@@ -14,6 +14,6 @@
     { "src": "/api/contacts(.*)",      "dest": "/api/src/routes/contacts.js" },
     { "src": "/api/captures(.*)",      "dest": "/api/src/routes/captures.js" },
     { "src": "/api/meeting-notes(.*)", "dest": "/api/src/routes/meeting_notes.js" },
-    { "src": "/api/webhooks/(.*)",     "dest": "/api/src/routes/webhooks.js" }
+    { "src": "/api/webhooks(.*)",      "dest": "/api/src/routes/webhooks.js" }
   ]
 }
