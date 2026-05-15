@@ -11,3 +11,8 @@
 [2026-05-15 13:25:40] Report date: 2026-05-15 — uploading to daily-reports/2026-05-15.json
 [2026-05-15 13:25:41] POST response (HTTP 200): {"Key":"daily-reports/2026-05-15.json","Id":"c6fdbd6b-5ebc-4b3f-9c4d-3f383f7a62a5"}
 [2026-05-15 13:25:41] SUCCESS: daily-reports/2026-05-15.json uploaded
+[2026-05-15 14:07:03] Starting upload...
+[2026-05-15 14:07:03] File found: /Users/ryanhankins/personal-os/data/last-email-report.json (   20299 bytes)
+[2026-05-15 14:07:03] Report date: 2026-05-15 — uploading to daily-reports/2026-05-15.json
+[2026-05-15 14:07:04] POST response (HTTP 200): {"Key":"daily-reports/2026-05-15.json","Id":"c6fdbd6b-5ebc-4b3f-9c4d-3f383f7a62a5"}
+[2026-05-15 14:07:04] SUCCESS: daily-reports/2026-05-15.json uploaded

@@ -178,7 +178,7 @@ module.exports = async (req, res) => {
               body_preview:           email.body_preview         ?? email.ai_summary ?? null,
               received_at:            email.received_at          ?? null,
               status:                 email.status               ?? null,
-              importance:             email.importance           ?? null,
+              importance:             email.importance           ?? 'normal',
               bucket:                 email.bucket               ?? null,
               tags:                   email.tags                 ?? [],
               days_waiting:           email.days_waiting         ?? 0,
