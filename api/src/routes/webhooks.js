@@ -16,27 +16,36 @@ module.exports = async (req, res) => {
 
   try {
     if (type === 'calendar') {
+      const extId = req.body.external_id
+      if (extId) {
+        // Check if this event already exists by external_id
+        const { data: existing } = await supabase
+          .from('events').select('id').eq('external_id', extId).maybeSingle()
+        if (existing) {
+          const { data, error } = await supabase
+            .from('events').update(req.body).eq('external_id', extId).select().single()
+          if (error) throw error
+          return res.json({ success: true, action: 'updated', data })
+        }
+      }
       const { data, error } = await supabase
-        .from('events')
-        .upsert(req.body, { onConflict: 'external_id' })
+        .from('events').insert(req.body).select().single()
       if (error) throw error
-      return res.json({ success: true, data })
+      return res.json({ success: true, action: 'inserted', data })
     }
 
     if (type === 'email') {
       const { data, error } = await supabase
-        .from('emails')
-        .insert(req.body)
+        .from('emails').insert(req.body).select().single()
       if (error) throw error
-      return res.json({ success: true, data })
+      return res.json({ success: true, action: 'inserted', data })
     }
 
     if (type === 'transcript') {
       const { data, error } = await supabase
-        .from('meeting_notes')
-        .insert(req.body)
+        .from('meeting_notes').insert(req.body).select().single()
       if (error) throw error
-      return res.json({ success: true, data })
+      return res.json({ success: true, action: 'inserted', data })
     }
 
     return res.status(400).json({ error: 'Unknown webhook type' })
