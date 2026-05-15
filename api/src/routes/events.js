@@ -17,11 +17,11 @@ module.exports = async (req, res) => {
       const { id, workspace_id, source } = req.query
       if (id) {
         const { data, error } = await supabase
-          .from('events').select('*').eq('id', id).single()
+          .from('events').select('*, workspaces(name)').eq('id', id).single()
         if (error) throw error
         return res.json(data)
       }
-      let query = supabase.from('events').select('*').order('start_time', { ascending: true })
+      let query = supabase.from('events').select('*, workspaces(name)').order('start_time', { ascending: true })
       if (workspace_id) query = query.eq('workspace_id', workspace_id)
       if (source)       query = query.eq('source', source)
       const { data, error } = await query

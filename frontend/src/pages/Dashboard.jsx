@@ -108,10 +108,11 @@ function DateHeader() {
 // ── StatCards ─────────────────────────────────────────────────
 
 function StatCards({ tasks, emails, events, commitments }) {
-  const openTasks      = tasks?.filter(t => t.status !== 'done').length ?? 0
-  const needsReply     = emails?.filter(e => e.status === 'needs_reply').length ?? 0
-  const todayEvents    = events?.filter(e => dayjs(e.start_time).isSame(dayjs(), 'day')).length ?? 0
-  const openCommit     = commitments?.filter(c => c.status === 'open').length ?? 0
+  const todayUTC    = new Date().toISOString().split('T')[0]
+  const openTasks   = tasks?.filter(t => t.status !== 'done').length ?? 0
+  const needsReply  = emails?.filter(e => e.status === 'needs_reply').length ?? 0
+  const todayEvents = events?.filter(e => e.start_time?.split('T')[0] === todayUTC).length ?? 0
+  const openCommit  = commitments?.filter(c => c.status === 'open').length ?? 0
 
   const stats = [
     { label: 'Meetings Today', value: todayEvents,   icon: '📅' },
@@ -138,9 +139,13 @@ function StatCards({ tasks, emails, events, commitments }) {
 // ── CalendarStrip ─────────────────────────────────────────────
 
 function CalendarStrip({ events, isLoading }) {
-  const todayEvents = events?.filter(e =>
-    dayjs(e.start_time).isSame(dayjs(), 'day')
-  ) ?? []
+  const todayUTC    = new Date().toISOString().split('T')[0]
+  const todayEvents = events?.filter(e => e.start_time?.split('T')[0] === todayUTC) ?? []
+
+  function fmtTime(iso) {
+    if (!iso) return ''
+    return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+  }
 
   return (
     <Card>
@@ -150,16 +155,16 @@ function CalendarStrip({ events, isLoading }) {
       ) : (
         <div className="space-y-2">
           {todayEvents.map(event => {
-            const ws = event.workspace_id ? 'work' : 'other'
-            const c  = WS_COLOR[ws] || WS_COLOR.work
+            const wsName = event.workspaces?.name || 'work'
+            const c = WS_COLOR[wsName] || WS_COLOR.work
             return (
               <div key={event.id} className={`flex items-center gap-3 p-2 rounded-lg ${c.bg}`}>
                 <div className={`w-1 h-10 rounded-full ${c.dot} flex-shrink-0`} />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-[#1a1a18] truncate">{event.title}</p>
                   <p className="text-xs text-[#6b6b67]">
-                    {dayjs(event.start_time).format('h:mm A')}
-                    {event.end_time && ` – ${dayjs(event.end_time).format('h:mm A')}`}
+                    {fmtTime(event.start_time)}
+                    {event.end_time && ` – ${fmtTime(event.end_time)}`}
                     {event.location && ` · ${event.location}`}
                   </p>
                 </div>
