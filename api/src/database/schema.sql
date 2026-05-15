@@ -156,19 +156,42 @@ CREATE INDEX IF NOT EXISTS idx_events_external_id  ON events (external_id);
 -- 6. EMAILS
 -- =============================================================
 CREATE TABLE IF NOT EXISTS emails (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  from_address  TEXT,
-  from_name     TEXT,
-  subject       TEXT,
-  body_preview  TEXT,
-  received_at   TIMESTAMPTZ,
-  sent_at       TIMESTAMPTZ,
-  status        TEXT,                         -- needs_reply | waiting_on | read | done
-  project_id    UUID REFERENCES projects (id) ON DELETE SET NULL,
-  thread_id     TEXT,
-  importance    TEXT,
-  ai_summary    TEXT,
-  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+  id                       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  from_address             TEXT,
+  from_name                TEXT,
+  subject                  TEXT,
+  body_preview             TEXT,
+  received_at              TIMESTAMPTZ,
+  sent_at                  TIMESTAMPTZ,
+  status                   TEXT,             -- needs_reply | waiting_on | read | done
+  project_id               UUID REFERENCES projects (id) ON DELETE SET NULL,
+  thread_id                TEXT,
+  importance               TEXT,
+  ai_summary               TEXT,
+  -- classification fields (populated by email-pull skill at 6:00am)
+  bucket                   INTEGER,          -- 1=needs_reply 2=waiting_on 3=oversight 4=documents 5=invites 6=filtered
+  tags                     TEXT[],           -- TIME_SENSITIVE | CONTRACT_LANGUAGE | EXTERNAL | HAS_ATTACHMENT | AGING | LARGE_THREAD
+  days_waiting             INTEGER,
+  urgency                  TEXT,             -- normal | elevated | high | critical
+  followed_up              BOOLEAN DEFAULT false,
+  cross_reference_status   TEXT,             -- new | aging | resolved
+  is_internal              BOOLEAN DEFAULT false,
+  has_attachment           BOOLEAN DEFAULT false,
+  is_time_sensitive        BOOLEAN DEFAULT false,
+  has_contract_language    BOOLEAN DEFAULT false,
+  thread_participant_count INTEGER,
+  last_report_date         DATE,
+  -- thread-aware fields (migration_03)
+  conversation_id          TEXT,
+  thread_message_count     INTEGER,
+  thread_participants      TEXT[],
+  latest_sender            TEXT,
+  latest_sender_name       TEXT,
+  my_last_reply_time       TIMESTAMPTZ,
+  waiting_since            TIMESTAMPTZ,
+  thread_subject           TEXT,
+  is_flagged               BOOLEAN DEFAULT false,
+  created_at               TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 ALTER TABLE emails ENABLE ROW LEVEL SECURITY;
@@ -179,10 +202,17 @@ CREATE POLICY "emails: authenticated full access"
   USING (true)
   WITH CHECK (true);
 
-CREATE INDEX IF NOT EXISTS idx_emails_project_id  ON emails (project_id);
-CREATE INDEX IF NOT EXISTS idx_emails_status      ON emails (status);
-CREATE INDEX IF NOT EXISTS idx_emails_received_at ON emails (received_at);
-CREATE INDEX IF NOT EXISTS idx_emails_thread_id   ON emails (thread_id);
+CREATE INDEX IF NOT EXISTS idx_emails_project_id      ON emails (project_id);
+CREATE INDEX IF NOT EXISTS idx_emails_status          ON emails (status);
+CREATE INDEX IF NOT EXISTS idx_emails_received_at     ON emails (received_at);
+CREATE INDEX IF NOT EXISTS idx_emails_thread_id       ON emails (thread_id);
+CREATE INDEX IF NOT EXISTS idx_emails_bucket          ON emails (bucket);
+CREATE INDEX IF NOT EXISTS idx_emails_days_waiting    ON emails (days_waiting);
+CREATE INDEX IF NOT EXISTS idx_emails_is_internal     ON emails (is_internal);
+CREATE INDEX IF NOT EXISTS idx_emails_urgency         ON emails (urgency);
+CREATE INDEX IF NOT EXISTS idx_emails_conversation_id ON emails (conversation_id);
+CREATE INDEX IF NOT EXISTS idx_emails_is_flagged      ON emails (is_flagged);
+CREATE INDEX IF NOT EXISTS idx_emails_waiting_since   ON emails (waiting_since);
 
 
 -- =============================================================

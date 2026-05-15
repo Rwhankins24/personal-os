@@ -1,0 +1,24 @@
+{
+  "_note": "Template file. Overwritten each morning by the email-pull skill at 6:00am.",
+  "report_date": "2026-01-01",
+  "calendar": [],
+  "bucket1": [],
+  "bucket2": [],
+  "bucket3": [],
+  "bucket4": [],
+  "bucket5": [],
+  "bucket6_count": 0,
+  "resolved_since_yesterday": [],
+  "summary": {
+    "total_needs_reply": 0,
+    "total_waiting_on": 0,
+    "total_oversight": 0,
+    "total_documents": 0,
+    "total_pending_invites": 0,
+    "total_filtered": 0,
+    "time_sensitive_count": 0,
+    "contract_language_count": 0,
+    "internal_count": 0,
+    "external_count": 0
+  }
+}
