@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/src/routes/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/health",             "dest": "/api/src/health.js" },
+    { "src": "/api/tasks(.*)",          "dest": "/api/src/routes/tasks.js" },
+    { "src": "/api/events(.*)",         "dest": "/api/src/routes/events.js" },
+    { "src": "/api/emails(.*)",         "dest": "/api/src/routes/emails.js" },
+    { "src": "/api/commitments(.*)",    "dest": "/api/src/routes/commitments.js" },
+    { "src": "/api/projects(.*)",       "dest": "/api/src/routes/projects.js" },
+    { "src": "/api/contacts(.*)",       "dest": "/api/src/routes/contacts.js" },
+    { "src": "/api/captures(.*)",       "dest": "/api/src/routes/captures.js" },
+    { "src": "/api/meeting-notes(.*)",  "dest": "/api/src/routes/meeting_notes.js" },
+    { "src": "/api/webhooks/(.*)",      "dest": "/api/src/routes/webhooks.js" }
+  ]
+}
