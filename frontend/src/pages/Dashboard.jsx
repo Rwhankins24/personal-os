@@ -8,6 +8,7 @@ import {
   getMeetingNotes, createCapture,
 } from '../lib/api'
 import { useStore } from '../store/useStore'
+import SyncButton from '../components/SyncButton'
 
 // ── Helpers ───────────────────────────────────────────────────
 
@@ -485,6 +486,9 @@ export default function Dashboard() {
 
       {/* Quick capture bar */}
       <QuickAdd />
+
+      {/* Floating sync button — triggers email report processor */}
+      <SyncButton />
     </div>
   )
 }

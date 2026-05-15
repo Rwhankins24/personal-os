@@ -19,8 +19,13 @@ that's the next job.
 **The unit of classification is a THREAD, not an individual email.**
 
 **Output target:** `~/personal-os/data/last-email-report.json`
-**Webhook:** `https://personal-os-five-black.vercel.app/api/webhooks?type=email`
+**Storage upload:** `https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json`
+**Storage fallback (webhook):** `https://personal-os-five-black.vercel.app/api/webhooks?type=email`
 **Delivery:** hankinsr@claycorp.com
+
+**Runtime credentials (for Step 6):**
+- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
+- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
 
 ---
 
@@ -72,13 +77,15 @@ failure to recall them.
    results and deduplicate by `conversationId`. Keep the most recent message per
    thread as the representative record. A thread seen in two queries is one thread.
 
-8. **Webhook retry once.** If a webhook POST fails, retry exactly once after a
-   2-second pause. If it fails again, log the subject and from_address, and
-   continue to the next thread. Do not abort the run.
+8. **Storage upload retry once.** If the Supabase storage upload fails, retry
+   once after a 5-second pause. If it fails again, fall back to direct webhook
+   push (individual thread posts). If the fallback webhook push also fails for
+   a thread, log the subject and continue — do not abort the run.
 
-9. **JSON always saves last.** Step 8 runs after all webhook pushes complete
-   (or fail). The handoff JSON reflects the actual state of the run, including
-   any items that failed to push. Never save the JSON before the push loop.
+9. **JSON always saves last.** Step 7 (save handoff JSON) runs after Step 6
+   (storage upload or webhook push) completes or fails. The handoff JSON
+   reflects the actual state of the run. Never save the JSON before the upload
+   attempt.
 
 10. **If the connector is unavailable**, note "MCP connector unavailable" in the
     Step 9 summary, write a skeleton JSON to the output file with today's date
@@ -363,25 +370,66 @@ For each thread, populate `tags: []` with applicable values:
 
 ---
 
-## Step 6 — Push to webhook
+## Step 6 — Write JSON to Supabase storage
 
-For each thread in Buckets 1–5 (skip Bucket 6), POST to:
+Instead of pushing individual threads directly to the webhook, upload the complete
+classified report as a single JSON file to Supabase storage. The Vercel processing
+job (`/api/jobs/process-email-report`) reads this file and handles all database
+upserts asynchronously.
+
+**Primary path — Supabase REST storage upload:**
+
+```bash
+curl -X POST \
+  "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Content-Type: application/json" \
+  -d "[FULL_JSON_PAYLOAD]"
+```
+
+Where:
+- `[TODAY_ISO]` = today's date in YYYY-MM-DD format (e.g. `2026-05-15`)
+- `[FULL_JSON_PAYLOAD]` = the complete `last-email-report.json` contents built in Step 7
+
+If the file already exists for today (HTTP 409), use `PUT` (upsert/overwrite):
+
+```bash
+curl -X PUT \
+  "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Content-Type: application/json" \
+  -H "x-upsert: true" \
+  -d "[FULL_JSON_PAYLOAD]"
+```
+
+**On success**, log:
+```
+JSON uploaded to Supabase storage: daily-reports/[TODAY_ISO].json
+```
+
+**On failure**, retry once after 5 seconds using the same curl command. If it still
+fails, fall back to the direct webhook push:
+
+```
+FALLBACK: Supabase storage upload failed — pushing threads individually to webhook.
+```
+
+Then push each thread from Buckets 1–5 individually to:
 `https://personal-os-five-black.vercel.app/api/webhooks?type=email`
 
-**Full payload structure for each thread:**
-
+For each thread POST this payload:
 ```json
 {
   "from_address": "j.miller@fireproofing.com",
   "from_name": "J. Miller",
   "subject": "RE: Insulation scope clarification — LWIC coordination",
+  "thread_subject": "LWIC coordination",
   "body_preview": "Ryan — attaching the Siplast product data...",
   "received_at": "2026-05-15T14:30:00Z",
   "status": "needs_reply",
-  "importance": "high",
   "bucket": 1,
   "urgency": "high",
-  "tags": ["TIME_SENSITIVE", "CONTRACT_LANGUAGE", "EXTERNAL", "FLAGGED"],
+  "tags": ["TIME_SENSITIVE", "CONTRACT_LANGUAGE", "EXTERNAL"],
   "days_waiting": 5,
   "followed_up": false,
   "cross_reference_status": "aging",
@@ -394,22 +442,16 @@ For each thread in Buckets 1–5 (skip Bucket 6), POST to:
   "last_report_date": "2026-05-15",
   "conversation_id": "AAQkADFhYWFhYWFh",
   "thread_message_count": 4,
-  "thread_participants": [
-    "j.miller@fireproofing.com",
-    "d.kowalski@kowalskiroofing.com",
-    "hankinsr@claycorp.com"
-  ],
+  "thread_participants": ["j.miller@fireproofing.com", "hankinsr@claycorp.com"],
   "latest_sender": "j.miller@fireproofing.com",
   "latest_sender_name": "J. Miller",
   "my_last_reply_time": "2026-05-10T14:00:00Z",
-  "waiting_since": "2026-05-10T16:30:00Z",
-  "thread_subject": "LWIC coordination"
+  "waiting_since": "2026-05-10T16:30:00Z"
 }
 ```
 
-Push threads one at a time. If a push fails, retry once after 2 seconds. If it
-fails again, log the subject and conversation_id, and continue — do not abort the run.
-The webhook handler upserts by `conversation_id` if present, otherwise by `thread_id`.
+If a fallback webhook push fails, retry once after 2 seconds. If still failing, log
+the subject and continue — do not abort the run.
 
 ---
 
@@ -548,7 +590,7 @@ After saving the JSON, output this exact bordered summary block:
   Aging (carried over):  X
   Resolved:              X
 
-  Pushed to webhook:     X threads
+  Storage upload:        daily-reports/[TODAY_ISO].json (or fallback: X threads to webhook)
   JSON saved:            ~/personal-os/data/last-email-report.json
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
