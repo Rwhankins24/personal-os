@@ -2,7 +2,7 @@
 
 # Personal OS — launchd installer
 # Run once from your Mac Terminal: bash ~/personal-os/scripts/install-launchd.sh
-# Creates and loads both launchd jobs (upload @ 6:02am, process @ 6:05am)
+# Creates and loads both launchd jobs (upload @ 6:15am, process @ 6:20am)
 
 set -e
 
@@ -54,7 +54,7 @@ cat > "$UPLOAD_PLIST" << PLIST
     <key>Hour</key>
     <integer>6</integer>
     <key>Minute</key>
-    <integer>2</integer>
+    <integer>15</integer>
   </dict>
   <key>StandardOutPath</key>
   <string>$LOGS_DIR/upload-stdout.log</string>
@@ -95,7 +95,7 @@ cat > "$PROCESS_PLIST" << PLIST
     <key>Hour</key>
     <integer>6</integer>
     <key>Minute</key>
-    <integer>5</integer>
+    <integer>20</integer>
   </dict>
   <key>StandardOutPath</key>
   <string>$LOGS_DIR/processing-stdout.log</string>
@@ -135,8 +135,8 @@ launchctl list | grep personalos
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  launchd jobs installed successfully"
-echo "  Upload:  daily @ 6:02am"
-echo "  Process: daily @ 6:05am"
+echo "  Upload:  daily @ 6:15am (waits up to 10min for today's file)"
+echo "  Process: daily @ 6:20am"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "To test manually:"

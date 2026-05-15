@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Personal OS — Daily report upload to Supabase storage
-# Runs at 6:02am via launchd (com.personalos.upload)
+# Runs at 6:15am via launchd (com.personalos.upload)
 # Also safe to run manually: bash ~/personal-os/scripts/upload-report.sh
 
 LOG_FILE="$HOME/personal-os/logs/upload.log"
@@ -30,11 +30,18 @@ if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_KEY" ]; then
   exit 1
 fi
 
-# Check if report file exists
-if [ ! -f "$JSON_FILE" ]; then
-  echo "[$TODAY $(date +%H:%M:%S)] ERROR: No report file found at $JSON_FILE" >> "$LOG_FILE"
-  exit 1
-fi
+# Wait up to 10 minutes for today's report file to appear
+MAX_WAIT=600
+WAITED=0
+while [ ! -f "$JSON_FILE" ]; do
+  if [ $WAITED -ge $MAX_WAIT ]; then
+    echo "[$TODAY $(date +%H:%M:%S)] ERROR: Timed out waiting for report file after ${MAX_WAIT}s" >> "$LOG_FILE"
+    exit 1
+  fi
+  sleep 30
+  WAITED=$((WAITED + 30))
+  echo "[$TODAY $(date +%H:%M:%S)] Waiting for report file... (${WAITED}s elapsed)" >> "$LOG_FILE"
+done
 
 echo "[$TODAY $(date +%H:%M:%S)] File found: $JSON_FILE ($(wc -c < "$JSON_FILE") bytes)" >> "$LOG_FILE"
 
@@ -49,7 +56,8 @@ except Exception as e:
 " 2>/dev/null)
 
 if [ "$REPORT_DATE" != "$TODAY" ]; then
-  echo "[$TODAY $(date +%H:%M:%S)] WARNING: Report date '$REPORT_DATE' does not match today '$TODAY' — uploading anyway" >> "$LOG_FILE"
+  echo "[$TODAY $(date +%H:%M:%S)] ERROR: File exists but report_date '$REPORT_DATE' does not match today '$TODAY' — aborting" >> "$LOG_FILE"
+  exit 1
 fi
 
 echo "[$TODAY $(date +%H:%M:%S)] Report date: $REPORT_DATE — uploading to daily-reports/$TODAY.json" >> "$LOG_FILE"
