@@ -6,6 +6,7 @@ import {
   getEvents, getEmails, updateEmail,
   getCommitments, updateCommitment,
   getMeetingNotes, createCapture,
+  getCaptures,
 } from '../lib/api'
 import { useStore } from '../store/useStore'
 import SyncButton from '../components/SyncButton'
@@ -442,6 +443,17 @@ export default function Dashboard() {
   const { data: emails,      isLoading: loadingEmails }      = useQuery({ queryKey: ['emails'],       queryFn: getEmails })
   const { data: commitments, isLoading: loadingCommitments } = useQuery({ queryKey: ['commitments'], queryFn: getCommitments })
   const { data: notes,       isLoading: loadingNotes }       = useQuery({ queryKey: ['notes'],        queryFn: getMeetingNotes })
+  const { data: dailyBrief } = useQuery({
+    queryKey: ['daily-brief'],
+    queryFn: async () => {
+      const captures = await getCaptures()
+      const brief = (captures || [])
+        .filter(c => c.type === 'daily_brief')
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]
+      return brief?.content || null
+    },
+    refetchInterval: 300000
+  })
 
   return (
     <div className="min-h-screen bg-[#f8f8f6] pb-20">
@@ -474,6 +486,21 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 gap-4">
           <TaskPanel tasks={tasks} isLoading={loadingTasks} />
           <CommitmentsPanel commitments={commitments} isLoading={loadingCommitments} />
+        </div>
+
+        {/* AI Daily Brief */}
+        <div className="bg-white rounded-lg border border-[#e5e5e3] p-4">
+          {dailyBrief ? (
+            <div>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
+              <p className="text-sm text-gray-800 leading-relaxed">{dailyBrief}</p>
+            </div>
+          ) : (
+            <div>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
+              <p className="text-sm text-gray-400 italic">Brief generates at 6:30 AM daily. Run the AI job manually to generate now.</p>
+            </div>
+          )}
         </div>
 
         {/* Emails + Meeting Notes */}

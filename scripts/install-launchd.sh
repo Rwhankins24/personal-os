@@ -95,7 +95,7 @@ cat > "$PROCESS_PLIST" << PLIST
     <key>Hour</key>
     <integer>6</integer>
     <key>Minute</key>
-    <integer>20</integer>
+    <integer>5</integer>
   </dict>
   <key>StandardOutPath</key>
   <string>$LOGS_DIR/processing-stdout.log</string>

@@ -79,6 +79,16 @@ echo "[$TODAY $(date +%H:%M:%S)] POST response (HTTP $HTTP_STATUS): $RESPONSE_BO
 
 if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "201" ]; then
   echo "[$TODAY $(date +%H:%M:%S)] SUCCESS: daily-reports/$TODAY.json uploaded" >> "$LOG_FILE"
+
+  # Mark upload complete in pipeline
+  curl -s -X POST \
+    "https://personal-os-five-black.vercel.app/api/pipeline/complete-step" \
+    -H "Content-Type: application/json" \
+    -H "x-trigger-secret: $TRIGGER_SECRET" \
+    -d "{\"step\":\"upload\",\"run_date\":\"$TODAY\"}" \
+    >> "$LOG_FILE" 2>&1
+  echo "" >> "$LOG_FILE"
+
   exit 0
 fi
 
@@ -101,6 +111,16 @@ echo "[$TODAY $(date +%H:%M:%S)] PUT response (HTTP $HTTP_STATUS2): $RESPONSE_BO
 
 if [ "$HTTP_STATUS2" = "200" ] || [ "$HTTP_STATUS2" = "201" ]; then
   echo "[$TODAY $(date +%H:%M:%S)] SUCCESS via PUT: daily-reports/$TODAY.json uploaded" >> "$LOG_FILE"
+
+  # Mark upload complete in pipeline
+  curl -s -X POST \
+    "https://personal-os-five-black.vercel.app/api/pipeline/complete-step" \
+    -H "Content-Type: application/json" \
+    -H "x-trigger-secret: $TRIGGER_SECRET" \
+    -d "{\"step\":\"upload\",\"run_date\":\"$TODAY\"}" \
+    >> "$LOG_FILE" 2>&1
+  echo "" >> "$LOG_FILE"
+
   exit 0
 else
   echo "[$TODAY $(date +%H:%M:%S)] ERROR: Both POST and PUT failed (last status: $HTTP_STATUS2)" >> "$LOG_FILE"

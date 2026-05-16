@@ -20,4 +20,5 @@ export const updateCommitment = (id, data) => api.patch(`/api/commitments?id=${i
 export const getProjects    = () => api.get('/api/projects').then(r => r.data)
 export const getContacts    = () => api.get('/api/contacts').then(r => r.data)
 export const getMeetingNotes = () => api.get('/api/meeting-notes').then(r => r.data)
+export const getCaptures    = ()     => api.get('/api/captures').then(r => r.data)
 export const createCapture  = (data) => api.post('/api/captures', data).then(r => r.data)

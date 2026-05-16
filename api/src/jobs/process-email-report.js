@@ -214,7 +214,21 @@ module.exports = async (req, res) => {
       }
     }
 
-    // Step 6 — Build and return results
+    // Step 6 — Mark processing complete in pipeline
+    try {
+      await supabase
+        .from('pipeline_runs')
+        .upsert({
+          run_date: today,
+          processing_completed_at: new Date().toISOString(),
+          status: 'processing_complete'
+        }, { onConflict: 'run_date' })
+    } catch (pipelineErr) {
+      console.log('Pipeline status update failed:', pipelineErr.message)
+      // Non-fatal — continue
+    }
+
+    // Step 7 — Build and return results
     const result = {
       success:        true,
       report_date:    today,

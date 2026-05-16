@@ -264,6 +264,49 @@ normalized subject (strip RE:/FWD: prefixes) + thread participants.
 
 ---
 
+## Step 2.5B — Tiered context extraction
+
+After thread grouping, fetch additional context based on urgency and bucket classification. This step runs while still in the Outlook session — before closing the connector.
+
+### TIER 1 — Full thread extraction
+
+For every thread where:
+- `bucket = 1` AND `urgency IN ('critical', 'high')`
+- OR `has_contract_language = true`
+- OR `is_time_sensitive = true` AND `days_waiting >= 3`
+
+Fetch the complete message body for the most recent 3 messages in the thread using `outlook_email_search` with the thread subject. Store as:
+- `full_thread_content`: concatenated message bodies separated by `"---MESSAGE BREAK---"`
+- `extraction_depth: "full"`
+
+### TIER 2 — Extended preview extraction
+
+For every thread where:
+- `bucket = 1` AND `urgency = 'normal'`
+- OR `bucket = 2`
+
+Fetch extended body preview — first 1000 characters of most recent message. Store as:
+- `extended_preview`: first 1000 chars
+- `extraction_depth: "extended"`
+
+### TIER 3 — Standard (no additional fetch)
+
+All other buckets. Keep existing `body_preview`.
+- `extraction_depth: "standard"`
+
+After extraction update each email payload with these additional fields:
+- `full_thread_content`: string or null
+- `extraction_depth`: `"full"` | `"extended"` | `"standard"`
+
+Log extraction summary:
+```
+Tier 1 (full): X threads
+Tier 2 (extended): X threads
+Tier 3 (standard): X threads
+```
+
+---
+
 ## Step 3 — Classify threads into 6 buckets
 
 Process each thread (represented by its most recent message) through this decision
@@ -405,6 +448,16 @@ curl -X PUT \
 **On success**, log:
 ```
 JSON uploaded to Supabase storage: daily-reports/[TODAY_ISO].json
+```
+
+Then immediately post a pipeline completion marker:
+
+```bash
+curl -s -X POST \
+  "https://personal-os-five-black.vercel.app/api/pipeline/complete-step" \
+  -H "Content-Type: application/json" \
+  -H "x-trigger-secret: 0557601ac4f4c8f0d42923bba2fb083b" \
+  -d '{"step":"upload","run_date":"[TODAY_ISO]"}'
 ```
 
 **On failure**, retry once after 5 seconds using the same curl command. If it still

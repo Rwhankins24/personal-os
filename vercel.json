@@ -8,6 +8,11 @@
   "routes": [
     { "src": "/api/health",                        "dest": "/api/src/health.js" },
     { "src": "/api/jobs/process-email-report",     "dest": "/api/src/jobs/process-email-report.js" },
+    { "src": "/api/jobs/nightly-ai",               "dest": "/api/src/jobs/nightly-ai.js" },
+    { "src": "/api/pipeline/status",               "dest": "/api/src/routes/pipeline.js" },
+    { "src": "/api/pipeline/complete-step",        "dest": "/api/src/routes/pipeline.js" },
+    { "src": "/api/pipeline/(.*)",                 "dest": "/api/src/routes/pipeline.js" },
+    { "src": "/api/ai/query",                      "dest": "/api/src/routes/ai-query.js" },
     { "src": "/api/tasks(.*)",                     "dest": "/api/src/routes/tasks.js" },
     { "src": "/api/events(.*)",                    "dest": "/api/src/routes/events.js" },
     { "src": "/api/emails(.*)",                    "dest": "/api/src/routes/emails.js" },

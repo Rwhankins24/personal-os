@@ -1,0 +1,61 @@
+name: Trigger Nightly AI Job
+
+on:
+  schedule:
+    - cron: '*/5 11-14 * * *'  # Every 5 min, 11am-2pm UTC = 6am-9am Phoenix (MST/UTC-7)
+  workflow_dispatch:
+
+jobs:
+  trigger-ai:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check pipeline and trigger AI
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          echo "Checking pipeline status for $TODAY"
+
+          STATUS=$(curl -s \
+            "https://personal-os-five-black.vercel.app/api/pipeline/status" \
+            -H "x-trigger-secret: ${{ secrets.TRIGGER_SECRET }}")
+
+          echo "Pipeline status: $STATUS"
+
+          PROCESSING_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys
+d=json.load(sys.stdin)
+print(d.get('processing_completed_at') or '')" 2>/dev/null)
+
+          AI_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys
+d=json.load(sys.stdin)
+print(d.get('ai_completed_at') or '')" 2>/dev/null)
+
+          echo "Processing done: $PROCESSING_DONE"
+          echo "AI done: $AI_DONE"
+
+          if [ -n "$PROCESSING_DONE" ] && [ -z "$AI_DONE" ]; then
+            echo "Conditions met. Triggering AI job..."
+
+            RESPONSE=$(curl -s -X POST \
+              "https://personal-os-five-black.vercel.app/api/jobs/nightly-ai" \
+              -H "Content-Type: application/json" \
+              -H "x-trigger-secret: ${{ secrets.TRIGGER_SECRET }}" \
+              -w "\nHTTP_STATUS:%{http_code}")
+
+            HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d: -f2)
+            RESPONSE_BODY=$(echo "$RESPONSE" | grep -v "HTTP_STATUS:")
+
+            echo "AI job response ($HTTP_STATUS): $RESPONSE_BODY"
+
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "AI job triggered successfully"
+            else
+              echo "AI job failed: $RESPONSE_BODY"
+              exit 1
+            fi
+          else
+            echo "Conditions not met. Skipping."
+            echo "Processing done: ${PROCESSING_DONE:-none}"
+            echo "AI already done: ${AI_DONE:-no}"
+          fi
