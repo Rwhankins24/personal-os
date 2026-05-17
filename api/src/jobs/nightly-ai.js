@@ -358,6 +358,19 @@ module.exports = async (req, res) => {
         .eq('status', 'open')
         .limit(5)
 
+      const { data: allOthersCommitments } = await supabase
+        .from('others_commitments')
+        .select('title, committed_by, due_date, status')
+        .eq('status', 'open')
+        .order('due_date', { ascending: true })
+        .limit(8)
+
+      const { data: recentMeetingNotes } = await supabase
+        .from('meeting_notes')
+        .select('title, summary, action_items, meeting_date')
+        .order('meeting_date', { ascending: false })
+        .limit(3)
+
       const briefContext = {
         date: today,
         meetings_today: (todayEvents || []).length,
@@ -370,6 +383,8 @@ module.exports = async (req, res) => {
         open_tasks: openTasks || [],
         open_commitments: openCommitments || [],
         overdue_others: overdueWithDays,
+        all_others_commitments: allOthersCommitments || [],
+        meeting_notes: recentMeetingNotes || [],
         rolling_summary: rollingCtx?.content || null
       }
 

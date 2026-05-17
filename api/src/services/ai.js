@@ -175,16 +175,24 @@ Return only the brief. No preamble.`
 async function generateDailyBrief(context) {
   const message = await client.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 600,
+    max_tokens: 1000,
     messages: [{
       role: 'user',
       content: `${RYAN_CONTEXT}
 
-Generate Ryan's daily brief. Be direct and specific. Flag the biggest risks. Tell him what needs action today vs what can wait. Maximum 5 sentences. Second person voice.
+Generate Ryan's daily brief. Be direct and specific. Second person voice. Structure it in 3 short sections:
+1. TODAY'S SCHEDULE — meetings and what to know walking in
+2. TOP ACTIONS — biggest risks and what needs to move today vs can wait
+3. COMMITMENTS WATCH — what others owe him + what he owes others
 
 Date: ${context.date}
-Meetings today: ${context.meetings_today}
-Calendar: ${context.calendar.map(e => `${e.title} at ${e.time}`).join(', ')}
+Meetings today (${context.meetings_today}):
+${context.calendar.map(e => `- ${e.title} at ${e.time}${e.location ? ' @ ' + e.location : ''}`).join('\n') || 'None'}
+
+Recent meeting notes (last 3):
+${context.meeting_notes.map(n =>
+  `- ${n.title} (${n.meeting_date}): ${n.summary || ''} ${n.action_items ? '| Actions: ' + n.action_items : ''}`
+).join('\n') || 'None'}
 
 Most urgent emails needing reply:
 ${context.critical_emails.map(e =>
@@ -196,17 +204,22 @@ ${context.open_tasks.map(t =>
   `- ${t.title} (${t.urgency}, due ${t.due_date || 'no date'})`
 ).join('\n') || 'None'}
 
-Open commitments you made:
+Commitments YOU made:
 ${context.open_commitments.map(c =>
-  `- ${c.title} to ${c.made_to} (due ${c.due_date || 'TBD'})`
+  `- ${c.title} to ${c.made_to} (due ${c.due_date || 'TBD'}, ${c.urgency})`
 ).join('\n') || 'None'}
 
-Things others committed to you (overdue):
+What OTHERS committed to you:
+${context.all_others_commitments.map(c =>
+  `- ${c.committed_by}: ${c.title} (due ${c.due_date || 'TBD'})`
+).join('\n') || 'None'}
+
+Overdue from others:
 ${context.overdue_others.map(c =>
-  `- ${c.committed_by_name}: ${c.title} (${c.days_overdue}d overdue)`
+  `- ${c.committed_by}: ${c.title} (${c.days_overdue}d overdue)`
 ).join('\n') || 'None'}
 
-Rolling context (last 30 days):
+Rolling context:
 ${context.rolling_summary || 'First run - no history yet'}
 
 Return only the brief. No preamble.`

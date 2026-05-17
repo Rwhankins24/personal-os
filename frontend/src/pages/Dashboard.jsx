@@ -471,6 +471,21 @@ export default function Dashboard() {
       {/* Main content */}
       <div className="max-w-5xl mx-auto px-6 py-5 space-y-4">
 
+        {/* AI Daily Brief — top of page */}
+        <div className="bg-white rounded-lg border border-[#e5e5e3] p-4">
+          {dailyBrief ? (
+            <div>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
+              <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">{dailyBrief}</p>
+            </div>
+          ) : (
+            <div>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
+              <p className="text-sm text-gray-400 italic">Brief generates at 6:30 AM daily. Run the AI job manually to generate now.</p>
+            </div>
+          )}
+        </div>
+
         {/* Stat cards */}
         <StatCards
           tasks={tasks}
@@ -486,21 +501,6 @@ export default function Dashboard() {
         <div className="grid grid-cols-2 gap-4">
           <TaskPanel tasks={tasks} isLoading={loadingTasks} />
           <CommitmentsPanel commitments={commitments} isLoading={loadingCommitments} />
-        </div>
-
-        {/* AI Daily Brief */}
-        <div className="bg-white rounded-lg border border-[#e5e5e3] p-4">
-          {dailyBrief ? (
-            <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
-              <p className="text-sm text-gray-800 leading-relaxed">{dailyBrief}</p>
-            </div>
-          ) : (
-            <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">AI Daily Brief</p>
-              <p className="text-sm text-gray-400 italic">Brief generates at 6:30 AM daily. Run the AI job manually to generate now.</p>
-            </div>
-          )}
         </div>
 
         {/* Emails + Meeting Notes */}
