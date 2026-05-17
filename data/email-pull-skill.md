@@ -82,10 +82,23 @@ failure to recall them.
    push (individual thread posts). If the fallback webhook push also fails for
    a thread, log the subject and continue — do not abort the run.
 
-9. **JSON always saves last.** Step 7 (save handoff JSON) runs after Step 6
-   (storage upload or webhook push) completes or fails. The handoff JSON
-   reflects the actual state of the run. Never save the JSON before the upload
-   attempt.
+9. **JSON saves BEFORE the upload attempt.** Step 6 (save handoff JSON to disk)
+   runs BEFORE Step 7 (storage upload). The local file is the critical dependency
+   for the downstream newsletter layer. Supabase is secondary. Never block the
+   local write on an upload that may fail.
+
+10. **Re-read immediately before Write.** The Write tool requires a Read of the
+    target file within the same session window immediately before the Write call.
+    Even though you Read `~/personal-os/data/last-email-report.json` in Step 1,
+    you MUST Read it again at the top of Step 6, directly before the Write.
+    Do NOT perform any other tool call between that Step 6 Read and the Write.
+    If you skip this, the Write will fail with "File has not been read yet."
+
+11. **External network calls (Supabase, Vercel) may fail in sandbox.** The shell
+    sandbox may not have outbound internet access to these endpoints. This is
+    expected and non-blocking. Log the failure in `warnings[]`, mark upload status
+    as "sandbox_blocked" in Step 8 output, and continue. Do not retry more than
+    once. The local JSON write (Step 6) is the only guaranteed delivery path.
 
 10. **If the connector is unavailable**, note "MCP connector unavailable" in the
     Step 9 summary, write a skeleton JSON to the output file with today's date
@@ -413,12 +426,41 @@ For each thread, populate `tags: []` with applicable values:
 
 ---
 
-## Step 6 — Write JSON to Supabase storage
+## Step 6 — Save handoff JSON
 
-Instead of pushing individual threads directly to the webhook, upload the complete
-classified report as a single JSON file to Supabase storage. The Vercel processing
-job (`/api/jobs/process-email-report`) reads this file and handles all database
+**THIS STEP RUNS BEFORE THE SUPABASE UPLOAD. THE LOCAL FILE IS THE CRITICAL DEPENDENCY.**
+
+Write the complete report to `~/personal-os/data/last-email-report.json`.
+This step always runs — even if earlier steps had partial failures.
+
+**PRECONDITION — do this first, before the Write:**
+Read `~/personal-os/data/last-email-report.json` using the Read tool RIGHT NOW,
+immediately before the Write call below. No other tool calls in between.
+
+```
+Read: ~/personal-os/data/last-email-report.json
+```
+
+Then immediately write the full classified JSON payload (structure defined below).
+Do not read any other file or make any API call between this Read and the Write.
+
+**Full output structure:**
+
+[See structure template below — same schema as today's report]
+
+After a successful write, log: `JSON saved: ~/personal-os/data/last-email-report.json`
+
+---
+
+## Step 7 — Upload JSON to Supabase storage
+
+Upload the complete classified report (already saved to disk in Step 6) as a single
+JSON file to Supabase storage. The Vercel processing job
+(`/api/jobs/process-email-report`) reads this file and handles all database
 upserts asynchronously.
+
+**Note:** This step may fail due to sandbox network restrictions. That is expected and
+non-blocking. Log status in warnings[] and continue to Step 8 regardless.
 
 **Primary path — Supabase REST storage upload:**
 
@@ -508,12 +550,7 @@ the subject and continue — do not abort the run.
 
 ---
 
-## Step 7 — Save handoff JSON
-
-Write the complete report to `~/personal-os/data/last-email-report.json`.
-This step always runs — even if earlier steps had partial failures.
-
-**Full output structure:**
+**Full output structure (for reference — write this schema in Step 6):**
 
 ```json
 {
@@ -643,8 +680,8 @@ After saving the JSON, output this exact bordered summary block:
   Aging (carried over):  X
   Resolved:              X
 
-  Storage upload:        daily-reports/[TODAY_ISO].json (or fallback: X threads to webhook)
-  JSON saved:            ~/personal-os/data/last-email-report.json
+  JSON saved:            ~/personal-os/data/last-email-report.json  ✓
+  Storage upload:        daily-reports/[TODAY_ISO].json  [success | failed | sandbox_blocked]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
