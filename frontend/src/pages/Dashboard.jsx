@@ -45,7 +45,7 @@ function EmptyState({ icon, message }) {
 
 function Card({ children, className = '' }) {
   return (
-    <div className={`bg-white border border-[#e5e5e3] rounded-xl p-4 ${className}`}>
+    <div className={`bg-white border border-[#e5e5e3] rounded-xl p-3 md:p-4 ${className}`}>
       {children}
     </div>
   )
@@ -124,7 +124,7 @@ function StatCards({ tasks, emails, events, commitments }) {
   ]
 
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
       {stats.map(s => (
         <Card key={s.label} className="flex items-center gap-3">
           <span className="text-2xl">{s.icon}</span>
@@ -246,6 +246,7 @@ function TaskPanel({ tasks, isLoading }) {
 // ── CommitmentsPanel ──────────────────────────────────────────
 
 function CommitmentsPanel({ commitments, isLoading }) {
+  const [showAdd, setShowAdd] = useState(false)
   const qc = useQueryClient()
   const close = useMutation({
     mutationFn: (id) => updateCommitment(id, { status: 'closed' }),
@@ -258,7 +259,16 @@ function CommitmentsPanel({ commitments, isLoading }) {
     <Card>
       <SectionHeader title="Commitments" count={open.length} />
       {isLoading ? <Spinner /> : open.length === 0 ? (
-        <EmptyState icon="🤝" message="No open commitments" />
+        <div className="text-center py-4">
+          <p className="text-sm text-gray-400">No commitments extracted yet.</p>
+          <p className="text-xs text-gray-300 mt-1">Commitments are extracted from your emails and meeting notes automatically each morning.</p>
+          <button
+            onClick={() => setShowAdd(true)}
+            className="mt-2 text-xs text-blue-600 hover:underline cursor-pointer"
+          >
+            + Add manually
+          </button>
+        </div>
       ) : (
         <div className="space-y-2">
           {open.map(c => {
@@ -315,11 +325,14 @@ function EmailQueue({ emails, isLoading }) {
             <div>
               <p className="text-xs font-medium text-red-500 uppercase tracking-wide mb-2">Needs Reply</p>
               <div className="space-y-2">
-                {needsReply.slice(0, 3).map(email => (
+                {needsReply.slice(0, 8).map(email => (
                   <div key={email.id} className="flex items-start gap-2 group">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-[#1a1a18] truncate">{email.from_name || email.from_address}</p>
-                      <p className="text-xs text-[#6b6b67] truncate">{email.subject}</p>
+                      <p className="text-xs text-[#6b6b67] truncate">{email.thread_subject || email.subject}</p>
+                      {email.days_waiting > 0 && (
+                        <p className="text-xs text-orange-400">{email.days_waiting}d waiting</p>
+                      )}
                     </div>
                     <button
                       onClick={() => mark.mutate({ id: email.id, status: 'done' })}
@@ -336,17 +349,24 @@ function EmailQueue({ emails, isLoading }) {
             <div>
               <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-2">Waiting On</p>
               <div className="space-y-2">
-                {waitingOn.slice(0, 2).map(email => (
+                {waitingOn.slice(0, 8).map(email => (
                   <div key={email.id} className="flex items-start gap-2">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-[#1a1a18] truncate">{email.from_name || email.from_address}</p>
-                      <p className="text-xs text-[#6b6b67] truncate">{email.subject}</p>
+                      <p className="text-sm text-[#1a1a18] truncate">{email.thread_subject || email.subject}</p>
+                      <p className="text-xs text-[#6b6b67] truncate">
+                        Waiting on: {email.latest_sender_name || email.to_name || email.to_address || 'Unknown'}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
+          <div className="mt-3 pt-3 border-t border-gray-100">
+            <span className="text-xs text-blue-600 cursor-pointer hover:underline">
+              View all {emails?.length ?? 0} emails →
+            </span>
+          </div>
         </div>
       )}
     </Card>
@@ -362,7 +382,10 @@ function MeetingNotesPanel({ notes, isLoading }) {
     <Card>
       <SectionHeader title="Recent Meetings" count={recent.length} />
       {isLoading ? <Spinner /> : recent.length === 0 ? (
-        <EmptyState icon="📝" message="No meeting notes yet" />
+        <div className="text-center py-4">
+          <p className="text-sm text-gray-400">No meeting notes yet.</p>
+          <p className="text-xs text-gray-300 mt-1">Otter.ai integration coming in next session.</p>
+        </div>
       ) : (
         <div className="space-y-3">
           {recent.map(note => (
@@ -403,8 +426,8 @@ function QuickAdd() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e5e5e3] px-6 py-3">
-      <div className="max-w-5xl mx-auto flex items-center gap-3">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e5e5e3] px-3 md:px-6 py-3">
+      <div className="max-w-5xl mx-auto flex items-center gap-2 md:gap-3">
         <select
           value={type}
           onChange={e => setType(e.target.value)}
@@ -458,8 +481,8 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#f8f8f6] pb-20">
       {/* Top bar */}
-      <div className="sticky top-0 z-10 bg-[#f8f8f6] border-b border-[#e5e5e3] px-6 py-3">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
+      <div className="sticky top-0 z-10 bg-[#f8f8f6] border-b border-[#e5e5e3] px-3 md:px-6 py-3">
+        <div className="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-3">
             <span className="font-bold text-[#1a1a18] text-lg">Personal OS</span>
             <WorkspaceBar workspace={workspace} setWorkspace={setWorkspace} />
@@ -469,7 +492,7 @@ export default function Dashboard() {
       </div>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-6 py-5 space-y-4">
+      <div className="max-w-5xl mx-auto px-3 md:px-6 py-4 md:py-5 space-y-4">
 
         {/* AI Daily Brief — top of page */}
         <div className="bg-white rounded-lg border border-[#e5e5e3] p-4">
@@ -498,13 +521,13 @@ export default function Dashboard() {
         <CalendarStrip events={events} isLoading={loadingEvents} />
 
         {/* Tasks + Commitments */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <TaskPanel tasks={tasks} isLoading={loadingTasks} />
           <CommitmentsPanel commitments={commitments} isLoading={loadingCommitments} />
         </div>
 
         {/* Emails + Meeting Notes */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <EmailQueue emails={emails} isLoading={loadingEmails} />
           <MeetingNotesPanel notes={notes} isLoading={loadingNotes} />
         </div>
