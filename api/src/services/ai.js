@@ -13,7 +13,7 @@ const RYAN_CONTEXT = `Ryan Hankins is a Project Executive at Clayco, a major con
 async function summarizeThread(email) {
   const content = email.full_thread_content || email.body_preview || 'No content available'
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 500,
     messages: [{
       role: 'user',
@@ -38,7 +38,7 @@ Return only the summary. No preamble.`
 async function extractTasks(email) {
   const content = email.full_thread_content || email.body_preview || ''
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1000,
     messages: [{
       role: 'user',
@@ -73,7 +73,7 @@ If no tasks return [].`
 async function extractOthersCommitments(email) {
   const content = email.full_thread_content || email.body_preview || ''
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1000,
     messages: [{
       role: 'user',
@@ -108,7 +108,7 @@ If no commitments return [].`
 async function extractMyCommitments(email) {
   const content = email.full_thread_content || email.body_preview || ''
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1000,
     messages: [{
       role: 'user',
@@ -140,7 +140,7 @@ If no commitments return [].`
 
 async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext) {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 800,
     messages: [{
       role: 'user',
@@ -174,7 +174,7 @@ Return only the brief. No preamble.`
 
 async function generateDailyBrief(context) {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 600,
     messages: [{
       role: 'user',
@@ -217,7 +217,7 @@ Return only the brief. No preamble.`
 
 async function generateDailyDigest(data) {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 800,
     messages: [{
       role: 'user',
@@ -236,7 +236,7 @@ Return a structured paragraph. Be concise. This will be read by AI in future run
 
 async function updateRollingContext(existingContext, todayDigest, date) {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1200,
     messages: [{
       role: 'user',
@@ -262,7 +262,7 @@ async function enrichTask(task, relatedEmails) {
     .join('\n')
 
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 400,
     messages: [{
       role: 'user',
@@ -282,7 +282,7 @@ Return only the context paragraph.`
 
 async function createContactProfile(contact, interactions) {
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 600,
     messages: [{
       role: 'user',
