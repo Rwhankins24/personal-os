@@ -317,6 +317,18 @@ module.exports = async (req, res) => {
         .limit(1)
         .maybeSingle()
 
+      // Yesterday's digest — what actually happened
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      const yesterdayStr = yesterday.toISOString().split('T')[0]
+
+      const { data: yesterdayDigest } = await supabase
+        .from('ai_context')
+        .select('content')
+        .eq('context_type', 'daily_digest')
+        .eq('date', yesterdayStr)
+        .maybeSingle()
+
       const { data: overdueOthers } = await supabase
         .from('others_commitments')
         .select('*')
@@ -385,6 +397,7 @@ module.exports = async (req, res) => {
         overdue_others: overdueWithDays,
         all_others_commitments: allOthersCommitments || [],
         meeting_notes: recentMeetingNotes || [],
+        yesterday_digest: yesterdayDigest?.content || null,
         rolling_summary: rollingCtx?.content || null
       }
 

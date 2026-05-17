@@ -180,23 +180,35 @@ async function generateDailyBrief(context) {
       role: 'user',
       content: `${RYAN_CONTEXT}
 
-Generate Ryan's daily brief. Be direct and specific. Second person voice. Structure it in 3 short sections:
-1. TODAY'S SCHEDULE — meetings and what to know walking in
-2. TOP ACTIONS — biggest risks and what needs to move today vs can wait
-3. COMMITMENTS WATCH — what others owe him + what he owes others
+Generate Ryan's daily brief. Second person voice. Direct and specific — no fluff, no restating facts he already knows. Three sections only:
+
+YESTERDAY
+What actually moved, what didn't, and what that means going into today. Be specific about project names and people. If nothing happened, say so plainly and flag what that silence means.
+
+TODAY'S FOCUS
+2-3 things that need to move today, ranked by consequence. Lead with the highest-exposure item. For each: what it is, why it matters today specifically, and what the action is. Factor in his schedule — if he has a meeting with a relevant party, note it.
+
+WATCH LIST
+1-2 items that aren't on fire today but will become problems if ignored this week. Overdue commitments from others belong here. Be blunt about who's holding what.
+
+---
 
 Date: ${context.date}
-Meetings today (${context.meetings_today}):
+
+Yesterday's summary:
+${context.yesterday_digest || 'No data from yesterday — first run or missed day.'}
+
+Today's schedule (${context.meetings_today} meetings):
 ${context.calendar.map(e => `- ${e.title} at ${e.time}${e.location ? ' @ ' + e.location : ''}`).join('\n') || 'None'}
 
-Recent meeting notes (last 3):
+Recent meeting notes:
 ${context.meeting_notes.map(n =>
-  `- ${n.title} (${n.meeting_date}): ${n.summary || ''} ${n.action_items ? '| Actions: ' + n.action_items : ''}`
+  `- ${n.title} (${n.meeting_date}): ${n.summary || 'no summary'} ${n.action_items ? '| Open actions: ' + n.action_items : ''}`
 ).join('\n') || 'None'}
 
-Most urgent emails needing reply:
+Emails needing reply (most urgent first):
 ${context.critical_emails.map(e =>
-  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d, ${e.urgency})`
+  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d waiting, ${e.urgency})`
 ).join('\n') || 'None'}
 
 Open tasks:
@@ -204,12 +216,12 @@ ${context.open_tasks.map(t =>
   `- ${t.title} (${t.urgency}, due ${t.due_date || 'no date'})`
 ).join('\n') || 'None'}
 
-Commitments YOU made:
+Commitments Ryan made:
 ${context.open_commitments.map(c =>
-  `- ${c.title} to ${c.made_to} (due ${c.due_date || 'TBD'}, ${c.urgency})`
+  `- ${c.title} → ${c.made_to} (due ${c.due_date || 'TBD'}, ${c.urgency})`
 ).join('\n') || 'None'}
 
-What OTHERS committed to you:
+What others committed to Ryan:
 ${context.all_others_commitments.map(c =>
   `- ${c.committed_by}: ${c.title} (due ${c.due_date || 'TBD'})`
 ).join('\n') || 'None'}
@@ -219,10 +231,10 @@ ${context.overdue_others.map(c =>
   `- ${c.committed_by}: ${c.title} (${c.days_overdue}d overdue)`
 ).join('\n') || 'None'}
 
-Rolling context:
-${context.rolling_summary || 'First run - no history yet'}
+30-day rolling context:
+${context.rolling_summary || 'No history yet.'}
 
-Return only the brief. No preamble.`
+Return only the brief. No preamble. Use the exact section headers: YESTERDAY, TODAY'S FOCUS, WATCH LIST.`
     }]
   })
   return message.content[0].text
