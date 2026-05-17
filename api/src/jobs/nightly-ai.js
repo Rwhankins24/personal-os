@@ -260,6 +260,46 @@ module.exports = async (req, res) => {
       }
     }
 
+    // ── STEP 7.5: Auto-create contacts from real email senders ───────
+    const { data: uniqueSenders } = await supabase
+      .from('emails')
+      .select('from_address, from_name')
+      .not('from_address', 'is', null)
+      .not('from_address', 'ilike', '%noreply%')
+      .not('from_address', 'ilike', '%no-reply%')
+      .not('from_address', 'ilike', '%donotreply%')
+      .not('from_address', 'ilike', '%@claycorp.com')
+
+    const seenAddresses = new Set()
+    for (const sender of (uniqueSenders || [])) {
+      if (seenAddresses.has(sender.from_address)) continue
+      seenAddresses.add(sender.from_address)
+
+      const { data: existing } = await supabase
+        .from('contacts')
+        .select('id')
+        .eq('email', sender.from_address)
+        .maybeSingle()
+
+      if (!existing) {
+        // Get most recent email from this sender for last_contact_date
+        const { data: lastEmail } = await supabase
+          .from('emails')
+          .select('received_at, thread_subject')
+          .eq('from_address', sender.from_address)
+          .order('received_at', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        await supabase.from('contacts').insert({
+          name: sender.from_name || sender.from_address,
+          email: sender.from_address,
+          last_contact_date: lastEmail?.received_at?.split('T')[0] || today,
+          last_topic: lastEmail?.thread_subject || null
+        })
+      }
+    }
+
     // ── STEP 8: Update contact profiles ──────────────────────────────
     const { data: activeContacts } = await supabase
       .from('contacts')
