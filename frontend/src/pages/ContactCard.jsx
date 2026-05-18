@@ -1,12 +1,14 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { getContact, getEmails, getCommitments, getProjects } from '../lib/api'
+import { getContact, getContacts, getEmails, getCommitments, getProjects, updateContact, deleteContact } from '../lib/api'
 import { marked } from 'marked'
 
 dayjs.extend(relativeTime)
 
+// ── Shared UI ──────────────────────────────────────────────────
 function PillBadge({ label, color = 'gray' }) {
   const colors = {
     gray:   'bg-gray-100 text-gray-600',
@@ -42,19 +44,222 @@ function Section({ title, children, count }) {
   )
 }
 
-export default function ContactCard() {
-  const { id }   = useParams()
-  const navigate = useNavigate()
+function FieldInput({ label, value, onChange, placeholder, type = 'text' }) {
+  return (
+    <div>
+      <label className="text-xs text-gray-500 block mb-1">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder || label}
+        className="w-full text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
+      />
+    </div>
+  )
+}
 
+// ── Merge Modal ────────────────────────────────────────────────
+function MergeModal({ contact, allContacts, onClose, onMerged }) {
+  const qc = useQueryClient()
+  const [selected, setSelected] = useState(null)
+  const [merging, setMerging]   = useState(false)
+  const [error, setError]       = useState(null)
+
+  // Candidates: contacts with overlapping name tokens, excluding self
+  const firstName = (contact.name || '').trim().split(/\s+/)[0].toLowerCase()
+  const lastName  = (contact.name || '').trim().split(/\s+/).slice(-1)[0].toLowerCase()
+  const candidates = (allContacts || []).filter(c => {
+    if (c.id === contact.id) return false
+    const cn = (c.name || '').toLowerCase()
+    return (firstName.length > 1 && cn.includes(firstName)) ||
+           (lastName.length > 1  && cn.includes(lastName))
+  })
+
+  async function doMerge() {
+    if (!selected) return
+    setMerging(true)
+    setError(null)
+    try {
+      // Build merged fields: target absorbs missing data from duplicate (contact being viewed)
+      const mergedUpdates = {}
+
+      // Secondary email: add this contact's email if target doesn't have secondary
+      if (!selected.secondary_email && contact.email !== selected.email) {
+        mergedUpdates.secondary_email = contact.email
+      }
+
+      // Fill any empty fields on the target from this contact
+      const fillIfEmpty = ['title', 'company', 'phone_mobile', 'phone_office',
+                           'phone_mobile_2', 'phone_office_2', 'linkedin', 'address',
+                           'notes', 'last_contact_date']
+      for (const f of fillIfEmpty) {
+        if (!selected[f] && contact[f]) mergedUpdates[f] = contact[f]
+      }
+
+      // Update target record
+      await updateContact(selected.id, mergedUpdates)
+
+      // Delete this duplicate
+      await deleteContact(contact.id)
+
+      // Invalidate both caches
+      qc.invalidateQueries({ queryKey: ['contacts'] })
+      qc.invalidateQueries({ queryKey: ['contact', contact.id] })
+      qc.invalidateQueries({ queryKey: ['contact', selected.id] })
+
+      onMerged(selected.id)
+    } catch (err) {
+      setError(err.message || 'Merge failed')
+      setMerging(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onClose}>
+      <div
+        className="bg-white rounded-2xl shadow-xl w-full max-w-md"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="px-5 py-4 border-b border-[#e5e5e3]">
+          <h2 className="text-base font-semibold text-[#1a1a18]">Merge Contact</h2>
+          <p className="text-xs text-[#6b6b67] mt-0.5">
+            Select which record to keep. The other will be deleted and its data absorbed.
+          </p>
+        </div>
+
+        <div className="px-5 py-4 space-y-3 max-h-80 overflow-y-auto">
+          {candidates.length === 0 ? (
+            <p className="text-sm text-gray-400 text-center py-4">
+              No similar contacts found.
+            </p>
+          ) : (
+            candidates.map(c => (
+              <div
+                key={c.id}
+                onClick={() => setSelected(selected?.id === c.id ? null : c)}
+                className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
+                  selected?.id === c.id
+                    ? 'border-blue-400 bg-blue-50'
+                    : 'border-[#e5e5e3] hover:border-blue-200 hover:bg-gray-50'
+                }`}
+              >
+                <div className="w-8 h-8 rounded-full bg-[#1a1a18] flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                  {(c.name || '?')[0].toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-[#1a1a18]">{c.name}</p>
+                  <p className="text-xs text-[#6b6b67] truncate">
+                    {[c.title, c.company].filter(Boolean).join(' · ') || c.email || '—'}
+                  </p>
+                  {c.email && <p className="text-xs text-gray-400">{c.email}</p>}
+                </div>
+                {selected?.id === c.id && (
+                  <span className="text-blue-500 text-sm flex-shrink-0">✓</span>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+
+        {error && (
+          <p className="px-5 text-xs text-red-500">{error}</p>
+        )}
+
+        <div className="px-5 py-4 border-t border-[#e5e5e3] flex gap-2 justify-end">
+          <button
+            onClick={onClose}
+            className="text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={doMerge}
+            disabled={!selected || merging}
+            className="text-sm px-4 py-2 rounded-lg bg-blue-600 text-white font-medium disabled:opacity-40 hover:bg-blue-700"
+          >
+            {merging ? 'Merging…' : `Merge into ${selected?.name || '…'}`}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Delete Confirmation ────────────────────────────────────────
+function DeleteConfirm({ contactName, onConfirm, onCancel, isPending }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onCancel}>
+      <div
+        className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-5"
+        onClick={e => e.stopPropagation()}
+      >
+        <h2 className="text-base font-semibold text-[#1a1a18] mb-2">Delete contact?</h2>
+        <p className="text-sm text-[#6b6b67] mb-5">
+          <span className="font-medium text-[#1a1a18]">{contactName}</span> and all associated
+          data will be permanently removed. This cannot be undone.
+        </p>
+        <div className="flex gap-2">
+          <button
+            onClick={onCancel}
+            className="flex-1 text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={isPending}
+            className="flex-1 text-sm px-4 py-2 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 disabled:opacity-40"
+          >
+            {isPending ? 'Deleting…' : 'Delete'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Main component ─────────────────────────────────────────────
+export default function ContactCard() {
+  const { id }    = useParams()
+  const navigate  = useNavigate()
+  const qc        = useQueryClient()
+
+  // UI state
+  const [editing, setEditing]         = useState(false)
+  const [showMerge, setShowMerge]     = useState(false)
+  const [showDelete, setShowDelete]   = useState(false)
+  const [form, setForm]               = useState({})
+
+  // Data
   const { data: contact, isLoading } = useQuery({
     queryKey: ['contact', id],
     queryFn: () => getContact(id),
   })
+  const { data: allContacts } = useQuery({ queryKey: ['contacts'],    queryFn: getContacts })
   const { data: emails }      = useQuery({ queryKey: ['emails'],      queryFn: getEmails })
   const { data: commitments } = useQuery({ queryKey: ['commitments'], queryFn: getCommitments })
   const { data: projects }    = useQuery({ queryKey: ['projects'],    queryFn: getProjects })
 
-  // Emails involving this contact (by name match)
+  // Mutations
+  const save = useMutation({
+    mutationFn: (updates) => updateContact(id, updates),
+    onSuccess: (updated) => {
+      qc.setQueryData(['contact', id], old => ({ ...old, ...updated }))
+      qc.invalidateQueries({ queryKey: ['contacts'] })
+      setEditing(false)
+    },
+  })
+
+  const remove = useMutation({
+    mutationFn: () => deleteContact(id),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['contacts'] })
+      navigate('/contacts')
+    },
+  })
+
+  // Derived
   const contactEmails = contact
     ? (emails || []).filter(e =>
         (e.from_name && e.from_name.includes(contact.name?.split(' ')[0] || '')) ||
@@ -62,12 +267,10 @@ export default function ContactCard() {
       ).slice(0, 5)
     : []
 
-  // My commitments to this contact
   const toThem = contact
     ? (commitments || []).filter(c =>
         c.status === 'open' &&
-        c.made_to &&
-        c.made_to.toLowerCase().includes((contact.name || '').toLowerCase())
+        c.made_to?.toLowerCase().includes((contact.name || '').toLowerCase())
       )
     : []
 
@@ -75,6 +278,19 @@ export default function ContactCard() {
     ? projects?.find(p => p.id === contact.project_id)
     : null
 
+  function startEdit() {
+    setForm({
+      name:         contact.name         || '',
+      title:        contact.title        || '',
+      company:      contact.company      || '',
+      phone_mobile: contact.phone_mobile || '',
+      phone_office: contact.phone_office || '',
+      relationship_warmth: contact.relationship_warmth || '',
+    })
+    setEditing(true)
+  }
+
+  // ── Loading / not found ──────────────────────────────────────
   if (isLoading) return (
     <div className="min-h-screen bg-[#f8f8f6] flex items-center justify-center">
       <div className="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />
@@ -84,7 +300,7 @@ export default function ContactCard() {
   if (!contact) return (
     <div className="min-h-screen bg-[#f8f8f6] flex flex-col items-center justify-center gap-3">
       <p className="text-gray-500">Contact not found</p>
-      <button onClick={() => navigate('/')} className="text-blue-600 text-sm hover:underline">← Back</button>
+      <button onClick={() => navigate('/contacts')} className="text-blue-600 text-sm hover:underline">← Contacts</button>
     </div>
   )
 
@@ -92,128 +308,196 @@ export default function ContactCard() {
 
   return (
     <div className="min-h-screen bg-[#f8f8f6]">
-      {/* Header */}
+
+      {/* Modals */}
+      {showMerge && (
+        <MergeModal
+          contact={contact}
+          allContacts={allContacts}
+          onClose={() => setShowMerge(false)}
+          onMerged={(targetId) => navigate(`/contact/${targetId}`)}
+        />
+      )}
+      {showDelete && (
+        <DeleteConfirm
+          contactName={contact.name}
+          onConfirm={() => remove.mutate()}
+          onCancel={() => setShowDelete(false)}
+          isPending={remove.isPending}
+        />
+      )}
+
+      {/* Sticky header */}
       <div className="sticky top-0 z-10 bg-white border-b border-[#e5e5e3] px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-1.5 text-sm text-[#6b6b67] hover:text-[#1a1a18]"
+            onClick={() => navigate('/contacts')}
+            className="text-sm text-[#6b6b67] hover:text-[#1a1a18]"
           >
-            ← Back
+            ← Contacts
           </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowMerge(true)}
+              className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50 transition-colors"
+            >
+              Merge
+            </button>
+            {editing ? (
+              <>
+                <button
+                  onClick={() => setEditing(false)}
+                  className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => save.mutate(form)}
+                  disabled={save.isPending}
+                  className="text-xs px-3 py-1.5 rounded-lg bg-[#1a1a18] text-white hover:bg-gray-800 disabled:opacity-40"
+                >
+                  {save.isPending ? 'Saving…' : 'Save'}
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={startEdit}
+                className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50 transition-colors"
+              >
+                Edit
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-5 space-y-4">
 
-        {/* Hero */}
+        {/* Hero card */}
         <div className="bg-white border border-[#e5e5e3] rounded-xl p-4">
-          <div className="flex items-start gap-3">
-            <div className="w-12 h-12 rounded-full bg-[#1a1a18] flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
-              {(contact.name || '?')[0].toUpperCase()}
+          {editing ? (
+            // ── Edit mode ──────────────────────────────────────
+            <div className="space-y-3">
+              <FieldInput label="Name"         value={form.name}         onChange={v => setForm(f => ({ ...f, name: v }))} />
+              <FieldInput label="Title"        value={form.title}        onChange={v => setForm(f => ({ ...f, title: v }))} />
+              <FieldInput label="Company"      value={form.company}      onChange={v => setForm(f => ({ ...f, company: v }))} />
+              <FieldInput label="Mobile"       value={form.phone_mobile} onChange={v => setForm(f => ({ ...f, phone_mobile: v }))} placeholder="+1 555 000 0000" />
+              <FieldInput label="Office Phone" value={form.phone_office} onChange={v => setForm(f => ({ ...f, phone_office: v }))} placeholder="+1 555 000 0000" />
+              <div>
+                <label className="text-xs text-gray-500 block mb-1">Relationship</label>
+                <select
+                  value={form.relationship_warmth}
+                  onChange={e => setForm(f => ({ ...f, relationship_warmth: e.target.value }))}
+                  className="w-full text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white"
+                >
+                  <option value="">— select —</option>
+                  <option value="hot">Hot</option>
+                  <option value="warm">Warm</option>
+                  <option value="cool">Cool</option>
+                  <option value="cold">Cold</option>
+                </select>
+              </div>
+              {save.isError && (
+                <p className="text-xs text-red-500">Save failed: {save.error?.message}</p>
+              )}
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-xl font-bold text-[#1a1a18]">{contact.name}</h1>
-                {contact.relationship_warmth && (
-                  <PillBadge label={contact.relationship_warmth} color={warmthColor} />
+          ) : (
+            // ── View mode ──────────────────────────────────────
+            <>
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 rounded-full bg-[#1a1a18] flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
+                  {(contact.name || '?')[0].toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h1 className="text-xl font-bold text-[#1a1a18]">{contact.name}</h1>
+                    {contact.relationship_warmth && (
+                      <PillBadge label={contact.relationship_warmth} color={warmthColor} />
+                    )}
+                    {contact.enriched && (
+                      <span title="Profile enriched from email signatures" className="text-xs text-gray-400">✦ enriched</span>
+                    )}
+                  </div>
+                  {contact.title && (
+                    <p className="text-sm font-medium text-[#1a1a18] mt-0.5">{contact.title}</p>
+                  )}
+                  {contact.company && (
+                    <p className="text-sm text-[#6b6b67]">
+                      {contact.company}
+                      {contact.company_pending && (
+                        <span className="ml-2 text-xs text-orange-500">(pending: {contact.company_pending})</span>
+                      )}
+                    </p>
+                  )}
+                  {contact.previous_title && (
+                    <p className="text-xs text-gray-400 mt-0.5">Prev: {contact.previous_title}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-3 space-y-1.5 border-t border-gray-100 pt-3">
+                {contact.email && (
+                  <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
+                    <span>✉️</span> {contact.email}
+                  </a>
                 )}
-                {contact.enriched && (
-                  <span title="Profile enriched from email signatures" className="text-xs text-gray-400">✦ enriched</span>
+                {contact.secondary_email && (
+                  <a href={`mailto:${contact.secondary_email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline opacity-70">
+                    <span>✉️</span> {contact.secondary_email}
+                  </a>
+                )}
+                {contact.phone_mobile && (
+                  <a href={`tel:${contact.phone_mobile}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
+                    <span>📱</span> {contact.phone_mobile}
+                    {contact.phone_mobile_2 && <span className="text-[#6b6b67]"> · {contact.phone_mobile_2}</span>}
+                  </a>
+                )}
+                {contact.phone_office && (
+                  <a href={`tel:${contact.phone_office}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
+                    <span>📞</span> {contact.phone_office}
+                    {contact.phone_office_2 && <span className="text-[#6b6b67]"> · {contact.phone_office_2}</span>}
+                  </a>
+                )}
+                {contact.phone && !contact.phone_mobile && !contact.phone_office && (
+                  <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-[#6b6b67] hover:text-blue-600">
+                    <span>📞</span> {contact.phone}
+                  </a>
+                )}
+                {contact.linkedin && (
+                  <a
+                    href={contact.linkedin.startsWith('http') ? contact.linkedin : `https://${contact.linkedin}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                  >
+                    <span>🔗</span> LinkedIn
+                  </a>
+                )}
+                {contact.address && (
+                  <p className="flex items-start gap-2 text-sm text-[#6b6b67]">
+                    <span className="flex-shrink-0">📍</span>
+                    <span>{contact.address}</span>
+                  </p>
+                )}
+                {contact.last_contact_date && (
+                  <p className="text-xs text-gray-400 pt-1">
+                    Last contact: {dayjs(contact.last_contact_date).format('MMMM D, YYYY')} ({dayjs(contact.last_contact_date).fromNow()})
+                  </p>
                 )}
               </div>
-              {/* Title */}
-              {contact.title && (
-                <p className="text-sm font-medium text-[#1a1a18] mt-0.5">{contact.title}</p>
-              )}
-              {/* Company */}
-              {contact.company && (
-                <p className="text-sm text-[#6b6b67]">
-                  {contact.company}
-                  {contact.company_pending && (
-                    <span className="ml-2 text-xs text-orange-500">(pending: {contact.company_pending})</span>
-                  )}
-                </p>
-              )}
-              {/* Previous title */}
-              {contact.previous_title && (
-                <p className="text-xs text-gray-400 mt-0.5">Prev: {contact.previous_title}</p>
-              )}
-            </div>
-          </div>
 
-          <div className="mt-3 space-y-1.5 border-t border-gray-100 pt-3">
-            {/* Email(s) */}
-            {contact.email && (
-              <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
-                <span>✉️</span> {contact.email}
-              </a>
-            )}
-            {contact.secondary_email && (
-              <a href={`mailto:${contact.secondary_email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline opacity-70">
-                <span>✉️</span> {contact.secondary_email}
-              </a>
-            )}
-            {/* Phone mobile */}
-            {contact.phone_mobile && (
-              <a href={`tel:${contact.phone_mobile}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
-                <span>📱</span> {contact.phone_mobile}
-                {contact.phone_mobile_2 && (
-                  <span className="text-[#6b6b67]"> · {contact.phone_mobile_2}</span>
-                )}
-              </a>
-            )}
-            {/* Phone office */}
-            {contact.phone_office && (
-              <a href={`tel:${contact.phone_office}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
-                <span>📞</span> {contact.phone_office}
-                {contact.phone_office_2 && (
-                  <span className="text-[#6b6b67]"> · {contact.phone_office_2}</span>
-                )}
-              </a>
-            )}
-            {/* Legacy phone field (pre-enrichment) */}
-            {contact.phone && !contact.phone_mobile && !contact.phone_office && (
-              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-[#6b6b67] hover:text-blue-600">
-                <span>📞</span> {contact.phone}
-              </a>
-            )}
-            {/* LinkedIn */}
-            {contact.linkedin && (
-              <a
-                href={contact.linkedin.startsWith('http') ? contact.linkedin : `https://${contact.linkedin}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
-              >
-                <span>🔗</span> LinkedIn
-              </a>
-            )}
-            {/* Address */}
-            {contact.address && (
-              <p className="flex items-start gap-2 text-sm text-[#6b6b67]">
-                <span className="flex-shrink-0">📍</span>
-                <span>{contact.address}</span>
-              </p>
-            )}
-            {/* Last contact */}
-            {contact.last_contact_date && (
-              <p className="text-xs text-gray-400 pt-1">
-                Last contact: {dayjs(contact.last_contact_date).format('MMMM D, YYYY')} ({dayjs(contact.last_contact_date).fromNow()})
-              </p>
-            )}
-          </div>
-
-          {linkedProject && (
-            <div className="mt-3 pt-3 border-t border-gray-100">
-              <p className="text-xs text-gray-500 mb-1">Project</p>
-              <button
-                onClick={() => navigate(`/project/${linkedProject.id}`)}
-                className="text-sm font-medium text-blue-600 hover:underline"
-              >
-                {linkedProject.name} →
-              </button>
-            </div>
+              {linkedProject && (
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <p className="text-xs text-gray-500 mb-1">Project</p>
+                  <button
+                    onClick={() => navigate(`/project/${linkedProject.id}`)}
+                    className="text-sm font-medium text-blue-600 hover:underline"
+                  >
+                    {linkedProject.name} →
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -232,7 +516,7 @@ export default function ContactCard() {
           </Section>
         )}
 
-        {/* Open commitments to this person */}
+        {/* My open commitments to this person */}
         {toThem.length > 0 && (
           <Section title="My Open Commitments" count={toThem.length}>
             <div className="space-y-2">
@@ -297,6 +581,20 @@ export default function ContactCard() {
             ))}
           </div>
         )}
+
+        {/* ── Danger zone ─────────────────────────────────────── */}
+        <div className="bg-white border border-red-100 rounded-xl p-4">
+          <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-2">Danger Zone</p>
+          <button
+            onClick={() => setShowDelete(true)}
+            className="text-sm text-red-600 hover:text-red-700 hover:underline"
+          >
+            Delete this contact
+          </button>
+          <p className="text-xs text-gray-400 mt-1">
+            Permanently removes this contact and all associated data.
+          </p>
+        </div>
 
       </div>
     </div>

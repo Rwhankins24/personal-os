@@ -42,6 +42,7 @@ export const updateProject  = (id, data) => api.patch(`/api/projects?id=${id}`, 
 export const getContacts    = () => api.get('/api/contacts').then(r => r.data)
 export const getContact     = (id) => api.get(`/api/contacts?id=${id}`).then(r => r.data)
 export const updateContact  = (id, data) => api.patch(`/api/contacts?id=${id}`, data).then(r => r.data)
+export const deleteContact  = (id) => api.delete(`/api/contacts?id=${id}`).then(r => r.data)
 
 // ── Meeting Notes ─────────────────────────────────────────────
 export const getMeetingNotes = () => api.get('/api/meeting-notes').then(r => r.data)
