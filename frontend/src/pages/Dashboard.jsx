@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -12,7 +12,6 @@ import {
   getOthersCommitments, updateOthersCommitment,
   getProjects,
   getContacts,
-  getMeetingNotes,
   getCaptures, createCapture,
   getPendingDecisions, updatePendingDecision,
   getUnlinkedIntelligence, updateUnlinkedIntelligence,
@@ -55,6 +54,39 @@ const WARMTH_COLOR = {
   warm:   'bg-orange-100 text-orange-700',
   cool:   'bg-blue-100 text-blue-700',
   cold:   'bg-gray-100 text-gray-500',
+}
+
+// ── ContactLink ────────────────────────────────────────────────
+// Matches a display name against the contacts list (exact then partial),
+// returns a tappable link if found, otherwise plain text.
+function findContactByName(name, contacts) {
+  if (!name || !contacts?.length) return null
+  const lower = name.toLowerCase().trim()
+  // Exact match
+  let match = contacts.find(c => c.name?.toLowerCase() === lower)
+  if (!match) {
+    // Contact name contained in the display string, or vice versa
+    match = contacts.find(c => {
+      const cn = (c.name || '').toLowerCase()
+      return cn.length > 1 && (lower.includes(cn) || cn.includes(lower))
+    })
+  }
+  return match || null
+}
+
+function ContactLink({ name, contacts, className = '' }) {
+  if (!name) return null
+  const contact = findContactByName(name, contacts)
+  if (!contact) return <span className={className}>{name}</span>
+  return (
+    <Link
+      to={`/contact/${contact.id}`}
+      className={`hover:underline hover:text-blue-600 transition-colors ${className}`}
+      onClick={e => e.stopPropagation()}
+    >
+      {name}
+    </Link>
+  )
 }
 
 // ── Shared components ──────────────────────────────────────────
@@ -377,7 +409,7 @@ function TaskPanel({ tasks, isLoading }) {
 }
 
 // ── My Commitments panel ───────────────────────────────────────
-function CommitmentsPanel({ commitments, isLoading }) {
+function CommitmentsPanel({ commitments, isLoading, contacts }) {
   const qc = useQueryClient()
   const close = useMutation({
     mutationFn: (id) => updateCommitment(id, { status: 'closed' }),
@@ -413,7 +445,9 @@ function CommitmentsPanel({ commitments, isLoading }) {
                     {c.implicit && <PillBadge label="implied" color="yellow" />}
                   </div>
                   <p className="text-xs text-[#6b6b67] mt-0.5">
-                    {c.made_to && `To: ${c.made_to}`}
+                    {c.made_to && (
+                      <span>To: <ContactLink name={c.made_to} contacts={contacts} className="text-xs text-[#6b6b67]" /></span>
+                    )}
                     {c.due_date && (
                       <span className={overdue ? 'text-red-500 font-medium ml-1' : 'ml-1'}>
                         Due {dayjs(c.due_date).format('MMM D')}
@@ -441,7 +475,7 @@ function CommitmentsPanel({ commitments, isLoading }) {
 }
 
 // ── Others' Commitments panel ──────────────────────────────────
-function OthersCommitmentsPanel() {
+function OthersCommitmentsPanel({ contacts }) {
   const qc = useQueryClient()
   const { data, isLoading } = useQuery({
     queryKey: ['others-commitments'],
@@ -473,7 +507,9 @@ function OthersCommitmentsPanel() {
                   )}
                 </div>
                 <p className="text-xs text-[#6b6b67] mt-0.5">
-                  {c.made_by && `From: ${c.made_by}`}
+                  {c.made_by && (
+                    <span>From: <ContactLink name={c.made_by} contacts={contacts} className="text-xs text-[#6b6b67]" /></span>
+                  )}
                   {c.due_date && (
                     <span className={c.days_overdue > 0 ? 'text-red-500 font-medium ml-1' : 'ml-1'}>
                       Due {dayjs(c.due_date).format('MMM D')}
@@ -506,7 +542,7 @@ function OthersCommitmentsPanel() {
 }
 
 // ── Email queue ────────────────────────────────────────────────
-function EmailQueue({ emails, isLoading }) {
+function EmailQueue({ emails, isLoading, contacts }) {
   const qc = useQueryClient()
   const [tab, setTab] = useState('reply')
 
@@ -558,9 +594,11 @@ function EmailQueue({ emails, isLoading }) {
           {shown.slice(0, 7).map(email => (
             <div key={email.id} className="flex items-start gap-2 group">
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-[#1a1a18] truncate">
-                  {email.from_name || email.from_address}
-                </p>
+                <ContactLink
+                  name={email.from_name || email.from_address}
+                  contacts={contacts}
+                  className="text-sm font-medium text-[#1a1a18] block truncate"
+                />
                 <p className="text-xs text-[#6b6b67] truncate">
                   {email.thread_subject || email.subject}
                 </p>
@@ -811,53 +849,6 @@ function ProjectsPanel({ projects, isLoading }) {
   )
 }
 
-// ── Contacts panel ─────────────────────────────────────────────
-function ContactsPanel({ contacts, isLoading }) {
-  const navigate = useNavigate()
-
-  const warm = (contacts || []).filter(c => ['hot', 'warm'].includes(c.relationship_warmth))
-  const shown = warm.length > 0 ? warm : (contacts || []).slice(0, 8)
-
-  return (
-    <Card>
-      <SectionHeader
-        title="Key Contacts"
-        count={contacts?.length}
-        action={warm.length > 0 ? <PillBadge label="warm/hot" color="orange" /> : undefined}
-      />
-      {isLoading ? <Spinner /> : shown.length === 0 ? (
-        <EmptyState icon="👥" message="No contacts yet" />
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {shown.slice(0, 8).map(c => (
-            <div
-              key={c.id}
-              onClick={() => navigate(`/contact/${c.id}`)}
-              className="border border-[#e5e5e3] rounded-lg p-2.5 cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all"
-            >
-              <div className="flex items-center gap-1.5 mb-1">
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white bg-[#1a1a18]`}>
-                  {(c.name || '?')[0].toUpperCase()}
-                </div>
-                {c.relationship_warmth && (
-                  <span className={`text-xs px-1 py-0.5 rounded font-medium ${WARMTH_COLOR[c.relationship_warmth] || 'bg-gray-100 text-gray-500'}`}>
-                    {c.relationship_warmth}
-                  </span>
-                )}
-              </div>
-              <p className="text-xs font-medium text-[#1a1a18] truncate">{c.name}</p>
-              <p className="text-xs text-[#6b6b67] truncate">{c.company || c.title || '—'}</p>
-              {c.last_contact_date && (
-                <p className="text-xs text-gray-400 mt-0.5">{dayjs(c.last_contact_date).fromNow()}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </Card>
-  )
-}
-
 // ── Unlinked Intelligence panel ────────────────────────────────
 
 // Parse item.content — may be a JSON array of intel objects or a plain string
@@ -1098,7 +1089,7 @@ export default function Dashboard() {
   const { data: emails,      isLoading: loadingEmails }  = useQuery({ queryKey: ['emails'],      queryFn: getEmails,       refetchInterval: 120000 })
   const { data: commitments, isLoading: loadingCommit }  = useQuery({ queryKey: ['commitments'], queryFn: getCommitments,  refetchInterval: 120000 })
   const { data: projects,    isLoading: loadingProjects} = useQuery({ queryKey: ['projects'],    queryFn: getProjects,     refetchInterval: 300000 })
-  const { data: contacts,    isLoading: loadingContacts} = useQuery({ queryKey: ['contacts'],    queryFn: getContacts,     refetchInterval: 300000 })
+  const { data: contacts }   = useQuery({ queryKey: ['contacts'],    queryFn: getContacts,     refetchInterval: 300000 })
   const { data: decisions }  = useQuery({ queryKey: ['pending-decisions'], queryFn: getPendingDecisions, refetchInterval: 300000 })
   const { data: questions }  = useQuery({ queryKey: ['ai-questions'],      queryFn: getAIQuestions,     refetchInterval: 300000 })
 
@@ -1113,6 +1104,12 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <span className="font-bold text-[#1a1a18] text-base tracking-tight">Personal OS</span>
             <WorkspaceBar workspace={workspace} setWorkspace={setWorkspace} />
+            <Link
+              to="/contacts"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Contacts
+            </Link>
           </div>
           <div className="text-right">
             <p className="text-sm font-semibold text-[#1a1a18]">{now.format('dddd, MMMM D')}</p>
@@ -1149,13 +1146,13 @@ export default function Dashboard() {
           {/* LEFT column */}
           <div className="space-y-3">
             <TaskPanel tasks={tasks} isLoading={loadingTasks} />
-            <CommitmentsPanel commitments={commitments} isLoading={loadingCommit} />
-            <OthersCommitmentsPanel />
+            <CommitmentsPanel commitments={commitments} isLoading={loadingCommit} contacts={contacts} />
+            <OthersCommitmentsPanel contacts={contacts} />
           </div>
 
           {/* RIGHT column */}
           <div className="space-y-3">
-            <EmailQueue emails={emails} isLoading={loadingEmails} />
+            <EmailQueue emails={emails} isLoading={loadingEmails} contacts={contacts} />
             <PendingDecisionsPanel />
             <AIQuestionsPanel />
           </div>
@@ -1163,9 +1160,6 @@ export default function Dashboard() {
 
         {/* Projects — full width */}
         <ProjectsPanel projects={projects} isLoading={loadingProjects} />
-
-        {/* Contacts */}
-        <ContactsPanel contacts={contacts} isLoading={loadingContacts} />
 
         {/* Unlinked intelligence — only renders if data exists */}
         <UnlinkedIntelPanel />
