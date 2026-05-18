@@ -59,6 +59,21 @@ function FieldInput({ label, value, onChange, placeholder, type = 'text' }) {
   )
 }
 
+function FieldTextarea({ label, value, onChange, placeholder, rows = 3 }) {
+  return (
+    <div>
+      <label className="text-xs text-gray-500 block mb-1">{label}</label>
+      <textarea
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder || label}
+        rows={rows}
+        className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white resize-none"
+      />
+    </div>
+  )
+}
+
 // ── Merge Modal ────────────────────────────────────────────────
 function MergeModal({ contact, allContacts, onClose, onMerged }) {
   const qc = useQueryClient()
@@ -66,7 +81,6 @@ function MergeModal({ contact, allContacts, onClose, onMerged }) {
   const [merging, setMerging]   = useState(false)
   const [error, setError]       = useState(null)
 
-  // Candidates: contacts with overlapping name tokens, excluding self
   const firstName = (contact.name || '').trim().split(/\s+/)[0].toLowerCase()
   const lastName  = (contact.name || '').trim().split(/\s+/).slice(-1)[0].toLowerCase()
   const candidates = (allContacts || []).filter(c => {
@@ -81,33 +95,21 @@ function MergeModal({ contact, allContacts, onClose, onMerged }) {
     setMerging(true)
     setError(null)
     try {
-      // Build merged fields: target absorbs missing data from duplicate (contact being viewed)
       const mergedUpdates = {}
-
-      // Secondary email: add this contact's email if target doesn't have secondary
       if (!selected.secondary_email && contact.email !== selected.email) {
         mergedUpdates.secondary_email = contact.email
       }
-
-      // Fill any empty fields on the target from this contact
       const fillIfEmpty = ['title', 'company', 'phone_mobile', 'phone_office',
                            'phone_mobile_2', 'phone_office_2', 'linkedin', 'address',
                            'notes', 'last_contact_date']
       for (const f of fillIfEmpty) {
         if (!selected[f] && contact[f]) mergedUpdates[f] = contact[f]
       }
-
-      // Update target record
       await updateContact(selected.id, mergedUpdates)
-
-      // Delete this duplicate
       await deleteContact(contact.id)
-
-      // Invalidate both caches
       qc.invalidateQueries({ queryKey: ['contacts'] })
       qc.invalidateQueries({ queryKey: ['contact', contact.id] })
       qc.invalidateQueries({ queryKey: ['contact', selected.id] })
-
       onMerged(selected.id)
     } catch (err) {
       setError(err.message || 'Merge failed')
@@ -117,22 +119,16 @@ function MergeModal({ contact, allContacts, onClose, onMerged }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onClose}>
-      <div
-        className="bg-white rounded-2xl shadow-xl w-full max-w-md"
-        onClick={e => e.stopPropagation()}
-      >
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md" onClick={e => e.stopPropagation()}>
         <div className="px-5 py-4 border-b border-[#e5e5e3]">
           <h2 className="text-base font-semibold text-[#1a1a18]">Merge Contact</h2>
           <p className="text-xs text-[#6b6b67] mt-0.5">
             Select which record to keep. The other will be deleted and its data absorbed.
           </p>
         </div>
-
         <div className="px-5 py-4 space-y-3 max-h-80 overflow-y-auto">
           {candidates.length === 0 ? (
-            <p className="text-sm text-gray-400 text-center py-4">
-              No similar contacts found.
-            </p>
+            <p className="text-sm text-gray-400 text-center py-4">No similar contacts found.</p>
           ) : (
             candidates.map(c => (
               <div
@@ -154,23 +150,14 @@ function MergeModal({ contact, allContacts, onClose, onMerged }) {
                   </p>
                   {c.email && <p className="text-xs text-gray-400">{c.email}</p>}
                 </div>
-                {selected?.id === c.id && (
-                  <span className="text-blue-500 text-sm flex-shrink-0">✓</span>
-                )}
+                {selected?.id === c.id && <span className="text-blue-500 text-sm flex-shrink-0">✓</span>}
               </div>
             ))
           )}
         </div>
-
-        {error && (
-          <p className="px-5 text-xs text-red-500">{error}</p>
-        )}
-
+        {error && <p className="px-5 text-xs text-red-500">{error}</p>}
         <div className="px-5 py-4 border-t border-[#e5e5e3] flex gap-2 justify-end">
-          <button
-            onClick={onClose}
-            className="text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
-          >
+          <button onClick={onClose} className="text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50">
             Cancel
           </button>
           <button
@@ -190,20 +177,14 @@ function MergeModal({ contact, allContacts, onClose, onMerged }) {
 function DeleteConfirm({ contactName, onConfirm, onCancel, isPending }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onCancel}>
-      <div
-        className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-5"
-        onClick={e => e.stopPropagation()}
-      >
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-5" onClick={e => e.stopPropagation()}>
         <h2 className="text-base font-semibold text-[#1a1a18] mb-2">Delete contact?</h2>
         <p className="text-sm text-[#6b6b67] mb-5">
           <span className="font-medium text-[#1a1a18]">{contactName}</span> and all associated
           data will be permanently removed. This cannot be undone.
         </p>
         <div className="flex gap-2">
-          <button
-            onClick={onCancel}
-            className="flex-1 text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
-          >
+          <button onClick={onCancel} className="flex-1 text-sm px-4 py-2 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50">
             Cancel
           </button>
           <button
@@ -221,15 +202,15 @@ function DeleteConfirm({ contactName, onConfirm, onCancel, isPending }) {
 
 // ── Main component ─────────────────────────────────────────────
 export default function ContactCard() {
-  const { id }    = useParams()
-  const navigate  = useNavigate()
-  const qc        = useQueryClient()
+  const { id }   = useParams()
+  const navigate = useNavigate()
+  const qc       = useQueryClient()
 
   // UI state
-  const [editing, setEditing]         = useState(false)
-  const [showMerge, setShowMerge]     = useState(false)
-  const [showDelete, setShowDelete]   = useState(false)
-  const [form, setForm]               = useState({})
+  const [editing, setEditing]       = useState(false)
+  const [showMerge, setShowMerge]   = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
+  const [form, setForm]             = useState({})
 
   // Data
   const { data: contact, isLoading } = useQuery({
@@ -241,13 +222,37 @@ export default function ContactCard() {
   const { data: commitments } = useQuery({ queryKey: ['commitments'], queryFn: getCommitments })
   const { data: projects }    = useQuery({ queryKey: ['projects'],    queryFn: getProjects })
 
-  // Mutations
+  // Save mutation
   const save = useMutation({
     mutationFn: (updates) => updateContact(id, updates),
     onSuccess: (updated) => {
       qc.setQueryData(['contact', id], old => ({ ...old, ...updated }))
       qc.invalidateQueries({ queryKey: ['contacts'] })
       setEditing(false)
+    },
+  })
+
+  // Inline job-change actions (no edit mode required)
+  const acceptCompany = useMutation({
+    mutationFn: () => updateContact(id, {
+      company: contact.company_pending,
+      company_pending: null,
+      job_change_detected: false,
+    }),
+    onSuccess: (updated) => {
+      qc.setQueryData(['contact', id], old => ({ ...old, ...updated }))
+      qc.invalidateQueries({ queryKey: ['contacts'] })
+    },
+  })
+
+  const keepCompany = useMutation({
+    mutationFn: () => updateContact(id, {
+      company_pending: null,
+      job_change_detected: false,
+    }),
+    onSuccess: (updated) => {
+      qc.setQueryData(['contact', id], old => ({ ...old, ...updated }))
+      qc.invalidateQueries({ queryKey: ['contacts'] })
     },
   })
 
@@ -280,14 +285,24 @@ export default function ContactCard() {
 
   function startEdit() {
     setForm({
-      name:         contact.name         || '',
-      title:        contact.title        || '',
-      company:      contact.company      || '',
-      phone_mobile: contact.phone_mobile || '',
-      phone_office: contact.phone_office || '',
-      relationship_warmth: contact.relationship_warmth || '',
+      name:                 contact.name                 || '',
+      title:                contact.title                || '',
+      company:              contact.company              || '',
+      phone_mobile:         contact.phone_mobile         || '',
+      phone_mobile_2:       contact.phone_mobile_2       || '',
+      phone_office:         contact.phone_office         || '',
+      phone_office_2:       contact.phone_office_2       || '',
+      linkedin:             contact.linkedin             || '',
+      address:              contact.address              || '',
+      notes:                contact.notes                || '',
+      relationship_warmth:  contact.relationship_warmth  || '',
     })
     setEditing(true)
+  }
+
+  function cancelEdit() {
+    setForm({})
+    setEditing(false)
   }
 
   // ── Loading / not found ──────────────────────────────────────
@@ -330,23 +345,22 @@ export default function ContactCard() {
       {/* Sticky header */}
       <div className="sticky top-0 z-10 bg-white border-b border-[#e5e5e3] px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
-          <button
-            onClick={() => navigate('/contacts')}
-            className="text-sm text-[#6b6b67] hover:text-[#1a1a18]"
-          >
+          <button onClick={() => navigate('/contacts')} className="text-sm text-[#6b6b67] hover:text-[#1a1a18]">
             ← Contacts
           </button>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowMerge(true)}
-              className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50 transition-colors"
-            >
-              Merge
-            </button>
+            {!editing && (
+              <button
+                onClick={() => setShowMerge(true)}
+                className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50 transition-colors"
+              >
+                Merge
+              </button>
+            )}
             {editing ? (
               <>
                 <button
-                  onClick={() => setEditing(false)}
+                  onClick={cancelEdit}
                   className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-50"
                 >
                   Cancel
@@ -378,11 +392,51 @@ export default function ContactCard() {
           {editing ? (
             // ── Edit mode ──────────────────────────────────────
             <div className="space-y-3">
-              <FieldInput label="Name"         value={form.name}         onChange={v => setForm(f => ({ ...f, name: v }))} />
-              <FieldInput label="Title"        value={form.title}        onChange={v => setForm(f => ({ ...f, title: v }))} />
-              <FieldInput label="Company"      value={form.company}      onChange={v => setForm(f => ({ ...f, company: v }))} />
-              <FieldInput label="Mobile"       value={form.phone_mobile} onChange={v => setForm(f => ({ ...f, phone_mobile: v }))} placeholder="+1 555 000 0000" />
-              <FieldInput label="Office Phone" value={form.phone_office} onChange={v => setForm(f => ({ ...f, phone_office: v }))} placeholder="+1 555 000 0000" />
+              <FieldInput label="Name"    value={form.name}    onChange={v => setForm(f => ({ ...f, name: v }))} />
+              <FieldInput label="Title"   value={form.title}   onChange={v => setForm(f => ({ ...f, title: v }))} />
+
+              {/* Company + pending banner */}
+              {contact.company_pending && (
+                <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2.5">
+                  <p className="text-xs font-semibold text-amber-800 mb-1.5">
+                    ⚠️ AI detected possible job change → <span className="font-bold">{contact.company_pending}</span>
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => acceptCompany.mutate()}
+                      disabled={acceptCompany.isPending}
+                      className="text-xs px-2.5 py-1 rounded-lg bg-amber-600 text-white font-medium hover:bg-amber-700 disabled:opacity-40"
+                    >
+                      Accept new company
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => keepCompany.mutate()}
+                      disabled={keepCompany.isPending}
+                      className="text-xs px-2.5 py-1 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-100 disabled:opacity-40"
+                    >
+                      Keep current
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <FieldInput label="Company" value={form.company} onChange={v => setForm(f => ({ ...f, company: v }))} />
+
+              <div className="grid grid-cols-2 gap-3">
+                <FieldInput label="Mobile"   value={form.phone_mobile}   onChange={v => setForm(f => ({ ...f, phone_mobile: v }))}   placeholder="+1 555 000 0000" />
+                <FieldInput label="Mobile 2" value={form.phone_mobile_2} onChange={v => setForm(f => ({ ...f, phone_mobile_2: v }))} placeholder="+1 555 000 0000" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <FieldInput label="Office Phone"   value={form.phone_office}   onChange={v => setForm(f => ({ ...f, phone_office: v }))}   placeholder="+1 555 000 0000" />
+                <FieldInput label="Office Phone 2" value={form.phone_office_2} onChange={v => setForm(f => ({ ...f, phone_office_2: v }))} placeholder="+1 555 000 0000" />
+              </div>
+
+              <FieldInput label="LinkedIn URL" value={form.linkedin} onChange={v => setForm(f => ({ ...f, linkedin: v }))} type="url" placeholder="https://linkedin.com/in/…" />
+              <FieldTextarea label="Address" value={form.address} onChange={v => setForm(f => ({ ...f, address: v }))} rows={2} placeholder="Office address" />
+              <FieldTextarea label="Notes"   value={form.notes}   onChange={v => setForm(f => ({ ...f, notes: v }))}   rows={3} />
+
               <div>
                 <label className="text-xs text-gray-500 block mb-1">Relationship</label>
                 <select
@@ -393,10 +447,12 @@ export default function ContactCard() {
                   <option value="">— select —</option>
                   <option value="hot">Hot</option>
                   <option value="warm">Warm</option>
+                  <option value="normal">Normal</option>
                   <option value="cool">Cool</option>
                   <option value="cold">Cold</option>
                 </select>
               </div>
+
               {save.isError && (
                 <p className="text-xs text-red-500">Save failed: {save.error?.message}</p>
               )}
@@ -404,6 +460,33 @@ export default function ContactCard() {
           ) : (
             // ── View mode ──────────────────────────────────────
             <>
+              {/* Job change pending banner (view mode) */}
+              {contact.company_pending && (
+                <div className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2.5">
+                  <p className="text-xs font-semibold text-amber-800 mb-1.5">
+                    ⚠️ AI detected possible job change → <span className="font-bold">{contact.company_pending}</span>
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => acceptCompany.mutate()}
+                      disabled={acceptCompany.isPending}
+                      className="text-xs px-2.5 py-1 rounded-lg bg-amber-600 text-white font-medium hover:bg-amber-700 disabled:opacity-40"
+                    >
+                      Accept new company
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => keepCompany.mutate()}
+                      disabled={keepCompany.isPending}
+                      className="text-xs px-2.5 py-1 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-100 disabled:opacity-40"
+                    >
+                      Keep current
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-start gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#1a1a18] flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
                   {(contact.name || '?')[0].toUpperCase()}
@@ -422,12 +505,7 @@ export default function ContactCard() {
                     <p className="text-sm font-medium text-[#1a1a18] mt-0.5">{contact.title}</p>
                   )}
                   {contact.company && (
-                    <p className="text-sm text-[#6b6b67]">
-                      {contact.company}
-                      {contact.company_pending && (
-                        <span className="ml-2 text-xs text-orange-500">(pending: {contact.company_pending})</span>
-                      )}
-                    </p>
+                    <p className="text-sm text-[#6b6b67]">{contact.company}</p>
                   )}
                   {contact.previous_title && (
                     <p className="text-xs text-gray-400 mt-0.5">Prev: {contact.previous_title}</p>
@@ -513,7 +591,24 @@ export default function ContactCard() {
               className="prose prose-sm max-w-none text-[#1a1a18]"
               dangerouslySetInnerHTML={{ __html: marked.parse(contact.ai_profile, { breaks: true, gfm: true }) }}
             />
+            {/* Enriched_at indicator */}
+            <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100">
+              {contact.enriched_at
+                ? `Last enriched by AI: ${dayjs(contact.enriched_at).format('MMMM D, YYYY')}`
+                : 'Not yet AI enriched'}
+            </p>
           </Section>
+        )}
+
+        {/* Enriched_at — shown even without AI profile */}
+        {!contact.ai_profile && (
+          <div className="bg-white border border-[#e5e5e3] rounded-xl px-4 py-3">
+            <p className="text-xs text-gray-400">
+              {contact.enriched_at
+                ? `Last enriched by AI: ${dayjs(contact.enriched_at).format('MMMM D, YYYY')}`
+                : 'Not yet AI enriched'}
+            </p>
+          </div>
         )}
 
         {/* My open commitments to this person */}
@@ -567,7 +662,7 @@ export default function ContactCard() {
         )}
 
         {/* Notes */}
-        {contact.notes && (
+        {contact.notes && !editing && (
           <Section title="Notes">
             <p className="text-sm text-[#1a1a18] whitespace-pre-wrap">{contact.notes}</p>
           </Section>
@@ -582,7 +677,7 @@ export default function ContactCard() {
           </div>
         )}
 
-        {/* ── Danger zone ─────────────────────────────────────── */}
+        {/* Danger zone */}
         <div className="bg-white border border-red-100 rounded-xl p-4">
           <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-2">Danger Zone</p>
           <button

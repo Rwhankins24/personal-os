@@ -744,65 +744,84 @@ async function main() {
   console.log(`  ✓ Contacts: ${results.contacts_created} created, ${results.contacts_updated} updated`)
 
   // ── STEP 3.7: Enrich contacts from email signatures ─────────────
+  // Targets contacts that need enrichment — not just active email senders.
+  // Includes: never enriched, missing key fields, or enriched > 30 days ago.
   console.log('Step 3.7: Enriching contacts from signatures...')
   let contactsEnriched = 0
-  for (const email of (activeEmails || [])) {
+
+  const thirtyDaysAgo = new Date()
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+
+  const { data: contactsToEnrich } = await supabase
+    .from('contacts')
+    .select('*')
+    .or(
+      'enriched.is.null,' +
+      'enriched.eq.false,' +
+      'title.is.null,' +
+      'phone_mobile.is.null,' +
+      `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
+    )
+    .limit(20)
+
+  for (const contact of (contactsToEnrich || [])) {
     try {
-      if (!email.from_address) continue
-      if (email.from_address === 'hankinsr@claycorp.com') continue
+      if (!contact.email) continue
+      if (contact.email === 'hankinsr@claycorp.com') continue
 
-      const content = email.full_thread_content || email.body_preview
-      if (!content) continue
+      // Find their most recent emails regardless of bucket
+      const { data: recentEmails } = await supabase
+        .from('emails')
+        .select('full_thread_content, body_preview, from_name, received_at')
+        .eq('from_address', contact.email)
+        .order('received_at', { ascending: false })
+        .limit(3)
 
-      // Find the contact record
-      const { data: contact } = await supabase
-        .from('contacts')
-        .select('id, name, title, company, phone_mobile, phone_mobile_2, phone_office, enriched')
-        .eq('email', email.from_address)
-        .maybeSingle()
+      if (!recentEmails?.length) continue
 
-      if (!contact) continue
+      // Use best available content — prefer full_thread_content
+      const bestEmail = recentEmails.find(e => e.full_thread_content) || recentEmails[0]
+      const content   = bestEmail.full_thread_content || bestEmail.body_preview
 
-      // Skip if already well-enriched (has title + mobile)
-      if (contact.enriched && contact.title && contact.phone_mobile) continue
+      if (!content || content.length < 100) continue
 
       const extracted = await aiService.extractContactFromSignature(
         content,
-        email.from_name,
-        email.from_address
+        contact.name,
+        contact.email
       )
 
       if (!extracted || extracted.confidence === 'low') continue
 
+      // Build updates — never overwrite existing good data
       const updates = {}
 
-      // ── Title: set if empty; promote if new value is more specific
-      if (extracted.title && extracted.title !== contact.title) {
-        if (!contact.title) {
-          updates.title = extracted.title
-        } else if (extracted.title.length > contact.title.length) {
-          updates.title = extracted.title
-          updates.previous_title = contact.title
-        }
+      // Title: set if empty
+      if (extracted.title && !contact.title) {
+        updates.title = extracted.title
       }
 
-      // ── Company: set if empty; detect job change and log question
-      if (extracted.company && extracted.company !== contact.company) {
+      // Company: set if empty; detect job change
+      if (extracted.company) {
         if (!contact.company) {
           updates.company = extracted.company
-        } else {
-          // Possible job change — don't auto-overwrite, log for Ryan
+        } else if (
+          extracted.company.toLowerCase() !== contact.company.toLowerCase()
+        ) {
+          updates.company_pending    = extracted.company
+          updates.job_change_detected = true
+
           await logAIQuestion(
-            `${contact.name} may have changed jobs. Stored: "${contact.company}". ` +
-            `New signature shows: "${extracted.company}". Update profile?`,
-            `Source email: ${email.thread_subject}`,
+            `${contact.name} may have changed jobs. Currently listed at ` +
+            `"${contact.company}" but their recent email signature shows ` +
+            `"${extracted.company}". Update their profile?`,
+            `Source: recent email signature`,
             'binary'
           )
-          updates.company_pending = extracted.company
         }
       }
 
-      // ── Phone mobile: additive — fill slot 1 then slot 2
+      // Phones — additive only
       if (extracted.phone_mobile) {
         if (!contact.phone_mobile) {
           updates.phone_mobile = extracted.phone_mobile
@@ -814,40 +833,31 @@ async function main() {
         }
       }
 
-      // ── Phone office: same additive logic
       if (extracted.phone_office) {
-        const { data: full } = await supabase
-          .from('contacts')
-          .select('phone_office, phone_office_2')
-          .eq('id', contact.id)
-          .single()
-        if (!full?.phone_office) {
+        if (!contact.phone_office) {
           updates.phone_office = extracted.phone_office
         } else if (
-          full.phone_office !== extracted.phone_office &&
-          !full.phone_office_2
+          contact.phone_office !== extracted.phone_office &&
+          !contact.phone_office_2
         ) {
           updates.phone_office_2 = extracted.phone_office
         }
       }
 
-      // ── LinkedIn + address: always update if found
-      if (extracted.linkedin) updates.linkedin = extracted.linkedin
-      if (extracted.address)  updates.address  = extracted.address
+      if (extracted.linkedin && !contact.linkedin) updates.linkedin = extracted.linkedin
+      if (extracted.address  && !contact.address)  updates.address  = extracted.address
 
-      // ── Mark enriched + update recency
       updates.enriched    = true
       updates.enriched_at = new Date().toISOString()
-      updates.last_contact_date = email.received_at?.split('T')[0] || today
 
-      if (Object.keys(updates).length > 2) { // more than just enriched + date
+      if (Object.keys(updates).length > 2) { // more than just enriched + enriched_at
         await supabase.from('contacts').update(updates).eq('id', contact.id)
         contactsEnriched++
       }
 
     } catch (err) {
-      // Non-fatal — log for visibility
-      console.log(`  ⚠️  Enrich error for ${email.from_address}: ${err.message}`)
+      // Non-fatal
+      console.log(`  ⚠️  Enrich error for ${contact.email}: ${err.message}`)
     }
   }
   console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
