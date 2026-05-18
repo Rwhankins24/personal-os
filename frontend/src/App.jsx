@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 // ─── PASSWORD GATE ──────────────────────────────────────────────────────────
 // Change PASSWORD here after deployment.
 // Later: move to VITE_APP_PASSWORD env var so no code change needed.
-const PASSWORD    = 'clayco2026'
+const PASSWORD    = import.meta.env.VITE_APP_PASSWORD || 'changeme'
 const SESSION_KEY = 'personal_os_auth'
 
 function PasswordGate({ children }) {
