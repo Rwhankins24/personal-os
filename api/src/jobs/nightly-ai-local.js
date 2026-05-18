@@ -130,6 +130,51 @@ function detectLinks(bodyText) {
   })
 }
 
+// ─── SEMANTIC DEDUPLICATION
+async function deduplicateTable(tableName, emailField) {
+  let selectFields = 'id, title, created_at'
+  if (emailField) selectFields = `id, title, ${emailField}, created_at`
+
+  const { data: items } = await supabase
+    .from(tableName)
+    .select(selectFields)
+    .eq('status', 'open')
+    .order('created_at', { ascending: true })
+
+  if (!items?.length) return 0
+
+  const seen    = new Map()
+  const toDelete = []
+
+  for (const item of items) {
+    const fingerprint = item.title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(' ')
+      .filter(w => w.length > 4)
+      .slice(0, 5)
+      .join('|')
+
+    const emailKey = emailField ? (item[emailField] || 'unknown') : 'any'
+    const key      = `${fingerprint}:${emailKey}`
+
+    if (seen.has(key)) {
+      toDelete.push(item.id)
+    } else {
+      seen.set(key, item.id)
+    }
+  }
+
+  if (toDelete.length > 0) {
+    await supabase
+      .from(tableName)
+      .delete()
+      .in('id', toDelete)
+  }
+
+  return toDelete.length
+}
+
 // ─── PROJECT KEYWORD BOOTSTRAP
 // On first run: infer keywords from project names
 async function bootstrapProjectKeywords() {
@@ -231,6 +276,15 @@ async function main() {
         .from('commitments')
         .update({ overdue_days: days })
         .eq('id', c.id)
+    }
+
+    // Deduplicate others_commitments and tasks
+    try {
+      const othersDeleted = await deduplicateTable('others_commitments', 'committed_by_email')
+      const tasksDeleted  = await deduplicateTable('tasks', null)
+      console.log(`  Deduped: ${othersDeleted} commitments, ${tasksDeleted} tasks removed`)
+    } catch (err) {
+      // Non-fatal
     }
 
     console.log('  ✓ Hygiene complete')
@@ -744,12 +798,47 @@ async function main() {
       const tasks = await aiService.extractTasks(email, threadHistory)
 
       for (const task of tasks) {
-        const { data: existing } = await supabase
+        // Level 1: exact title match
+        const { data: exactTask } = await supabase
           .from('tasks')
           .select('id')
           .eq('title', task.title)
           .eq('status', 'open')
           .maybeSingle()
+
+        let existing = exactTask
+
+        // Level 2: semantic similarity (keyword overlap)
+        if (!existing) {
+          const keyWords = task.title
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '')
+            .split(' ')
+            .filter(w => w.length > 4)
+            .slice(0, 4)
+
+          if (keyWords.length >= 2) {
+            const { data: candidates } = await supabase
+              .from('tasks')
+              .select('id, title')
+              .eq('status', 'open')
+              .ilike('title', `%${keyWords[0]}%`)
+
+            for (const candidate of (candidates || [])) {
+              const candidateWords = candidate.title
+                .toLowerCase().split(' ')
+                .filter(w => w.length > 4)
+              const overlap = keyWords.filter(w =>
+                candidateWords.some(cw => cw.includes(w) || w.includes(cw))
+              ).length
+
+              if (overlap >= 3) {
+                existing = candidate
+                break
+              }
+            }
+          }
+        }
 
         if (!existing) {
           const projectId = await findProjectByKeywords(email.thread_subject)
@@ -784,13 +873,49 @@ async function main() {
       const othersC = await aiService.extractOthersCommitments(email, threadHistory)
 
       for (const c of othersC) {
-        const { data: existing } = await supabase
+        // Level 1: exact match (title + email)
+        const { data: exactMatch } = await supabase
           .from('others_commitments')
           .select('id')
           .eq('title', c.title)
           .eq('committed_by_email', c.committed_by_email)
           .eq('status', 'open')
           .maybeSingle()
+
+        let existing = exactMatch
+
+        // Level 2: semantic similarity check (same person, overlapping keywords)
+        if (!existing && c.committed_by_email) {
+          const keyWords = c.title
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '')
+            .split(' ')
+            .filter(w => w.length > 4)
+            .slice(0, 4)
+
+          if (keyWords.length >= 2) {
+            const { data: candidates } = await supabase
+              .from('others_commitments')
+              .select('id, title')
+              .eq('status', 'open')
+              .eq('committed_by_email', c.committed_by_email)
+              .ilike('title', `%${keyWords[0]}%`)
+
+            for (const candidate of (candidates || [])) {
+              const candidateWords = candidate.title
+                .toLowerCase().split(' ')
+                .filter(w => w.length > 4)
+              const overlap = keyWords.filter(w =>
+                candidateWords.some(cw => cw.includes(w) || w.includes(cw))
+              ).length
+
+              if (overlap >= 3) {
+                existing = candidate
+                break
+              }
+            }
+          }
+        }
 
         if (!existing) {
           const projectId = await findProjectByKeywords(email.thread_subject)

@@ -448,15 +448,22 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
         <EmptyState icon="🤝" message="No open commitments" />
       ) : (
         <div className="space-y-2">
-          {(showAll ? open : open.slice(0, 5)).map(c => {
+          {(showAll ? open : open.slice(0, 4)).map(c => {
             const overdue = c.due_date && dayjs(c.due_date).isBefore(dayjs(), 'day')
             return (
-              <div key={c.id} className="flex items-start gap-2.5">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${URGENCY_COLOR[c.urgency] || 'bg-gray-300'}`} />
+              <div key={c.id} className={`flex items-start gap-2.5 group p-1.5 rounded-lg border-l-2 ${
+                c.urgency === 'critical' ? 'border-l-red-400 bg-red-50' :
+                c.urgency === 'high'     ? 'border-l-orange-400 bg-orange-50' :
+                c.urgency === 'medium'   ? 'border-l-yellow-400 bg-yellow-50' :
+                'border-l-gray-200 bg-transparent'
+              }`}>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <p className="text-sm text-[#1a1a18] leading-snug">{c.title}</p>
                     {c.implicit && <PillBadge label="implied" color="yellow" />}
+                    {c.commitment_type && c.commitment_type !== 'hard' && (
+                      <PillBadge label={c.commitment_type} color="gray" />
+                    )}
                   </div>
                   <p className="text-xs text-[#6b6b67] mt-0.5">
                     {c.made_to && (
@@ -472,19 +479,20 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
                 </div>
                 <button
                   onClick={() => close.mutate(c.id)}
-                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
+                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
+                  title="Mark done"
                 >
                   ✓
                 </button>
               </div>
             )
           })}
-          {!showAll && open.length > 5 && (
+          {!showAll && open.length > 4 && (
             <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
-              + {open.length - 5} more — tap to show all
+              + {open.length - 4} more — tap to show all
             </button>
           )}
-          {showAll && open.length > 5 && (
+          {showAll && open.length > 4 && (
             <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
               Show less ↑
             </button>
@@ -519,41 +527,58 @@ function OthersCommitmentsPanel({ contacts }) {
         <EmptyState icon="⏳" message="Nothing waiting on others" />
       ) : (
         <div className="space-y-2">
-          {(showAll ? items : items.slice(0, 5)).map(c => (
-            <div key={c.id} className="flex items-start gap-2.5 group">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <p className="text-sm text-[#1a1a18] leading-snug">{c.title}</p>
-                  {c.ai_suggests_complete && (
-                    <PillBadge label="AI: may be done" color="green" />
+          {(showAll ? items : items.slice(0, 5)).map(c => {
+            const initials = (c.committed_by_name || c.made_by || '?')
+              .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+            return (
+              <div key={c.id} className="flex items-start gap-2.5 group">
+                {/* Initials circle */}
+                <div className="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                  {initials}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <p className="text-sm text-[#1a1a18] leading-snug">{c.title}</p>
+                    {c.ai_suggests_complete && (
+                      <PillBadge label="AI: may be done" color="green" />
+                    )}
+                  </div>
+                  <p className="text-xs text-[#6b6b67] mt-0.5">
+                    {(c.committed_by_name || c.made_by) && (
+                      <span>
+                        <ContactLink
+                          name={c.committed_by_name || c.made_by}
+                          contacts={contacts}
+                          className="text-xs text-[#6b6b67]"
+                        />
+                      </span>
+                    )}
+                    {c.due_date && (
+                      <span className={c.days_overdue > 0 ? 'text-red-500 font-medium ml-1' : 'ml-1'}>
+                        · Due {dayjs(c.due_date).format('MMM D')}
+                        {c.days_overdue > 0 && ` (${c.days_overdue}d late)`}
+                      </span>
+                    )}
+                  </p>
+                  {c.context && (
+                    <p className="text-xs text-[#6b6b67] mt-0.5 truncate italic">{c.context}</p>
+                  )}
+                  {c.ai_suggests_complete && c.fulfillment_evidence && (
+                    <p className="text-xs text-green-600 mt-0.5 italic truncate">
+                      "{c.fulfillment_evidence}"
+                    </p>
                   )}
                 </div>
-                <p className="text-xs text-[#6b6b67] mt-0.5">
-                  {c.made_by && (
-                    <span>From: <ContactLink name={c.made_by} contacts={contacts} className="text-xs text-[#6b6b67]" /></span>
-                  )}
-                  {c.due_date && (
-                    <span className={c.days_overdue > 0 ? 'text-red-500 font-medium ml-1' : 'ml-1'}>
-                      Due {dayjs(c.due_date).format('MMM D')}
-                      {c.days_overdue > 0 && ` (${c.days_overdue}d late)`}
-                    </span>
-                  )}
-                </p>
-                {c.ai_suggests_complete && c.fulfillment_evidence && (
-                  <p className="text-xs text-green-600 mt-0.5 italic truncate">
-                    "{c.fulfillment_evidence}"
-                  </p>
-                )}
+                <button
+                  onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
+                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
+                  title="Mark done"
+                >
+                  ✓
+                </button>
               </div>
-              <button
-                onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
-                className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
-                title="Mark done"
-              >
-                ✓
-              </button>
-            </div>
-          ))}
+            )
+          })}
           {!showAll && items.length > 5 && (
             <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
               + {items.length - 5} more — tap to show all
@@ -603,7 +628,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
   const shownAll     = isReplyTab ? (showAllReply || false) : showAllWaiting
   const setShownAll  = isReplyTab ? setShowAllReply : setShowAllWaiting
   const shown        = isReplyTab ? needsReply : waitingOn
-  const CAP          = 7
+  const CAP          = 8
   const visibleItems = shownAll ? shown : shown.slice(0, CAP)
 
   return (
@@ -1049,7 +1074,7 @@ function UnlinkedIntelPanel({ projects }) {
       <SectionHeader title="Unlinked Intelligence" count={items.length} badge="needs filing" />
       {isLoading ? <Spinner /> : (
         <div className="space-y-3">
-          {(showAll ? items : items.slice(0, 5)).map(item => {
+          {(showAll ? items : items.slice(0, 3)).map(item => {
             const subItems   = parseIntelContent(item.content)
             const sourceLabel = item.source_email_id ? 'from email'
               : item.source_type === 'meeting' ? 'from meeting'
@@ -1163,12 +1188,12 @@ function UnlinkedIntelPanel({ projects }) {
               </div>
             )
           })}
-          {!showAll && items.length > 5 && (
+          {!showAll && items.length > 3 && (
             <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
-              + {items.length - 5} more — tap to show all
+              + {items.length - 3} more — tap to show all
             </button>
           )}
-          {showAll && items.length > 5 && (
+          {showAll && items.length > 3 && (
             <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
               Show less ↑
             </button>
