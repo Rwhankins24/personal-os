@@ -101,9 +101,6 @@ export default function ContactCard() {
           >
             ← Back
           </button>
-          {contact.relationship_warmth && (
-            <PillBadge label={contact.relationship_warmth} color={warmthColor} />
-          )}
         </div>
       </div>
 
@@ -111,31 +108,97 @@ export default function ContactCard() {
 
         {/* Hero */}
         <div className="bg-white border border-[#e5e5e3] rounded-xl p-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-[#1a1a18] flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
               {(contact.name || '?')[0].toUpperCase()}
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-[#1a1a18]">{contact.name}</h1>
-              <p className="text-sm text-[#6b6b67]">
-                {[contact.title, contact.company].filter(Boolean).join(' · ')}
-              </p>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-xl font-bold text-[#1a1a18]">{contact.name}</h1>
+                {contact.relationship_warmth && (
+                  <PillBadge label={contact.relationship_warmth} color={warmthColor} />
+                )}
+                {contact.enriched && (
+                  <span title="Profile enriched from email signatures" className="text-xs text-gray-400">✦ enriched</span>
+                )}
+              </div>
+              {/* Title */}
+              {contact.title && (
+                <p className="text-sm font-medium text-[#1a1a18] mt-0.5">{contact.title}</p>
+              )}
+              {/* Company */}
+              {contact.company && (
+                <p className="text-sm text-[#6b6b67]">
+                  {contact.company}
+                  {contact.company_pending && (
+                    <span className="ml-2 text-xs text-orange-500">(pending: {contact.company_pending})</span>
+                  )}
+                </p>
+              )}
+              {/* Previous title */}
+              {contact.previous_title && (
+                <p className="text-xs text-gray-400 mt-0.5">Prev: {contact.previous_title}</p>
+              )}
             </div>
           </div>
 
-          <div className="mt-3 space-y-1.5">
+          <div className="mt-3 space-y-1.5 border-t border-gray-100 pt-3">
+            {/* Email(s) */}
             {contact.email && (
               <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
                 <span>✉️</span> {contact.email}
               </a>
             )}
-            {contact.phone && (
-              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-[#6b6b67]">
+            {contact.secondary_email && (
+              <a href={`mailto:${contact.secondary_email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline opacity-70">
+                <span>✉️</span> {contact.secondary_email}
+              </a>
+            )}
+            {/* Phone mobile */}
+            {contact.phone_mobile && (
+              <a href={`tel:${contact.phone_mobile}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
+                <span>📱</span> {contact.phone_mobile}
+                {contact.phone_mobile_2 && (
+                  <span className="text-[#6b6b67]"> · {contact.phone_mobile_2}</span>
+                )}
+              </a>
+            )}
+            {/* Phone office */}
+            {contact.phone_office && (
+              <a href={`tel:${contact.phone_office}`} className="flex items-center gap-2 text-sm text-[#1a1a18] hover:text-blue-600">
+                <span>📞</span> {contact.phone_office}
+                {contact.phone_office_2 && (
+                  <span className="text-[#6b6b67]"> · {contact.phone_office_2}</span>
+                )}
+              </a>
+            )}
+            {/* Legacy phone field (pre-enrichment) */}
+            {contact.phone && !contact.phone_mobile && !contact.phone_office && (
+              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-[#6b6b67] hover:text-blue-600">
                 <span>📞</span> {contact.phone}
               </a>
             )}
+            {/* LinkedIn */}
+            {contact.linkedin && (
+              <a
+                href={contact.linkedin.startsWith('http') ? contact.linkedin : `https://${contact.linkedin}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
+              >
+                <span>🔗</span> LinkedIn
+              </a>
+            )}
+            {/* Address */}
+            {contact.address && (
+              <p className="flex items-start gap-2 text-sm text-[#6b6b67]">
+                <span className="flex-shrink-0">📍</span>
+                <span>{contact.address}</span>
+              </p>
+            )}
+            {/* Last contact */}
             {contact.last_contact_date && (
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-400 pt-1">
                 Last contact: {dayjs(contact.last_contact_date).format('MMMM D, YYYY')} ({dayjs(contact.last_contact_date).fromNow()})
               </p>
             )}

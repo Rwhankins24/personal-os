@@ -521,49 +521,187 @@ async function main() {
     `${results.risk_signals_detected} risks`
   )
 
-  // ── STEP 3.6: Auto-create contacts ─────────────────────────────
+  // ── STEP 3.6: Auto-create contacts (with deduplication) ────────
   console.log('Step 3.6: Updating contacts...')
   for (const email of (activeEmails || [])) {
     try {
       if (!email.from_address || !email.from_name) continue
       if (email.from_address === 'hankinsr@claycorp.com') continue
 
-      const { data: existing } = await supabase
+      // Priority 1: exact email match
+      const { data: byEmail } = await supabase
         .from('contacts')
-        .select('id')
+        .select('id, email, secondary_email')
         .eq('email', email.from_address)
         .maybeSingle()
 
-      if (!existing) {
-        const domain = email.from_address.split('@')[1] || ''
-        const company = domain.split('.')[0].charAt(0).toUpperCase() +
-          domain.split('.')[0].slice(1)
-
-        await supabase.from('contacts').insert({
-          name: email.from_name,
-          email: email.from_address,
-          company: company,
-          last_contact_date: today,
-          last_topic: email.thread_subject,
-          relationship_warmth: email.is_internal ? 'warm' : 'normal',
-          notes: `Auto-created from: ${email.thread_subject}`
-        })
-        results.contacts_created++
-      } else {
+      if (byEmail) {
+        // Exact match — just update recency
         await supabase
           .from('contacts')
-          .update({
-            last_contact_date: today,
-            last_topic: email.thread_subject
-          })
-          .eq('id', existing.id)
+          .update({ last_contact_date: today, last_topic: email.thread_subject })
+          .eq('id', byEmail.id)
         results.contacts_updated++
+        continue
       }
+
+      // Priority 2: name + domain match (same person, different address)
+      const domain = email.from_address.split('@')[1] || ''
+      const firstName = email.from_name.trim().split(/\s+/)[0]
+      const { data: byNameDomain } = firstName.length > 2
+        ? await supabase
+            .from('contacts')
+            .select('id, email, secondary_email')
+            .ilike('name', `%${firstName}%`)
+            .ilike('email', `%${domain}%`)
+            .maybeSingle()
+        : { data: null }
+
+      if (byNameDomain) {
+        // Same person, different address — add as secondary, update recency
+        const updates = {
+          last_contact_date: today,
+          last_topic: email.thread_subject
+        }
+        if (!byNameDomain.secondary_email &&
+            byNameDomain.email !== email.from_address) {
+          updates.secondary_email = email.from_address
+        }
+        await supabase.from('contacts').update(updates).eq('id', byNameDomain.id)
+        results.contacts_updated++
+        continue
+      }
+
+      // Priority 3: no match — create new
+      const company = domain && !['gmail', 'yahoo', 'outlook', 'hotmail', 'icloud'].includes(domain.split('.')[0])
+        ? domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1)
+        : null
+
+      await supabase.from('contacts').insert({
+        name: email.from_name,
+        email: email.from_address,
+        company: company,
+        last_contact_date: today,
+        last_topic: email.thread_subject,
+        relationship_warmth: email.is_internal ? 'warm' : 'cool',
+        notes: `Auto-created from: ${email.thread_subject}`
+      })
+      results.contacts_created++
+
     } catch (err) {
       // Non-fatal
     }
   }
   console.log(`  ✓ Contacts: ${results.contacts_created} created, ${results.contacts_updated} updated`)
+
+  // ── STEP 3.7: Enrich contacts from email signatures ─────────────
+  console.log('Step 3.7: Enriching contacts from signatures...')
+  let contactsEnriched = 0
+  for (const email of (activeEmails || [])) {
+    try {
+      if (!email.from_address) continue
+      if (email.from_address === 'hankinsr@claycorp.com') continue
+
+      const content = email.full_thread_content || email.body_preview
+      if (!content) continue
+
+      // Find the contact record
+      const { data: contact } = await supabase
+        .from('contacts')
+        .select('id, name, title, company, phone_mobile, phone_mobile_2, phone_office, enriched')
+        .eq('email', email.from_address)
+        .maybeSingle()
+
+      if (!contact) continue
+
+      // Skip if already well-enriched (has title + mobile)
+      if (contact.enriched && contact.title && contact.phone_mobile) continue
+
+      const extracted = await aiService.extractContactFromSignature(
+        content,
+        email.from_name,
+        email.from_address
+      )
+
+      if (!extracted || extracted.confidence === 'low') continue
+
+      const updates = {}
+
+      // ── Title: set if empty; promote if new value is more specific
+      if (extracted.title && extracted.title !== contact.title) {
+        if (!contact.title) {
+          updates.title = extracted.title
+        } else if (extracted.title.length > contact.title.length) {
+          updates.title = extracted.title
+          updates.previous_title = contact.title
+        }
+      }
+
+      // ── Company: set if empty; detect job change and log question
+      if (extracted.company && extracted.company !== contact.company) {
+        if (!contact.company) {
+          updates.company = extracted.company
+        } else {
+          // Possible job change — don't auto-overwrite, log for Ryan
+          await logAIQuestion(
+            `${contact.name} may have changed jobs. Stored: "${contact.company}". ` +
+            `New signature shows: "${extracted.company}". Update profile?`,
+            `Source email: ${email.thread_subject}`,
+            'binary'
+          )
+          updates.company_pending = extracted.company
+        }
+      }
+
+      // ── Phone mobile: additive — fill slot 1 then slot 2
+      if (extracted.phone_mobile) {
+        if (!contact.phone_mobile) {
+          updates.phone_mobile = extracted.phone_mobile
+        } else if (
+          contact.phone_mobile !== extracted.phone_mobile &&
+          !contact.phone_mobile_2
+        ) {
+          updates.phone_mobile_2 = extracted.phone_mobile
+        }
+      }
+
+      // ── Phone office: same additive logic
+      if (extracted.phone_office) {
+        const { data: full } = await supabase
+          .from('contacts')
+          .select('phone_office, phone_office_2')
+          .eq('id', contact.id)
+          .single()
+        if (!full?.phone_office) {
+          updates.phone_office = extracted.phone_office
+        } else if (
+          full.phone_office !== extracted.phone_office &&
+          !full.phone_office_2
+        ) {
+          updates.phone_office_2 = extracted.phone_office
+        }
+      }
+
+      // ── LinkedIn + address: always update if found
+      if (extracted.linkedin) updates.linkedin = extracted.linkedin
+      if (extracted.address)  updates.address  = extracted.address
+
+      // ── Mark enriched + update recency
+      updates.enriched    = true
+      updates.enriched_at = new Date().toISOString()
+      updates.last_contact_date = email.received_at?.split('T')[0] || today
+
+      if (Object.keys(updates).length > 2) { // more than just enriched + date
+        await supabase.from('contacts').update(updates).eq('id', contact.id)
+        contactsEnriched++
+      }
+
+    } catch (err) {
+      // Non-fatal — log for visibility
+      console.log(`  ⚠️  Enrich error for ${email.from_address}: ${err.message}`)
+    }
+  }
+  console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
 
   // ── STEP 4: Extract tasks ───────────────────────────────────────
   console.log('Step 4: Extracting tasks...')

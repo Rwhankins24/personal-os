@@ -645,6 +645,48 @@ Return only the profile paragraph.`
   return message.content[0].text
 }
 
+// ─── EXTRACT CONTACT FROM EMAIL SIGNATURE
+async function extractContactFromSignature(emailContent, fromName, fromEmail) {
+  if (!emailContent) return null
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 400,
+      messages: [{
+        role: 'user',
+        content: `Extract contact information from this email content. Look specifically at the email signature block which typically appears at the bottom of the email.
+
+From: ${fromName} (${fromEmail})
+Email content:
+${emailContent.substring(0, 2000)}
+
+Extract whatever is present. Return JSON only.
+{
+  "name": "full name if different from ${fromName}",
+  "title": "job title or role",
+  "company": "company name",
+  "phone_mobile": "mobile number or null",
+  "phone_office": "office number or null",
+  "linkedin": "linkedin URL or null",
+  "address": "office address or null",
+  "confidence": "high|medium|low"
+}
+If no signature found return: { "confidence": "low" }
+Return only JSON. No other text.`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch {
+    return null
+  }
+}
+
 module.exports = {
   RYAN_CONTEXT,
   withRetry,
@@ -660,5 +702,6 @@ module.exports = {
   generateDailyDigest,
   updateRollingContext,
   enrichTask,
-  createContactProfile
+  createContactProfile,
+  extractContactFromSignature
 }
