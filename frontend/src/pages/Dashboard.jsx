@@ -859,6 +859,65 @@ function ContactsPanel({ contacts, isLoading }) {
 }
 
 // ── Unlinked Intelligence panel ────────────────────────────────
+
+// Parse item.content — may be a JSON array of intel objects or a plain string
+function parseIntelContent(raw) {
+  if (!raw) return null
+  if (typeof raw !== 'string') return null
+  const trimmed = raw.trim()
+  if (!trimmed.startsWith('[') && !trimmed.startsWith('{')) return null
+  try {
+    const parsed = JSON.parse(trimmed)
+    // Normalise: wrap single object in array
+    return Array.isArray(parsed) ? parsed : [parsed]
+  } catch {
+    return null
+  }
+}
+
+// Extract the human-readable text from an intel sub-item
+function intelText(obj) {
+  if (typeof obj === 'string') return obj
+  return (
+    obj.fact        ||
+    obj.decision    ||
+    obj.signal      ||
+    obj.description ||
+    obj.text        ||
+    obj.content     ||
+    Object.values(obj).find(v => typeof v === 'string' && v.length > 5) ||
+    JSON.stringify(obj)
+  )
+}
+
+const CATEGORY_COLOR = {
+  financial:   'blue',
+  technical:   'purple',
+  schedule:    'orange',
+  scope:       'yellow',
+  risk:        'red',
+  decision:    'green',
+  relationship:'gray',
+  contractual: 'blue',
+}
+
+function IntelSubItem({ obj }) {
+  const text      = intelText(obj)
+  const statedBy  = typeof obj === 'object' ? (obj.stated_by || obj.source || null) : null
+  const category  = typeof obj === 'object' ? (obj.category || obj.type || obj.intel_type || null) : null
+  const color     = category ? (CATEGORY_COLOR[category.toLowerCase()] || 'gray') : 'gray'
+
+  return (
+    <div className="py-1.5 border-b border-gray-100 last:border-0">
+      <p className="text-sm text-[#1a1a18] leading-snug">{text}</p>
+      <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+        {category  && <PillBadge label={category}       color={color} />}
+        {statedBy  && <span className="text-xs text-[#6b6b67]">via {statedBy}</span>}
+      </div>
+    </div>
+  )
+}
+
 function UnlinkedIntelPanel() {
   const qc = useQueryClient()
   const { data, isLoading } = useQuery({
@@ -879,27 +938,57 @@ function UnlinkedIntelPanel() {
     <Card>
       <SectionHeader title="Unlinked Intelligence" count={items.length} badge="needs filing" />
       {isLoading ? <Spinner /> : (
-        <div className="space-y-2">
-          {items.slice(0, 5).map(item => (
-            <div key={item.id} className="flex items-start gap-2 group">
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-[#1a1a18] leading-snug">{item.content}</p>
-                <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                  {item.intel_type && <PillBadge label={item.intel_type} color="purple" />}
-                  {item.source_email_id && <PillBadge label="from email" color="blue" />}
+        <div className="space-y-1">
+          {items.slice(0, 5).map(item => {
+            const subItems = parseIntelContent(item.content)
+
+            return (
+              <div key={item.id} className="flex items-start gap-2 group rounded-lg hover:bg-gray-50 px-1 py-1 -mx-1">
+                <div className="flex-1 min-w-0">
+                  {/* Source badge row */}
+                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                    {item.intel_type && <PillBadge label={item.intel_type} color="purple" />}
+                    {item.source_email_id && <PillBadge label="from email" color="blue" />}
+                  </div>
+
+                  {subItems ? (
+                    // Parsed JSON array — render each sub-item
+                    <div>
+                      {subItems.slice(0, 4).map((obj, i) => (
+                        <IntelSubItem key={i} obj={obj} />
+                      ))}
+                      {subItems.length > 4 && (
+                        <p className="text-xs text-[#6b6b67] mt-1">
+                          +{subItems.length - 4} more in this batch
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    // Parse failed — clean fallback
+                    item.content && item.content.trim().startsWith('[') ? (
+                      <p className="text-sm text-[#6b6b67] italic">
+                        {item.content.trim().match(/^\[.*\]$/s)
+                          ? `${(item.content.match(/\{/g) || []).length} intelligence items need filing`
+                          : item.content}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-[#1a1a18] leading-snug">{item.content}</p>
+                    )
+                  )}
                 </div>
+
+                <button
+                  onClick={() => update.mutate({ id: item.id, status: 'reviewed' })}
+                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
+                  title="Mark reviewed"
+                >
+                  ✓
+                </button>
               </div>
-              <button
-                onClick={() => update.mutate({ id: item.id, status: 'reviewed' })}
-                className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
-                title="Mark reviewed"
-              >
-                ✓
-              </button>
-            </div>
-          ))}
+            )
+          })}
           {items.length > 5 && (
-            <p className="text-xs text-[#6b6b67]">+{items.length - 5} more items</p>
+            <p className="text-xs text-[#6b6b67] pt-1">+{items.length - 5} more items</p>
           )}
         </div>
       )}

@@ -37,16 +37,28 @@ module.exports = async (req, res) => {
         })
       }
 
-      // List: sort by last_contact_date (most recent first), nulls last
+      // List: select all columns (safe regardless of schema version),
+      // sort by name as reliable DB fallback, re-sort by last_contact_date in JS
+      // (handles cases where last_contact_date column doesn't exist yet)
       let query = supabase
         .from('contacts')
-        .select('id, name, company, title, relationship_warmth, last_contact_date, phone, email')
-        .order('last_contact_date', { ascending: false, nullsLast: true })
+        .select('*')
+        .order('name', { ascending: true })
       if (relationship_warmth) query = query.eq('relationship_warmth', relationship_warmth)
       if (project_id)          query = query.eq('project_id', project_id)
       const { data, error } = await query
       if (error) throw error
-      return res.json(data)
+
+      // Re-sort by last_contact_date DESC in JS (nulls last)
+      const sorted = (data || []).sort((a, b) => {
+        const da = a.last_contact_date ? new Date(a.last_contact_date) : null
+        const db = b.last_contact_date ? new Date(b.last_contact_date) : null
+        if (!da && !db) return 0
+        if (!da) return 1
+        if (!db) return -1
+        return db - da
+      })
+      return res.json(sorted)
     }
 
     if (req.method === 'POST') {
