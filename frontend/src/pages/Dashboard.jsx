@@ -10,7 +10,7 @@ import {
   getEmails, updateEmail,
   getCommitments, updateCommitment,
   getOthersCommitments, updateOthersCommitment,
-  getProjects,
+  getProjects, createProject,
   getContacts,
   getCaptures, createCapture,
   getPendingDecisions, updatePendingDecision,
@@ -561,8 +561,15 @@ function EmailQueue({ emails, isLoading, contacts }) {
   })
 
   const needsReply = (emails || []).filter(e => e.status === 'needs_reply')
-  const waitingOn  = (emails || []).filter(e => e.status === 'waiting_on')
-  const shown      = tab === 'reply' ? needsReply : waitingOn
+
+  // Waiting On: include 'resolved' items (shown greyed at bottom), exclude 'archived'
+  const waitingOnAll = (emails || []).filter(e => e.status === 'waiting_on' || e.status === 'resolved')
+  const waitingOn = [
+    ...waitingOnAll.filter(e => e.status !== 'resolved'),
+    ...waitingOnAll.filter(e => e.status === 'resolved'),
+  ]
+
+  const shown = tab === 'reply' ? needsReply : waitingOn
 
   return (
     <Card>
@@ -582,7 +589,8 @@ function EmailQueue({ emails, isLoading, contacts }) {
             tab === 'waiting' ? 'bg-gray-200 text-gray-700' : 'text-[#6b6b67] hover:bg-gray-100'
           }`}
         >
-          Waiting On {waitingOn.length > 0 && `(${waitingOn.length})`}
+          Waiting On {waitingOnAll.filter(e => e.status === 'waiting_on').length > 0 &&
+            `(${waitingOnAll.filter(e => e.status === 'waiting_on').length})`}
         </button>
       </div>
       {isLoading ? <Spinner /> : shown.length === 0 ? (
@@ -591,31 +599,60 @@ function EmailQueue({ emails, isLoading, contacts }) {
         } />
       ) : (
         <div className="space-y-2">
-          {shown.slice(0, 7).map(email => (
-            <div key={email.id} className="flex items-start gap-2 group">
-              <div className="flex-1 min-w-0">
-                <ContactLink
-                  name={email.from_name || email.from_address}
-                  contacts={contacts}
-                  className="text-sm font-medium text-[#1a1a18] block truncate"
-                />
-                <p className="text-xs text-[#6b6b67] truncate">
-                  {email.thread_subject || email.subject}
-                </p>
-                {email.days_waiting > 0 && tab === 'reply' && (
-                  <p className="text-xs text-orange-400">{email.days_waiting}d waiting</p>
+          {shown.slice(0, 7).map(email => {
+            const isResolved = email.status === 'resolved'
+            return (
+              <div
+                key={email.id}
+                className={`flex items-start gap-2 group transition-opacity ${isResolved ? 'opacity-40' : ''}`}
+              >
+                <div className="flex-1 min-w-0">
+                  <ContactLink
+                    name={email.from_name || email.from_address}
+                    contacts={contacts}
+                    className={`text-sm font-medium text-[#1a1a18] block truncate ${isResolved ? 'line-through' : ''}`}
+                  />
+                  <p className={`text-xs text-[#6b6b67] truncate ${isResolved ? 'line-through' : ''}`}>
+                    {email.thread_subject || email.subject}
+                  </p>
+                  {email.days_waiting > 0 && tab === 'reply' && (
+                    <p className="text-xs text-orange-400">{email.days_waiting}d waiting</p>
+                  )}
+                </div>
+
+                {/* Needs Reply: single checkmark */}
+                {tab === 'reply' && (
+                  <button
+                    onClick={() => mark.mutate({ id: email.id, status: 'done' })}
+                    className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
+                    title="Mark replied"
+                  >
+                    ✓
+                  </button>
+                )}
+
+                {/* Waiting On: checkmark (resolved) + archive (no longer waiting) */}
+                {tab === 'waiting' && !isResolved && (
+                  <div className="flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100">
+                    <button
+                      onClick={() => mark.mutate({ id: email.id, status: 'resolved' })}
+                      className="text-xs text-[#6b6b67] hover:text-green-600"
+                      title="Mark resolved"
+                    >
+                      ✓
+                    </button>
+                    <button
+                      onClick={() => mark.mutate({ id: email.id, status: 'archived' })}
+                      className="text-[10px] text-gray-300 hover:text-gray-500 leading-none"
+                      title="No longer waiting"
+                    >
+                      No longer waiting
+                    </button>
+                  </div>
                 )}
               </div>
-              {tab === 'reply' && (
-                <button
-                  onClick={() => mark.mutate({ id: email.id, status: 'done' })}
-                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
-                >
-                  ✓
-                </button>
-              )}
-            </div>
-          ))}
+            )
+          })}
           {shown.length > 7 && (
             <p className="text-xs text-[#6b6b67]">+{shown.length - 7} more</p>
           )}
@@ -909,7 +946,7 @@ function IntelSubItem({ obj }) {
   )
 }
 
-function UnlinkedIntelPanel() {
+function UnlinkedIntelPanel({ projects }) {
   const qc = useQueryClient()
   const { data, isLoading } = useQuery({
     queryKey: ['unlinked-intel'],
@@ -917,8 +954,33 @@ function UnlinkedIntelPanel() {
     refetchInterval: 300000,
   })
 
-  const update = useMutation({
-    mutationFn: ({ id, status }) => updateUnlinkedIntelligence(id, { status }),
+  const [openMenuId, setOpenMenuId]       = useState(null)
+  const [creatingForId, setCreatingForId] = useState(null)
+  const [newProjectName, setNewProjectName] = useState('')
+
+  const activeProjects = (projects || []).filter(p => p.status === 'active')
+
+  const linkMutation = useMutation({
+    mutationFn: ({ id, projectId }) =>
+      updateUnlinkedIntelligence(id, { status: 'filed', suggested_project_id: projectId }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['unlinked-intel'] }),
+  })
+
+  const createAndLink = useMutation({
+    mutationFn: async ({ id, name }) => {
+      const project = await createProject({ name, status: 'active' })
+      await updateUnlinkedIntelligence(id, { status: 'filed', suggested_project_id: project.id })
+    },
+    onSuccess: () => {
+      setCreatingForId(null)
+      setNewProjectName('')
+      qc.invalidateQueries({ queryKey: ['unlinked-intel'] })
+      qc.invalidateQueries({ queryKey: ['projects'] })
+    },
+  })
+
+  const dismiss = useMutation({
+    mutationFn: (id) => updateUnlinkedIntelligence(id, { status: 'dismissed' }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['unlinked-intel'] }),
   })
 
@@ -929,52 +991,118 @@ function UnlinkedIntelPanel() {
     <Card>
       <SectionHeader title="Unlinked Intelligence" count={items.length} badge="needs filing" />
       {isLoading ? <Spinner /> : (
-        <div className="space-y-1">
+        <div className="space-y-3">
           {items.slice(0, 5).map(item => {
-            const subItems = parseIntelContent(item.content)
+            const subItems   = parseIntelContent(item.content)
+            const sourceLabel = item.source_email_id ? 'from email'
+              : item.source_type === 'meeting' ? 'from meeting'
+              : item.source_type || null
 
             return (
-              <div key={item.id} className="flex items-start gap-2 group rounded-lg hover:bg-gray-50 px-1 py-1 -mx-1">
-                <div className="flex-1 min-w-0">
-                  {/* Source badge row */}
-                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
-                    {item.intel_type && <PillBadge label={item.intel_type} color="purple" />}
-                    {item.source_email_id && <PillBadge label="from email" color="blue" />}
-                  </div>
+              <div key={item.id} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
 
-                  {subItems ? (
-                    // Parsed JSON array — render each sub-item
-                    <div>
-                      {subItems.slice(0, 4).map((obj, i) => (
-                        <IntelSubItem key={i} obj={obj} />
-                      ))}
-                      {subItems.length > 4 && (
-                        <p className="text-xs text-[#6b6b67] mt-1">
-                          +{subItems.length - 4} more in this batch
-                        </p>
-                      )}
-                    </div>
-                  ) : (
-                    // Parse failed — clean fallback
-                    item.content && item.content.trim().startsWith('[') ? (
-                      <p className="text-sm text-[#6b6b67] italic">
-                        {item.content.trim().match(/^\[.*\]$/s)
-                          ? `${(item.content.match(/\{/g) || []).length} intelligence items need filing`
-                          : item.content}
-                      </p>
-                    ) : (
-                      <p className="text-sm text-[#1a1a18] leading-snug">{item.content}</p>
-                    )
-                  )}
+                {/* Source + type badges */}
+                <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
+                  {item.intel_type  && <PillBadge label={item.intel_type} color="purple" />}
+                  {sourceLabel      && <PillBadge label={sourceLabel}     color="blue"   />}
                 </div>
 
-                <button
-                  onClick={() => update.mutate({ id: item.id, status: 'reviewed' })}
-                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
-                  title="Mark reviewed"
-                >
-                  ✓
-                </button>
+                {/* Readable content */}
+                {subItems ? (
+                  <div className="mb-2">
+                    {subItems.slice(0, 3).map((obj, i) => (
+                      <IntelSubItem key={i} obj={obj} />
+                    ))}
+                    {subItems.length > 3 && (
+                      <p className="text-xs text-[#6b6b67] mt-1">
+                        +{subItems.length - 3} more in this batch
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-sm text-[#1a1a18] leading-snug mb-2">
+                    {item.content && item.content.trim().startsWith('[')
+                      ? `${(item.content.match(/\{/g) || []).length} intelligence items need filing`
+                      : item.content}
+                  </p>
+                )}
+
+                {/* Filing actions */}
+                {creatingForId === item.id ? (
+                  <div className="flex gap-2">
+                    <input
+                      value={newProjectName}
+                      onChange={e => setNewProjectName(e.target.value)}
+                      placeholder="New project name..."
+                      className="flex-1 text-xs border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                      autoFocus
+                      onKeyDown={e => {
+                        if (e.key === 'Enter' && newProjectName.trim()) {
+                          createAndLink.mutate({ id: item.id, name: newProjectName.trim() })
+                        }
+                        if (e.key === 'Escape') { setCreatingForId(null); setNewProjectName('') }
+                      }}
+                    />
+                    <button
+                      onClick={() => newProjectName.trim() &&
+                        createAndLink.mutate({ id: item.id, name: newProjectName.trim() })}
+                      disabled={!newProjectName.trim() || createAndLink.isPending}
+                      className="text-xs bg-blue-600 text-white px-2 py-1 rounded disabled:opacity-40 hover:bg-blue-700"
+                    >
+                      {createAndLink.isPending ? '…' : 'Create'}
+                    </button>
+                    <button
+                      onClick={() => { setCreatingForId(null); setNewProjectName('') }}
+                      className="text-xs text-gray-400 hover:text-gray-600"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-3 flex-wrap">
+                    {/* Link to project: toggle select */}
+                    {openMenuId === item.id ? (
+                      <select
+                        className="text-xs border border-gray-200 rounded px-1.5 py-0.5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400"
+                        defaultValue=""
+                        autoFocus
+                        onChange={e => {
+                          if (e.target.value) {
+                            linkMutation.mutate({ id: item.id, projectId: e.target.value })
+                            setOpenMenuId(null)
+                          }
+                        }}
+                        onBlur={() => setOpenMenuId(null)}
+                      >
+                        <option value="" disabled>Select project…</option>
+                        {activeProjects.map(p => (
+                          <option key={p.id} value={p.id}>{p.name}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <button
+                        onClick={() => { setOpenMenuId(item.id); setCreatingForId(null) }}
+                        className="text-xs text-blue-600 hover:underline"
+                      >
+                        Link to project ▾
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => { setCreatingForId(item.id); setOpenMenuId(null); setNewProjectName('') }}
+                      className="text-xs text-[#6b6b67] hover:text-[#1a1a18]"
+                    >
+                      Create new project
+                    </button>
+
+                    <button
+                      onClick={() => dismiss.mutate(item.id)}
+                      className="text-xs text-gray-400 hover:text-red-400"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                )}
               </div>
             )
           })}
@@ -1162,7 +1290,7 @@ export default function Dashboard() {
         <ProjectsPanel projects={projects} isLoading={loadingProjects} />
 
         {/* Unlinked intelligence — only renders if data exists */}
-        <UnlinkedIntelPanel />
+        <UnlinkedIntelPanel projects={projects} />
 
       </div>
 

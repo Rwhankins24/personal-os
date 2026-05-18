@@ -36,6 +36,7 @@ export const updateOthersCommitment = (id, data) =>
 // ── Projects ──────────────────────────────────────────────────
 export const getProjects    = () => api.get('/api/projects').then(r => r.data)
 export const getProject     = (id) => api.get(`/api/projects?id=${id}`).then(r => r.data)
+export const createProject  = (data) => api.post('/api/projects', data).then(r => r.data)
 export const updateProject  = (id, data) => api.patch(`/api/projects?id=${id}`, data).then(r => r.data)
 
 // ── Contacts ──────────────────────────────────────────────────
