@@ -1233,6 +1233,12 @@ export default function Dashboard() {
             <span className="font-bold text-[#1a1a18] text-base tracking-tight">Personal OS</span>
             <WorkspaceBar workspace={workspace} setWorkspace={setWorkspace} />
             <Link
+              to="/projects"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
               to="/contacts"
               className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
             >

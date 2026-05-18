@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard   from './pages/Dashboard'
 import TaskDetail  from './pages/TaskDetail'
+import Projects    from './pages/Projects'
 import ProjectCard from './pages/ProjectCard'
 import ContactCard from './pages/ContactCard'
 import Contacts    from './pages/Contacts'
@@ -25,6 +26,8 @@ export default function App() {
           <Route path="/contact/:id"    element={<ContactCard />} />
           <Route path="/contacts/:id"   element={<ContactCard />} />
           <Route path="/task/:id"       element={<TaskDetail />} />
+          <Route path="/projects"       element={<Projects />} />
+          <Route path="/projects/:id"   element={<ProjectCard />} />
           <Route path="/project/:id"    element={<ProjectCard />} />
         </Routes>
       </BrowserRouter>

@@ -13,6 +13,21 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end()
 
   try {
+    // ── Keyword preview endpoint ──────────────────────────────────
+    const urlPath = (req.url || '').split('?')[0]
+    const previewMatch = urlPath.match(/\/api\/projects\/([^/]+)\/keyword-preview$/)
+    if (previewMatch && req.method === 'GET') {
+      const keywords = (req.query.keywords || '').split(',').map(k => k.trim()).filter(k => k.length > 0)
+      if (!keywords.length) return res.json({ email_count: 0, meeting_count: 0 })
+      const emailFilter = keywords.map(k => `thread_subject.ilike.%${k}%`).join(',')
+      const { count: emailCount } = await supabase
+        .from('emails').select('id', { count: 'exact', head: true }).or(emailFilter)
+      const meetingFilter = keywords.map(k => `title.ilike.%${k}%,short_summary.ilike.%${k}%`).join(',')
+      const { count: meetingCount } = await supabase
+        .from('meeting_notes').select('id', { count: 'exact', head: true }).or(meetingFilter)
+      return res.json({ email_count: emailCount || 0, meeting_count: meetingCount || 0 })
+    }
+
     if (req.method === 'GET') {
       const { id, status, type, workspace_id } = req.query
       if (id) {
@@ -31,16 +46,24 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
+      const body = {
+        intelligence_notes: [],
+        decisions_made: [],
+        risk_signals: [],
+        key_facts: [],
+        ...req.body,
+      }
       const { data, error } = await supabase
-        .from('projects').insert(req.body).select().single()
+        .from('projects').insert(body).select().single()
       if (error) throw error
       return res.status(201).json(data)
     }
 
     if (req.method === 'PATCH') {
       const { id } = req.query
+      const body = { ...req.body, updated_at: new Date().toISOString() }
       const { data, error } = await supabase
-        .from('projects').update(req.body).eq('id', id).select().single()
+        .from('projects').update(body).eq('id', id).select().single()
       if (error) throw error
       return res.json(data)
     }

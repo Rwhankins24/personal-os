@@ -38,6 +38,9 @@ export const getProjects    = () => api.get('/api/projects').then(r => r.data)
 export const getProject     = (id) => api.get(`/api/projects?id=${id}`).then(r => r.data)
 export const createProject  = (data) => api.post('/api/projects', data).then(r => r.data)
 export const updateProject  = (id, data) => api.patch(`/api/projects?id=${id}`, data).then(r => r.data)
+export const deleteProject  = (id) => api.delete(`/api/projects?id=${id}`).then(r => r.data)
+export const getProjectKeywordPreview = (id, keywords) =>
+  api.get(`/api/projects/${id}/keyword-preview?keywords=${encodeURIComponent((keywords || []).join(','))}`).then(r => r.data)
 
 // ── Contacts ──────────────────────────────────────────────────
 export const getContacts    = () => api.get('/api/contacts').then(r => r.data)
