@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -220,7 +220,8 @@ function PipelineBanner() {
 }
 
 // ── Stat cards ─────────────────────────────────────────────────
-function StatCards({ tasks, emails, events, commitments, decisions, questions }) {
+function StatCards({ tasks, emails, events, commitments, decisions, questions,
+                     onOpenTasks, onNeedsReply, onDecisions, onQuestions }) {
   const todayUTC    = new Date().toISOString().split('T')[0]
   const openTasks   = tasks?.filter(t => t.status !== 'done' && t.status !== 'archived').length ?? 0
   const needsReply  = emails?.filter(e => e.status === 'needs_reply').length ?? 0
@@ -229,22 +230,27 @@ function StatCards({ tasks, emails, events, commitments, decisions, questions })
   const pendingQs   = questions?.length ?? 0
 
   const stats = [
-    { label: 'Meetings',    value: todayEvents,    icon: '📅', alert: false },
-    { label: 'Open Tasks',  value: openTasks,      icon: '✅', alert: openTasks > 10 },
-    { label: 'Needs Reply', value: needsReply,     icon: '📬', alert: needsReply > 5 },
-    { label: 'Decisions',   value: openDecisions,  icon: '🧠', alert: openDecisions > 0 },
-    { label: 'AI Questions',value: pendingQs,      icon: '❓', alert: pendingQs > 0 },
+    { label: 'Meetings',     value: todayEvents,   icon: '📅', alert: false,            onClick: null },
+    { label: 'Open Tasks',   value: openTasks,     icon: '✅', alert: openTasks > 10,   onClick: onOpenTasks },
+    { label: 'Needs Reply',  value: needsReply,    icon: '📬', alert: needsReply > 5,   onClick: onNeedsReply },
+    { label: 'Decisions',    value: openDecisions, icon: '🧠', alert: openDecisions > 0, onClick: onDecisions },
+    { label: 'AI Questions', value: pendingQs,     icon: '❓', alert: pendingQs > 0,    onClick: onQuestions },
   ]
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
       {stats.map(s => (
-        <Card key={s.label} className={`flex items-center gap-2.5 ${s.alert ? 'border-orange-200 bg-orange-50' : ''}`}>
+        <Card
+          key={s.label}
+          className={`flex items-center gap-2.5 transition-all ${s.alert ? 'border-orange-200 bg-orange-50' : ''} ${s.onClick ? 'cursor-pointer hover:border-blue-300 hover:shadow-sm active:scale-95' : ''}`}
+          onClick={s.onClick || undefined}
+        >
           <span className="text-xl">{s.icon}</span>
           <div>
             <p className={`text-xl font-bold ${s.alert ? 'text-orange-600' : 'text-[#1a1a18]'}`}>{s.value}</p>
             <p className="text-xs text-[#6b6b67]">{s.label}</p>
           </div>
+          {s.onClick && <span className="ml-auto text-gray-300 text-xs">↓</span>}
         </Card>
       ))}
     </div>
@@ -319,10 +325,9 @@ function CalendarStrip({ events, isLoading }) {
 }
 
 // ── Task panel ─────────────────────────────────────────────────
-function TaskPanel({ tasks, isLoading }) {
+function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
   const navigate = useNavigate()
   const qc = useQueryClient()
-  const [showAll, setShowAll] = useState(false)
 
   const toggle = useMutation({
     mutationFn: ({ id, status }) => updateTask(id, { status }),
@@ -394,12 +399,20 @@ function TaskPanel({ tasks, isLoading }) {
               </div>
             ))}
           </div>
-          {open.length > 6 && (
+          {!showAll && open.length > 6 && (
             <button
-              onClick={() => setShowAll(v => !v)}
-              className="mt-3 text-xs text-blue-600 hover:underline"
+              onClick={() => setShowAll(true)}
+              className="mt-3 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left"
             >
-              {showAll ? 'Show less' : `Show ${open.length - 6} more`}
+              + {open.length - 6} more — tap to show all
+            </button>
+          )}
+          {showAll && open.length > 6 && (
+            <button
+              onClick={() => setShowAll(false)}
+              className="mt-3 text-xs text-[#6b6b67] hover:underline w-full text-left"
+            >
+              Show less ↑
             </button>
           )}
         </>
@@ -411,6 +424,7 @@ function TaskPanel({ tasks, isLoading }) {
 // ── My Commitments panel ───────────────────────────────────────
 function CommitmentsPanel({ commitments, isLoading, contacts }) {
   const qc = useQueryClient()
+  const [showAll, setShowAll] = useState(false)
   const close = useMutation({
     mutationFn: (id) => updateCommitment(id, { status: 'closed' }),
     onMutate: async (id) => {
@@ -434,7 +448,7 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
         <EmptyState icon="🤝" message="No open commitments" />
       ) : (
         <div className="space-y-2">
-          {open.slice(0, 5).map(c => {
+          {(showAll ? open : open.slice(0, 5)).map(c => {
             const overdue = c.due_date && dayjs(c.due_date).isBefore(dayjs(), 'day')
             return (
               <div key={c.id} className="flex items-start gap-2.5">
@@ -465,8 +479,15 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
               </div>
             )
           })}
-          {open.length > 5 && (
-            <p className="text-xs text-[#6b6b67]">+{open.length - 5} more</p>
+          {!showAll && open.length > 5 && (
+            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {open.length - 5} more — tap to show all
+            </button>
+          )}
+          {showAll && open.length > 5 && (
+            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -477,6 +498,7 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
 // ── Others' Commitments panel ──────────────────────────────────
 function OthersCommitmentsPanel({ contacts }) {
   const qc = useQueryClient()
+  const [showAll, setShowAll] = useState(false)
   const { data, isLoading } = useQuery({
     queryKey: ['others-commitments'],
     queryFn: () => getOthersCommitments('open'),
@@ -497,7 +519,7 @@ function OthersCommitmentsPanel({ contacts }) {
         <EmptyState icon="⏳" message="Nothing waiting on others" />
       ) : (
         <div className="space-y-2">
-          {items.slice(0, 5).map(c => (
+          {(showAll ? items : items.slice(0, 5)).map(c => (
             <div key={c.id} className="flex items-start gap-2.5 group">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
@@ -532,8 +554,15 @@ function OthersCommitmentsPanel({ contacts }) {
               </button>
             </div>
           ))}
-          {items.length > 5 && (
-            <p className="text-xs text-[#6b6b67]">+{items.length - 5} more</p>
+          {!showAll && items.length > 5 && (
+            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {items.length - 5} more — tap to show all
+            </button>
+          )}
+          {showAll && items.length > 5 && (
+            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -542,9 +571,10 @@ function OthersCommitmentsPanel({ contacts }) {
 }
 
 // ── Email queue ────────────────────────────────────────────────
-function EmailQueue({ emails, isLoading, contacts }) {
+function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply }) {
   const qc = useQueryClient()
   const [tab, setTab] = useState('reply')
+  const [showAllWaiting, setShowAllWaiting] = useState(false)
 
   const mark = useMutation({
     mutationFn: ({ id, status }) => updateEmail(id, { status }),
@@ -569,7 +599,12 @@ function EmailQueue({ emails, isLoading, contacts }) {
     ...waitingOnAll.filter(e => e.status === 'resolved'),
   ]
 
-  const shown = tab === 'reply' ? needsReply : waitingOn
+  const isReplyTab   = tab === 'reply'
+  const shownAll     = isReplyTab ? (showAllReply || false) : showAllWaiting
+  const setShownAll  = isReplyTab ? setShowAllReply : setShowAllWaiting
+  const shown        = isReplyTab ? needsReply : waitingOn
+  const CAP          = 7
+  const visibleItems = shownAll ? shown : shown.slice(0, CAP)
 
   return (
     <Card>
@@ -594,12 +629,12 @@ function EmailQueue({ emails, isLoading, contacts }) {
         </button>
       </div>
       {isLoading ? <Spinner /> : shown.length === 0 ? (
-        <EmptyState icon={tab === 'reply' ? '📬' : '⏳'} message={
-          tab === 'reply' ? 'No emails need reply' : 'Nothing waiting'
+        <EmptyState icon={isReplyTab ? '📬' : '⏳'} message={
+          isReplyTab ? 'No emails need reply' : 'Nothing waiting'
         } />
       ) : (
         <div className="space-y-2">
-          {shown.slice(0, 7).map(email => {
+          {visibleItems.map(email => {
             const isResolved = email.status === 'resolved'
             return (
               <div
@@ -615,13 +650,13 @@ function EmailQueue({ emails, isLoading, contacts }) {
                   <p className={`text-xs text-[#6b6b67] truncate ${isResolved ? 'line-through' : ''}`}>
                     {email.thread_subject || email.subject}
                   </p>
-                  {email.days_waiting > 0 && tab === 'reply' && (
+                  {email.days_waiting > 0 && isReplyTab && (
                     <p className="text-xs text-orange-400">{email.days_waiting}d waiting</p>
                   )}
                 </div>
 
                 {/* Needs Reply: single checkmark */}
-                {tab === 'reply' && (
+                {isReplyTab && (
                   <button
                     onClick={() => mark.mutate({ id: email.id, status: 'done' })}
                     className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
@@ -632,7 +667,7 @@ function EmailQueue({ emails, isLoading, contacts }) {
                 )}
 
                 {/* Waiting On: checkmark (resolved) + archive (no longer waiting) */}
-                {tab === 'waiting' && !isResolved && (
+                {!isReplyTab && !isResolved && (
                   <div className="flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100">
                     <button
                       onClick={() => mark.mutate({ id: email.id, status: 'resolved' })}
@@ -653,8 +688,15 @@ function EmailQueue({ emails, isLoading, contacts }) {
               </div>
             )
           })}
-          {shown.length > 7 && (
-            <p className="text-xs text-[#6b6b67]">+{shown.length - 7} more</p>
+          {!shownAll && shown.length > CAP && (
+            <button onClick={() => setShownAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {shown.length - CAP} more — tap to show all
+            </button>
+          )}
+          {shownAll && shown.length > CAP && (
+            <button onClick={() => setShownAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -663,7 +705,7 @@ function EmailQueue({ emails, isLoading, contacts }) {
 }
 
 // ── Pending Decisions panel ────────────────────────────────────
-function PendingDecisionsPanel() {
+function PendingDecisionsPanel({ showAll, setShowAll }) {
   const qc = useQueryClient()
   const { data, isLoading } = useQuery({
     queryKey: ['pending-decisions'],
@@ -696,7 +738,7 @@ function PendingDecisionsPanel() {
         <EmptyState icon="🧠" message="No pending decisions" />
       ) : (
         <div className="space-y-3">
-          {items.slice(0, 4).map(d => (
+          {(showAll ? items : items.slice(0, 4)).map(d => (
             <div key={d.id} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
               <div className="flex items-start gap-2">
                 <div className="flex-1 min-w-0">
@@ -753,8 +795,15 @@ function PendingDecisionsPanel() {
               )}
             </div>
           ))}
-          {items.length > 4 && (
-            <p className="text-xs text-[#6b6b67]">+{items.length - 4} more decisions</p>
+          {!showAll && items.length > 4 && (
+            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {items.length - 4} more decisions — tap to show all
+            </button>
+          )}
+          {showAll && items.length > 4 && (
+            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -763,7 +812,7 @@ function PendingDecisionsPanel() {
 }
 
 // ── AI Questions panel ─────────────────────────────────────────
-function AIQuestionsPanel() {
+function AIQuestionsPanel({ showAll, setShowAll }) {
   const qc = useQueryClient()
   const { data, isLoading } = useQuery({
     queryKey: ['ai-questions'],
@@ -791,7 +840,7 @@ function AIQuestionsPanel() {
         <EmptyState icon="❓" message="No pending questions" />
       ) : (
         <div className="space-y-3">
-          {items.slice(0, 4).map(q => (
+          {(showAll ? items : items.slice(0, 4)).map(q => (
             <div key={q.id} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
               <p className="text-sm text-[#1a1a18] leading-snug">{q.question}</p>
               {q.context && (
@@ -831,8 +880,15 @@ function AIQuestionsPanel() {
               )}
             </div>
           ))}
-          {items.length > 4 && (
-            <p className="text-xs text-[#6b6b67]">+{items.length - 4} more questions</p>
+          {!showAll && items.length > 4 && (
+            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {items.length - 4} more questions — tap to show all
+            </button>
+          )}
+          {showAll && items.length > 4 && (
+            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -948,6 +1004,7 @@ function IntelSubItem({ obj }) {
 
 function UnlinkedIntelPanel({ projects }) {
   const qc = useQueryClient()
+  const [showAll, setShowAll] = useState(false)
   const { data, isLoading } = useQuery({
     queryKey: ['unlinked-intel'],
     queryFn: getUnlinkedIntelligence,
@@ -992,7 +1049,7 @@ function UnlinkedIntelPanel({ projects }) {
       <SectionHeader title="Unlinked Intelligence" count={items.length} badge="needs filing" />
       {isLoading ? <Spinner /> : (
         <div className="space-y-3">
-          {items.slice(0, 5).map(item => {
+          {(showAll ? items : items.slice(0, 5)).map(item => {
             const subItems   = parseIntelContent(item.content)
             const sourceLabel = item.source_email_id ? 'from email'
               : item.source_type === 'meeting' ? 'from meeting'
@@ -1106,8 +1163,15 @@ function UnlinkedIntelPanel({ projects }) {
               </div>
             )
           })}
-          {items.length > 5 && (
-            <p className="text-xs text-[#6b6b67] pt-1">+{items.length - 5} more items</p>
+          {!showAll && items.length > 5 && (
+            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
+              + {items.length - 5} more — tap to show all
+            </button>
+          )}
+          {showAll && items.length > 5 && (
+            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
+              Show less ↑
+            </button>
           )}
         </div>
       )}
@@ -1212,6 +1276,42 @@ function DailyBrief() {
 export default function Dashboard() {
   const [workspace, setWorkspace] = useState('all')
 
+  // ── Lifted expand/collapse state (for stat card navigation) ──
+  const [showAllTasks,     setShowAllTasks]     = useState(false)
+  const [showAllReply,     setShowAllReply]     = useState(false)
+  const [showAllDecisions, setShowAllDecisions] = useState(false)
+  const [showAllQuestions, setShowAllQuestions] = useState(false)
+
+  // ── Panel refs for scroll-to navigation ──────────────────────
+  const tasksRef     = useRef(null)
+  const emailRef     = useRef(null)
+  const decisionsRef = useRef(null)
+  const questionsRef = useRef(null)
+
+  function scrollTo(ref) {
+    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const onOpenTasks = useCallback(() => {
+    setShowAllTasks(true)
+    setTimeout(() => scrollTo(tasksRef), 50)
+  }, [])
+
+  const onNeedsReply = useCallback(() => {
+    setShowAllReply(true)
+    setTimeout(() => scrollTo(emailRef), 50)
+  }, [])
+
+  const onDecisions = useCallback(() => {
+    setShowAllDecisions(true)
+    setTimeout(() => scrollTo(decisionsRef), 50)
+  }, [])
+
+  const onQuestions = useCallback(() => {
+    setShowAllQuestions(true)
+    setTimeout(() => scrollTo(questionsRef), 50)
+  }, [])
+
   const { data: tasks,       isLoading: loadingTasks }   = useQuery({ queryKey: ['tasks'],       queryFn: getTasks,        refetchInterval: 120000 })
   const { data: events,      isLoading: loadingEvents }  = useQuery({ queryKey: ['events'],      queryFn: getEvents,       refetchInterval: 120000 })
   const { data: emails,      isLoading: loadingEmails }  = useQuery({ queryKey: ['emails'],      queryFn: getEmails,       refetchInterval: 120000 })
@@ -1269,6 +1369,10 @@ export default function Dashboard() {
           commitments={commitments}
           decisions={decisions}
           questions={questions}
+          onOpenTasks={onOpenTasks}
+          onNeedsReply={onNeedsReply}
+          onDecisions={onDecisions}
+          onQuestions={onQuestions}
         />
 
         {/* Calendar — full width */}
@@ -1279,16 +1383,24 @@ export default function Dashboard() {
 
           {/* LEFT column */}
           <div className="space-y-3">
-            <TaskPanel tasks={tasks} isLoading={loadingTasks} />
+            <div ref={tasksRef}>
+              <TaskPanel tasks={tasks} isLoading={loadingTasks} showAll={showAllTasks} setShowAll={setShowAllTasks} />
+            </div>
             <CommitmentsPanel commitments={commitments} isLoading={loadingCommit} contacts={contacts} />
             <OthersCommitmentsPanel contacts={contacts} />
           </div>
 
           {/* RIGHT column */}
           <div className="space-y-3">
-            <EmailQueue emails={emails} isLoading={loadingEmails} contacts={contacts} />
-            <PendingDecisionsPanel />
-            <AIQuestionsPanel />
+            <div ref={emailRef}>
+              <EmailQueue emails={emails} isLoading={loadingEmails} contacts={contacts} showAllReply={showAllReply} setShowAllReply={setShowAllReply} />
+            </div>
+            <div ref={decisionsRef}>
+              <PendingDecisionsPanel showAll={showAllDecisions} setShowAll={setShowAllDecisions} />
+            </div>
+            <div ref={questionsRef}>
+              <AIQuestionsPanel showAll={showAllQuestions} setShowAll={setShowAllQuestions} />
+            </div>
           </div>
         </div>
 
