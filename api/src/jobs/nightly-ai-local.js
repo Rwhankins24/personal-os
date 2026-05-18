@@ -130,10 +130,13 @@ function detectLinks(bodyText) {
   })
 }
 
-// ─── SEMANTIC DEDUPLICATION
+// ─── SEMANTIC DEDUPLICATION (source-priority-aware)
+// Priority: manual=4 (never deleted), ai_otter=3, ai_email=2, system=1
 async function deduplicateTable(tableName, emailField) {
-  let selectFields = 'id, title, created_at'
-  if (emailField) selectFields = `id, title, ${emailField}, created_at`
+  const SOURCE_PRIORITY = { manual: 4, ai_otter: 3, ai_email: 2, system: 1 }
+
+  let selectFields = 'id, title, source_type, created_at'
+  if (emailField) selectFields += `, ${emailField}`
 
   const { data: items } = await supabase
     .from(tableName)
@@ -143,11 +146,11 @@ async function deduplicateTable(tableName, emailField) {
 
   if (!items?.length) return 0
 
-  const seen    = new Map()
-  const toDelete = []
+  // Group items by fingerprint key
+  const groups = new Map()
 
   for (const item of items) {
-    const fingerprint = item.title
+    const fingerprint = (item.title || '')
       .toLowerCase()
       .replace(/[^a-z0-9\s]/g, '')
       .split(' ')
@@ -156,20 +159,35 @@ async function deduplicateTable(tableName, emailField) {
       .join('|')
 
     const emailKey = emailField ? (item[emailField] || 'unknown') : 'any'
-    const key      = `${fingerprint}:${emailKey}`
+    const key = `${fingerprint}:${emailKey}`
 
-    if (seen.has(key)) {
-      toDelete.push(item.id)
-    } else {
-      seen.set(key, item.id)
+    if (!groups.has(key)) groups.set(key, [])
+    groups.get(key).push(item)
+  }
+
+  const toDelete = []
+
+  for (const [, group] of groups) {
+    if (group.length <= 1) continue
+
+    // Sort: highest priority first; ties broken by oldest created_at (keep original)
+    group.sort((a, b) => {
+      const pa = SOURCE_PRIORITY[a.source_type] || 0
+      const pb = SOURCE_PRIORITY[b.source_type] || 0
+      if (pb !== pa) return pb - pa
+      return new Date(a.created_at) - new Date(b.created_at)
+    })
+
+    // Keep first (winner), queue the rest for deletion — never delete manual
+    for (let i = 1; i < group.length; i++) {
+      if (group[i].source_type !== 'manual') {
+        toDelete.push(group[i].id)
+      }
     }
   }
 
   if (toDelete.length > 0) {
-    await supabase
-      .from(tableName)
-      .delete()
-      .in('id', toDelete)
+    await supabase.from(tableName).delete().in('id', toDelete)
   }
 
   return toDelete.length
@@ -304,6 +322,52 @@ async function main() {
     .limit(25)
 
   console.log(`  ✓ Found ${(activeEmails || []).length} active email threads`)
+
+  // ── STEP 2.5: Load existing items as AI dedup context ──────────
+  // Loaded once here — available to both email (STEP 4/5) and future Otter extraction
+  let existingTasksContext = ''
+  let existingOthersContext = ''
+  let existingMineContext = ''
+  try {
+    const { data: openTasks } = await supabase
+      .from('tasks')
+      .select('title, context, urgency')
+      .eq('status', 'open')
+      .order('created_at', { ascending: false })
+      .limit(60)
+    if (openTasks?.length) {
+      existingTasksContext = openTasks
+        .map(t => `- ${t.title}${t.context ? ` (${t.context.slice(0, 60)})` : ''}`)
+        .join('\n')
+    }
+  } catch (err) { /* non-fatal */ }
+  try {
+    const { data: openOthers } = await supabase
+      .from('others_commitments')
+      .select('title, committed_by_name')
+      .eq('status', 'open')
+      .order('created_at', { ascending: false })
+      .limit(60)
+    if (openOthers?.length) {
+      existingOthersContext = openOthers
+        .map(c => `- ${c.committed_by_name || 'Unknown'}: ${c.title}`)
+        .join('\n')
+    }
+  } catch (err) { /* non-fatal */ }
+  try {
+    const { data: openMine } = await supabase
+      .from('commitments')
+      .select('title, made_to')
+      .eq('status', 'open')
+      .order('created_at', { ascending: false })
+      .limit(60)
+    if (openMine?.length) {
+      existingMineContext = openMine
+        .map(c => `- ${c.title}${c.made_to ? ` (to: ${c.made_to})` : ''}`)
+        .join('\n')
+    }
+  } catch (err) { /* non-fatal */ }
+  console.log(`  ✓ Context loaded: ${existingTasksContext.split('\n').filter(Boolean).length} tasks, ${existingOthersContext.split('\n').filter(Boolean).length} others, ${existingMineContext.split('\n').filter(Boolean).length} mine`)
 
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
@@ -795,13 +859,13 @@ async function main() {
   for (const email of bucket1) {
     try {
       const threadHistory = await getThreadHistory(email)
-      const tasks = await aiService.extractTasks(email, threadHistory)
+      const tasks = await aiService.extractTasks(email, threadHistory, existingTasksContext)
 
       for (const task of tasks) {
         // Level 1: exact title match
         const { data: exactTask } = await supabase
           .from('tasks')
-          .select('id')
+          .select('id, source_type')
           .eq('title', task.title)
           .eq('status', 'open')
           .maybeSingle()
@@ -820,7 +884,7 @@ async function main() {
           if (keyWords.length >= 2) {
             const { data: candidates } = await supabase
               .from('tasks')
-              .select('id, title')
+              .select('id, title, source_type')
               .eq('status', 'open')
               .ilike('title', `%${keyWords[0]}%`)
 
@@ -855,6 +919,31 @@ async function main() {
             project_id: projectId || null
           })
           results.tasks_created++
+        } else if (existing.source_type && existing.source_type !== 'ai_email') {
+          // CHANGE 5: Cross-source enrichment — same task seen from a different source
+          // Patch cross_references on existing item instead of silently skipping
+          try {
+            const { data: fullTask } = await supabase
+              .from('tasks')
+              .select('cross_references')
+              .eq('id', existing.id)
+              .single()
+            const crossRefs = fullTask?.cross_references || []
+            const alreadyCrossReferenced = crossRefs.some(
+              r => r.source_label === email.thread_subject
+            )
+            if (!alreadyCrossReferenced) {
+              crossRefs.push({
+                source_type: 'ai_email',
+                source_label: email.thread_subject,
+                date: today
+              })
+              await supabase
+                .from('tasks')
+                .update({ cross_references: crossRefs })
+                .eq('id', existing.id)
+            }
+          } catch (err) { /* non-fatal */ }
         }
       }
     } catch (err) {
@@ -870,13 +959,13 @@ async function main() {
       const threadHistory = await getThreadHistory(email)
 
       // Others' commitments
-      const othersC = await aiService.extractOthersCommitments(email, threadHistory)
+      const othersC = await aiService.extractOthersCommitments(email, threadHistory, existingOthersContext)
 
       for (const c of othersC) {
         // Level 1: exact match (title + email)
         const { data: exactMatch } = await supabase
           .from('others_commitments')
-          .select('id')
+          .select('id, source_type')
           .eq('title', c.title)
           .eq('committed_by_email', c.committed_by_email)
           .eq('status', 'open')
@@ -896,7 +985,7 @@ async function main() {
           if (keyWords.length >= 2) {
             const { data: candidates } = await supabase
               .from('others_commitments')
-              .select('id, title')
+              .select('id, title, source_type')
               .eq('status', 'open')
               .eq('committed_by_email', c.committed_by_email)
               .ilike('title', `%${keyWords[0]}%`)
@@ -936,6 +1025,30 @@ async function main() {
             project_id: projectId || null
           })
           results.others_commitments_extracted++
+        } else if (existing && existing.source_type && existing.source_type !== 'ai_email' && !c.ai_suggests_complete) {
+          // CHANGE 5: Cross-source enrichment for others_commitments
+          try {
+            const { data: fullC } = await supabase
+              .from('others_commitments')
+              .select('cross_references')
+              .eq('id', existing.id)
+              .single()
+            const crossRefs = fullC?.cross_references || []
+            const alreadyCrossReferenced = crossRefs.some(
+              r => r.source_label === email.thread_subject
+            )
+            if (!alreadyCrossReferenced) {
+              crossRefs.push({
+                source_type: 'ai_email',
+                source_label: email.thread_subject,
+                date: today
+              })
+              await supabase
+                .from('others_commitments')
+                .update({ cross_references: crossRefs })
+                .eq('id', existing.id)
+            }
+          } catch (err) { /* non-fatal */ }
         } else if (c.ai_suggests_complete) {
           // Suggest completion — don't auto-complete
           await supabase
@@ -959,7 +1072,7 @@ async function main() {
 
       // My commitments (from Bucket 2 sent body)
       if (email.bucket === 2) {
-        const myC = await aiService.extractMyCommitments(email, threadHistory)
+        const myC = await aiService.extractMyCommitments(email, threadHistory, existingMineContext)
 
         for (const c of myC) {
           const { data: existing } = await supabase

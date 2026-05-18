@@ -219,13 +219,16 @@ Risk signals: ONLY include if BOTH true:
 }
 
 // ─── EXTRACT TASKS
-async function extractTasks(email, threadHistory = []) {
+async function extractTasks(email, threadHistory = [], existingItemsContext = '') {
   const content =
     email.full_thread_content ||
     email.sent_body ||
     email.body_preview ||
     ''
   const historyContext = formatThreadHistoryForAI(threadHistory)
+  const existingSection = existingItemsContext
+    ? `\nExisting open tasks — do NOT re-extract these. Skip anything that is essentially the same action:\n${existingItemsContext}\n`
+    : ''
 
   const message = await withRetry(() =>
     client.messages.create({
@@ -243,7 +246,7 @@ Days waiting: ${email.days_waiting || 0}
 Tags: ${(email.tags || []).join(', ')}
 Content: ${content}
 ${historyContext}
-
+${existingSection}
 Return JSON array only. No other text.
 [{
   "title": "specific action required",
@@ -266,12 +269,15 @@ If no open tasks return [].`
 }
 
 // ─── EXTRACT OTHERS COMMITMENTS
-async function extractOthersCommitments(email, threadHistory = []) {
+async function extractOthersCommitments(email, threadHistory = [], existingItemsContext = '') {
   const content =
     email.full_thread_content ||
     email.body_preview ||
     ''
   const historyContext = formatThreadHistoryForAI(threadHistory)
+  const existingSection = existingItemsContext
+    ? `\nExisting tracked commitments from others — do NOT re-extract these. Skip anything that is essentially the same commitment:\n${existingItemsContext}\n`
+    : ''
 
   const message = await withRetry(() =>
     client.messages.create({
@@ -291,7 +297,7 @@ Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
 Content: ${content}
 ${historyContext}
-
+${existingSection}
 Return JSON array only.
 [{
   "committed_by_name": "full name",
@@ -321,13 +327,16 @@ If no open commitments return [].`
 }
 
 // ─── EXTRACT MY COMMITMENTS
-async function extractMyCommitments(email, threadHistory = []) {
+async function extractMyCommitments(email, threadHistory = [], existingItemsContext = '') {
   const content =
     email.full_thread_content ||
     email.sent_body ||
     email.body_preview ||
     ''
   const historyContext = formatThreadHistoryForAI(threadHistory)
+  const existingSection = existingItemsContext
+    ? `\nExisting tracked commitments Ryan already has open — do NOT re-extract these. Skip anything that is essentially the same commitment:\n${existingItemsContext}\n`
+    : ''
 
   const message = await withRetry(() =>
     client.messages.create({
@@ -347,7 +356,7 @@ Conditional: depends on something else first
 Thread: ${email.thread_subject || email.subject}
 Content: ${content}
 ${historyContext}
-
+${existingSection}
 Return JSON array only.
 [{
   "title": "exactly what Ryan committed to",
