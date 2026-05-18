@@ -1,0 +1,49 @@
+name: Cleanup Job
+
+on:
+  schedule:
+    # Tuesday and Friday at 02:00 UTC (7pm Phoenix MST / 8pm MDT)
+    - cron: '0 2 * * 2,5'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: api/package-lock.json
+
+      - name: Install dependencies
+        working-directory: api
+        run: npm ci
+
+      - name: Run cleanup job
+        working-directory: api
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: node src/jobs/cleanup-local.js
+
+      - name: Notify on failure (optional)
+        if: failure() && secrets.RESEND_API_KEY != ''
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          curl -s -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "Personal OS <alerts@yourdomain.com>",
+              "to": ["hankinsr@claycorp.com"],
+              "subject": "⚠️ Personal OS cleanup job failed",
+              "text": "The cleanup job failed. Check GitHub Actions for details."
+            }'

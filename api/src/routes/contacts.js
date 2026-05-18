@@ -15,13 +15,33 @@ module.exports = async (req, res) => {
   try {
     if (req.method === 'GET') {
       const { id, relationship_warmth, project_id } = req.query
+
       if (id) {
-        const { data, error } = await supabase
-          .from('contacts').select('*').eq('id', id).single()
-        if (error) throw error
-        return res.json(data)
+        // Single contact: fetch contact + latest AI profile
+        const [contactResult, profileResult] = await Promise.all([
+          supabase.from('contacts').select('*').eq('id', id).single(),
+          supabase
+            .from('ai_context')
+            .select('content, created_at')
+            .eq('context_type', 'contact_profile')
+            .eq('subject_id', id)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle()
+        ])
+        if (contactResult.error) throw contactResult.error
+        return res.json({
+          ...contactResult.data,
+          ai_profile: profileResult.data?.content || null,
+          ai_profile_date: profileResult.data?.created_at || null
+        })
       }
-      let query = supabase.from('contacts').select('*').order('name', { ascending: true })
+
+      // List: sort by last_contact_date (most recent first), nulls last
+      let query = supabase
+        .from('contacts')
+        .select('id, name, company, title, relationship_warmth, last_contact_date, phone, email')
+        .order('last_contact_date', { ascending: false, nullsLast: true })
       if (relationship_warmth) query = query.eq('relationship_warmth', relationship_warmth)
       if (project_id)          query = query.eq('project_id', project_id)
       const { data, error } = await query
