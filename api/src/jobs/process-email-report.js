@@ -90,21 +90,28 @@ module.exports = async (req, res) => {
     if (report.calendar && report.calendar.length > 0) {
       for (const event of report.calendar) {
         try {
-          const externalId = event.external_id || `${event.title}::${event.start || event.start_time}`
+          const externalId = event.external_id ||
+            `${event.title}-${event.start || event.start_time}`
+
+          // Targeted event upsert — does NOT overwrite AI-set fields:
+          // high_stakes, stakes_reason, preparation_required, body (pre-meeting brief)
+          const eventPayload = {
+            title:       event.title,
+            start_time:  event.start || event.start_time,
+            end_time:    event.end   || event.end_time,
+            location:    event.location  || null,
+            join_link:   event.join_link || null,
+            organizer:   event.organizer || null,
+            attendees:   event.attendees || [],
+            source:      'outlook',
+            external_id: externalId
+          }
+          // Note: high_stakes, stakes_reason, preparation_required, body
+          // are NOT included — AI job sets those separately
+
           const { error } = await supabase
             .from('events')
-            .upsert({
-              title:       event.title,
-              start_time:  event.start || event.start_time,
-              end_time:    event.end   || event.end_time,
-              location:    event.location   || null,
-              join_link:   event.join_link  || null,
-              organizer:   event.organizer  || null,
-              attendees:   event.attendees  || null,
-              body:        event.notes      || null,
-              source:      'outlook',
-              external_id: externalId
-            }, {
+            .upsert(eventPayload, {
               onConflict: 'external_id',
               ignoreDuplicates: false
             })
@@ -200,7 +207,11 @@ module.exports = async (req, res) => {
               waiting_since:          email.waiting_since        ?? email.waitingSince    ?? null,
               thread_subject:         threadKey,
               is_flagged:             email.is_flagged            ?? email.isFlagged      ?? false,
-              ai_summary:             email.ai_summary           ?? null
+              ai_summary:             email.ai_summary           ?? null,
+              full_thread_content:    email.full_thread_content  ?? null,
+              extraction_depth:       email.extraction_depth     ?? 'standard',
+              links_detected:         email.links_detected       ?? [],
+              sent_body:              email.sent_body            ?? null
             })
           if (error) throw error
           emailResults.pushed++
@@ -226,6 +237,26 @@ module.exports = async (req, res) => {
     } catch (pipelineErr) {
       console.log('Pipeline status update failed:', pipelineErr.message)
       // Non-fatal — continue
+    }
+
+    // Step 6.5 — Trigger AI job via GitHub Actions (fire and forget)
+    if (process.env.GITHUB_PAT && process.env.GITHUB_REPO) {
+      fetch(
+        `https://api.github.com/repos/${process.env.GITHUB_REPO}/actions/workflows/nightly-ai.yml/dispatches`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.GITHUB_PAT}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ref: 'main' })
+        }
+      ).then(() =>
+        console.log('GitHub Actions AI job triggered')
+      ).catch(err =>
+        console.log('GitHub Actions trigger failed:', err.message)
+      )
     }
 
     // Step 7 — Build and return results

@@ -4,17 +4,16 @@ description: >
   Morning email classification pipeline for Ryan Hankins. Pulls inbox and sent items
   from Outlook (last 48h), classifies into 6 buckets by thread, cross-references against
   yesterday's report, tags each thread with metadata, pushes to personal-os webhook,
-  and saves a structured handoff JSON for the 6:05am AI newsletter layer.
-  Run this before the morning-newsletter skill. Trigger on: "pull my emails",
-  "classify inbox", "run email pull", "morning email prep", or on schedule at 6:00am.
+  and saves a structured handoff JSON for the 4:05am pipeline. This skill runs at 4:05am
+  daily via Cowork scheduled task. Trigger on: "pull my emails", "classify inbox",
+  "run email pull", "morning email prep", or on schedule at 4:05am.
 ---
 
 # Email Pull & Classification Pipeline
 
-You are Ryan Hankins' morning email intelligence layer. You run at 6:00 AM, before
-the newsletter AI job. Your job: pull, group by thread, classify, cross-reference,
-push to the database, and save the handoff JSON. You do NOT write the newsletter —
-that's the next job.
+You are Ryan Hankins' morning email intelligence layer. You run at 4:05 AM via Cowork
+scheduled task. Your job: pull, group by thread, classify, cross-reference, push to the
+database, and save the handoff JSON. You do NOT write the newsletter — that's the next job.
 
 **The unit of classification is a THREAD, not an individual email.**
 
@@ -302,6 +301,20 @@ Fetch extended body preview — first 1000 characters of most recent message. St
 - `extended_preview`: first 1000 chars
 - `extraction_depth: "extended"`
 
+**For Bucket 2 threads specifically — also fetch `sent_body`:**
+
+For every Bucket 2 thread, fetch Ryan's most recent sent message in this thread to surface any commitment language he wrote. Use `outlook_email_search` with:
+```
+folderName: "sentitems"
+query: "[thread_subject]"
+afterDateTime: 14d ago
+limit: 5
+```
+
+Take the most recent result matching this thread subject. Store the body as `sent_body` on the email record. Set `extraction_depth: "full"` for all Bucket 2 threads (not "extended"), because the sent_body is what the AI commitment extractor needs to see.
+
+If the sentitems search fails or returns no match, leave `sent_body: null` and continue — non-fatal.
+
 ### TIER 3 — Standard (no additional fetch)
 
 All other buckets. Keep existing `body_preview`.
@@ -309,6 +322,7 @@ All other buckets. Keep existing `body_preview`.
 
 After extraction update each email payload with these additional fields:
 - `full_thread_content`: string or null
+- `sent_body`: string or null (Bucket 2 only — Ryan's sent message in this thread)
 - `extraction_depth`: `"full"` | `"extended"` | `"standard"`
 
 Log extraction summary:
@@ -745,8 +759,8 @@ If any step had a failure or partial result, append a WARNINGS section:
 
 ## Scheduling
 
-This skill is designed to run automatically at **6:00 AM daily** as a scheduled
-Cowork task, before the `morning-newsletter` skill fires at 6:05 AM.
+This skill is designed to run automatically at **4:05 AM daily** as a scheduled
+Cowork task. The Mac wakes at 4:00am via pmset and Claude Desktop auto-loads.
 
 **Manual trigger phrases:**
 - "pull my emails"
@@ -758,9 +772,9 @@ Cowork task, before the `morning-newsletter` skill fires at 6:05 AM.
 ```json
 {
   "name": "email-pull-daily",
-  "schedule": "0 6 * * *",
+  "schedule": "5 4 * * *",
   "skill": "email-pull",
-  "description": "Morning email classification pipeline — runs before newsletter at 6:05am"
+  "description": "Morning email classification pipeline — runs at 4:05am daily"
 }
 ```
 

@@ -1,0 +1,103 @@
+name: Nightly AI Intelligence Job
+
+on:
+  schedule:
+    # 9:00am-2:00pm UTC = 2:00am-7:00am Phoenix
+    # Polls every 5 minutes in this window
+    # Only fires when pipeline processing is done
+    - cron: '*/5 9-14 * * *'
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if already completed today'
+        required: false
+        default: 'false'
+
+jobs:
+  check-and-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check pipeline status
+        id: check
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          echo "Checking pipeline for $TODAY"
+
+          STATUS=$(curl -s \
+            "${{ secrets.API_URL }}/api/pipeline/status" \
+            -H "x-trigger-secret: ${{ secrets.TRIGGER_SECRET }}")
+
+          echo "Pipeline status: $STATUS"
+
+          PROCESSING_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys
+d=json.load(sys.stdin)
+print(d.get('processing_completed_at') or '')" 2>/dev/null)
+
+          AI_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys
+d=json.load(sys.stdin)
+print(d.get('ai_completed_at') or '')" 2>/dev/null)
+
+          FORCE="${{ github.event.inputs.force_run }}"
+
+          echo "Processing done: $PROCESSING_DONE"
+          echo "AI done: $AI_DONE"
+          echo "Force run: $FORCE"
+
+          if [ -n "$PROCESSING_DONE" ] && \
+             ([ -z "$AI_DONE" ] || \
+             [ "$FORCE" = "true" ]); then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "Conditions met — will run AI job"
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
+            echo "Conditions not met — skipping"
+          fi
+
+      - name: Checkout repository
+        if: steps.check.outputs.should_run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: steps.check.outputs.should_run == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: api/package-lock.json
+
+      - name: Install dependencies
+        if: steps.check.outputs.should_run == 'true'
+        run: |
+          cd api
+          npm ci
+
+      - name: Run nightly AI job
+        if: steps.check.outputs.should_run == 'true'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TRIGGER_SECRET: ${{ secrets.TRIGGER_SECRET }}
+        run: |
+          cd api
+          node src/jobs/nightly-ai-local.js
+          echo "Exit code: $?"
+
+      - name: Notify on failure
+        if: failure() && steps.check.outputs.should_run == 'true'
+        run: |
+          echo "AI job failed — sending notification"
+          curl -s -X POST \
+            "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "personalos@resend.dev",
+              "to": "ryanhankins.personalos@gmail.com",
+              "subject": "Personal OS — AI job failed",
+              "text": "The nightly AI job failed. Check GitHub Actions logs."
+            }' || echo "Notification failed too"

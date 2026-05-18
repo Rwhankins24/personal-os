@@ -1,3 +1,4 @@
+'use strict'
 // personal-os — AI service layer
 // All Claude API calls centralized here
 
@@ -8,61 +9,255 @@ const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
 })
 
-const RYAN_CONTEXT = `Ryan Hankins is a Project Executive at Clayco, a major construction company. He works on large commercial projects including data centers (DS3, Pacific Fusion), industrial facilities, and mixed-use developments (Southbank). He is relationship-driven, direct, and operates at the intersection of pursuit, preconstruction, and execution. He thinks like an owner-side integrator. He values: decision advantage, risk clarity, and no surprises. His email is hankinsr@claycorp.com.`
+// ─── Ryan's context — single source of truth
+const RYAN_CONTEXT = `Ryan Hankins is a Project Executive at Clayco, a major construction company. He works on large commercial projects including data centers (DS3, Pacific Fusion), industrial facilities (Project Solis), and mixed-use developments (Southbank Tower). He is relationship-driven, direct, and operates at the intersection of pursuit, preconstruction, and execution. He thinks like an owner-side integrator. Values: decision advantage, risk clarity, no surprises, and strong relationships. His email is hankinsr@claycorp.com. Key projects: Pacific Fusion DS3, Project Solis, Southbank Tower, Clayco Internal. Key contacts include owner representatives, architects, structural and MEP engineers, and subcontractors.`
 
+// ─── Exponential backoff for API rate limits
+async function withRetry(fn, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      if (attempt === maxRetries) throw err
+      if (
+        err.status === 429 ||
+        err.status === 529 ||
+        err.message?.includes('rate limit') ||
+        err.message?.includes('overloaded')
+      ) {
+        const delay = Math.pow(2, attempt) * 1000
+        console.log(`Rate limited. Waiting ${delay}ms before retry ${attempt + 1}...`)
+        await new Promise(r => setTimeout(r, delay))
+      } else {
+        throw err
+      }
+    }
+  }
+}
+
+// ─── Format thread history for AI context
+function formatThreadHistoryForAI(history) {
+  if (!history || history.length <= 1) return ''
+  return (
+    '\n\nThread history from database ' +
+    `(${history.length} messages):\n` +
+    history.map(m => {
+      const date = m.received_at?.split('T')[0] || 'unknown'
+      const content = m.ai_summary || m.body_preview || 'no content'
+      return `[${date}] ${m.from_name}: ${content}`
+    }).join('\n')
+  )
+}
+
+// ─── SUMMARIZE THREAD
+// Forces specificity — this summary becomes
+// the permanent memory of this thread
 async function summarizeThread(email) {
-  const content = email.full_thread_content || email.body_preview || 'No content available'
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 500,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const content =
+    email.full_thread_content ||
+    email.body_preview ||
+    'No content available'
 
-Summarize this email thread in 2-3 sentences. Be specific about what's being asked and what action is needed from Ryan if any.
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 600,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Thread subject: ${email.thread_subject || email.subject}
+Summarize this email thread for future AI reference. This summary becomes the permanent memory of this thread. Future AI runs read this summary — not the original email. Accuracy and specificity are critical.
+
+You MUST include all present:
+1. Exactly what was asked or requested
+2. Dollar figures, dates, deadlines — exact
+3. What each party committed to do with deadlines — named specifically
+4. Decision made OR pending decision
+5. What is blocking progress if anything
+6. What Ryan needs to do next
+7. Current status: resolved/waiting/pending/escalating
+
+Rules:
+- Never use vague language like "discussed" or "mentioned" or "talked about"
+- Always name specific people
+- Always include specific dates and amounts
+- If promised: state exactly what and by when
+- If decided: state exactly what and who
+- Maximum 4 sentences
+- Write as if this is the only record that will ever exist of this conversation
+
+Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name} (${email.from_address})
 Days waiting: ${email.days_waiting || 0}
 Tags: ${(email.tags || []).join(', ')}
-
 Content:
 ${content}
 
 Return only the summary. No preamble.`
-    }]
-  })
+      }]
+    })
+  )
   return message.content[0].text
 }
 
-async function extractTasks(email) {
-  const content = email.full_thread_content || email.body_preview || ''
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+// ─── EXTRACT INTELLIGENCE
+// Extracts all 10 categories of intelligence
+async function extractIntelligence(email, threadHistory = []) {
+  const content =
+    email.full_thread_content ||
+    email.sent_body ||
+    email.body_preview ||
+    ''
+  const historyContext = formatThreadHistoryForAI(threadHistory)
 
-Extract tasks Ryan needs to complete from this email thread. Only include explicit asks or clear action items directed at Ryan.
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1500,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved.
+
+Thread: ${email.thread_subject || email.subject}
+From: ${email.from_name}
+Content: ${content}
+${historyContext}
+
+Return ONLY valid JSON. Empty arrays fine.
+{
+  "technical_facts": [{
+    "fact": "specific technical fact",
+    "stated_by": "person name",
+    "date": "YYYY-MM-DD or null",
+    "confidence": "high|medium|low"
+  }],
+  "financial_signals": [{
+    "amount": "exact dollar figure",
+    "context": "what it relates to",
+    "stated_by": "person name",
+    "date": "YYYY-MM-DD or null"
+  }],
+  "schedule_signals": [{
+    "date_or_deadline": "specific date",
+    "context": "what is due",
+    "stated_by": "person name",
+    "hard_deadline": true
+  }],
+  "scope_signals": [{
+    "signal": "scope addition/change/assumption",
+    "type": "addition|change|assumption|risk",
+    "stated_by": "person name"
+  }],
+  "decisions_made": [{
+    "decision": "exactly what was decided",
+    "decided_by": "person or group",
+    "date": "YYYY-MM-DD or null",
+    "all_parties": ["name1", "name2"],
+    "implications": "why this matters"
+  }],
+  "pending_decisions": [{
+    "decision": "what needs to be decided",
+    "blocking": "what this blocks",
+    "due_date": "YYYY-MM-DD or null",
+    "urgency": "critical|high|medium|low",
+    "decision_maker": "who decides"
+  }],
+  "risk_signals": [{
+    "signal": "specific risk observed",
+    "type": "escalation|silence|scope|legal|relationship|schedule|financial",
+    "severity": "high|medium|low",
+    "involves_key_contact": true,
+    "involves_active_project": true,
+    "evidence": "specific evidence from email"
+  }],
+  "implicit_commitments": [{
+    "commitment": "what Ryan implied he'd do",
+    "basis": "why this is implied",
+    "party_relying_on_it": "who relies on this",
+    "risk_if_not_met": "consequence if missed"
+  }],
+  "relationship_signals": [{
+    "person": "contact name",
+    "signal": "specific behavioral observation",
+    "type": "cooling|warming|escalating|avoidant|collaborative",
+    "evidence": "what shows this"
+  }],
+  "key_facts": [{
+    "fact": "important fact worth remembering",
+    "category": "project|person|contract|technical|financial",
+    "person": "who stated it"
+  }]
+}
+
+Risk signals: ONLY include if BOTH true:
+1. involves_key_contact AND involves_active_project
+2. severity is high AND type is escalation, scope risk, legal, relationship deterioration, or financial > $50k`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch {
+    return {
+      technical_facts: [],
+      financial_signals: [],
+      schedule_signals: [],
+      scope_signals: [],
+      decisions_made: [],
+      pending_decisions: [],
+      risk_signals: [],
+      implicit_commitments: [],
+      relationship_signals: [],
+      key_facts: []
+    }
+  }
+}
+
+// ─── EXTRACT TASKS
+async function extractTasks(email, threadHistory = []) {
+  const content =
+    email.full_thread_content ||
+    email.sent_body ||
+    email.body_preview ||
+    ''
+  const historyContext = formatThreadHistoryForAI(threadHistory)
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Extract tasks Ryan needs to complete. Use thread history — only extract tasks that are genuinely still open. Do not extract tasks for completed items. Do not duplicate existing commitments.
 
 Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
 Days waiting: ${email.days_waiting || 0}
+Tags: ${(email.tags || []).join(', ')}
 Content: ${content}
+${historyContext}
 
 Return JSON array only. No other text.
-Format:
 [{
-  "title": "specific action",
-  "context": "why this exists",
+  "title": "specific action required",
+  "context": "why this exists and stakes",
   "urgency": "critical|high|medium|low",
   "due_date": "YYYY-MM-DD or null",
-  "type": "pursuit|contract|coord|personal|home|book"
+  "type": "pursuit|contract|coord|personal|home|book",
+  "blocking": "what this blocks or null"
 }]
-If no tasks return [].`
-    }]
-  })
+If no open tasks return [].`
+      }]
+    })
+  )
+
   try {
     const text = message.content[0].text
     const clean = text.replace(/```json|```/g, '').trim()
@@ -70,67 +265,54 @@ If no tasks return [].`
   } catch { return [] }
 }
 
-async function extractOthersCommitments(email) {
-  const content = email.full_thread_content || email.body_preview || ''
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+// ─── EXTRACT OTHERS COMMITMENTS
+async function extractOthersCommitments(email, threadHistory = []) {
+  const content =
+    email.full_thread_content ||
+    email.body_preview ||
+    ''
+  const historyContext = formatThreadHistoryForAI(threadHistory)
 
-Extract commitments OTHER PEOPLE made to Ryan in this email thread. Look for things like "I will send", "I'll get you", "we will provide", "I'll have that", "will follow up", etc. Do NOT include things Ryan committed to do.
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Thread: ${email.thread_subject || email.subject}
-From: ${email.from_name} (${email.from_address})
-Content: ${content}
+Extract commitments OTHER PEOPLE made to Ryan. Use thread history to identify fulfilled vs outstanding commitments.
 
-Return JSON array only. No other text.
-Format:
-[{
-  "committed_by_name": "person who made commitment",
-  "committed_by_email": "their email",
-  "title": "what they committed to do",
-  "context": "why this matters to Ryan",
-  "due_date": "YYYY-MM-DD or null",
-  "urgency": "critical|high|medium|low"
-}]
-If no commitments return [].`
-    }]
-  })
-  try {
-    const text = message.content[0].text
-    const clean = text.replace(/```json|```/g, '').trim()
-    return JSON.parse(clean)
-  } catch { return [] }
-}
-
-async function extractMyCommitments(email) {
-  const content = email.full_thread_content || email.body_preview || ''
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
-
-Extract commitments RYAN made to others in this email thread. Look for things Ryan said like "I'll send", "let me follow up", "I will", "I'll get you", "I'll confirm" etc.
+Commitment strength:
+Hard: specific deadline explicitly stated
+Soft: implied or flexible timing
 
 Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
 Content: ${content}
+${historyContext}
 
-Return JSON array only. No other text.
-Format:
+Return JSON array only.
 [{
-  "title": "what Ryan committed to do",
-  "made_to": "person Ryan committed to",
+  "committed_by_name": "full name",
+  "committed_by_email": "email address",
+  "title": "exactly what they committed to",
+  "context": "why this matters and consequence",
+  "due_date": "YYYY-MM-DD or null",
   "urgency": "critical|high|medium|low",
-  "due_date": "YYYY-MM-DD or null"
+  "commitment_strength": "hard|soft",
+  "ai_suggests_complete": false,
+  "fulfillment_evidence": null
 }]
-If no commitments return [].`
-    }]
-  })
+If thread history shows fulfillment evidence:
+Set ai_suggests_complete to true.
+Describe evidence in fulfillment_evidence.
+Still include — Ryan confirms manually.
+If no open commitments return [].`
+      }]
+    })
+  )
+
   try {
     const text = message.content[0].text
     const clean = text.replace(/```json|```/g, '').trim()
@@ -138,187 +320,317 @@ If no commitments return [].`
   } catch { return [] }
 }
 
-async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext) {
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 800,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+// ─── EXTRACT MY COMMITMENTS
+async function extractMyCommitments(email, threadHistory = []) {
+  const content =
+    email.full_thread_content ||
+    email.sent_body ||
+    email.body_preview ||
+    ''
+  const historyContext = formatThreadHistoryForAI(threadHistory)
 
-Generate a pre-meeting brief for Ryan. Be direct. Sound like a trusted advisor. Flag risks. Maximum 4 sentences.
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Extract commitments RYAN made to others. Sent_body contains Ryan's own sent message in this thread — check it carefully for commitment language. Use thread history — only return open ones.
+
+Types:
+Hard: specific deadline explicitly stated
+Soft: implied or flexible timing
+Conditional: depends on something else first
+
+Thread: ${email.thread_subject || email.subject}
+Content: ${content}
+${historyContext}
+
+Return JSON array only.
+[{
+  "title": "exactly what Ryan committed to",
+  "made_to": "person name",
+  "urgency": "critical|high|medium|low",
+  "due_date": "YYYY-MM-DD or null",
+  "commitment_type": "hard|soft|conditional",
+  "condition_text": "prerequisite or null",
+  "implicit": false
+}]
+If no open commitments return [].`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch { return [] }
+}
+
+// ─── DETECT HIGH STAKES MEETING
+async function detectHighStakesMeeting(event, relatedEmails) {
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 400,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Is this meeting high-stakes requiring significant preparation from Ryan?
+
+HIGH STAKES — any of:
+- Owner, client, or owner representative
+- Contract negotiation or scope discussion
+- Pursuit presentation or interview
+- First meeting with new external party
+- Crisis, dispute, or conflict resolution
+- Major financial decision or approval
+- Design milestone or formal sign-off
+- Decision that will be hard to reverse
+
+NOT HIGH STAKES — any of:
+- Regular internal weekly sync
+- Routine status update, no decisions
+- Large all-hands 50+ attendees
+- Social or purely informational
+
+Meeting: ${event.title}
+Attendees: ${JSON.stringify(event.attendees || [])}
+Organizer: ${event.organizer || 'Unknown'}
+Related emails:
+${relatedEmails.slice(0, 3).map(e =>
+  `- ${e.thread_subject} (${e.from_name})`
+).join('\n') || 'None'}
+
+Return JSON only.
+{
+  "high_stakes": true or false,
+  "reason": "one sentence explanation",
+  "preparation_required": true or false,
+  "preparation_notes": "what to prepare or null"
+}`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch {
+    return {
+      high_stakes: false,
+      reason: 'Could not determine',
+      preparation_required: false,
+      preparation_notes: null
+    }
+  }
+}
+
+// ─── GENERATE PRE-MEETING BRIEF
+async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext) {
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 800,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Generate a pre-meeting brief for Ryan. Direct. Trusted advisor tone. Flag risks. Maximum 4 sentences.
 
 Meeting: ${event.title}
 Time: ${event.start_time}
-Location: ${event.location || 'No location set'}
+Location: ${event.location || 'Not set'}
 Attendees: ${JSON.stringify(event.attendees || [])}
 
-Related open emails (${relatedEmails.length}):
+Related emails:
 ${relatedEmails.slice(0, 3).map(e =>
-  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d waiting, ${e.urgency})`
+  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d, ${e.urgency})`
 ).join('\n') || 'None'}
 
-Open tasks related to this meeting:
+Open tasks:
 ${openTasks.slice(0, 3).map(t =>
   `- ${t.title} (${t.urgency})`
 ).join('\n') || 'None'}
 
-Project context:
-${projectContext || 'No project context available'}
+Context: ${projectContext || 'None available'}
 
 Return only the brief. No preamble.`
-    }]
-  })
+      }]
+    })
+  )
   return message.content[0].text
 }
 
+// ─── GENERATE DAILY BRIEF
+// Three sections: Yesterday, Today's Focus, Watch List
 async function generateDailyBrief(context) {
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 900,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Generate Ryan's daily brief. Second person voice. Direct and specific — no fluff, no restating facts he already knows. Three sections only:
+Generate Ryan's daily brief in exactly three sections. Direct. Specific. Actionable. Trusted senior advisor tone. No fluff.
 
-YESTERDAY
-What actually moved, what didn't, and what that means going into today. Be specific about project names and people. If nothing happened, say so plainly and flag what that silence means.
+**YESTERDAY**
+One sentence: what moved, what didn't. If first run say so. Note resolved items.
 
-TODAY'S FOCUS
-2-3 things that need to move today, ranked by consequence. Lead with the highest-exposure item. For each: what it is, why it matters today specifically, and what the action is. Factor in his schedule — if he has a meeting with a relevant party, note it.
+**TODAY'S FOCUS**
+Maximum 3 numbered items. Each: specific action + specific person + specific stakes. Lead with highest risk.
 
-WATCH LIST
-1-2 items that aren't on fire today but will become problems if ignored this week. Overdue commitments from others belong here. Be blunt about who's holding what.
+**WATCH LIST**
+Maximum 3 items. Not action items today — monitoring items. Risk signals, pending decisions building, relationship signals, long-runway items approaching.
+Format: "[Person/Project]: [observation]"
 
----
-
+Today's data:
 Date: ${context.date}
+Meetings: ${context.meetings_today} total, ${context.high_stakes_meetings || 0} high-stakes
+Schedule: ${context.calendar.map(e =>
+  `${e.title}${e.high_stakes ? ' ⚡HIGH STAKES' : ''}`
+).join(', ') || 'No meetings'}
 
-Yesterday's summary:
-${context.yesterday_digest || 'No data from yesterday — first run or missed day.'}
-
-Today's schedule (${context.meetings_today} meetings):
-${context.calendar.map(e => `- ${e.title} at ${e.time}${e.location ? ' @ ' + e.location : ''}`).join('\n') || 'None'}
-
-Recent meeting notes:
-${context.meeting_notes.map(n =>
-  `- ${n.title} (${n.meeting_date}): ${n.summary || 'no summary'} ${n.action_items ? '| Open actions: ' + n.action_items : ''}`
-).join('\n') || 'None'}
-
-Emails needing reply (most urgent first):
+Emails needing reply (by urgency):
 ${context.critical_emails.map(e =>
-  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d waiting, ${e.urgency})`
+  `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d, ${e.urgency})`
 ).join('\n') || 'None'}
 
-Open tasks:
+My open tasks:
 ${context.open_tasks.map(t =>
   `- ${t.title} (${t.urgency}, due ${t.due_date || 'no date'})`
 ).join('\n') || 'None'}
 
-Commitments Ryan made:
+My open commitments:
 ${context.open_commitments.map(c =>
-  `- ${c.title} → ${c.made_to} (due ${c.due_date || 'TBD'}, ${c.urgency})`
+  `- ${c.title} to ${c.made_to} (${c.commitment_type || 'hard'}, due ${c.due_date || 'TBD'})`
 ).join('\n') || 'None'}
 
-What others committed to Ryan:
-${context.all_others_commitments.map(c =>
-  `- ${c.committed_by}: ${c.title} (due ${c.due_date || 'TBD'})`
-).join('\n') || 'None'}
-
-Overdue from others:
+Others overdue:
 ${context.overdue_others.map(c =>
-  `- ${c.committed_by}: ${c.title} (${c.days_overdue}d overdue)`
+  `- ${c.committed_by_name}: ${c.title} (${c.days_overdue}d overdue)`
 ).join('\n') || 'None'}
 
-30-day rolling context:
-${context.rolling_summary || 'No history yet.'}
+Pending decisions:
+${(context.pending_decisions || []).map(d =>
+  `- ${d.title}${d.blocking ? ` (blocking: ${d.blocking})` : ''}`
+).join('\n') || 'None'}
 
-Return only the brief. No preamble. Use the exact section headers: YESTERDAY, TODAY'S FOCUS, WATCH LIST.`
-    }]
-  })
+Risk signals:
+${(context.risk_signals || []).map(r =>
+  `- ${r.signal} (${r.type}, ${r.severity})`
+).join('\n') || 'None'}
+
+Rolling context:
+${context.rolling_summary || 'First run — no history yet'}
+
+Return only the brief with three labeled sections. No preamble.`
+      }]
+    })
+  )
   return message.content[0].text
 }
 
+// ─── GENERATE DAILY DIGEST
+// Stored as permanent memory record
 async function generateDailyDigest(data) {
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 800,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 800,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Write a structured daily digest for ${data.date}. This is stored as context for future AI runs. Be factual and specific. Note patterns. Include: what happened, what moved, what didn't, relationship observations, risk flags.
+Write a structured daily digest for ${data.date}. This is stored as AI memory for future runs. Be factual and specific. Note patterns, what moved, what didn't, relationship observations, risk flags.
 
 Data:
 ${JSON.stringify(data, null, 2)}
 
-Return a structured paragraph. Be concise. This will be read by AI in future runs.`
-    }]
-  })
+Return a structured paragraph. Concise. This will be read by AI in future runs.`
+      }]
+    })
+  )
   return message.content[0].text
 }
 
+// ─── UPDATE ROLLING CONTEXT
+// Rewrites the 30-day rolling summary
 async function updateRollingContext(existingContext, todayDigest, date) {
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 1200,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1200,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-You are updating Ryan's 30-day rolling context. This context is read before generating every daily brief. Keep it current and useful. Rewrite it incorporating today's digest. Remove information older than 30 days. Keep: patterns, relationship observations, ongoing risks, project status, behavioral notes. Maximum 400 words.
+Update Ryan's 30-day rolling context. Read before every daily brief generation. Rewrite it incorporating today's digest. Remove information older than 30 days. Keep: patterns, relationship observations, ongoing risks, project status, behavioral notes, commitment patterns.
+
+MAXIMUM 400 WORDS — enforce strictly.
 
 Existing context:
-${existingContext || 'No existing context - first run'}
+${existingContext || 'No existing context — first run'}
 
 Today (${date}) digest:
 ${todayDigest}
 
 Return only the updated rolling context.`
-    }]
-  })
+      }]
+    })
+  )
   return message.content[0].text
 }
 
+// ─── ENRICH MANUAL TASK
 async function enrichTask(task, relatedEmails) {
   const emailContext = relatedEmails
-    .map(e => `${e.thread_subject}: ${e.body_preview}`)
+    .map(e => `${e.thread_subject}: ${e.ai_summary || e.body_preview}`)
     .join('\n')
 
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 400,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 400,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Enrich this manually added task with context from related emails. Write 2-3 sentences explaining why this task exists, what's at stake, and what the key considerations are.
+Enrich this manually added task with context from related emails. Write 2-3 sentences: why this task exists, what is at stake, key considerations.
 
 Task: ${task.title}
 Related email context:
 ${emailContext || 'No related emails found'}
 
 Return only the context paragraph.`
-    }]
-  })
+      }]
+    })
+  )
   return message.content[0].text
 }
 
+// ─── CREATE CONTACT PROFILE
 async function createContactProfile(contact, interactions) {
-  const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 600,
-    messages: [{
-      role: 'user',
-      content: `${RYAN_CONTEXT}
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 600,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
 
-Create a relationship profile for this contact based on their email interactions with Ryan. Include: communication style, what they respond to, their priorities, relationship observations, any patterns noted. Be specific and useful.
+Create a relationship profile for this contact based on email interactions. Include: communication style, what they respond to, their priorities, relationship observations, patterns noted. Be specific and useful for future briefings.
 
 Contact: ${contact.name} (${contact.email})
 Company: ${contact.company || 'Unknown'}
 Role: ${contact.role || 'Unknown'}
-Total interactions: ${interactions.length}
+Interactions: ${interactions.length}
 Last contact: ${contact.last_contact_date}
 
 Recent interactions:
@@ -327,16 +639,22 @@ ${interactions.slice(0, 5).map(e =>
 ).join('\n')}
 
 Return only the profile paragraph.`
-    }]
-  })
+      }]
+    })
+  )
   return message.content[0].text
 }
 
 module.exports = {
+  RYAN_CONTEXT,
+  withRetry,
+  formatThreadHistoryForAI,
   summarizeThread,
+  extractIntelligence,
   extractTasks,
   extractOthersCommitments,
   extractMyCommitments,
+  detectHighStakesMeeting,
   generatePreMeetingBrief,
   generateDailyBrief,
   generateDailyDigest,

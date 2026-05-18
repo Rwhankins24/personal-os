@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { question, context_type, subject_id } = req.body || {}
+  const { question, context_type, subject_id, question_id } = req.body || {}
   if (!question) {
     return res.status(400).json({ error: 'Question required' })
   }
@@ -61,6 +61,33 @@ module.exports = async (req, res) => {
       }
     }
 
+    // Load question context if question_id provided
+    let updatedConversation = null
+    if (question_id) {
+      const { data: questionRecord } = await supabase
+        .from('ai_questions')
+        .select('question, context, conversation')
+        .eq('id', question_id)
+        .maybeSingle()
+
+      if (questionRecord) {
+        context +=
+          `\n\nQuestion context: ${questionRecord.question}` +
+          `\nBackground: ${questionRecord.context || ''}` +
+          `\nConversation so far: ${JSON.stringify(questionRecord.conversation || [])}`
+
+        // Prepare updated conversation (append user message)
+        updatedConversation = [
+          ...(questionRecord.conversation || []),
+          {
+            role: 'user',
+            content: question,
+            timestamp: new Date().toISOString()
+          }
+        ]
+      }
+    }
+
     const message = await client.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 800,
@@ -74,8 +101,28 @@ Answer directly and specifically. Be concise. Flag any risks or gaps.`
       }]
     })
 
+    const answer = message.content[0].text
+
+    // Update question conversation if applicable
+    if (question_id && updatedConversation) {
+      const finalConvo = [
+        ...updatedConversation,
+        {
+          role: 'assistant',
+          content: answer,
+          timestamp: new Date().toISOString()
+        }
+      ]
+
+      await supabase
+        .from('ai_questions')
+        .update({ conversation: finalConvo })
+        .eq('id', question_id)
+        .catch(() => {}) // Non-fatal
+    }
+
     return res.json({
-      answer: message.content[0].text,
+      answer,
       context_used: !!context
     })
   } catch (err) {
