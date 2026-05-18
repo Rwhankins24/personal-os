@@ -572,7 +572,38 @@ async function main() {
         continue
       }
 
-      // Priority 3: no match — create new
+      // Priority 3: exact name match across any domain
+      // Catches same person with completely different email addresses (e.g. work vs personal)
+      const nameParts = email.from_name.trim().split(/\s+/)
+      const firstN    = nameParts[0]
+      const lastN     = nameParts[nameParts.length - 1]
+      if (firstN && lastN && firstN !== lastN) {
+        const { data: byNameOnly } = await supabase
+          .from('contacts')
+          .select('id, email, secondary_email')
+          .ilike('name', email.from_name.trim())
+          .neq('email', email.from_address)
+          .maybeSingle()
+
+        if (byNameOnly) {
+          // Same name, different email — store as secondary
+          if (!byNameOnly.secondary_email) {
+            await supabase
+              .from('contacts')
+              .update({ secondary_email: email.from_address })
+              .eq('id', byNameOnly.id)
+          }
+          // Update recency regardless
+          await supabase
+            .from('contacts')
+            .update({ last_contact_date: today, last_topic: email.thread_subject })
+            .eq('id', byNameOnly.id)
+          results.contacts_updated++
+          continue
+        }
+      }
+
+      // Priority 4: no match — create new
       const company = domain && !['gmail', 'yahoo', 'outlook', 'hotmail', 'icloud'].includes(domain.split('.')[0])
         ? domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1)
         : null
