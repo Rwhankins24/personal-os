@@ -34,7 +34,7 @@ jobs:
         run: node src/jobs/cleanup-local.js
 
       - name: Notify on failure (optional)
-        if: failure() && secrets.RESEND_API_KEY != ''
+        if: failure()
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |

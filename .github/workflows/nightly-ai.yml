@@ -31,15 +31,9 @@ jobs:
 
           echo "Pipeline status: $STATUS"
 
-          PROCESSING_DONE=$(echo "$STATUS" | python3 -c \
-            "import json,sys
-d=json.load(sys.stdin)
-print(d.get('processing_completed_at') or '')" 2>/dev/null)
+          PROCESSING_DONE=$(echo "$STATUS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('processing_completed_at') or '')" 2>/dev/null)
 
-          AI_DONE=$(echo "$STATUS" | python3 -c \
-            "import json,sys
-d=json.load(sys.stdin)
-print(d.get('ai_completed_at') or '')" 2>/dev/null)
+          AI_DONE=$(echo "$STATUS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" 2>/dev/null)
 
           FORCE="${{ github.event.inputs.force_run }}"
 
