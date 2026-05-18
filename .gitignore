@@ -3,3 +3,4 @@ data/last-otter-report.json
 logs/*.log
 data/contact-sweep.json
 data/contact-sweep-review.json
+data/archive-sweep.json
