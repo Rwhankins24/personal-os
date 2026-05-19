@@ -539,6 +539,13 @@ ${(context.risk_signals || []).map(r =>
 Rolling context:
 ${context.rolling_summary || 'First run — no history yet'}
 
+Recent meetings (last 7 days):
+${(context.recent_meetings || []).map(m =>
+  `[${m.start_time?.split('T')[0] || 'unknown'}] ${m.title}: ${m.short_summary || 'no summary'}`
+).join('\n') || 'No meeting data'}
+
+Cross-source intelligence: When an item has evidence from BOTH email AND meeting transcripts — explicitly note this connection. Example: "Verbally committed in [meeting] AND no email follow-through yet." Flag when verbal commitments from meetings have no corresponding email follow-up — these are highest risk for falling through cracks. Flag when email threads reference a meeting discussion that is still unresolved.
+
 Return only the brief with three labeled sections. No preamble.`
       }]
     })
@@ -696,6 +703,87 @@ Return only JSON. No other text.`
   }
 }
 
+// ─── EXTRACT INTELLIGENCE FROM TRANSCRIPT
+// Full 10-category extraction from meeting transcripts
+// Speaker labels are generic (Speaker 1, 2...) — we resolve via roster + context
+async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext) {
+  const transcript = meeting.full_transcript
+  if (!transcript) return null
+
+  const attendeeList = attendeeRoster
+    .map(a => `${a.name} (${a.email || 'no email'})`)
+    .join('\n')
+
+  const emailContext = relatedEmailContext
+    .map(e =>
+      `Thread: ${e.thread_subject}\n` +
+      `From: ${e.from_name}\n` +
+      `Summary: ${e.ai_summary || e.body_preview}`
+    )
+    .join('\n\n')
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 2000,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+Extract ALL valuable intelligence from this meeting transcript. Audio-only recording — Otter labels speakers as "Speaker 1" etc.
+
+Speaker attribution signals:
+1. Action items show who was assigned what
+2. Names mentioned directly in conversation
+3. First person language near topics owned by specific attendees
+4. Context clues from discussion topics
+
+Meeting: ${meeting.title || 'Untitled'}
+Date: ${meeting.start_time}
+Duration: ${meeting.duration_raw}
+
+Confirmed attendees:
+${attendeeList || 'Unknown'}
+
+Related active email threads:
+${emailContext || 'None'}
+
+Action items already extracted by Otter:
+${(meeting.action_items_raw || [])
+  .map(a => `- ${a.assignee_name}: ${a.task_text}`)
+  .join('\n') || 'None'}
+
+Full transcript:
+${transcript}
+
+Return ONLY valid JSON. Empty arrays fine.
+{
+  "technical_facts": [{"fact": "specific technical fact", "stated_by": "name or Speaker X", "attribution_confidence": "high|medium|low", "attribution_basis": "why attributed"}],
+  "financial_signals": [{"amount": "exact figure", "context": "what it relates to", "stated_by": "name or Speaker X", "attribution_confidence": "high|medium|low"}],
+  "schedule_signals": [{"date_or_deadline": "specific date", "context": "what is due", "stated_by": "name or Speaker X", "hard_deadline": true, "attribution_confidence": "high|medium|low"}],
+  "scope_signals": [{"signal": "scope change or assumption", "type": "addition|change|assumption|risk", "stated_by": "name or Speaker X", "attribution_confidence": "high|medium|low"}],
+  "decisions_made": [{"decision": "exactly what was decided", "decided_by": "name or group", "all_parties": ["name1", "name2"], "implications": "why this matters", "attribution_confidence": "high|medium|low"}],
+  "pending_decisions": [{"decision": "what needs to be decided", "blocking": "what this blocks", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "decision_maker": "who decides"}],
+  "risk_signals": [{"signal": "specific risk observed", "type": "escalation|silence|scope|legal|relationship|schedule|financial", "severity": "high|medium|low", "involves_key_contact": true, "involves_active_project": true, "evidence": "what in transcript shows this"}],
+  "verbal_commitments_ryan": [{"title": "what Ryan committed to", "made_to": "person name", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "commitment_type": "hard|soft|conditional", "attribution_confidence": "high|medium|low", "attribution_basis": "why attributed to Ryan"}],
+  "verbal_commitments_others": [{"title": "what they committed to", "committed_by_name": "name", "committed_by_email": "email or null", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high|medium|low"}],
+  "key_facts": [{"fact": "important fact", "category": "project|person|contract|technical|financial", "stated_by": "name or Speaker X"}],
+  "meeting_outcome": {"summary": "2-3 sentence outcome", "resolved_items": ["what was resolved"], "unresolved_items": ["what was not"], "next_steps": ["agreed next steps"], "overall_sentiment": "productive|tense|unclear|routine"},
+  "speaker_attributions": [{"speaker_label": "Speaker 1", "likely_person": "name", "confidence": "high|medium|low", "basis": "how we know"}]
+}`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch {
+    return null
+  }
+}
+
 module.exports = {
   RYAN_CONTEXT,
   withRetry,
@@ -712,5 +800,6 @@ module.exports = {
   updateRollingContext,
   enrichTask,
   createContactProfile,
-  extractContactFromSignature
+  extractContactFromSignature,
+  extractIntelligenceFromTranscript
 }

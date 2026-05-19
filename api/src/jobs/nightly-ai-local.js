@@ -252,6 +252,11 @@ async function main() {
     tasks_enriched: 0,
     questions_logged: 0,
     daily_brief: null,
+    otter_meetings_processed: 0,
+    otter_tasks_created: 0,
+    otter_my_commitments: 0,
+    otter_others_created: 0,
+    cross_refs_created: 0,
     errors: []
   }
 
@@ -937,6 +942,321 @@ async function main() {
   }
   console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
 
+  // ── STEP 2.6: Process Otter transcripts ────────────────────────
+  console.log('Step 2.6: Processing Otter meetings...')
+  try {
+    const { data: unprocessedMeetings } = await supabase
+      .from('meeting_notes')
+      .select('*')
+      .eq('intelligence_extracted', false)
+      .order('start_time', { ascending: false })
+      .limit(10)
+
+    for (const meeting of (unprocessedMeetings || [])) {
+      try {
+        // PASS 1: Process metadata action items
+        const actionItems = meeting.action_items_raw || []
+
+        for (const item of actionItems) {
+          const isRyan = item.assignee_email === 'hankinsr@claycorp.com'
+          const projectId = await findProjectByKeywords(
+            (meeting.title || '') + ' ' + (meeting.short_summary || '')
+          )
+
+          if (isRyan) {
+            const { data: existing } = await supabase
+              .from('tasks')
+              .select('id')
+              .eq('title', item.task_text)
+              .eq('status', 'open')
+              .maybeSingle()
+
+            if (!existing) {
+              await supabase.from('tasks').insert({
+                title:            item.task_text,
+                context:          `Action item from: ${meeting.title || 'Meeting'}`,
+                status:           'open',
+                source:           'otter',
+                source_type:      'ai_otter',
+                source_label:     meeting.title || 'Meeting',
+                source_date:      today,
+                ai_enriched:      true,
+                source_confidence: 0.9,
+                project_id:       projectId || null
+              })
+              results.otter_tasks_created++
+            }
+          } else {
+            const { data: existing } = await supabase
+              .from('others_commitments')
+              .select('id')
+              .eq('title', item.task_text)
+              .eq('status', 'open')
+              .maybeSingle()
+
+            if (!existing) {
+              const { data: contact } = await supabase
+                .from('contacts')
+                .select('id, email')
+                .ilike('name', `%${item.assignee_name}%`)
+                .maybeSingle()
+
+              await supabase.from('others_commitments').insert({
+                committed_by_name:  item.assignee_name,
+                committed_by_email: item.assignee_email || contact?.email || null,
+                title:        item.task_text,
+                context:      `Action item from meeting: ${meeting.title || 'Meeting'}`,
+                source_type:  'ai_otter',
+                source_id:    meeting.id,
+                source_label: meeting.title || 'Meeting',
+                status:       'open',
+                project_id:   projectId || null,
+                urgency:      'medium'
+              })
+              results.otter_others_created++
+            }
+          }
+        }
+
+        // PASS 2: Full transcript extraction (skip all-hands)
+        const participantCount = (meeting.participants || []).length
+        const isAllHands = participantCount > 30 ||
+          ['all hands', 'all-hands', 'operations mtg', 'company update'].some(phrase =>
+            (meeting.title || '').toLowerCase().includes(phrase)
+          )
+
+        if (meeting.full_transcript && !isAllHands) {
+          const attendeeRoster = meeting.participants || []
+
+          const keywords = ((meeting.title || '') + ' ' + (meeting.short_summary || ''))
+            .toLowerCase()
+            .split(' ')
+            .filter(w => w.length > 4)
+            .slice(0, 5)
+
+          const { data: relatedEmails } = await supabase
+            .from('emails')
+            .select('thread_subject, from_name, ai_summary, body_preview, received_at')
+            .or(keywords.map(k => `thread_subject.ilike.%${k}%`).join(','))
+            .limit(5)
+
+          const intel = await aiService.extractIntelligenceFromTranscript(
+            meeting,
+            attendeeRoster,
+            relatedEmails || []
+          )
+
+          if (intel) {
+            const projectId = await findProjectByKeywords(
+              (meeting.title || '') + ' ' + (meeting.short_summary || '')
+            )
+
+            if (projectId) {
+              const { data: project } = await supabase
+                .from('projects')
+                .select('intelligence_notes, decisions_made, risk_signals, key_facts')
+                .eq('id', projectId)
+                .single()
+
+              if (project) {
+                const newNotes = [
+                  ...(intel.technical_facts || []).map(f => ({
+                    ...f, type: 'technical', source: meeting.title, source_type: 'otter', date: today
+                  })),
+                  ...(intel.financial_signals || []).map(f => ({
+                    ...f, type: 'financial', source: meeting.title, source_type: 'otter', date: today
+                  })),
+                  ...(intel.schedule_signals || []).map(s => ({
+                    ...s, type: 'schedule', source: meeting.title, source_type: 'otter', date: today
+                  })),
+                  ...(intel.scope_signals || []).map(s => ({
+                    ...s, type: 'scope', source: meeting.title, source_type: 'otter', date: today
+                  }))
+                ]
+
+                await supabase
+                  .from('projects')
+                  .update({
+                    intelligence_notes: [
+                      ...(project.intelligence_notes || []),
+                      ...newNotes
+                    ].slice(-50),
+                    decisions_made: [
+                      ...(project.decisions_made || []),
+                      ...(intel.decisions_made || []).map(d => ({
+                        ...d, source: meeting.title, source_type: 'otter', date: today
+                      }))
+                    ],
+                    key_facts: [
+                      ...(project.key_facts || []),
+                      ...(intel.key_facts || []).map(f => ({
+                        ...f, source: meeting.title, source_type: 'otter', date: today
+                      }))
+                    ].slice(-30)
+                  })
+                  .eq('id', projectId)
+
+                // Log decisions
+                for (const d of (intel.decisions_made || [])) {
+                  const { data: existD } = await supabase
+                    .from('decisions')
+                    .select('id')
+                    .eq('title', d.decision)
+                    .eq('project_id', projectId)
+                    .maybeSingle()
+
+                  if (!existD) {
+                    await supabase.from('decisions').insert({
+                      title:           d.decision,
+                      what_was_decided: d.decision,
+                      who_was_present: d.all_parties?.join(', '),
+                      decided_on:      today,
+                      project_id:      projectId,
+                      source_type:     'ai_otter',
+                      source_id:       meeting.id,
+                      status:          'made'
+                    })
+                    results.decisions_logged++
+                  }
+                }
+
+                // Log pending decisions
+                for (const p of (intel.pending_decisions || [])) {
+                  const { data: existP } = await supabase
+                    .from('pending_decisions')
+                    .select('id')
+                    .eq('title', p.decision)
+                    .eq('status', 'open')
+                    .maybeSingle()
+
+                  if (!existP) {
+                    await supabase.from('pending_decisions').insert({
+                      title:       p.decision,
+                      context:     p.decision,
+                      blocking:    p.blocking,
+                      due_date:    p.due_date,
+                      urgency:     p.urgency || 'medium',
+                      project_id:  projectId,
+                      source_type: 'ai_otter',
+                      source_id:   meeting.id,
+                      status:      'open'
+                    })
+                    results.pending_decisions_created++
+                  }
+                }
+              }
+            }
+
+            // Speaker attributions
+            for (const sa of (intel.speaker_attributions || [])) {
+              const { data: contact } = await supabase
+                .from('contacts')
+                .select('id')
+                .ilike('name', `%${sa.likely_person}%`)
+                .maybeSingle()
+
+              await supabase.from('speaker_attributions').insert({
+                meeting_id:               meeting.id,
+                speaker_label:            sa.speaker_label,
+                attributed_to_name:       sa.likely_person,
+                attributed_to_contact_id: contact?.id || null,
+                confidence:               sa.confidence,
+                attribution_basis:        [sa.basis]
+              })
+
+              // Update last_contact_date for high-confidence attendees
+              if (sa.confidence === 'high' && sa.likely_person && contact) {
+                await supabase
+                  .from('contacts')
+                  .update({
+                    last_contact_date: meeting.start_time?.split('T')[0] || today
+                  })
+                  .eq('id', contact.id)
+              }
+            }
+
+            // Ryan's verbal commitments
+            for (const c of (intel.verbal_commitments_ryan || [])) {
+              const { data: existing } = await supabase
+                .from('commitments')
+                .select('id')
+                .eq('title', c.title)
+                .eq('status', 'open')
+                .maybeSingle()
+
+              if (!existing) {
+                await supabase.from('commitments').insert({
+                  title:           c.title,
+                  made_to:         c.made_to,
+                  urgency:         c.urgency,
+                  due_date:        c.due_date,
+                  status:          'open',
+                  source_type:     'ai_otter',
+                  commitment_type: c.commitment_type || 'hard',
+                  implicit:        false,
+                  made_on:         today
+                })
+                results.otter_my_commitments++
+              }
+            }
+
+            // Others' verbal commitments
+            for (const c of (intel.verbal_commitments_others || [])) {
+              const { data: existing } = await supabase
+                .from('others_commitments')
+                .select('id')
+                .eq('title', c.title)
+                .eq('status', 'open')
+                .maybeSingle()
+
+              if (!existing) {
+                await supabase.from('others_commitments').insert({
+                  committed_by_name:  c.committed_by_name,
+                  committed_by_email: c.committed_by_email || null,
+                  title:        c.title,
+                  context:      `Verbal commitment in: ${meeting.title}`,
+                  due_date:     c.due_date,
+                  urgency:      c.urgency,
+                  source_type:  'ai_otter',
+                  source_id:    meeting.id,
+                  source_label: meeting.title,
+                  status:       'open'
+                })
+                results.otter_others_created++
+              }
+            }
+          }
+        } else if (isAllHands) {
+          console.log(`  Skipping full extraction for all-hands: ${meeting.title}`)
+        }
+
+        // Mark meeting as processed
+        await supabase
+          .from('meeting_notes')
+          .update({
+            intelligence_extracted: true,
+            commitments_extracted:  true,
+            extraction_date:        today
+          })
+          .eq('id', meeting.id)
+
+        results.otter_meetings_processed++
+      } catch (err) {
+        results.errors.push(`Otter ${meeting.otter_id}: ${err.message}`)
+      }
+    }
+
+    console.log(
+      `  ✓ Otter: ${results.otter_meetings_processed} meetings, ` +
+      `${results.otter_tasks_created} tasks, ` +
+      `${results.otter_my_commitments} my commitments, ` +
+      `${results.otter_others_created} others`
+    )
+  } catch (err) {
+    results.errors.push(`Otter processing: ${err.message}`)
+    console.log(`  ✗ Otter error: ${err.message}`)
+  }
+
   // ── STEP 4: Extract tasks ───────────────────────────────────────
   console.log('Step 4: Extracting tasks...')
   const bucket1 = (activeEmails || []).filter(e => e.bucket === 1)
@@ -1196,6 +1516,73 @@ async function main() {
     `${results.others_commitments_extracted} others`
   )
 
+  // ── STEP 5.5: Cross-reference synthesis ────────────────────────
+  console.log('Step 5.5: Cross-referencing sources...')
+  try {
+    const { data: otterItems } = await supabase
+      .from('tasks')
+      .select('*')
+      .eq('source_type', 'ai_otter')
+      .eq('source_date', today)
+      .limit(20)
+
+    const { data: otterCommitments } = await supabase
+      .from('commitments')
+      .select('*')
+      .eq('source_type', 'ai_otter')
+      .eq('made_on', today)
+      .limit(10)
+
+    const { data: recentEmails } = await supabase
+      .from('emails')
+      .select('id, thread_subject, from_name, ai_summary, body_preview, received_at')
+      .in('bucket', [1, 2])
+      .limit(20)
+
+    const allOtterItems = [
+      ...(otterItems || []),
+      ...(otterCommitments || [])
+    ]
+
+    for (const item of allOtterItems) {
+      const titleWords = (item.title || '')
+        .toLowerCase()
+        .split(' ')
+        .filter(w => w.length > 4)
+        .slice(0, 4)
+
+      const relatedEmails = (recentEmails || []).filter(email => {
+        const subject = (email.thread_subject || '').toLowerCase()
+        return titleWords.some(w => subject.includes(w))
+      })
+
+      if (relatedEmails.length > 0) {
+        const refs = relatedEmails.map(e => ({
+          source_type:    'email',
+          source_label:   e.thread_subject,
+          reference_type: 'related',
+          context:        e.ai_summary || e.body_preview,
+          date:           e.received_at?.split('T')[0],
+          confidence:     'medium'
+        }))
+
+        const table = item.made_on ? 'commitments' : 'tasks'
+
+        await supabase
+          .from(table)
+          .update({ cross_references: refs })
+          .eq('id', item.id)
+
+        results.cross_refs_created += refs.length
+      }
+    }
+
+    console.log(`  ✓ Cross-references: ${results.cross_refs_created}`)
+  } catch (err) {
+    // Non-fatal
+    console.log(`  Cross-ref error: ${err.message}`)
+  }
+
   // ── STEP 6: Enrich manual tasks ─────────────────────────────────
   console.log('Step 6: Enriching manual tasks...')
   const { data: manualTasks } = await supabase
@@ -1434,6 +1821,13 @@ async function main() {
       .select('name, risk_signals')
       .eq('status', 'active')
 
+    // Load recent meeting notes for cross-source brief
+    const { data: recentMeetings } = await supabase
+      .from('meeting_notes')
+      .select('title, start_time, short_summary')
+      .order('start_time', { ascending: false })
+      .limit(7)
+
     const riskSignalsList = (projectsWithRisks || [])
       .flatMap(p =>
         (p.risk_signals || [])
@@ -1457,7 +1851,8 @@ async function main() {
       overdue_others: overdueWithDays,
       pending_decisions: pendingDecisions || [],
       risk_signals: riskSignalsList,
-      rolling_summary: rollingCtx?.content || null
+      rolling_summary: rollingCtx?.content || null,
+      recent_meetings: recentMeetings || []
     }
 
     const brief = await aiService.generateDailyBrief(briefContext)

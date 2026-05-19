@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - name: Check pipeline status
+      - name: Check pipeline and trigger AI
         id: check
         run: |
           TODAY=$(date -u +%Y-%m-%d)
@@ -29,26 +29,56 @@ jobs:
             "${{ secrets.API_URL }}/api/pipeline/status" \
             -H "x-trigger-secret: ${{ secrets.TRIGGER_SECRET }}")
 
-          echo "Pipeline status: $STATUS"
+          echo "Status: $STATUS"
 
-          PROCESSING_DONE=$(echo "$STATUS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('processing_completed_at') or '')" 2>/dev/null)
+          PROCESSING_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('processing_completed_at') or '')" \
+            2>/dev/null)
 
-          AI_DONE=$(echo "$STATUS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" 2>/dev/null)
+          OTTER_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('otter_processing_completed_at') or '')" \
+            2>/dev/null)
+
+          AI_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" \
+            2>/dev/null)
 
           FORCE="${{ github.event.inputs.force_run }}"
 
-          echo "Processing done: $PROCESSING_DONE"
-          echo "AI done: $AI_DONE"
-          echo "Force run: $FORCE"
+          # Calculate minutes since email processing
+          MINUTES_SINCE=0
+          if [ -n "$PROCESSING_DONE" ]; then
+            PROC_EPOCH=$(python3 -c "
+          from datetime import datetime, timezone
+          import time
+          dt = datetime.fromisoformat('${PROCESSING_DONE}'.replace('Z', '+00:00'))
+          print(int(time.time() - dt.timestamp()))" 2>/dev/null || echo "0")
+            MINUTES_SINCE=$((PROC_EPOCH / 60))
+          fi
 
+          echo "Email done: $PROCESSING_DONE"
+          echo "Otter done: $OTTER_DONE"
+          echo "AI done: $AI_DONE"
+          echo "Minutes since email: $MINUTES_SINCE"
+          echo "Force: $FORCE"
+
+          # Fire when: email processing complete AND
+          # (Otter done OR 30+ min since email OR force)
+          # AND AI not done yet
           if [ -n "$PROCESSING_DONE" ] && \
-             ([ -z "$AI_DONE" ] || \
+             [ -z "$AI_DONE" ] && (
+             [ -n "$OTTER_DONE" ] || \
+             [ "$MINUTES_SINCE" -ge 30 ] || \
              [ "$FORCE" = "true" ]); then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "Conditions met — will run AI job"
+            if [ -n "$OTTER_DONE" ]; then
+              echo "Both email and Otter ready."
+            else
+              echo "Email ready. Otter timeout or no meetings. Running anyway."
+            fi
           else
             echo "should_run=false" >> $GITHUB_OUTPUT
-            echo "Conditions not met — skipping"
+            echo "Conditions not met. Skipping."
           fi
 
       - name: Checkout repository

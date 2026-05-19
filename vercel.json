@@ -1,13 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/src/router.js",                    "use": "@vercel/node" },
-    { "src": "api/src/jobs/nightly-ai.js",           "use": "@vercel/node" },
-    { "src": "api/src/jobs/process-email-report.js", "use": "@vercel/node" }
+    { "src": "api/src/router.js",                       "use": "@vercel/node" },
+    { "src": "api/src/jobs/nightly-ai.js",              "use": "@vercel/node" },
+    { "src": "api/src/jobs/process-email-report.js",    "use": "@vercel/node" },
+    { "src": "api/src/jobs/process-otter-report.js",    "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/jobs/nightly-ai",           "dest": "/api/src/jobs/nightly-ai.js" },
-    { "src": "/api/jobs/process-email-report", "dest": "/api/src/jobs/process-email-report.js" },
-    { "src": "/api/(.*)",                      "dest": "/api/src/router.js" }
+    { "src": "/api/jobs/nightly-ai",            "dest": "/api/src/jobs/nightly-ai.js" },
+    { "src": "/api/jobs/process-email-report",  "dest": "/api/src/jobs/process-email-report.js" },
+    { "src": "/api/jobs/process-otter-report",  "dest": "/api/src/jobs/process-otter-report.js" },
+    { "src": "/api/(.*)",                       "dest": "/api/src/router.js" }
   ]
 }

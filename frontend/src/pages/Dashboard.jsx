@@ -17,6 +17,7 @@ import {
   getUnlinkedIntelligence, updateUnlinkedIntelligence,
   getAIQuestions, answerAIQuestion,
   getPipelineStatus,
+  getMeetingNotes,
 } from '../lib/api'
 import SyncButton from '../components/SyncButton'
 
@@ -1345,6 +1346,12 @@ export default function Dashboard() {
   const { data: contacts }   = useQuery({ queryKey: ['contacts'],    queryFn: getContacts,     refetchInterval: 300000 })
   const { data: decisions }  = useQuery({ queryKey: ['pending-decisions'], queryFn: getPendingDecisions, refetchInterval: 300000 })
   const { data: questions }  = useQuery({ queryKey: ['ai-questions'],      queryFn: getAIQuestions,     refetchInterval: 300000 })
+  const { data: meetingNotes = [] } = useQuery({
+    queryKey: ['meeting-notes'],
+    queryFn: () => getMeetingNotes(),
+    refetchInterval: 300000
+  })
+  const [expandedMeeting, setExpandedMeeting] = useState(null)
 
   const now = dayjs()
 
@@ -1434,6 +1441,74 @@ export default function Dashboard() {
 
         {/* Unlinked intelligence — only renders if data exists */}
         <UnlinkedIntelPanel projects={projects} />
+
+        {/* Recent Meetings (Otter) */}
+        <div className="bg-white rounded-2xl border border-[#e5e5e3] p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-semibold text-[#1a1a18] text-sm">Recent Meetings</h2>
+            <span className="text-xs text-[#6b6b67] bg-[#f0f0ee] px-2 py-0.5 rounded-full">from Otter</span>
+          </div>
+          {meetingNotes.length === 0 ? (
+            <p className="text-xs text-[#9b9b97] py-4 text-center">No meetings recorded yet</p>
+          ) : (
+            <div className="space-y-2">
+              {meetingNotes.map(m => {
+                const isExpanded = expandedMeeting === m.otter_id
+                const dateStr = m.start_time ? m.start_time.split('T')[0] : 'unknown'
+                const participantCount = (m.participants || []).length
+                const ryanItems = (m.action_items_raw || []).filter(a => a.is_ryan_item || a.assignee_email === 'hankinsr@claycorp.com')
+                const othersItems = (m.action_items_raw || []).filter(a => !a.is_ryan_item && a.assignee_email !== 'hankinsr@claycorp.com')
+                const summaryPreview = m.short_summary ? m.short_summary.slice(0, 100) + (m.short_summary.length > 100 ? '...' : '') : ''
+                return (
+                  <div
+                    key={m.otter_id}
+                    className="border border-[#e5e5e3] rounded-xl p-3 cursor-pointer hover:bg-[#f8f8f6] transition-colors"
+                    onClick={() => setExpandedMeeting(isExpanded ? null : m.otter_id)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-[#1a1a18] truncate flex-1 mr-2">{m.title || 'Untitled meeting'}</span>
+                      <span className="text-xs text-[#9b9b97] shrink-0">{dateStr}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      {m.duration_raw && <span className="text-xs text-[#6b6b67]">{m.duration_raw}</span>}
+                      {participantCount > 0 && <span className="text-xs text-[#9b9b97]">{participantCount} attendees</span>}
+                    </div>
+                    {!isExpanded && summaryPreview && (
+                      <p className="text-xs text-[#6b6b67] mt-1 leading-relaxed">{summaryPreview}</p>
+                    )}
+                    {isExpanded && (
+                      <div className="mt-2 space-y-2">
+                        {m.short_summary && (
+                          <p className="text-xs text-[#6b6b67] leading-relaxed">{m.short_summary}</p>
+                        )}
+                        {ryanItems.length > 0 && (
+                          <div>
+                            <p className="text-xs font-medium text-[#3b82f6] mb-1">My action items</p>
+                            <ul className="space-y-0.5">
+                              {ryanItems.map((item, i) => (
+                                <li key={i} className="text-xs text-[#3b82f6]">- {item.task_text}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        {othersItems.length > 0 && (
+                          <div>
+                            <p className="text-xs font-medium text-[#6b6b67] mb-1">Others action items</p>
+                            <ul className="space-y-0.5">
+                              {othersItems.map((item, i) => (
+                                <li key={i} className="text-xs text-[#9b9b97]">- {item.assignee_name}: {item.task_text}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
 
       </div>
 
