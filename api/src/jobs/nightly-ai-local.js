@@ -639,6 +639,81 @@ async function main() {
     `${results.risk_signals_detected} risks`
   )
 
+  // ── STEP 3.6b: Auto-expand project keywords ────────────────────
+  console.log('Step 3.6b: Learning project keywords...')
+  try {
+    const { data: activeProjects } = await supabase
+      .from('projects')
+      .select('id, name, keywords')
+      .eq('status', 'active')
+
+    for (const project of (activeProjects || [])) {
+      // Find emails linked to this project
+      const { data: linkedEmails } = await supabase
+        .from('emails')
+        .select('thread_subject, from_name, from_address')
+        .eq('project_id', project.id)
+        .limit(20)
+
+      if (!linkedEmails?.length) continue
+
+      // Extract candidate keywords from thread subjects and sender names
+      const candidates = new Map()
+
+      for (const email of linkedEmails) {
+        // Words from thread subject
+        const words = (email.thread_subject || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, '')
+          .split(' ')
+          .filter(w => w.length > 3)
+          .filter(w => ![
+            'from', 'with', 'this', 'that',
+            'have', 'will', 'your', 'been',
+            'more', 'week', 'next', 'last',
+            'meet', 'call', 'zoom', 'team',
+            'fwd', 'reply', 'over', 'about'
+          ].includes(w))
+
+        for (const word of words) {
+          candidates.set(word, (candidates.get(word) || 0) + 1)
+        }
+
+        // Last name of sender as keyword (weighted higher)
+        const nameParts = (email.from_name || '').split(' ')
+        const lastName  = nameParts[nameParts.length - 1]?.toLowerCase()
+        if (lastName && lastName.length > 3) {
+          candidates.set(lastName, (candidates.get(lastName) || 0) + 2)
+        }
+      }
+
+      // Keywords appearing 3+ times are strong candidates
+      const currentKeywords = new Set(
+        (project.keywords || []).map(k => k.toLowerCase())
+      )
+
+      const newKeywords = []
+      for (const [word, count] of candidates) {
+        if (count >= 3 && !currentKeywords.has(word)) {
+          newKeywords.push(word)
+        }
+      }
+
+      if (newKeywords.length > 0) {
+        const updatedKeywords = [...(project.keywords || []), ...newKeywords]
+        await supabase
+          .from('projects')
+          .update({ keywords: updatedKeywords })
+          .eq('id', project.id)
+
+        console.log(`  ${project.name}: added keywords ${newKeywords.join(', ')}`)
+      }
+    }
+  } catch (err) {
+    // Non-fatal
+    console.log(`  Keyword learning error: ${err.message}`)
+  }
+
   // ── STEP 3.6: Auto-create contacts (with deduplication) ────────
   console.log('Step 3.6: Updating contacts...')
   for (const email of (activeEmails || [])) {
