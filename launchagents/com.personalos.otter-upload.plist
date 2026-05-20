@@ -15,7 +15,7 @@
     <key>Hour</key>
     <integer>4</integer>
     <key>Minute</key>
-    <integer>10</integer>
+    <integer>35</integer>
   </dict>
   <key>StandardOutPath</key>
   <string>/Users/ryanhankins/personal-os/logs/otter-upload-stdout.log</string>

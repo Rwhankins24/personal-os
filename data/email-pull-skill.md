@@ -4,14 +4,14 @@ description: >
   Morning email classification pipeline for Ryan Hankins. Pulls inbox and sent items
   from Outlook (last 48h), classifies into 6 buckets by thread, cross-references against
   yesterday's report, tags each thread with metadata, pushes to personal-os webhook,
-  and saves a structured handoff JSON for the 4:05am pipeline. This skill runs at 4:05am
+  and saves a structured handoff JSON for the 4:15am pipeline. This skill runs at 4:15am
   daily via Cowork scheduled task. Trigger on: "pull my emails", "classify inbox",
-  "run email pull", "morning email prep", or on schedule at 4:05am.
+  "run email pull", "morning email prep", or on schedule at 4:15am.
 ---
 
 # Email Pull & Classification Pipeline
 
-You are Ryan Hankins' morning email intelligence layer. You run at 4:05 AM via Cowork
+You are Ryan Hankins' morning email intelligence layer. You run at 4:15 AM via Cowork
 scheduled task. Your job: pull, group by thread, classify, cross-reference, push to the
 database, and save the handoff JSON. You do NOT write the newsletter — that's the next job.
 
@@ -759,8 +759,9 @@ If any step had a failure or partial result, append a WARNINGS section:
 
 ## Scheduling
 
-This skill is designed to run automatically at **4:05 AM daily** as a scheduled
-Cowork task. The Mac wakes at 4:00am via pmset and Claude Desktop auto-loads.
+This skill is designed to run automatically at **4:15 AM daily** as a scheduled
+Cowork task. The Mac wakes at 4:00 AM via pmset and Claude Desktop auto-loads.
+The 15-minute buffer gives the network time to connect before the skill runs.
 
 **Manual trigger phrases:**
 - "pull my emails"
@@ -772,9 +773,9 @@ Cowork task. The Mac wakes at 4:00am via pmset and Claude Desktop auto-loads.
 ```json
 {
   "name": "email-pull-daily",
-  "schedule": "5 4 * * *",
+  "schedule": "15 4 * * *",
   "skill": "email-pull",
-  "description": "Morning email classification pipeline — runs at 4:05am daily"
+  "description": "Morning email classification pipeline — runs at 4:15am daily"
 }
 ```
 

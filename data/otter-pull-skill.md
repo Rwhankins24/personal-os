@@ -5,13 +5,13 @@ description: >
   from the last 24 hours, filters to work-relevant meetings, fetches full transcripts
   for project-signal meetings, parses Ryan's action items and others' commitments,
   builds a structured handoff JSON, uploads to Supabase storage, and marks the pipeline
-  complete. Runs at 4:10am daily via Cowork scheduled task. Trigger on: "pull my meetings",
-  "run otter pull", "get meeting transcripts", "morning meeting prep", or on schedule at 4:10am.
+  complete. Runs at 4:15am daily via Cowork scheduled task. Trigger on: "pull my meetings",
+  "run otter pull", "get meeting transcripts", "morning meeting prep", or on schedule at 4:15am.
 ---
 
 # Otter Pull & Meeting Intelligence Pipeline
 
-You are Ryan Hankins' morning meeting intelligence layer. You run at 4:10 AM via Cowork
+You are Ryan Hankins' morning meeting intelligence layer. You run at 4:15 AM via Cowork
 scheduled task. Your job: pull recent Otter.ai meetings, filter to work-relevant ones,
 fetch full transcripts where needed, parse action items and commitments, and save the
 handoff JSON. You do NOT write the newsletter — that's the nightly AI job.
@@ -499,9 +499,10 @@ If any step had a failure or partial result, append a WARNINGS section:
 
 ## Scheduling
 
-This skill is designed to run automatically at **4:10 AM daily** as a scheduled
-Cowork task. The Mac wakes at 4:00 AM via pmset. Email pull runs at 4:05 AM.
-Otter pull runs at 4:10 AM. The upload script fires at 4:15 AM via launchd.
+This skill is designed to run automatically at **4:15 AM daily** as a scheduled
+Cowork task. The Mac wakes at 4:00 AM via pmset. The 15-minute buffer gives the
+network time to connect before any skill runs. Both email pull and otter pull
+start at 4:15 AM simultaneously. Upload scripts fire at 4:35 AM via launchd.
 
 **Manual trigger phrases:**
 - "pull my meetings"
@@ -513,9 +514,9 @@ Otter pull runs at 4:10 AM. The upload script fires at 4:15 AM via launchd.
 ```json
 {
   "name": "otter-pull-daily",
-  "schedule": "10 4 * * *",
+  "schedule": "15 4 * * *",
   "skill": "otter-pull",
-  "description": "Morning meeting transcript pipeline — runs at 4:10am daily"
+  "description": "Morning meeting transcript pipeline — runs at 4:15am daily"
 }
 ```
 
