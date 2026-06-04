@@ -1,0 +1,129 @@
+name: Data Backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: 'Comma-separated dates to backfill (YYYY-MM-DD). e.g. 2026-05-19,2026-05-20,2026-05-27'
+        required: true
+        default: ''
+      skip_email:
+        description: 'Skip email processing (just run AI job)'
+        required: false
+        default: 'false'
+      skip_otter:
+        description: 'Skip Otter processing (just run AI job)'
+        required: false
+        default: 'false'
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: api/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd api
+          npm ci
+
+      - name: Backfill each date
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TRIGGER_SECRET: ${{ secrets.TRIGGER_SECRET }}
+          API_URL: ${{ secrets.API_URL }}
+          SKIP_EMAIL: ${{ github.event.inputs.skip_email }}
+          SKIP_OTTER: ${{ github.event.inputs.skip_otter }}
+          DATES: ${{ github.event.inputs.dates }}
+        run: |
+          IFS=',' read -ra DATE_LIST <<< "$DATES"
+
+          for DATE in "${DATE_LIST[@]}"; do
+            DATE=$(echo "$DATE" | tr -d ' ')
+            echo ""
+            echo "════════════════════════════════════════"
+            echo "  BACKFILL: $DATE"
+            echo "════════════════════════════════════════"
+
+            # Step 1: Process email report for this date
+            if [ "$SKIP_EMAIL" != "true" ]; then
+              echo "→ Processing email report for $DATE..."
+              EMAIL_RESULT=$(curl -s -X POST \
+                "$API_URL/api/jobs/process-email-report" \
+                -H "Content-Type: application/json" \
+                -H "x-trigger-secret: $TRIGGER_SECRET" \
+                -d "{\"date\": \"$DATE\"}" \
+                --max-time 60 || echo '{"error":"curl failed"}')
+              echo "  Email result: $EMAIL_RESULT"
+            else
+              echo "→ Skipping email processing (SKIP_EMAIL=true)"
+            fi
+
+            # Step 2: Process Otter report for this date
+            if [ "$SKIP_OTTER" != "true" ]; then
+              echo "→ Processing Otter report for $DATE..."
+              OTTER_RESULT=$(curl -s -X POST \
+                "$API_URL/api/jobs/process-otter-report" \
+                -H "Content-Type: application/json" \
+                -H "x-trigger-secret: $TRIGGER_SECRET" \
+                -d "{\"date\": \"$DATE\"}" \
+                --max-time 60 || echo '{"error":"curl failed"}')
+              echo "  Otter result: $OTTER_RESULT"
+            else
+              echo "→ Skipping Otter processing (SKIP_OTTER=true)"
+            fi
+
+            # Step 3: Mark pipeline processing complete for this date
+            # (so the AI job's idempotency / pipeline check passes)
+            echo "→ Marking pipeline processing complete for $DATE..."
+            curl -s -X POST \
+              "$API_URL/api/pipeline/backfill-date" \
+              -H "Content-Type: application/json" \
+              -H "x-trigger-secret: $TRIGGER_SECRET" \
+              -d "{\"date\": \"$DATE\"}" \
+              --max-time 30 || echo "  Pipeline mark failed (non-fatal)"
+
+            # Step 4: Run AI job for this date
+            echo "→ Running AI job for $DATE..."
+            DATE_OVERRIDE="$DATE" FORCE_RERUN=true node api/src/jobs/nightly-ai-local.js
+            AI_EXIT=$?
+            if [ $AI_EXIT -eq 0 ]; then
+              echo "  ✓ AI job completed for $DATE"
+            else
+              echo "  ✗ AI job FAILED for $DATE (exit $AI_EXIT)"
+            fi
+
+            echo "  Done: $DATE"
+            sleep 5  # Brief pause between dates
+          done
+
+          echo ""
+          echo "════════════════════════════════════════"
+          echo "  BACKFILL COMPLETE"
+          echo "════════════════════════════════════════"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          curl -s -X POST \
+            "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "personalos@resend.dev",
+              "to": "ryanhankins.personalos@gmail.com",
+              "subject": "Personal OS — Backfill job failed",
+              "text": "The data backfill job failed. Check GitHub Actions logs."
+            }' || true

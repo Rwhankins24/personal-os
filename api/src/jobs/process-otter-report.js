@@ -13,7 +13,8 @@ module.exports = async (req, res) => {
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  const today = new Date().toISOString().split('T')[0]
+  const body = req.body || {}
+  const today = body.date || new Date().toISOString().split('T')[0]
 
   try {
     const { data: fileData, error: fetchError } = await supabase.storage
@@ -93,7 +94,7 @@ module.exports = async (req, res) => {
         otter_processing_completed_at: new Date().toISOString()
       }, { onConflict: 'run_date' })
 
-    return res.json({ success: true, date: today, results })
+    return res.json({ success: true, date: today, meetings_processed: results.meetings_processed, errors: results.errors })
   } catch (err) {
     return res.status(500).json({ error: err.message })
   }

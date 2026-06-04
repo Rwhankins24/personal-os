@@ -282,47 +282,46 @@ After thread grouping, fetch additional context based on urgency and bucket clas
 
 ### TIER 1 — Full thread extraction
 
-For every thread where:
-- `bucket = 1` AND `urgency IN ('critical', 'high')`
-- OR `has_contract_language = true`
-- OR `is_time_sensitive = true` AND `days_waiting >= 3`
+**This is the most important tier. Cast it wide — more full content = better AI extraction.**
 
-Fetch the complete message body for the most recent 3 messages in the thread using `outlook_email_search` with the thread subject. Store as:
+For every thread where ANY of the following is true:
+- `bucket IN (1, 2)` — all action-required and waiting-on threads
+- `has_contract_language = true`
+- `is_time_sensitive = true`
+- `days_waiting >= 2`
+- `urgency IN ('critical', 'high')`
+- `is_flagged = true`
+
+Fetch the complete message body for the most recent **5 messages** in the thread using `outlook_email_search` with the thread subject. Store as:
 - `full_thread_content`: concatenated message bodies separated by `"---MESSAGE BREAK---"`
 - `extraction_depth: "full"`
 
-### TIER 2 — Extended preview extraction
-
-For every thread where:
-- `bucket = 1` AND `urgency = 'normal'`
-- OR `bucket = 2`
-
-Fetch extended body preview — first 1000 characters of most recent message. Store as:
-- `extended_preview`: first 1000 chars
-- `extraction_depth: "extended"`
-
-**For Bucket 2 threads specifically — also fetch `sent_body`:**
-
-For every Bucket 2 thread, fetch Ryan's most recent sent message in this thread to surface any commitment language he wrote. Use `outlook_email_search` with:
+**Also fetch `sent_body` for every Tier 1 thread (not just Bucket 2):** Fetch Ryan's most recent sent message in this thread to surface commitment language he wrote. Use `outlook_email_search` with:
 ```
 folderName: "sentitems"
 query: "[thread_subject]"
 afterDateTime: 14d ago
 limit: 5
 ```
+Take the most recent result matching this thread subject. Store the body as `sent_body`. Non-fatal if not found.
 
-Take the most recent result matching this thread subject. Store the body as `sent_body` on the email record. Set `extraction_depth: "full"` for all Bucket 2 threads (not "extended"), because the sent_body is what the AI commitment extractor needs to see.
+### TIER 2 — Extended preview extraction
 
-If the sentitems search fails or returns no match, leave `sent_body: null` and continue — non-fatal.
+For every thread where:
+- `bucket IN (3, 4)` AND `days_waiting >= 1`
+
+Fetch extended body preview — first 1500 characters of most recent message. Store as:
+- `full_thread_content`: first 1500 chars (so the AI fallback chain works cleanly)
+- `extraction_depth: "extended"`
 
 ### TIER 3 — Standard (no additional fetch)
 
-All other buckets. Keep existing `body_preview`.
+All remaining threads (Bucket 5, Bucket 6, or low-priority Bucket 3/4 with 0 days waiting). Keep existing `body_preview`.
 - `extraction_depth: "standard"`
 
 After extraction update each email payload with these additional fields:
 - `full_thread_content`: string or null
-- `sent_body`: string or null (Bucket 2 only — Ryan's sent message in this thread)
+- `sent_body`: string or null
 - `extraction_depth`: `"full"` | `"extended"` | `"standard"`
 
 Log extraction summary:

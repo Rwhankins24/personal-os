@@ -5,12 +5,107 @@
 const Anthropic = require('@anthropic-ai/sdk')
 require('dotenv').config()
 
+const { createClient } = require('@supabase/supabase-js')
+
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
 })
 
-// ─── Ryan's context — single source of truth
-const RYAN_CONTEXT = `Ryan Hankins is a Project Executive at Clayco, a major construction company. He works on large commercial projects including data centers (DS3, Pacific Fusion), industrial facilities (Project Solis), and mixed-use developments (Southbank Tower). He is relationship-driven, direct, and operates at the intersection of pursuit, preconstruction, and execution. He thinks like an owner-side integrator. Values: decision advantage, risk clarity, no surprises, and strong relationships. His email is hankinsr@claycorp.com. Key projects: Pacific Fusion DS3, Project Solis, Southbank Tower, Clayco Internal. Key contacts include owner representatives, architects, structural and MEP engineers, and subcontractors.`
+// ─── Supabase client for live context injection
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+)
+
+// ─── Ryan's base context — role and operating style
+const RYAN_BASE = `Ryan Hankins is a Project Executive at Clayco, a national design-build construction firm. He operates at the intersection of pursuit, preconstruction, and execution. He thinks like an owner-side integrator trapped in a GC role. Values: decision advantage, risk clarity, no surprises. Email: hankinsr@claycorp.com.`
+
+// ─── Build live RYAN_CONTEXT by pulling current project state from DB
+// Returns a context string injected into every AI call
+let _cachedContext = null
+let _cacheBuiltAt = null
+
+async function buildRyanContext() {
+  // Cache for 30 minutes within a single job run
+  if (_cachedContext && _cacheBuiltAt && (Date.now() - _cacheBuiltAt) < 30 * 60 * 1000) {
+    return _cachedContext
+  }
+
+  try {
+    // Pull active projects with status/phase info
+    const { data: projects } = await supabase
+      .from('projects')
+      .select('name, status, phase, description, keywords')
+      .eq('status', 'active')
+      .limit(20)
+
+    // Pull open high-priority tasks (gives AI a sense of Ryan's current load)
+    const { data: openTasks } = await supabase
+      .from('tasks')
+      .select('title, urgency, due_date, type')
+      .eq('status', 'open')
+      .in('urgency', ['critical', 'high'])
+      .order('due_date', { ascending: true })
+      .limit(10)
+
+    // Pull contacts marked as key (high-frequency or high-importance)
+    const { data: keyContacts } = await supabase
+      .from('contacts')
+      .select('name, company, role, relationship_tier')
+      .in('relationship_tier', ['tier1', 'tier2'])
+      .order('last_contact_date', { ascending: false })
+      .limit(15)
+
+    let ctx = RYAN_BASE + '\n\n'
+
+    if (projects?.length) {
+      ctx += 'ACTIVE PROJECTS:\n'
+      ctx += projects.map(p => {
+        let line = `- ${p.name}`
+        if (p.phase) line += ` [${p.phase}]`
+        if (p.description) line += `: ${p.description.slice(0, 120)}`
+        return line
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
+    if (openTasks?.length) {
+      ctx += 'RYAN\'S CURRENT HIGH-PRIORITY OPEN ITEMS:\n'
+      ctx += openTasks.map(t => {
+        let line = `- [${t.urgency.toUpperCase()}] ${t.title}`
+        if (t.due_date) line += ` (due ${t.due_date})`
+        return line
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
+    if (keyContacts?.length) {
+      ctx += 'KEY CONTACTS (use names when attributing statements or actions):\n'
+      ctx += keyContacts.map(c => {
+        let line = `- ${c.name}`
+        if (c.role) line += `, ${c.role}`
+        if (c.company) line += ` @ ${c.company}`
+        return line
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    _cachedContext = ctx
+    _cacheBuiltAt = Date.now()
+    return ctx
+  } catch (err) {
+    // If DB lookup fails, fall back to static context — don't break AI calls
+    console.log(`[ai.js] Live context build failed: ${err.message} — using base context`)
+    return RYAN_BASE
+  }
+}
+
+// ─── Warm the context cache before a job run
+// Call once at the start of nightly-ai-local.js so all subsequent calls are instant
+async function warmContext() {
+  _cachedContext = null // force fresh build
+  return buildRyanContext()
+}
 
 // ─── Exponential backoff for API rate limits
 async function withRetry(fn, maxRetries = 3) {
@@ -53,8 +148,10 @@ function formatThreadHistoryForAI(history) {
 // Forces specificity — this summary becomes
 // the permanent memory of this thread
 async function summarizeThread(email) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
+    email.sent_body ||
     email.body_preview ||
     'No content available'
 
@@ -103,6 +200,7 @@ Return only the summary. No preamble.`
 // ─── EXTRACT INTELLIGENCE
 // Extracts all 10 categories of intelligence
 async function extractIntelligence(email, threadHistory = [], meetingContext = '') {
+  const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
     email.sent_body ||
@@ -194,9 +292,12 @@ Return ONLY valid JSON. Empty arrays fine.
   }]
 }
 
-Risk signals: ONLY include if BOTH true:
-1. involves_key_contact AND involves_active_project
-2. severity is high AND type is escalation, scope risk, legal, relationship deterioration, or financial > $50k`
+Risk signals: Include if ANY of these are true:
+- severity is high or critical (regardless of who is involved)
+- type is escalation, scope, legal, or financial and amount > $10k
+- involves_key_contact AND relationship signal is deteriorating or avoidant
+- involves_active_project AND a hard deadline is at risk
+Low-severity or purely informational signals: omit.`
       }]
     })
   )
@@ -223,6 +324,7 @@ Risk signals: ONLY include if BOTH true:
 
 // ─── EXTRACT TASKS
 async function extractTasks(email, threadHistory = [], existingItemsContext = '') {
+  const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
     email.sent_body ||
@@ -273,6 +375,7 @@ If no open tasks return [].`
 
 // ─── EXTRACT OTHERS COMMITMENTS
 async function extractOthersCommitments(email, threadHistory = [], existingItemsContext = '') {
+  const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
     email.body_preview ||
@@ -331,6 +434,7 @@ If no open commitments return [].`
 
 // ─── EXTRACT MY COMMITMENTS
 async function extractMyCommitments(email, threadHistory = [], existingItemsContext = '') {
+  const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
     email.sent_body ||
@@ -384,6 +488,7 @@ If no open commitments return [].`
 
 // ─── DETECT HIGH STAKES MEETING
 async function detectHighStakesMeeting(event, relatedEmails) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -445,6 +550,7 @@ Return JSON only.
 
 // ─── GENERATE PRE-MEETING BRIEF
 async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -482,6 +588,7 @@ Return only the brief. No preamble.`
 // ─── GENERATE DAILY BRIEF
 // Three sections: Yesterday, Today's Focus, Watch List
 async function generateDailyBrief(context) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -559,6 +666,7 @@ Return only the brief with three labeled sections. No preamble.`
 // ─── GENERATE DAILY DIGEST
 // Stored as permanent memory record
 async function generateDailyDigest(data) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -582,6 +690,7 @@ Return a structured paragraph. Concise. This will be read by AI in future runs.`
 // ─── UPDATE ROLLING CONTEXT
 // Rewrites the 30-day rolling summary
 async function updateRollingContext(existingContext, todayDigest, date) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -609,6 +718,7 @@ Return only the updated rolling context.`
 
 // ─── ENRICH MANUAL TASK
 async function enrichTask(task, relatedEmails) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const emailContext = relatedEmails
     .map(e => `${e.thread_subject}: ${e.ai_summary || e.body_preview}`)
     .join('\n')
@@ -636,6 +746,7 @@ Return only the context paragraph.`
 
 // ─── CREATE CONTACT PROFILE
 async function createContactProfile(contact, interactions) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
@@ -666,6 +777,7 @@ Return only the profile paragraph.`
 
 // ─── EXTRACT CONTACT FROM EMAIL SIGNATURE
 async function extractContactFromSignature(emailContent, fromName, fromEmail) {
+  const RYAN_CONTEXT = await buildRyanContext()
   if (!emailContent) return null
 
   const message = await withRetry(() =>
@@ -710,6 +822,7 @@ Return only JSON. No other text.`
 // Full 10-category extraction from meeting transcripts
 // Speaker labels are generic (Speaker 1, 2...) — we resolve via roster + context
 async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext) {
+  const RYAN_CONTEXT = await buildRyanContext()
   const transcript = meeting.full_transcript
   if (!transcript) return null
 
@@ -809,7 +922,8 @@ Return ONLY valid JSON. Empty arrays fine.
 }
 
 module.exports = {
-  RYAN_CONTEXT,
+  buildRyanContext,
+  warmContext,
   withRetry,
   formatThreadHistoryForAI,
   summarizeThread,

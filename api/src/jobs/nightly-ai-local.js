@@ -17,11 +17,23 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 )
 
-const today = new Date().toISOString().split('T')[0]
+// Support date override for backfill runs:
+//   DATE_OVERRIDE=2026-05-20 node nightly-ai-local.js
+//   OR: node nightly-ai-local.js 2026-05-20
+const today = process.env.DATE_OVERRIDE || process.argv[2] || new Date().toISOString().split('T')[0]
+const isBackfill = today !== new Date().toISOString().split('T')[0]
+
+if (isBackfill) {
+  console.log(`=== BACKFILL MODE: running for ${today} (not today) ===`)
+}
 
 // ─── IDEMPOTENCY CHECK
-// If AI already ran today — exit immediately
+// If AI already ran for this date — exit (unless FORCE_RERUN is set)
 async function checkAlreadyRan() {
+  if (process.env.FORCE_RERUN === 'true') {
+    console.log(`FORCE_RERUN=true — skipping idempotency check for ${today}`)
+    return
+  }
   const { data } = await supabase
     .from('pipeline_runs')
     .select('ai_completed_at')
@@ -52,7 +64,7 @@ async function getThreadHistory(email) {
       'body_preview, sent_body, status, bucket, days_waiting, tags'
     )
     .ilike('thread_subject', `%${subject}%`)
-    .order('received_at', { ascending: true })
+    .order('created_at', { ascending: true })  // received_at is often null; created_at is always set
     .limit(20)
 
   return data || []
@@ -234,6 +246,16 @@ async function main() {
   )
 
   await checkAlreadyRan()
+
+  // Warm AI context cache once — all subsequent AI calls use the cached version
+  console.log('Warming AI context (live project + task + contact data)...')
+  try {
+    const ctx = await aiService.warmContext()
+    const projectCount = (ctx.match(/^- /mg) || []).length
+    console.log(`  ✓ Context warmed (${projectCount} entries loaded)`)
+  } catch (err) {
+    console.log(`  ⚠ Context warm failed: ${err.message} — using base context`)
+  }
 
   const results = {
     date: today,

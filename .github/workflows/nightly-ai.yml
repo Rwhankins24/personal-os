@@ -12,6 +12,14 @@ on:
         description: 'Force run even if already completed today'
         required: false
         default: 'false'
+      date_override:
+        description: 'Backfill: run AI for this date (YYYY-MM-DD). Leave blank for today.'
+        required: false
+        default: ''
+      force_rerun:
+        description: 'Re-run AI even if already completed for that date'
+        required: false
+        default: 'false'
 
 jobs:
   check-and-run:
@@ -120,6 +128,8 @@ jobs:
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TRIGGER_SECRET: ${{ secrets.TRIGGER_SECRET }}
+          DATE_OVERRIDE: ${{ github.event.inputs.date_override }}
+          FORCE_RERUN: ${{ github.event.inputs.force_rerun }}
         run: |
           cd api
           node src/jobs/nightly-ai-local.js
