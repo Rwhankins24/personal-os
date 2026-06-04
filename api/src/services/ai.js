@@ -102,13 +102,16 @@ Return only the summary. No preamble.`
 
 // ─── EXTRACT INTELLIGENCE
 // Extracts all 10 categories of intelligence
-async function extractIntelligence(email, threadHistory = []) {
+async function extractIntelligence(email, threadHistory = [], meetingContext = '') {
   const content =
     email.full_thread_content ||
     email.sent_body ||
     email.body_preview ||
     ''
   const historyContext = formatThreadHistoryForAI(threadHistory)
+  const meetingContextBlock = meetingContext
+    ? `\nRECENT MEETING CONTEXT (last 7 days — use this to connect email threads to verbal discussions and decisions):\n${meetingContext}\n`
+    : ''
 
   const message = await withRetry(() =>
     client.messages.create({
@@ -118,12 +121,12 @@ async function extractIntelligence(email, threadHistory = []) {
         role: 'user',
         content: `${RYAN_CONTEXT}
 
-Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved.
+Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved. Use meeting context to connect email threads to verbal discussions — flag when an email is a follow-up to a meeting commitment or contradicts something said in a meeting.
 
 Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
 Content: ${content}
-${historyContext}
+${historyContext}${meetingContextBlock}
 
 Return ONLY valid JSON. Empty arrays fine.
 {

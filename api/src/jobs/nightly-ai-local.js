@@ -328,6 +328,74 @@ async function main() {
 
   console.log(`  ✓ Found ${(activeEmails || []).length} active email threads`)
 
+  // ── STEP 2.4: Load Plaud meetings from storage → meeting_notes ──
+  console.log('Step 2.4: Loading Plaud meetings into meeting_notes...')
+  let plaudMeetingsLoaded = 0
+  try {
+    // Download plaud-{today}.json from Supabase storage
+    const plaudStorageUrl = `${process.env.SUPABASE_URL}/storage/v1/object/daily-reports/plaud-${today}.json`
+    const plaudRes = await fetch(plaudStorageUrl, {
+      headers: { Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}` }
+    })
+
+    if (plaudRes.ok) {
+      const plaudReport = await plaudRes.json()
+      const meetings = plaudReport.meetings || []
+
+      for (const meeting of meetings) {
+        if (!meeting.gmail_message_id) continue
+
+        // Check if already inserted (idempotent)
+        const { data: existing } = await supabase
+          .from('meeting_notes')
+          .select('id')
+          .eq('otter_id', `plaud_${meeting.gmail_message_id}`)
+          .maybeSingle()
+
+        if (existing) continue
+
+        // Map Plaud fields → meeting_notes schema
+        const actionItemsRaw = [
+          ...(meeting.ryan_action_items || []).map(i => ({
+            task_text: i.task,
+            assignee_name: 'Ryan Hankins',
+            assignee_email: 'hankinsr@claycorp.com'
+          })),
+          ...(meeting.others_action_items || []).map(i => ({
+            task_text: i.task,
+            assignee_name: i.assignee || 'Unknown',
+            assignee_email: null
+          })),
+          ...(meeting.unattributed_action_items || []).map(i => ({
+            task_text: i.task,
+            assignee_name: null,
+            assignee_email: null
+          }))
+        ]
+
+        await supabase.from('meeting_notes').insert({
+          otter_id:               `plaud_${meeting.gmail_message_id}`,
+          title:                  meeting.title,
+          start_time:             `${meeting.date}T09:00:00Z`,
+          short_summary:          meeting.summary || '',
+          full_transcript:        meeting.transcript_text || null,
+          action_items_raw:       actionItemsRaw,
+          participants:           meeting.participants || [],
+          source:                 'plaud',
+          intelligence_extracted: false,
+          commitments_extracted:  false
+        })
+        plaudMeetingsLoaded++
+      }
+      console.log(`  ✓ Plaud: ${plaudMeetingsLoaded} meetings loaded into meeting_notes`)
+    } else {
+      console.log(`  ℹ Plaud storage: no report for ${today} (status ${plaudRes.status})`)
+    }
+  } catch (err) {
+    // Non-fatal — pipeline continues without Plaud data
+    console.log(`  ⚠ Plaud load error: ${err.message}`)
+  }
+
   // ── STEP 2.5: Load existing items as AI dedup context ──────────
   // Loaded once here — available to both email (STEP 4/5) and future Otter extraction
   let existingTasksContext = ''
@@ -373,6 +441,36 @@ async function main() {
     }
   } catch (err) { /* non-fatal */ }
   console.log(`  ✓ Context loaded: ${existingTasksContext.split('\n').filter(Boolean).length} tasks, ${existingOthersContext.split('\n').filter(Boolean).length} others, ${existingMineContext.split('\n').filter(Boolean).length} mine`)
+
+  // ── Build meeting context for email analysis ──────────────────
+  // Inject recent meeting summaries so email intelligence knows what
+  // was discussed verbally — connects email threads to meeting decisions
+  let meetingContext = ''
+  try {
+    const sevenDaysAgo = new Date()
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+    const { data: recentMeetingNotes } = await supabase
+      .from('meeting_notes')
+      .select('title, start_time, short_summary, action_items_raw, participants, source')
+      .gte('start_time', sevenDaysAgo.toISOString())
+      .order('start_time', { ascending: false })
+      .limit(10)
+
+    if (recentMeetingNotes?.length) {
+      meetingContext = recentMeetingNotes.map(m => {
+        const date = m.start_time?.split('T')[0] || 'unknown date'
+        const source = m.source === 'plaud' ? 'Plaud' : 'Otter'
+        const summary = (m.short_summary || '').slice(0, 300)
+        const actionCount = (m.action_items_raw || []).length
+        const participants = (m.participants || []).slice(0, 5).join(', ')
+        return `[${date} — ${m.title} (${source})]${participants ? ` Attendees: ${participants}.` : ''} ${summary}${actionCount ? ` (${actionCount} action items)` : ''}`
+      }).join('\n')
+      console.log(`  ✓ Meeting context: ${recentMeetingNotes.length} meetings from last 7 days`)
+    }
+  } catch (err) {
+    console.log(`  ⚠ Meeting context load error: ${err.message}`)
+  }
 
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
@@ -424,7 +522,7 @@ async function main() {
   for (const email of (activeEmails || [])) {
     try {
       const threadHistory = await getThreadHistory(email)
-      const intel = await aiService.extractIntelligence(email, threadHistory)
+      const intel = await aiService.extractIntelligence(email, threadHistory, meetingContext)
 
       let projectId = email.project_id ||
         await findProjectByKeywords(email.thread_subject)
@@ -942,8 +1040,8 @@ async function main() {
   }
   console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
 
-  // ── STEP 2.6: Process Otter transcripts ────────────────────────
-  console.log('Step 2.6: Processing Otter meetings...')
+  // ── STEP 2.6: Process meeting transcripts (Otter + Plaud) ───────
+  console.log('Step 2.6: Processing meeting intelligence (Otter + Plaud)...')
   try {
     const { data: unprocessedMeetings } = await supabase
       .from('meeting_notes')
@@ -963,7 +1061,10 @@ async function main() {
             (meeting.title || '') + ' ' + (meeting.short_summary || '')
           )
 
-          if (isRyan) {
+          const meetingSource = meeting.source === 'plaud' ? 'plaud' : 'otter'
+        const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter'
+
+        if (isRyan) {
             const { data: existing } = await supabase
               .from('tasks')
               .select('id')
@@ -976,8 +1077,8 @@ async function main() {
                 title:            item.task_text,
                 context:          `Action item from: ${meeting.title || 'Meeting'}`,
                 status:           'open',
-                source:           'otter',
-                source_type:      'ai_otter',
+                source:           meetingSource,
+                source_type:      meetingSourceType,
                 source_label:     meeting.title || 'Meeting',
                 source_date:      today,
                 ai_enriched:      true,
@@ -1006,7 +1107,7 @@ async function main() {
                 committed_by_email: item.assignee_email || contact?.email || null,
                 title:        item.task_text,
                 context:      `Action item from meeting: ${meeting.title || 'Meeting'}`,
-                source_type:  'ai_otter',
+                source_type:  meetingSourceType,
                 source_id:    meeting.id,
                 source_label: meeting.title || 'Meeting',
                 status:       'open',
@@ -1061,16 +1162,16 @@ async function main() {
               if (project) {
                 const newNotes = [
                   ...(intel.technical_facts || []).map(f => ({
-                    ...f, type: 'technical', source: meeting.title, source_type: 'otter', date: today
+                    ...f, type: 'technical', source: meeting.title, source_type: meetingSource, date: today
                   })),
                   ...(intel.financial_signals || []).map(f => ({
-                    ...f, type: 'financial', source: meeting.title, source_type: 'otter', date: today
+                    ...f, type: 'financial', source: meeting.title, source_type: meetingSource, date: today
                   })),
                   ...(intel.schedule_signals || []).map(s => ({
-                    ...s, type: 'schedule', source: meeting.title, source_type: 'otter', date: today
+                    ...s, type: 'schedule', source: meeting.title, source_type: meetingSource, date: today
                   })),
                   ...(intel.scope_signals || []).map(s => ({
-                    ...s, type: 'scope', source: meeting.title, source_type: 'otter', date: today
+                    ...s, type: 'scope', source: meeting.title, source_type: meetingSource, date: today
                   }))
                 ]
 
@@ -1522,14 +1623,14 @@ async function main() {
     const { data: otterItems } = await supabase
       .from('tasks')
       .select('*')
-      .eq('source_type', 'ai_otter')
+      .in('source_type', ['ai_otter', 'ai_plaud'])
       .eq('source_date', today)
       .limit(20)
 
     const { data: otterCommitments } = await supabase
       .from('commitments')
       .select('*')
-      .eq('source_type', 'ai_otter')
+      .in('source_type', ['ai_otter', 'ai_plaud'])
       .eq('made_on', today)
       .limit(10)
 
