@@ -461,11 +461,24 @@ async function main() {
       meetingContext = recentMeetingNotes.map(m => {
         const date = m.start_time?.split('T')[0] || 'unknown date'
         const source = m.source === 'plaud' ? 'Plaud' : 'Otter'
-        const summary = (m.short_summary || '').slice(0, 300)
-        const actionCount = (m.action_items_raw || []).length
-        const participants = (m.participants || []).slice(0, 5).join(', ')
-        return `[${date} — ${m.title} (${source})]${participants ? ` Attendees: ${participants}.` : ''} ${summary}${actionCount ? ` (${actionCount} action items)` : ''}`
-      }).join('\n')
+        const summary = (m.short_summary || '').slice(0, 400)
+        const participants = (m.participants || []).slice(0, 8).join(', ')
+
+        // Format action items — show assignee + task so AI can connect email follow-ups
+        const actionItems = (m.action_items_raw || [])
+          .slice(0, 12)
+          .map(a => {
+            const who = a.assignee_name || 'Unassigned'
+            return `  - ${who}: ${a.task_text}`
+          })
+          .join('\n')
+
+        let block = `[${date} — ${m.title} (${source})]`
+        if (participants) block += `\nAttendees: ${participants}`
+        block += `\nSummary: ${summary}`
+        if (actionItems) block += `\nAction items:\n${actionItems}`
+        return block
+      }).join('\n\n')
       console.log(`  ✓ Meeting context: ${recentMeetingNotes.length} meetings from last 7 days`)
     }
   } catch (err) {

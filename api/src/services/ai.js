@@ -713,9 +713,30 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
   const transcript = meeting.full_transcript
   if (!transcript) return null
 
-  const attendeeList = attendeeRoster
-    .map(a => `${a.name} (${a.email || 'no email'})`)
+  // Attendee roster can be {name, email} objects or strings (from Plaud participants array)
+  // Augment with names derived from action item assignees if roster is thin
+  const rosterNames = new Set(
+    (attendeeRoster || []).map(a => typeof a === 'string' ? a : a.name).filter(Boolean)
+  )
+  const actionItemAssignees = (meeting.action_items_raw || [])
+    .map(a => a.assignee_name)
+    .filter(Boolean)
+  for (const name of actionItemAssignees) {
+    rosterNames.add(name)
+  }
+
+  const attendeeList = [...rosterNames]
+    .map(name => {
+      const match = (attendeeRoster || []).find(a => (typeof a === 'string' ? a : a.name) === name)
+      const email = (match && typeof match === 'object') ? match.email : null
+      return email ? `${name} (${email})` : name
+    })
     .join('\n')
+
+  // Include Plaud's pre-processed summary if available — helps with speaker attribution
+  const structuredSummary = meeting.short_summary
+    ? `\nPre-processed meeting summary (from recording tool — use for speaker attribution and context):\n${meeting.short_summary}\n`
+    : ''
 
   const emailContext = relatedEmailContext
     .map(e =>
@@ -733,7 +754,7 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
         role: 'user',
         content: `${RYAN_CONTEXT}
 
-Extract ALL valuable intelligence from this meeting transcript. Audio-only recording — Otter labels speakers as "Speaker 1" etc.
+Extract ALL valuable intelligence from this meeting transcript. Audio recording — speakers may be labeled "Speaker 1" etc. or by name if the recording tool identified them.
 
 Speaker attribution signals:
 1. Action items show who was assigned what
@@ -747,11 +768,11 @@ Duration: ${meeting.duration_raw}
 
 Confirmed attendees:
 ${attendeeList || 'Unknown'}
-
+${structuredSummary}
 Related active email threads:
 ${emailContext || 'None'}
 
-Action items already extracted by Otter:
+Action items already extracted from meeting:
 ${(meeting.action_items_raw || [])
   .map(a => `- ${a.assignee_name}: ${a.task_text}`)
   .join('\n') || 'None'}
