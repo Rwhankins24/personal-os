@@ -1588,6 +1588,7 @@ async function main() {
             status: 'open',
             source: 'email',
             source_type: 'ai_email',
+            source_id: email.id,
             source_label: email.thread_subject,
             source_date: today,
             ai_enriched: true,

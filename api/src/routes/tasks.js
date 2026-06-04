@@ -43,6 +43,35 @@ module.exports = async (req, res) => {
       const { data, error } = await supabase
         .from('tasks').update(req.body).eq('id', id).select().single()
       if (error) throw error
+
+      // Cascade: when a task is marked complete, retire the source email from bucket 1
+      // so it no longer appears in the daily brief or critical email lists.
+      if (req.body.status === 'complete' && data) {
+        try {
+          let emailId = data.source_id || null
+
+          // If no direct source_id, find by thread_subject match
+          if (!emailId && data.source_label) {
+            const { data: matched } = await supabase
+              .from('emails')
+              .select('id')
+              .eq('thread_subject', data.source_label)
+              .eq('bucket', 1)
+              .maybeSingle()
+            if (matched) emailId = matched.id
+          }
+
+          if (emailId) {
+            await supabase
+              .from('emails')
+              .update({ bucket: 5, status: 'done' })
+              .eq('id', emailId)
+          }
+        } catch (_) {
+          // Non-fatal — task was still marked complete successfully
+        }
+      }
+
       return res.json(data)
     }
 
