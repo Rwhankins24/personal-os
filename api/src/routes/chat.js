@@ -1,6 +1,4 @@
-const express = require('express')
-const router  = express.Router()
-const supabase = require('../services/supabase')
+const supabase  = require('../services/supabase')
 const Anthropic = require('@anthropic-ai/sdk')
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
@@ -24,8 +22,9 @@ function daysAgo(n) {
   return d.toISOString()
 }
 
-// ── Main chat route ──────────────────────────────────────────────────────
-router.post('/', async (req, res) => {
+// ── Main chat handler ────────────────────────────────────────────────────
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
   const { question, history = [] } = req.body
   if (!question?.trim()) return res.status(400).json({ error: 'question required' })
 
@@ -271,6 +270,4 @@ ${context || 'No relevant data found for this time period.'}`.trim()
     console.error('Chat error:', err.message)
     res.status(500).json({ error: 'Chat failed', detail: err.message })
   }
-})
-
-module.exports = router
+}

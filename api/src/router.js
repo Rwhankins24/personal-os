@@ -17,6 +17,7 @@ const unlinkedIntelligence = require('./routes/unlinked-intelligence')
 const suggestedProjects   = require('./routes/suggested-projects')
 const aiQuestions         = require('./routes/ai-questions')
 const othersCommitments   = require('./routes/others-commitments')
+const chat                = require('./routes/chat')
 const health              = require('./health')
 
 const CORS_HEADERS = {
@@ -54,6 +55,7 @@ module.exports = async (req, res) => {
   if (matchRoute(path, '/api/suggested-projects'))    return suggestedProjects(req, res)
   if (matchRoute(path, '/api/ai-questions'))          return aiQuestions(req, res)
   if (matchRoute(path, '/api/others-commitments'))    return othersCommitments(req, res)
+  if (path === '/api/chat')                           return chat(req, res)
 
   return res.status(404).json({ error: 'Not found', path })
 }
