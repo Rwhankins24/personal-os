@@ -1,5 +1,7 @@
 data/last-email-report.json
 data/last-otter-report.json
+data/last-plaud-report.json
+data/gmail-credentials.json
 logs/*.log
 data/contact-sweep.json
 data/contact-sweep-review.json

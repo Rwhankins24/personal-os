@@ -2,7 +2,7 @@
 
 # Personal OS — launchd installer
 # Run once from your Mac Terminal: bash ~/personal-os/scripts/install-launchd.sh
-# Creates and loads both launchd jobs (upload @ 4:35am, process @ 6:05am)
+# Creates and loads both launchd jobs (upload on file-write, process @ 6:05am)
 
 set -e
 
@@ -49,13 +49,10 @@ cat > "$UPLOAD_PLIST" << PLIST
     <string>/bin/bash</string>
     <string>$SCRIPTS_DIR/upload-report.sh</string>
   </array>
-  <key>StartCalendarInterval</key>
-  <dict>
-    <key>Hour</key>
-    <integer>4</integer>
-    <key>Minute</key>
-    <integer>35</integer>
-  </dict>
+  <key>WatchPaths</key>
+  <array>
+    <string>$HOME_DIR/personal-os/data/last-email-report.json</string>
+  </array>
   <key>StandardOutPath</key>
   <string>$LOGS_DIR/upload-stdout.log</string>
   <key>StandardErrorPath</key>
@@ -135,7 +132,7 @@ launchctl list | grep personalos
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  launchd jobs installed successfully"
-echo "  Upload:  daily @ 4:35am (waits for today's file after email pull)"
+echo "  Upload:  fires automatically when last-email-report.json is written"
 echo "  Process: daily @ 6:05am"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""

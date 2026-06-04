@@ -4,20 +4,20 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.personalos.otter-upload</string>
+  <string>com.personalos.plaud-upload</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/ryanhankins/personal-os/scripts/upload-otter-report.sh</string>
+    <string>/Users/ryanhankins/personal-os/scripts/upload-plaud-report.sh</string>
   </array>
   <key>WatchPaths</key>
   <array>
-    <string>/Users/ryanhankins/personal-os/data/last-otter-report.json</string>
+    <string>/Users/ryanhankins/personal-os/data/last-plaud-report.json</string>
   </array>
   <key>StandardOutPath</key>
-  <string>/Users/ryanhankins/personal-os/logs/otter-upload-stdout.log</string>
+  <string>/Users/ryanhankins/personal-os/logs/plaud-upload-stdout.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/ryanhankins/personal-os/logs/otter-upload-stderr.log</string>
+  <string>/Users/ryanhankins/personal-os/logs/plaud-upload-stderr.log</string>
   <key>RunAtLoad</key>
   <false/>
 </dict>
