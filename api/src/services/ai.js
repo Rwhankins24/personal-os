@@ -481,25 +481,36 @@ async function extractMyCommitments(email, threadHistory = [], existingItemsCont
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1000,
+      max_tokens: 2000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
 
-Extract commitments RYAN made to others. Sent_body contains Ryan's own sent message in this thread — check it carefully for commitment language. Use thread history — only return open ones.
+Extract ALL commitments RYAN made to others in this thread. Cast a wide net — err on inclusion. Ryan forgets things he said he'd do and needs these surfaced.
 
-Types:
-Hard: specific deadline explicitly stated
-Soft: implied or flexible timing
-Conditional: depends on something else first
+Check sent_body and full_thread_content carefully. Count as a commitment ANY of the following signals from Ryan:
+- "I'll send / I'll get you / I'll have this to you / I'll follow up / I'll circle back"
+- "sending over / sending you / will forward / will share / will provide"
+- "by [day/date] / by end of week / by Friday / by EOD / by next week"
+- "let me check on that / let me look into it / let me confirm / I'll find out"
+- "will connect you / will introduce / will loop in / will set up a call"
+- "I'll review / I'll take a look / I'll get back to you"
+- "working on it / getting it together / finalizing / almost ready"
+- "will have the [number/estimate/proposal/contract/schedule/answer]"
+- Any implicit promise to deliver, respond, schedule, or act
+
+Commitment types:
+Hard: specific deadline or date mentioned
+Soft: implied timing or no date given
+Conditional: depends on something else happening first
 
 Thread: ${email.thread_subject || email.subject}
 Content: ${content}
 ${historyContext}
 ${existingSection}
-Return JSON array only.
+Return JSON array only. Include every commitment found, even soft/implied ones.
 [{
-  "title": "exactly what Ryan committed to",
+  "title": "exactly what Ryan committed to do",
   "made_to": "person name",
   "urgency": "critical|high|medium|low",
   "due_date": "YYYY-MM-DD or null",
@@ -507,7 +518,9 @@ Return JSON array only.
   "condition_text": "prerequisite or null",
   "implicit": false
 }]
-If no open commitments return [].`
+Set implicit: true for commitments that are strongly implied but not stated explicitly.
+If thread history shows Ryan already fulfilled this commitment, omit it.
+If genuinely no commitments exist in this thread, return [].`
       }]
     })
   )
