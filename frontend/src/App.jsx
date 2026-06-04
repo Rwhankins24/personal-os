@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Dashboard   from './pages/Dashboard'
-import TaskDetail  from './pages/TaskDetail'
-import Projects    from './pages/Projects'
-import ProjectCard from './pages/ProjectCard'
-import ContactCard from './pages/ContactCard'
-import Contacts    from './pages/Contacts'
+import Dashboard       from './pages/Dashboard'
+import TaskDetail      from './pages/TaskDetail'
+import Projects        from './pages/Projects'
+import ProjectCard     from './pages/ProjectCard'
+import ContactCard     from './pages/ContactCard'
+import Contacts        from './pages/Contacts'
+import TasksPage       from './pages/TasksPage'
+import EmailsPage      from './pages/EmailsPage'
+import OthersPage      from './pages/OthersPage'
+import CommitmentsPage from './pages/CommitmentsPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -101,7 +105,11 @@ export default function App() {
             <Route path="/task/:id"       element={<TaskDetail />} />
             <Route path="/projects"       element={<Projects />} />
             <Route path="/projects/:id"   element={<ProjectCard />} />
-            <Route path="/project/:id"    element={<ProjectCard />} />
+            <Route path="/project/:id"       element={<ProjectCard />} />
+            <Route path="/tasks"            element={<TasksPage />} />
+            <Route path="/emails"           element={<EmailsPage />} />
+            <Route path="/others"           element={<OthersPage />} />
+            <Route path="/commitments-list" element={<CommitmentsPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

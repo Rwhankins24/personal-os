@@ -116,11 +116,17 @@ function Card({ children, className = '' }) {
   )
 }
 
-function SectionHeader({ title, count, badge, action }) {
+function SectionHeader({ title, count, badge, action, to }) {
   return (
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center gap-2">
-        <h2 className="text-sm font-semibold text-[#1a1a18]">{title}</h2>
+        {to ? (
+          <Link to={to} className="text-sm font-semibold text-[#1a1a18] hover:text-blue-600 hover:underline transition-colors">
+            {title}
+          </Link>
+        ) : (
+          <h2 className="text-sm font-semibold text-[#1a1a18]">{title}</h2>
+        )}
         {count !== undefined && count > 0 && (
           <span className="text-xs bg-gray-100 text-[#6b6b67] px-2 py-0.5 rounded-full">{count}</span>
         )}
@@ -352,6 +358,7 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
       <SectionHeader
         title="Tasks"
         count={open.length}
+        to="/tasks"
         action={
           <span className="text-xs text-[#6b6b67]">
             {(tasks || []).filter(t => t.status === 'done').length} done
@@ -444,7 +451,7 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
 
   return (
     <Card>
-      <SectionHeader title="My Commitments" count={open.length} />
+      <SectionHeader title="My Commitments" count={open.length} to="/commitments-list" />
       {isLoading ? <Spinner /> : open.length === 0 ? (
         <EmptyState icon="🤝" message="No open commitments" />
       ) : (
@@ -727,7 +734,7 @@ function OthersCommitmentsPanel({ contacts }) {
 
   return (
     <Card>
-      <SectionHeader title="Waiting On Others" count={items.length} />
+      <SectionHeader title="Waiting On Others" count={items.length} to="/others" />
       {isLoading ? <Spinner /> : items.length === 0 ? (
         <EmptyState icon="⏳" message="Nothing waiting on others" />
       ) : (
@@ -800,7 +807,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
 
   return (
     <Card>
-      <SectionHeader title="Email Queue" />
+      <SectionHeader title="Email Queue" to="/emails" />
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => setTab('reply')}
