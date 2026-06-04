@@ -838,13 +838,23 @@ async function main() {
           }
           unlinkedClusters[topic].push(email)
 
-          await supabase.from('unlinked_intelligence').insert({
-            content: JSON.stringify(intelItems),
-            intelligence_type: 'mixed',
-            source_email_id: email.id,
-            suggested_project: topic,
-            status: 'unreviewed'
-          })
+          // Dedup: skip if this email already has an unlinked intelligence entry
+          // (regardless of status — avoids re-surfacing filed/dismissed items)
+          const { data: existingIntel } = await supabase
+            .from('unlinked_intelligence')
+            .select('id')
+            .eq('source_email_id', email.id)
+            .maybeSingle()
+
+          if (!existingIntel) {
+            await supabase.from('unlinked_intelligence').insert({
+              content: JSON.stringify(intelItems),
+              intelligence_type: 'mixed',
+              source_email_id: email.id,
+              suggested_project: topic,
+              status: 'unreviewed'
+            })
+          }
         }
       }
 

@@ -90,15 +90,19 @@ module.exports = async (req, res) => {
     if (report.calendar && report.calendar.length > 0) {
       for (const event of report.calendar) {
         try {
-          const externalId = event.external_id ||
-            `${event.title}-${event.start || event.start_time}`
+          // Support both 'title' and 'subject' field names from the email report JSON
+          const title = event.title || event.subject || 'Untitled'
+          const startTime = event.start || event.start_time
+          // Support both 'external_id' and 'id' field names
+          const externalId = event.external_id || event.id ||
+            `${title}-${startTime}`
 
           // Targeted event upsert — does NOT overwrite AI-set fields:
           // high_stakes, stakes_reason, preparation_required, body (pre-meeting brief)
           const eventPayload = {
-            title:       event.title,
-            start_time:  event.start || event.start_time,
-            end_time:    event.end   || event.end_time,
+            title,
+            start_time:  startTime,
+            end_time:    event.end   || event.end_time || null,
             location:    event.location  || null,
             join_link:   event.join_link || null,
             organizer:   event.organizer || null,
@@ -119,7 +123,7 @@ module.exports = async (req, res) => {
           calendarResults.pushed++
         } catch (err) {
           calendarResults.failed++
-          calendarResults.errors.push({ item: event.title, error: err.message })
+          calendarResults.errors.push({ item: event.title || event.subject, error: err.message })
         }
       }
     }
