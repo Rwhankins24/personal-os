@@ -13,6 +13,8 @@ import TasksPage       from './pages/TasksPage'
 import EmailsPage      from './pages/EmailsPage'
 import OthersPage      from './pages/OthersPage'
 import CommitmentsPage from './pages/CommitmentsPage'
+import ChatPage        from './pages/ChatPage'
+import ChatWidget      from './components/ChatWidget'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -113,7 +115,9 @@ export default function App() {
             <Route path="/emails"           element={<EmailsPage />} />
             <Route path="/others"           element={<OthersPage />} />
             <Route path="/commitments-list" element={<CommitmentsPage />} />
+            <Route path="/chat"             element={<ChatPage />} />
           </Routes>
+          <ChatWidget />
         </BrowserRouter>
       </QueryClientProvider>
     </PasswordGate>

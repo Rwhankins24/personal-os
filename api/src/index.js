@@ -28,6 +28,7 @@ app.use('/api/projects',      require('./routes/projects'))
 app.use('/api/contacts',      require('./routes/contacts'))
 app.use('/api/captures',      require('./routes/captures'))
 app.use('/api/meeting-notes', require('./routes/meeting_notes'))
+app.use('/api/chat',         require('./routes/chat'))
 
 // ── 404 handler ───────────────────────────────────────────────
 app.use((req, res) => {
