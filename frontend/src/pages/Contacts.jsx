@@ -34,20 +34,39 @@ function lastContactLabel(dateStr) {
 }
 
 const SORT_OPTIONS = [
-  { value: 'key_first',  label: 'Key contacts first' },
-  { value: 'recent',     label: 'Most recent contact' },
-  { value: 'warmth',     label: 'Relationship warmth' },
-  { value: 'open_items', label: 'Most open items' },
-  { value: 'going_cold', label: 'Going cold' },
+  { value: 'key_first',   label: 'Key contacts first' },
+  { value: 'recent',      label: 'Most recent contact' },
+  { value: 'alpha_first', label: 'A–Z by first name' },
+  { value: 'alpha_last',  label: 'A–Z by last name' },
+  { value: 'warmth',      label: 'Relationship warmth' },
+  { value: 'open_items',  label: 'Most open items' },
+  { value: 'going_cold',  label: 'Going cold' },
 ]
+
+const INTERNAL_DOMAINS = new Set([
+  'claycorp.com', 'theljc.com', 'ljc.com', 'ljcdesign.com',
+  'realcrg.com', 'concretestrategies.com', 'ventanaconstruction.com', 'ventana.vc',
+])
+
+function isInternal(email) {
+  const domain = (email || '').split('@')[1]?.toLowerCase() || ''
+  return INTERNAL_DOMAINS.has(domain)
+}
+
+function getLastName(name) {
+  if (!name) return ''
+  const parts = name.trim().split(/\s+/)
+  return parts.length > 1 ? parts[parts.length - 1] : parts[0]
+}
 
 export default function Contacts() {
   const navigate = useNavigate()
   const qc = useQueryClient()
-  const [search,       setSearch]       = useState('')
-  const [warmthFilter, setWarmthFilter] = useState('all')
-  const [keyOnly,      setKeyOnly]      = useState(false)
-  const [sort,         setSort]         = useState('key_first')
+  const [search,          setSearch]          = useState('')
+  const [warmthFilter,    setWarmthFilter]    = useState('all')
+  const [keyOnly,         setKeyOnly]         = useState(false)
+  const [sort,            setSort]            = useState('key_first')
+  const [internalFilter,  setInternalFilter]  = useState('all') // 'all' | 'internal' | 'external'
 
   const toggleKey = useMutation({
     mutationFn: ({ id, is_key_contact }) => updateContact(id, { is_key_contact }),
@@ -92,6 +111,8 @@ export default function Contacts() {
     return (contacts || []).filter(c => {
       if (keyOnly && !c.is_key_contact) return false
       if (warmthFilter !== 'all' && c.relationship_warmth !== warmthFilter) return false
+      if (internalFilter === 'internal' && !isInternal(c.email)) return false
+      if (internalFilter === 'external' &&  isInternal(c.email)) return false
       if (!search.trim()) return true
       const q = search.toLowerCase()
       return (
@@ -101,7 +122,7 @@ export default function Contacts() {
         c.title?.toLowerCase().includes(q)
       )
     })
-  }, [contacts, warmthFilter, keyOnly, search])
+  }, [contacts, warmthFilter, keyOnly, search, internalFilter])
 
   // Sort
   const sorted = useMemo(() => {
@@ -116,6 +137,15 @@ export default function Contacts() {
         if (a.last_contact_date) return -1
         if (b.last_contact_date) return 1
         return (a.name || '').localeCompare(b.name || '')
+      }
+
+      if (sort === 'alpha_first') {
+        return (a.name || '').localeCompare(b.name || '')
+      }
+
+      if (sort === 'alpha_last') {
+        return getLastName(a.name).localeCompare(getLastName(b.name)) ||
+               (a.name || '').localeCompare(b.name || '')
       }
 
       if (sort === 'warmth') {
@@ -190,6 +220,37 @@ export default function Contacts() {
                 <option key={o.value} value={o.value}>{o.label}</option>
               ))}
             </select>
+          </div>
+
+          {/* All / Internal / External tabs */}
+          <div className="flex items-center gap-1 mb-2 border-b border-[#e5e5e3] pb-2">
+            {[
+              { value: 'all',      label: 'All' },
+              { value: 'external', label: 'External' },
+              { value: 'internal', label: 'Internal' },
+            ].map(tab => {
+              const count = (contacts || []).filter(c => {
+                if (tab.value === 'all') return true
+                if (tab.value === 'internal') return isInternal(c.email)
+                return !isInternal(c.email)
+              }).length
+              return (
+                <button
+                  key={tab.value}
+                  onClick={() => setInternalFilter(tab.value)}
+                  className={`text-sm px-4 py-1.5 rounded-lg font-medium transition-all ${
+                    internalFilter === tab.value
+                      ? 'bg-[#1a1a18] text-white'
+                      : 'text-[#6b6b67] hover:bg-gray-100'
+                  }`}
+                >
+                  {tab.label}
+                  <span className={`ml-1.5 text-xs ${internalFilter === tab.value ? 'opacity-70' : 'text-[#9b9b97]'}`}>
+                    {count}
+                  </span>
+                </button>
+              )
+            })}
           </div>
 
           {/* Key contacts count */}
