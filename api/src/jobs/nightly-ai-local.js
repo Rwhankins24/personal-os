@@ -1104,6 +1104,158 @@ async function main() {
   // ── STEP 3.7: Enrich contacts from email signatures ─────────────
   // Targets contacts that need enrichment — not just active email senders.
   // Includes: never enriched, missing key fields, or enriched > 30 days ago.
+  // ── STEP 3.7a: Context questions ────────────────────────────────
+  // Surfaces open-ended questions Ryan can type a response to.
+  // Answers feed back into buildRyanContext() as persistent knowledge.
+  console.log('Step 3.7a: Generating context questions...')
+
+  // Helper: skip if we already have an unanswered question on the same subject
+  async function questionAlreadyOpen(keyPhrase) {
+    const { data } = await supabase
+      .from('ai_questions')
+      .select('id')
+      .ilike('question', `%${keyPhrase.slice(0, 40)}%`)
+      .is('answered_at', null)
+      .maybeSingle()
+    return !!data
+  }
+
+  try {
+    // ── 1. Unknown person appearing in multiple threads ─────────────
+    // Find contacts with no role AND appearing in 3+ active emails this week
+    const nameCounts = {}
+    for (const email of (activeEmails || [])) {
+      const name = email.from_name
+      if (name && name !== 'Ryan Hankins') {
+        nameCounts[name] = (nameCounts[name] || 0) + 1
+      }
+    }
+    for (const [name, count] of Object.entries(nameCounts)) {
+      if (count < 3) continue
+      const { data: contact } = await supabase
+        .from('contacts')
+        .select('id, role, company, relationship_tier')
+        .ilike('name', `%${name.split(' ')[0]}%`)
+        .maybeSingle()
+
+      // Only ask if no role is set (we don't know who they are yet)
+      if (!contact?.role) {
+        const alreadyAsked = await questionAlreadyOpen(name)
+        if (!alreadyAsked) {
+          await logAIQuestion(
+            `I keep seeing ${name} across ${count} of your active email threads. Who are they — what's their role, company, and how do they fit into your work?`,
+            `Threads: ${(activeEmails || []).filter(e => e.from_name === name).map(e => e.thread_subject).slice(0, 3).join(', ')}`,
+            'context_person'
+          )
+          results.questions_logged++
+        }
+      }
+    }
+
+    // ── 2. Thread sitting in bucket 2–3 for 7+ days with no action ──
+    // Surfaces threads that have gone stale — still active but not prioritized
+    const sevenDaysAgo = new Date()
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+    const { data: staleThreads } = await supabase
+      .from('emails')
+      .select('id, thread_subject, from_name, days_waiting')
+      .in('bucket', [2, 3])
+      .lt('received_at', sevenDaysAgo.toISOString())
+      .order('days_waiting', { ascending: false })
+      .limit(3)
+
+    for (const thread of (staleThreads || [])) {
+      const alreadyAsked = await questionAlreadyOpen(thread.thread_subject)
+      if (!alreadyAsked) {
+        await logAIQuestion(
+          `The thread "${thread.thread_subject}" from ${thread.from_name} has been sitting for ${thread.days_waiting} days without action. Is this still relevant, or should I drop it from your active list?`,
+          `${thread.days_waiting} days waiting, currently bucket 2-3`,
+          'context_importance'
+        )
+        results.questions_logged++
+      }
+    }
+
+    // ── 3. High-stakes calendar event with no meeting notes ────────
+    // Ask for context on upcoming meetings where prep matters
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 2)
+
+    const { data: upcomingHighStakes } = await supabase
+      .from('events')
+      .select('id, title, start_time, body')
+      .eq('high_stakes', true)
+      .is('body', null)          // no pre-meeting brief yet
+      .gte('start_time', new Date().toISOString())
+      .lte('start_time', tomorrow.toISOString())
+      .limit(2)
+
+    for (const event of (upcomingHighStakes || [])) {
+      const alreadyAsked = await questionAlreadyOpen(event.title)
+      if (!alreadyAsked) {
+        await logAIQuestion(
+          `You have "${event.title}" coming up — flagged as high-stakes. What's your primary goal for this meeting, and is there anything I should know going in?`,
+          `Scheduled: ${new Date(event.start_time).toLocaleString()}`,
+          'context_meeting'
+        )
+        results.questions_logged++
+      }
+    }
+
+    // ── 4. Overdue commitment (mine) ───────────────────────────────
+    const fiveDaysAgo = new Date()
+    fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5)
+
+    const { data: overdueCommitments } = await supabase
+      .from('commitments')
+      .select('id, description, committed_to, due_date')
+      .eq('status', 'open')
+      .lt('due_date', today)
+      .order('due_date', { ascending: true })
+      .limit(2)
+
+    for (const c of (overdueCommitments || [])) {
+      const alreadyAsked = await questionAlreadyOpen(c.description?.slice(0, 40) || 'commitment')
+      if (!alreadyAsked) {
+        const daysLate = Math.floor((new Date() - new Date(c.due_date)) / (1000 * 60 * 60 * 24))
+        await logAIQuestion(
+          `You committed to "${c.description}" for ${c.committed_to || 'someone'} — that's ${daysLate} day${daysLate !== 1 ? 's' : ''} past due. Did you handle this? If not, what's the hold-up?`,
+          `Due: ${c.due_date}`,
+          'overdue_commitment'
+        )
+        results.questions_logged++
+      }
+    }
+
+    // ── 5. Stalled pending decision (7+ days, no resolution) ──────
+    const { data: stalledDecisions } = await supabase
+      .from('pending_decisions')
+      .select('id, title, context, created_at')
+      .eq('status', 'open')
+      .lt('created_at', sevenDaysAgo.toISOString())
+      .order('created_at', { ascending: true })
+      .limit(2)
+
+    for (const d of (stalledDecisions || [])) {
+      const daysOld = Math.floor((new Date() - new Date(d.created_at)) / (1000 * 60 * 60 * 24))
+      const alreadyAsked = await questionAlreadyOpen(d.title?.slice(0, 40) || 'decision')
+      if (!alreadyAsked) {
+        await logAIQuestion(
+          `The "${d.title}" decision has been open for ${daysOld} days. What's needed to resolve it — are you waiting on someone, more information, or is this on you to call?`,
+          d.context || '',
+          'stalled_decision'
+        )
+        results.questions_logged++
+      }
+    }
+
+  } catch (err) {
+    results.errors.push(`Context questions: ${err.message}`)
+  }
+
+  console.log(`  ✓ Context questions logged: ${results.questions_logged}`)
+
   console.log('Step 3.7: Enriching contacts from signatures...')
   let contactsEnriched = 0
 

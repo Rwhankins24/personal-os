@@ -87,6 +87,24 @@ async function buildRyanContext() {
         if (c.company) line += ` @ ${c.company}`
         return line
       }).join('\n')
+      ctx += '\n\n'
+    }
+
+    // Pull Ryan's answers to AI questions — this is the knowledge accumulation loop.
+    // Every answer Ryan types becomes permanent context that shapes all future AI calls.
+    const { data: answeredQs } = await supabase
+      .from('ai_questions')
+      .select('question, answer_chat, answered_at')
+      .not('answer_chat', 'is', null)
+      .not('answer_chat', 'eq', '')
+      .order('answered_at', { ascending: false })
+      .limit(30)
+
+    if (answeredQs?.length) {
+      ctx += 'CONTEXT RYAN HAS PROVIDED (his direct answers to AI questions — treat as ground truth):\n'
+      ctx += answeredQs.map(q =>
+        `- Q: ${q.question}\n  A: ${q.answer_chat}`
+      ).join('\n')
       ctx += '\n'
     }
 
