@@ -100,9 +100,11 @@ async function buildRyanContext() {
       .order('answered_at', { ascending: false })
       .limit(30)
 
-    if (answeredQs?.length) {
+    // Exclude skipped questions (__skip__ means "not relevant right now")
+    const realAnswers = (answeredQs || []).filter(q => q.answer_chat !== '__skip__')
+    if (realAnswers.length) {
       ctx += 'CONTEXT RYAN HAS PROVIDED (his direct answers to AI questions — treat as ground truth):\n'
-      ctx += answeredQs.map(q =>
+      ctx += realAnswers.map(q =>
         `- Q: ${q.question}\n  A: ${q.answer_chat}`
       ).join('\n')
       ctx += '\n'

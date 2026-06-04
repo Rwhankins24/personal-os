@@ -504,6 +504,103 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
   )
 }
 
+// ── Quick Question ─────────────────────────────────────────────
+// One question at a time, right in the flow. Tap anywhere on the card
+// to focus the input. Enter submits. Skip sends it to the back of the queue.
+function QuickQuestion({ question: q, remaining }) {
+  const qc = useQueryClient()
+  const [text, setText] = useState('')
+  const [active, setActive] = useState(false)
+  const inputRef = useRef(null)
+
+  const answer = useMutation({
+    mutationFn: ({ id, text }) => answerAIQuestion(id, text),
+    onSuccess: () => {
+      setText('')
+      setActive(false)
+      qc.invalidateQueries({ queryKey: ['ai-questions'] })
+    },
+  })
+
+  const skip = useMutation({
+    mutationFn: (id) => answerAIQuestion(id, '__skip__'),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['ai-questions'] }),
+  })
+
+  const handleCardClick = () => {
+    setActive(true)
+    setTimeout(() => inputRef.current?.focus(), 50)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey && text.trim()) {
+      e.preventDefault()
+      answer.mutate({ id: q.id, text: text.trim() })
+    }
+    if (e.key === 'Escape') setActive(false)
+  }
+
+  const typeLabel = {
+    context_person:     '👤 Who is this?',
+    context_meeting:    '📅 Meeting context',
+    context_importance: '❓ Still relevant?',
+    overdue_commitment: '⚠️ Overdue',
+    stalled_decision:   '⏸ Stalled decision',
+    binary:             '❓ Quick check',
+  }[q.question_type] || '💬 Quick input'
+
+  return (
+    <div
+      className="bg-white border border-blue-200 rounded-2xl p-4 cursor-text shadow-sm"
+      onClick={handleCardClick}
+    >
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <div className="flex-1">
+          <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide mr-2">
+            {typeLabel}
+          </span>
+          {remaining > 0 && (
+            <span className="text-xs text-[#6b6b67]">+{remaining} more</span>
+          )}
+          <p className="text-sm text-[#1a1a18] mt-1 leading-snug">{q.question}</p>
+          {q.context && (
+            <p className="text-xs text-[#6b6b67] mt-0.5 italic truncate">{q.context}</p>
+          )}
+        </div>
+        <button
+          onClick={(e) => { e.stopPropagation(); skip.mutate(q.id) }}
+          className="text-xs text-[#9b9b97] hover:text-[#6b6b67] flex-shrink-0 mt-0.5"
+          title="Skip for now"
+        >skip</button>
+      </div>
+
+      {active ? (
+        <div className="flex gap-2 mt-2" onClick={e => e.stopPropagation()}>
+          <input
+            ref={inputRef}
+            value={text}
+            onChange={e => setText(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type your answer, press Enter to save…"
+            className="flex-1 text-sm border border-blue-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-[#f8f9ff]"
+          />
+          <button
+            onClick={() => text.trim() && answer.mutate({ id: q.id, text: text.trim() })}
+            disabled={!text.trim() || answer.isPending}
+            className="text-xs bg-blue-600 text-white px-3 py-2 rounded-lg disabled:opacity-40 hover:bg-blue-700 flex-shrink-0"
+          >
+            {answer.isPending ? '…' : 'Save'}
+          </button>
+        </div>
+      ) : (
+        <div className="mt-2 text-xs text-blue-500 hover:text-blue-700">
+          Tap to answer…
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Others' Commitments panel ──────────────────────────────────
 // Three sub-sections:
 //   blocking_ryan — manually flagged by Ryan as blocking his work (highest priority)
@@ -1478,6 +1575,15 @@ export default function Dashboard() {
 
         {/* Calendar — full width */}
         <CalendarStrip events={events} isLoading={loadingEvents} />
+
+        {/* Quick Question — surfaces one question at a time, prominent + frictionless */}
+        {questions?.length > 0 && (
+          <QuickQuestion
+            question={questions[0]}
+            remaining={questions.length - 1}
+            onAnswered={() => {}}
+          />
+        )}
 
         {/* Two-column grid: action left, intelligence right */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
