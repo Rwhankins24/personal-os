@@ -179,12 +179,16 @@ def find_attachments(payload):
     return attachments
 
 def parse_action_items(body_text):
-    """Extract action items from email body. Returns ryan_items, others_items, unattributed."""
+    """
+    Extract action items from Plaud summary.txt.
+    Plaud uses @Name** as assignee section headers, followed by task lines.
+    Also handles inline "Name: task" patterns.
+    """
     ryan_items, others_items, unattributed = [], [], []
 
-    # Find action items section
     lines = body_text.split('\n')
     in_action_section = False
+    current_assignee = None
 
     for line in lines:
         line = line.strip()
@@ -194,40 +198,72 @@ def parse_action_items(body_text):
         # Detect action items section header
         if re.search(r'action items?|follow.?ups?|next steps?|tasks?', line, re.I) and len(line) < 60:
             in_action_section = True
+            current_assignee = None
             continue
 
-        # Detect end of action items section (new major section)
-        if in_action_section and re.match(r'^#{1,3}\s|^[A-Z][A-Z\s]{5,}:?\s*$', line):
+        # Detect end of action items section (new # section)
+        if re.match(r'^#{1,3}\s', line) and in_action_section:
             in_action_section = False
+            current_assignee = None
             continue
 
         if not in_action_section:
             continue
 
-        # Skip section headers within action items
-        if len(line) < 4 or line.endswith(':') and len(line) < 30:
+        # Detect Plaud **@Name** assignee label lines (standalone — not a task)
+        # Plaud format: **@Chris Tinney** or @Name or @Name**
+        plaud_assignee = re.match(r'^\*{0,2}@([^*\n]+?)\*{0,2}\s*$', line)
+        if plaud_assignee:
+            current_assignee = plaud_assignee.group(1).strip()
             continue
 
-        # Clean bullet markers
-        task = re.sub(r'^[-•*\d\.]+\s*', '', line).strip()
+        # Strip markdown image noise: ![...](url)
+        line = re.sub(r'!\[.*?\]\(.*?\)', '', line).strip()
+        if not line:
+            continue
+
+        # Extract trailing due date hints: [Tomorrow] [TBD] etc.
+        due_date = None
+        due_match = re.search(r'\[(Tomorrow|Today|TBD|[\w\s,]+\d{4})\]\s*$', line, re.I)
+        if due_match:
+            raw_due = due_match.group(1).strip()
+            if raw_due.lower() == 'tomorrow':
+                from datetime import datetime, timedelta
+                due_date = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+            elif raw_due.lower() not in ('tbd',):
+                due_date = raw_due
+            line = line[:due_match.start()].strip()
+
+        # Clean bullet markers, checkboxes, and trailing markdown bold **
+        # Order matters: strip bullet first (- [ ] task), then checkbox
+        task = re.sub(r'^[-•\d\.]+\s*', '', line).strip()    # bullet markers (- or 1.)
+        task = re.sub(r'^\[[ xX]\]\s*', '', task).strip()    # [ ] or [x] checkboxes
+        task = re.sub(r'\*{1,2}$', '', task).strip()          # trailing **
+        task = task.strip(' -–')
+
         if not task or len(task) < 5:
             continue
 
-        # Detect speaker attribution: "Name: task" or "[Name] task" or "Name - task"
-        speaker_match = re.match(r'^([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s*[:\-]\s*(.+)', task)
-        bracket_match = re.match(r'^\[([^\]]+)\]\s*(.+)', task)
+        # Determine assignee: section-level (@Name**) takes priority
+        if current_assignee:
+            assignee = current_assignee
+            task_text = task
+        else:
+            # Inline "Name: task" fallback
+            speaker_match = re.match(r'^([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s*:\s*(.+)', task)
+            if speaker_match:
+                assignee = speaker_match.group(1).strip()
+                task_text = speaker_match.group(2).strip()
+            else:
+                assignee = None
+                task_text = task
 
-        assignee = None
-        task_text = task
-
-        if speaker_match:
-            assignee = speaker_match.group(1).strip()
-            task_text = speaker_match.group(2).strip()
-        elif bracket_match:
-            assignee = bracket_match.group(1).strip()
-            task_text = bracket_match.group(2).strip()
-
-        item = {"task": task_text, "assignee": assignee, "due_date": None, "source": "plaud_email_body"}
+        item = {
+            "task": task_text,
+            "assignee": assignee,
+            "due_date": due_date,
+            "source": "plaud_summary_txt"
+        }
 
         if assignee:
             if re.search(r'\bryan\b', assignee, re.I):
@@ -240,7 +276,11 @@ def parse_action_items(body_text):
     return ryan_items, others_items, unattributed
 
 def parse_summary(body_text):
-    """Extract the summary section from the body."""
+    """Extract the summary section from Plaud summary.txt."""
+    # Strip markdown images (Plaud banner at top): ![PLAUD NOTE](url)
+    body_text = re.sub(r'!\[.*?\]\(.*?\)', '', body_text)
+    # Strip markdown links but keep text
+    body_text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', body_text)
     lines = body_text.split('\n')
     summary_lines = []
     in_summary = False
