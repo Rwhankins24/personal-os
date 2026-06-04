@@ -342,6 +342,14 @@ async function main() {
       const plaudReport = await plaudRes.json()
       const meetings = plaudReport.meetings || []
 
+      // Load calendar events for today once — used to cross-ref all meetings
+      const { data: todayCalendarEvents } = await supabase
+        .from('events')
+        .select('title, start_time, attendees')
+        .gte('start_time', `${today}T00:00:00Z`)
+        .lte('start_time', `${today}T23:59:59Z`)
+        .not('attendees', 'is', null)
+
       for (const meeting of meetings) {
         if (!meeting.gmail_message_id) continue
 
@@ -353,6 +361,55 @@ async function main() {
           .maybeSingle()
 
         if (existing) continue
+
+        // ── Cross-reference calendar to get real attendees + start_time ──
+        // Match on keyword overlap between Plaud title and calendar event title
+        let calendarMatch = null
+        const plaudKeywords = (meeting.title || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, '')
+          .split(' ')
+          .filter(w => w.length > 4)
+
+        for (const event of (todayCalendarEvents || [])) {
+          const eventTitle = (event.title || '').toLowerCase().replace(/[^a-z0-9\s]/g, '')
+          const overlap = plaudKeywords.filter(w => eventTitle.includes(w)).length
+          // Require 2+ keyword matches — avoids false positives on generic words
+          if (overlap >= 2) {
+            calendarMatch = event
+            break
+          }
+        }
+
+        // Build participant roster from calendar attendees
+        // Format is mixed: emails ("TinneyC@claycorp.com") or names ("Bill Huie")
+        let participantRoster = []
+        if (calendarMatch?.attendees?.length) {
+          // Resolve emails → names via contacts table where possible
+          const attendeeEntries = calendarMatch.attendees
+          const emails = attendeeEntries.filter(a => a.includes('@'))
+          const names = attendeeEntries.filter(a => !a.includes('@'))
+
+          // Look up names for email entries
+          if (emails.length > 0) {
+            const { data: contacts } = await supabase
+              .from('contacts')
+              .select('name, email')
+              .in('email', emails.map(e => e.toLowerCase()))
+            const emailToName = {}
+            for (const c of (contacts || [])) {
+              emailToName[c.email.toLowerCase()] = c.name
+            }
+            for (const email of emails) {
+              const name = emailToName[email.toLowerCase()]
+              participantRoster.push(name || email)
+            }
+          }
+          participantRoster = [...participantRoster, ...names]
+          console.log(`  ✓ Calendar match for "${meeting.title}": ${participantRoster.length} attendees from "${calendarMatch.title}"`)
+        } else {
+          console.log(`  ℹ No calendar match for "${meeting.title}" on ${meeting.date}`)
+        }
 
         // Map Plaud fields → meeting_notes schema
         const actionItemsRaw = [
@@ -373,14 +430,17 @@ async function main() {
           }))
         ]
 
+        // Use real start_time from calendar if matched, otherwise default to noon
+        const startTime = calendarMatch?.start_time || `${meeting.date}T12:00:00Z`
+
         await supabase.from('meeting_notes').insert({
           otter_id:               `plaud_${meeting.gmail_message_id}`,
           title:                  meeting.title,
-          start_time:             `${meeting.date}T09:00:00Z`,
+          start_time:             startTime,
           short_summary:          meeting.summary || '',
           full_transcript:        meeting.transcript_text || null,
           action_items_raw:       actionItemsRaw,
-          participants:           meeting.participants || [],
+          participants:           participantRoster,
           source:                 'plaud',
           intelligence_extracted: false,
           commitments_extracted:  false
