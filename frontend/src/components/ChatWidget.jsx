@@ -89,10 +89,10 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating button — fixed bottom-right, never overlaps content */}
+      {/* Floating button — fixed bottom-LEFT, clear of sync button (bottom-right) */}
       <button
         onClick={() => setOpen(o => !o)}
-        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 ${
+        className={`fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 ${
           open
             ? 'bg-[#1a1a18] text-white rotate-45'
             : 'bg-[#1a1a18] text-white hover:scale-105'
@@ -108,34 +108,35 @@ export default function ChatWidget() {
         )}
       </button>
 
-      {/* Chat panel — sits above the button, doesn't overlap page content */}
+      {/* Chat panel — bottom-left above the button */}
       {open && (
         <div
-          className="fixed bottom-22 right-6 z-50 w-[360px] max-w-[calc(100vw-3rem)] bg-[#f8f8f6] border border-[#e5e5e3] rounded-2xl shadow-xl flex flex-col overflow-hidden"
-          style={{ height: '480px', bottom: '5.5rem' }}
+          className="fixed left-6 z-50 w-[360px] max-w-[calc(100vw-3rem)] bg-[#f8f8f6] border border-[#e5e5e3] rounded-2xl shadow-xl flex flex-col overflow-hidden"
+          style={{ height: '500px', bottom: '5.5rem' }}
         >
+          {/* Full page link — top of panel, prominent */}
+          <Link
+            to="/chat"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-between px-4 py-2.5 bg-blue-50 border-b border-blue-100 hover:bg-blue-100 transition-colors group"
+          >
+            <span className="text-xs font-medium text-blue-700">Open full chat page</span>
+            <span className="text-xs text-blue-500 group-hover:translate-x-0.5 transition-transform">→</span>
+          </Link>
+
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a18] rounded-t-2xl">
+          <div className="flex items-center justify-between px-4 py-2.5 bg-[#1a1a18]">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-400" />
               <span className="text-sm font-semibold text-white">Ask anything</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Link
-                to="/chat"
-                onClick={() => setOpen(false)}
-                className="text-[10px] text-white/60 hover:text-white/90 underline"
-              >
-                Full page →
-              </Link>
-              <button
-                onClick={() => setMessages([])}
-                className="text-[10px] text-white/60 hover:text-white/90"
-                title="Clear conversation"
-              >
-                Clear
-              </button>
-            </div>
+            <button
+              onClick={() => setMessages([])}
+              className="text-[10px] text-white/60 hover:text-white/90"
+              title="Clear conversation"
+            >
+              Clear
+            </button>
           </div>
 
           {/* Messages */}
