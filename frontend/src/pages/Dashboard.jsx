@@ -505,9 +505,14 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
 }
 
 // ── Others' Commitments panel ──────────────────────────────────
+// Three sub-sections:
+//   blocking_ryan — manually flagged by Ryan as blocking his work (highest priority)
+//   to_ryan       — AI-detected as owed directly to Ryan
+//   general       — others' actions not specifically owed to Ryan
 function OthersCommitmentsPanel({ contacts }) {
   const qc = useQueryClient()
-  const [showAll, setShowAll] = useState(false)
+  const [collapsed, setCollapsed] = useState({ blocking_ryan: false, to_ryan: false, general: true })
+
   const { data, isLoading } = useQuery({
     queryKey: ['others-commitments'],
     queryFn: () => getOthersCommitments('open'),
@@ -521,75 +526,139 @@ function OthersCommitmentsPanel({ contacts }) {
 
   const items = data || []
 
+  // Split into three buckets
+  const blocking = items.filter(c => c.delivery_type === 'blocking_ryan')
+  const toRyan   = items.filter(c => c.delivery_type === 'to_ryan')
+  const general  = items.filter(c => !c.delivery_type || c.delivery_type === 'general')
+
+  // Group items by person name within a bucket
+  const groupByPerson = (list) => {
+    const groups = {}
+    for (const c of list) {
+      const name = c.committed_by_name || c.made_by || 'Unknown'
+      if (!groups[name]) groups[name] = []
+      groups[name].push(c)
+    }
+    return groups
+  }
+
+  const CommitmentRow = ({ c }) => (
+    <div key={c.id} className="flex items-start gap-2 group py-1">
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <p className="text-sm text-[#1a1a18] leading-snug">{c.title}</p>
+          {c.ai_suggests_complete && <PillBadge label="AI: may be done" color="green" />}
+          {c.days_overdue > 0 && <PillBadge label={`${c.days_overdue}d late`} color="red" />}
+        </div>
+        {c.due_date && (
+          <p className={`text-xs mt-0.5 ${c.days_overdue > 0 ? 'text-red-500 font-medium' : 'text-[#6b6b67]'}`}>
+            Due {dayjs(c.due_date).format('MMM D')}
+          </p>
+        )}
+        {c.context && (
+          <p className="text-xs text-[#6b6b67] mt-0.5 italic truncate">{c.context}</p>
+        )}
+        {c.ai_suggests_complete && c.fulfillment_evidence && (
+          <p className="text-xs text-green-600 mt-0.5 italic truncate">"{c.fulfillment_evidence}"</p>
+        )}
+      </div>
+      <div className="flex items-center gap-1 flex-shrink-0 opacity-0 group-hover:opacity-100">
+        {/* Escalate to blocking */}
+        {c.delivery_type !== 'blocking_ryan' && (
+          <button
+            onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'blocking_ryan' } })}
+            className="text-xs text-orange-400 hover:text-orange-600 px-1"
+            title="Mark as blocking me"
+          >🚧</button>
+        )}
+        {/* De-escalate from blocking */}
+        {c.delivery_type === 'blocking_ryan' && (
+          <button
+            onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'to_ryan' } })}
+            className="text-xs text-[#6b6b67] hover:text-gray-800 px-1"
+            title="Remove blocking flag"
+          >↓</button>
+        )}
+        {/* Mark done */}
+        <button
+          onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
+          className="text-xs text-[#6b6b67] hover:text-green-600 px-1"
+          title="Mark done"
+        >✓</button>
+      </div>
+    </div>
+  )
+
+  const PersonGroup = ({ name, items: groupItems }) => (
+    <div className="mb-3">
+      <div className="flex items-center gap-2 mb-1">
+        <div className="w-6 h-6 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+          {name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)}
+        </div>
+        <ContactLink name={name} contacts={contacts} className="text-xs font-semibold text-[#1a1a18]" />
+        <span className="text-xs text-[#6b6b67]">({groupItems.length})</span>
+      </div>
+      <div className="pl-8 space-y-0.5">
+        {groupItems.map(c => <CommitmentRow key={c.id} c={c} />)}
+      </div>
+    </div>
+  )
+
+  const SubSection = ({ title, icon, items: sectionItems, sectionKey, emptyMsg, headerClass }) => {
+    const groups = groupByPerson(sectionItems)
+    const isCollapsed = collapsed[sectionKey]
+    return (
+      <div className="mb-4">
+        <button
+          onClick={() => setCollapsed(prev => ({ ...prev, [sectionKey]: !prev[sectionKey] }))}
+          className={`flex items-center gap-2 w-full text-left mb-2 ${headerClass}`}
+        >
+          <span className="text-xs font-bold uppercase tracking-wide">{icon} {title}</span>
+          <span className="text-xs text-[#6b6b67]">({sectionItems.length})</span>
+          <span className="ml-auto text-xs text-[#6b6b67]">{isCollapsed ? '▸' : '▾'}</span>
+        </button>
+        {!isCollapsed && (
+          sectionItems.length === 0
+            ? <p className="text-xs text-[#6b6b67] italic pl-1">{emptyMsg}</p>
+            : Object.entries(groups).map(([name, groupItems]) => (
+                <PersonGroup key={name} name={name} items={groupItems} />
+              ))
+        )}
+      </div>
+    )
+  }
+
   return (
     <Card>
       <SectionHeader title="Waiting On Others" count={items.length} />
       {isLoading ? <Spinner /> : items.length === 0 ? (
         <EmptyState icon="⏳" message="Nothing waiting on others" />
       ) : (
-        <div className="space-y-2">
-          {(showAll ? items : items.slice(0, 5)).map(c => {
-            const initials = (c.committed_by_name || c.made_by || '?')
-              .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
-            return (
-              <div key={c.id} className="flex items-start gap-2.5 group">
-                {/* Initials circle */}
-                <div className="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
-                  {initials}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <p className="text-sm text-[#1a1a18] leading-snug">{c.title}</p>
-                    {c.ai_suggests_complete && (
-                      <PillBadge label="AI: may be done" color="green" />
-                    )}
-                  </div>
-                  <p className="text-xs text-[#6b6b67] mt-0.5">
-                    {(c.committed_by_name || c.made_by) && (
-                      <span>
-                        <ContactLink
-                          name={c.committed_by_name || c.made_by}
-                          contacts={contacts}
-                          className="text-xs text-[#6b6b67]"
-                        />
-                      </span>
-                    )}
-                    {c.due_date && (
-                      <span className={c.days_overdue > 0 ? 'text-red-500 font-medium ml-1' : 'ml-1'}>
-                        · Due {dayjs(c.due_date).format('MMM D')}
-                        {c.days_overdue > 0 && ` (${c.days_overdue}d late)`}
-                      </span>
-                    )}
-                  </p>
-                  {c.context && (
-                    <p className="text-xs text-[#6b6b67] mt-0.5 truncate italic">{c.context}</p>
-                  )}
-                  {c.ai_suggests_complete && c.fulfillment_evidence && (
-                    <p className="text-xs text-green-600 mt-0.5 italic truncate">
-                      "{c.fulfillment_evidence}"
-                    </p>
-                  )}
-                </div>
-                <button
-                  onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
-                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
-                  title="Mark done"
-                >
-                  ✓
-                </button>
-              </div>
-            )
-          })}
-          {!showAll && items.length > 5 && (
-            <button onClick={() => setShowAll(true)} className="mt-2 text-sm text-blue-600 hover:underline cursor-pointer w-full text-left">
-              + {items.length - 5} more — tap to show all
-            </button>
-          )}
-          {showAll && items.length > 5 && (
-            <button onClick={() => setShowAll(false)} className="mt-2 text-xs text-[#6b6b67] hover:underline w-full text-left">
-              Show less ↑
-            </button>
-          )}
+        <div>
+          <SubSection
+            title="Blocking Me"
+            icon="🚧"
+            items={blocking}
+            sectionKey="blocking_ryan"
+            emptyMsg="Nothing blocking you right now"
+            headerClass="text-red-600"
+          />
+          <SubSection
+            title="Owed to Me"
+            icon="📬"
+            items={toRyan}
+            sectionKey="to_ryan"
+            emptyMsg="No items specifically owed to you"
+            headerClass="text-orange-600"
+          />
+          <SubSection
+            title="Their Actions"
+            icon="📋"
+            items={general}
+            sectionKey="general"
+            emptyMsg="No tracked general commitments"
+            headerClass="text-[#6b6b67]"
+          />
         </div>
       )}
     </Card>

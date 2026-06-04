@@ -404,6 +404,10 @@ From: ${email.from_name}
 Content: ${content}
 ${historyContext}
 ${existingSection}
+delivery_type classification:
+- "to_ryan": they are delivering something specifically TO Ryan (sending him a document, answering his question, completing something he is waiting to receive)
+- "general": they committed to doing something but it is not specifically owed to Ryan (a team task, their own action item, something for the project generally)
+
 Return JSON array only.
 [{
   "committed_by_name": "full name",
@@ -413,6 +417,7 @@ Return JSON array only.
   "due_date": "YYYY-MM-DD or null",
   "urgency": "critical|high|medium|low",
   "commitment_strength": "hard|soft",
+  "delivery_type": "to_ryan|general",
   "ai_suggests_complete": false,
   "fulfillment_evidence": null
 }]

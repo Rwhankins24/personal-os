@@ -1292,7 +1292,8 @@ async function main() {
                 source_label: meeting.title || 'Meeting',
                 status:       'open',
                 project_id:   projectId || null,
-                urgency:      'medium'
+                urgency:      'medium',
+                delivery_type: 'general'
               })
               results.otter_others_created++
             }
@@ -1501,7 +1502,8 @@ async function main() {
                   source_type:  'ai_otter',
                   source_id:    meeting.id,
                   source_label: meeting.title,
-                  status:       'open'
+                  status:       'open',
+                  delivery_type: c.delivery_type || 'general'
                 })
                 results.otter_others_created++
               }
@@ -1709,7 +1711,8 @@ async function main() {
             ai_suggests_complete: c.ai_suggests_complete || false,
             fulfillment_evidence: c.fulfillment_evidence || null,
             status: 'open',
-            project_id: projectId || null
+            project_id: projectId || null,
+            delivery_type: c.delivery_type || 'general'
           })
           results.others_commitments_extracted++
         } else if (existing && existing.source_type && existing.source_type !== 'ai_email' && !c.ai_suggests_complete) {
