@@ -408,16 +408,27 @@ async function extractOthersCommitments(email, threadHistory = [], existingItems
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1000,
+      max_tokens: 2000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
 
-Extract commitments OTHER PEOPLE made to Ryan. Use thread history to identify fulfilled vs outstanding commitments.
+Extract ALL commitments OTHER PEOPLE made in this thread. Cast a wide net — err on the side of inclusion. Ryan is bad at tracking these and needs visibility.
+
+Count as a commitment ANY of the following signals:
+- "I'll send / I'll get you / I'll have this to you / I'll follow up / I'll circle back"
+- "sending over / sending you / will forward / will share / will provide"
+- "by [day/date] / by end of week / by Friday / by EOD / by next week"
+- "let me check on that / let me look into it / let me confirm / I'll find out"
+- "will connect you / will introduce / will loop in / will set up a call"
+- "I'll review / I'll take a look / I'll get back to you"
+- "working on it / getting it together / finalizing / almost ready"
+- "will have the [document/number/answer/proposal/contract/schedule]"
+- Any implicit promise to deliver, respond, schedule, or act
 
 Commitment strength:
-Hard: specific deadline explicitly stated
-Soft: implied or flexible timing
+Hard: specific deadline or date mentioned
+Soft: implied timing or no date given
 
 Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
@@ -425,15 +436,15 @@ Content: ${content}
 ${historyContext}
 ${existingSection}
 delivery_type classification:
-- "to_ryan": they are delivering something specifically TO Ryan (sending him a document, answering his question, completing something he is waiting to receive)
-- "general": they committed to doing something but it is not specifically owed to Ryan (a team task, their own action item, something for the project generally)
+- "to_ryan": they are delivering something specifically TO Ryan (sending him a document, answering his question, completing something he asked for, a response he is waiting on)
+- "general": action they committed to for the project/team generally, not specifically owed to Ryan
 
-Return JSON array only.
+Return JSON array only. Include every commitment found, even soft/implied ones.
 [{
   "committed_by_name": "full name",
   "committed_by_email": "email address",
-  "title": "exactly what they committed to",
-  "context": "why this matters and consequence",
+  "title": "exactly what they committed to do",
+  "context": "why this matters to Ryan and consequence if not done",
   "due_date": "YYYY-MM-DD or null",
   "urgency": "critical|high|medium|low",
   "commitment_strength": "hard|soft",
@@ -441,11 +452,8 @@ Return JSON array only.
   "ai_suggests_complete": false,
   "fulfillment_evidence": null
 }]
-If thread history shows fulfillment evidence:
-Set ai_suggests_complete to true.
-Describe evidence in fulfillment_evidence.
-Still include — Ryan confirms manually.
-If no open commitments return [].`
+If thread history shows this was already delivered: set ai_suggests_complete to true and describe the evidence in fulfillment_evidence. Still include — Ryan confirms completion manually.
+If genuinely no commitments exist in this thread, return [].`
       }]
     })
   )

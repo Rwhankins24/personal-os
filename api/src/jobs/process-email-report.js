@@ -144,17 +144,23 @@ module.exports = async (req, res) => {
         const threadKey = email.thread_subject || email.subject || email.threadSubject
         const fromAddr  = email.from_address
 
-        // Check if this thread already exists and isn't resolved
+        // Check if this thread already exists (including done records)
         const { data: existing } = await supabase
           .from('emails')
           .select('id, status')
           .eq('thread_subject', threadKey)
           .eq('from_address', fromAddr)
-          .neq('status', 'done')
           .maybeSingle()
 
         if (existing) {
-          // Update existing thread's rolling fields
+          // BUCKET PROTECTION: never re-open a thread Ryan has marked done
+          if (existing.status === 'done') {
+            emailResults.pushed++ // count it but don't touch it
+            continue
+          }
+
+          // Update existing thread's rolling fields — never overwrite status/bucket
+          // (those are controlled by Ryan via the dashboard or task completion cascade)
           const { error } = await supabase
             .from('emails')
             .update({
@@ -169,9 +175,8 @@ module.exports = async (req, res) => {
               tags:                  email.tags                ?? null,
               is_time_sensitive:     email.is_time_sensitive   ?? false,
               has_contract_language: email.has_contract_language ?? false,
-              is_flagged:            email.is_flagged           ?? email.isFlagged           ?? false,
-              status:                email.status              ?? null,
-              bucket:                email.bucket              ?? null
+              is_flagged:            email.is_flagged           ?? email.isFlagged           ?? false
+              // status and bucket intentionally excluded — Ryan controls these
             })
             .eq('id', existing.id)
           if (error) throw error
