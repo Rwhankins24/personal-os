@@ -828,29 +828,31 @@ async function extractContactFromSignature(emailContent, fromName, fromEmail) {
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       messages: [{
         role: 'user',
-        content: `Extract contact information from this email content. Look specifically at the email signature block which typically appears at the bottom of the email.
+        content: `Extract contact information from this email. Focus on the signature block at the bottom — that's where name, title, company, phone, and LinkedIn usually appear.
 
 From: ${fromName} (${fromEmail})
-Email content:
-${emailContent.substring(0, 2000)}
+Email content (check the bottom for signature):
+${emailContent.substring(0, 3000)}
 
-Extract whatever is present. Return JSON only.
+Return JSON only. Extract whatever fields are present.
 {
-  "name": "full name if different from ${fromName}",
-  "title": "job title or role",
-  "company": "company name",
-  "phone_mobile": "mobile number or null",
-  "phone_office": "office number or null",
-  "linkedin": "linkedin URL or null",
+  "name": "full name if clearer than '${fromName}'",
+  "title": "job title or role or null",
+  "company": "company or organization name or null",
+  "phone_mobile": "mobile/cell number or null",
+  "phone_office": "office/direct number or null",
+  "linkedin": "linkedin profile URL or null",
   "address": "office address or null",
   "confidence": "high|medium|low"
 }
-If no signature found return: { "confidence": "low" }
-Return only JSON. No other text.`
+high = found clear signature block with multiple fields
+medium = found some fields but signature incomplete
+low = no signature found, just email body
+Return only JSON.`
       }]
     })
   )
