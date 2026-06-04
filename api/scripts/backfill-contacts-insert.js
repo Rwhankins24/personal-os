@@ -254,23 +254,21 @@ async function main() {
   console.log(`  ${CONTACTS.length} contacts to process`)
   console.log('════════════════════════════════════════\n')
 
-  // Step 1: Add missing columns
-  console.log('Step 1: Ensuring schema columns exist...')
-  const { error: schemaErr } = await supabase.rpc('exec_sql', {
-    sql: `
-      ALTER TABLE contacts ADD COLUMN IF NOT EXISTS phone_work TEXT;
-      ALTER TABLE contacts ADD COLUMN IF NOT EXISTS source TEXT DEFAULT 'manual';
-      CREATE UNIQUE INDEX IF NOT EXISTS contacts_email_unique ON contacts (lower(email));
-    `
-  }).catch(() => ({ error: null }))
+  // Step 1: Verify schema — if phone_work column missing, exit with instructions
+  console.log('Step 1: Checking schema...')
+  const { data: schemaCheck, error: schemaErr } = await supabase
+    .from('contacts')
+    .select('phone_work, source')
+    .limit(1)
 
-  // Try direct approach if RPC not available
-  try {
-    await supabase.from('contacts').select('phone_work').limit(1)
-    console.log('  ✓ Schema OK')
-  } catch {
-    console.log('  ⚠ Note: run ALTER TABLE manually if needed')
+  if (schemaErr && schemaErr.message?.includes('phone_work')) {
+    console.error('\n  ✗ Missing columns. Run this in Supabase SQL editor first:\n')
+    console.error('    ALTER TABLE contacts ADD COLUMN IF NOT EXISTS phone_work TEXT;')
+    console.error('    ALTER TABLE contacts ADD COLUMN IF NOT EXISTS source TEXT DEFAULT \'manual\';')
+    console.error('    CREATE UNIQUE INDEX IF NOT EXISTS contacts_email_unique ON contacts (lower(email));\n')
+    process.exit(1)
   }
+  console.log('  ✓ Schema OK')
 
   // Step 2: Deduplicate the list (just in case)
   const seen = new Set()
