@@ -19,6 +19,7 @@ export const deleteTask     = (id) => api.delete(`/api/tasks?id=${id}`)
 
 // ── Events ────────────────────────────────────────────────────
 export const getEvents      = () => api.get('/api/events').then(r => r.data)
+export const updateEvent    = (id, data) => api.patch(`/api/events?id=${id}`, data).then(r => r.data)
 
 // ── Emails ────────────────────────────────────────────────────
 export const getEmails      = () => api.get('/api/emails').then(r => r.data)

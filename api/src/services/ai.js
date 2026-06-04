@@ -595,23 +595,23 @@ Return JSON only.
 }
 
 // ─── GENERATE PRE-MEETING BRIEF
-async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext) {
+async function generatePreMeetingBrief(event, relatedEmails, openTasks, projectContext, preNotes = null) {
   const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 800,
+      max_tokens: 1000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
 
-Generate a pre-meeting brief for Ryan. Direct. Trusted advisor tone. Flag risks. Maximum 4 sentences.
+Generate a pre-meeting brief for Ryan. Direct. Trusted advisor tone. Flag risks and open items. 4-6 sentences max.
 
 Meeting: ${event.title}
 Time: ${event.start_time}
 Location: ${event.location || 'Not set'}
 Attendees: ${JSON.stringify(event.attendees || [])}
-
+${preNotes ? `\nRyan's notes for this meeting (treat as primary intent — build the brief around this):\n${preNotes}\n` : ''}
 Related emails:
 ${relatedEmails.slice(0, 3).map(e =>
   `- ${e.from_name}: ${e.thread_subject} (${e.days_waiting}d, ${e.urgency})`
@@ -624,7 +624,7 @@ ${openTasks.slice(0, 3).map(t =>
 
 Context: ${projectContext || 'None available'}
 
-Return only the brief. No preamble.`
+Return only the brief. No preamble. If Ryan provided notes above, anchor the brief to his stated intent.`
       }]
     })
   )

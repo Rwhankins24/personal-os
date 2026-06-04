@@ -2221,7 +2221,15 @@ async function main() {
 
       if (stakeCheck.high_stakes) {
         results.high_stakes_meetings_detected++
+      }
 
+      // Generate brief for ALL upcoming events with attendees, not just high-stakes.
+      // Skip if brief already exists AND no pre_meeting_notes have changed.
+      const hasAttendees = (event.attendees || []).length > 0
+      const briefExists  = !!event.body
+      const hasPreNotes  = !!event.pre_meeting_notes
+
+      if (hasAttendees && (!briefExists || hasPreNotes)) {
         const { data: openTasks } = await supabase
           .from('tasks')
           .select('title, urgency')
@@ -2241,7 +2249,8 @@ async function main() {
           event,
           relatedEmails || [],
           openTasks || [],
-          projectCtx?.content || null
+          projectCtx?.content || null,
+          event.pre_meeting_notes || null
         )
         await supabase
           .from('events')
