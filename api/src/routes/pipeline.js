@@ -50,10 +50,12 @@ module.exports = async (req, res) => {
     const date = run_date || today
 
     const stepMap = {
-      'email_pull':  'email_pull_completed_at',
-      'upload':      'upload_completed_at',
-      'processing':  'processing_completed_at',
-      'ai':          'ai_completed_at'
+      'email_pull':        'email_pull_completed_at',
+      'upload':            'upload_completed_at',
+      'processing':        'processing_completed_at',
+      'otter_processing':  'otter_pull_completed_at',
+      'plaud_processing':  'plaud_pull_completed_at',
+      'ai':                'ai_completed_at'
     }
 
     const field = stepMap[step]
