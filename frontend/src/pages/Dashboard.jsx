@@ -291,38 +291,41 @@ function CalendarStrip({ events, isLoading }) {
             const isPast = end ? end < now : start < now
 
             return (
-              <div key={event.id} className={`flex items-center gap-3 p-2 rounded-lg ${
-                isNow ? 'bg-blue-50 border border-blue-200' :
-                isPast ? 'opacity-50' : 'bg-gray-50'
-              }`}>
-                {event.high_stakes && (
-                  <span title={event.stakes_reason || 'High stakes'} className="text-sm">🔥</span>
-                )}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-[#1a1a18] truncate">{event.title}</p>
-                    {isNow && <PillBadge label="NOW" color="blue" />}
+              <Link key={event.id} to={`/event/${event.id}`} className="block">
+                <div className={`flex items-center gap-3 p-2 rounded-lg ${
+                  isNow ? 'bg-blue-50 border border-blue-200' :
+                  isPast ? 'opacity-50' : 'bg-gray-50'
+                }`}>
+                  {event.high_stakes && (
+                    <span title={event.stakes_reason || 'High stakes'} className="text-sm">🔥</span>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium text-[#1a1a18] truncate">{event.title}</p>
+                      {isNow && <PillBadge label="NOW" color="blue" />}
+                    </div>
+                    <p className="text-xs text-[#6b6b67]">
+                      {fmtTime(event.start_time)}
+                      {event.end_time && ` – ${fmtTime(event.end_time)}`}
+                      {event.location && ` · ${event.location}`}
+                    </p>
+                    {event.preparation_required && (
+                      <p className="text-xs text-orange-500 mt-0.5">⚡ Prep needed</p>
+                    )}
                   </div>
-                  <p className="text-xs text-[#6b6b67]">
-                    {fmtTime(event.start_time)}
-                    {event.end_time && ` – ${fmtTime(event.end_time)}`}
-                    {event.location && ` · ${event.location}`}
-                  </p>
-                  {event.preparation_required && (
-                    <p className="text-xs text-orange-500 mt-0.5">⚡ Prep needed</p>
+                  {event.join_link && (
+                    <a
+                      href={event.join_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={e => e.stopPropagation()}
+                      className="text-xs font-medium text-blue-600 hover:underline flex-shrink-0"
+                    >
+                      Join
+                    </a>
                   )}
                 </div>
-                {event.join_link && (
-                  <a
-                    href={event.join_link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs font-medium text-blue-600 hover:underline flex-shrink-0"
-                  >
-                    Join
-                  </a>
-                )}
-              </div>
+              </Link>
             )
           })}
         </div>

@@ -12,6 +12,7 @@ const authHeaders = () => ({
 
 // ── Tasks ─────────────────────────────────────────────────────
 export const getTasks       = () => api.get('/api/tasks').then(r => r.data)
+export const getTask        = (id) => api.get(`/api/tasks?id=${id}`).then(r => r.data)
 export const createTask     = (data) => api.post('/api/tasks', data).then(r => r.data)
 export const updateTask     = (id, data) => api.patch(`/api/tasks?id=${id}`, data).then(r => r.data)
 export const deleteTask     = (id) => api.delete(`/api/tasks?id=${id}`)
