@@ -2,10 +2,10 @@ name: Nightly AI Intelligence Job
 
 on:
   schedule:
-    # 9:00am-2:00pm UTC = 2:00am-7:00am Phoenix
-    # Polls every 5 minutes in this window
+    # 9:00am-18:00 UTC = 2:00am-11:00am Phoenix
+    # Polls every 10 minutes in this window
     # Only fires when pipeline processing is done
-    - cron: '*/5 9-14 * * *'
+    - cron: '*/10 9-18 * * *'
   workflow_dispatch:
     inputs:
       force_run:
@@ -99,7 +99,7 @@ jobs:
         if: steps.check.outputs.should_run == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: api/package-lock.json
 
