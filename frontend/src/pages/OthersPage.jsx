@@ -147,8 +147,11 @@ export default function OthersPage() {
     onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
   })
 
+  const keyCount = (items || []).filter(isKeyPerson).length
+
   const typeOptions = [
     { value: 'all',           label: 'All' },
+    { value: 'key',           label: `⭐ Key${keyCount ? ` (${keyCount})` : ''}` },
     { value: 'blocking_ryan', label: '🚧 Blocking' },
     { value: 'to_ryan',       label: '📬 Owed to Me' },
     { value: 'general',       label: '📋 General' },
@@ -161,11 +164,30 @@ export default function OthersPage() {
 
   const today = dayjs()
 
+  // Build key contact lookup by email + name
+  const keyEmailSet = new Set(
+    (contacts || []).filter(c => c.is_key_contact).map(c => (c.email || '').toLowerCase()).filter(Boolean)
+  )
+  const keyNameSet = new Set(
+    (contacts || []).filter(c => c.is_key_contact).map(c => (c.name || '').toLowerCase()).filter(Boolean)
+  )
+  const isKeyPerson = (item) => {
+    const email = (item.committed_by_email || '').toLowerCase()
+    const name  = (item.committed_by_name  || item.made_by || '').toLowerCase()
+    if (email && keyEmailSet.has(email)) return true
+    if (name  && keyNameSet.has(name))   return true
+    return false
+  }
+  const isKeyName = (name) => {
+    return keyNameSet.has((name || '').toLowerCase())
+  }
+
   const filtered = (items || []).filter(c => {
     if (typeFilter === 'all') return true
     if (typeFilter === 'blocking_ryan') return c.delivery_type === 'blocking_ryan'
     if (typeFilter === 'to_ryan') return c.delivery_type === 'to_ryan'
     if (typeFilter === 'general') return !c.delivery_type || c.delivery_type === 'general'
+    if (typeFilter === 'key') return isKeyPerson(c)
     return true
   })
 
@@ -200,11 +222,20 @@ export default function OthersPage() {
   }
 
   const groups = groupByPerson(filtered)
-  const sortedGroupNames = Object.keys(groups).sort((a, b) => a.localeCompare(b))
+  // Key contacts float to top, then alpha
+  const sortedGroupNames = Object.keys(groups).sort((a, b) => {
+    const aKey = isKeyName(a) ? 0 : 1
+    const bKey = isKeyName(b) ? 0 : 1
+    if (aKey !== bKey) return aKey - bKey
+    return a.localeCompare(b)
+  })
 
-  // If sorting by due date, flatten and re-group as single list
+  // If sorting by due date, key contacts sort first within same date, then by date
   const flatSorted = sortBy === 'due_date'
     ? [...filtered].sort((a, b) => {
+        const aKey = isKeyPerson(a) ? 0 : 1
+        const bKey = isKeyPerson(b) ? 0 : 1
+        if (aKey !== bKey) return aKey - bKey
         if (a.due_date && b.due_date) return dayjs(a.due_date).diff(dayjs(b.due_date))
         if (a.due_date) return -1
         if (b.due_date) return 1
@@ -260,6 +291,7 @@ export default function OthersPage() {
                   daysOverdue={daysOverdue}
                   update={update}
                   showPerson
+                  isKey={isKeyPerson(c)}
                   contacts={contacts}
                 />
               )
@@ -271,14 +303,23 @@ export default function OthersPage() {
             {sortedGroupNames.map(name => {
               const personItems = sortItems(groups[name])
               const initials = getInitials(name)
+              const keyContact = isKeyName(name)
+              // Detect internal from any item's email in the group
+              const groupInternal = personItems.some(i => isInternal(i.committed_by_email))
               return (
-                <div key={name} className="bg-white border border-[#e5e5e3] rounded-2xl overflow-hidden">
+                <div key={name} className={`bg-white rounded-2xl overflow-hidden ${keyContact ? 'border border-amber-300' : 'border border-[#e5e5e3]'}`}>
                   {/* Person header */}
-                  <div className="flex items-center gap-2.5 px-4 py-3 bg-gray-50 border-b border-[#f0f0ee]">
-                    <div className="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  <div className={`flex items-center gap-2.5 px-4 py-3 border-b ${keyContact ? 'bg-amber-50 border-amber-200' : 'bg-gray-50 border-[#f0f0ee]'}`}>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${keyContact ? 'bg-amber-200 text-amber-800' : 'bg-gray-200 text-gray-600'}`}>
                       {initials}
                     </div>
                     <span className="text-sm font-semibold text-[#1a1a18]">{name}</span>
+                    {keyContact && <span className="text-xs text-amber-500" title="Key contact">⭐</span>}
+                    {groupInternal && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-500 font-medium">
+                        Internal
+                      </span>
+                    )}
                     <span className="text-xs text-[#6b6b67] ml-auto">{personItems.length}</span>
                   </div>
 
@@ -294,6 +335,7 @@ export default function OthersPage() {
                           daysOverdue={daysOverdue}
                           update={update}
                           showPerson={false}
+                          isKey={keyContact}
                           contacts={contacts}
                         />
                       )
@@ -309,9 +351,16 @@ export default function OthersPage() {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, contacts }) {
+function isInternal(email) {
+  if (!email) return false
+  const domain = email.toLowerCase().split('@')[1] || ''
+  return domain === 'claycorp.com' || domain === 'ljc.com'
+}
+
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts }) {
   const [reassigning, setReassigning] = useState(false)
   const speaker = isSpeaker(personName)
+  const internal = isInternal(c.committed_by_email)
 
   const typeIcon = c.delivery_type === 'blocking_ryan' ? '🚧'
     : c.delivery_type === 'to_ryan' ? '📬'
@@ -335,6 +384,7 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, contact
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm flex-shrink-0">{typeIcon}</span>
             <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
+            {isKey && <span className="text-xs text-amber-500 flex-shrink-0" title="Key contact">⭐</span>}
             {c.urgency && (
               <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[c.urgency] || 'text-gray-500 bg-gray-100'}`}>
                 {c.urgency}
@@ -353,6 +403,11 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, contact
               <p className={`text-xs ${speaker ? 'text-amber-600 font-medium' : 'text-[#6b6b67]'}`}>
                 {speaker ? `⚠ ${personName} — unattributed` : personName}
               </p>
+              {internal && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-500 font-medium flex-shrink-0">
+                  Internal
+                </span>
+              )}
               {speaker && !reassigning && (
                 <button
                   onClick={() => setReassigning(true)}
