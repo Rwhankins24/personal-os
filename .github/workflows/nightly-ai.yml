@@ -23,7 +23,15 @@ jobs:
         id: check
         run: |
           TODAY=$(date -u +%Y-%m-%d)
-          echo "Checking pipeline for $TODAY"
+          FORCE="${{ github.event.inputs.force_run }}"
+          echo "Checking pipeline for $TODAY (force=$FORCE)"
+
+          # Force flag bypasses ALL pipeline checks — run immediately
+          if [ "$FORCE" = "true" ]; then
+            echo "Force run requested — bypassing pipeline status checks"
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
 
           STATUS=$(curl -s \
             "${{ secrets.API_URL }}/api/pipeline/status" \
@@ -47,8 +55,6 @@ jobs:
             "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" \
             2>/dev/null)
 
-          FORCE="${{ github.event.inputs.force_run }}"
-
           # Calculate minutes since email processing
           MINUTES_SINCE=0
           if [ -n "$PROCESSING_DONE" ]; then
@@ -65,10 +71,9 @@ jobs:
           echo "Plaud done: $PLAUD_DONE"
           echo "AI done: $AI_DONE"
           echo "Minutes since email: $MINUTES_SINCE"
-          echo "Force: $FORCE"
 
           # Fire when: email processing complete AND
-          # (both Otter+Plaud done OR 30+ min since email OR force)
+          # (both Otter+Plaud done OR 30+ min since email)
           # AND AI not done yet
           MEETING_SOURCES_DONE=""
           if [ -n "$OTTER_DONE" ] && [ -n "$PLAUD_DONE" ]; then
@@ -78,8 +83,7 @@ jobs:
           if [ -n "$PROCESSING_DONE" ] && \
              [ -z "$AI_DONE" ] && (
              [ -n "$MEETING_SOURCES_DONE" ] || \
-             [ "$MINUTES_SINCE" -ge 30 ] || \
-             [ "$FORCE" = "true" ]); then
+             [ "$MINUTES_SINCE" -ge 30 ]); then
             echo "should_run=true" >> $GITHUB_OUTPUT
             if [ -n "$MEETING_SOURCES_DONE" ]; then
               echo "Email + Otter + Plaud all ready."
