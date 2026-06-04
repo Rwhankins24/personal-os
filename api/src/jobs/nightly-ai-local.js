@@ -456,6 +456,81 @@ async function main() {
     console.log(`  ⚠ Plaud load error: ${err.message}`)
   }
 
+  // ── STEP 2.45: Backfill participants for Plaud meetings with empty roster ──
+  // Runs before intelligence extraction — catches meetings inserted on prior days
+  // that had no calendar match at insert time, or were inserted before today's
+  // calendar events were available. Skips meetings with manually-entered participants.
+  console.log('Step 2.45: Backfilling Plaud meeting participants from calendar...')
+  try {
+    const { data: emptyParticipantMeetings } = await supabase
+      .from('meeting_notes')
+      .select('id, title, start_time, participants')
+      .eq('source', 'plaud')
+      .eq('intelligence_extracted', false)
+      .or('participants.eq.[],participants.is.null')
+
+    if (emptyParticipantMeetings?.length) {
+      for (const mn of emptyParticipantMeetings) {
+        const meetingDate = mn.start_time?.split('T')[0]
+        if (!meetingDate) continue
+
+        // Pull calendar events for that meeting's date
+        const { data: calEvents } = await supabase
+          .from('events')
+          .select('title, start_time, attendees')
+          .gte('start_time', `${meetingDate}T00:00:00Z`)
+          .lte('start_time', `${meetingDate}T23:59:59Z`)
+          .not('attendees', 'is', null)
+
+        const mnKeywords = (mn.title || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, '')
+          .split(' ')
+          .filter(w => w.length > 4)
+
+        let match = null
+        for (const ev of (calEvents || [])) {
+          const evTitle = (ev.title || '').toLowerCase().replace(/[^a-z0-9\s]/g, '')
+          const overlap = mnKeywords.filter(w => evTitle.includes(w)).length
+          if (overlap >= 2) { match = ev; break }
+        }
+
+        if (!match) continue
+
+        // Resolve attendees
+        const attendeeEntries = match.attendees || []
+        const emails = attendeeEntries.filter(a => a.includes('@'))
+        const names  = attendeeEntries.filter(a => !a.includes('@'))
+        let roster = [...names]
+
+        if (emails.length > 0) {
+          const { data: contacts } = await supabase
+            .from('contacts')
+            .select('name, email')
+            .in('email', emails.map(e => e.toLowerCase()))
+          const emailToName = {}
+          for (const c of (contacts || [])) emailToName[c.email.toLowerCase()] = c.name
+          for (const email of emails) roster.push(emailToName[email.toLowerCase()] || email)
+        }
+
+        if (roster.length > 0) {
+          await supabase
+            .from('meeting_notes')
+            .update({
+              participants: roster,
+              start_time: match.start_time  // also fix the faked time
+            })
+            .eq('id', mn.id)
+          console.log(`  ✓ Backfilled ${roster.length} participants for "${mn.title}"`)
+        }
+      }
+    } else {
+      console.log('  ✓ No Plaud meetings need participant backfill')
+    }
+  } catch (err) {
+    console.log(`  ⚠ Participant backfill error: ${err.message}`)
+  }
+
   // ── STEP 2.5: Load existing items as AI dedup context ──────────
   // Loaded once here — available to both email (STEP 4/5) and future Otter extraction
   let existingTasksContext = ''
