@@ -926,6 +926,61 @@ Return ONLY valid JSON. Empty arrays fine.
   }
 }
 
+// ─── REFRESH STALE ITEM
+// Called on open tasks/commitments that are 3+ days old when their source
+// thread has new activity. Returns patched fields only if something material changed.
+async function refreshStaleItem(item, email, threadHistory = []) {
+  const RYAN_CONTEXT = await buildRyanContext()
+  const content =
+    email.full_thread_content ||
+    email.sent_body ||
+    email.body_preview ||
+    ''
+  const historyContext = formatThreadHistoryForAI(threadHistory)
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-haiku-4-5-20251001',  // fast + cheap for refresh pass
+      max_tokens: 400,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+
+You are reviewing an existing tracked item to see if it needs updating based on new thread activity.
+
+Existing item:
+Title: ${item.title}
+Current urgency: ${item.urgency || 'medium'}
+Current due_date: ${item.due_date || 'none'}
+Current context: ${item.context || 'none'}
+Created: ${item.source_date || item.created_at}
+
+Latest thread activity:
+Thread: ${email.thread_subject || email.subject}
+Days waiting: ${email.days_waiting || 0}
+Content: ${content.slice(0, 1500)}
+${historyContext}
+
+Has anything material changed? Look for:
+- Deadline moved, added, or passed
+- Urgency escalated (new stakeholder pressure, explicit deadline, blocking issue)
+- Scope or ask changed
+- Item may now be resolved (evidence of completion)
+
+Return JSON only. If nothing material changed, return {"changed": false}.
+If changed: {"changed": true, "urgency": "critical|high|medium|low", "due_date": "YYYY-MM-DD or null", "context": "updated 1-sentence context", "ai_suggests_complete": false, "fulfillment_evidence": null}
+Set ai_suggests_complete true only if there is clear evidence the item was completed.`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(clean)
+  } catch { return { changed: false } }
+}
+
 module.exports = {
   buildRyanContext,
   warmContext,
@@ -942,6 +997,7 @@ module.exports = {
   generateDailyDigest,
   updateRollingContext,
   enrichTask,
+  refreshStaleItem,
   createContactProfile,
   extractContactFromSignature,
   extractIntelligenceFromTranscript

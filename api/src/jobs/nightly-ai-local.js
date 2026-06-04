@@ -1641,6 +1641,129 @@ async function main() {
   }
   console.log(`  ✓ Tasks: ${results.tasks_created} created`)
 
+  // ── STEP 4.5: Refresh stale open items ──────────────────────────
+  // For every active email thread, find open tasks + commitments linked to it
+  // that are 3+ days old and re-evaluate urgency/due_date/context.
+  // Also detect re-opens: completed tasks whose thread has new activity.
+  console.log('Step 4.5: Refreshing stale open items...')
+  let refreshed = 0
+  let reopened  = 0
+
+  try {
+    for (const email of (activeEmails || [])) {
+      try {
+        // Any open task/commitment linked to an active thread refreshes every night.
+        // No age threshold — if the thread is in today's active email set, update it.
+
+        // ── Find open tasks linked to this thread ──
+        const { data: staleTasks } = await supabase
+          .from('tasks')
+          .select('id, title, urgency, due_date, context, source_date, created_at, updated_at')
+          .eq('status', 'open')
+          .eq('source_label', email.thread_subject)
+
+        if (staleTasks?.length) {
+          const threadHistory = await getThreadHistory(email)
+          for (const task of staleTasks) {
+            const refresh = await aiService.refreshStaleItem(task, email, threadHistory)
+            if (refresh?.changed) {
+              const patch = {
+                urgency:              refresh.urgency              || task.urgency,
+                due_date:             refresh.due_date             ?? task.due_date,
+                context:              refresh.context              || task.context,
+                ai_suggests_complete: refresh.ai_suggests_complete || false,
+                fulfillment_evidence: refresh.fulfillment_evidence || null,
+                source_date:          today
+              }
+              await supabase.from('tasks').update(patch).eq('id', task.id)
+              refreshed++
+            }
+          }
+        }
+
+        // ── Find open others_commitments linked to this thread ──
+        const { data: staleCommitments } = await supabase
+          .from('others_commitments')
+          .select('id, title, urgency, due_date, context, source_date, created_at, delivery_type')
+          .eq('status', 'open')
+          .eq('source_label', email.thread_subject)
+
+        if (staleCommitments?.length) {
+          const threadHistory = await getThreadHistory(email)
+          for (const c of staleCommitments) {
+            const refresh = await aiService.refreshStaleItem(c, email, threadHistory)
+            if (refresh?.changed) {
+              const patch = {
+                urgency:              refresh.urgency  || c.urgency,
+                due_date:             refresh.due_date ?? c.due_date,
+                context:              refresh.context  || c.context,
+                ai_suggests_complete: refresh.ai_suggests_complete || false,
+                fulfillment_evidence: refresh.fulfillment_evidence || null,
+                source_date:          today
+              }
+              await supabase.from('others_commitments').update(patch).eq('id', c.id)
+              refreshed++
+            }
+          }
+        }
+
+        // ── Re-open detection: completed task + thread has new activity ──
+        // If a task was completed but the same thread is now back in bucket 1,
+        // create a NEW follow-up task rather than re-opening the old one.
+        if (email.bucket === 1) {
+          const { data: completedTask } = await supabase
+            .from('tasks')
+            .select('id, title, updated_at')
+            .eq('status', 'complete')
+            .eq('source_label', email.thread_subject)
+            .order('updated_at', { ascending: false })
+            .limit(1)
+            .maybeSingle()
+
+          if (completedTask) {
+            // Thread has activity after the task was completed — check if new enough to matter
+            const taskCompletedAt  = new Date(completedTask.updated_at)
+            const emailReceivedAt  = email.received_at ? new Date(email.received_at) : null
+            if (emailReceivedAt && emailReceivedAt > taskCompletedAt) {
+              // New activity on a completed thread — check if it's already been re-created
+              const { data: existingReopen } = await supabase
+                .from('tasks')
+                .select('id')
+                .eq('status', 'open')
+                .eq('source_label', email.thread_subject)
+                .maybeSingle()
+
+              if (!existingReopen) {
+                const projectId = await findProjectByKeywords(email.thread_subject)
+                await supabase.from('tasks').insert({
+                  title:            `Follow-up: ${email.thread_subject}`,
+                  context:          `Thread re-activated after prior task completed. New activity from ${email.from_name}.`,
+                  urgency:          email.urgency || 'high',
+                  status:           'open',
+                  source:           'email',
+                  source_type:      'ai_email',
+                  source_id:        email.id,
+                  source_label:     email.thread_subject,
+                  source_date:      today,
+                  ai_enriched:      false,
+                  source_confidence: 0.7,
+                  project_id:       projectId || null
+                })
+                reopened++
+              }
+            }
+          }
+        }
+
+      } catch (err) { /* non-fatal per email */ }
+    }
+  } catch (err) {
+    results.errors.push(`Refresh stale: ${err.message}`)
+  }
+
+  results.tasks_enriched += refreshed
+  console.log(`  ✓ Refreshed: ${refreshed} stale items updated, ${reopened} re-opened threads flagged`)
+
   // ── STEP 5: Extract commitments ─────────────────────────────────
   console.log('Step 5: Extracting commitments...')
   for (const email of (activeEmails || [])) {
