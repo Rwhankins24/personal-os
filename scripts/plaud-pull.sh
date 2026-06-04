@@ -155,26 +155,28 @@ def decode_b64(data):
         data += "=" * padding
     return base64.urlsafe_b64decode(data).decode("utf-8", errors="replace")
 
-def extract_body(payload):
-    """Recursively extract plain text body."""
-    mime = payload.get("mimeType", "")
-    if mime == "text/plain":
-        return decode_b64(payload.get("body", {}).get("data", ""))
-    if mime.startswith("multipart/"):
-        for part in payload.get("parts", []):
-            result = extract_body(part)
-            if result:
-                return result
-    return ""
-
-def find_transcript(payload):
-    """Find transcript attachment part."""
-    for part in payload.get("parts", []):
-        fname = part.get("filename", "")
-        if fname and ("transcript" in fname.lower() or fname.endswith(".vtt") or fname.endswith(".txt")):
-            att_id = part.get("body", {}).get("attachmentId", "")
-            return att_id, fname
-    return None, None
+def find_attachments(payload):
+    """
+    Walk the full MIME tree and return a dict of filename -> attachmentId
+    for every named attachment. Plaud structure:
+      multipart/mixed
+        multipart/related
+          multipart/alternative
+            text/html   (body banner — no useful text)
+        text/plain      fname=transcript.txt  (full transcript)
+        text/plain      fname=summary.txt     (summary + action items)
+        image/jpeg      (logo/banner image — ignore)
+    """
+    attachments = {}
+    def walk(p):
+        fname = p.get("filename", "")
+        att_id = p.get("body", {}).get("attachmentId", "")
+        if fname and att_id:
+            attachments[fname.lower()] = att_id
+        for part in p.get("parts", []):
+            walk(part)
+    walk(payload)
+    return attachments
 
 def parse_action_items(body_text):
     """Extract action items from email body. Returns ryan_items, others_items, unattributed."""
@@ -301,20 +303,34 @@ for msg_id in MESSAGE_IDS:
     else:
         meeting_date = TODAY
 
-    # Extract body
-    body_text = extract_body(msg.get('payload', {}))
+    # Find all named attachments (summary.txt, transcript.txt, etc.)
+    attachments = find_attachments(msg.get('payload', {}))
 
-    # Parse content
-    summary = parse_summary(body_text)
-    ryan_items, others_items, unattributed = parse_action_items(body_text)
+    # ── Download summary.txt ──────────────────────────────────────
+    summary_text = ""
+    summary_att_id = attachments.get("summary.txt")
+    if summary_att_id:
+        att_data = gmail_get_attachment(msg_id, summary_att_id)
+        summary_text = decode_b64(att_data.get('data', ''))
+    else:
+        warnings.append(f"No summary.txt attachment for: {title}")
 
-    # Find transcript attachment
-    att_id, att_filename = find_transcript(msg.get('payload', {}))
+    # Parse content from summary.txt
+    summary = parse_summary(summary_text) if summary_text else ""
+    ryan_items, others_items, unattributed = parse_action_items(summary_text) if summary_text else ([], [], [])
+
+    # Store raw summary text for debugging
+    email_body_raw = summary_text
+
+    # ── Download transcript.txt ───────────────────────────────────
     transcript_text = None
     has_transcript = False
-
-    if att_id:
-        att_data = gmail_get_attachment(msg_id, att_id)
+    transcript_att_id = (
+        attachments.get("transcript.txt") or
+        next((v for k, v in attachments.items() if "transcript" in k), None)
+    )
+    if transcript_att_id:
+        att_data = gmail_get_attachment(msg_id, transcript_att_id)
         raw = att_data.get('data', '')
         if raw:
             transcript_text = decode_b64(raw)
@@ -337,6 +353,7 @@ for msg_id in MESSAGE_IDS:
         "source": "plaud",
         "email_subject": subject,
         "summary": summary,
+        "email_body_raw": email_body_raw,
         "participants": [],
         "ryan_action_items": ryan_items,
         "others_action_items": others_items,
