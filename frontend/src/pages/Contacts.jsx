@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { getContacts, getOthersCommitments } from '../lib/api'
+import { getContacts, getOthersCommitments, updateContact } from '../lib/api'
 
 dayjs.extend(relativeTime)
 
@@ -34,6 +34,7 @@ function lastContactLabel(dateStr) {
 }
 
 const SORT_OPTIONS = [
+  { value: 'key_first',  label: 'Key contacts first' },
   { value: 'recent',     label: 'Most recent contact' },
   { value: 'warmth',     label: 'Relationship warmth' },
   { value: 'open_items', label: 'Most open items' },
@@ -42,9 +43,25 @@ const SORT_OPTIONS = [
 
 export default function Contacts() {
   const navigate = useNavigate()
+  const qc = useQueryClient()
   const [search,       setSearch]       = useState('')
   const [warmthFilter, setWarmthFilter] = useState('all')
-  const [sort,         setSort]         = useState('recent')
+  const [keyOnly,      setKeyOnly]      = useState(false)
+  const [sort,         setSort]         = useState('key_first')
+
+  const toggleKey = useMutation({
+    mutationFn: ({ id, is_key_contact }) => updateContact(id, { is_key_contact }),
+    onMutate: async ({ id, is_key_contact }) => {
+      await qc.cancelQueries({ queryKey: ['contacts'] })
+      const prev = qc.getQueryData(['contacts'])
+      qc.setQueryData(['contacts'], old =>
+        (old || []).map(c => c.id === id ? { ...c, is_key_contact } : c)
+      )
+      return { prev }
+    },
+    onError: (_, __, ctx) => qc.setQueryData(['contacts'], ctx.prev),
+    onSettled: () => qc.invalidateQueries({ queryKey: ['contacts'] }),
+  })
 
   const { data: contacts, isLoading } = useQuery({
     queryKey: ['contacts'],
@@ -73,6 +90,7 @@ export default function Contacts() {
   // Filter
   const filtered = useMemo(() => {
     return (contacts || []).filter(c => {
+      if (keyOnly && !c.is_key_contact) return false
       if (warmthFilter !== 'all' && c.relationship_warmth !== warmthFilter) return false
       if (!search.trim()) return true
       const q = search.toLowerCase()
@@ -83,11 +101,23 @@ export default function Contacts() {
         c.title?.toLowerCase().includes(q)
       )
     })
-  }, [contacts, warmthFilter, search])
+  }, [contacts, warmthFilter, keyOnly, search])
 
   // Sort
   const sorted = useMemo(() => {
     return [...filtered].sort((a, b) => {
+      // Key contacts always float to top when sort is key_first
+      if (sort === 'key_first') {
+        if (a.is_key_contact && !b.is_key_contact) return -1
+        if (!a.is_key_contact && b.is_key_contact) return 1
+        // tiebreak: most recent
+        if (a.last_contact_date && b.last_contact_date)
+          return new Date(b.last_contact_date) - new Date(a.last_contact_date)
+        if (a.last_contact_date) return -1
+        if (b.last_contact_date) return 1
+        return (a.name || '').localeCompare(b.name || '')
+      }
+
       if (sort === 'warmth') {
         const wa = WARMTH_STYLES[a.relationship_warmth]?.order ?? 5
         const wb = WARMTH_STYLES[b.relationship_warmth]?.order ?? 5
@@ -162,6 +192,23 @@ export default function Contacts() {
             </select>
           </div>
 
+          {/* Key contacts count */}
+          {contacts && (
+            <div className="mb-2 flex items-center gap-2">
+              <button
+                onClick={() => setKeyOnly(k => !k)}
+                className={`text-xs px-3 py-1 rounded-full font-medium border transition-all flex items-center gap-1.5 ${
+                  keyOnly
+                    ? 'bg-amber-400 text-white border-amber-400'
+                    : 'bg-white text-[#6b6b67] border-[#e5e5e3] hover:border-amber-300'
+                }`}
+              >
+                ⭐ Key contacts
+                <span className="opacity-70">({(contacts || []).filter(c => c.is_key_contact).length})</span>
+              </button>
+            </div>
+          )}
+
           {/* Search + warmth filter row */}
           <div className="flex items-center gap-2 flex-wrap">
             <div className="relative flex-1 min-w-48">
@@ -232,6 +279,7 @@ export default function Contacts() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-[#e5e5e3] bg-gray-50">
+                    <th className="w-8 px-3 py-2.5" />
                     <th className="text-left px-4 py-2.5 text-xs font-semibold text-[#6b6b67] uppercase tracking-wide">Name</th>
                     <th className="text-left px-4 py-2.5 text-xs font-semibold text-[#6b6b67] uppercase tracking-wide">Title</th>
                     <th className="text-left px-4 py-2.5 text-xs font-semibold text-[#6b6b67] uppercase tracking-wide">Company</th>
@@ -253,6 +301,23 @@ export default function Contacts() {
                           i < sorted.length - 1 ? 'border-b border-[#f0f0ee]' : ''
                         }`}
                       >
+                        {/* Star */}
+                        <td className="px-3 py-3 w-8"
+                          onClick={e => {
+                            e.stopPropagation()
+                            toggleKey.mutate({ id: c.id, is_key_contact: !c.is_key_contact })
+                          }}
+                        >
+                          <button
+                            className={`text-base transition-all hover:scale-110 ${
+                              c.is_key_contact ? 'opacity-100' : 'opacity-20 hover:opacity-60'
+                            }`}
+                            title={c.is_key_contact ? 'Remove key contact' : 'Mark as key contact'}
+                          >
+                            ⭐
+                          </button>
+                        </td>
+
                         {/* Name + avatar */}
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2.5">
@@ -328,6 +393,15 @@ export default function Contacts() {
                     onClick={() => navigate(`/contact/${c.id}`)}
                     className="bg-white border border-[#e5e5e3] rounded-xl px-4 py-3 cursor-pointer hover:border-blue-300 transition-colors flex items-center gap-3"
                   >
+                    <button
+                      onClick={e => {
+                        e.stopPropagation()
+                        toggleKey.mutate({ id: c.id, is_key_contact: !c.is_key_contact })
+                      }}
+                      className={`text-base flex-shrink-0 transition-all ${
+                        c.is_key_contact ? 'opacity-100' : 'opacity-20'
+                      }`}
+                    >⭐</button>
                     <div className="w-9 h-9 rounded-full bg-[#1a1a18] flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
                       {initials}
                     </div>
