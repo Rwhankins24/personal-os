@@ -4,18 +4,38 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getTasks, updateTask, getEmails, getProjects } from '../lib/api'
 
-const URGENCY_LABELS = { critical: '🔴 Critical', high: '🟠 High', medium: '🟡 Medium', low: '⚪ Low' }
+const STATUS_COLORS = {
+  open:        'bg-blue-100 text-blue-700',
+  in_progress: 'bg-amber-100 text-amber-700',
+  done:        'bg-green-100 text-green-700',
+  blocked:     'bg-red-100 text-red-600',
+}
+
+const URGENCY_COLORS = {
+  critical: 'bg-red-100 text-red-600',
+  high:     'bg-orange-100 text-orange-700',
+  medium:   'bg-yellow-100 text-yellow-700',
+  low:      'bg-gray-100 text-gray-500',
+}
+
+const URGENCY_LABELS = {
+  critical: '🔴 Critical',
+  high:     '🟠 High',
+  medium:   '🟡 Medium',
+  low:      '⚪ Low',
+}
 
 export default function TaskDetail() {
-  const { id }     = useParams()
-  const navigate   = useNavigate()
-  const qc         = useQueryClient()
-  const [editing, setEditing] = useState(false)
-  const [form, setForm]       = useState({})
+  const { id }   = useParams()
+  const navigate = useNavigate()
+  const qc       = useQueryClient()
 
-  const { data: tasks, isLoading } = useQuery({ queryKey: ['tasks'], queryFn: getTasks })
-  const { data: emails }           = useQuery({ queryKey: ['emails'], queryFn: getEmails })
-  const { data: projects }         = useQuery({ queryKey: ['projects'], queryFn: getProjects })
+  const [editing, setEditing] = useState(false)
+  const [form,    setForm]    = useState({})
+
+  const { data: tasks,    isLoading } = useQuery({ queryKey: ['tasks'],    queryFn: getTasks })
+  const { data: emails }              = useQuery({ queryKey: ['emails'],   queryFn: getEmails })
+  const { data: projects }            = useQuery({ queryKey: ['projects'], queryFn: getProjects })
 
   const task = tasks?.find(t => t.id === id)
 
@@ -46,62 +66,56 @@ export default function TaskDetail() {
 
   if (!task) return (
     <div className="min-h-screen bg-[#f8f8f6] flex flex-col items-center justify-center gap-3">
-      <p className="text-gray-500">Task not found</p>
-      <button onClick={() => navigate('/')} className="text-blue-600 text-sm hover:underline">← Back</button>
+      <p className="text-[#6b6b67]">Task not found</p>
+      <button onClick={() => navigate(-1)} className="text-blue-600 text-sm hover:underline">← Back</button>
     </div>
   )
 
-  const sourceEmail  = task.source_email_id  ? emails?.find(e => e.id === task.source_email_id)  : null
-  const linkedProject = task.project_id ? projects?.find(p => p.id === task.project_id) : null
-  const isDone       = task.status === 'done'
-  const overdue      = task.due_date && dayjs(task.due_date).isBefore(dayjs(), 'day') && !isDone
+  const isDone  = task.status === 'done'
+  const overdue = task.due_date && dayjs(task.due_date).isBefore(dayjs(), 'day') && !isDone
+
+  const sourceEmail   = task.source_email_id  ? emails?.find(e => e.id === task.source_email_id)  : null
+  const linkedProject = task.project_id       ? projects?.find(p => p.id === task.project_id)     : null
 
   return (
     <div className="min-h-screen bg-[#f8f8f6]">
-      {/* Header */}
+
+      {/* ── Sticky top bar ─────────────────────────────────────── */}
       <div className="sticky top-0 z-10 bg-white border-b border-[#e5e5e3] px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
+        <div className="max-w-2xl mx-auto flex items-center justify-between gap-3">
           <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-1.5 text-sm text-[#6b6b67] hover:text-[#1a1a18]"
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-1.5 text-sm text-[#6b6b67] hover:text-[#1a1a18] flex-shrink-0"
           >
             ← Back
           </button>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => toggle.mutate(isDone ? 'open' : 'done')}
-              className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
-                isDone
-                  ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  : 'bg-green-100 text-green-700 hover:bg-green-200'
-              }`}
-            >
-              {isDone ? 'Reopen' : '✓ Mark Done'}
-            </button>
-            <button
-              onClick={() => {
-                setForm({
-                  title:    task.title,
-                  context:  task.context || '',
-                  due_date: task.due_date || '',
-                  urgency:  task.urgency || 'medium',
-                  notes:    task.notes || '',
-                })
-                setEditing(v => !v)
-              }}
-              className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-100"
-            >
-              {editing ? 'Cancel' : 'Edit'}
-            </button>
-          </div>
+          <p className="text-sm font-semibold text-[#1a1a18] truncate flex-1 text-center">
+            {task.title}
+          </p>
+          <button
+            onClick={() => {
+              setForm({
+                title:    task.title,
+                context:  task.context  || '',
+                due_date: task.due_date || '',
+                urgency:  task.urgency  || 'medium',
+                notes:    task.notes    || '',
+              })
+              setEditing(v => !v)
+            }}
+            className="text-xs px-3 py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-100 flex-shrink-0"
+          >
+            {editing ? 'Cancel' : 'Edit'}
+          </button>
         </div>
       </div>
 
-      {/* Content */}
+      {/* ── Content ─────────────────────────────────────────────── */}
       <div className="max-w-2xl mx-auto px-4 py-5 space-y-4">
 
         {editing ? (
-          <div className="bg-white border border-[#e5e5e3] rounded-xl p-4 space-y-3">
+          /* Edit form */
+          <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4 space-y-3">
             <input
               value={form.title}
               onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -109,7 +123,7 @@ export default function TaskDetail() {
             />
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Due date</label>
+                <label className="text-xs text-[#6b6b67] block mb-1">Due date</label>
                 <input
                   type="date"
                   value={form.due_date}
@@ -118,7 +132,7 @@ export default function TaskDetail() {
                 />
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Urgency</label>
+                <label className="text-xs text-[#6b6b67] block mb-1">Urgency</label>
                 <select
                   value={form.urgency}
                   onChange={e => setForm(f => ({ ...f, urgency: e.target.value }))}
@@ -131,7 +145,7 @@ export default function TaskDetail() {
               </div>
             </div>
             <div>
-              <label className="text-xs text-gray-500 block mb-1">Context</label>
+              <label className="text-xs text-[#6b6b67] block mb-1">Context</label>
               <input
                 value={form.context}
                 onChange={e => setForm(f => ({ ...f, context: e.target.value }))}
@@ -140,7 +154,7 @@ export default function TaskDetail() {
               />
             </div>
             <div>
-              <label className="text-xs text-gray-500 block mb-1">Notes</label>
+              <label className="text-xs text-[#6b6b67] block mb-1">Notes</label>
               <textarea
                 value={form.notes}
                 onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
@@ -158,36 +172,22 @@ export default function TaskDetail() {
           </div>
         ) : (
           <>
-            {/* Title + status */}
-            <div className="bg-white border border-[#e5e5e3] rounded-xl p-4">
-              <div className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={isDone}
-                  onChange={() => toggle.mutate(isDone ? 'open' : 'done')}
-                  className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 cursor-pointer flex-shrink-0"
-                />
-                <div className="flex-1">
-                  <h1 className={`text-lg font-semibold leading-snug ${isDone ? 'line-through text-gray-400' : 'text-[#1a1a18]'}`}>
-                    {task.title}
-                  </h1>
-                  {task.context && (
-                    <p className="text-sm text-[#6b6b67] mt-1">{task.context}</p>
-                  )}
-                </div>
-              </div>
+            {/* Main card */}
+            <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+              <h1 className={`text-lg font-semibold leading-snug ${isDone ? 'line-through text-gray-400' : 'text-[#1a1a18]'}`}>
+                {task.title}
+              </h1>
 
-              {/* Metadata row */}
-              <div className="flex items-center gap-2 mt-3 flex-wrap">
-                {task.urgency && (
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                    {URGENCY_LABELS[task.urgency] || task.urgency}
+              {/* Status + urgency badges */}
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                {task.status && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[task.status] || 'bg-gray-100 text-gray-600'}`}>
+                    {task.status.replace('_', ' ')}
                   </span>
                 )}
-                {task.due_date && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${overdue ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600'}`}>
-                    Due {dayjs(task.due_date).format('MMM D, YYYY')}
-                    {overdue && ' — overdue'}
+                {task.urgency && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${URGENCY_COLORS[task.urgency] || 'bg-gray-100 text-gray-500'}`}>
+                    {URGENCY_LABELS[task.urgency] || task.urgency}
                   </span>
                 )}
                 {task.ai_extracted && (
@@ -196,25 +196,64 @@ export default function TaskDetail() {
                 {task.blocking && (
                   <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full">blocking</span>
                 )}
-                {task.status && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${isDone ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
-                    {task.status}
-                  </span>
-                )}
               </div>
 
+              {/* Due date */}
+              {task.due_date && (
+                <p className={`text-sm mt-2 ${overdue ? 'text-red-500 font-medium' : 'text-[#6b6b67]'}`}>
+                  Due {dayjs(task.due_date).format('MMMM D, YYYY')}
+                  {overdue && ' — overdue'}
+                </p>
+              )}
+
+              {/* Context / description */}
+              {task.context && (
+                <p className="text-sm text-[#6b6b67] mt-3 whitespace-pre-line">{task.context}</p>
+              )}
+
+              {/* Notes */}
               {task.notes && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide mb-1.5">Notes</p>
+                  <p className="text-xs text-[#6b6b67] uppercase tracking-wide mb-1.5">Notes</p>
                   <p className="text-sm text-[#1a1a18] whitespace-pre-wrap">{task.notes}</p>
                 </div>
               )}
+
+              {/* Source label */}
+              {task.source_label && (
+                <p className="text-xs text-[#9b9b97] mt-3">Source: {task.source_label}</p>
+              )}
+
+              {/* Action buttons */}
+              <div className="mt-4 flex items-center gap-2">
+                {isDone ? (
+                  <button
+                    onClick={() => toggle.mutate('open')}
+                    disabled={toggle.isPending}
+                    className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-40 font-medium transition-colors"
+                  >
+                    Reopen
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      toggle.mutate('done', {
+                        onSuccess: () => navigate(-1),
+                      })
+                    }}
+                    disabled={toggle.isPending}
+                    className="px-4 py-2 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700 disabled:opacity-40 font-medium transition-colors"
+                  >
+                    {toggle.isPending ? '…' : '✓ Mark Complete'}
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Linked project */}
             {linkedProject && (
-              <div className="bg-white border border-[#e5e5e3] rounded-xl p-4">
-                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1.5">Project</p>
+              <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+                <p className="text-xs text-[#6b6b67] uppercase tracking-wide mb-1.5">Project</p>
                 <button
                   onClick={() => navigate(`/project/${linkedProject.id}`)}
                   className="text-sm font-medium text-blue-600 hover:underline"
@@ -222,15 +261,15 @@ export default function TaskDetail() {
                   {linkedProject.name} →
                 </button>
                 {linkedProject.client && (
-                  <p className="text-xs text-gray-500 mt-0.5">{linkedProject.client}</p>
+                  <p className="text-xs text-[#6b6b67] mt-0.5">{linkedProject.client}</p>
                 )}
               </div>
             )}
 
             {/* Source email */}
             {sourceEmail && (
-              <div className="bg-white border border-[#e5e5e3] rounded-xl p-4">
-                <p className="text-xs text-gray-500 uppercase tracking-wide mb-1.5">Source Email</p>
+              <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+                <p className="text-xs text-[#6b6b67] uppercase tracking-wide mb-1.5">Source Email</p>
                 <p className="text-sm font-medium text-[#1a1a18]">
                   {sourceEmail.from_name || sourceEmail.from_address}
                 </p>

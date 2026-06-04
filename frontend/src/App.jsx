@@ -7,6 +7,7 @@ import EventDetail     from './pages/EventDetail'
 import Projects        from './pages/Projects'
 import ProjectCard     from './pages/ProjectCard'
 import ContactCard     from './pages/ContactCard'
+import ContactDetail   from './pages/ContactDetail'
 import Contacts        from './pages/Contacts'
 import TasksPage       from './pages/TasksPage'
 import EmailsPage      from './pages/EmailsPage'
@@ -101,7 +102,7 @@ export default function App() {
           <Routes>
             <Route path="/"               element={<Dashboard />} />
             <Route path="/contacts"       element={<Contacts />} />
-            <Route path="/contact/:id"    element={<ContactCard />} />
+            <Route path="/contact/:id"    element={<ContactDetail />} />
             <Route path="/contacts/:id"   element={<ContactCard />} />
             <Route path="/task/:id"       element={<TaskDetail />} />
             <Route path="/event/:id"      element={<EventDetail />} />
