@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import api from '../lib/api'
+import { api } from '../lib/api'
 
 const SUGGESTIONS = [
   'What did Courtney say in our last meeting?',
