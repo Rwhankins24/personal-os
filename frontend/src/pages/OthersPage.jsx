@@ -1,8 +1,81 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getOthersCommitments, updateOthersCommitment, getContacts } from '../lib/api'
+
+function isSpeaker(name) {
+  if (!name) return true
+  return /^speaker\s*\d+$/i.test(name.trim()) || name.trim().toLowerCase() === 'unknown'
+}
+
+// ── Inline reassign typeahead ──────────────────────────────────
+function ReassignDropdown({ contacts, onSelect, onClose }) {
+  const [query, setQuery] = useState('')
+  const inputRef = useRef(null)
+
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  const filtered = (contacts || [])
+    .filter(c => c.name && c.name.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 7)
+
+  const exactMatch = (contacts || []).find(
+    c => c.name?.toLowerCase() === query.toLowerCase()
+  )
+
+  const handleKey = (e) => {
+    if (e.key === 'Escape') { e.stopPropagation(); onClose() }
+    if (e.key === 'Enter' && query.trim()) {
+      if (exactMatch) {
+        onSelect({ name: exactMatch.name, email: exactMatch.email || null })
+      } else {
+        onSelect({ name: query.trim(), email: null })
+      }
+    }
+  }
+
+  return (
+    <div className="mt-2 relative" onClick={e => e.stopPropagation()}>
+      <input
+        ref={inputRef}
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        onKeyDown={handleKey}
+        placeholder="Type a name…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#1a1a18] bg-white"
+      />
+      {query.length > 0 && (
+        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-[#e5e5e3] rounded-xl shadow-lg z-30 overflow-hidden">
+          {filtered.length > 0 ? (
+            filtered.map(c => (
+              <button
+                key={c.id}
+                onClick={() => onSelect({ name: c.name, email: c.email || null })}
+                className="w-full text-left px-3 py-2 text-xs hover:bg-[#f8f8f6] flex items-center gap-2 border-b border-[#f0f0ee] last:border-0"
+              >
+                <span className="w-5 h-5 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+                  {c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)}
+                </span>
+                <span className="font-medium text-[#1a1a18]">{c.name}</span>
+                {c.company && <span className="text-[#9b9b97] truncate">{c.company}</span>}
+              </button>
+            ))
+          ) : null}
+          {!exactMatch && query.trim().length > 1 && (
+            <button
+              onClick={() => onSelect({ name: query.trim(), email: null })}
+              className="w-full text-left px-3 py-2 text-xs hover:bg-blue-50 text-blue-600 flex items-center gap-2"
+            >
+              <span className="text-base">+</span>
+              Add "{query.trim()}" as new person
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
 
 const URGENCY_COLOR = {
   critical: 'bg-red-500',
@@ -187,6 +260,7 @@ export default function OthersPage() {
                   daysOverdue={daysOverdue}
                   update={update}
                   showPerson
+                  contacts={contacts}
                 />
               )
             })}
@@ -220,6 +294,7 @@ export default function OthersPage() {
                           daysOverdue={daysOverdue}
                           update={update}
                           showPerson={false}
+                          contacts={contacts}
                         />
                       )
                     })}
@@ -234,73 +309,126 @@ export default function OthersPage() {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, contacts }) {
+  const [reassigning, setReassigning] = useState(false)
+  const speaker = isSpeaker(personName)
+
   const typeIcon = c.delivery_type === 'blocking_ryan' ? '🚧'
     : c.delivery_type === 'to_ryan' ? '📬'
     : '📋'
 
+  const handleReassign = ({ name, email }) => {
+    update.mutate({
+      id: c.id,
+      updates: {
+        committed_by_name: name,
+        ...(email ? { committed_by_email: email } : {})
+      }
+    })
+    setReassigning(false)
+  }
+
   return (
-    <div className="flex items-start gap-3 px-4 py-3 group">
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm flex-shrink-0">{typeIcon}</span>
-          <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
-          {c.urgency && (
-            <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[c.urgency] || 'text-gray-500 bg-gray-100'}`}>
-              {c.urgency}
-            </span>
+    <div className={`px-4 py-3 group ${speaker ? 'bg-amber-50/40' : ''}`}>
+      <div className="flex items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm flex-shrink-0">{typeIcon}</span>
+            <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
+            {c.urgency && (
+              <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[c.urgency] || 'text-gray-500 bg-gray-100'}`}>
+                {c.urgency}
+              </span>
+            )}
+            {daysOverdue > 0 && (
+              <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-600 font-medium flex-shrink-0">
+                {daysOverdue}d overdue
+              </span>
+            )}
+          </div>
+
+          {/* Person name — amber + reassign hint if Speaker */}
+          {showPerson && (
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <p className={`text-xs ${speaker ? 'text-amber-600 font-medium' : 'text-[#6b6b67]'}`}>
+                {speaker ? `⚠ ${personName} — unattributed` : personName}
+              </p>
+              {speaker && !reassigning && (
+                <button
+                  onClick={() => setReassigning(true)}
+                  className="text-[10px] text-amber-600 underline hover:text-amber-800"
+                >
+                  assign
+                </button>
+              )}
+            </div>
           )}
-          {daysOverdue > 0 && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-600 font-medium flex-shrink-0">
-              {daysOverdue}d overdue
-            </span>
+
+          {c.context && (
+            <p className="text-xs text-[#9b9b97] mt-0.5 truncate">{c.context}</p>
+          )}
+          {c.due_date && (
+            <p className={`text-xs mt-0.5 ${daysOverdue > 0 ? 'text-red-500 font-medium' : 'text-[#6b6b67]'}`}>
+              Due {dayjs(c.due_date).format('MMM D, YYYY')}
+            </p>
+          )}
+
+          {/* Inline reassign dropdown */}
+          {reassigning && (
+            <ReassignDropdown
+              contacts={contacts}
+              onSelect={handleReassign}
+              onClose={() => setReassigning(false)}
+            />
           )}
         </div>
-        {showPerson && (
-          <p className="text-xs text-[#6b6b67] mt-0.5">{personName}</p>
-        )}
-        {c.context && (
-          <p className="text-xs text-[#9b9b97] mt-0.5 truncate">{c.context}</p>
-        )}
-        {c.due_date && (
-          <p className={`text-xs mt-0.5 ${daysOverdue > 0 ? 'text-red-500 font-medium' : 'text-[#6b6b67]'}`}>
-            Due {dayjs(c.due_date).format('MMM D, YYYY')}
-          </p>
-        )}
-      </div>
 
-      {/* Action buttons */}
-      <div className="flex items-center gap-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5">
-        {/* Mark done */}
-        <button
-          onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
-          className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
-          title="Mark done"
-        >
-          ✓
-        </button>
+        {/* Action buttons */}
+        <div className="flex items-center gap-1 flex-shrink-0 mt-0.5">
+          {/* Reassign button — always visible for non-speaker rows on hover */}
+          {!speaker && (
+            <button
+              onClick={() => setReassigning(r => !r)}
+              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all
+                opacity-0 group-hover:opacity-100
+                ${reassigning ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-[#e5e5e3] text-[#6b6b67] hover:border-blue-300 hover:text-blue-500 hover:bg-blue-50'}`}
+              title="Reassign to someone"
+            >
+              👤
+            </button>
+          )}
 
-        {/* Escalate to blocking */}
-        {c.delivery_type !== 'blocking_ryan' && (
+          {/* Mark done */}
           <button
-            onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'blocking_ryan' } })}
-            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center hover:border-orange-400 hover:bg-orange-50 transition-all text-xs"
-            title="Mark as blocking me"
+            onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
+            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs opacity-0 group-hover:opacity-100"
+            title="Mark done"
           >
-            🚧
+            ✓
           </button>
-        )}
 
-        {/* De-escalate from blocking */}
-        {c.delivery_type === 'blocking_ryan' && (
-          <button
-            onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'to_ryan' } })}
-            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-gray-400 hover:bg-gray-100 transition-all text-xs"
-            title="Remove blocking flag"
-          >
-            ↓
-          </button>
-        )}
+          {/* Escalate to blocking */}
+          {c.delivery_type !== 'blocking_ryan' && (
+            <button
+              onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'blocking_ryan' } })}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center hover:border-orange-400 hover:bg-orange-50 transition-all text-xs opacity-0 group-hover:opacity-100"
+              title="Mark as blocking me"
+            >
+              🚧
+            </button>
+          )}
+
+          {/* De-escalate from blocking */}
+          {c.delivery_type === 'blocking_ryan' && (
+            <button
+              onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'to_ryan' } })}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-gray-400 hover:bg-gray-100 transition-all text-xs opacity-0 group-hover:opacity-100"
+              title="Remove blocking flag"
+            >
+              ↓
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
