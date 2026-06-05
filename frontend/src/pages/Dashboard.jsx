@@ -1751,11 +1751,8 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Quick capture */}
-      <QuickAdd />
-
-      {/* Sync FAB — bottom right above capture bar */}
-      <div className="fixed bottom-14 right-4 z-20">
+      {/* Sync FAB — above the chat bar */}
+      <div className="fixed bottom-16 right-4 z-20">
         <SyncButton />
       </div>
 

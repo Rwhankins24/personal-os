@@ -1849,7 +1849,7 @@ async function main() {
         // ── Find open tasks linked to this thread ──
         const { data: staleTasks } = await supabase
           .from('tasks')
-          .select('id, title, urgency, due_date, context, source_date, created_at, updated_at')
+          .select('id, title, urgency, due_date, context, ai_context, user_modified, source_date, created_at, updated_at')
           .eq('status', 'open')
           .eq('source_label', email.thread_subject)
 
@@ -1859,9 +1859,13 @@ async function main() {
             const refresh = await aiService.refreshStaleItem(task, email, threadHistory)
             if (refresh?.changed) {
               const patch = {
-                urgency:              refresh.urgency              || task.urgency,
-                due_date:             refresh.due_date             ?? task.due_date,
-                context:              refresh.context              || task.context,
+                // Only update user-facing fields if user hasn't manually edited them
+                ...(task.user_modified ? {} : {
+                  urgency:  refresh.urgency  || task.urgency,
+                  due_date: refresh.due_date ?? task.due_date,
+                }),
+                // AI context always goes to ai_context — never overwrites user's context field
+                ai_context:           refresh.context              || task.ai_context || null,
                 ai_suggests_complete: refresh.ai_suggests_complete || false,
                 fulfillment_evidence: refresh.fulfillment_evidence || null,
                 source_date:          today
@@ -1875,7 +1879,7 @@ async function main() {
         // ── Find open others_commitments linked to this thread ──
         const { data: staleCommitments } = await supabase
           .from('others_commitments')
-          .select('id, title, urgency, due_date, context, source_date, created_at, delivery_type')
+          .select('id, title, urgency, due_date, context, ai_context, user_modified, source_date, created_at, delivery_type')
           .eq('status', 'open')
           .eq('source_label', email.thread_subject)
 
@@ -1885,9 +1889,13 @@ async function main() {
             const refresh = await aiService.refreshStaleItem(c, email, threadHistory)
             if (refresh?.changed) {
               const patch = {
-                urgency:              refresh.urgency  || c.urgency,
-                due_date:             refresh.due_date ?? c.due_date,
-                context:              refresh.context  || c.context,
+                // Only update user-facing fields if user hasn't manually edited them
+                ...(c.user_modified ? {} : {
+                  urgency:  refresh.urgency  || c.urgency,
+                  due_date: refresh.due_date ?? c.due_date,
+                }),
+                // AI context always goes to ai_context
+                ai_context:           refresh.context              || c.ai_context || null,
                 ai_suggests_complete: refresh.ai_suggests_complete || false,
                 fulfillment_evidence: refresh.fulfillment_evidence || null,
                 source_date:          today

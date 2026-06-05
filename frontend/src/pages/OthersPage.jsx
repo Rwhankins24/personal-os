@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getOthersCommitments, updateOthersCommitment, getContacts } from '../lib/api'
+import InlineEdit from '../components/InlineEdit'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -383,23 +384,17 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm flex-shrink-0">{typeIcon}</span>
-            <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
-            {isKey && <span className="text-xs text-amber-500 flex-shrink-0" title="Key contact">⭐</span>}
-            {c.urgency && (
-              <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[c.urgency] || 'text-gray-500 bg-gray-100'}`}>
-                {c.urgency}
-              </span>
-            )}
-            {daysOverdue > 0 && (
-              <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-600 font-medium flex-shrink-0">
-                {daysOverdue}d overdue
-              </span>
-            )}
+            {isKey && <span className="text-xs text-amber-500 flex-shrink-0">⭐</span>}
+            <InlineEdit
+              item={c}
+              type="waiting"
+              onSave={(id, patch) => update.mutate({ id, updates: patch })}
+            />
           </div>
 
-          {/* Person name — amber + reassign hint if Speaker */}
+          {/* Person name row */}
           {showPerson && (
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1.5 mt-0.5 ml-6">
               <p className={`text-xs ${speaker ? 'text-amber-600 font-medium' : 'text-[#6b6b67]'}`}>
                 {speaker ? `⚠ ${personName} — unattributed` : personName}
               </p>
@@ -417,10 +412,6 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
                 </button>
               )}
             </div>
-          )}
-
-          {c.context && (
-            <p className="text-xs text-[#9b9b97] mt-0.5 truncate">{c.context}</p>
           )}
           {c.due_date && (
             <p className={`text-xs mt-0.5 ${daysOverdue > 0 ? 'text-red-500 font-medium' : 'text-[#6b6b67]'}`}>

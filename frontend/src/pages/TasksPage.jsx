@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getTasks, updateTask } from '../lib/api'
+import InlineEdit from '../components/InlineEdit'
 
 const URGENCY_COLOR = {
   critical: 'bg-red-500',
@@ -51,6 +52,18 @@ export default function TasksPage() {
   const { data: tasks, isLoading } = useQuery({
     queryKey: ['tasks'],
     queryFn: getTasks,
+  })
+
+  const update = useMutation({
+    mutationFn: ({ id, updates }) => updateTask(id, updates),
+    onMutate: async ({ id, updates }) => {
+      await qc.cancelQueries({ queryKey: ['tasks'] })
+      const prev = qc.getQueryData(['tasks'])
+      qc.setQueryData(['tasks'], old => (old || []).map(t => t.id === id ? { ...t, ...updates } : t))
+      return { prev }
+    },
+    onError: (_, __, ctx) => qc.setQueryData(['tasks'], ctx.prev),
+    onSettled: () => qc.invalidateQueries({ queryKey: ['tasks'] }),
   })
 
   const complete = useMutation({
@@ -190,18 +203,16 @@ export default function TasksPage() {
                     )}
                   </div>
 
-                  {/* Expanded detail */}
+                  {/* Expanded detail — inline edit */}
                   {expanded && (
-                    <div className="px-4 pb-3 pt-0 ml-5 space-y-1.5 bg-gray-50 border-t border-[#f0f0ee]">
-                      {task.context && (
-                        <p className="text-sm text-[#1a1a18]">{task.context}</p>
-                      )}
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {task.urgency && (
-                          <span className={`text-xs px-2 py-0.5 rounded font-medium ${URGENCY_TEXT[task.urgency] || 'text-gray-500 bg-gray-100'}`}>
-                            {task.urgency}
-                          </span>
-                        )}
+                    <div className="px-4 pb-3 pt-2 ml-5 bg-gray-50 border-t border-[#f0f0ee]">
+                      <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-2">Edit · click any field</p>
+                      <InlineEdit
+                        item={task}
+                        type="task"
+                        onSave={(id, patch) => update.mutate({ id, updates: patch })}
+                      />
+                      <div className="flex items-center gap-2 flex-wrap mt-2">
                         {task.status && (
                           <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-[#6b6b67]">
                             {task.status}
