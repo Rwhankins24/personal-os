@@ -438,16 +438,16 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           )}
         </div>
 
-        {/* Action buttons */}
+        {/* Action buttons — always visible */}
         <div className="flex items-center gap-1 flex-shrink-0 mt-0.5">
-          {/* Reassign button — always visible for non-speaker rows on hover */}
+          {/* Reassign */}
           {!speaker && (
             <button
-              onClick={() => setReassigning(r => !r)}
-              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all
-                opacity-0 group-hover:opacity-100
-                ${reassigning ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-[#e5e5e3] text-[#6b6b67] hover:border-blue-300 hover:text-blue-500 hover:bg-blue-50'}`}
-              title="Reassign to someone"
+              onClick={e => { e.stopPropagation(); setReassigning(r => !r) }}
+              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all ${
+                reassigning ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-[#e5e5e3] text-[#6b6b67] hover:border-blue-300 hover:text-blue-500 hover:bg-blue-50'
+              }`}
+              title="Reassign"
             >
               👤
             </button>
@@ -455,8 +455,8 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
 
           {/* Mark done */}
           <button
-            onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
-            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs opacity-0 group-hover:opacity-100"
+            onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { status: 'closed' } }) }}
+            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
             title="Mark done"
           >
             ✓
@@ -465,8 +465,8 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           {/* Escalate to blocking */}
           {c.delivery_type !== 'blocking_ryan' && (
             <button
-              onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'blocking_ryan' } })}
-              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center hover:border-orange-400 hover:bg-orange-50 transition-all text-xs opacity-0 group-hover:opacity-100"
+              onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { delivery_type: 'blocking_ryan' } }) }}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center hover:border-orange-400 hover:bg-orange-50 transition-all text-xs"
               title="Mark as blocking me"
             >
               🚧
@@ -476,8 +476,8 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           {/* De-escalate from blocking */}
           {c.delivery_type === 'blocking_ryan' && (
             <button
-              onClick={() => update.mutate({ id: c.id, updates: { delivery_type: 'to_ryan' } })}
-              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-gray-400 hover:bg-gray-100 transition-all text-xs opacity-0 group-hover:opacity-100"
+              onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { delivery_type: 'to_ryan' } }) }}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-gray-400 hover:bg-gray-100 transition-all text-xs"
               title="Remove blocking flag"
             >
               ↓

@@ -57,10 +57,7 @@ module.exports = async (req, res) => {
       const { id } = req.query
       const { data, error } = await supabase
         .from('others_commitments')
-        .update({
-          ...req.body,
-          updated_at: new Date().toISOString()
-        })
+        .update(req.body)
         .eq('id', id)
         .select()
         .single()
