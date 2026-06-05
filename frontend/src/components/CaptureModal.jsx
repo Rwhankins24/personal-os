@@ -138,6 +138,7 @@ export default function CaptureModal({ onClose }) {
           context: context.trim() || null,
           status: 'open',
           source: 'manual',
+          source_type: 'manual',
           bucket: urgency === 'critical' ? 1 : urgency === 'high' ? 2 : 3,
         })
       }
@@ -152,6 +153,7 @@ export default function CaptureModal({ onClose }) {
           context: context.trim() || null,
           status: 'open',
           source: 'manual',
+          source_type: 'manual',
         })
       }
 
@@ -166,6 +168,7 @@ export default function CaptureModal({ onClose }) {
           context: context.trim() || null,
           status: 'open',
           source: 'manual',
+          source_type: 'manual',
         })
       }
 
@@ -176,6 +179,7 @@ export default function CaptureModal({ onClose }) {
           due_date: dueDate || null,
           status: 'open',
           source: 'manual',
+          source_type: 'manual',
         })
       }
     },
