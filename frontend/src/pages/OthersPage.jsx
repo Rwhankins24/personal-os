@@ -147,24 +147,9 @@ export default function OthersPage() {
     onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
   })
 
-  const keyCount = (items || []).filter(isKeyPerson).length
-
-  const typeOptions = [
-    { value: 'all',           label: 'All' },
-    { value: 'key',           label: `⭐ Key${keyCount ? ` (${keyCount})` : ''}` },
-    { value: 'blocking_ryan', label: '🚧 Blocking' },
-    { value: 'to_ryan',       label: '📬 Owed to Me' },
-    { value: 'general',       label: '📋 General' },
-  ]
-
-  const sortOptions = [
-    { value: 'person',   label: 'By Person' },
-    { value: 'due_date', label: 'By Due Date' },
-  ]
-
   const today = dayjs()
 
-  // Build key contact lookup by email + name
+  // Build key contact lookup by email + name — must come before keyCount
   const keyEmailSet = new Set(
     (contacts || []).filter(c => c.is_key_contact).map(c => (c.email || '').toLowerCase()).filter(Boolean)
   )
@@ -181,6 +166,21 @@ export default function OthersPage() {
   const isKeyName = (name) => {
     return keyNameSet.has((name || '').toLowerCase())
   }
+
+  const keyCount = (items || []).filter(isKeyPerson).length
+
+  const typeOptions = [
+    { value: 'all',           label: 'All' },
+    { value: 'key',           label: `⭐ Key${keyCount ? ` (${keyCount})` : ''}` },
+    { value: 'blocking_ryan', label: '🚧 Blocking' },
+    { value: 'to_ryan',       label: '📬 Owed to Me' },
+    { value: 'general',       label: '📋 General' },
+  ]
+
+  const sortOptions = [
+    { value: 'person',   label: 'By Person' },
+    { value: 'due_date', label: 'By Due Date' },
+  ]
 
   const filtered = (items || []).filter(c => {
     if (typeFilter === 'all') return true
