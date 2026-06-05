@@ -230,7 +230,7 @@ function PipelineBanner() {
 function StatCards({ tasks, emails, events, commitments, decisions, questions,
                      onOpenTasks, onNeedsReply, onDecisions, onQuestions }) {
   const todayUTC    = new Date().toISOString().split('T')[0]
-  const openTasks   = tasks?.filter(t => t.status !== 'done' && t.status !== 'archived').length ?? 0
+  const openTasks   = tasks?.filter(t => t.status !== 'done' && t.status !== 'complete' && t.status !== 'archived').length ?? 0
   const needsReply  = emails?.filter(e => e.status === 'needs_reply').length ?? 0
   const todayEvents = events?.filter(e => e.start_time?.split('T')[0] === todayUTC).length ?? 0
   const openDecisions = decisions?.length ?? 0
@@ -353,7 +353,7 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
     onSettled: () => qc.invalidateQueries({ queryKey: ['tasks'] }),
   })
 
-  const open = (tasks || []).filter(t => t.status !== 'done' && t.status !== 'archived')
+  const open = (tasks || []).filter(t => t.status !== 'done' && t.status !== 'complete' && t.status !== 'archived')
   const shown = showAll ? open : open.slice(0, 6)
 
   return (
