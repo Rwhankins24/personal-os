@@ -71,7 +71,7 @@ export default function TaskDetail() {
     </div>
   )
 
-  const isDone  = task.status === 'done'
+  const isDone  = task.status === 'done' || task.status === 'complete'
   const overdue = task.due_date && dayjs(task.due_date).isBefore(dayjs(), 'day') && !isDone
 
   const sourceEmail   = task.source_email_id  ? emails?.find(e => e.id === task.source_email_id)  : null

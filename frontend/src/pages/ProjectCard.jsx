@@ -185,7 +185,7 @@ export default function ProjectCard() {
   })
 
   // ── Derived data ───────────────────────────────────────────
-  const projectTasks       = (allTasks || []).filter(t => t.project_id === id && t.status !== 'done' && t.status !== 'archived')
+  const projectTasks       = (allTasks || []).filter(t => t.project_id === id && t.status !== 'done' && t.status !== 'complete' && t.status !== 'archived')
   const projectCommitments = (allCommitments || []).filter(c => c.project_id === id && c.status === 'open')
   const projectContacts    = (allContacts || []).filter(c => c.project_id === id)
   const pendingDecisions   = (allDecisions || []).filter(d => d.project_id === id && d.status !== 'decided' && d.status !== 'archived')

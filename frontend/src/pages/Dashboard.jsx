@@ -364,7 +364,7 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
         to="/tasks"
         action={
           <span className="text-xs text-[#6b6b67]">
-            {(tasks || []).filter(t => t.status === 'done').length} done
+            {(tasks || []).filter(t => t.status === 'done' || t.status === 'complete').length} done
           </span>
         }
       />
@@ -377,7 +377,7 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
               <div key={task.id} className="flex items-start gap-2.5 group">
                 <input
                   type="checkbox"
-                  checked={task.status === 'done'}
+                  checked={task.status === 'done' || task.status === 'complete'}
                   onChange={() => toggle.mutate({
                     id: task.id,
                     status: task.status === 'done' ? 'open' : 'done',

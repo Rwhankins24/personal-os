@@ -67,12 +67,12 @@ export default function TasksPage() {
   })
 
   const complete = useMutation({
-    mutationFn: ({ id }) => updateTask(id, { status: 'complete' }),
+    mutationFn: ({ id }) => updateTask(id, { status: 'done' }),
     onMutate: async ({ id }) => {
       await qc.cancelQueries({ queryKey: ['tasks'] })
       const prev = qc.getQueryData(['tasks'])
       qc.setQueryData(['tasks'], old =>
-        (old || []).map(t => t.id === id ? { ...t, status: 'complete' } : t)
+        (old || []).map(t => t.id === id ? { ...t, status: 'done' } : t)
       )
       return { prev }
     },
