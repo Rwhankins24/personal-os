@@ -15,6 +15,7 @@ import OthersPage      from './pages/OthersPage'
 import CommitmentsPage from './pages/CommitmentsPage'
 import ChatPage        from './pages/ChatPage'
 import ChatWidget      from './components/ChatWidget'
+import CaptureButton   from './components/CaptureButton'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -118,6 +119,7 @@ export default function App() {
             <Route path="/chat"             element={<ChatPage />} />
           </Routes>
           <ChatWidget />
+          <CaptureButton />
         </BrowserRouter>
       </QueryClientProvider>
     </PasswordGate>

@@ -26,13 +26,15 @@ export const getEmails      = () => api.get('/api/emails').then(r => r.data)
 export const updateEmail    = (id, data) => api.patch(`/api/emails?id=${id}`, data).then(r => r.data)
 
 // ── My Commitments ────────────────────────────────────────────
-export const getCommitments   = () => api.get('/api/commitments').then(r => r.data)
-export const updateCommitment = (id, data) => api.patch(`/api/commitments?id=${id}`, data).then(r => r.data)
+export const getCommitments    = () => api.get('/api/commitments').then(r => r.data)
+export const createCommitment  = (data) => api.post('/api/commitments', data).then(r => r.data)
+export const updateCommitment  = (id, data) => api.patch(`/api/commitments?id=${id}`, data).then(r => r.data)
 
 // ── Others' Commitments ───────────────────────────────────────
-export const getOthersCommitments   = (status = 'open') =>
+export const getOthersCommitments    = (status = 'open') =>
   api.get(`/api/others-commitments?status=${status}`).then(r => r.data)
-export const updateOthersCommitment = (id, data) =>
+export const createOthersCommitment  = (data) => api.post('/api/others-commitments', data).then(r => r.data)
+export const updateOthersCommitment  = (id, data) =>
   api.patch(`/api/others-commitments?id=${id}`, data).then(r => r.data)
 
 // ── Projects ──────────────────────────────────────────────────
@@ -58,9 +60,10 @@ export const getCaptures    = ()     => api.get('/api/captures').then(r => r.dat
 export const createCapture  = (data) => api.post('/api/captures', data).then(r => r.data)
 
 // ── Pending Decisions ─────────────────────────────────────────
-export const getPendingDecisions   = () =>
+export const getPendingDecisions    = () =>
   api.get('/api/pending-decisions').then(r => r.data)
-export const updatePendingDecision = (id, data) =>
+export const createPendingDecision  = (data) => api.post('/api/pending-decisions', data).then(r => r.data)
+export const updatePendingDecision  = (id, data) =>
   api.patch(`/api/pending-decisions?id=${id}`, data).then(r => r.data)
 
 // ── Unlinked Intelligence ─────────────────────────────────────
