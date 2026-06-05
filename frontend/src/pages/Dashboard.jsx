@@ -1476,35 +1476,24 @@ function DailyBrief() {
 
 // ── AI Job button ──────────────────────────────────────────────
 function AIJobButton() {
-  const [status, setStatus] = useState('idle') // idle | loading | done | error
+  const [status, setStatus] = useState('idle')
 
   const trigger = async () => {
     if (status === 'loading') return
     setStatus('loading')
     try {
       const res = await fetch('https://personal-os-five-black.vercel.app/api/jobs/trigger-nightly', {
-        method:  'POST',
+        method: 'POST',
         headers: { 'x-trigger-secret': '0557601ac4f4c8f0d42923bba2fb083b' },
       })
-      if (res.ok) {
-        setStatus('done')
-        setTimeout(() => setStatus('idle'), 3000)
-      } else {
-        setStatus('error')
-        setTimeout(() => setStatus('idle'), 3000)
-      }
+      if (res.ok) { setStatus('done'); setTimeout(() => setStatus('idle'), 3000) }
+      else         { setStatus('error'); setTimeout(() => setStatus('idle'), 3000) }
     } catch {
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 3000)
+      setStatus('error'); setTimeout(() => setStatus('idle'), 3000)
     }
   }
 
-  const label = {
-    idle:    '▶ AI Job',
-    loading: 'Running…',
-    done:    '✓ Triggered',
-    error:   '✗ Failed',
-  }[status]
+  const label = { idle: '▶ AI Job', loading: 'Queuing…', done: '✓ Queued', error: '✗ Failed' }[status]
 
   const cls = {
     idle:    'bg-[#1a1a18] text-white hover:bg-gray-800',
@@ -1517,11 +1506,9 @@ function AIJobButton() {
     <button
       onClick={trigger}
       disabled={status === 'loading'}
-      className={`text-xs px-2.5 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 ${cls}`}
+      className={`text-xs px-2.5 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 ${cls[status] || cls.idle}`}
     >
-      {status === 'loading' && (
-        <span className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
-      )}
+      {status === 'loading' && <span className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />}
       {label}
     </button>
   )
