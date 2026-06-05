@@ -51,14 +51,6 @@ jobs:
             "import json,sys; d=json.load(sys.stdin); print(d.get('processing_completed_at') or '')" \
             2>/dev/null)
 
-          OTTER_DONE=$(echo "$STATUS" | python3 -c \
-            "import json,sys; d=json.load(sys.stdin); print(d.get('otter_processing_completed_at') or '')" \
-            2>/dev/null)
-
-          PLAUD_DONE=$(echo "$STATUS" | python3 -c \
-            "import json,sys; d=json.load(sys.stdin); print(d.get('plaud_pull_completed_at') or '')" \
-            2>/dev/null)
-
           AI_DONE=$(echo "$STATUS" | python3 -c \
             "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" \
             2>/dev/null)
@@ -80,27 +72,19 @@ jobs:
           echo "AI done: $AI_DONE"
           echo "Minutes since email: $MINUTES_SINCE"
 
-          # Fire when: email processing complete AND
-          # (both Otter+Plaud done OR 30+ min since email)
-          # AND AI not done yet
-          MEETING_SOURCES_DONE=""
-          if [ -n "$OTTER_DONE" ] && [ -n "$PLAUD_DONE" ]; then
-            MEETING_SOURCES_DONE="true"
-          fi
-
-          if [ -n "$PROCESSING_DONE" ] && \
-             [ -z "$AI_DONE" ] && (
-             [ -n "$MEETING_SOURCES_DONE" ] || \
-             [ "$MINUTES_SINCE" -ge 30 ]); then
+          # Fire when: email processing complete AND AI not done yet
+          # Otter removed — fully migrated to Plaud (loaded from Supabase storage internally)
+          # Run immediately when email is done, no meeting-source wait needed
+          if [ -n "$PROCESSING_DONE" ] && [ -z "$AI_DONE" ]; then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            if [ -n "$MEETING_SOURCES_DONE" ]; then
-              echo "Email + Otter + Plaud all ready."
-            else
-              echo "Email ready. Meeting sources timeout or no meetings. Running anyway."
-            fi
+            echo "Email done. Running AI job."
           else
             echo "should_run=false" >> $GITHUB_OUTPUT
-            echo "Conditions not met. Skipping."
+            if [ -z "$PROCESSING_DONE" ]; then
+              echo "Email not processed yet. Skipping."
+            else
+              echo "AI already ran today. Skipping."
+            fi
           fi
 
       - name: Checkout repository
