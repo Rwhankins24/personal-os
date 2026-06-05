@@ -9,7 +9,7 @@ const supabase = createClient(
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, OPTIONS')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
   if (req.method === 'OPTIONS') return res.status(200).end()
@@ -23,7 +23,6 @@ module.exports = async (req, res) => {
         .from('others_commitments')
         .select('*')
         .eq('status', filterStatus)
-        .order('ai_suggests_complete', { ascending: false })
         .order('due_date', { ascending: true, nullsLast: true })
 
       if (error) throw error
@@ -42,6 +41,16 @@ module.exports = async (req, res) => {
       }))
 
       return res.json(withOverdue)
+    }
+
+    if (req.method === 'POST') {
+      const { data, error } = await supabase
+        .from('others_commitments')
+        .insert({ ...req.body, created_at: new Date().toISOString() })
+        .select()
+        .single()
+      if (error) throw error
+      return res.status(201).json(data)
     }
 
     if (req.method === 'PATCH') {
