@@ -9,7 +9,7 @@ const supabase = createClient(
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, OPTIONS')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
   if (req.method === 'OPTIONS') return res.status(200).end()
@@ -23,6 +23,16 @@ module.exports = async (req, res) => {
         .order('due_date', { ascending: true })
       if (error) throw error
       return res.json(data)
+    }
+
+    if (req.method === 'POST') {
+      const { data, error } = await supabase
+        .from('pending_decisions')
+        .insert(req.body)
+        .select()
+        .single()
+      if (error) throw error
+      return res.status(201).json(data)
     }
 
     if (req.method === 'PATCH') {

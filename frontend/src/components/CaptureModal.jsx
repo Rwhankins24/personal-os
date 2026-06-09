@@ -132,54 +132,45 @@ export default function CaptureModal({ onClose }) {
 
       if (type === 'task') {
         return createTask({
-          title: title.trim(),
+          title:    title.trim(),
           urgency,
           due_date: dueDate || null,
-          context: context.trim() || null,
-          status: 'open',
-          source: 'manual',
-          source_type: 'manual',
-          bucket: urgency === 'critical' ? 1 : urgency === 'high' ? 2 : 3,
+          context:  context.trim() || null,
+          status:   'open',
         })
       }
 
       if (type === 'commitment') {
         if (!madeTo.trim()) throw new Error('Who did you commit to?')
         return createCommitment({
-          title: title.trim(),
-          made_to: madeTo.trim(),
-          due_date: dueDate || null,
+          title:           title.trim(),
+          made_to:         madeTo.trim(),
+          due_date:        dueDate || null,
           commitment_type: commitType,
-          context: context.trim() || null,
-          status: 'open',
-          source: 'manual',
-          source_type: 'manual',
+          context:         context.trim() || null,
+          status:          'open',
         })
       }
 
       if (type === 'waiting') {
         if (!fromName.trim()) throw new Error('Who are you waiting on?')
         return createOthersCommitment({
-          title: title.trim(),
-          committed_by_name: fromName.trim(),
-          due_date: dueDate || null,
-          delivery_type: deliveryType,
-          urgency: ocUrgency,
-          context: context.trim() || null,
-          status: 'open',
-          source: 'manual',
-          source_type: 'manual',
+          title:              title.trim(),
+          committed_by_name:  fromName.trim(),
+          due_date:           dueDate || null,
+          delivery_type:      deliveryType,
+          urgency:            ocUrgency,
+          context:            context.trim() || null,
+          status:             'open',
         })
       }
 
       if (type === 'decision') {
         return createPendingDecision({
-          title: title.trim(),
+          title:       title.trim(),
           description: context.trim() || null,
-          due_date: dueDate || null,
-          status: 'open',
-          source: 'manual',
-          source_type: 'manual',
+          due_date:    dueDate || null,
+          status:      'open',
         })
       }
     },

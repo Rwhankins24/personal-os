@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') {
       const { data, error } = await supabase
         .from('others_commitments')
-        .insert({ ...req.body, created_at: new Date().toISOString() })
+        .insert(req.body)
         .select()
         .single()
       if (error) throw error
