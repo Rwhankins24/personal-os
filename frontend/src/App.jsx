@@ -14,6 +14,7 @@ import EmailsPage      from './pages/EmailsPage'
 import OthersPage      from './pages/OthersPage'
 import CommitmentsPage from './pages/CommitmentsPage'
 import ChatPage        from './pages/ChatPage'
+import KnowledgePage   from './pages/KnowledgePage'
 import ChatWidget      from './components/ChatWidget'
 import CaptureButton   from './components/CaptureButton'
 
@@ -117,6 +118,7 @@ export default function App() {
             <Route path="/others"           element={<OthersPage />} />
             <Route path="/commitments-list" element={<CommitmentsPage />} />
             <Route path="/chat"             element={<ChatPage />} />
+            <Route path="/knowledge"        element={<KnowledgePage />} />
           </Routes>
           <ChatWidget />
           <CaptureButton />

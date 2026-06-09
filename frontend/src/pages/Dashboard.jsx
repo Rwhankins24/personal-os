@@ -18,6 +18,7 @@ import {
   getAIQuestions, answerAIQuestion,
   getPipelineStatus,
   getMeetingNotes,
+  getKnowledge,
 } from '../lib/api'
 import SyncButton from '../components/SyncButton'
 
@@ -1607,6 +1608,12 @@ export default function Dashboard() {
     queryFn: () => getMeetingNotes(),
     refetchInterval: 300000
   })
+
+  const { data: proposedKnowledge = [] } = useQuery({
+    queryKey: ['knowledge-proposed'],
+    queryFn:  () => getKnowledge('proposed'),
+    refetchInterval: 300000,
+  })
   const [expandedMeeting, setExpandedMeeting] = useState(null)
 
   const now = dayjs()
@@ -1631,6 +1638,17 @@ export default function Dashboard() {
               className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
             >
               Contacts
+            </Link>
+            <Link
+              to="/knowledge"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-1.5"
+            >
+              Knowledge
+              {proposedKnowledge.length > 0 && (
+                <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full font-medium leading-none">
+                  ⚡ Review
+                </span>
+              )}
             </Link>
             <AIJobButton />
           </div>

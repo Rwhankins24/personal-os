@@ -87,3 +87,9 @@ export const askAI = (question, opts = {}) =>
 // ── Pipeline Status ───────────────────────────────────────────
 export const getPipelineStatus = () =>
   api.get('/api/pipeline/status', authHeaders()).then(r => r.data)
+
+// ── Knowledge Base ────────────────────────────────────────────
+export const getKnowledge    = (status = 'active') => api.get(`/api/knowledge?status=${status}`).then(r => r.data)
+export const createKnowledge = (data) => api.post('/api/knowledge', data).then(r => r.data)
+export const updateKnowledge = (id, data) => api.patch(`/api/knowledge?id=${id}`, data).then(r => r.data)
+export const deleteKnowledge = (id) => api.delete(`/api/knowledge?id=${id}`).then(r => r.data)

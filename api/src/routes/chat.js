@@ -35,6 +35,7 @@ module.exports = async (req, res) => {
 
     // ── Parallel context fetch ────────────────────────────────────────
     const [
+      knowledge,
       meetingNotes,
       emails,
       contacts,
@@ -44,6 +45,15 @@ module.exports = async (req, res) => {
       intelligenceNotes,
       events,
     ] = await Promise.all([
+
+      // Knowledge base — always include relevant entries
+      supabase
+        .from('knowledge_base')
+        .select('topic, category, context, resolution, applies_to')
+        .eq('status', 'active')
+        .order('updated_at', { ascending: false })
+        .limit(20)
+        .then(r => r.data || []),
 
       // Meeting notes — search title + participants + summary
       supabase
@@ -157,8 +167,21 @@ module.exports = async (req, res) => {
     const relEvents = filterRelevant(events,
       e => `${e.title} ${(e.attendees || []).map(a => a.name || a).join(' ')} ${e.body}`)
 
+    const relKnowledge = filterRelevant(knowledge,
+      k => `${k.topic} ${k.context} ${k.resolution} ${(k.applies_to || []).join(' ')}`)
+
     // ── Build context string ─────────────────────────────────────────
     const sections = []
+
+    if (relKnowledge.length) {
+      sections.push("=== RYAN'S KNOWLEDGE BASE ===")
+      relKnowledge.forEach(k => {
+        sections.push(`[${k.category}] ${k.topic}
+Context: ${k.context?.slice(0, 300) || ''}
+Resolution/Learning: ${k.resolution?.slice(0, 300) || ''}
+Applies to: ${(k.applies_to || []).join(', ')}`)
+      })
+    }
 
     if (relMeetings.length) {
       sections.push('=== MEETING NOTES ===')
