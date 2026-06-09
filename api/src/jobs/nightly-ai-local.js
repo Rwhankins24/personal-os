@@ -2682,6 +2682,157 @@ async function main() {
     results.errors.push(`Lookahead: ${err.message}`)
   }
 
+  // ── STEP 9.7: Propose knowledge base entries ──────────────────────
+  console.log('Step 9.7: Extracting knowledge base proposals...')
+  let knowledgeProposed = 0
+  const Anthropic = require('@anthropic-ai/sdk')
+  const haiku = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+  async function proposeWithHaiku(prompt) {
+    const msg = await haiku.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 400,
+      messages: [{ role: 'user', content: prompt }]
+    })
+    const text = msg.content[0]?.text || ''
+    const match = text.match(/\{[\s\S]*\}/)
+    if (!match) return null
+    try { return JSON.parse(match[0]) } catch { return null }
+  }
+
+  try {
+    // Source 1: Recently decided pending_decisions
+    const thirtyDaysAgo = new Date()
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+
+    const { data: decidedItems } = await supabase
+      .from('pending_decisions')
+      .select('id, title, description, status, outcome, decided_at, project_id')
+      .eq('status', 'decided')
+      .gte('decided_at', thirtyDaysAgo.toISOString())
+      .limit(10)
+
+    for (const item of (decidedItems || [])) {
+      if (!item.outcome) continue
+      // Check not already proposed
+      const { data: existing } = await supabase
+        .from('knowledge_base')
+        .select('id')
+        .eq('source_id', item.id)
+        .maybeSingle()
+      if (existing) continue
+
+      try {
+        const prompt = `A pending decision was resolved. Extract the institutional knowledge worth saving.
+
+Decision: ${item.title}
+Background: ${item.description || 'none'}
+Outcome: ${item.outcome}
+
+Return JSON only:
+{
+  "topic": "short memorable title (< 8 words)",
+  "category": "decision",
+  "context": "what the situation/issue was (2-3 sentences)",
+  "resolution": "what was decided and why — the actual learning (2-3 sentences)",
+  "applies_to": ["project or topic tags, 2-4 items"],
+  "worth_saving": true/false
+}`
+
+        const parsed = await proposeWithHaiku(prompt)
+        if (!parsed?.worth_saving) continue
+
+        await supabase.from('knowledge_base').insert({
+          topic:       parsed.topic,
+          category:    'decision',
+          context:     parsed.context,
+          resolution:  parsed.resolution,
+          applies_to:  parsed.applies_to || [],
+          status:      'proposed',
+          proposed_by: 'ai_nightly',
+          source_type: 'pending_decision',
+          source_id:   item.id,
+          project_id:  item.project_id || null,
+          created_at:  new Date().toISOString(),
+          updated_at:  new Date().toISOString(),
+        })
+        knowledgeProposed++
+      } catch { /* non-fatal */ }
+    }
+
+    // Source 2: High-signal intelligence notes (risk + pattern clusters)
+    const { data: intelNotes } = await supabase
+      .from('intelligence_notes')
+      .select('id, note, category, project_id, created_at')
+      .in('category', ['risk', 'pattern', 'insight', 'lesson'])
+      .gte('created_at', thirtyDaysAgo.toISOString())
+      .order('created_at', { ascending: false })
+      .limit(20)
+
+    // Group by similar topics to find repeating patterns
+    const noteMap = {}
+    for (const n of (intelNotes || [])) {
+      const words = (n.note || '').toLowerCase().split(/\s+/).filter(w => w.length > 5).slice(0, 5).join('|')
+      if (!noteMap[words]) noteMap[words] = []
+      noteMap[words].push(n)
+    }
+
+    // Only propose if a pattern appears 2+ times (recurring issue)
+    for (const [, group] of Object.entries(noteMap)) {
+      if (group.length < 2) continue
+      const sample = group[0]
+
+      const { data: existing } = await supabase
+        .from('knowledge_base')
+        .select('id')
+        .eq('source_id', sample.id)
+        .maybeSingle()
+      if (existing) continue
+
+      try {
+        const combinedNotes = group.slice(0, 3).map(n => n.note).join('\n---\n')
+        const prompt = `Multiple intelligence notes show a recurring pattern. Extract the institutional knowledge.
+
+Notes (${group.length} occurrences):
+${combinedNotes}
+
+Return JSON only:
+{
+  "topic": "short memorable title (< 8 words)",
+  "category": "project_lesson",
+  "context": "what keeps happening / the pattern (2-3 sentences)",
+  "resolution": "what this means / what to watch for / how to handle it (2-3 sentences)",
+  "applies_to": ["project or topic tags, 2-4 items"],
+  "worth_saving": true/false
+}`
+
+        const parsed = await proposeWithHaiku(prompt)
+        if (!parsed?.worth_saving) continue
+
+        await supabase.from('knowledge_base').insert({
+          topic:       parsed.topic,
+          category:    'project_lesson',
+          context:     parsed.context,
+          resolution:  parsed.resolution,
+          applies_to:  parsed.applies_to || [],
+          status:      'proposed',
+          proposed_by: 'ai_nightly',
+          source_type: 'intelligence_pattern',
+          source_id:   sample.id,
+          project_id:  sample.project_id || null,
+          created_at:  new Date().toISOString(),
+          updated_at:  new Date().toISOString(),
+        })
+        knowledgeProposed++
+      } catch { /* non-fatal */ }
+    }
+
+    console.log(`  ✓ Knowledge proposals: ${knowledgeProposed} new entries queued for review`)
+  } catch (err) {
+    console.log(`  ⚠ Knowledge extraction error: ${err.message}`)
+    results.errors.push(`Knowledge: ${err.message}`)
+  }
+
   // ── STEP 10: Mark complete ──────────────────────────────────────
   console.log('Step 10: Marking complete...')
   const pendingQCount = results.questions_logged
