@@ -69,6 +69,34 @@ jobs:
 
           import urllib.parse
 
+          # ── Calculate lookback window ────────────────────────────────
+          # Use max(days since last run, 2) so gaps from travel are caught
+          def get_lookback_days():
+              try:
+                  req = urllib.request.Request(
+                      f"{SUPABASE_URL}/rest/v1/pipeline_status"
+                      "?select=plaud_pull_completed_at&order=created_at.desc&limit=1",
+                      headers={
+                          'apikey': SUPABASE_KEY,
+                          'Authorization': f'Bearer {SUPABASE_KEY}'
+                      }
+                  )
+                  with urllib.request.urlopen(req, timeout=10) as r:
+                      rows = json.loads(r.read())
+                  if rows and rows[0].get('plaud_pull_completed_at'):
+                      last_run = datetime.fromisoformat(
+                          rows[0]['plaud_pull_completed_at'].replace('Z', '+00:00')
+                      )
+                      days_since = (datetime.now(timezone.utc) - last_run).days
+                      lookback = max(days_since + 1, 2)  # at least 2, cover partial days
+                      log(f"Last Plaud pull: {last_run.date()} ({days_since}d ago) → lookback {lookback}d")
+                      return lookback
+              except Exception as e:
+                  log(f"Could not fetch last run date ({e}) — defaulting to 2d")
+              return 2
+
+          LOOKBACK_DAYS = get_lookback_days()
+
           log("Refreshing Gmail access token...")
           ACCESS_TOKEN = refresh_token(1)
           if not ACCESS_TOKEN:
@@ -203,10 +231,10 @@ jobs:
               return ' '.join(summary_lines) if summary_lines else body_text[:500]
 
           # ── Search Gmail ─────────────────────────────────────────────
-          log("Searching Gmail for [Plaud-AutoFlow] emails (last 48h)...")
+          log(f"Searching Gmail for [Plaud-AutoFlow] emails (last {LOOKBACK_DAYS}d)...")
           search = gmail_get(
               "https://gmail.googleapis.com/gmail/v1/users/me/messages"
-              "?q=subject%3A%5BPlaud-AutoFlow%5D+newer_than%3A2d&maxResults=50"
+              f"?q=subject%3A%5BPlaud-AutoFlow%5D+newer_than%3A{LOOKBACK_DAYS}d&maxResults=50"
           )
           message_ids = [m['id'] for m in search.get('messages', [])]
           log(f"Found {len(message_ids)} Plaud messages")

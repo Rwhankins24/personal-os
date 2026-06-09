@@ -112,7 +112,27 @@ failure to recall them.
 date '+%Y-%m-%d'
 ```
 
-Store `TODAY_ISO`. Then load yesterday's report if it exists:
+Store `TODAY_ISO`. Then determine the pull window — use last successful run date
+so gaps from travel are automatically caught:
+
+```bash
+curl -s \
+  "https://dvevqwhphrcboyjpvnlz.supabase.co/rest/v1/pipeline_status?select=processing_completed_at&order=created_at.desc&limit=2" \
+  -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+```
+
+From the result, find the most recent `processing_completed_at` from a **previous**
+run (not today). Calculate `PULL_SINCE`:
+
+- If a previous run timestamp exists: use that timestamp as `PULL_SINCE`
+  (this catches all emails since last successful pull, including travel gaps)
+- If no previous run found: default to `48h ago`
+- Always use whichever gives the **larger** window (earlier date)
+
+Store as `PULL_SINCE`. Log: `"Pull window: from [PULL_SINCE] to now"`
+
+Then load yesterday's report if it exists:
 
 ```bash
 cat ~/personal-os/data/last-email-report.json 2>/dev/null || echo "{}"
@@ -130,8 +150,9 @@ Run all sub-steps concurrently where possible. Each is a separate API call.
 ### 2A — Inbox (split into 4 queries — DO NOT combine)
 
 **Query 2A-1 — Recent inbox by date (folder + date filter, no keyword):**
-- `folderName: "inbox"`, `afterDateTime: 48h ago`, `limit: 100`
-- Captures everything recent. No `query:` parameter.
+- `folderName: "inbox"`, `afterDateTime: PULL_SINCE`, `limit: 100`
+- Uses the calculated pull window from Step 1 — catches gaps from travel days.
+- No `query:` parameter.
 
 **Query 2A-2 — Urgent/action keywords (keyword only, no folder/date):**
 - `query: "urgent OR deadline OR ASAP OR \"action required\" OR \"please respond\" OR approval"`
@@ -182,12 +203,14 @@ After all 4 queries return: merge results. For each email capture these fields:
 
 ### 2B — Sent items (split into 2 queries — ALWAYS separate from inbox)
 
-**Query 2B-1 — Sent last 7 days:**
-- `folderName: "sentitems"`, `afterDateTime: 7d ago`, `limit: 100`
+**Query 2B-1 — Sent since last pull:**
+- `folderName: "sentitems"`, `afterDateTime: PULL_SINCE`, `limit: 100`
+- Uses same pull window as inbox — catches sent items from travel gaps.
 - No `query:` parameter.
 
-**Query 2B-2 — Sent days 8–14:**
-- `folderName: "sentitems"`, `afterDateTime: 14d ago`, `beforeDateTime: 7d ago`, `limit: 100`
+**Query 2B-2 — Sent previous window (overlap buffer):**
+- `folderName: "sentitems"`, `afterDateTime: 14d ago`, `beforeDateTime: PULL_SINCE`, `limit: 100`
+- Safety net to catch any threads just outside the window.
 - No `query:` parameter.
 
 Capture all the same thread fields as Step 2A for each sent item. These records
