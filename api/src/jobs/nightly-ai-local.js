@@ -1301,33 +1301,66 @@ async function main() {
 
   console.log(`  ✓ Context questions logged: ${results.questions_logged}`)
 
-  // ── Step 3.65: Auto-create contacts from email senders ────────
-  // Finds any from_address in emails that has no contact record yet
-  // and creates a minimal record so enrichment can run on it
-  console.log('Step 3.65: Auto-creating contacts from email senders...')
+  // ── Step 3.65: Auto-create contacts from all email participants ──
+  // Captures senders AND recipients/CC from thread_participants
+  // Skips internal Clayco domains — those aren't relationship contacts
+  console.log('Step 3.65: Auto-creating contacts from email participants...')
+  const SKIP_DOMAINS_CONTACT = new Set([
+    'claycorp.com', 'theljc.com', 'realcrg.com', 'concretestrategies.com',
+    'ventanaconstruction.com', 'ventana.vc', 'ljcdesign.com',
+    'noreply', 'no-reply', 'donotreply', 'mailer', 'notifications',
+    'amazonses.com', 'sendgrid.net', 'mailchimp.com', 'hubspot.com',
+    'bounce', 'helpdesk', 'proofpoint', 'southwest.com',
+  ])
+  function shouldSkipContact(email) {
+    const domain = (email || '').split('@')[1]?.toLowerCase() || ''
+    return SKIP_DOMAINS_CONTACT.has(domain) ||
+      [...SKIP_DOMAINS_CONTACT].some(d => domain.includes(d))
+  }
+
   try {
+    // Fetch all emails — senders + participants
     const { data: allEmails } = await supabase
       .from('emails')
-      .select('from_address, from_name')
+      .select('from_address, from_name, thread_participants')
       .not('from_address', 'is', null)
-      .neq('from_address', 'hankinsr@claycorp.com')
       .neq('from_address', '')
 
     const { data: existingContacts } = await supabase
       .from('contacts')
       .select('email')
 
-    const existingEmails = new Set((existingContacts || []).map(c => (c.email || '').toLowerCase()))
+    const existingEmails = new Set(
+      (existingContacts || []).map(c => (c.email || '').toLowerCase())
+    )
 
-    const newSenders = {}
+    const newPeople = {} // email → name
+
     for (const e of (allEmails || [])) {
-      const addr = (e.from_address || '').toLowerCase().trim()
-      if (addr && !existingEmails.has(addr) && !newSenders[addr]) {
-        newSenders[addr] = e.from_name || addr.split('@')[0]
+      // Add sender
+      const fromAddr = (e.from_address || '').toLowerCase().trim()
+      if (fromAddr && !existingEmails.has(fromAddr) && !shouldSkipContact(fromAddr) && !newPeople[fromAddr]) {
+        newPeople[fromAddr] = e.from_name || fromAddr.split('@')[0]
+      }
+
+      // Add all thread participants (TO + CC)
+      const participants = e.thread_participants || []
+      for (const p of participants) {
+        const addr = typeof p === 'string'
+          ? p.toLowerCase().trim()
+          : (p.email || p.address || '').toLowerCase().trim()
+        const name = typeof p === 'string'
+          ? (p.includes('@') ? p.split('@')[0] : p)
+          : (p.name || addr.split('@')[0])
+
+        if (addr && addr.includes('@') && !existingEmails.has(addr) &&
+            !shouldSkipContact(addr) && !newPeople[addr]) {
+          newPeople[addr] = name
+        }
       }
     }
 
-    const toCreate = Object.entries(newSenders).slice(0, 200)
+    const toCreate = Object.entries(newPeople).slice(0, 300)
     let autoCreated = 0
     for (const [email, name] of toCreate) {
       const { error } = await supabase
@@ -1335,7 +1368,7 @@ async function main() {
         .insert({ email, name, source: 'email', enriched: false })
       if (!error) autoCreated++
     }
-    console.log(`  ✓ Auto-created ${autoCreated} contacts from email senders`)
+    console.log(`  ✓ Auto-created ${autoCreated} contacts from email senders + participants`)
   } catch (err) {
     console.log(`  ⚠ Auto-create contacts error: ${err.message}`)
   }
@@ -1356,7 +1389,7 @@ async function main() {
       'phone_mobile.is.null,' +
       `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
     )
-    .limit(150)
+    .limit(250)
 
   for (const contact of (contactsToEnrich || [])) {
     try {
