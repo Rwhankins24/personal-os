@@ -832,27 +832,34 @@ async function extractContactFromSignature(emailContent, fromName, fromEmail) {
       max_tokens: 400,
       messages: [{
         role: 'user',
-        content: `Extract contact information from this email. Focus on the signature block at the bottom — that's where name, title, company, phone, and LinkedIn usually appear.
+        content: `You are extracting contact details from email content. The signature block ALWAYS appears at the end of an email, after the main body. Look for:
+- Phone numbers in ANY format: (555) 123-4567 | 555.123.4567 | +1 555 123 4567 | M: 555-123-4567 | C: 555-123-4567 | mobile 555...
+- Job titles: anything after their name like "Vice President" "Project Manager" "Senior Engineer" "Director of..."
+- Company names: usually on their own line or after "at [Company]"
+- Email addresses in the signature
+- LinkedIn URLs: linkedin.com/in/...
+- Physical addresses: street, city, state, zip
 
 From: ${fromName} (${fromEmail})
-Email content (check the bottom for signature):
-${emailContent.substring(0, 3000)}
 
-Return JSON only. Extract whatever fields are present.
+EMAIL CONTENT — scan the ENTIRE thing especially the bottom:
+${emailContent.slice(0, 5000)}
+
+Return JSON only — null for anything not found:
 {
-  "name": "full name if clearer than '${fromName}'",
-  "title": "job title or role or null",
-  "company": "company or organization name or null",
-  "phone_mobile": "mobile/cell number or null",
-  "phone_office": "office/direct number or null",
-  "linkedin": "linkedin profile URL or null",
-  "address": "office address or null",
+  "name": "full name if found clearer than '${fromName}' or null",
+  "title": "exact job title from signature or null",
+  "company": "company name or null",
+  "phone_mobile": "cell/mobile number in original format or null",
+  "phone_office": "office/direct/work number in original format or null",
+  "linkedin": "full linkedin URL or null",
+  "address": "full address string or null",
   "confidence": "high|medium|low"
 }
-high = found clear signature block with multiple fields
-medium = found some fields but signature incomplete
-low = no signature found, just email body
-Return only JSON.`
+high = found explicit signature with 3+ fields
+medium = found 1-2 fields clearly
+low = no signature found
+Return ONLY the JSON object.`
       }]
     })
   )

@@ -1389,6 +1389,7 @@ async function main() {
       'phone_mobile.is.null,' +
       `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
     )
+    .not('email', 'is', null)
     .limit(250)
 
   for (const contact of (contactsToEnrich || [])) {
@@ -1396,29 +1397,57 @@ async function main() {
       if (!contact.email) continue
       if (contact.email === 'hankinsr@claycorp.com') continue
 
-      // Find their most recent emails regardless of bucket
-      const { data: recentEmails } = await supabase
+      // ── Gather ALL content sources for this contact ───────────────
+      const contentParts = []
+
+      // Source 1: Emails they SENT (from_address match) — best source for their sig
+      const { data: sentEmails } = await supabase
         .from('emails')
-        .select('full_thread_content, body_preview, from_name, received_at')
+        .select('full_thread_content, body_preview, sent_body, from_name')
         .eq('from_address', contact.email)
+        .order('received_at', { ascending: false })
+        .limit(5)
+
+      for (const e of (sentEmails || [])) {
+        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(0, 3000))
+        else if (e.body_preview)   contentParts.push(e.body_preview)
+      }
+
+      // Source 2: Threads they participated in — sig often in quoted replies
+      const { data: participantThreads } = await supabase
+        .from('emails')
+        .select('full_thread_content, sent_body, body_preview')
+        .contains('thread_participants', [contact.email])
+        .not('full_thread_content', 'is', null)
         .order('received_at', { ascending: false })
         .limit(3)
 
-      if (!recentEmails?.length) continue
+      for (const e of (participantThreads || [])) {
+        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(0, 3000))
+        if (e.sent_body)           contentParts.push(e.sent_body.slice(0, 2000))
+      }
 
-      // Use best available content — prefer full_thread_content
-      const bestEmail = recentEmails.find(e => e.full_thread_content) || recentEmails[0]
-      const content   = bestEmail.full_thread_content || bestEmail.body_preview
+      if (contentParts.length === 0) {
+        // Mark enriched=true with no data so we don't keep retrying for missing contacts
+        await supabase.from('contacts').update({
+          enriched: true, enriched_at: new Date().toISOString()
+        }).eq('id', contact.id)
+        continue
+      }
 
-      if (!content || content.length < 100) continue
+      const combinedContent = contentParts.join('\n---\n').slice(0, 6000)
 
       const extracted = await aiService.extractContactFromSignature(
-        content,
+        combinedContent,
         contact.name,
         contact.email
       )
 
-      if (!extracted || extracted.confidence === 'low') continue
+      // Accept medium + high — only skip if truly nothing found
+      if (!extracted) continue
+      if (extracted.confidence === 'low' &&
+          !extracted.title && !extracted.phone_mobile &&
+          !extracted.phone_office && !extracted.company) continue
 
       // Build updates — never overwrite existing good data
       const updates = {}
