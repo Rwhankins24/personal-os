@@ -683,6 +683,51 @@ async function main() {
   }
   console.log(`  ✓ Summarized ${results.threads_summarized} threads`)
 
+  // ── STEP 3.2: Classify email context (work vs personal) ──────────
+  console.log('Step 3.2: Classifying email context...')
+  let classified = 0
+  try {
+    for (const email of (activeEmails || [])) {
+      // Skip if already classified
+      if (email.context_type && email.context_type !== 'work') continue
+
+      const content = email.ai_summary || email.body_preview || email.thread_subject || ''
+      const subject = (email.thread_subject || '').toLowerCase()
+      const from    = (email.from_address || '').toLowerCase()
+
+      // Heuristic classification — skip AI call for obvious cases
+      const personalSignals = [
+        /southwest|delta|united|american airlines|flight|hotel|airbnb/i,
+        /family|mom|dad|wife|husband|kids|baby|wedding|birthday|anniversary/i,
+        /golf|tennis|fitness|health|gym|doctor|dentist|medical/i,
+        /amazon|walmart|target|order confirm|shipping|delivery/i,
+        /bank|mortgage|insurance|tax|irs|financial advisor/i,
+        /linkedin newsletter|bizjournals|news digest|valley partnership/i,
+      ]
+      const isPersonal = personalSignals.some(re => re.test(content) || re.test(subject))
+
+      // Check if it's clearly work (mentions active project names or clients)
+      const workSignals = [
+        /pacific fusion|project solis|gotion|asml|norsun|sofidel|lucid|canadian solar/i,
+        /gmp|precon|submittal|rfi|change order|pay app|lien|contract/i,
+        /claycorp|clayco|ljc|crg|concrete strategies/i,
+      ]
+      const isWork = workSignals.some(re => re.test(content) || re.test(subject))
+
+      let contextType = 'work' // default
+      if (isPersonal && !isWork) contextType = 'personal'
+      else if (isPersonal && isWork) contextType = 'mixed'
+
+      if (contextType !== 'work') {
+        await supabase.from('emails').update({ context_type: contextType }).eq('id', email.id)
+        classified++
+      }
+    }
+    console.log(`  ✓ Classified: ${classified} non-work emails`)
+  } catch (err) {
+    console.log(`  ⚠ Classification error: ${err.message}`)
+  }
+
   // ── STEP 3.5: Intelligence extraction ──────────────────────────
   console.log('Step 3.5: Extracting intelligence...')
 

@@ -119,6 +119,16 @@ jobs:
           node src/jobs/nightly-ai-local.js
           echo "Exit code: $?"
 
+      - name: Run nightly cleanup
+        if: steps.check.outputs.should_run == 'true'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd api
+          node scripts/cleanup-local.js
+          echo "Cleanup exit: $?"
+
       - name: Notify on failure
         if: failure() && steps.check.outputs.should_run == 'true'
         run: |

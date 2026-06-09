@@ -90,6 +90,7 @@ export default function ContactDetail() {
 
   function openEdit() {
     setForm({
+      display_name: contact?.display_name  || '',
       title:        contact?.title        || '',
       company:      contact?.company      || '',
       phone_mobile: contact?.phone_mobile || '',
@@ -247,6 +248,16 @@ export default function ContactDetail() {
 
           {editOpen && (
             <div className="mt-4 space-y-3">
+              <div>
+                <label className="text-xs text-[#6b6b67] block mb-1">Display Name</label>
+                <input
+                  value={form.display_name}
+                  onChange={e => setForm(f => ({ ...f, display_name: e.target.value }))}
+                  className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
+                  placeholder="Short alias shown in the app"
+                />
+                <p className="text-xs text-[#9b9b97] mt-1">Short name shown in the app. Original name used for email matching.</p>
+              </div>
               <div>
                 <label className="text-xs text-[#6b6b67] block mb-1">Title</label>
                 <input

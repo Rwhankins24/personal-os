@@ -116,12 +116,52 @@ function getInitials(name) {
   return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
 }
 
+// ── Bulk action bar ────────────────────────────────────────────
+function BulkActionBar({ selectedIds, contacts, onReassign, onCancel }) {
+  const [open, setOpen] = useState(false)
+
+  if (selectedIds.size === 0) return null
+
+  return (
+    <div className="fixed bottom-14 left-0 right-0 z-20 px-4 pb-2">
+      <div className="max-w-2xl mx-auto bg-[#1a1a18] text-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-lg">
+        <span className="text-sm font-medium flex-1">{selectedIds.size} item{selectedIds.size !== 1 ? 's' : ''} selected</span>
+        <div className="relative">
+          <button
+            onClick={() => setOpen(v => !v)}
+            className="text-sm bg-white text-[#1a1a18] px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
+            Reassign {selectedIds.size} →
+          </button>
+          {open && (
+            <div className="absolute bottom-full mb-2 right-0 w-64 bg-white rounded-xl shadow-xl border border-[#e5e5e3] p-2 z-30">
+              <ReassignDropdown
+                contacts={contacts}
+                onSelect={(person) => { onReassign(person); setOpen(false) }}
+                onClose={() => setOpen(false)}
+              />
+            </div>
+          )}
+        </div>
+        <button
+          onClick={onCancel}
+          className="text-sm text-gray-400 hover:text-white transition-colors"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function OthersPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
 
   const [typeFilter, setTypeFilter] = useState('all')
   const [sortBy, setSortBy] = useState('person')
+  const [selectMode, setSelectMode] = useState(false)
+  const [selectedIds, setSelectedIds] = useState(new Set())
 
   const { data: items, isLoading } = useQuery({
     queryKey: ['others-commitments'],
@@ -146,6 +186,34 @@ export default function OthersPage() {
     onError: (_, __, ctx) => qc.setQueryData(['others-commitments'], ctx.prev),
     onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
   })
+
+  const toggleSelectMode = () => {
+    setSelectMode(v => !v)
+    setSelectedIds(new Set())
+  }
+
+  const toggleItemSelect = (id) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const handleBulkReassign = ({ name, email }) => {
+    selectedIds.forEach(id => {
+      update.mutate({
+        id,
+        updates: {
+          committed_by_name: name,
+          ...(email ? { committed_by_email: email } : {}),
+        }
+      })
+    })
+    setSelectedIds(new Set())
+    setSelectMode(false)
+  }
 
   const today = dayjs()
 
@@ -256,6 +324,16 @@ export default function OthersPage() {
           </button>
           <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Waiting on Others</h1>
           <span className="text-xs text-[#6b6b67] flex-shrink-0">{filtered.length} items</span>
+          <button
+            onClick={toggleSelectMode}
+            className={`text-xs px-2.5 py-1 rounded-lg font-medium border transition-all flex-shrink-0 ${
+              selectMode
+                ? 'bg-[#1a1a18] text-white border-[#1a1a18]'
+                : 'bg-white text-[#6b6b67] border-[#e5e5e3] hover:border-gray-400'
+            }`}
+          >
+            {selectMode ? 'Cancel' : 'Select'}
+          </button>
         </div>
       </div>
 
@@ -293,6 +371,9 @@ export default function OthersPage() {
                   showPerson
                   isKey={isKeyPerson(c)}
                   contacts={contacts}
+                  selectMode={selectMode}
+                  selected={selectedIds.has(c.id)}
+                  onToggleSelect={() => toggleItemSelect(c.id)}
                 />
               )
             })}
@@ -337,6 +418,9 @@ export default function OthersPage() {
                           showPerson={false}
                           isKey={keyContact}
                           contacts={contacts}
+                          selectMode={selectMode}
+                          selected={selectedIds.has(c.id)}
+                          onToggleSelect={() => toggleItemSelect(c.id)}
                         />
                       )
                     })}
@@ -347,6 +431,13 @@ export default function OthersPage() {
           </div>
         )}
       </div>
+
+      <BulkActionBar
+        selectedIds={selectedIds}
+        contacts={contacts}
+        onReassign={handleBulkReassign}
+        onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
+      />
     </div>
   )
 }
@@ -357,7 +448,7 @@ function isInternal(email) {
   return domain === 'claycorp.com' || domain === 'ljc.com'
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect }) {
   const [reassigning, setReassigning] = useState(false)
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
@@ -378,8 +469,20 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
   }
 
   return (
-    <div className={`px-4 py-3 group ${speaker ? 'bg-amber-50/40' : ''}`}>
+    <div
+      className={`px-4 py-3 group ${speaker ? 'bg-amber-50/40' : ''} ${selectMode ? 'cursor-pointer' : ''} ${selected ? 'bg-blue-50' : ''}`}
+      onClick={selectMode ? onToggleSelect : undefined}
+    >
       <div className="flex items-start gap-3">
+        {selectMode && (
+          <input
+            type="checkbox"
+            checked={selected}
+            onChange={onToggleSelect}
+            onClick={e => e.stopPropagation()}
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 cursor-pointer flex-shrink-0"
+          />
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm flex-shrink-0">{typeIcon}</span>
@@ -438,8 +541,8 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           )}
         </div>
 
-        {/* Action buttons — always visible */}
-        <div className="flex items-center gap-1 flex-shrink-0 mt-0.5">
+        {/* Action buttons — hidden in select mode */}
+        <div className={`flex items-center gap-1 flex-shrink-0 mt-0.5 ${selectMode ? 'hidden' : ''}`}>
           {/* Reassign */}
           {!speaker && (
             <button

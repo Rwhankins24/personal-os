@@ -386,7 +386,7 @@ export default function Contacts() {
                               {initials}
                             </div>
                             <div className="flex items-center gap-1.5 min-w-0">
-                              <span className="font-medium text-[#1a1a18] truncate">{c.name || '—'}</span>
+                              <span className="font-medium text-[#1a1a18] truncate">{c.display_name || c.name || '—'}</span>
                               {c.job_change_detected && (
                                 <span title="Possible job change detected" className="text-amber-500 flex-shrink-0">⚠️</span>
                               )}
@@ -468,7 +468,7 @@ export default function Contacts() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <p className="text-sm font-medium text-[#1a1a18] truncate">{c.name}</p>
+                        <p className="text-sm font-medium text-[#1a1a18] truncate">{c.display_name || c.name}</p>
                         {c.job_change_detected && (
                           <span title="Possible job change detected" className="flex-shrink-0 text-sm">⚠️</span>
                         )}

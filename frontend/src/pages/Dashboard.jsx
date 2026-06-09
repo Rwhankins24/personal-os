@@ -282,7 +282,7 @@ function CalendarStrip({ events, isLoading }) {
       {isLoading ? <Spinner /> : todayEvents.length === 0 ? (
         <EmptyState icon="📅" message="No meetings today" />
       ) : (
-        <div className="space-y-1.5">
+        <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-1 md:pb-0 md:space-y-1.5 snap-x snap-mandatory">
           {todayEvents.map(event => {
             const now = new Date()
             const start = new Date(event.start_time)
@@ -291,8 +291,8 @@ function CalendarStrip({ events, isLoading }) {
             const isPast = end ? end < now : start < now
 
             return (
-              <Link key={event.id} to={`/event/${event.id}`} className="block">
-                <div className={`flex items-center gap-3 p-2 rounded-lg ${
+              <Link key={event.id} to={`/event/${event.id}`} className="block flex-shrink-0 md:flex-shrink snap-start w-64 md:w-auto">
+                <div className={`flex items-center gap-3 p-2 rounded-lg h-full ${
                   isNow ? 'bg-blue-50 border border-blue-200' :
                   isPast ? 'opacity-50' : 'bg-gray-50'
                 }`}>
@@ -777,6 +777,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
   const qc = useQueryClient()
   const [tab, setTab] = useState('reply')
   const [showAllWaiting, setShowAllWaiting] = useState(false)
+  const [contextTab, setContextTab] = useState('all')
 
   const mark = useMutation({
     mutationFn: ({ id, status }) => updateEmail(id, { status }),
@@ -792,10 +793,17 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
     onSettled: () => qc.invalidateQueries({ queryKey: ['emails'] }),
   })
 
-  const needsReply = (emails || []).filter(e => e.status === 'needs_reply')
+  function matchesContextTab(e) {
+    if (contextTab === 'all') return true
+    if (contextTab === 'work') return e.context_type === 'work' || e.context_type === 'mixed' || !e.context_type
+    if (contextTab === 'personal') return e.context_type === 'personal' || e.context_type === 'mixed'
+    return true
+  }
+
+  const needsReply = (emails || []).filter(e => e.status === 'needs_reply' && matchesContextTab(e))
 
   // Waiting On: include 'resolved' items (shown greyed at bottom), exclude 'archived'
-  const waitingOnAll = (emails || []).filter(e => e.status === 'waiting_on' || e.status === 'resolved')
+  const waitingOnAll = (emails || []).filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && matchesContextTab(e))
   const waitingOn = [
     ...waitingOnAll.filter(e => e.status !== 'resolved'),
     ...waitingOnAll.filter(e => e.status === 'resolved'),
@@ -811,6 +819,24 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
   return (
     <Card>
       <SectionHeader title="Email Queue" to="/emails" />
+      {/* Context filter tabs */}
+      <div className="flex gap-1 mb-2">
+        {[
+          { value: 'all', label: 'All' },
+          { value: 'work', label: 'Work' },
+          { value: 'personal', label: 'Personal' },
+        ].map(ct => (
+          <button
+            key={ct.value}
+            onClick={() => setContextTab(ct.value)}
+            className={`text-xs px-2.5 py-1 rounded-lg font-medium transition-all ${
+              contextTab === ct.value ? 'bg-[#1a1a18] text-white' : 'text-[#6b6b67] hover:bg-gray-100'
+            }`}
+          >
+            {ct.label}
+          </button>
+        ))}
+      </div>
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => setTab('reply')}
@@ -838,22 +864,36 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
         <div className="space-y-2">
           {visibleItems.map(email => {
             const isResolved = email.status === 'resolved'
+            const hasAsk = email.ai_summary && (/\?/.test(email.ai_summary) || /\b(please|can you|could you|need|request|asking|send|provide|confirm|review|approve)\b/i.test(email.ai_summary))
             return (
               <div
                 key={email.id}
                 className={`flex items-start gap-2 group transition-opacity ${isResolved ? 'opacity-40' : ''}`}
               >
                 <div className="flex-1 min-w-0">
-                  <ContactLink
-                    name={email.from_name || email.from_address}
-                    contacts={contacts}
-                    className={`text-sm font-medium text-[#1a1a18] block truncate ${isResolved ? 'line-through' : ''}`}
-                  />
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <ContactLink
+                      name={email.from_name || email.from_address}
+                      contacts={contacts}
+                      className={`text-sm font-medium text-[#1a1a18] truncate ${isResolved ? 'line-through' : ''}`}
+                    />
+                    {email.urgency && (
+                      <span className={`text-xs px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[email.urgency] || 'text-gray-500 bg-gray-100'}`}>
+                        {email.urgency}
+                      </span>
+                    )}
+                    {email.days_waiting > 0 && isReplyTab && (
+                      <span className="text-xs text-orange-400 flex-shrink-0">{email.days_waiting}d</span>
+                    )}
+                  </div>
                   <p className={`text-xs text-[#6b6b67] truncate ${isResolved ? 'line-through' : ''}`}>
                     {email.thread_subject || email.subject}
                   </p>
-                  {email.days_waiting > 0 && isReplyTab && (
-                    <p className="text-xs text-orange-400">{email.days_waiting}d waiting</p>
+                  {email.ai_summary && (
+                    <p className="text-xs text-[#9b9b97] mt-0.5 line-clamp-2 leading-snug">
+                      {hasAsk && <span className="font-semibold text-orange-500 mr-1">Ask:</span>}
+                      {email.ai_summary}
+                    </p>
                   )}
                 </div>
 
@@ -1400,7 +1440,7 @@ function QuickAdd() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e5e5e3] px-3 md:px-6 py-2.5 z-10">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#e5e5e3] px-3 md:px-6 py-2.5 z-10" style={{ paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom))' }}>
       <div className="max-w-5xl mx-auto flex items-center gap-2">
         <select
           value={type}
@@ -1572,7 +1612,7 @@ export default function Dashboard() {
   const now = dayjs()
 
   return (
-    <div className="min-h-screen bg-[#f8f8f6] pb-16">
+    <div className="min-h-screen bg-[#f8f8f6]" style={{ paddingBottom: 'max(4rem, calc(4rem + env(safe-area-inset-bottom)))' }}>
 
       {/* ── Top bar ─────────────────────────────────────────── */}
       <div className="sticky top-0 z-20 bg-[#f8f8f6]/95 backdrop-blur border-b border-[#e5e5e3] px-3 md:px-6 py-2.5">
