@@ -47,7 +47,10 @@ module.exports = async (req, res) => {
   try {
     // Step 1 — Determine target date (default: today, override via body)
     const body = req.body || {}
-    const today = body.date || new Date().toISOString().split('T')[0]
+    // Use Phoenix time (America/Phoenix, UTC-7, no DST) not UTC
+    // so evening runs don't look for "tomorrow's" report
+    const phoenixDate = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Phoenix' })
+    const today = body.date || phoenixDate
     const filename = `${today}.json`
 
     console.log(`Processing email report for: ${today}`)

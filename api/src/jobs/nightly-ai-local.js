@@ -1457,13 +1457,35 @@ async function main() {
         updates.title = extracted.title
       }
 
-      // Company: set if empty; detect job change
+      // Company: set if empty, auto-correct formatting, or flag genuine job change
       if (extracted.company) {
+        // Normalize: lowercase, strip .com/.org/.net, remove all spaces/punctuation
+        function normalizeCompany(s) {
+          return (s || '').toLowerCase()
+            .replace(/\.(com|org|net|co|inc|llc|corp)\.?$/i, '')
+            .replace(/[^a-z0-9]/g, '')
+        }
+        const normExtracted = normalizeCompany(extracted.company)
+        const normExisting  = normalizeCompany(contact.company)
+
         if (!contact.company) {
+          // No company stored — set it
           updates.company = extracted.company
+        } else if (normExtracted === normExisting) {
+          // Same company after normalization — just update formatting silently
+          // e.g. "Pacificfusion" → "Pacific Fusion", "claycorp.com" → "Clayco"
+          if (extracted.company !== contact.company) {
+            updates.company = extracted.company
+          }
         } else if (
-          extracted.company.toLowerCase() !== contact.company.toLowerCase()
+          normExtracted.includes(normExisting) ||
+          normExisting.includes(normExtracted)
         ) {
+          // One is a substring of the other — formatting/shortening variant, auto-update
+          // e.g. "Claycorp" → "Clayco", "ThorntonTomasetti" → "Thornton Tomasetti"
+          updates.company = extracted.company
+        } else if (normExtracted.length > 3 && normExisting.length > 3) {
+          // Genuinely different company name — flag as potential job change
           updates.company_pending    = extracted.company
           updates.job_change_detected = true
 
