@@ -55,7 +55,7 @@ async function listStorageFiles() {
   const allRes = await request(
     `${SUPABASE_URL}/storage/v1/object/list/daily-reports`,
     { method: 'POST', headers: supabaseHeaders() },
-    JSON.stringify({ limit: 500, offset: 0, sortBy: { column: 'name', order: 'asc' } })
+    JSON.stringify({ limit: 500, offset: 0, prefix: '', sortBy: { column: 'name', order: 'asc' } })
   )
   if (allRes.status !== 200) throw new Error(`List failed [${allRes.status}]: ${JSON.stringify(allRes.body)}`)
 
