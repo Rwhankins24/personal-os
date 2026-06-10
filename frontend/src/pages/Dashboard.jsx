@@ -117,6 +117,39 @@ function Card({ children, className = '' }) {
   )
 }
 
+// ── Client-side dedup utilities ───────────────────────────────
+function dedupEmails(emails) {
+  const seen = new Map()
+  return (emails || []).filter(e => {
+    const normSubject = (e.thread_subject || e.subject || '')
+      .replace(/^(re|fwd?|fw|aw):\s*/gi, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .trim()
+      .split(/\s+/).slice(0, 6).join(' ')
+    const sender = (e.from_address || '').toLowerCase()
+    const key = `${sender}::${normSubject}`
+    if (!key || key === '::') return true // can't dedup without key
+    if (seen.has(key)) return false
+    seen.set(key, true)
+    return true
+  })
+}
+
+function dedupByTitle(items) {
+  const seen = new Map()
+  return (items || []).filter(item => {
+    const norm = (item.title || item.description || item.what || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(/\s+/).slice(0, 6).join(' ')
+    if (!norm) return true
+    if (seen.has(norm)) return false
+    seen.set(norm, true)
+    return true
+  })
+}
+
 function SectionHeader({ title, count, badge, action, to }) {
   return (
     <div className="flex items-center justify-between mb-3">
@@ -354,7 +387,9 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
     onSettled: () => qc.invalidateQueries({ queryKey: ['tasks'] }),
   })
 
-  const open = (tasks || []).filter(t => t.status !== 'done' && t.status !== 'complete' && t.status !== 'archived')
+  const open = dedupByTitle(
+    (tasks || []).filter(t => t.status !== 'done' && t.status !== 'complete' && t.status !== 'archived')
+  )
   const shown = showAll ? open : open.slice(0, 6)
 
   return (
@@ -451,7 +486,9 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
     onSettled: () => qc.invalidateQueries({ queryKey: ['commitments'] }),
   })
 
-  const open = (commitments || []).filter(c => c.status === 'open')
+  const open = dedupByTitle(
+    (commitments || []).filter(c => c.status === 'open')
+  )
 
   return (
     <Card>
@@ -632,7 +669,7 @@ function OthersCommitmentsPanel({ contacts }) {
     onSuccess: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
   })
 
-  const items = data || []
+  const items = dedupByTitle(data || [])
 
   // Split into three buckets
   const blocking = items.filter(c => c.delivery_type === 'blocking_ryan')
@@ -801,10 +838,14 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
     return true
   }
 
-  const needsReply = (emails || []).filter(e => e.status === 'needs_reply' && matchesContextTab(e))
+  const needsReply = dedupEmails(
+    (emails || []).filter(e => e.status === 'needs_reply' && matchesContextTab(e))
+  )
 
   // Waiting On: include 'resolved' items (shown greyed at bottom), exclude 'archived'
-  const waitingOnAll = (emails || []).filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && matchesContextTab(e))
+  const waitingOnAll = dedupEmails(
+    (emails || []).filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && matchesContextTab(e))
+  )
   const waitingOn = [
     ...waitingOnAll.filter(e => e.status !== 'resolved'),
     ...waitingOnAll.filter(e => e.status === 'resolved'),

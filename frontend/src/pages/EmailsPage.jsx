@@ -134,9 +134,25 @@ export default function EmailsPage() {
     return String(e.bucket) === bucketFilter
   }
 
+  // Dedup utility (same sender + normalized subject)
+  function dedupEmails(list) {
+    const seen = new Map()
+    return list.filter(e => {
+      const norm = (e.thread_subject || e.subject || '')
+        .replace(/^(re|fwd?|fw|aw):\s*/gi, '').toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '').trim()
+        .split(/\s+/).slice(0, 6).join(' ')
+      const key = `${(e.from_address || '').toLowerCase()}::${norm}`
+      if (!key || key === '::') return true
+      if (seen.has(key)) return false
+      seen.set(key, true)
+      return true
+    })
+  }
+
   // Status tab buckets
-  const needsReplyAll  = allEmails.filter(e => e.status === 'needs_reply')
-  const waitingOnAll   = allEmails.filter(e => e.status === 'waiting_on' || e.status === 'resolved')
+  const needsReplyAll  = dedupEmails(allEmails.filter(e => e.status === 'needs_reply'))
+  const waitingOnAll   = dedupEmails(allEmails.filter(e => e.status === 'waiting_on' || e.status === 'resolved'))
   const isReplyTab     = statusTab === 'reply'
 
   const baseSet = isReplyTab ? needsReplyAll : waitingOnAll

@@ -323,13 +323,78 @@ async function main() {
         .eq('id', c.id)
     }
 
-    // Deduplicate others_commitments and tasks
+    // ── Deduplicate tasks and others_commitments ────────────────
     try {
       const othersDeleted = await deduplicateTable('others_commitments', 'committed_by_email')
       const tasksDeleted  = await deduplicateTable('tasks', null)
       console.log(`  Deduped: ${othersDeleted} commitments, ${tasksDeleted} tasks removed`)
-    } catch (err) {
-      // Non-fatal
+    } catch (err) { /* non-fatal */ }
+
+    // ── Deduplicate emails by (from_address + normalized subject) ──
+    // Keeps the highest-bucket / most recently active record; merges data
+    try {
+      function normalizeSubject(s) {
+        return (s || '')
+          .replace(/^(re|fwd?|fw|aw|ant):\s*/gi, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, '')
+          .trim()
+          .split(/\s+/)
+          .slice(0, 8)
+          .join(' ')
+      }
+
+      const { data: allActiveEmails } = await supabase
+        .from('emails')
+        .select('id, from_address, thread_subject, subject, bucket, status, days_waiting, created_at, ai_summary, action_needed')
+        .not('status', 'eq', 'archived')
+
+      const emailGroups = new Map()
+
+      for (const e of (allActiveEmails || [])) {
+        const normSubject = normalizeSubject(e.thread_subject || e.subject)
+        const sender      = (e.from_address || '').toLowerCase().trim()
+        if (!normSubject || !sender) continue
+        const key = `${sender}::${normSubject}`
+        if (!emailGroups.has(key)) emailGroups.set(key, [])
+        emailGroups.get(key).push(e)
+      }
+
+      let emailDupsRemoved = 0
+      for (const [, group] of emailGroups) {
+        if (group.length <= 1) continue
+
+        // Sort: prefer lower bucket number (higher priority), then most days_waiting, then newest
+        group.sort((a, b) => {
+          const ba = a.bucket ?? 99, bb = b.bucket ?? 99
+          if (ba !== bb) return ba - bb
+          if ((b.days_waiting ?? 0) !== (a.days_waiting ?? 0)) return (b.days_waiting ?? 0) - (a.days_waiting ?? 0)
+          return new Date(b.created_at) - new Date(a.created_at)
+        })
+
+        const winner  = group[0]
+        const losers  = group.slice(1)
+
+        // Merge any richer data from losers into winner before deleting
+        const mergedSummary = winner.ai_summary || winner.action_needed
+          ? null
+          : losers.map(l => l.ai_summary || l.action_needed).find(Boolean)
+
+        if (mergedSummary) {
+          await supabase.from('emails').update({ ai_summary: mergedSummary }).eq('id', winner.id)
+        }
+
+        // Delete the losers
+        const loserIds = losers.map(l => l.id)
+        await supabase.from('emails').delete().in('id', loserIds)
+        emailDupsRemoved += loserIds.length
+      }
+
+      if (emailDupsRemoved > 0) {
+        console.log(`  Deduped: ${emailDupsRemoved} duplicate email threads removed`)
+      }
+    } catch (emailDedupErr) {
+      console.log(`  Email dedup error (non-fatal): ${emailDedupErr.message}`)
     }
 
     console.log('  ✓ Hygiene complete')
