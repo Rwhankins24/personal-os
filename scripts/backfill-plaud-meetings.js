@@ -51,16 +51,25 @@ function supabaseHeaders(extra = {}) {
 
 // ── List all files in daily-reports bucket ────────────────────────────────────
 async function listStorageFiles() {
-  const res = await request(
+  // First: list ALL files so we can see what's there
+  const allRes = await request(
     `${SUPABASE_URL}/storage/v1/object/list/daily-reports`,
-    {
-      method:  'POST',
-      headers: supabaseHeaders(),
-    },
-    JSON.stringify({ limit: 500, offset: 0, prefix: 'plaud-', sortBy: { column: 'name', order: 'asc' } })
+    { method: 'POST', headers: supabaseHeaders() },
+    JSON.stringify({ limit: 500, offset: 0, sortBy: { column: 'name', order: 'asc' } })
   )
-  if (res.status !== 200) throw new Error(`List failed: ${JSON.stringify(res.body)}`)
-  return (res.body || []).filter(f => f.name && f.name.startsWith('plaud-') && f.name.endsWith('.json'))
+  if (allRes.status !== 200) throw new Error(`List failed [${allRes.status}]: ${JSON.stringify(allRes.body)}`)
+
+  const allFiles = allRes.body || []
+  console.log(`\n  All files in daily-reports bucket (${allFiles.length} total):`)
+  allFiles.slice(0, 20).forEach(f => console.log(`    ${f.name}`))
+  if (allFiles.length > 20) console.log(`    ... and ${allFiles.length - 20} more`)
+
+  // Filter to plaud files — also catch 'plaud_' prefix variant
+  const plaudFiles = allFiles.filter(f =>
+    f.name && (f.name.startsWith('plaud-') || f.name.startsWith('plaud_')) && f.name.endsWith('.json')
+  )
+  console.log(`\n  Plaud files found: ${plaudFiles.length}`)
+  return plaudFiles
 }
 
 // ── Download a single file from storage ──────────────────────────────────────
