@@ -323,6 +323,20 @@ async function main() {
         .eq('id', c.id)
     }
 
+    // ── Delete ghost emails (no name, no address, no subject) ───
+    try {
+      const { data: ghosts } = await supabase
+        .from('emails')
+        .select('id')
+        .is('from_name', null)
+        .is('from_address', null)
+        .or('thread_subject.is.null,thread_subject.eq.')
+      if (ghosts?.length) {
+        await supabase.from('emails').delete().in('id', ghosts.map(g => g.id))
+        console.log(`  Deleted ${ghosts.length} ghost email records (no name/address/subject)`)
+      }
+    } catch (ghostErr) { /* non-fatal */ }
+
     // ── Deduplicate tasks and others_commitments ────────────────
     try {
       const othersDeleted = await deduplicateTable('others_commitments', 'committed_by_email')

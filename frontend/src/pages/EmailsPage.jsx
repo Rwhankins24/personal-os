@@ -151,8 +151,9 @@ export default function EmailsPage() {
   }
 
   // Status tab buckets
-  const needsReplyAll  = dedupEmails(allEmails.filter(e => e.status === 'needs_reply'))
-  const waitingOnAll   = dedupEmails(allEmails.filter(e => e.status === 'waiting_on' || e.status === 'resolved'))
+  const hasIdentity = e => (e.from_name || e.from_address) || (e.thread_subject || e.subject)
+  const needsReplyAll  = dedupEmails(allEmails.filter(e => e.status === 'needs_reply' && hasIdentity(e)))
+  const waitingOnAll   = dedupEmails(allEmails.filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && hasIdentity(e)))
   const isReplyTab     = statusTab === 'reply'
 
   const baseSet = isReplyTab ? needsReplyAll : waitingOnAll

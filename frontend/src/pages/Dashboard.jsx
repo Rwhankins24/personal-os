@@ -844,13 +844,18 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
     return true
   }
 
+  // Filter out ghost records: no name, no address, no subject — nothing to act on
+  function hasIdentity(e) {
+    return (e.from_name || e.from_address) || (e.thread_subject || e.subject)
+  }
+
   const needsReply = dedupEmails(
-    (emails || []).filter(e => e.status === 'needs_reply' && matchesContextTab(e))
+    (emails || []).filter(e => e.status === 'needs_reply' && matchesContextTab(e) && hasIdentity(e))
   )
 
   // Waiting On: include 'resolved' items (shown greyed at bottom), exclude 'archived'
   const waitingOnAll = dedupEmails(
-    (emails || []).filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && matchesContextTab(e))
+    (emails || []).filter(e => (e.status === 'waiting_on' || e.status === 'resolved') && matchesContextTab(e) && hasIdentity(e))
   )
   const waitingOn = [
     ...waitingOnAll.filter(e => e.status !== 'resolved'),
