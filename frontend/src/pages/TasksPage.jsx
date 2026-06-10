@@ -183,8 +183,11 @@ export default function TasksPage() {
                           </span>
                         )}
                       </div>
+                      {task.context && (
+                        <p className="text-xs text-[#6b6b67] mt-0.5 line-clamp-2 leading-snug">{task.context}</p>
+                      )}
                       {task.source_label && (
-                        <p className="text-xs text-[#9b9b97] mt-0.5 truncate">{task.source_label}</p>
+                        <p className="text-xs text-[#9b9b97] mt-0.5 truncate">↳ {task.source_label}</p>
                       )}
                     </div>
 

@@ -403,6 +403,244 @@ async function main() {
     console.log(`  ✗ Hygiene error: ${err.message}`)
   }
 
+  // ── STEP 1.5: Task semantic dedup ───────────────────────────────
+  // 1. Token overlap pre-filter against ALL open tasks (fast, no API cost)
+  // 2. Haiku semantic check on near-matches — confirms duplicate + picks best title
+  // 3. Smart merge: fill missing fields from loser into winner before delete
+  // 4. Enrich context + source_ref on tasks missing them
+  console.log('Step 1.5: Task semantic dedup + enrichment...')
+  try {
+    const { data: allOpenTasks } = await supabase
+      .from('tasks')
+      .select(
+        'id, title, urgency, due_date, context, ai_context, source_type, ' +
+        'source_label, source_id, project_id, cross_references, created_at, ' +
+        'blocking, ai_extracted'
+      )
+      .eq('status', 'open')
+      .order('created_at', { ascending: true })
+
+    if (!allOpenTasks?.length) {
+      console.log('  No open tasks to dedup')
+    } else {
+
+      // ── Token overlap helpers ────────────────────────────────────
+      const STOP_WORDS = new Set([
+        'the','and','for','with','from','this','that','have','will','been',
+        'more','week','next','last','meet','call','zoom','team','follow',
+        'review','update','send','check','please','need','about','over',
+        'fwd','reply','into','your','their','also','make','sure','task',
+        'action','item','items','regarding','re','fw','asap','today'
+      ])
+
+      function taskTokens(title) {
+        return (title || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, '')
+          .split(/\s+/)
+          .filter(w => w.length > 2 && !STOP_WORDS.has(w))
+      }
+
+      function jaccard(setA, setB) {
+        if (!setA.length || !setB.length) return 0
+        const a = new Set(setA), b = new Set(setB)
+        let intersection = 0
+        for (const w of a) if (b.has(w)) intersection++
+        return intersection / (a.size + b.size - intersection)
+      }
+
+      // Pre-compute tokens for all tasks
+      const tokenMap = new Map(allOpenTasks.map(t => [t.id, taskTokens(t.title)]))
+
+      // Find near-match pairs (Jaccard ≥ 0.55, same project or both unlinked)
+      const nearMatches = []
+      for (let i = 0; i < allOpenTasks.length; i++) {
+        for (let j = i + 1; j < allOpenTasks.length; j++) {
+          const a = allOpenTasks[i], b = allOpenTasks[j]
+          // Skip if both manual — never auto-merge manual tasks
+          if (a.source_type === 'manual' && b.source_type === 'manual') continue
+          const score = jaccard(tokenMap.get(a.id), tokenMap.get(b.id))
+          if (score >= 0.55) {
+            // Prefer pairs in same project, but also catch unlinked matches
+            const sameProject = a.project_id && b.project_id && a.project_id === b.project_id
+            const bothUnlinked = !a.project_id && !b.project_id
+            if (sameProject || bothUnlinked || score >= 0.75) {
+              nearMatches.push({ a, b, score })
+            }
+          }
+        }
+      }
+
+      console.log(`  Token overlap: ${nearMatches.length} near-match pairs`)
+
+      // ── Haiku semantic confirmation ──────────────────────────────
+      const haikuDedup = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const toDelete   = new Map() // id → winner_id (track merges)
+      let   merged     = 0
+
+      for (const { a, b, score } of nearMatches.slice(0, 30)) {
+        // Skip if either already marked for deletion in this pass
+        if (toDelete.has(a.id) || toDelete.has(b.id)) continue
+
+        try {
+          const prompt = `Two tasks from Ryan's personal OS task list:
+
+Task A: "${a.title}"
+  - Urgency: ${a.urgency || 'unknown'}
+  - Due: ${a.due_date || 'none'}
+  - Context: ${a.context || a.ai_context || 'none'}
+  - Source: ${a.source_label || a.source_type || 'unknown'}
+  - Created: ${a.created_at?.split('T')[0]}
+
+Task B: "${b.title}"
+  - Urgency: ${b.urgency || 'unknown'}
+  - Due: ${b.due_date || 'none'}
+  - Context: ${b.context || b.ai_context || 'none'}
+  - Source: ${b.source_label || b.source_type || 'unknown'}
+  - Created: ${b.created_at?.split('T')[0]}
+
+Are these the same underlying action item (just phrased differently), or genuinely distinct tasks?
+
+If they ARE the same: pick the best title (clearest, most specific), and identify which task is the "winner" to keep (A or B).
+
+Respond ONLY with valid JSON:
+{
+  "is_duplicate": true,
+  "winner": "A",
+  "best_title": "The clearest, most complete phrasing of the task",
+  "reason": "one sentence why they are the same"
+}`
+
+          const msg = await haikuDedup.messages.create({
+            model:      'claude-haiku-4-5-20251001',
+            max_tokens: 200,
+            messages:   [{ role: 'user', content: prompt }]
+          })
+
+          const raw = (msg.content[0]?.text || '').trim()
+          let verdict
+          try {
+            const jsonMatch = raw.match(/\{[\s\S]*\}/)
+            verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+          } catch { continue }
+
+          if (!verdict?.is_duplicate) continue
+
+          // Determine winner and loser
+          const winner = verdict.winner === 'A' ? a : b
+          const loser  = verdict.winner === 'A' ? b : a
+
+          // Never delete manual tasks
+          if (loser.source_type === 'manual') continue
+
+          // ── Smart merge: fill winner's gaps from loser ──────────
+          const patch = {}
+          if (!winner.due_date   && loser.due_date)   patch.due_date   = loser.due_date
+          if (!winner.project_id && loser.project_id) patch.project_id = loser.project_id
+          if (!winner.context    && (loser.context || loser.ai_context)) {
+            patch.context = loser.context || loser.ai_context
+          }
+          if (!winner.urgency && loser.urgency)       patch.urgency    = loser.urgency
+          if (verdict.best_title && verdict.best_title !== winner.title) {
+            patch.title = verdict.best_title
+          }
+
+          // Merge cross_references: carry loser's source as a cross-ref on winner
+          const existingRefs = winner.cross_references || []
+          const alreadyRef   = existingRefs.some(r => r.source_label === loser.source_label)
+          if (!alreadyRef && (loser.source_label || loser.source_type)) {
+            patch.cross_references = [
+              ...existingRefs,
+              {
+                source_type:  loser.source_type  || 'ai_email',
+                source_label: loser.source_label || loser.title,
+                merged_from:  loser.id,
+                date:         today
+              }
+            ]
+          }
+
+          if (Object.keys(patch).length > 0) {
+            await supabase.from('tasks').update(patch).eq('id', winner.id)
+          }
+
+          toDelete.set(loser.id, winner.id)
+          merged++
+          console.log(`  Merged: "${loser.title}" → "${verdict.best_title || winner.title}"`)
+
+        } catch (pairErr) {
+          console.log(`  Pair check error: ${pairErr.message}`)
+        }
+      }
+
+      // Delete losers
+      if (toDelete.size > 0) {
+        await supabase.from('tasks').delete().in('id', [...toDelete.keys()])
+        console.log(`  ✓ Task dedup: ${merged} pairs merged, ${toDelete.size} duplicates removed`)
+      } else {
+        console.log(`  ✓ Task dedup: no duplicates found`)
+      }
+
+      // ── Task context enrichment ──────────────────────────────────
+      // For tasks with no context or stale context, generate a 1-line description
+      // and surface the source reference on the card
+      const needsContext = allOpenTasks.filter(t =>
+        !toDelete.has(t.id) &&           // not just deleted
+        !t.context &&                    // no context yet
+        t.source_label                   // has a source we can reference
+      ).slice(0, 25)                     // cap per run
+
+      const haikuEnrich = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      let enrichedTasks = 0
+
+      for (const task of needsContext) {
+        try {
+          // Pull the source email for context if available
+          let sourceContext = ''
+          if (task.source_id) {
+            const { data: srcEmail } = await supabase
+              .from('emails')
+              .select('ai_summary, action_needed, thread_summary, body_preview')
+              .eq('id', task.source_id)
+              .maybeSingle()
+            sourceContext = srcEmail?.action_needed || srcEmail?.ai_summary || srcEmail?.body_preview || ''
+          }
+
+          const enrichPrompt = `Task: "${task.title}"
+Source thread: ${task.source_label || 'unknown'}
+${sourceContext ? `Thread context: ${sourceContext.slice(0, 400)}` : ''}
+
+Write a single plain-English sentence (max 100 chars) that gives Ryan enough context to act on this task without looking up the email. Focus on WHAT specifically needs to happen and WHY it matters.
+
+Respond with just the sentence, no quotes, no JSON.`
+
+          const msg = await haikuEnrich.messages.create({
+            model:      'claude-haiku-4-5-20251001',
+            max_tokens: 80,
+            messages:   [{ role: 'user', content: enrichPrompt }]
+          })
+
+          const contextLine = (msg.content[0]?.text || '').trim().replace(/^"|"$/g, '')
+          if (contextLine && contextLine.length > 10) {
+            await supabase
+              .from('tasks')
+              .update({ context: contextLine })
+              .eq('id', task.id)
+            enrichedTasks++
+          }
+        } catch (enrichErr) {
+          // Non-fatal
+        }
+      }
+
+      if (enrichedTasks > 0) {
+        console.log(`  ✓ Task context: ${enrichedTasks} tasks enriched`)
+      }
+    }
+  } catch (taskDedupErr) {
+    console.log(`  ✗ Task dedup error (non-fatal): ${taskDedupErr.message}`)
+  }
+
   // ── STEP 2: Get active emails ───────────────────────────────────
   console.log('Step 2: Fetching active emails...')
   const { data: activeEmails } = await supabase
