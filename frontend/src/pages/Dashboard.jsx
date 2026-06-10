@@ -865,35 +865,64 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
         <div className="space-y-2">
           {visibleItems.map(email => {
             const isResolved = email.status === 'resolved'
-            const hasAsk = email.ai_summary && (/\?/.test(email.ai_summary) || /\b(please|can you|could you|need|request|asking|send|provide|confirm|review|approve)\b/i.test(email.ai_summary))
+
+            // Category label + color
+            const CATEGORY_STYLE = {
+              submittal:         'bg-blue-50 text-blue-700',
+              question:          'bg-purple-50 text-purple-700',
+              action_request:    'bg-orange-50 text-orange-700',
+              follow_up:         'bg-yellow-50 text-yellow-700',
+              approval_pending:  'bg-red-50 text-red-700',
+              informational:     'bg-gray-100 text-gray-500',
+              question_to_ryan:  'bg-purple-50 text-purple-700',
+              approval_needed:   'bg-red-50 text-red-700',
+              action_needed:     'bg-orange-50 text-orange-700',
+              submittal_received:'bg-blue-50 text-blue-700',
+              fyi:               'bg-gray-100 text-gray-400',
+              introduction:      'bg-green-50 text-green-700',
+            }
+            const catStyle = CATEGORY_STYLE[email.email_category] || 'bg-gray-100 text-gray-500'
+            const catLabel = (email.email_category || '').replace(/_/g, ' ')
+
             return (
               <div
                 key={email.id}
                 className={`flex items-start gap-2 group transition-opacity ${isResolved ? 'opacity-40' : ''}`}
               >
                 <div className="flex-1 min-w-0">
+                  {/* Row 1: name + category + days */}
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <ContactLink
                       name={email.from_name || email.from_address}
                       contacts={contacts}
-                      className={`text-sm font-medium text-[#1a1a18] truncate ${isResolved ? 'line-through' : ''}`}
+                      className={`text-sm font-medium text-[#1a1a18] ${isResolved ? 'line-through' : ''}`}
                     />
-                    {email.urgency && (
-                      <span className={`text-xs px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[email.urgency] || 'text-gray-500 bg-gray-100'}`}>
-                        {email.urgency}
+                    {email.email_category && (
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${catStyle}`}>
+                        {catLabel}
                       </span>
                     )}
-                    {email.days_waiting > 0 && isReplyTab && (
-                      <span className="text-xs text-orange-400 flex-shrink-0">{email.days_waiting}d</span>
+                    {email.days_waiting > 0 && (
+                      <span className={`text-xs flex-shrink-0 font-medium ${email.days_waiting > 5 ? 'text-red-500' : 'text-orange-400'}`}>
+                        {email.days_waiting}d
+                      </span>
+                    )}
+                    {email.extracted_deadline && (
+                      <span className="text-[10px] text-red-500 flex-shrink-0 font-medium">
+                        due {email.extracted_deadline}
+                      </span>
                     )}
                   </div>
-                  <p className={`text-xs text-[#6b6b67] truncate ${isResolved ? 'line-through' : ''}`}>
+
+                  {/* Row 2: subject (secondary, smaller) */}
+                  <p className={`text-[11px] text-[#9b9b97] truncate ${isResolved ? 'line-through' : ''}`}>
                     {email.thread_subject || email.subject}
                   </p>
-                  {email.ai_summary && (
-                    <p className="text-xs text-[#9b9b97] mt-0.5 line-clamp-2 leading-snug">
-                      {hasAsk && <span className="font-semibold text-orange-500 mr-1">Ask:</span>}
-                      {email.ai_summary}
+
+                  {/* Row 3: action_needed (primary context — what actually matters) */}
+                  {(email.action_needed || email.ai_summary) && (
+                    <p className="text-xs text-[#1a1a18] mt-0.5 line-clamp-2 leading-snug font-normal">
+                      {email.action_needed || email.ai_summary}
                     </p>
                   )}
                 </div>

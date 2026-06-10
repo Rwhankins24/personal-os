@@ -967,6 +967,170 @@ async function main() {
     `${results.risk_signals_detected} risks`
   )
 
+  // ── STEP 3.55: Email context enrichment ────────────────────────
+  // For each active email (needs_reply or waiting_on):
+  //   1. Read full thread content
+  //   2. Pull surrounding emails from same sender (last 7 business days)
+  //   3. Claude Haiku classifies type + extracts action_needed, deadline, summary
+  //
+  // Required columns (run once in Supabase SQL editor if missing):
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS email_category text;
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS action_needed text;
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS extracted_deadline text;
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS thread_summary text;
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS can_auto_archive boolean DEFAULT false;
+  //   ALTER TABLE emails ADD COLUMN IF NOT EXISTS context_enriched_at timestamptz;
+  console.log('Step 3.55: Email context enrichment...')
+
+  try {
+    const threeDaysAgo  = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+    const tenDaysAgo    = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString() // ~7 business days
+
+    // Emails that need enrichment
+    const { data: enrichQueue } = await supabase
+      .from('emails')
+      .select(
+        'id, thread_subject, subject, from_name, from_address, ' +
+        'full_thread_content, body_preview, ai_summary, sent_body, ' +
+        'status, bucket, urgency, days_waiting, received_at, ' +
+        'waiting_since, my_last_reply_time, thread_message_count, ' +
+        'thread_participants, conversation_id'
+      )
+      .in('status', ['needs_reply', 'waiting_on'])
+      .not('bucket', 'eq', 5)
+      .or(`context_enriched_at.is.null,context_enriched_at.lt.${threeDaysAgo}`)
+      .order('days_waiting', { ascending: false })
+      .limit(40)
+
+    const haikuClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    let enriched = 0
+
+    for (const email of (enrichQueue || [])) {
+      try {
+        // ── 1. Build full thread context ──────────────────────────
+        const threadContent = email.full_thread_content || email.body_preview || email.ai_summary || ''
+
+        // Thread history: other emails in same thread
+        const threadHistory = await getThreadHistory(email)
+        const threadHistoryText = threadHistory
+          .filter(e => e.id !== email.id)
+          .slice(0, 8)
+          .map(e =>
+            `[${e.from_name || e.from_address} — ${e.received_at ? e.received_at.split('T')[0] : 'unknown'}]\n` +
+            (e.ai_summary || e.body_preview || '(no content)').slice(0, 400)
+          )
+          .join('\n\n---\n\n')
+
+        // ── 2. Surrounding emails from same sender (last 7 biz days) ──
+        let surroundingText = ''
+        if (email.from_address) {
+          const { data: surrounding } = await supabase
+            .from('emails')
+            .select('thread_subject, ai_summary, body_preview, received_at, status')
+            .eq('from_address', email.from_address)
+            .neq('id', email.id)
+            .gte('created_at', tenDaysAgo)
+            .order('created_at', { ascending: false })
+            .limit(6)
+
+          if (surrounding?.length) {
+            surroundingText = surrounding
+              .map(e =>
+                `[Other thread: "${e.thread_subject}" — ${e.received_at ? e.received_at.split('T')[0] : 'unknown'}]\n` +
+                (e.ai_summary || e.body_preview || '').slice(0, 200)
+              )
+              .join('\n\n')
+          }
+        }
+
+        // ── 3. Build prompt ───────────────────────────────────────
+        const isWaiting = email.status === 'waiting_on'
+        const prompt = `You are analyzing an email thread for Ryan Hankins, a Project Executive at Clayco (construction/real estate).
+
+EMAIL DETAILS:
+- Subject: ${email.thread_subject || email.subject || '(none)'}
+- From: ${email.from_name || email.from_address || 'Unknown'}
+- Status: ${isWaiting ? 'WAITING ON (Ryan sent last, awaiting response)' : 'NEEDS REPLY (received, Ryan needs to respond)'}
+- Days waiting: ${email.days_waiting || 0}
+- Messages in thread: ${email.thread_message_count || 1}
+- Last reply from Ryan: ${email.my_last_reply_time ? email.my_last_reply_time.split('T')[0] : 'unknown'}
+
+FULL THREAD CONTENT:
+${threadContent.slice(0, 4000) || '(not available)'}
+
+${threadHistoryText ? `THREAD HISTORY (earlier messages):\n${threadHistoryText}` : ''}
+
+${surroundingText ? `OTHER RECENT EMAILS FROM THIS SENDER (last 7 business days — for context only):\n${surroundingText}` : ''}
+
+Based on the FULL thread context above, classify this email and extract action details.
+
+${isWaiting
+  ? 'For WAITING ON threads: What did Ryan send? What is he waiting to receive back?'
+  : 'For NEEDS REPLY threads: What is the sender asking of Ryan specifically?'
+}
+
+Respond ONLY with valid JSON (no markdown):
+{
+  "email_category": "${isWaiting
+    ? 'submittal|question|action_request|informational|follow_up|approval_pending'
+    : 'question_to_ryan|approval_needed|action_needed|submittal_received|fyi|introduction'
+  }",
+  "action_needed": "Single sentence: who needs to do what, by when if known. Max 120 chars.",
+  "extracted_deadline": "YYYY-MM-DD or null",
+  "thread_summary": "2-3 sentences covering the full arc of this conversation — what was originally discussed, where it stands now, what is unresolved.",
+  "can_auto_archive": false
+}
+
+Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with no open question or deliverable.`
+
+        // ── 4. Call Haiku ────────────────────────────────────────
+        const msg = await haikuClient.messages.create({
+          model:      'claude-haiku-4-5-20251001',
+          max_tokens: 400,
+          messages:   [{ role: 'user', content: prompt }]
+        })
+
+        const raw = (msg.content[0]?.text || '').trim()
+        let parsed
+        try {
+          const jsonMatch = raw.match(/\{[\s\S]*\}/)
+          parsed = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+        } catch {
+          console.log(`  ✗ Enrich parse error for "${email.thread_subject}": ${raw.slice(0, 80)}`)
+          continue
+        }
+
+        // ── 5. Update email ──────────────────────────────────────
+        const update = {
+          context_enriched_at: new Date().toISOString()
+        }
+        if (parsed.email_category)    update.email_category    = parsed.email_category
+        if (parsed.action_needed)     update.action_needed     = parsed.action_needed
+        if (parsed.extracted_deadline) update.extracted_deadline = parsed.extracted_deadline
+        if (parsed.thread_summary)    update.thread_summary    = parsed.thread_summary
+        if (parsed.can_auto_archive === true) update.can_auto_archive = true
+
+        // Auto-downgrade obvious FYIs: move to bucket 4 if currently 2 or 3
+        if (parsed.can_auto_archive && (email.bucket === 2 || email.bucket === 3)) {
+          update.bucket  = 4
+          update.urgency = 'low'
+        }
+
+        await supabase.from('emails').update(update).eq('id', email.id)
+        enriched++
+
+      } catch (emailErr) {
+        console.log(`  ✗ Enrich error for "${email.thread_subject}": ${emailErr.message}`)
+      }
+    }
+
+    console.log(`  ✓ Enriched ${enriched}/${(enrichQueue || []).length} emails with context`)
+    results.emails_context_enriched = enriched
+
+  } catch (enrichErr) {
+    console.log(`  ✗ Email enrichment step failed: ${enrichErr.message}`)
+  }
+
   // ── STEP 3.6b: Auto-expand project keywords ────────────────────
   console.log('Step 3.6b: Learning project keywords...')
   try {

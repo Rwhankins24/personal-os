@@ -238,12 +238,25 @@ export default function EmailsPage() {
             {sorted.map(email => {
               const expanded   = expandedId === email.id
               const isResolved = email.status === 'resolved'
-              const waitingLong = (email.days_waiting ?? 0) > 3
+              const waitingLong = (email.days_waiting ?? 0) > 5
               const bucketNum  = email.bucket
-              const hasAsk = email.ai_summary && (
-                /\?/.test(email.ai_summary) ||
-                /\b(please|can you|could you|need|request|asking|send|provide|confirm|review|approve)\b/i.test(email.ai_summary)
-              )
+
+              const CATEGORY_STYLE = {
+                submittal:         'bg-blue-50 text-blue-700',
+                question:          'bg-purple-50 text-purple-700',
+                action_request:    'bg-orange-50 text-orange-700',
+                follow_up:         'bg-yellow-50 text-yellow-700',
+                approval_pending:  'bg-red-50 text-red-700',
+                informational:     'bg-gray-100 text-gray-500',
+                question_to_ryan:  'bg-purple-50 text-purple-700',
+                approval_needed:   'bg-red-50 text-red-700',
+                action_needed:     'bg-orange-50 text-orange-700',
+                submittal_received:'bg-blue-50 text-blue-700',
+                fyi:               'bg-gray-100 text-gray-400',
+                introduction:      'bg-green-50 text-green-700',
+              }
+              const catStyle = CATEGORY_STYLE[email.email_category] || 'bg-gray-100 text-gray-500'
+              const catLabel = (email.email_category || '').replace(/_/g, ' ')
 
               return (
                 <div key={email.id} className={isResolved ? 'opacity-50' : ''}>
@@ -252,49 +265,48 @@ export default function EmailsPage() {
                     onClick={() => setExpandedId(expanded ? null : email.id)}
                   >
                     <div className="flex-1 min-w-0">
-                      {/* Row 1: name + badges */}
+                      {/* Row 1: name + category + days + deadline */}
                       <div className="flex items-center gap-2 flex-wrap">
                         <ContactLink
                           name={email.from_name || email.from_address}
                           contacts={contacts}
                           className={`text-sm font-semibold text-[#1a1a18] ${isResolved ? 'line-through' : ''}`}
                         />
+                        {email.email_category && (
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${catStyle}`}>
+                            {catLabel}
+                          </span>
+                        )}
                         {email.days_waiting > 0 && (
-                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                            waitingLong ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-[#6b6b67]'
+                          <span className={`text-xs font-medium flex-shrink-0 ${
+                            waitingLong ? 'text-red-500' : 'text-orange-400'
                           }`}>
                             {email.days_waiting}d
                           </span>
                         )}
+                        {email.extracted_deadline && (
+                          <span className="text-[10px] text-red-500 font-medium flex-shrink-0">
+                            due {email.extracted_deadline}
+                          </span>
+                        )}
                         {bucketNum && BUCKET_LABELS[bucketNum] && (
-                          <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${BUCKET_COLORS[bucketNum] || 'text-gray-500 bg-gray-100'}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${BUCKET_COLORS[bucketNum] || 'text-gray-500 bg-gray-100'}`}>
                             {BUCKET_LABELS[bucketNum]}
-                          </span>
-                        )}
-                        {email.urgency && email.urgency !== 'normal' && (
-                          <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[email.urgency] || 'text-gray-500 bg-gray-100'}`}>
-                            {email.urgency}
-                          </span>
-                        )}
-                        {email.is_time_sensitive && (
-                          <span className="text-xs px-2 py-0.5 rounded font-medium bg-orange-50 text-orange-600 flex-shrink-0">
-                            time-sensitive
                           </span>
                         )}
                       </div>
 
-                      {/* Row 2: subject */}
-                      <p className={`text-xs text-[#6b6b67] mt-0.5 truncate ${isResolved ? 'line-through' : ''}`}>
-                        {email.thread_subject || email.subject || '(no subject)'}
-                      </p>
-
-                      {/* Row 3: AI summary / ask */}
-                      {email.ai_summary && (
-                        <p className="text-xs text-[#9b9b97] mt-1 line-clamp-2 leading-snug">
-                          {hasAsk && <span className="font-semibold text-orange-500 mr-1">Ask:</span>}
-                          {email.ai_summary}
+                      {/* Row 2: action_needed — the primary context line */}
+                      {(email.action_needed || email.ai_summary) && (
+                        <p className="text-sm text-[#1a1a18] mt-1 line-clamp-2 leading-snug">
+                          {email.action_needed || email.ai_summary}
                         </p>
                       )}
+
+                      {/* Row 3: subject (secondary) */}
+                      <p className={`text-[11px] text-[#9b9b97] mt-0.5 truncate ${isResolved ? 'line-through' : ''}`}>
+                        {email.thread_subject || email.subject || '(no subject)'}
+                      </p>
                     </div>
 
                     {/* Action buttons (hover) */}
@@ -339,8 +351,15 @@ export default function EmailsPage() {
                       {email.thread_message_count > 1 && (
                         <p className="text-xs text-[#9b9b97]">{email.thread_message_count} messages in thread</p>
                       )}
-                      {/* Body preview */}
-                      {(email.body_preview || email.ai_summary) && (
+                      {/* Thread summary — full arc */}
+                      {email.thread_summary && (
+                        <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+                          <p className="text-[10px] text-blue-600 font-medium mb-1 uppercase tracking-wide">Thread Summary</p>
+                          <p className="text-xs text-[#1a1a18] leading-relaxed">{email.thread_summary}</p>
+                        </div>
+                      )}
+                      {/* Body preview fallback */}
+                      {!email.thread_summary && (email.body_preview || email.ai_summary) && (
                         <div className="bg-white rounded-lg p-3 border border-[#e5e5e3]">
                           <p className="text-xs text-[#1a1a18] leading-relaxed whitespace-pre-line">
                             {email.body_preview || email.ai_summary}
