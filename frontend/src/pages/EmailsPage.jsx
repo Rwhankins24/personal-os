@@ -1,37 +1,52 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getEmails, updateEmail, getContacts } from '../lib/api'
-
-const URGENCY_COLOR = {
-  critical: 'bg-red-500',
-  high:     'bg-orange-400',
-  medium:   'bg-yellow-400',
-  low:      'bg-gray-300',
-}
 
 const URGENCY_TEXT = {
   critical: 'text-red-600 bg-red-50',
   high:     'text-orange-600 bg-orange-50',
   medium:   'text-yellow-700 bg-yellow-50',
   low:      'text-gray-500 bg-gray-100',
+  normal:   'text-gray-500 bg-gray-100',
 }
 
-const BUCKET_LABELS = {
-  1: 'Critical',
-  2: 'Action',
-  3: 'Monitor',
-  4: 'Low',
-  5: 'Done',
-}
-
+const BUCKET_LABELS = { 1: 'Critical', 2: 'Action', 3: 'Monitor', 4: 'Low', 5: 'Done' }
 const BUCKET_COLORS = {
   1: 'text-red-600 bg-red-50',
   2: 'text-orange-600 bg-orange-50',
   3: 'text-blue-600 bg-blue-50',
   4: 'text-gray-500 bg-gray-100',
   5: 'text-green-700 bg-green-50',
+}
+
+function findContactByName(name, contacts) {
+  if (!name || !contacts?.length) return null
+  const lower = name.toLowerCase().trim()
+  let match = contacts.find(c => c.name?.toLowerCase() === lower)
+  if (!match) {
+    match = contacts.find(c => {
+      const cn = (c.name || '').toLowerCase()
+      return cn.length > 1 && (lower.includes(cn) || cn.includes(lower))
+    })
+  }
+  return match || null
+}
+
+function ContactLink({ name, contacts, className = '' }) {
+  if (!name) return <span className={className}>Unknown sender</span>
+  const contact = findContactByName(name, contacts)
+  if (!contact) return <span className={className}>{name}</span>
+  return (
+    <Link
+      to={`/contact/${contact.id}`}
+      className={`hover:underline hover:text-blue-600 transition-colors ${className}`}
+      onClick={e => e.stopPropagation()}
+    >
+      {name}
+    </Link>
+  )
 }
 
 function PillToggle({ options, value, onChange }) {
@@ -55,12 +70,15 @@ function PillToggle({ options, value, onChange }) {
 }
 
 export default function EmailsPage() {
-  const navigate = useNavigate()
-  const qc = useQueryClient()
+  const navigate  = useNavigate()
+  const qc        = useQueryClient()
 
+  // Primary: status tab (Needs Reply vs Waiting On)
+  const [statusTab,    setStatusTab]    = useState('reply')
+  // Secondary filters
+  const [contextTab,   setContextTab]   = useState('all')
   const [bucketFilter, setBucketFilter] = useState('all')
-  const [typeFilter, setTypeFilter] = useState('all')
-  const [expandedId, setExpandedId] = useState(null)
+  const [expandedId,   setExpandedId]   = useState(null)
 
   const { data: emails, isLoading } = useQuery({
     queryKey: ['emails'],
@@ -70,6 +88,20 @@ export default function EmailsPage() {
   const { data: contacts } = useQuery({
     queryKey: ['contacts'],
     queryFn: getContacts,
+  })
+
+  const mark = useMutation({
+    mutationFn: ({ id, status }) => updateEmail(id, { status }),
+    onMutate: async ({ id, status }) => {
+      await qc.cancelQueries({ queryKey: ['emails'] })
+      const prev = qc.getQueryData(['emails'])
+      qc.setQueryData(['emails'], old =>
+        (old || []).map(e => e.id === id ? { ...e, status } : e)
+      )
+      return { prev }
+    },
+    onError: (_, __, ctx) => qc.setQueryData(['emails'], ctx.prev),
+    onSettled: () => qc.invalidateQueries({ queryKey: ['emails'] }),
   })
 
   const markDone = useMutation({
@@ -86,33 +118,50 @@ export default function EmailsPage() {
     onSettled: () => qc.invalidateQueries({ queryKey: ['emails'] }),
   })
 
-  const bucketOptions = [
-    { value: 'all', label: 'All' },
-    { value: '1',   label: 'Critical (1)' },
-    { value: '2',   label: 'Action (2)' },
-    { value: '3',   label: 'Monitor (3)' },
-    { value: '4',   label: 'Low (4)' },
-    { value: '5',   label: 'Done (5)' },
-  ]
+  const allEmails = emails || []
 
-  const typeOptions = [
-    { value: 'all',      label: 'All' },
-    { value: 'internal', label: 'Internal' },
-    { value: 'external', label: 'External' },
-  ]
-
-  const filtered = (emails || []).filter(e => {
-    if (bucketFilter !== 'all' && String(e.bucket) !== bucketFilter) return false
-    if (typeFilter !== 'all' && e.email_type !== typeFilter) return false
+  // Context filter
+  function matchesContext(e) {
+    if (contextTab === 'all') return true
+    if (contextTab === 'work') return e.context_type === 'work' || e.context_type === 'mixed' || !e.context_type
+    if (contextTab === 'personal') return e.context_type === 'personal' || e.context_type === 'mixed'
     return true
-  })
+  }
 
+  // Bucket filter
+  function matchesBucket(e) {
+    if (bucketFilter === 'all') return true
+    return String(e.bucket) === bucketFilter
+  }
+
+  // Status tab buckets
+  const needsReplyAll  = allEmails.filter(e => e.status === 'needs_reply')
+  const waitingOnAll   = allEmails.filter(e => e.status === 'waiting_on' || e.status === 'resolved')
+  const isReplyTab     = statusTab === 'reply'
+
+  const baseSet = isReplyTab ? needsReplyAll : waitingOnAll
+  const filtered = baseSet.filter(e => matchesContext(e) && matchesBucket(e))
+
+  // Sort: bucket priority, then days_waiting desc
   const sorted = [...filtered].sort((a, b) => {
-    const ba = a.bucket ?? 99
-    const bb = b.bucket ?? 99
+    const ba = a.bucket ?? 99, bb = b.bucket ?? 99
     if (ba !== bb) return ba - bb
     return (b.days_waiting ?? 0) - (a.days_waiting ?? 0)
   })
+
+  const contextOptions = [
+    { value: 'all',      label: 'All' },
+    { value: 'work',     label: 'Work' },
+    { value: 'personal', label: 'Personal' },
+  ]
+
+  const bucketOptions = [
+    { value: 'all', label: 'All' },
+    { value: '1',   label: 'Critical' },
+    { value: '2',   label: 'Action' },
+    { value: '3',   label: 'Monitor' },
+    { value: '4',   label: 'Low' },
+  ]
 
   return (
     <div className="min-h-screen bg-[#f8f8f6]">
@@ -125,21 +174,55 @@ export default function EmailsPage() {
           >
             ← Back
           </button>
-          <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Emails</h1>
-          <span className="text-xs text-[#6b6b67] flex-shrink-0">{sorted.length} items</span>
+          <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Email Queue</h1>
+          <span className="text-xs text-[#6b6b67] flex-shrink-0">{sorted.length} shown</span>
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
-        {/* Filter bar */}
-        <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2">
+        {/* Status tabs — primary toggle */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setStatusTab('reply')}
+            className={`text-sm px-4 py-2 rounded-xl font-medium transition-all ${
+              isReplyTab
+                ? 'bg-red-100 text-red-700 border border-red-200'
+                : 'bg-white text-[#6b6b67] border border-[#e5e5e3] hover:border-gray-400'
+            }`}
+          >
+            Needs Reply
+            {needsReplyAll.length > 0 && (
+              <span className="ml-1.5 text-xs bg-red-600 text-white rounded-full px-1.5 py-0.5">
+                {needsReplyAll.length}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setStatusTab('waiting')}
+            className={`text-sm px-4 py-2 rounded-xl font-medium transition-all ${
+              !isReplyTab
+                ? 'bg-gray-200 text-gray-700 border border-gray-300'
+                : 'bg-white text-[#6b6b67] border border-[#e5e5e3] hover:border-gray-400'
+            }`}
+          >
+            Waiting On
+            {waitingOnAll.filter(e => e.status === 'waiting_on').length > 0 && (
+              <span className="ml-1.5 text-xs bg-gray-600 text-white rounded-full px-1.5 py-0.5">
+                {waitingOnAll.filter(e => e.status === 'waiting_on').length}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Secondary filters */}
+        <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2.5">
           <div>
-            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Bucket</p>
-            <PillToggle options={bucketOptions} value={bucketFilter} onChange={setBucketFilter} />
+            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Context</p>
+            <PillToggle options={contextOptions} value={contextTab} onChange={setContextTab} />
           </div>
           <div>
-            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Type</p>
-            <PillToggle options={typeOptions} value={typeFilter} onChange={setTypeFilter} />
+            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Priority</p>
+            <PillToggle options={bucketOptions} value={bucketFilter} onChange={setBucketFilter} />
           </div>
         </div>
 
@@ -147,84 +230,164 @@ export default function EmailsPage() {
         {isLoading ? (
           <p className="text-sm text-[#6b6b67] text-center py-8">Loading...</p>
         ) : sorted.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-8">No emails match this filter</p>
+          <p className="text-sm text-gray-400 text-center py-8">
+            {isReplyTab ? 'No emails need reply' : 'Nothing waiting on others'}
+          </p>
         ) : (
           <div className="bg-white border border-[#e5e5e3] rounded-2xl divide-y divide-[#f0f0ee]">
             {sorted.map(email => {
-              const expanded = expandedId === email.id
+              const expanded   = expandedId === email.id
+              const isResolved = email.status === 'resolved'
               const waitingLong = (email.days_waiting ?? 0) > 3
-              const bucketNum = email.bucket
-              const bucketLabel = BUCKET_LABELS[bucketNum]
-              const bucketColor = BUCKET_COLORS[bucketNum] || 'text-gray-500 bg-gray-100'
+              const bucketNum  = email.bucket
+              const hasAsk = email.ai_summary && (
+                /\?/.test(email.ai_summary) ||
+                /\b(please|can you|could you|need|request|asking|send|provide|confirm|review|approve)\b/i.test(email.ai_summary)
+              )
 
               return (
-                <div key={email.id}>
+                <div key={email.id} className={isResolved ? 'opacity-50' : ''}>
                   <div
-                    className="flex items-start gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors"
+                    className="flex items-start gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors group"
                     onClick={() => setExpandedId(expanded ? null : email.id)}
                   >
                     <div className="flex-1 min-w-0">
+                      {/* Row 1: name + badges */}
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="text-sm font-medium text-[#1a1a18] truncate">
-                          {email.from_name || email.from_address || 'Unknown'}
-                        </p>
+                        <ContactLink
+                          name={email.from_name || email.from_address}
+                          contacts={contacts}
+                          className={`text-sm font-semibold text-[#1a1a18] ${isResolved ? 'line-through' : ''}`}
+                        />
                         {email.days_waiting > 0 && (
-                          <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-medium ${
+                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
                             waitingLong ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-[#6b6b67]'
                           }`}>
                             {email.days_waiting}d
                           </span>
                         )}
-                        {bucketLabel && (
-                          <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${bucketColor}`}>
-                            {bucketLabel}
+                        {bucketNum && BUCKET_LABELS[bucketNum] && (
+                          <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${BUCKET_COLORS[bucketNum] || 'text-gray-500 bg-gray-100'}`}>
+                            {BUCKET_LABELS[bucketNum]}
                           </span>
                         )}
-                        {email.urgency && (
+                        {email.urgency && email.urgency !== 'normal' && (
                           <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[email.urgency] || 'text-gray-500 bg-gray-100'}`}>
                             {email.urgency}
                           </span>
                         )}
+                        {email.is_time_sensitive && (
+                          <span className="text-xs px-2 py-0.5 rounded font-medium bg-orange-50 text-orange-600 flex-shrink-0">
+                            time-sensitive
+                          </span>
+                        )}
                       </div>
-                      <p className="text-xs text-[#6b6b67] mt-0.5 truncate">
+
+                      {/* Row 2: subject */}
+                      <p className={`text-xs text-[#6b6b67] mt-0.5 truncate ${isResolved ? 'line-through' : ''}`}>
                         {email.thread_subject || email.subject || '(no subject)'}
                       </p>
+
+                      {/* Row 3: AI summary / ask */}
+                      {email.ai_summary && (
+                        <p className="text-xs text-[#9b9b97] mt-1 line-clamp-2 leading-snug">
+                          {hasAsk && <span className="font-semibold text-orange-500 mr-1">Ask:</span>}
+                          {email.ai_summary}
+                        </p>
+                      )}
                     </div>
 
-                    {/* Done button */}
-                    {email.status !== 'done' && bucketNum !== 5 && (
-                      <button
-                        onClick={e => {
-                          e.stopPropagation()
-                          markDone.mutate({ id: email.id })
-                        }}
-                        className="flex-shrink-0 text-xs px-2.5 py-1 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all"
-                      >
-                        Done
-                      </button>
-                    )}
+                    {/* Action buttons (hover) */}
+                    <div className="flex-shrink-0 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {isReplyTab && (
+                        <button
+                          onClick={e => { e.stopPropagation(); mark.mutate({ id: email.id, status: 'done' }) }}
+                          className="text-xs text-[#6b6b67] hover:text-green-600 px-2 py-1 rounded hover:bg-green-50"
+                          title="Mark replied"
+                        >
+                          ✓ Done
+                        </button>
+                      )}
+                      {!isReplyTab && !isResolved && (
+                        <>
+                          <button
+                            onClick={e => { e.stopPropagation(); mark.mutate({ id: email.id, status: 'resolved' }) }}
+                            className="text-xs text-[#6b6b67] hover:text-green-600 px-2 py-1 rounded hover:bg-green-50"
+                          >
+                            ✓ Got it
+                          </button>
+                          <button
+                            onClick={e => { e.stopPropagation(); mark.mutate({ id: email.id, status: 'archived' }) }}
+                            className="text-xs text-gray-300 hover:text-gray-500 px-1 py-1 rounded"
+                          >
+                            No longer waiting
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
 
                   {/* Expanded detail */}
                   {expanded && (
-                    <div className="px-4 pb-3 bg-gray-50 border-t border-[#f0f0ee] space-y-1.5">
-                      {email.latest_sender && email.latest_sender !== email.from_name && (
+                    <div className="px-4 pb-4 bg-gray-50 border-t border-[#f0f0ee] space-y-2">
+                      {/* Additional context */}
+                      {email.latest_sender_name && email.latest_sender_name !== email.from_name && (
                         <p className="text-xs text-[#6b6b67] pt-2">
-                          Latest sender: <span className="font-medium text-[#1a1a18]">{email.latest_sender}</span>
+                          Latest reply from: <span className="font-medium text-[#1a1a18]">{email.latest_sender_name}</span>
                         </p>
                       )}
-                      {email.body_preview && (
-                        <p className="text-sm text-[#1a1a18] line-clamp-4 pt-1">{email.body_preview}</p>
+                      {email.thread_message_count > 1 && (
+                        <p className="text-xs text-[#9b9b97]">{email.thread_message_count} messages in thread</p>
                       )}
+                      {/* Body preview */}
+                      {(email.body_preview || email.ai_summary) && (
+                        <div className="bg-white rounded-lg p-3 border border-[#e5e5e3]">
+                          <p className="text-xs text-[#1a1a18] leading-relaxed whitespace-pre-line">
+                            {email.body_preview || email.ai_summary}
+                          </p>
+                        </div>
+                      )}
+                      {/* Tags + meta */}
                       <div className="flex items-center gap-2 flex-wrap pt-1">
                         {email.email_type && (
                           <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-[#6b6b67]">{email.email_type}</span>
                         )}
+                        {(email.tags || []).map(tag => (
+                          <span key={tag} className="text-xs px-2 py-0.5 rounded bg-blue-50 text-blue-600">{tag}</span>
+                        ))}
                         {email.received_at && (
                           <span className="text-xs text-[#9b9b97]">
                             {dayjs(email.received_at).format('MMM D, YYYY')}
                           </span>
                         )}
+                        {email.waiting_since && !isReplyTab && (
+                          <span className="text-xs text-[#9b9b97]">
+                            Waiting since {dayjs(email.waiting_since).format('MMM D')}
+                          </span>
+                        )}
+                      </div>
+                      {/* Thread participants */}
+                      {(email.thread_participants || []).length > 0 && (
+                        <p className="text-xs text-[#9b9b97]">
+                          Participants: {email.thread_participants.join(', ')}
+                        </p>
+                      )}
+                      {/* Quick actions */}
+                      <div className="flex gap-2 pt-1">
+                        {isReplyTab && (
+                          <button
+                            onClick={() => mark.mutate({ id: email.id, status: 'done' })}
+                            className="text-xs bg-green-600 text-white px-3 py-1.5 rounded-lg hover:bg-green-700"
+                          >
+                            ✓ Mark Replied
+                          </button>
+                        )}
+                        <button
+                          onClick={() => markDone.mutate({ id: email.id })}
+                          className="text-xs bg-gray-100 text-[#6b6b67] px-3 py-1.5 rounded-lg hover:bg-gray-200"
+                        >
+                          Archive
+                        </button>
                       </div>
                     </div>
                   )}

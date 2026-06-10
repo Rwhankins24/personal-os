@@ -351,6 +351,43 @@ jobs:
                       log("FATAL: upload failed")
                       sys.exit(1)
 
+          # ── Upsert meetings into meeting_notes table ─────────────────
+          if API_URL and TRIGGER_SECRET and report.get('meetings'):
+              log(f"Upserting {len(report['meetings'])} meetings into meeting_notes...")
+              upserted = 0
+              for m in report['meetings']:
+                  try:
+                      note_payload = json.dumps({
+                          "title":        m.get("title", "Untitled"),
+                          "meeting_date": m.get("date"),
+                          "source":       "plaud",
+                          "summary":      m.get("summary") or m.get("email_body_raw", ""),
+                          "action_items": (
+                              m.get("ryan_action_items", []) +
+                              m.get("others_action_items", []) +
+                              m.get("unattributed_action_items", [])
+                          ),
+                          "participants":       m.get("participants", []),
+                          "raw_transcript":     m.get("transcript_text", ""),
+                          "external_id":        m.get("gmail_message_id") or m.get("id"),
+                          "has_transcript":     m.get("has_transcript", False),
+                          "transcript_word_count": m.get("transcript_word_count", 0),
+                      }).encode()
+                      upsert_req = urllib.request.Request(
+                          f"{API_URL}/api/meeting-notes",
+                          data=note_payload,
+                          method='POST',
+                          headers={
+                              'Content-Type': 'application/json',
+                              'x-trigger-secret': TRIGGER_SECRET
+                          }
+                      )
+                      with urllib.request.urlopen(upsert_req, timeout=15) as r:
+                          upserted += 1
+                  except Exception as e:
+                      log(f"  Meeting upsert failed ({m.get('title', '?')}): {e}")
+              log(f"  Upserted {upserted}/{len(report['meetings'])} meetings into meeting_notes")
+
           # ── Mark pipeline step complete ──────────────────────────────
           if API_URL and TRIGGER_SECRET:
               log("Marking plaud_processing complete in pipeline...")

@@ -31,6 +31,15 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
+      // Upsert by external_id if provided (idempotent Plaud re-runs)
+      if (req.body.external_id) {
+        const { data, error } = await supabase
+          .from('meeting_notes')
+          .upsert(req.body, { onConflict: 'external_id', ignoreDuplicates: false })
+          .select().single()
+        if (error) throw error
+        return res.status(200).json(data)
+      }
       const { data, error } = await supabase
         .from('meeting_notes').insert(req.body).select().single()
       if (error) throw error

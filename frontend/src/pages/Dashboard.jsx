@@ -976,7 +976,7 @@ function PendingDecisionsPanel({ showAll, setShowAll }) {
 
   return (
     <Card>
-      <SectionHeader title="Pending Decisions" count={items.length} />
+      <SectionHeader title="Pending Decisions" count={items.length} to="/decisions" />
       {isLoading ? <Spinner /> : items.length === 0 ? (
         <EmptyState icon="🧠" message="No pending decisions" />
       ) : (
@@ -1730,7 +1730,7 @@ export default function Dashboard() {
         <div className="bg-white rounded-2xl border border-[#e5e5e3] p-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-[#1a1a18] text-sm">Recent Meetings</h2>
-            <span className="text-xs text-[#6b6b67] bg-[#f0f0ee] px-2 py-0.5 rounded-full">from Otter</span>
+            <span className="text-xs text-[#6b6b67] bg-[#f0f0ee] px-2 py-0.5 rounded-full">from Plaud</span>
           </div>
           {meetingNotes.length === 0 ? (
             <p className="text-xs text-[#9b9b97] py-4 text-center">No meetings recorded yet</p>
