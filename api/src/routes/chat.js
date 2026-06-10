@@ -55,23 +55,28 @@ module.exports = async (req, res) => {
         .limit(20)
         .then(r => r.data || []),
 
-      // Meeting notes — search title + participants + summary
+      // Meeting notes — full summary + transcript for deep context
+      // Plaud uses meeting_date; Otter uses start_time — query both
       supabase
         .from('meeting_notes')
-        .select('title, start_time, short_summary, action_items_raw, participants, source')
-        .gte('start_time', since)
-        .order('start_time', { ascending: false })
-        .limit(15)
+        .select(
+          'id, title, meeting_date, start_time, source, participants, ' +
+          'summary, short_summary, raw_transcript, transcript_word_count, ' +
+          'action_items, action_items_raw, has_transcript'
+        )
+        .or(`meeting_date.gte.${since.split('T')[0]},start_time.gte.${since}`)
+        .order('meeting_date', { ascending: false, nullsFirst: false })
+        .limit(20)
         .then(r => r.data || []),
 
-      // Emails — recent active threads
+      // Emails — recent active threads with enriched context
       supabase
         .from('emails')
-        .select('thread_subject, from_name, from_address, ai_summary, body_preview, received_at, bucket, urgency')
+        .select('thread_subject, from_name, from_address, ai_summary, action_needed, thread_summary, body_preview, received_at, bucket, urgency, status')
         .gte('received_at', since)
         .neq('status', 'done')
         .order('received_at', { ascending: false })
-        .limit(20)
+        .limit(25)
         .then(r => r.data || []),
 
       // Contacts — all (for name resolution)
@@ -144,7 +149,7 @@ module.exports = async (req, res) => {
     }
 
     const relMeetings = filterRelevant(meetingNotes,
-      n => `${n.title} ${n.short_summary} ${(n.participants || []).join(' ')}`)
+      n => `${n.title} ${n.summary} ${n.short_summary} ${(n.participants || []).join(' ')} ${n.raw_transcript?.slice(0, 500) || ''}`, 0)
 
     const relEmails = filterRelevant(emails,
       e => `${e.thread_subject} ${e.ai_summary} ${e.from_name}`)
@@ -185,12 +190,36 @@ Applies to: ${(k.applies_to || []).join(', ')}`)
 
     if (relMeetings.length) {
       sections.push('=== MEETING NOTES ===')
-      relMeetings.forEach(n => {
-        const items = (n.action_items_raw || []).map(a => `  • ${a.task_text || a} (${a.assignee_name || 'unassigned'})`).join('\n')
-        sections.push(`[${n.start_time?.split('T')[0] || 'unknown date'}] ${n.title} (${n.source || 'recording'})
-Summary: ${n.short_summary || 'no summary'}
-Participants: ${(n.participants || []).slice(0, 8).join(', ')}
-${items ? `Action items:\n${items}` : ''}`)
+      relMeetings.forEach((n, idx) => {
+        const date = n.meeting_date || n.start_time?.split('T')[0] || 'unknown date'
+
+        // Action items — combine both formats
+        const rawItems = (n.action_items_raw || [])
+          .map(a => `  • ${a.task_text || a.task || a} (${a.assignee_name || a.assignee || 'unassigned'})`)
+        const structItems = (n.action_items || [])
+          .filter(a => typeof a === 'string' ? true : a.task || a.task_text)
+          .map(a => `  • ${typeof a === 'string' ? a : (a.task_text || a.task)} (${a.assignee || 'unassigned'})`)
+        const allItems = [...new Set([...rawItems, ...structItems])]
+
+        // Full summary — use richest available
+        const fullSummary = n.summary || n.short_summary || 'no summary'
+
+        // Transcript — include for high-relevance meetings or first 2 results
+        // Keyword score determines depth: high match = more transcript
+        const meetingKeywordScore = keywords.reduce((s, k) => {
+          const text = `${n.title} ${n.summary || ''} ${n.raw_transcript || ''}`
+          return s + (text.toLowerCase().includes(k) ? 1 : 0)
+        }, 0)
+        const transcriptChars = meetingKeywordScore >= 3 ? 4000 : idx < 2 ? 2000 : 0
+        const transcriptSnippet = transcriptChars && n.raw_transcript
+          ? `\nTranscript excerpt:\n${n.raw_transcript.slice(0, transcriptChars)}${n.raw_transcript.length > transcriptChars ? '\n[...truncated]' : ''}`
+          : ''
+
+        sections.push(
+`[${date}] ${n.title} (${n.source || 'recording'})${n.has_transcript ? ' ✓ transcript' : ''}
+Participants: ${(n.participants || []).slice(0, 8).join(', ') || 'unknown'}
+Summary: ${fullSummary.slice(0, 800)}
+${allItems.length ? `Action items:\n${allItems.join('\n')}` : ''}${transcriptSnippet}`)
       })
     }
 
@@ -209,11 +238,12 @@ ${e.pre_meeting_notes ? `Pre-meeting notes: ${e.pre_meeting_notes}` : ''}`)
     if (relEmails.length) {
       sections.push('=== ACTIVE EMAIL THREADS ===')
       relEmails.forEach(e => {
-        sections.push(`From: ${e.from_name} <${e.from_address}>
+        // Use richest available context — action_needed > thread_summary > ai_summary > preview
+        const context = e.action_needed || e.thread_summary || e.ai_summary || e.body_preview?.slice(0, 200) || ''
+        sections.push(`From: ${e.from_name || e.from_address}
 Subject: ${e.thread_subject}
-Date: ${e.received_at?.split('T')[0]}
-${e.ai_summary ? `Summary: ${e.ai_summary}` : `Preview: ${e.body_preview?.slice(0, 200)}`}
-Status: bucket ${e.bucket}, urgency: ${e.urgency || 'normal'}`)
+Date: ${e.received_at?.split('T')[0]} | Status: ${e.status} | Bucket: ${e.bucket} | Urgency: ${e.urgency || 'normal'}
+${context ? `Context: ${context.slice(0, 400)}` : ''}`)
       })
     }
 
