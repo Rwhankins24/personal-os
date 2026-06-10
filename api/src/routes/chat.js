@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
         .from('meeting_notes')
         .select(
           'id, title, meeting_date, start_time, source, participants, ' +
-          'summary, short_summary, raw_transcript, transcript_word_count, ' +
+          'summary, short_summary, raw_transcript, full_transcript, transcript_word_count, ' +
           'action_items, action_items_raw, has_transcript'
         )
         .or(`meeting_date.gte.${since.split('T')[0]},start_time.gte.${since}`)
@@ -149,7 +149,7 @@ module.exports = async (req, res) => {
     }
 
     const relMeetings = filterRelevant(meetingNotes,
-      n => `${n.title} ${n.summary} ${n.short_summary} ${(n.participants || []).join(' ')} ${n.raw_transcript?.slice(0, 500) || ''}`, 0)
+      n => `${n.title} ${n.summary} ${n.short_summary} ${(n.participants || []).join(' ')} ${(n.raw_transcript || n.full_transcript || '').slice(0, 500)}`, 0)
 
     const relEmails = filterRelevant(emails,
       e => `${e.thread_subject} ${e.ai_summary} ${e.from_name}`)
@@ -210,9 +210,11 @@ Applies to: ${(k.applies_to || []).join(', ')}`)
           const text = `${n.title} ${n.summary || ''} ${n.raw_transcript || ''}`
           return s + (text.toLowerCase().includes(k) ? 1 : 0)
         }, 0)
+        // Use whichever transcript field is populated
+        const transcript = n.raw_transcript || n.full_transcript || ''
         const transcriptChars = meetingKeywordScore >= 3 ? 4000 : idx < 2 ? 2000 : 0
-        const transcriptSnippet = transcriptChars && n.raw_transcript
-          ? `\nTranscript excerpt:\n${n.raw_transcript.slice(0, transcriptChars)}${n.raw_transcript.length > transcriptChars ? '\n[...truncated]' : ''}`
+        const transcriptSnippet = transcriptChars && transcript
+          ? `\nTranscript excerpt:\n${transcript.slice(0, transcriptChars)}${transcript.length > transcriptChars ? '\n[...truncated]' : ''}`
           : ''
 
         sections.push(

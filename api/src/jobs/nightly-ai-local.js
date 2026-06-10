@@ -778,6 +778,7 @@ Respond with just the sentence, no quotes, no JSON.`
           start_time:             startTime,
           short_summary:          meeting.summary || '',
           full_transcript:        meeting.transcript_text || null,
+          raw_transcript:         meeting.transcript_text || null,
           action_items_raw:       actionItemsRaw,
           participants:           participantRoster,
           source:                 'plaud',

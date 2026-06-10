@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
-      // Upsert by external_id if provided (idempotent Plaud re-runs)
+      // Upsert by external_id if provided (idempotent for re-runs + backfill)
       if (req.body.external_id) {
         const { data, error } = await supabase
           .from('meeting_notes')
@@ -40,6 +40,28 @@ module.exports = async (req, res) => {
         if (error) throw error
         return res.status(200).json(data)
       }
+
+      // No external_id — check for duplicate by title + meeting_date before inserting
+      if (req.body.title && req.body.meeting_date) {
+        const { data: existing } = await supabase
+          .from('meeting_notes')
+          .select('id')
+          .eq('title', req.body.title)
+          .eq('meeting_date', req.body.meeting_date)
+          .eq('source', req.body.source || 'plaud')
+          .maybeSingle()
+        if (existing) {
+          // Update with any richer content from this payload
+          const { data, error } = await supabase
+            .from('meeting_notes')
+            .update(req.body)
+            .eq('id', existing.id)
+            .select().single()
+          if (error) throw error
+          return res.status(200).json(data)
+        }
+      }
+
       const { data, error } = await supabase
         .from('meeting_notes').insert(req.body).select().single()
       if (error) throw error
