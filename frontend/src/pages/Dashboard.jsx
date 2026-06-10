@@ -1844,13 +1844,20 @@ export default function Dashboard() {
                     {isExpanded && (
                       <div className="mt-2 space-y-2">
                         {m.short_summary && (
-                          <p className="text-xs text-[#6b6b67] leading-relaxed">{m.short_summary}</p>
+                          <p className="text-xs text-[#6b6b67] leading-relaxed">{m.short_summary.slice(0, 400)}{m.short_summary.length > 400 ? '...' : ''}</p>
+                        )}
+                        {(m.participants || []).length > 0 && (
+                          <p className="text-xs text-[#9b9b97]">
+                            <span className="font-medium text-[#6b6b67]">Participants: </span>
+                            {(m.participants || []).slice(0, 8).join(', ')}
+                            {(m.participants || []).length > 8 ? ` +${(m.participants || []).length - 8} more` : ''}
+                          </p>
                         )}
                         {ryanItems.length > 0 && (
                           <div>
                             <p className="text-xs font-medium text-[#3b82f6] mb-1">My action items</p>
                             <ul className="space-y-0.5">
-                              {ryanItems.map((item, i) => (
+                              {ryanItems.slice(0, 5).map((item, i) => (
                                 <li key={i} className="text-xs text-[#3b82f6]">- {item.task_text}</li>
                               ))}
                             </ul>
@@ -1860,10 +1867,16 @@ export default function Dashboard() {
                           <div>
                             <p className="text-xs font-medium text-[#6b6b67] mb-1">Others action items</p>
                             <ul className="space-y-0.5">
-                              {othersItems.map((item, i) => (
+                              {othersItems.slice(0, 5).map((item, i) => (
                                 <li key={i} className="text-xs text-[#9b9b97]">- {item.assignee_name}: {item.task_text}</li>
                               ))}
                             </ul>
+                          </div>
+                        )}
+                        {m.continuity_context && (
+                          <div className="border-t border-[#e5e5e3] pt-2 mt-2">
+                            <p className="text-xs font-medium text-[#9b9b97] mb-1">Recurring context:</p>
+                            <p className="text-xs text-[#6b6b67] leading-relaxed italic">{m.continuity_context.slice(0, 400)}{m.continuity_context.length > 400 ? '...' : ''}</p>
                           </div>
                         )}
                       </div>

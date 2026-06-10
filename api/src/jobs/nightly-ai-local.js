@@ -4,6 +4,20 @@
 // Uses process.env — NOT req/res
 // process.exit(0) on success, process.exit(1) on fatal failure
 
+// ── REQUIRED SCHEMA MIGRATIONS ──────────────────────────────────────────────
+// Run these ALTER TABLE statements in Supabase SQL editor before deploying:
+//
+//   ALTER TABLE meeting_notes ADD COLUMN IF NOT EXISTS event_id uuid;
+//   ALTER TABLE meeting_notes ADD COLUMN IF NOT EXISTS event_title text;
+//   ALTER TABLE meeting_notes ADD COLUMN IF NOT EXISTS continuity_context text;
+//   ALTER TABLE meeting_notes ADD COLUMN IF NOT EXISTS recurring_series_key text;
+//   ALTER TABLE events ADD COLUMN IF NOT EXISTS meeting_note_id uuid;
+//   ALTER TABLE events ADD COLUMN IF NOT EXISTS has_recording boolean DEFAULT false;
+//   ALTER TABLE projects ADD COLUMN IF NOT EXISTS project_context text;
+//   ALTER TABLE projects ADD COLUMN IF NOT EXISTS project_context_updated_at timestamptz;
+//
+// ────────────────────────────────────────────────────────────────────────────
+
 const path = require('path')
 require('dotenv').config({
   path: path.join(__dirname, '../../.env')
@@ -772,7 +786,7 @@ Respond with just the sentence, no quotes, no JSON.`
         // Use real start_time from calendar if matched, otherwise default to noon
         const startTime = calendarMatch?.start_time || `${meeting.date}T12:00:00Z`
 
-        await supabase.from('meeting_notes').insert({
+        const { data: insertedMeeting } = await supabase.from('meeting_notes').insert({
           otter_id:               `plaud_${meeting.gmail_message_id}`,
           title:                  meeting.title,
           start_time:             startTime,
@@ -784,8 +798,134 @@ Respond with just the sentence, no quotes, no JSON.`
           source:                 'plaud',
           intelligence_extracted: false,
           commitments_extracted:  false
-        })
+        }).select('id').single()
         plaudMeetingsLoaded++
+
+        // ── Meeting-to-Calendar Content + Time Matching ───────────────
+        // Stage 1: time proximity narrows candidates (±120 min, Phoenix tz)
+        // Stage 2: Haiku reads transcript content to verify — prevents a
+        //   phone call recorded before/after a meeting from being mislinked
+        try {
+          if (insertedMeeting?.id) {
+            const meetingStartMs = new Date(startTime).getTime()
+            const phoenixDate = new Date(startTime).toLocaleDateString('en-CA', { timeZone: 'America/Phoenix' })
+
+            // Pull all events for the Phoenix-local day
+            const { data: dayEvents } = await supabase
+              .from('events')
+              .select('id, title, start_time, end_time, attendees')
+              .gte('start_time', `${phoenixDate}T00:00:00Z`)
+              .lte('start_time', `${phoenixDate}T23:59:59Z`)
+
+            // Stage 1: find all time-proximity candidates (within ±120 min)
+            const candidates = (dayEvents || [])
+              .map(evt => ({
+                evt,
+                diffMin: Math.abs(meetingStartMs - new Date(evt.start_time).getTime()) / 60000
+              }))
+              .filter(c => c.diffMin <= 120)
+              .sort((a, b) => a.diffMin - b.diffMin)
+
+            if (candidates.length === 0) {
+              console.log(`  ℹ No calendar candidates for "${meeting.title}" on ${phoenixDate}`)
+            } else {
+              // Stage 2: content verification via Haiku
+              // Build context from transcript/summary for content matching
+              const recordingContent = (meeting.transcript_text || meeting.summary || meeting.email_body_raw || '').slice(0, 2000)
+              const recordingParticipants = participantRoster.join(', ') || 'unknown'
+
+              const candidateDescriptions = candidates.slice(0, 4).map((c, i) =>
+                `Option ${i + 1}: "${c.evt.title}" at ${new Date(c.evt.start_time).toLocaleTimeString('en-US', { timeZone: 'America/Phoenix', hour: '2-digit', minute: '2-digit' })} (${Math.round(c.diffMin)} min away) — attendees: ${(c.evt.attendees || []).slice(0, 6).join(', ') || 'unknown'}`
+              ).join('\n')
+
+              const verifyPrompt = `You are matching a Plaud audio recording to a calendar event.
+
+RECORDING:
+- Title from email: "${meeting.title || 'Untitled'}"
+- Date: ${phoenixDate} (Phoenix time)
+- Participants detected in recording: ${recordingParticipants}
+- Content summary/transcript excerpt:
+${recordingContent || '(no content available)'}
+
+CALENDAR EVENTS THAT DAY (within 2 hours):
+${candidateDescriptions}
+
+TASK: Determine which calendar event this recording belongs to, or if it's a standalone call not on the calendar.
+
+Key rules:
+- A phone call between 2 people should NOT match a large group meeting (OAC, pre-con, all-hands)
+- If the recording content mentions attendees, project topics, or agenda items from a specific event, that's a strong match
+- If the recording happened right BEFORE a meeting started or AFTER it ended, it's likely a SEPARATE call, not the meeting itself
+- If NO calendar event matches the content, return "none"
+
+Respond with JSON only:
+{
+  "match": "1" | "2" | "3" | "4" | "none",
+  "confidence": "high" | "medium" | "low",
+  "reason": "one sentence explaining the match or why none matched",
+  "inferred_title": "If the recording is clearly an OAC or specific meeting type based on content, provide a better title here. Otherwise null."
+}`
+
+              const haikuMatch = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+              const matchMsg = await haikuMatch.messages.create({
+                model:      'claude-haiku-4-5-20251001',
+                max_tokens: 200,
+                messages:   [{ role: 'user', content: verifyPrompt }]
+              })
+
+              let verdict
+              try {
+                const raw = (matchMsg.content[0]?.text || '').trim()
+                const jsonMatch = raw.match(/\{[\s\S]*\}/)
+                verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+              } catch { verdict = null }
+
+              if (verdict && verdict.match !== 'none' && verdict.confidence !== 'low') {
+                const matchIdx = parseInt(verdict.match) - 1
+                const matched = candidates[matchIdx]?.evt
+
+                if (matched) {
+                  const evtAttendees = (matched.attendees || [])
+                  const mergedParticipants = [...new Set([...participantRoster, ...evtAttendees])]
+
+                  // Title resolution: use inferred title > event title for generic recordings
+                  const genericTitles = ['plaud recording', 'recording', 'meeting recording', 'untitled', '']
+                  const isGenericTitle = genericTitles.some(g => (meeting.title || '').toLowerCase().trim() === g)
+                  const resolvedTitle = verdict.inferred_title ||
+                    (isGenericTitle ? matched.title : (meeting.title || matched.title))
+
+                  await supabase
+                    .from('meeting_notes')
+                    .update({
+                      event_id:     matched.id,
+                      event_title:  matched.title,
+                      title:        resolvedTitle,
+                      participants: mergedParticipants
+                    })
+                    .eq('id', insertedMeeting.id)
+
+                  await supabase
+                    .from('events')
+                    .update({ meeting_note_id: insertedMeeting.id, has_recording: true })
+                    .eq('id', matched.id)
+
+                  console.log(`  ✓ Content-matched "${resolvedTitle}" → "${matched.title}" (${verdict.confidence} confidence: ${verdict.reason})`)
+                }
+              } else if (verdict?.inferred_title) {
+                // No calendar match but AI inferred a better title from content
+                await supabase
+                  .from('meeting_notes')
+                  .update({ title: verdict.inferred_title })
+                  .eq('id', insertedMeeting.id)
+                console.log(`  ℹ No calendar match for "${meeting.title}" — titled as "${verdict.inferred_title}" (${verdict.reason})`)
+              } else {
+                console.log(`  ℹ No match: "${meeting.title}" — ${verdict?.reason || 'no calendar candidates matched'}`)
+              }
+            }
+          }
+        } catch (matchErr) {
+          console.log(`  ⚠ Meeting-calendar match error: ${matchErr.message}`)
+        }
       }
       console.log(`  ✓ Plaud: ${plaudMeetingsLoaded} meetings loaded into meeting_notes`)
     } else {
@@ -2315,6 +2455,94 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
           console.log(`  Skipping full extraction for all-hands: ${meeting.title}`)
         }
 
+        // ── Recurring Series Continuity ────────────────────────────────
+        // Compute a recurring_series_key and compare against prior instances
+        // to generate continuity_context (cross-meeting trajectory analysis)
+        try {
+          const rawTitle = (meeting.title || '').toLowerCase()
+          // Strip dates like 6/3, 06/03, June 3, 2026 etc.
+          let seriesKey = rawTitle
+            .replace(/\b\d{1,2}\/\d{1,2}(\/\d{2,4})?\b/g, '')
+            .replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]* \d{1,2}(,? \d{4})?\b/gi, '')
+            .replace(/\b\d{4}\b/g, '')
+            // Strip standalone numbers
+            .replace(/\b\d+\b/g, '')
+            // Normalize separators and collapse spaces
+            .replace(/[^a-z0-9\s]/g, ' ')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '')
+            .trim()
+
+          if (seriesKey.length > 3) {
+            await supabase
+              .from('meeting_notes')
+              .update({ recurring_series_key: seriesKey })
+              .eq('id', meeting.id)
+
+            // Find prior instances (last 6 months, limit 5, exclude current)
+            const sixMonthsAgo = new Date()
+            sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
+            const { data: priorInstances } = await supabase
+              .from('meeting_notes')
+              .select('id, title, start_time, short_summary, action_items_raw')
+              .eq('recurring_series_key', seriesKey)
+              .neq('id', meeting.id)
+              .gte('start_time', sixMonthsAgo.toISOString())
+              .order('start_time', { ascending: false })
+              .limit(5)
+
+            if ((priorInstances || []).length >= 2) {
+              // Build continuity prompt from prior summaries + action items
+              const priorSummaries = priorInstances.map(p => {
+                const date = p.start_time?.split('T')[0] || 'unknown'
+                const items = (p.action_items_raw || []).map(a => `  - ${a.task_text || a.task || a}`).join('\n')
+                return `[${date}] ${p.title}\nSummary: ${(p.short_summary || 'No summary').slice(0, 400)}\nAction items:\n${items || '  (none)'}`
+              }).join('\n\n---\n\n')
+
+              const currentSummary = meeting.short_summary || 'No summary available'
+              const currentItems = (meeting.action_items_raw || []).map(a => `  - ${a.task_text || a.task || a}`).join('\n')
+
+              const continuityHaiku = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+              const continuityMsg = await continuityHaiku.messages.create({
+                model: 'claude-haiku-4-5-20251001',
+                max_tokens: 500,
+                messages: [{
+                  role: 'user',
+                  content: `You are analyzing a recurring meeting series to identify patterns and trajectory.
+
+PRIOR MEETINGS (${priorInstances.length} instances):
+${priorSummaries}
+
+CURRENT MEETING (${meeting.title} — ${today}):
+Summary: ${currentSummary}
+Action items:
+${currentItems || '  (none)'}
+
+Write a concise continuity analysis (150-200 words) covering:
+1. Recurring themes/topics that appear across multiple meetings
+2. Items explicitly resolved vs. items that keep coming back unresolved
+3. Trajectory: is this project/relationship trending better or worse?
+4. 1-2 specific things Ryan should raise at the next meeting of this type
+
+Be direct and specific. No fluff.`
+                }]
+              })
+
+              const continuityContext = continuityMsg.content[0]?.text || ''
+              if (continuityContext) {
+                await supabase
+                  .from('meeting_notes')
+                  .update({ continuity_context: continuityContext })
+                  .eq('id', meeting.id)
+                console.log(`  ✓ Continuity context generated for "${meeting.title}" (series: ${seriesKey})`)
+              }
+            }
+          }
+        } catch (continuityErr) {
+          console.log(`  ⚠ Continuity context error for ${meeting.title}: ${continuityErr.message}`)
+        }
+
         // Mark meeting as processed
         await supabase
           .from('meeting_notes')
@@ -2903,12 +3131,48 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
           .limit(1)
           .maybeSingle()
 
+        // Look up continuity_context from recurring meeting series
+        // Compute series key from event title using same normalization logic
+        let continuityCtxForBrief = null
+        try {
+          const eventSeriesKey = (event.title || '').toLowerCase()
+            .replace(/\b\d{1,2}\/\d{1,2}(\/\d{2,4})?\b/g, '')
+            .replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]* \d{1,2}(,? \d{4})?\b/gi, '')
+            .replace(/\b\d{4}\b/g, '')
+            .replace(/\b\d+\b/g, '')
+            .replace(/[^a-z0-9\s]/g, ' ')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '')
+            .trim()
+
+          if (eventSeriesKey.length > 3) {
+            const { data: priorMeetingWithContinuity } = await supabase
+              .from('meeting_notes')
+              .select('continuity_context, title, start_time')
+              .eq('recurring_series_key', eventSeriesKey)
+              .not('continuity_context', 'is', null)
+              .order('start_time', { ascending: false })
+              .limit(1)
+              .maybeSingle()
+            continuityCtxForBrief = priorMeetingWithContinuity?.continuity_context || null
+          }
+        } catch (ctxErr) {
+          // Non-fatal
+        }
+
+        // Append continuity context to pre_meeting_notes if found
+        const enrichedPreNotes = [
+          event.pre_meeting_notes,
+          continuityCtxForBrief ? `\n\n=== RECURRING MEETING CONTEXT ===\n${continuityCtxForBrief}` : null
+        ].filter(Boolean).join('') || null
+
         const brief = await aiService.generatePreMeetingBrief(
           event,
           relatedEmails || [],
           openTasks || [],
           projectCtx?.content || null,
-          event.pre_meeting_notes || null
+          enrichedPreNotes
         )
         await supabase
           .from('events')
@@ -3154,6 +3418,154 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   } catch (err) {
     results.errors.push(`Daily brief: ${err.message}`)
     console.log(`  ✗ Brief error: ${err.message}`)
+  }
+
+  // ── STEP 9.3: Project Intelligence Documents ─────────────────────
+  // Pre-compute a rich narrative for each active project so the chat
+  // can read a single document instead of correlating 5 tables.
+  console.log('Step 9.3: Building project intelligence documents...')
+  try {
+    const { data: activeProjects } = await supabase
+      .from('projects')
+      .select('id, name, status, keywords')
+      .eq('status', 'active')
+      .limit(10)
+
+    const projectIntelHaiku = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+    let projectIntelCount = 0
+
+    for (const project of (activeProjects || [])) {
+      try {
+        const projectKeywords = [
+          project.name,
+          ...((project.keywords || []))
+        ].filter(Boolean)
+
+        // Build keyword OR filter for email subjects
+        const keywordFilter = projectKeywords
+          .map(k => `thread_subject.ilike.%${k}%`)
+          .join(',')
+
+        const [
+          { data: projectEmails },
+          { data: projectMeetings },
+          { data: openTasks },
+          { data: openCommitmentsForProject },
+          { data: othersCommitmentsForProject },
+          { data: pendingDecisionsForProject }
+        ] = await Promise.all([
+          // Emails linked by project_id OR keyword match in subject
+          supabase.from('emails')
+            .select('thread_subject, from_name, ai_summary, received_at, status')
+            .or(`project_id.eq.${project.id}${keywordFilter ? ',' + keywordFilter : ''}`)
+            .order('received_at', { ascending: false })
+            .limit(10),
+          supabase.from('meeting_notes')
+            .select('title, start_time, short_summary, action_items_raw, participants')
+            .eq('project_id', project.id)
+            .order('start_time', { ascending: false })
+            .limit(8),
+          supabase.from('tasks')
+            .select('title, urgency, due_date, context, status')
+            .eq('project_id', project.id)
+            .eq('status', 'open')
+            .order('urgency', { ascending: false })
+            .limit(10),
+          supabase.from('commitments')
+            .select('title, made_to, due_date, urgency, commitment_type')
+            .eq('project_id', project.id)
+            .eq('status', 'open')
+            .limit(8),
+          supabase.from('others_commitments')
+            .select('title, committed_by_name, due_date, urgency')
+            .eq('project_id', project.id)
+            .eq('status', 'open')
+            .limit(8),
+          supabase.from('pending_decisions')
+            .select('title, blocking, due_date, urgency')
+            .eq('project_id', project.id)
+            .eq('status', 'open')
+            .limit(8)
+        ])
+
+        // Build prompt context
+        const emailsText = (projectEmails || []).map(e =>
+          `[${e.received_at?.split('T')[0]}] ${e.thread_subject} (from ${e.from_name}) — ${(e.ai_summary || '').slice(0, 200)}`
+        ).join('\n')
+
+        const meetingsText = (projectMeetings || []).map(m => {
+          const items = (m.action_items_raw || []).map(a => `  • ${a.task_text || a.task || a} (${a.assignee_name || 'unassigned'})`).join('\n')
+          return `[${m.start_time?.split('T')[0] || 'unknown'}] ${m.title}\n${(m.short_summary || '').slice(0, 300)}\n${items}`
+        }).join('\n\n')
+
+        const tasksText = (openTasks || []).map(t =>
+          `[${t.urgency || 'normal'}] ${t.title} — due ${t.due_date || 'TBD'}: ${(t.context || '').slice(0, 150)}`
+        ).join('\n')
+
+        const commitmentsText = [
+          ...(openCommitmentsForProject || []).map(c => `Ryan → ${c.made_to}: ${c.title} (due ${c.due_date || 'TBD'})`),
+          ...(othersCommitmentsForProject || []).map(c => `${c.committed_by_name} → Ryan: ${c.title} (due ${c.due_date || 'TBD'})`)
+        ].join('\n')
+
+        const decisionsText = (pendingDecisionsForProject || []).map(d =>
+          `${d.title}${d.blocking ? ' [BLOCKING]' : ''} — due ${d.due_date || 'TBD'}`
+        ).join('\n')
+
+        const intelMsg = await projectIntelHaiku.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 600,
+          messages: [{
+            role: 'user',
+            content: `You are generating a concise project intelligence document for Ryan Hankins' Personal OS.
+
+PROJECT: ${project.name}
+
+RECENT EMAILS (${(projectEmails || []).length}):
+${emailsText || '(none)'}
+
+RECENT MEETINGS (${(projectMeetings || []).length}):
+${meetingsText || '(none)'}
+
+OPEN TASKS (${(openTasks || []).length}):
+${tasksText || '(none)'}
+
+COMMITMENTS IN/OUT:
+${commitmentsText || '(none)'}
+
+PENDING DECISIONS:
+${decisionsText || '(none)'}
+
+Write a 300-400 word project intelligence narrative covering:
+1. Current status and phase
+2. Top open items and who owns them
+3. What's been resolved recently
+4. Key risks and pending decisions
+5. Commitments in and out
+
+Be specific, direct, and actionable. Today is ${today}.`
+          }]
+        })
+
+        const projectContext = intelMsg.content[0]?.text || ''
+        if (projectContext) {
+          await supabase
+            .from('projects')
+            .update({
+              project_context: projectContext,
+              project_context_updated_at: new Date().toISOString()
+            })
+            .eq('id', project.id)
+          projectIntelCount++
+          console.log(`  ✓ Project intel: ${project.name}`)
+        }
+      } catch (projErr) {
+        console.log(`  ⚠ Project intel error for ${project.name}: ${projErr.message}`)
+      }
+    }
+    console.log(`  ✓ Step 9.3: Project intelligence documents generated for ${projectIntelCount} projects`)
+  } catch (err) {
+    results.errors.push(`Project intel: ${err.message}`)
+    console.log(`  ✗ Project intel error: ${err.message}`)
   }
 
   // ── STEP 9.5: 5-day lookahead ───────────────────────────────────

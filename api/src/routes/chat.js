@@ -13,7 +13,7 @@ function extractDateRange(question) {
   if (q.includes('last month') || q.includes('this month')) return daysAgo(30)
   if (q.includes('last year'))     return daysAgo(365)
   if (q.includes('recent') || q.includes('lately')) return daysAgo(14)
-  return daysAgo(60) // default lookback
+  return daysAgo(180) // default lookback
 }
 
 function daysAgo(n) {
@@ -62,7 +62,8 @@ module.exports = async (req, res) => {
         .select(
           'id, title, meeting_date, start_time, source, participants, ' +
           'summary, short_summary, raw_transcript, full_transcript, transcript_word_count, ' +
-          'action_items, action_items_raw, has_transcript'
+          'action_items, action_items_raw, has_transcript, ' +
+          'continuity_context, event_title, recurring_series_key'
         )
         .or(`meeting_date.gte.${since.split('T')[0]},start_time.gte.${since}`)
         .order('meeting_date', { ascending: false, nullsFirst: false })
@@ -132,6 +133,37 @@ module.exports = async (req, res) => {
         .then(r => r.data || []),
     ])
 
+    // ── Project context: load pre-computed intelligence if question matches a project ──
+    let projectIntelSection = null
+    try {
+      const { data: allProjects } = await supabase
+        .from('projects')
+        .select('id, name, keywords, project_context, project_context_updated_at')
+        .eq('status', 'active')
+        .not('project_context', 'is', null)
+
+      for (const proj of (allProjects || [])) {
+        const projectTerms = [
+          proj.name,
+          ...((proj.keywords || []))
+        ].filter(Boolean).map(t => t.toLowerCase())
+
+        const matched = projectTerms.some(term =>
+          keywords.some(k => term.includes(k) || k.includes(term))
+        )
+
+        if (matched && proj.project_context) {
+          const updatedAt = proj.project_context_updated_at
+            ? new Date(proj.project_context_updated_at).toISOString().split('T')[0]
+            : 'unknown date'
+          projectIntelSection = `=== PROJECT INTELLIGENCE: ${proj.name} (as of ${updatedAt}) ===\n${proj.project_context}`
+          break // use first match
+        }
+      }
+    } catch (projCtxErr) {
+      // Non-fatal — proceed without project context
+    }
+
     // ── Score and filter by relevance ────────────────────────────────
     function scoreRelevance(text, keywords) {
       if (!text) return 0
@@ -178,6 +210,11 @@ module.exports = async (req, res) => {
     // ── Build context string ─────────────────────────────────────────
     const sections = []
 
+    // Project intelligence goes FIRST — pre-computed rich narrative
+    if (projectIntelSection) {
+      sections.push(projectIntelSection)
+    }
+
     if (relKnowledge.length) {
       sections.push("=== RYAN'S KNOWLEDGE BASE ===")
       relKnowledge.forEach(k => {
@@ -218,10 +255,10 @@ Applies to: ${(k.applies_to || []).join(', ')}`)
           : ''
 
         sections.push(
-`[${date}] ${n.title} (${n.source || 'recording'})${n.has_transcript ? ' ✓ transcript' : ''}
+`[${date}] ${n.title}${n.event_title && n.event_title !== n.title ? ` (calendar: ${n.event_title})` : ''} (${n.source || 'recording'})${n.has_transcript ? ' ✓ transcript' : ''}
 Participants: ${(n.participants || []).slice(0, 8).join(', ') || 'unknown'}
 Summary: ${fullSummary.slice(0, 800)}
-${allItems.length ? `Action items:\n${allItems.join('\n')}` : ''}${transcriptSnippet}`)
+${allItems.length ? `Action items:\n${allItems.join('\n')}` : ''}${transcriptSnippet}${n.continuity_context ? `\nRecurring context: ${n.continuity_context.slice(0, 400)}` : ''}`)
       })
     }
 
