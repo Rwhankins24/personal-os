@@ -248,10 +248,12 @@ function PipelineBanner() {
         ? 'bg-green-50 border-green-200 text-green-700'
         : 'bg-blue-50 border-blue-200 text-blue-700'
     }`}>
-      <span className={`w-1.5 h-1.5 rounded-full ${allDone ? 'bg-green-500' : 'bg-blue-400 animate-pulse'}`} />
-      {allDone
-        ? `Full pipeline complete · AI finished ${dayjs(status.ai_completed_at).fromNow()}`
-        : `Pipeline in progress · ${lastCompleted?.label || 'Starting'} done`}
+      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${allDone ? 'bg-green-500' : 'bg-blue-400 animate-pulse'}`} />
+      <span className="truncate">
+        {allDone
+          ? `Full pipeline complete · AI finished ${dayjs(status.ai_completed_at).fromNow()}`
+          : `Pipeline in progress · ${lastCompleted?.label || 'Starting'} done`}
+      </span>
       <div className="ml-auto flex items-center gap-1">
         {steps.map(s => (
           <div key={s.key} title={s.label} className={`w-1.5 h-1.5 rounded-full ${status[s.key] ? 'bg-green-500' : 'bg-gray-200'}`} />
@@ -328,7 +330,7 @@ function CalendarStrip({ events, isLoading }) {
             const isPast = end ? end < now : start < now
 
             return (
-              <Link key={event.id} to={`/event/${event.id}`} className="block flex-shrink-0 md:flex-shrink snap-start w-64 md:w-auto">
+              <Link key={event.id} to={`/event/${event.id}`} className="block flex-shrink-0 md:flex-shrink snap-start w-[85vw] max-w-xs md:w-auto">
                 <div className={`flex items-center gap-3 p-2 rounded-lg h-full ${
                   isNow ? 'bg-blue-50 border border-blue-200' :
                   isPast ? 'opacity-50' : 'bg-gray-50'
@@ -558,7 +560,7 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
                 </div>
                 <button
                   onClick={() => close.mutate(c.id)}
-                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100 mt-0.5"
+                  className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 mt-0.5"
                   title="Mark done"
                 >
                   ✓
@@ -737,7 +739,7 @@ function OthersCommitmentsPanel({ contacts }) {
           <p className="text-xs text-green-600 mt-0.5 italic truncate">"{c.fulfillment_evidence}"</p>
         )}
       </div>
-      <div className="flex items-center gap-1 flex-shrink-0 opacity-0 group-hover:opacity-100">
+      <div className="flex items-center gap-1 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100">
         {/* Escalate to blocking */}
         {c.delivery_type !== 'blocking_ryan' && (
           <button
@@ -1007,7 +1009,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
                 {isReplyTab && (
                   <button
                     onClick={() => mark.mutate({ id: email.id, status: 'done' })}
-                    className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-0 group-hover:opacity-100"
+                    className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100"
                     title="Mark replied"
                   >
                     ✓
@@ -1016,7 +1018,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
 
                 {/* Waiting On: checkmark (resolved) + archive (no longer waiting) */}
                 {!isReplyTab && !isResolved && (
-                  <div className="flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100">
+                  <div className="flex items-center gap-1.5 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100">
                     <button
                       onClick={() => mark.mutate({ id: email.id, status: 'resolved' })}
                       className="text-xs text-[#6b6b67] hover:text-green-600"
@@ -1765,7 +1767,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── Main content ────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-3 md:px-6 py-4 space-y-3">
+      <div className="max-w-5xl mx-auto px-3 md:px-6 py-4 pb-28 md:pb-4 space-y-3">
 
         {/* Pipeline banner */}
         <PipelineBanner />
