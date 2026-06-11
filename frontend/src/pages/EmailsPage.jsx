@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getEmails, updateEmail, getContacts } from '../lib/api'
+import { getEmails, updateEmail, getContacts, createOthersCommitment } from '../lib/api'
 
 const URGENCY_TEXT = {
   critical: 'text-red-600 bg-red-50',
@@ -79,6 +79,13 @@ export default function EmailsPage() {
   const [contextTab,   setContextTab]   = useState('all')
   const [bucketFilter, setBucketFilter] = useState('all')
   const [expandedId,   setExpandedId]   = useState(null)
+  // Bulk select
+  const [selectMode,   setSelectMode]   = useState(false)
+  const [selected,     setSelected]     = useState(new Set())
+  // Assign modal
+  const [showAssign,   setShowAssign]   = useState(false)
+  const [contactSearch, setContactSearch] = useState('')
+  const [assigning,    setAssigning]    = useState(false)
 
   const { data: emails, isLoading } = useQuery({
     queryKey: ['emails'],
@@ -186,12 +193,27 @@ export default function EmailsPage() {
       <div className="sticky top-0 z-10 bg-white border-b border-[#e5e5e3] px-4 py-3">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => { navigate(-1) }}
             className="flex items-center gap-1 text-sm text-[#6b6b67] hover:text-[#1a1a18] flex-shrink-0"
           >
             ← Back
           </button>
           <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Email Queue</h1>
+          {!isReplyTab && (
+            <button
+              onClick={() => {
+                setSelectMode(s => !s)
+                setSelected(new Set())
+              }}
+              className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all flex-shrink-0 ${
+                selectMode
+                  ? 'bg-[#1a1a18] text-white'
+                  : 'bg-gray-100 text-[#6b6b67] hover:bg-gray-200'
+              }`}
+            >
+              {selectMode ? 'Cancel' : 'Select'}
+            </button>
+          )}
           <span className="text-xs text-[#6b6b67] flex-shrink-0">{sorted.length} shown</span>
         </div>
       </div>
@@ -279,8 +301,27 @@ export default function EmailsPage() {
                 <div key={email.id} className={isResolved ? 'opacity-50' : ''}>
                   <div
                     className="flex items-start gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors group"
-                    onClick={() => setExpandedId(expanded ? null : email.id)}
+                    onClick={() => {
+                      if (selectMode) {
+                        setSelected(prev => {
+                          const next = new Set(prev)
+                          next.has(email.id) ? next.delete(email.id) : next.add(email.id)
+                          return next
+                        })
+                      } else {
+                        setExpandedId(expanded ? null : email.id)
+                      }
+                    }}
                   >
+                    {selectMode && (
+                      <div className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all ${
+                        selected.has(email.id)
+                          ? 'bg-blue-600 border-blue-600'
+                          : 'border-gray-300'
+                      }`}>
+                        {selected.has(email.id) && <span className="text-white text-[10px] font-bold">✓</span>}
+                      </div>
+                    )}
                     <div className="flex-1 min-w-0">
                       {/* Row 1: name + category + days + deadline */}
                       <div className="flex items-center gap-2 flex-wrap">
@@ -433,6 +474,118 @@ export default function EmailsPage() {
           </div>
         )}
       </div>
+
+      {/* ── Floating bulk action bar ── */}
+      {selectMode && selected.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg">
+          <div className="bg-[#1a1a18] rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl">
+            <span className="text-white text-sm font-medium flex-1">
+              {selected.size} selected
+            </span>
+            <button
+              onClick={async () => {
+                // Bulk mark done
+                for (const id of selected) {
+                  await updateEmail(id, { status: 'done' })
+                }
+                qc.invalidateQueries({ queryKey: ['emails'] })
+                setSelected(new Set())
+                setSelectMode(false)
+              }}
+              className="text-xs bg-white/10 text-white px-3 py-1.5 rounded-lg hover:bg-white/20"
+            >
+              ✓ Mark done
+            </button>
+            <button
+              onClick={() => { setShowAssign(true); setContactSearch('') }}
+              className="text-xs bg-blue-500 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-blue-600"
+            >
+              Assign to →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Assign to contact modal ── */}
+      {showAssign && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 pb-0">
+          <div className="bg-white w-full max-w-lg rounded-t-2xl max-h-[70vh] flex flex-col">
+            <div className="px-4 pt-4 pb-2 border-b border-[#e5e5e3]">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-semibold text-[#1a1a18]">
+                  Assign {selected.size} email{selected.size !== 1 ? 's' : ''} to...
+                </p>
+                <button onClick={() => setShowAssign(false)} className="text-[#6b6b67] text-lg leading-none">×</button>
+              </div>
+              <input
+                autoFocus
+                value={contactSearch}
+                onChange={e => setContactSearch(e.target.value)}
+                placeholder="Search by name or company..."
+                className="w-full text-sm border border-[#e5e5e3] rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+            <div className="overflow-y-auto flex-1 py-2">
+              {(contacts || [])
+                .filter(c => {
+                  if (!contactSearch) return true
+                  const q = contactSearch.toLowerCase()
+                  return (c.name || '').toLowerCase().includes(q) ||
+                         (c.company || '').toLowerCase().includes(q) ||
+                         (c.email || '').toLowerCase().includes(q)
+                })
+                .slice(0, 30)
+                .map(contact => (
+                  <button
+                    key={contact.id}
+                    disabled={assigning}
+                    onClick={async () => {
+                      setAssigning(true)
+                      try {
+                        const selectedEmails = sorted.filter(e => selected.has(e.id))
+                        for (const email of selectedEmails) {
+                          await createOthersCommitment({
+                            committed_by_name:  contact.name,
+                            committed_by_email: contact.email,
+                            title:              email.action_needed || email.thread_subject || email.subject,
+                            context:            `Assigned from Waiting On email: "${email.thread_subject}"${email.days_waiting > 0 ? ` (${email.days_waiting}d)` : ''}`,
+                            due_date:           email.extracted_deadline || null,
+                            urgency:            email.days_waiting >= 7 ? 'high' : email.days_waiting >= 3 ? 'medium' : 'normal',
+                            source_type:        'manual',
+                            source_id:          email.id,
+                            source_label:       email.thread_subject,
+                            status:             'open',
+                            delivery_type:      'to_ryan',
+                          })
+                          await updateEmail(email.id, { has_linked_commitment: true })
+                        }
+                        qc.invalidateQueries({ queryKey: ['emails'] })
+                        qc.invalidateQueries({ queryKey: ['others-commitments'] })
+                        setShowAssign(false)
+                        setSelectMode(false)
+                        setSelected(new Set())
+                      } finally {
+                        setAssigning(false)
+                      }
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-left disabled:opacity-50"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                      {(contact.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#1a1a18] truncate">{contact.name}</p>
+                      <p className="text-xs text-[#9b9b97] truncate">{contact.company || contact.email}</p>
+                    </div>
+                    {assigning && <span className="text-xs text-[#9b9b97]">...</span>}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }
