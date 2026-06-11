@@ -1667,9 +1667,10 @@ function AIJobButton() {
 
 // ── Dashboard ──────────────────────────────────────────────────
 export default function Dashboard() {
+  const navigate = useNavigate()
   const [workspace, setWorkspace] = useState('all')
 
-  // ── Lifted expand/collapse state (for stat card navigation) ──
+  // ── Lifted expand/collapse state (still used for in-page panels) ──
   const [showAllTasks,     setShowAllTasks]     = useState(false)
   const [showAllReply,     setShowAllReply]     = useState(false)
   const [showAllDecisions, setShowAllDecisions] = useState(false)
@@ -1681,29 +1682,11 @@ export default function Dashboard() {
   const decisionsRef = useRef(null)
   const questionsRef = useRef(null)
 
-  function scrollTo(ref) {
-    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  const onOpenTasks = useCallback(() => {
-    setShowAllTasks(true)
-    setTimeout(() => scrollTo(tasksRef), 50)
-  }, [])
-
-  const onNeedsReply = useCallback(() => {
-    setShowAllReply(true)
-    setTimeout(() => scrollTo(emailRef), 50)
-  }, [])
-
-  const onDecisions = useCallback(() => {
-    setShowAllDecisions(true)
-    setTimeout(() => scrollTo(decisionsRef), 50)
-  }, [])
-
-  const onQuestions = useCallback(() => {
-    setShowAllQuestions(true)
-    setTimeout(() => scrollTo(questionsRef), 50)
-  }, [])
+  // ── Stat card clicks → navigate to dedicated pages ────────────
+  const onOpenTasks  = useCallback(() => navigate('/tasks'),     [navigate])
+  const onNeedsReply = useCallback(() => navigate('/emails'),    [navigate])
+  const onDecisions  = useCallback(() => navigate('/decisions'), [navigate])
+  const onQuestions  = useCallback(() => navigate('/knowledge'), [navigate])
 
   const { data: tasks,       isLoading: loadingTasks }   = useQuery({ queryKey: ['tasks'],       queryFn: getTasks,        refetchInterval: 120000 })
   const { data: events,      isLoading: loadingEvents }  = useQuery({ queryKey: ['events'],      queryFn: getEvents,       refetchInterval: 120000 })

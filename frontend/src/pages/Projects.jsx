@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getProjects, createProject } from '../lib/api'
+import { getProjects, createProject, mergeProject } from '../lib/api'
 
 // ── Tag Input ─────────────────────────────────────────────────
 function TagInput({ tags, onChange, placeholder = 'Add keyword…' }) {
@@ -217,6 +217,109 @@ function NewProjectModal({ onClose }) {
   )
 }
 
+// ── Merge project modal ───────────────────────────────────────
+function MergeProjectModal({ winner, allProjects, onClose }) {
+  const qc = useQueryClient()
+  const [loserId, setLoserId] = useState('')
+  const [merging, setMerging] = useState(false)
+  const [done, setDone] = useState(false)
+  const [error, setError] = useState('')
+
+  const candidates = allProjects.filter(p => p.id !== winner.id && p.status !== 'archived')
+
+  const handleMerge = async () => {
+    if (!loserId) return
+    setMerging(true)
+    setError('')
+    try {
+      await mergeProject(winner.id, loserId)
+      await qc.invalidateQueries({ queryKey: ['projects'] })
+      setDone(true)
+    } catch (e) {
+      setError(e.message || 'Merge failed')
+      setMerging(false)
+    }
+  }
+
+  const loser = allProjects.find(p => p.id === loserId)
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+          <h2 className="text-sm font-semibold text-[#1a1a18]">Merge Projects</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-lg leading-none">×</button>
+        </div>
+
+        {done ? (
+          <div className="p-6 text-center space-y-3">
+            <div className="text-3xl">✅</div>
+            <p className="text-sm font-semibold text-[#1a1a18]">Merge complete</p>
+            <p className="text-xs text-gray-500">
+              All tasks, emails, meetings, contacts, and intelligence from <strong>{loser?.name}</strong> have been moved to <strong>{winner.name}</strong>.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-2 text-sm px-4 py-2 bg-[#1a1a18] text-white rounded-lg hover:bg-[#2a2a28]"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <div className="p-5 space-y-5">
+            {/* Winner */}
+            <div>
+              <p className="text-xs text-gray-500 mb-1 font-medium uppercase tracking-wider">Keep (winner)</p>
+              <div className="text-sm font-semibold text-[#1a1a18] bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                {winner.name}
+              </div>
+            </div>
+
+            {/* Loser picker */}
+            <div>
+              <p className="text-xs text-gray-500 mb-1 font-medium uppercase tracking-wider">Merge into it (will be archived)</p>
+              <select
+                value={loserId}
+                onChange={e => setLoserId(e.target.value)}
+                className="w-full text-sm px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 bg-white"
+              >
+                <option value="">Select project to absorb…</option>
+                {candidates.map(p => (
+                  <option key={p.id} value={p.id}>{p.name}{p.status !== 'active' ? ` (${p.status})` : ''}</option>
+                ))}
+              </select>
+            </div>
+
+            {loserId && (
+              <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-xs text-amber-800">
+                All tasks, emails, meetings, contacts, and intelligence from <strong>{loser?.name}</strong> will be re-assigned to <strong>{winner.name}</strong>. <strong>{loser?.name}</strong> will be archived.
+              </div>
+            )}
+
+            {error && <p className="text-xs text-red-600">{error}</p>}
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={onClose}
+                className="text-sm px-4 py-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleMerge}
+                disabled={!loserId || merging}
+                className="text-sm px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+              >
+                {merging ? 'Merging…' : 'Merge →'}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ── Projects page ─────────────────────────────────────────────
 const STATUS_FILTERS = ['all', 'active', 'pursuit', 'on_hold', 'completed']
 
@@ -225,6 +328,7 @@ export default function Projects() {
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [showModal, setShowModal] = useState(false)
+  const [mergeWinner, setMergeWinner] = useState(null) // project to merge INTO
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ['projects'],
@@ -322,6 +426,7 @@ export default function Projects() {
                   <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden md:table-cell">Keywords</th>
                   <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Risks</th>
                   <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Decisions</th>
+                  <th className="px-4 py-2.5" />
                 </tr>
               </thead>
               <tbody>
@@ -376,6 +481,15 @@ export default function Projects() {
                           <span className="text-xs text-gray-300">—</span>
                         )}
                       </td>
+                      <td className="px-4 py-3 text-right">
+                        <button
+                          onClick={e => { e.stopPropagation(); setMergeWinner(p) }}
+                          className="text-[10px] text-gray-400 hover:text-amber-600 hover:bg-amber-50 px-2 py-0.5 rounded transition-colors whitespace-nowrap"
+                          title="Merge another project into this one"
+                        >
+                          Merge ↗
+                        </button>
+                      </td>
                     </tr>
                   )
                 })}
@@ -394,6 +508,13 @@ export default function Projects() {
       </div>
 
       {showModal && <NewProjectModal onClose={() => setShowModal(false)} />}
+      {mergeWinner && (
+        <MergeProjectModal
+          winner={mergeWinner}
+          allProjects={projects}
+          onClose={() => setMergeWinner(null)}
+        />
+      )}
     </div>
   )
 }

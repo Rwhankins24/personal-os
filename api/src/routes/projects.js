@@ -61,6 +61,92 @@ module.exports = async (req, res) => {
 
     if (req.method === 'PATCH') {
       const { id } = req.query
+
+      // ── Merge endpoint: PATCH /api/projects?id=WINNER&merge_from=LOSER
+      if (req.query.merge_from) {
+        const winnerId = id
+        const loserId  = req.query.merge_from
+        if (!winnerId || !loserId || winnerId === loserId) {
+          return res.status(400).json({ error: 'merge_from and id must be different non-null project ids' })
+        }
+
+        // 1. Load both projects
+        const [{ data: winner, error: we }, { data: loser, error: le }] = await Promise.all([
+          supabase.from('projects').select('*').eq('id', winnerId).single(),
+          supabase.from('projects').select('*').eq('id', loserId).single(),
+        ])
+        if (we) return res.status(404).json({ error: `Winner project not found: ${we.message}` })
+        if (le) return res.status(404).json({ error: `Loser project not found: ${le.message}` })
+
+        // 2. Merge JSONB arrays (dedupe by JSON string)
+        const mergeArrays = (a, b) => {
+          const combined = [...(a || []), ...(b || [])]
+          const seen = new Set()
+          return combined.filter(item => {
+            const key = JSON.stringify(item)
+            if (seen.has(key)) return false
+            seen.add(key)
+            return true
+          })
+        }
+
+        const mergedIntel    = mergeArrays(winner.intelligence_notes, loser.intelligence_notes)
+        const mergedDecisions = mergeArrays(winner.decisions_made,     loser.decisions_made)
+        const mergedRisks    = mergeArrays(winner.risk_signals,        loser.risk_signals)
+        const mergedKeyFacts = mergeArrays(winner.key_facts,           loser.key_facts)
+
+        // 3. Re-point all related records from loser → winner
+        const tables = [
+          'tasks', 'emails', 'meeting_notes', 'others_commitments',
+          'commitments', 'contacts', 'events', 'pending_decisions',
+          'decisions', 'captures', 'knowledge',
+        ]
+        const repoints = tables.map(table =>
+          supabase.from(table).update({ project_id: winnerId }).eq('project_id', loserId)
+        )
+        await Promise.allSettled(repoints)
+
+        // 4. Merge winner keywords
+        const winnerKw = winner.keywords || []
+        const loserKw  = loser.keywords  || []
+        const mergedKw = [...new Set([...winnerKw, ...loserKw])]
+
+        // 5. Update winner with merged data + enrich from loser if winner is missing fields
+        const enriched = {
+          intelligence_notes: mergedIntel,
+          decisions_made:     mergedDecisions,
+          risk_signals:       mergedRisks,
+          key_facts:          mergedKeyFacts,
+          keywords:           mergedKw,
+          updated_at:         new Date().toISOString(),
+          // Fill gaps from loser if winner is missing these
+          description:   winner.description   || loser.description   || null,
+          phase:         winner.phase         || loser.phase         || null,
+          client:        winner.client        || loser.client        || null,
+          location:      winner.location      || loser.location      || null,
+          value:         winner.value         || loser.value         || null,
+          start_date:    winner.start_date    || loser.start_date    || null,
+          end_date:      winner.end_date      || loser.end_date      || null,
+        }
+        const { data: updated, error: ue } = await supabase
+          .from('projects').update(enriched).eq('id', winnerId).select().single()
+        if (ue) return res.status(500).json({ error: `Failed to update winner: ${ue.message}` })
+
+        // 6. Archive loser
+        await supabase.from('projects').update({
+          status:     'archived',
+          updated_at: new Date().toISOString(),
+        }).eq('id', loserId)
+
+        return res.json({
+          merged: true,
+          winner: updated,
+          loser_id: loserId,
+          repointed: tables,
+        })
+      }
+
+      // Regular PATCH
       const body = { ...req.body, updated_at: new Date().toISOString() }
       const { data, error } = await supabase
         .from('projects').update(body).eq('id', id).select().single()
