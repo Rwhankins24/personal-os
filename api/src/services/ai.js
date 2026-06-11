@@ -832,18 +832,20 @@ async function extractContactFromSignature(emailContent, fromName, fromEmail) {
       max_tokens: 400,
       messages: [{
         role: 'user',
-        content: `You are extracting contact details from email content. The signature block ALWAYS appears at the end of an email, after the main body. Look for:
-- Phone numbers in ANY format: (555) 123-4567 | 555.123.4567 | +1 555 123 4567 | M: 555-123-4567 | C: 555-123-4567 | mobile 555...
-- Job titles: anything after their name like "Vice President" "Project Manager" "Senior Engineer" "Director of..."
-- Company names: usually on their own line or after "at [Company]"
-- Email addresses in the signature
+        content: `You are extracting contact details from email content. The signature block ALWAYS appears at the END of each email message. You are being given the bottom portion of email threads where signatures live.
+
+Look for:
+- Phone numbers in ANY format: (555) 123-4567 | 555.123.4567 | +1 555 123 4567 | M: 555-123-4567 | C: 555-123-4567 | mobile 555... | Direct: 555...
+- Job titles: anything after their name like "Vice President" "Project Manager" "Senior Engineer" "Director of..." "Principal" "Executive"
+- Company names: usually on their own line, often after their title
+- Email addresses in the signature (may differ from sending address)
 - LinkedIn URLs: linkedin.com/in/...
-- Physical addresses: street, city, state, zip
+- Physical addresses: street, city, state, zip — often last line of signature
 
 From: ${fromName} (${fromEmail})
 
-EMAIL CONTENT — scan the ENTIRE thing especially the bottom:
-${emailContent.slice(0, 5000)}
+EMAIL CONTENT (bottom portion where signatures appear):
+${emailContent.slice(-5000)}
 
 Return JSON only — null for anything not found:
 {

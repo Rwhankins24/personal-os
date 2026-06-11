@@ -2009,6 +2009,9 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       'enriched.eq.false,' +
       'title.is.null,' +
       'phone_mobile.is.null,' +
+      'company.is.null,' +
+      'address.is.null,' +
+      'linkedin.is.null,' +
       `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
     )
     .not('email', 'is', null)
@@ -2022,7 +2025,8 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       // ── Gather ALL content sources for this contact ───────────────
       const contentParts = []
 
-      // Source 1: Emails they SENT (from_address match) — best source for their sig
+      // Source 1: Emails they SENT — best source for their own signature
+      // Signatures are at the BOTTOM — take last 2500 chars, not the first
       const { data: sentEmails } = await supabase
         .from('emails')
         .select('full_thread_content, body_preview, sent_body, from_name')
@@ -2031,11 +2035,18 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         .limit(5)
 
       for (const e of (sentEmails || [])) {
-        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(0, 3000))
-        else if (e.body_preview)   contentParts.push(e.body_preview)
+        if (e.full_thread_content) {
+          // Take last 2500 chars — this is where the signature lives
+          const content = e.full_thread_content
+          contentParts.push(content.slice(-2500))
+          // Also take a middle slice in case of long threads with multiple sigs
+          if (content.length > 5000) contentParts.push(content.slice(Math.floor(content.length / 2) - 1000, Math.floor(content.length / 2) + 1000))
+        } else if (e.sent_body) {
+          contentParts.push(e.sent_body.slice(-2000))
+        }
       }
 
-      // Source 2: Threads they participated in — sig often in quoted replies
+      // Source 2: Threads they participated in — sig in quoted replies
       const { data: participantThreads } = await supabase
         .from('emails')
         .select('full_thread_content, sent_body, body_preview')
@@ -2045,8 +2056,37 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         .limit(3)
 
       for (const e of (participantThreads || [])) {
-        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(0, 3000))
-        if (e.sent_body)           contentParts.push(e.sent_body.slice(0, 2000))
+        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(-2500))
+        if (e.sent_body)           contentParts.push(e.sent_body.slice(-1500))
+      }
+
+      // Source 3: Meeting transcripts — introductions often contain title/company
+      // Look for the contact's name in recent Plaud recordings
+      const nameParts = (contact.name || '').split(' ').filter(w => w.length > 2)
+      if (nameParts.length > 0) {
+        const { data: mentionedInMeetings } = await supabase
+          .from('meeting_notes')
+          .select('raw_transcript, full_transcript, summary, short_summary, title')
+          .or(nameParts.map(n => `participants.cs.{"${contact.name}"}`).join(',') +
+              `,raw_transcript.ilike.%${nameParts[nameParts.length - 1]}%`)
+          .order('meeting_date', { ascending: false })
+          .limit(3)
+
+        for (const m of (mentionedInMeetings || [])) {
+          const transcript = m.raw_transcript || m.full_transcript || ''
+          if (transcript.length > 100) {
+            // Find the portion of the transcript where their name appears
+            const lastName = nameParts[nameParts.length - 1]
+            const idx = transcript.toLowerCase().indexOf(lastName.toLowerCase())
+            if (idx > -1) {
+              // Extract context around where their name appears (intro/bio likely nearby)
+              const start = Math.max(0, idx - 200)
+              const end   = Math.min(transcript.length, idx + 800)
+              contentParts.push(`[From meeting: ${m.title}]\n${transcript.slice(start, end)}`)
+            }
+          }
+          if (m.summary) contentParts.push(`[Meeting summary: ${m.title}]\n${m.summary.slice(0, 500)}`)
+        }
       }
 
       if (contentParts.length === 0) {
