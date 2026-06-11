@@ -2962,6 +2962,148 @@ Be direct and specific. No fluff.`
     `${results.others_commitments_extracted} others`
   )
 
+  // ── STEP 5.45: Auto-link waiting_on emails → others_commitments ──
+  // For each email Ryan marked as waiting_on that doesn't already have
+  // a linked others_commitment, extract WHO and WHAT via Haiku and
+  // create the commitment automatically (high confidence only).
+  console.log('Step 5.45: Linking waiting_on emails to others_commitments...')
+  try {
+    const { data: waitingEmails } = await supabase
+      .from('emails')
+      .select(
+        'id, thread_subject, from_name, from_address, action_needed, ' +
+        'ai_summary, full_thread_content, body_preview, sent_body, ' +
+        'thread_participants, days_waiting, waiting_since, email_category'
+      )
+      .eq('status', 'waiting_on')
+      .not('bucket', 'eq', 5)
+      .order('days_waiting', { ascending: false })
+      .limit(60)
+
+    const haikuLink = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    let linked = 0
+
+    for (const email of (waitingEmails || [])) {
+      try {
+        // Skip if already has a linked others_commitment
+        const { data: existing } = await supabase
+          .from('others_commitments')
+          .select('id')
+          .eq('source_id', email.id)
+          .eq('status', 'open')
+          .maybeSingle()
+        if (existing) continue
+
+        // Skip large group threads (>5 participants) — can't assign to one person
+        const participants = email.thread_participants || []
+        if (participants.length > 5) continue
+
+        // Skip internal-only threads
+        const internalDomains = ['claycorp', 'theljc', 'realcrg', 'concretestrategies', 'ventana']
+        const isFullyInternal = participants.every(p =>
+          internalDomains.some(d => (p || '').toLowerCase().includes(d))
+        )
+        if (isFullyInternal) continue
+
+        const content = email.sent_body || email.full_thread_content || email.action_needed || email.body_preview || ''
+
+        const prompt = `Ryan Hankins sent an email and is now waiting for a response or deliverable.
+
+Thread: "${email.thread_subject || 'unknown'}"
+From (original sender/recipient): ${email.from_name || email.from_address || 'unknown'}
+Participants: ${participants.slice(0, 6).join(', ') || 'unknown'}
+Days waiting: ${email.days_waiting || 0}
+AI action needed: ${email.action_needed || 'none'}
+
+Email content:
+${content.slice(0, 2000)}
+
+Determine:
+1. Who SPECIFICALLY is Ryan waiting on? (name + email if visible)
+2. What EXACTLY do they need to deliver?
+3. Is there a deadline mentioned?
+4. How confident are you that this is ONE specific person's responsibility?
+
+Rules:
+- If multiple people share the responsibility equally, confidence = low
+- If it's a large group/committee decision, confidence = low
+- If one person is clearly the owner, confidence = high
+- If someone specific was asked but it's not 100% clear, confidence = medium
+
+Respond ONLY with valid JSON:
+{
+  "confident_owner": true,
+  "confidence": "high|medium|low",
+  "person_name": "Full Name or null",
+  "person_email": "email@domain.com or null",
+  "what_they_owe": "Specific one-sentence description of what Ryan is waiting to receive",
+  "deadline": "YYYY-MM-DD or null",
+  "reason": "one sentence why this is or isn't assignable to one person"
+}`
+
+        const msg = await haikuLink.messages.create({
+          model:      'claude-haiku-4-5-20251001',
+          max_tokens: 250,
+          messages:   [{ role: 'user', content: prompt }]
+        })
+
+        let verdict
+        try {
+          const raw = (msg.content[0]?.text || '').trim()
+          const jsonMatch = raw.match(/\{[\s\S]*\}/)
+          verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+        } catch { continue }
+
+        // Only auto-create for high confidence with a named person
+        if (verdict?.confidence !== 'high' || !verdict?.what_they_owe) continue
+        if (!verdict.person_name && !verdict.person_email) continue
+
+        const projectId = await findProjectByKeywords(email.thread_subject)
+
+        // Also check by person+title to prevent cross-step duplication
+        const { data: titleMatch } = await supabase
+          .from('others_commitments')
+          .select('id')
+          .eq('status', 'open')
+          .ilike('title', `%${verdict.what_they_owe.slice(0, 30)}%`)
+          .eq('committed_by_email', verdict.person_email || email.from_address || '')
+          .maybeSingle()
+        if (titleMatch) continue
+
+        await supabase.from('others_commitments').insert({
+          committed_by_name:  verdict.person_name  || email.from_name  || 'Unknown',
+          committed_by_email: verdict.person_email || email.from_address || null,
+          title:              verdict.what_they_owe,
+          context:            `Waiting since email: "${email.thread_subject}"${email.days_waiting > 0 ? ` (${email.days_waiting}d)` : ''}`,
+          due_date:           verdict.deadline || null,
+          urgency:            email.days_waiting >= 7 ? 'high' : email.days_waiting >= 3 ? 'medium' : 'normal',
+          source_type:        'ai_email',
+          source_id:          email.id,
+          source_label:       email.thread_subject,
+          status:             'open',
+          project_id:         projectId || null,
+          delivery_type:      'to_ryan',
+        })
+
+        // Flag the email so UI knows it's tracked in Others
+        await supabase
+          .from('emails')
+          .update({ has_linked_commitment: true })
+          .eq('id', email.id)
+
+        linked++
+        console.log(`  ✓ Linked: "${verdict.what_they_owe}" ← ${verdict.person_name || email.from_name}`)
+
+      } catch (linkErr) {
+        // Non-fatal
+      }
+    }
+
+    console.log(`  ✓ Waiting_on linking: ${linked} others_commitments auto-created`)
+  } catch (linkStepErr) {
+    console.log(`  ✗ Waiting_on linking error: ${linkStepErr.message}`)
+  }
+
   // ── STEP 5.5: Cross-reference synthesis ────────────────────────
   console.log('Step 5.5: Cross-referencing sources...')
   try {

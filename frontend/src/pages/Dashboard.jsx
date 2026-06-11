@@ -889,7 +889,7 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
   const isReplyTab   = tab === 'reply'
   const shownAll     = isReplyTab ? (showAllReply || false) : showAllWaiting
   const setShownAll  = isReplyTab ? setShowAllReply : setShowAllWaiting
-  const shown        = isReplyTab ? needsReply : waitingOn
+  const shown = isReplyTab ? needsReply : waitingOn
   const CAP          = 8
   const visibleItems = shownAll ? shown : shown.slice(0, CAP)
 
