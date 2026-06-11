@@ -20,6 +20,7 @@ const othersCommitments   = require('./routes/others-commitments')
 const chat                = require('./routes/chat')
 const knowledge           = require('./routes/knowledge')
 const triggerNightly      = require('./routes/trigger-nightly')
+const preMeetingBrief     = require('./routes/pre-meeting-brief')
 const health              = require('./health')
 
 const CORS_HEADERS = {
@@ -60,6 +61,7 @@ module.exports = async (req, res) => {
   if (path === '/api/chat')                           return chat(req, res)
   if (matchRoute(path, '/api/knowledge'))             return knowledge(req, res)
   if (path === '/api/jobs/trigger-nightly')           return triggerNightly(req, res)
+  if (path === '/api/jobs/pre-meeting-brief')         return preMeetingBrief(req, res)
 
   return res.status(404).json({ error: 'Not found', path })
 }

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getEvents, updateEvent, getMeetingNotes, getContacts } from '../lib/api'
+import { getEvents, updateEvent, getMeetingNotes, getContacts, generatePreMeetingBrief } from '../lib/api'
 
 // ── Helpers ────────────────────────────────────────────────────
 function fmtDate(iso) {
@@ -42,6 +42,78 @@ function notesOverlap(note, attendeeEmails, attendeeNames) {
     if (last.length > 2 && participants.some(p => p.includes(last))) return true
   }
   return false
+}
+
+// ── Brief section with on-demand generation ────────────────────
+function BriefSection({ event, onBriefGenerated }) {
+  const [generating, setGenerating] = useState(false)
+  const [error, setError]           = useState(null)
+  const [localBrief, setLocalBrief] = useState(null)
+
+  const brief = localBrief || event.body
+
+  async function handleGenerate() {
+    setGenerating(true)
+    setError(null)
+    try {
+      const result = await generatePreMeetingBrief(event.id)
+      setLocalBrief(result.brief)
+      onBriefGenerated?.(result.brief)
+    } catch (err) {
+      setError('Failed to generate brief. Try again.')
+    } finally {
+      setGenerating(false)
+    }
+  }
+
+  return (
+    <div className={`rounded-2xl p-4 border ${brief ? 'bg-amber-50 border-amber-200' : 'bg-white border-[#e5e5e3]'}`}>
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">✨ AI Brief</p>
+        <button
+          onClick={handleGenerate}
+          disabled={generating}
+          className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+            generating
+              ? 'bg-amber-100 text-amber-400 cursor-not-allowed'
+              : 'bg-amber-600 text-white hover:bg-amber-700 active:bg-amber-800'
+          }`}
+        >
+          {generating ? (
+            <>
+              <span className="inline-block w-3 h-3 border-2 border-amber-300 border-t-white rounded-full animate-spin" />
+              Generating...
+            </>
+          ) : (
+            brief ? '↻ Regenerate' : '⚡ Brief me'
+          )}
+        </button>
+      </div>
+
+      {error && (
+        <p className="text-xs text-red-500 mb-2">{error}</p>
+      )}
+
+      {brief ? (
+        <div className="text-sm text-[#1a1a18] leading-relaxed whitespace-pre-line">{brief}</div>
+      ) : generating ? (
+        <div className="space-y-2 animate-pulse">
+          <div className="h-3 bg-amber-100 rounded w-3/4" />
+          <div className="h-3 bg-amber-100 rounded w-full" />
+          <div className="h-3 bg-amber-100 rounded w-5/6" />
+          <div className="h-3 bg-amber-100 rounded w-2/3" />
+        </div>
+      ) : (
+        <p className="text-xs text-[#9b9b97] italic">
+          Tap "Brief me" for an on-demand brief pulling from emails, past meetings, open tasks, and commitments.
+        </p>
+      )}
+
+      {event.stakes_reason && (
+        <p className="text-xs text-amber-600 mt-2 border-t border-amber-200 pt-2">🔥 {event.stakes_reason}</p>
+      )}
+    </div>
+  )
 }
 
 // ── Auto-save notes field ──────────────────────────────────────
@@ -274,21 +346,11 @@ export default function EventDetail() {
         </div>
 
         {/* AI Brief */}
-        <div className={`rounded-2xl p-4 border ${event.body ? 'bg-amber-50 border-amber-200' : 'bg-white border-[#e5e5e3]'}`}>
-          <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 mb-2">✨ AI Brief</p>
-          {event.body ? (
-            <p className="text-sm text-[#1a1a18] leading-relaxed whitespace-pre-line">{event.body}</p>
-          ) : (
-            <p className="text-xs text-[#9b9b97] italic">
-              {isPast
-                ? 'No brief was generated for this meeting.'
-                : 'Brief generates tonight — add notes below to shape it.'}
-            </p>
-          )}
-          {event.stakes_reason && (
-            <p className="text-xs text-amber-600 mt-2 border-t border-amber-200 pt-2">🔥 {event.stakes_reason}</p>
-          )}
-        </div>
+        <BriefSection event={event} onBriefGenerated={(brief) => {
+          qc.setQueryData(['events'], old =>
+            (old || []).map(e => e.id === event.id ? { ...e, body: brief } : e)
+          )
+        }} />
 
         {/* Notes — pre (upcoming) or post + collapsed pre (past) */}
         {!isPast ? (

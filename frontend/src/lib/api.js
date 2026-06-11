@@ -93,3 +93,6 @@ export const getKnowledge    = (status = 'active') => api.get(`/api/knowledge?st
 export const createKnowledge = (data) => api.post('/api/knowledge', data).then(r => r.data)
 export const updateKnowledge = (id, data) => api.patch(`/api/knowledge?id=${id}`, data).then(r => r.data)
 export const deleteKnowledge = (id) => api.delete(`/api/knowledge?id=${id}`).then(r => r.data)
+
+export const generatePreMeetingBrief = (event_id) =>
+  api.post('/api/jobs/pre-meeting-brief', { event_id }).then(r => r.data)

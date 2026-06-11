@@ -19,6 +19,7 @@ import {
   getPipelineStatus,
   getMeetingNotes,
   getKnowledge,
+  generatePreMeetingBrief,
 } from '../lib/api'
 import SyncButton from '../components/SyncButton'
 
@@ -304,6 +305,8 @@ function CalendarStrip({ events, isLoading }) {
   const todayEvents = (events || [])
     .filter(e => e.start_time?.split('T')[0] === todayUTC)
     .sort((a, b) => new Date(a.start_time) - new Date(b.start_time))
+  const [briefingId, setBriefingId] = useState(null)
+  const [briefs, setBriefs]         = useState({})
 
   function fmtTime(iso) {
     if (!iso) return ''
@@ -346,8 +349,28 @@ function CalendarStrip({ events, isLoading }) {
                     {event.preparation_required && (
                       <p className="text-xs text-orange-500 mt-0.5">⚡ Prep needed</p>
                     )}
+                    {briefs[event.id] && (
+                      <p className="text-xs text-amber-700 mt-1 line-clamp-2 font-normal">{briefs[event.id].slice(0, 120)}…</p>
+                    )}
                   </div>
-                  {event.join_link && (
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <button
+                      onClick={async e => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setBriefingId(event.id)
+                        try {
+                          const r = await generatePreMeetingBrief(event.id)
+                          setBriefs(prev => ({ ...prev, [event.id]: r.brief }))
+                        } catch {}
+                        finally { setBriefingId(null) }
+                      }}
+                      className="text-[10px] font-semibold px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 flex-shrink-0"
+                      title="Generate pre-meeting brief"
+                    >
+                      {briefingId === event.id ? '...' : '⚡'}
+                    </button>
+                    {event.join_link && (
                     <a
                       href={event.join_link}
                       target="_blank"
@@ -357,7 +380,8 @@ function CalendarStrip({ events, isLoading }) {
                     >
                       Join
                     </a>
-                  )}
+                    )}
+                  </div>
                 </div>
               </Link>
             )
