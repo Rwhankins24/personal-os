@@ -342,11 +342,14 @@ async function main() {
       const candidateTokens = taskTokens(candidateTitle)
       if (candidateTokens.length < 2) return { match: null, confidence: 0, bestTitle: null }
 
-      // Build query for open records
+      // Build query for open records (include reviewed flags to skip known pairs)
+      const extraFields = (tableName === 'others_commitments' ? ', committed_by_email' : '') +
+        ', duplicate_reviewed, known_not_duplicate_with'
       let query = supabase
         .from(tableName)
-        .select('id, title' + (tableName === 'others_commitments' ? ', committed_by_email' : '') + ', project_id')
+        .select('id, title, project_id' + extraFields)
         .eq('status', 'open')
+        .or('duplicate_reviewed.is.null,duplicate_reviewed.eq.false')
 
       if (candidatePersonEmail && tableName === 'others_commitments') {
         query = query.eq('committed_by_email', candidatePersonEmail)
@@ -367,10 +370,13 @@ async function main() {
         var candidates = recs || []
       }
 
-      // Find best Jaccard match
+      // Find best Jaccard match — skip pairs already reviewed as "keep separate"
       let bestMatch = null
       let bestScore = 0
       for (const rec of candidates) {
+        // Skip if this candidate was explicitly flagged as NOT a duplicate of rec
+        const recExcludes = rec.known_not_duplicate_with || []
+        if (recExcludes.some(id => id === rec.id)) continue
         const score = jaccard(candidateTokens, taskTokens(rec.title))
         if (score >= 0.55 && score > bestScore) {
           bestScore = score
@@ -577,7 +583,7 @@ The "confidence" field must be an integer 0-100 representing how certain you are
       .select(
         'id, title, urgency, due_date, context, ai_context, source_type, ' +
         'source_label, source_id, project_id, cross_references, created_at, ' +
-        'blocking, ai_extracted'
+        'blocking, ai_extracted, duplicate_reviewed, known_not_duplicate_with'
       )
       .eq('status', 'open')
       .order('created_at', { ascending: true })
@@ -599,6 +605,11 @@ The "confidence" field must be an integer 0-100 representing how certain you are
           const a = allOpenTasks[i], b = allOpenTasks[j]
           // Skip if both manual — never auto-merge manual tasks
           if (a.source_type === 'manual' && b.source_type === 'manual') continue
+          // Skip if Ryan already reviewed this pair and said keep separate
+          if (a.duplicate_reviewed || b.duplicate_reviewed) continue
+          const aExcludes = a.known_not_duplicate_with || []
+          const bExcludes = b.known_not_duplicate_with || []
+          if (aExcludes.includes(b.id) || bExcludes.includes(a.id)) continue
           const score = jaccard(tokenMap.get(a.id), tokenMap.get(b.id))
           if (score >= 0.55) {
             // Prefer pairs in same project, but also catch unlinked matches

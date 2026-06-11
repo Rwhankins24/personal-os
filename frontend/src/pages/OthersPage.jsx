@@ -482,36 +482,56 @@ function OthersDuplicatesSection({ allItems, update }) {
     byPerson[name].push(pair)
   }
 
-  const handleMerge = (loser) => {
+  const handleMerge = (loser, winner) => {
+    // Enrich winner with any data loser has that winner is missing
+    const enrichment = {}
+    if (!winner.due_date   && loser.due_date)   enrichment.due_date   = loser.due_date
+    if (!winner.project_id && loser.project_id) enrichment.project_id = loser.project_id
+    if (!winner.context    && loser.context)    enrichment.context    = loser.context
+    if (!winner.urgency    && loser.urgency)    enrichment.urgency    = loser.urgency
+    if (Object.keys(enrichment).length > 0) {
+      update.mutate({ id: winner.id, updates: enrichment })
+    }
+    // Archive loser, mark reviewed — nightly job won't re-flag
     update.mutate({
       id: loser.id,
-      updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+      updates: {
+        status: 'archived',
+        potential_duplicate_of: null,
+        duplicate_confidence: null,
+        duplicate_reviewed: true,
+        duplicate_decision: 'merged'
+      }
     })
   }
 
-  const handleKeepSeparate = (loser) => {
+  const handleKeepSeparate = (loser, winner) => {
+    // Mark both as reviewed — nightly job checks before re-flagging
+    update.mutate({
+      id: winner.id,
+      updates: {
+        known_not_duplicate_with: [...(winner.known_not_duplicate_with || []), loser.id],
+        duplicate_reviewed: true
+      }
+    })
     update.mutate({
       id: loser.id,
-      updates: { potential_duplicate_of: null, duplicate_confidence: null }
+      updates: {
+        potential_duplicate_of: null,
+        duplicate_confidence: null,
+        duplicate_reviewed: true,
+        duplicate_decision: 'separate',
+        known_not_duplicate_with: [...(loser.known_not_duplicate_with || []), winner.id]
+      }
     })
   }
 
   const handleResolveAllForPerson = (personPairs) => {
-    for (const { loser } of personPairs) {
-      update.mutate({
-        id: loser.id,
-        updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
-      })
-    }
+    for (const { loser, winner } of personPairs) handleMerge(loser, winner)
   }
 
   const handleResolveAll = () => {
-    for (const { loser } of pairs) {
-      update.mutate({
-        id: loser.id,
-        updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
-      })
-    }
+    for (const { loser, winner } of pairs) handleMerge(loser, winner)
   }
 
   const togglePersonCollapse = (name) => {
@@ -606,7 +626,7 @@ function OthersDuplicatesSection({ allItems, update }) {
                             Merge (keep "{winner.title.slice(0, 28)}{winner.title.length > 28 ? '…' : ''}")
                           </button>
                           <button
-                            onClick={() => handleKeepSeparate(loser)}
+                            onClick={() => handleKeepSeparate(loser, winner)}
                             className="text-xs px-3 py-1 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-100 transition-colors"
                           >
                             Keep separate
