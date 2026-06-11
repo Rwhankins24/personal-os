@@ -3032,8 +3032,10 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   : { data: null }
 
                 await supabase.from('others_commitments').insert({
-                  person_name:     personName,
-                  person_email:    personEmail || contact?.email || null,
+                  person_name:          personName,
+                  committed_by_name:    personName,
+                  person_email:         personEmail || contact?.email || null,
+                  committed_by_email:   personEmail || contact?.email || null,
                   contact_id:      contact?.id || null,
                   title:           title,
                   context:         `From meeting: ${meeting.title}`,

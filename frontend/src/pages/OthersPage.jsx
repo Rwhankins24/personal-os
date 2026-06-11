@@ -237,7 +237,7 @@ export default function OthersPage() {
       try {
         await createTask({
           title:        c.title,
-          context:      `Promoted from Others: originally assigned to ${c.committed_by_name || 'unknown'}`,
+          context:      `Promoted from Others: originally assigned to ${c.committed_by_name || c.person_name || 'unknown'}`,
           urgency:      c.urgency || 'medium',
           due_date:     c.due_date || null,
           status:       'open',
@@ -258,7 +258,7 @@ export default function OthersPage() {
     try {
       await createTask({
         title:        c.title,
-        context:      `Promoted from Others: originally assigned to ${c.committed_by_name || 'unknown'}`,
+        context:      `Promoted from Others: originally assigned to ${c.committed_by_name || c.person_name || 'unknown'}`,
         urgency:      c.urgency || 'medium',
         due_date:     c.due_date || null,
         status:       'open',
@@ -281,7 +281,7 @@ export default function OthersPage() {
   )
   const isKeyPerson = (item) => {
     const email = (item.committed_by_email || '').toLowerCase()
-    const name  = (item.committed_by_name  || item.made_by || '').toLowerCase()
+    const name  = (item.committed_by_name  || item.person_name || item.made_by || '').toLowerCase()
     if (email && keyEmailSet.has(email)) return true
     if (name  && keyNameSet.has(name))   return true
     return false
@@ -324,7 +324,7 @@ export default function OthersPage() {
   const groupByPerson = (list) => {
     const groups = {}
     for (const c of list) {
-      const name = c.committed_by_name || c.made_by || 'Unknown'
+      const name = c.committed_by_name || c.person_name || c.made_by || 'Unknown'
       if (!groups[name]) groups[name] = []
       groups[name].push(c)
     }
@@ -415,7 +415,7 @@ export default function OthersPage() {
           <div className="bg-white border border-[#e5e5e3] rounded-2xl divide-y divide-[#f0f0ee]">
             {flatSorted.map(c => {
               const daysOverdue = getDaysOverdue(c)
-              const personName = c.committed_by_name || c.made_by || 'Unknown'
+              const personName = c.committed_by_name || c.person_name || c.made_by || 'Unknown'
               return (
                 <CommitmentRow
                   key={c.id}
