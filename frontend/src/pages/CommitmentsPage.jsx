@@ -204,7 +204,7 @@ export default function CommitmentsPage() {
 
                           <button
                             onClick={() => markDone.mutate({ id: c.id })}
-                            className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs opacity-0 group-hover:opacity-100 mt-0.5"
+                            className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 mt-0.5"
                             title="Mark done"
                           >
                             ✓
