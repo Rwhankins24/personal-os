@@ -2539,7 +2539,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       .select('*')
       .eq('intelligence_extracted', false)
       .order('start_time', { ascending: false })
-      .limit(10)
+      .limit(15) // steady state: 15/night is sufficient once backfill is done
 
     for (const meeting of (unprocessedMeetings || [])) {
       try {
