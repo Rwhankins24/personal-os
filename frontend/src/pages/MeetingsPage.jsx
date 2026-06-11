@@ -190,10 +190,11 @@ export default function MeetingsPage() {
                 </div>
               </div>
 
-              {/* Summary preview */}
-              {meeting.summary && (
-                <p className="text-xs text-[#6b6b67] mt-2 line-clamp-2 leading-relaxed">
-                  {meeting.summary}
+              {/* Summary or transcript preview */}
+              {(meeting.summary || meeting.short_summary || meeting.full_transcript || meeting.raw_transcript) && (
+                <p className="text-xs text-[#6b6b67] mt-2 line-clamp-3 leading-relaxed">
+                  {meeting.summary || meeting.short_summary ||
+                    (meeting.full_transcript || meeting.raw_transcript || '').slice(0, 300)}
                 </p>
               )}
 
