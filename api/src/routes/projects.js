@@ -111,7 +111,8 @@ module.exports = async (req, res) => {
         const loserKw  = loser.keywords  || []
         const mergedKw = [...new Set([...winnerKw, ...loserKw])]
 
-        // 5. Update winner with merged data + enrich from loser if winner is missing fields
+        // 5. Update winner with merged data + fill gaps from loser if winner is missing
+        // Only write columns confirmed to exist — avoid writing non-existent columns
         const enriched = {
           intelligence_notes: mergedIntel,
           decisions_made:     mergedDecisions,
@@ -119,18 +120,21 @@ module.exports = async (req, res) => {
           key_facts:          mergedKeyFacts,
           keywords:           mergedKw,
           updated_at:         new Date().toISOString(),
-          // Fill gaps from loser if winner is missing these
-          description:   winner.description   || loser.description   || null,
-          phase:         winner.phase         || loser.phase         || null,
-          client:        winner.client        || loser.client        || null,
-          location:      winner.location      || loser.location      || null,
-          value:         winner.value         || loser.value         || null,
-          start_date:    winner.start_date    || loser.start_date    || null,
-          end_date:      winner.end_date      || loser.end_date      || null,
         }
+        // Fill gaps only for columns we know exist (confirmed by ProjectCard + migrations)
+        const fillGap = (col) => {
+          if (!winner[col] && loser[col]) enriched[col] = loser[col]
+        }
+        ;['description', 'client', 'location', 'contract_value', 'current_phase',
+          'delivery_method', 'contract_type', 'type', 'decision_date',
+          'win_probability', 'key_risk', 'est_value'].forEach(fillGap)
         const { data: updated, error: ue } = await supabase
           .from('projects').update(enriched).eq('id', winnerId).select().single()
-        if (ue) return res.status(500).json({ error: `Failed to update winner: ${ue.message}` })
+        if (ue) {
+          console.error('Merge winner update failed:', ue)
+          console.error('Enriched payload keys:', Object.keys(enriched))
+          return res.status(500).json({ error: `Failed to update winner: ${ue.message}`, detail: ue.details, hint: ue.hint })
+        }
 
         // 6. Archive loser
         await supabase.from('projects').update({
