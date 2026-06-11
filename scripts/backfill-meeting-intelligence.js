@@ -239,9 +239,7 @@ async function main() {
           if (!existing) {
             await supabase.from('others_commitments').insert({
               title:              title,
-              person_name:        name,
               committed_by_name:  name,
-              person_email:       item.assigned_to_email || item.committed_by_email || contact?.email || null,
               committed_by_email: item.assigned_to_email || item.committed_by_email || contact?.email || null,
               contact_id:      contact?.id || null,
               due_date:        item.due_date || null,
