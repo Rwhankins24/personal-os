@@ -2943,28 +2943,49 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
               }
             }
 
-            // Others' verbal commitments
-            for (const c of (intel.verbal_commitments_others || [])) {
+            // Others' verbal commitments + general action items assigned to others
+            const allOthersItems = [
+              ...(intel.verbal_commitments_others || []),
+              ...(intel.others_action_items       || []),
+            ]
+            for (const c of allOthersItems) {
+              const personName  = c.committed_by_name || c.assigned_to_name
+              const personEmail = c.committed_by_email || c.assigned_to_email || null
+              const title       = c.title || c.task_text
+              if (!title || !personName) continue
+              if (personName === 'Ryan' || personName === 'Ryan Hankins') continue
+              if ((c.attribution_confidence || 'medium') === 'low') continue
+
               const { data: existing } = await supabase
                 .from('others_commitments')
                 .select('id')
-                .eq('title', c.title)
-                .eq('status', 'open')
+                .ilike('title', title.slice(0, 60))
+                .eq('status', 'pending')
                 .maybeSingle()
 
               if (!existing) {
+                // Try to find linked contact
+                const nameParts = personName.trim().split(/\s+/)
+                const { data: contact } = nameParts.length > 1
+                  ? await supabase.from('contacts').select('id, email')
+                      .ilike('name', `%${nameParts[nameParts.length - 1]}%`).maybeSingle()
+                  : { data: null }
+
                 await supabase.from('others_commitments').insert({
-                  committed_by_name:  c.committed_by_name,
-                  committed_by_email: c.committed_by_email || null,
-                  title:        c.title,
-                  context:      `Verbal commitment in: ${meeting.title}`,
-                  due_date:     c.due_date,
-                  urgency:      c.urgency,
-                  source_type:  'ai_otter',
-                  source_id:    meeting.id,
-                  source_label: meeting.title,
-                  status:       'open',
-                  delivery_type: c.delivery_type || 'general'
+                  person_name:   personName,
+                  person_email:  personEmail || contact?.email || null,
+                  contact_id:    contact?.id || null,
+                  title:         title,
+                  context:       `From meeting: ${meeting.title}`,
+                  due_date:      c.due_date || null,
+                  urgency:       c.urgency || 'medium',
+                  source:        meetingSource,
+                  source_type:   meetingSourceType,
+                  source_id:     meeting.id,
+                  source_label:  meeting.title,
+                  project_id:    projectId || null,
+                  status:        'pending',
+                  ai_extracted:  true,
                 })
                 results.otter_others_created++
               }

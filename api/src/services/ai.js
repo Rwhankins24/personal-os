@@ -886,8 +886,8 @@ Return ONLY the JSON object.`
 // Speaker labels are generic (Speaker 1, 2...) — we resolve via roster + context
 async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext) {
   const RYAN_CONTEXT = await buildRyanContext()
-  const transcript = meeting.full_transcript
-  if (!transcript) return null
+  const transcript = meeting.full_transcript || meeting.raw_transcript
+  if (!transcript || transcript.trim().length < 100) return null
 
   // Attendee roster can be {name, email} objects or strings (from Plaud participants array)
   // Augment with names derived from action item assignees if roster is thin
@@ -925,7 +925,7 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2000,
+      max_tokens: 4000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
@@ -967,8 +967,9 @@ Return ONLY valid JSON. Empty arrays fine.
   "risk_signals": [{"signal": "specific risk observed", "type": "escalation|silence|scope|legal|relationship|schedule|financial", "severity": "high|medium|low", "involves_key_contact": true, "involves_active_project": true, "evidence": "what in transcript shows this"}],
   "verbal_commitments_ryan": [{"title": "what Ryan committed to", "made_to": "person name", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "commitment_type": "hard|soft|conditional", "attribution_confidence": "high|medium|low", "attribution_basis": "why attributed to Ryan"}],
   "verbal_commitments_others": [{"title": "what they committed to", "committed_by_name": "name", "committed_by_email": "email or null", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high|medium|low"}],
+  "others_action_items": [{"title": "what they need to do", "assigned_to_name": "name", "assigned_to_email": "email or null", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high|medium|low", "attribution_basis": "how we know this was assigned to them"}],
   "key_facts": [{"fact": "important fact", "category": "project|person|contract|technical|financial", "stated_by": "name or Speaker X"}],
-  "meeting_outcome": {"summary": "2-3 sentence outcome", "resolved_items": ["what was resolved"], "unresolved_items": ["what was not"], "next_steps": ["agreed next steps"], "overall_sentiment": "productive|tense|unclear|routine"},
+  "meeting_outcome": {"summary": "comprehensive narrative summary — cover all major topics discussed, key positions taken, context behind decisions, and important subtext. Length should match meeting complexity: simple check-in = 1 paragraph, complex negotiation or OAC = 3-5 paragraphs. Do not truncate important content.", "resolved_items": ["what was resolved"], "unresolved_items": ["what was not resolved or still open"], "next_steps": ["specific agreed next steps with owner if known"], "overall_sentiment": "productive|tense|unclear|routine"},
   "speaker_attributions": [{"speaker_label": "Speaker 1", "likely_person": "name", "confidence": "high|medium|low", "basis": "how we know"}]
 }`
       }]

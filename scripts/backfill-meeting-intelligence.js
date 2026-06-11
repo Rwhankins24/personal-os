@@ -64,7 +64,7 @@ async function main() {
     .from('meeting_notes')
     .select('*')
     .eq('intelligence_extracted', false)
-    .not('full_transcript', 'is', null)
+    .or('full_transcript.not.is.null,raw_transcript.not.is.null')
     .order('start_time', { ascending: false })
 
   if (error) { console.error('DB error:', error.message); process.exit(1) }
@@ -100,7 +100,12 @@ async function main() {
         .or(keywords.length ? keywords.map(k => `thread_subject.ilike.%${k}%`).join(',') : 'id.is.null')
         .limit(5)
 
-      console.log(`  Processing: ${label}`)
+      const transcriptLen = (meeting.full_transcript || meeting.raw_transcript || '').length
+      console.log(`  Processing: ${label} [transcript: ${transcriptLen} chars]`)
+      // Ensure full_transcript is populated for the ai service
+      if (!meeting.full_transcript && meeting.raw_transcript) {
+        meeting.full_transcript = meeting.raw_transcript
+      }
       const intel = await aiService.extractIntelligenceFromTranscript(
         meeting,
         attendeeRoster,
@@ -166,9 +171,10 @@ async function main() {
 
       // Extract tasks assigned to Ryan
       const ryanTasks = [
-        ...(intel.ryan_action_items    || []),
+        ...(intel.ryan_action_items     || []),
         ...(intel.action_items_for_ryan || []),
       ]
+      let ryanTaskCount = 0
       for (const item of ryanTasks) {
         const taskText = item.task_text || item.task || (typeof item === 'string' ? item : null)
         if (!taskText) continue
@@ -187,12 +193,58 @@ async function main() {
               project_id:   projectId || null,
               ai_enriched:  true,
             })
+            ryanTaskCount++
           }
         } catch (_) {}
       }
 
-      const taskCount = ryanTasks.length
-      console.log(`    ✓ Done — ${taskCount} task(s) extracted${projectId ? ', project updated' : ''}`)
+      // Extract action items assigned to others (not just commitments made to Ryan)
+      // Covers: "John needs to get drawings updated", "Sarah will send the contract" etc.
+      const othersItems = [
+        ...(intel.others_action_items       || []),
+        ...(intel.verbal_commitments_others || []),
+      ]
+      let othersCount = 0
+      for (const item of othersItems) {
+        const title = item.title || item.task_text || item.task
+        const name  = item.assigned_to_name || item.committed_by_name
+        if (!title || !name || name === 'Ryan' || name === 'Ryan Hankins') continue
+        if ((item.attribution_confidence || 'medium') === 'low') continue
+        try {
+          // Look up contact by name
+          const nameParts = name.trim().split(/\s+/)
+          const { data: contact } = nameParts.length > 1
+            ? await supabase.from('contacts').select('id, name, email')
+                .ilike('name', `%${nameParts[nameParts.length - 1]}%`).maybeSingle()
+            : { data: null }
+
+          const { data: existing } = await supabase
+            .from('others_commitments').select('id')
+            .ilike('title', title.slice(0, 60))
+            .eq('status', 'pending').maybeSingle()
+
+          if (!existing) {
+            await supabase.from('others_commitments').insert({
+              title:              title,
+              person_name:        name,
+              person_email:       item.assigned_to_email || item.committed_by_email || contact?.email || null,
+              contact_id:         contact?.id || null,
+              due_date:           item.due_date || null,
+              urgency:            item.urgency || 'medium',
+              status:             'pending',
+              source:             meeting.source || 'plaud',
+              source_label:       meeting.title || 'Meeting',
+              source_date:        meeting.start_time?.split('T')[0] || today,
+              project_id:         projectId || null,
+              context:            `Assigned in meeting: ${meeting.title || 'Meeting'}`,
+              ai_extracted:       true,
+            })
+            othersCount++
+          }
+        } catch (_) {}
+      }
+
+      console.log(`    ✓ Done — ${ryanTaskCount} Ryan task(s), ${othersCount} others item(s)${projectId ? ', project updated' : ''}`)
       processed++
 
     } catch (err) {
