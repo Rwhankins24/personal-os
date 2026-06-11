@@ -258,7 +258,17 @@ async function main() {
         } catch (_) {}
       }
 
-      console.log(`    ✓ Done — ${ryanTaskCount} Ryan task(s), ${othersCount} others item(s)${projectId ? ', project updated' : ''}`)
+      const decisions   = (intel.decisions_made       || []).length
+      const pending     = (intel.pending_decisions    || []).length
+      const risks       = (intel.risk_signals         || []).length
+      const techFacts   = (intel.technical_facts      || []).length
+      const financial   = (intel.financial_signals    || []).length
+      const schedule    = (intel.schedule_signals     || []).length
+      const scope       = (intel.scope_signals        || []).length
+      const hasSummary  = !!intel.meeting_outcome?.summary
+
+      console.log(`    ✓ Done — Ryan: ${ryanTaskCount} tasks | Others: ${othersCount} items | Decisions: ${decisions} made, ${pending} pending | Risks: ${risks} | Tech: ${techFacts} | Financial: ${financial} | Schedule: ${schedule} | Scope: ${scope} | Summary: ${hasSummary ? 'yes' : 'no'}${projectId ? ' | project linked' : ' | NO PROJECT MATCH'}`)
+
       processed++
 
     } catch (err) {
