@@ -206,7 +206,44 @@ export default function MeetingDetail() {
         {(meeting.summary || meeting.short_summary) && (
           <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
             <p className="text-xs font-bold uppercase tracking-widest text-[#1B2A4A] mb-2">Summary</p>
-            <p className="text-sm text-[#1a1a18] leading-relaxed">{meeting.summary || meeting.short_summary}</p>
+            {(() => {
+              const raw = meeting.summary || meeting.short_summary || ''
+              const lines = raw.split('\n').map(l => l.trim()).filter(Boolean)
+              const hasStructure = lines.some(l => l.startsWith('##') || l.startsWith('•') || l.startsWith('-'))
+              if (!hasStructure) {
+                return <p className="text-sm text-[#1a1a18] leading-relaxed whitespace-pre-wrap">{raw}</p>
+              }
+              const sections = []
+              let current = null
+              for (const line of lines) {
+                if (line.startsWith('##')) {
+                  current = { heading: line.replace(/^##\s*/, ''), bullets: [] }
+                  sections.push(current)
+                } else if (line.startsWith('•') || line.startsWith('-')) {
+                  if (!current) { current = { heading: null, bullets: [] }; sections.push(current) }
+                  current.bullets.push(line.replace(/^[•\-]\s*/, ''))
+                }
+              }
+              return (
+                <div className="space-y-3">
+                  {sections.map((s, i) => (
+                    <div key={i}>
+                      {s.heading && (
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6b67] mb-1">{s.heading}</p>
+                      )}
+                      <ul className="space-y-1">
+                        {s.bullets.map((b, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm text-[#1a1a18]">
+                            <span className="text-[#C9A84C] mt-0.5 shrink-0 text-xs">▸</span>
+                            <span className="leading-relaxed">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )
+            })()}
           </div>
         )}
 

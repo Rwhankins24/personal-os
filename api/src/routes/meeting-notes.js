@@ -64,11 +64,23 @@ module.exports = async (req, res) => {
         .order('urgency', { ascending: true })
 
       // 4. Others' commitments from this meeting
-      const { data: othersCommitments } = await supabase
+      // Primary: match by meeting_note_id (set on new records)
+      // Fallback: match by source_label = meeting title (for older records)
+      let { data: othersCommitments } = await supabase
         .from('others_commitments')
-        .select('id, title, person_name, due_date, urgency, status, context')
+        .select('id, title, person_name, committed_by_name, due_date, urgency, status, context')
         .eq('meeting_note_id', id)
         .order('urgency', { ascending: true })
+
+      if (!othersCommitments?.length && meeting.title) {
+        const { data: byLabel } = await supabase
+          .from('others_commitments')
+          .select('id, title, person_name, committed_by_name, due_date, urgency, status, context')
+          .eq('source_label', meeting.title)
+          .in('status', ['open', 'pending'])
+          .order('urgency', { ascending: true })
+        othersCommitments = byLabel || []
+      }
 
       // 5. Project intelligence (decisions, risks) filtered by this meeting's title
       let decisions = []
