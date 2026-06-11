@@ -6,3 +6,7 @@ logs/*.log
 data/contact-sweep.json
 data/contact-sweep-review.json
 data/archive-sweep.json
+data/plaud-import/*.mp3
+data/plaud-import/*.txt
+data/plaud-import/*.csv
+data/.DS_Store
