@@ -1,0 +1,263 @@
+Ryan Hankins  00:00
+I Hey, Ryan, Hi, there, Hey, there, Barry, I guess I was like, Was that me? I
+
+Ryan Hankins  01:03
+How you doing today? I'm doing well. How about
+
+Unknown Speaker  01:07
+you? Yeah,
+
+Speaker 1  01:22
+okay, good afternoon. Can you hear me? Yes, we can. This is my first time using WebEx. I've used every video platform since joining
+
+Unknown Speaker  01:32
+Pacific fusion. That's funny.
+
+Ryan Hankins  01:36
+Yeah, we love our WebEx. I personally I'm a teams guy, but that's just me. But you know that's neither here nor there.
+
+Speaker 1  01:47
+What do you guys use to do direct messaging, like they're using slack?
+
+Ryan Hankins  01:51
+Is it WebEx teams? WebEx is just our conference rooms are all set up for WebEx. Yeah, I don't know why we do everything, but
+
+Unknown Speaker  02:04
+yeah, I can't imagine instant messaging someone about that.
+
+Speaker 1  02:08
+That's funny. My previous employer, when I started with them, they use Skype. It was like Skype, instant messaging. Y'all remember Skype? Oh, yeah, yeah. And then they finally just put everything in the Microsoft ecosystem, which was, which was nice, but they had, they had WebEx conference rooms for a long time, and then they transfer over, which made it easy.
+
+Unknown Speaker  02:33
+Skype was a little before my time.
+
+Ryan Hankins  02:39
+Sorry. I'm texting Conor to make sure we get
+
+Speaker 2  02:44
+over here. Okay, yeah, my other call ran a little bit long.
+
+Ryan Hankins  02:51
+All good. Hey, Jacob is Justin joining, or I don't think he was supposed to join, right? No, he couldn't make it. I think we're covered here with Conor. Yeah, perfect, yeah. I talked to Abbott. He's on a plane. He's so he's not going to be able to join. But think we got everybody from our side.
+
+Speaker 1  03:11
+Okay, no worries. Mindy, I didn't really give you a brief on this meeting, so I'll give you a brief in my intro, and we'll go from there. Are you ready to start? Clayco, yes. Okay, great. Well, hello. I'm James estopenal. I am health engineering for Pacific fusion. I'll be the main point of contact for any of your financial needs. And Mindy, who will introduce herself Next, she is our head of finance, so she'll be one of our main stakeholders for completing some of these requests, many this meeting is to have Clayco introduce themselves to you and then also explain kind of what the cash flow will look like once we sign the LOA. And then the team will also share what they need in order to complete their financial verification for specific fusion, if I missed anything else, Clayco, please just fill in the gaps, and we'll be happy to take action. Andy, I'll give it to you so you could.
+
+Speaker 2  04:11
+Yeah, I think the third bucket is with some of these projects. We know that there's entitlements coming from, like public funds, one way or the other, we're always able to accommodate that stuff, as long as we tell it somewhat up front, particularly before we buy, like sub contracts. So Mindy, it's it's helpful to that we have opened up the conduit of communication, just because, if you start entering into deals, and then I know that there's some reported, I think, with the City of Albuquerque in the state of New Mexico, it's good for us to just be full alignment of what strings they're sort of attaching to That funding, because they typically attach strings such as prevailing wage. Sometimes there's other conditions that they put in it, and we're able to navigate all that stuff. We just need to make sure that we know about it somewhat up front. So that's the third bucket.
+
+Speaker 3  05:20
+Well, it's great to meet you guys. It'd be helpful if you guys could go around the room and tell me what your roles are. But like James said at head finance, so you'll mostly like day to day, you know, draw to draw. We'll be working with James really closely on making sure that we're tracking all the cash flow and the total cost of the project. And then you'll see me copied on emails and pop in every once in a while with very specific questions. Do
+
+Unknown Speaker  05:48
+you want to go first? Ryan,
+
+Ryan Hankins  05:49
+yeah, absolutely. Ryan Hankins, with Clayco Project executive, so everything from the pursuit working with the Pacific fusion team all the way through execution, more, more or less your point of contact.
+
+Speaker 2  06:05
+Then I'm Conor Ty I'm our EDP of pre construction and procurement, so I run those groups, sort of nationally for the company. I'm on the project, working with Ryan and others. I've have a long history of first of kind, you know, projects, even with with more startups. So I've navigated it before with a lot of different projects. And here to help, here to really more support Ryan and then the estimating team, Jacob.
+
+Speaker 4  06:40
+Yep. Jacob Moore, pre qualification Manager with Clayco, that entails some due diligence on our clients on the financial side, making sure they're they're funding projects, and then some of our larger subcontracts and subcontractors as well. Nice to meet you all, and why you all say? Well, that's a good question,
+
+Ryan Hankins  07:07
+all over. So I'm in I'm in Phoenix, and I'm in Chicago.
+
+Unknown Speaker  07:12
+Conor, you're in Chicago,
+
+Ryan Hankins  07:16
+yes, but the way we operate is really one company. So we do have several offices throughout the nation. We have one in Southern California. We have Phoenix, Chicago, St Louis, and then some over on the east coast as well. But you know, no matter which office you're necessarily dealing with, you're still, it's still one company like Conor is nationally over pre construction. You know, I report to Conor. I'm just
+
+Speaker 3  07:44
+asking from, I'm just asking for my curiosity perspective. JV said, You're in Phoenix too. Yeah, I'm in
+
+Speaker 5  07:50
+St Louis. I sit in Omaha, Nebraska, so I've been there. Cool.
+
+Speaker 3  08:06
+All right, so next agenda item is the financial requirements.
+
+Speaker 5  08:14
+Yeah, Conor, do you want to open up? Or you want me to open it up?
+
+Speaker 2  08:19
+Yeah, why don't we do, why don't we do financial requirements, slash funding sources, I if there's the public funding and then maybe Mindy, what we we talk about afterwards, after that is like how we can communicate with you to show cash flows, right, so that you're able to manage overall spend, and then any type of documentation requirements that you and James are looking for from us. That seems like the most natural way to break it down, yeah, if you want to start, yeah.
+
+Speaker 5  08:59
+So see, you guys are kind of operating in the startup nature, which that's very exciting for you guys. Saw series A was was out there as well. So we're just trying to figure out, really, you know what, how you guys are thinking about funding for this project specifically, and how that's all been online.
+
+Speaker 3  09:20
+Sorry, so I did not come in aware that I was supposed to talk about that this meeting. So I guess what I need to renew is, like, here's the list of things that you want to know, and then we'll schedule another meeting. I'll give you all the answers. Okay, so if there's an email somewhere or something that has this already, like, I kind of have a particular way that I share this information with folks. So like, you just ask a question and me answering it is probably not the most efficient way.
+
+Speaker 2  09:45
+So I think, yeah, we could do we could do that. Sometimes our clients are funding through some type of debt financing. Sometimes it's, you know, off of their balance sheet. Sometimes it's through some type of equity financing. It's like all over the map. It helps us, you know, depending on how you're doing the funding, particularly if you're doing any type of debt or or senior lending through a bank, it helps us understand how we drive the GMP process, because a lot of times there's a closing involved somewhere in there that we that we then have to target for purposes of underwriting. So Jacob can follow up in an email of like, okay, is it going to be through assets? Is there is your plan to do some type of debt? Is it going to go through bank?
+
+Speaker 5  10:46
+Because once we have sort of an idea identified, it helps us understand how we need to drive part of the precon process in order to be whatever that yeah, if you want that question pose or email. Happy to do that, but yeah, that's, that's the question. When we get answered, then I can start to ask my questions that I'll have questions on, depending on, you know, whatever structure that is. So I can follow you separately.
+
+Speaker 3  11:14
+Okay, I'm not 100% following um, what you're getting at. So Conor, you said a whole bunch of like, hypotheticals, essentially, and then, and then, JV said that, based on kind of how we're structuring the cost of building this facility will determine what other questions you need to ask, like, is there a
+
+Speaker 2  11:40
+more efficient way through this process. Yeah, so maybe, maybe an example is, if, if you're, if you're financing the project cost. So think of it as the overall construction cost, right? If you're, if you're going to get a loan from JP Morgan Chase, right? Or those costs, it means that we're going to we're not going to need as much information about the current sort of assets on the balance sheet, right? Then, if you were going to finance the overall project through utilizing your current cash and investment balances within your balance does that. I think that's what Jacob saying is if, if you're going to go towards go
+
+Speaker 3  12:33
+less, let's go down the path of assuming that we're doing it from our equity funding, and we may add debt on later, but that's TV, so let's go down the path of assuming that that's equity, and give me your list of questions from that. Does that work? Yep. Jacob, okay, cool. Great. Anything else on that topic,
+
+Speaker 2  12:59
+I think on funding. The only other question is whether there's public funding coming in that's going to be utilized for the construction. The reason we want to know that is, typically the funding comes with some type of cost verification that we need to do. Experiences are, if, if there's money that is through a development agreement with a state, they typically want certifications from MOS for payrolls, right? Not a problem. And the grand scheme of things, it's just, we have to know what the rules are so we can set up the project controls and that we can buy those project controls from our subcontractors.
+
+Speaker 3  13:48
+Yeah, so what you've read about is, is where we're at right now. I think it'd be helpful for us, from an estimating perspective, and I don't know this is Ryan or Conor is, to kind of understand how you guys bid the project from a labor rates perspective today, like the numbers that you provided in the RFP response, like, what, what was underpinning that on, like a, here's the class of, you know, talent that has to be onsite, and here's the hourly rate that we were expecting to Pay. Other than that, there's, there's there's nothing else that you everything that we've gotten is publicly available, so there's nothing else on the books.
+
+Speaker 2  14:28
+Yeah, and Ryan and I talked about this beforehand, and I think we even brought it up in the interview, like we we think that the project cost support, what we believe is the prevailing wage that would be required in New Mexico. We just would have to, we just have to verify it with whatever the funding actual requirements are on your side. So we, we do think probably 35 that 35 different trade categories. We think that we're probably in alignment just based off of current industry demand for labor, so we should be fine.
+
+Unknown Speaker  15:09
+I think that answers your question,
+
+Speaker 3  15:11
+yeah, I think there is a follow up, though, like I'd like to understand the rates that you guys use against those 35 trades as part of the bid package. Is that something you can share with us?
+
+Unknown Speaker  15:24
+Yeah, we could give you round about. So we could give you an idea of what those rates would
+
+Speaker 2  15:33
+look like. Do you know? Do you know if, within your agreements with Albuquerque in the state. Did they include what, what we would call on our side of wage determination?
+
+Unknown Speaker  15:49
+Okay, so TBD,
+
+Speaker 2  15:54
+that's something we would typically take and then build into the subcontracts
+
+Unknown Speaker  16:00
+when you when you get there, okay,
+
+Speaker 2  16:07
+then, just so you're aware, it's not a huge cost driver for us to track it. We just have to do it up front. Yeah, there's, there's systems that we use, such as, there's a system called LCC tracker that we use to track a lot of that stuff for purposes of audit. Typically, there's an audit function somewhere in that development agreement. Yep,
+
+Speaker 2  16:40
+um, Brian, Jacob, can you think of anything else on the funding side before we talk cash flow?
+
+Ryan Hankins  16:50
+There was, and I think Nick's working on this, but, and this is probably going to be in your follow up questions, Jacob, but like, what break ground. He said there might be like a funding gate on when you guys break ground, something about a June or July as a prerequisite. Okay, there's nothing
+
+Speaker 5  17:14
+like that. You should, you should only add pop finance with the finance people, please,
+
+Ryan Hankins  17:18
+absolutely, absolutely. I was just clarifying. Understood there's
+
+Speaker 3  17:27
+nothing there we want to break around because schedule is really important to us, right? We've talked about that. I'm sure that he's talked to you about
+
+Speaker 5  17:38
+that, yeah, it's good for us to know if there's a funding strength that happens or doesn't happen. If there are days now,
+
+Speaker 5  17:49
+I anything else anyone on the call about funding,
+
+Speaker 2  17:57
+maybe we move on the cash flow. I Yeah, I think one of the things that will we owe to you, and that's going to come probably in two parts. One is this is the expected cash flow for sort of the preconstruction process, which is a very limited window, right? And then, as we're working in the pre construction process, we'll probably provide a cash flow of what we think the actual construction process will look like.
+
+Speaker 2  18:36
+Precons. Brian, what do you think precon next couple weeks. If that, yeah, so sorry.
+
+Speaker 3  18:45
+When will I have the precon cash flow? Can you give
+
+Ryan Hankins  18:49
+me a date? I already gave you guys a preliminary cash flow for a precon. I can forward that?
+
+Unknown Speaker  19:00
+Courtney, yeah, that's, that's what's going to be outlined in the LOA. There you go.
+
+Ryan Hankins  19:06
+Yeah. It was a email from 325 I'll forward it to, yeah.
+
+Unknown Speaker  19:12
+Thank you. I slacked it to you Mindy for the numbers.
+
+Speaker 3  19:15
+Okay? And then sorry. And then the next, like, level of fidelity on it is going to be when
+
+Unknown Speaker  19:23
+so the larger project,
+
+Speaker 3  19:29
+oh, what you do already is just the LOA like cash flow during the LOA time period,
+
+Speaker 2  19:38
+yeah, the larger project requires us to advance the schedule and the budget far enough, because it's they're both sort of intertwined. Brian, like I'm thinking it's probably a month or two. I know you want an exact date
+
+Unknown Speaker  19:58
+of April, end
+
+Unknown Speaker  20:02
+of April, probably achievable.
+
+Speaker 3  20:07
+That's super important for us, right? Like, so, just so you guys are aware, right? Like, equity funded company, we have two really huge things that we're building. One is the core and shell that you guys are building for us, right? And then we're also buying a system, so we have to buy all the parts for the system. So understanding when you guys need cash is a really, really critically important thing for us, so that we know, because this is the priority for all the cash, and then the secondary spend is buying the system that's going to be built later, right? But we can't No point in spending cash on a system and parts if there's not a building to build the system inside of, right? So understanding that, because we have a lot of long lead procurements, and there's just like a big puzzle, that we're trying to make sure that our cash is like properly used in the highest and best use at all times. So that cash flow is super important. And our under my understanding today from James and Kort, or, sorry, not James from Nick and Cory, is that we would have something from you like by 415 so I just want to make sure that we definitely are getting something by 430
+
+Speaker 2  21:18
+for the larger, yeah, 430 is more. It's achievable. Sorry, it came up yet.
+
+Ryan Hankins  21:25
+No, just, I was just gonna say, yeah, like, I mean, we got awarded, and we need to, we ever kick off next week? I think, I think we need to get through that. But yes, we can definitely work to getting you a cash flow. I just think we need to get up to speed where the project is.
+
+Speaker 3  21:40
+That sounds great, okay? And then, you know, something that's really important to us too is, as we do, the monthly draws that you guys are updating that that cash flow every single month, so we understand what changes happened in the project and how those changes and under overspend based, you know, the prior month impacts the next month's cash flows.
+
+Ryan Hankins  22:05
+Understood? Yeah, I think that's
+
+Unknown Speaker  22:08
+we could do that as well.
+
+Speaker 3  22:18
+Any other what is your process is the other thing to talk about, like the monthly drop process.
+
+Speaker 2  22:30
+We it's, it's not as important now as it is in the next once we actually go into construction phase. I mean, we can, we can talk about it, the cadence and go ahead.
+
+Ryan Hankins  22:46
+Part of this is like we're still working through our main contract, and so once we understand what that billing cycle looks like from the contractual perspective, tell you right
+
+Speaker 3  22:56
+now what that's gonna look like. It's gonna look like Nick and Cory want to and really, Nick needs to approve every single individual invoice inside your business systems, right? And then, once a month, we're going to expect you to put together a package that shows this was like the normal monthly drawdown package is due for everyone and their brother, that shows all the costs against the James. What's it called? The list of schedules. Schedule of values.
+
+Speaker 5  23:20
+Categories, schedule values, no, the categories she's thinking about.
+
+Unknown Speaker  23:24
+CSI, so like the work breakdown,
+
+Speaker 3  23:29
+we just want it to be able to track in that format, right? You know, this is how much was spent on concrete, and this is how much is spent on steel, and this is how much is spent on core and shell versus landscaping in that format every month. And then there will be a time period that we do a final review, and then we pay you. But I think the most important things are the data format for us and James and you will continue to talk about that, that we're getting that like detailed breakdown, and as stuff moves, how it goes in and out of those various categories, and it's basically the basic level of the CSI with a couple of more specific things, probably in the concrete area. And then the second thing that is most important to us is that you know that Nick is reviewing those things and seeing them one by one as they come through your system. I'm sure all this is very standard for you guys. Yeah, okay, cool. It is great. Um, so that's that's all we need. Perfect, perfect. All right, okay, so two things are gonna come out of this meeting, Jacob, you're gonna send me a list of questions based on an equity funding and then someone is going to send us a list of the 35 trades and the hourly rate that you guys use for those initially in your bid.
+
+Ryan Hankins  24:49
+Yeah, we'll work through that. I probably need till next week in order to do that. But yes, we can. We can work through getting you something on that you need till next week to do what we're the labor
+
+Speaker 3  25:03
+we know, I guess. How would you have put a bit together if you didn't have that like already?
+
+Speaker 2  25:07
+Well, it's called parametric estimating. So, so basically, you use your historical based off of what you've experienced on similar builds, and then we, we adjusted according to the actual area that we're building. So we're able to extrapolate back out what the what the rate looks like. But it's, it's, it's not the nature of how we do the raw
+
+Unknown Speaker  25:34
+data at the level of
+
+Speaker 2  25:37
+drawings that we had. Otherwise you get down so we have parametric estimation.
+
+Speaker 3  25:52
+All right, anything else you guys need for me today? Think we're good. Awesome. Ryan Conor, Jacob, it was great to meet all of you today. I look forward to our next conversation after I get your list of questions in advance, and then I hope you have a
+
+Ryan Hankins  26:10
+good week. Sounds great? Nice meeting you. Thank you. Bye.
+
+
+Transcribed by https://otter.ai

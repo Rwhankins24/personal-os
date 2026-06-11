@@ -1,0 +1,869 @@
+Speaker 1  00:00
+I Ben for Brian Erica, do you want to go ahead and take us through the summary and just kind of walk us through things? We've got about two hours, you know, we don't necessarily need to use the whole time, but just to give you guys, you know, Nick and I, our intention is to kind of have a really clear understanding of all the different value engineering opportunities. You know, I think at this point we can absolutely make decisions on which ones we will do or will not do, but also having a holistic understanding of the cut the plus deltas associated with 100% DD, and any additional scope that just happened through discovery of, you know, being a part of the project team now, before we get started, are there any items pending that we should just kind of itemize, that we still need to follow up on, or is this the, is this the holistic View kind of moving forward?
+
+Ryan Hankins  01:41
+This is, this is a holistic view of where we sit today based on the conversations we've had. And what we've tried to do is memorialize everything within the clarifications as well, to kind of get like a good documented basis for this snapshot in time. The one thing we're missing from what we sent you on Friday is really all the attachments that go with it to show what was priced and so those will be coming this week. It was just, it was a monumental effort to get it out on Friday.
+
+Speaker 1  02:13
+Yeah, and completely understand one specific question. What about finishes? Is finishes still pending, or is this
+
+Ryan Hankins  02:20
+wrapped up in this? This is wrapped up in this, and the VE takes into account some of the higher dollar items that we think could be potentially reduced, or which, which ones are driving cost is the better way? Okay, excellent, perfect. Okay. Do you want me to take it away? All right, let me share my screen real quick. Let me know when you can see it. And I did. Did you forward it to the design team?
+
+Speaker 1  02:55
+Cory, no, I have not forwarded this to anybody just yet. Wanted to
+
+Ryan Hankins  03:01
+just internal to Pacific fusion, good deal. So we'll, we'll get this in your hands. Stantec apologize. Tip. Typically, I send it to the owner, primarily just because we work for them, but we will make sure you guys get it today as well. Let me know when you can see?
+
+Speaker 1  03:23
+Yeah, and I think so. I think the the main information that Stantec needs is really just decisions or direction, right? So the numbers are less important for Stantec. It's more about just direction decisions, how, if there's any options on the table, making sure you guys will and Rebecca have had that direction
+
+Ryan Hankins  03:47
+absolutely all right, I think now you're seeing the email I sent. Okay, so high level, the pricing is coming roughly 20% over the 50% DD pricing. That basically means we're roughly $50 million over that previous amount. The good news is that, because we've been so proactive as an entire team about this ve exercise, and I've zoomed in a little bit, so maybe it's more readable. Is that of that $50 million because we were roughly at 232 before now we're roughly at 282 we've priced $44 million in total options. And what We have provided to you, and we'll go through this in a minute, there's roughly $34 million of roadmap savings, that gets us back within 7% of the 50% DD budget, which, when you take into account, you know, the fireproofing and a lot of the things that have been kind of, we'll call it just pure we'll call It basis of design changes that have happened from the Pacific fusion side, being 7% over budgets, pretty dang good. So a lot of work has gone into this from our side, from from your side, from the design team side, and I think at the end of the day, having a realistic solution to get to that 7% of our 50% DD budgets, pretty remarkable considering all the discussions you've been having over the last month. Anything else here before I go into the PDF?
+
+Ryan Hankins  05:41
+So what you'll what you're seeing, and this is, like I said, an abbreviated version of what we would typically send, and we'll get that out to you guys this week.
+
+Speaker 1  05:52
+Sorry, a really quick Ryan the 282 the 282 is including the plus deltas, but not including the Value Engineering, correct, correct.
+
+Ryan Hankins  06:03
+So, the way, the way that I mean. So if I was to make it super simple, 232, 50% DD estimate, and I what I said, it was DD, 100% documents, plus the real time discussion adders, because I don't know how to necessarily put a statement around that. But you know, the the a lot of things with the tunnel that we've been talking about, pre loading, all those types of things that's within this 49 million, 50 million here to get you up to that 100% DD estimate. And then the roadmap value engineering is the Clayco thought of what roadmap items could get you to $34 million realistically, which would drive you down to that 248 million, which would be 15 million, 16 million over budget, make sense. So, I mean, we can do one of two things. We can go straight to ve if we want to go through cost bridging items or
+
+Speaker 1  07:08
+so, I think in the sake of for the sake of time, let's, let's make sure that we can get everything in the two hours. Let's go through, let's go through all the vs Stan tech team, Rebecca and Bill, I'd like you to raise your hand if you guys have been given the laundry list of ve direction items, if you see something on this list that is significant, significant enough to move the needle where you need a decision on that, let's, let's call it out, and let's determine if it's something this could end up in the 90% or after so let's start with VE. We'll get through ve, and then we'll move to the cost deltas. Does that sound good? Sounds great.
+
+Ryan Hankins  07:55
+Okay, so if we go one by one, I'll just use the green bar here, just because sometimes it's difficult to read Excel on a PDF, but basically so the mike the helix micro bars that one did bear some good fruit, roughly 150 grand. I think that was a no brainer for the slab areas,
+
+Speaker 1  08:16
+okay? And that's happening in the lab admin and central utility
+
+Ryan Hankins  08:20
+building, correct? I don't think it's central utility building. I think it's just the admin in the lab.
+
+Ryan Hankins  08:34
+Those are the types of things that like we just need, we need to get you all these exhibits so that they're specifically tied to the numbers, and that's what we're working on this week. Swap natural RT or natural gas RT use in the building. That's that $9.2 million that we've been talking about being able to save. By the way, this does not include financials or indirect costs. What I've done is, at the very bottom, I have total indirect costs that are rolled up into a $4.7 million savings. So that is, this is just the raw trade cost. I think we've already talked about accepting that one, and then basically for this one, we said no, because we're just a lower value and we're the natural gas.
+
+Speaker 1  09:27
+Do do we? Is there any value in editing this real time as I like what you're doing with the green highlighting it as like this has already been accepted.
+
+Ryan Hankins  09:39
+Good point. I like where you're going with this. Yep, yep, I'm pulling it over. Oh, cool. Okay, all right. So what I'll do is I'll just put a little bit, I'll put a column here. Except, great. And we'll do equals that.
+
+Ryan Hankins  10:11
+Okay, High Performance Coatings, so roughly the high performance coding adder came out to roughly $4 million and so if you remove the areas that are not shown in that exhibit, you get to the one point to $1.28 million in savings off of that 4 million. And that's the reverse hourglass, because the basically the process areas would not have it. It would just be all the outside areas.
+
+Speaker 1  10:46
+Got you Okay, so there was I see. So this doesn't make sense. I know we talked about this conceptually at a high level, but you basically did a cost delta for the scope that wasn't included, and we found a way to trip that down. Yep. Okay, that sounds good. So I'd say, you know, for now, it's part of the spec. This is included. Do we think there's any additional potential to find high performance coding that's less than $20 a square foot, or is it not recommended?
+
+Ryan Hankins  11:19
+Yeah, the the one that we the one that we the one that's in the spec, is consistent with we reached out to some of the larger epoxy guys in the New Mexico area, and the guy that's doing this at Intel, this is the same spec. So he actually went off of his pricing from some stuff he's done recently from the Intel project, and he was saying it was coming in around $20 a foot. He said, you know, absolutely he could see savings. But once again, it comes, I think I've talked about this before. It comes back to maintainability, and whatever you say up front, cap x, basically, would, would you'd probably want to put into a maintenance bucket. Yeah. It depends on your goals. And if you're just trying to get capex down, yes, you can find a decent product for 1012, bucks a foot. I wouldn't recommend going lower than that.
+
+Speaker 1  12:15
+Good to know it's and again, I think you know the realities of how we work in the world. We just may need to focus on that cap x number.
+
+Ryan Hankins  12:28
+So good to know, yep, but for right now, we're saying that at least the parameters are accepted. Okay, that sounds good. Okay. Read. Reducing the extents of the entry, reducing window coverage. This is basically the revised, the revised option for the entry, with the glass and the metal panels and everything, roughly 200 and roughly 300 grand in savings,
+
+Speaker 1  13:00
+okay, that includes steel. That includes glazing, yep, okay. And that includes the the impressions, kind of the architectural impressions, where we're just having the border and not that, okay, all right. Do we know there are times that he just gave you straight tonnage
+
+Ryan Hankins  13:23
+of steel we so that was one of the biggest clarifications we've had in this entire estimate, is that we, we don't have any new information on steel from the 50% DD. So what we did was, I think, like the the Stantec team has been good with getting us, and I think it might have been have been thorn in Thomas city as well, with getting us some visuals of what steel is needed there. And they talked about two columns being deducted. And so we basically conceptually looked at what we thought those beams might be, size wise, and deducted the steel complication. Yep, all right, that one you think?
+
+Speaker 1  14:07
+Except, yes, absolutely, yeah, already gave that direction to the design team. And I think Rebecca Dominic's already made that change.
+
+Ryan Hankins  14:15
+Okay, so MC Nichols, roof screening, Perf panels. So those were coming in roughly, just for the roof screening itself, roughly 25 bucks a foot, if we kind of gave you, like the bottom line, dollar on what this could potentially be. I mean, there's just, there's not a ton of square footage there. But if you wanted to go to a cheaper product, you could go to a B deck, which is basically just a decking product that you just put vertically, not, not, not the prettiest, you know, but it would cause savings. It's not like trucks, it's, it's like taking the metal deck that's horizontal above you, and it's just turning it like a corrugated steel, yeah.
+
+Speaker 2  15:01
+Okay, okay. I just wanted to add to that in terms of the because it's essentially a large cantilever, and so the perforation, there needs to be a certain amount of perforation from the structural standpoint. So I think we would just need to double check that so that there's not too much of a wind load on this massive cantilever, so having the air be able to pass through. So I think we had given the option of the match instead of the perf panel, which I think is cheaper. I don't know if that is, we was reviewed as as a cheaper square foot cost or
+
+Ryan Hankins  15:40
+so we did look at that. What we looked at was, here's the bottom line, dollar cost, if we think that 70 grand is not enough to go and go explore, because we were not able to get the cost for that panel, gotcha, that's the lowest level that this is the lowest level possibly, got it
+
+Speaker 2  16:01
+because and we had given the option of another of one other, like pre manufactured system that we thought might also be a cheaper option, but okay, got
+
+Speaker 1  16:13
+it so. Is this just for the parapet around the or the equipment screening on the roof? Or does this also include elimination of the external stairs behind the central utility building?
+
+Ryan Hankins  16:28
+Those are different items.
+
+Speaker 2  16:30
+Okay? Is it? Is it on a different line item? Because I thought it had it was like a part 123, and four in that item 10, Oh, you did it down there. Option one, got it. Got it.
+
+Ryan Hankins  16:44
+Sorry. That's a good it's good comment. We were trying to get this out, and I don't think No, that's good. There you go.
+
+Speaker 1  16:54
+Agree. So I'm just saying accepted this is we'll accept this.
+
+Ryan Hankins  16:59
+Well, we'll accept it with the caveat that we need to go find out what the real solution is. But yes, well,
+
+Speaker 2  17:04
+yeah, we can double check with structural and what what it needs to be in terms of the amount of penetrations.
+
+Ryan Hankins  17:17
+Okay, so there was two options priced here. One was reduced 25 foot, and one was to reduce to zero foot, basically removal entirely, and then add 10 foot fencing to match the perimeter fencing. And so we road mapped the larger item.
+
+Speaker 1  17:40
+Yep, we'll accept that. Let's maybe just change row 97 to option two. It's an option.
+
+Ryan Hankins  17:47
+Yep, that works. So then we get into imp. So for the imp panels, Kingspan. I mean, there was, there was like five manufacturers spec, but Kingspan was the most cost competitive out of that group. What we did is we priced two different panels. One was they're both metal span products. Which are they're actually owned. Metal span is actually owned by new core. I can guarantee you, it's probably not as pretty as Kingspan, and it probably doesn't have the color selection, probably that we're wanting, but you could save between a million to go to the CF metal span and 1.3 million to go to the VF metal span.
+
+Speaker 1  18:36
+What is the what is the visual and performance spec difference between CF
+
+Ryan Hankins  18:41
+and EF, I don't that's not my cup of tea. What I would say is, we'll let you guys well, we'll give you guys some information on it and see if we can get what the best solution looks like there. Yeah. I think
+
+Speaker 3  18:58
+Go ahead. Erica, yeah. I was just going to say when we send you the backup, we can give you all the information so you can make a little bit better informed decision on what that looks like.
+
+Speaker 1  19:07
+Okay, I think for now, for documentation purposes, we're going to make an assumption that we'll go with the higher the opportunity, 12 a but we should probably highlight this yellow, because we need to go back. It's probably same thing with the Mike Nichols product. Anything we need to go back and double confirm our assumption. Let's just maybe color code that to Yeah, perfect, yeah.
+
+Speaker 4  19:39
+And real quick, Courtney, just my quick 32nd Google search, the CF versus VF for the middle span products is concealed fastener versus visible fastener. So it's really just an esthetic thing if you want to be able to see the fasteners or not.
+
+Speaker 1  19:56
+Yeah, that sounds like a nice $400,000 savings if it's just a visual thing. Okay, yeah, we'll pull on that third a little bit more later, but for now, we'll make that $1.3 million assumption getting
+
+Ryan Hankins  20:13
+rid of the basketball court. 30 grand. The $35,000 number was because of the index, which you capture below.
+
+Unknown Speaker  20:20
+Okay, we'll accept that still hurts my feelings.
+
+Ryan Hankins  20:27
+We'll put a little later, we'll put a little concrete slab, and we'll go buy a basketball hoop from home
+
+Speaker 4  20:36
+some GMP savings. I was thinking one of those plastic ones that you put behind the door.
+
+Speaker 2  20:46
+I'm just looking, just a quick question, but I'm looking at this, the metal span. Is there a price? So the CF, there's a bunch of different finishes. Is there like, is it just any of the finishes and options. Or is there a specific type that we would just out of curiosity, but you can tell us later?
+
+Ryan Hankins  21:07
+Yeah, good. Good question.
+
+Speaker 2  21:10
+Yeah, if it can be defined a little bit of what specific line you guys are choosing from to get that savings that would help us. Thank you. Do.
+
+Ryan Hankins  21:27
+Okay, man, I totally screwed this whole thing up. Do
+
+Ryan Hankins  21:45
+all right, geo peers. We already had geo peers included under all the foundations. And so this is a pure savings of 340,000 or 360,000 for reducing the foundation sizes. I Yeah, removing the architectural louver tube steel canopy at the entrance. That's that large, triangular shaped one. If you remove the whole thing, you save 577, if you do something between where you make it smaller, like it just kind of the more the smaller and the more rectangular we can make it, that cost will be more efficient.
+
+Speaker 1  22:30
+Rebecca, we don't necessarily need it there, since it's not really part of our future plan. Amenity spaces. Do you think that's going to push us over the 10% change when we would go back into clean up entitlements if we remove it completely?
+
+Speaker 2  22:49
+Yeah, I'm not, I'm not sure that image pushes over 10% I think I don't know. I would have to go look at the numbers and see like we're making several changes no matter what to the site plan. So I think it would maybe be worth just a quick conversation with Jay to see what he Jr Robin, but Mike, my initial instinct is probably it wouldn't push you over 10% but
+
+Speaker 1  23:20
+I'm not sure, yeah, yeah, let's, let's highlight this yellow. If we can completely eliminate it, I think that's going to be great money spent elsewhere. But we'll just, we'll do that due diligence in the background.
+
+Ryan Hankins  23:37
+So do we want to put like, couple 100k here. Do we want to put zero right now?
+
+Speaker 1  23:44
+Let's, let's push to get it removed. If we're fairly confident it's not going to push us over, we'll just put the full 577, so treatment, programming rods. I think we can move past this. I've spoken with a few other folks, and it sounds like there's quite a bit of maintenance involved, and it looks like it's an ad here. So I'm okay skipping over this one.
+
+Ryan Hankins  24:09
+Okay, so we'll just say not accepted
+
+Ryan Hankins  24:17
+fluid coolers. We've already talked about this, where we've accepted this one? I saw your email from last week, Courtney. Haven't been able to react yet, but for this one, I don't have an answer for you yet. What was the question, I think you were saying, how do we accept this and what's, the value of it? I just, I haven't been able to break out with that value as yet. It's already most of it's already wrapped into the line items above the other larger savings items from mechanical the 9 million. Are you talking about the glycol, glycol secondary loop, yeah. So I still, I still owe you something on that. I just haven't gotten it
+
+Speaker 1  25:09
+yet. Okay, all right, we are actually accepting this. So there's, I'll have to go back. I'll be honest, Ryan, I'm having a bit of a brain blip, but we are accepting this, eliminating the secondary loop, and just creating a full primary loop. It's something we can easily manage on our side, which is different heat exchanger specs for our equipment understood.
+
+Ryan Hankins  25:35
+I need to go figure out the mutually exclusive value. Okay, so I'll go figure that out. We don't have it yet.
+
+Speaker 2  25:44
+I just wanted to point out one small thing that I just remembered about the landscape canopy. There's a requirement for Mesa Del Sol that the bike spaces are covered, or they have to be brought inside. So we at least need a small canopy to cover them. So it'll be small, but it can be we can just put it just over the bike spaces, if that's what the direction is.
+
+Speaker 1  26:09
+And the square footage of those bike spaces is 50%
+
+Speaker 2  26:13
+30% Oh, it's the bike spaces as much less than 50% of the overall we've already reduced it to 50% in the in our current plan, so and made it rectangular. So I can figure that out. I don't have that number for you right now, but Okay,
+
+Speaker 1  26:29
+so maybe what we do, Ryan, then, so thank you. Rebecca, great feedback. Maybe what we do is we just take that 577, we cut it in half. That's our allocation, if we can do better. Great. But yes, Rebecca, I think the design direction is, let's only, let's do the Mesa Del Sol minimum, and just cover that square footage.
+
+Speaker 2  26:47
+Okay, yeah, I'll talk with our landscape architect and we'll move in that direction.
+
+Ryan Hankins  26:52
+Okay, four, pipe to two pipe. I think we decided we're not going to accept this.
+
+Speaker 1  27:02
+And I mean, there's much more flexibility with the four pipes. So if it's only $48,000
+
+Ryan Hankins  27:09
+that's, yeah, reduce or eliminate installation on exposed supply deck work and condition spaces. Like we said, we're going to accept that,
+
+Speaker 1  27:21
+as long as there's no energy code implication here and Astrid is confirmed that, then that's fine.
+
+Ryan Hankins  27:39
+Okay, then we looked at the office area lighting package savings 20 grand. We looked at the overall building fixture savings to go with alternative manufacturers, 200 grand. It's just not something that's super easy. We'd probably need to have more time on it, but we feel pretty confident we can get to those figures working with with Stantec in the in the vendors, gotcha.
+
+Speaker 1  28:07
+So you're looking at a combined total of 220 Yep, roughly. Okay, let's accept this and let's just chip away it
+
+Speaker 4  28:15
+before we get off. Lighting is with the removal of all of the skylights, is there any impact to our lighting requirements?
+
+Unknown Speaker  28:29
+I mean, I'm just wondering if we're gonna have to
+
+Speaker 3  28:31
+add that. That's a good point. We'll have to study that. Yeah, okay, the engineers and confirm
+
+Speaker 1  28:40
+Is there somebody had made a comment previously about this, and the standard illumination for work spaces needs to be carried over during daytime and nighttime. So my assumption is, if you need 30 foot candles at night. And during the day, you're, you're really sizing the lighting system for that 30 foot candles at night when the skylights provide no additional elimination. And I think it would just be, I'm just spit ball in here, but I think it would just be in the controls, right? So during the day, if you did have sky lights, you could reduce lighting and your your operational cost. So my assumption is the design was already sized for, you know, night time requirements, but something to look into. I think that's right. Cory, this
+
+Ryan Hankins  29:41
+next one is just taking the restroom and locker room finishes and cutting the height of the wall tile in half. So you save $22,000 by just cutting the wall tile in half. Or there's a difference. You know, you could do wet walls just tile. And do you know, less, much less tile on the other walls, there's, there's a couple options we can do there. But basically what we're saying is that there's $22,000 to save, and we just need to talk about it with Stantec, about what we think the right solution is.
+
+Speaker 1  30:15
+That sounds good. Let's, let's accept that, and then this next one, we will, I think, for now, we will not accept it, but let's highlight it yellow, because this is something that we'll need to run down with leadership. So this will be a key decision, so we won't currently include it in our bottom line, but we'll pull it out as an additional opportunity for Keith to make a decision on should we want to increase that bottom line?
+
+Ryan Hankins  30:51
+Okay, eliminating nine rectangle skylights and one octagon skylight.
+
+Ryan Hankins  31:08
+Eliminate shell and core locker rooms, if not code required. Basically, this is everything in this space as you just do a level two drywall finish in there. Just tape joints. So it's just basically a gray box, no toilets, no electrical, no mechanical. It's just dead. Yeah, I think
+
+Speaker 1  31:35
+I'm gonna say no to this one, just for a people happiness standpoint. I think we do want to have some, some ability for people to use the space in a way that de stresses them. So if they had showers, could use that workout space. But we'll, you know, again, this will be in our back pocket if we really get pushed on finding additional savings.
+
+Speaker 2  32:10
+You can't play basketball, but you can lift that will make me happy. I need to drop for a few minutes, and then I'll come back. So if you need me for anything, just save the questions and I'll be back in a little bit. Okay.
+
+Speaker 1  32:24
+Okay, no problem. So will if you wouldn't mind taking over for Rebecca. So if you see any decisions here that we're making and accepting that wasn't a part of the original guidance, let's just make note of that so we know what we need to disseminate to the rest of the design team.
+
+Ryan Hankins  32:45
+Okay, perfect. So this next one, there's, there's like a mountainous type wood slat system that shown in one of the common areas, and it ended up being pretty expensive. And the the sub actually, or the trade partner, actually had some concerns about some of the heights of that as well, because it is wood, and wood does you know, if you go to, like a 20 foot stick, there could be some potential warping. So there was some, there was some thoughts about, you know, what else could we do here? And if you just remove the system entirely, it's roughly $600,000 savings. And for 600 grand, we can probably afford something that's pretty nice. We'll just have to identify what that is, yeah, so
+
+Speaker 1  33:38
+I'll say for now, let's take this out, does this? So there's little bat ins that we use to create that impression. Does that also include elimination of the paint? Because I think that was an accent wall as well, and like a darker blue, are we keeping it?
+
+Ryan Hankins  33:55
+Okay, great. Maybe we just paints pennies in the dollar. We'll we'll figure out paint.
+
+Speaker 1  34:00
+But yeah, and I think for kind of day one purposes, an accent wall is really as far as we want to go. So we'll accept this. Okay, we're not going to accept as we're moving as well in the parking lot, I think first impressions will want to maintain a, you know, a
+
+Ryan Hankins  34:30
+nicely paved space, heavily recommended. I yeah, when we saw how much space it was, we were less excited about this being a bigger value. And so, yeah, we totally agree, yes, this next one is, there's an and there's, there's a couple items here about amenities the next couple so first is the table tennis or the ping pong area, basically deducting it and then adding Crusher fines back in. That was roughly 178,000 The next one is that shade structure that is over that area is another 177,000 GF, CR bench, which is over at the entry, that one's 227,000 and then just removing all of the backdrop panels, the gate, the line gates, the chairs, tables, benches, that saves you another 150 grand. And so depending on, you know, once again, some of this stuff, you guys can buy some of this stuff. You know, we don't even have to buy day one some of the stuff. I mean, we just, there's opportunity to save there. Is what we're trying to say.
+
+Speaker 1  35:50
+Gotcha okay? So it looks like, Can you do a quick little total of just one of those columns?
+
+Ryan Hankins  35:56
+Yeah, it's 735, well, we will accept all of this. Okay.
+
+Ryan Hankins  36:14
+Now our favorite item on the whole list, fireproofing. You get to save roughly $4 million dollars in fireproofing by going to a sprayed versus into message, excellent.
+
+Speaker 1  36:26
+And this was originally a an $8 million ad within Tomes.
+
+Ryan Hankins  36:32
+It it ended up being about seven and a half million. And then in our final estimate, and basically this pulls out 4 million of that. So it's only like a three and a half million dollar otter, which is pretty good.
+
+Speaker 1  36:48
+This next one, I've already talked to Jeremy about it, the answer is no, but we'll still bring it up with Keith. And if it's absolutely, if there, this is a big chunk of change here. So we'll highlight this yellow. It's no for now, just like the mezzanine will have it in our back pocket is leadership decisions. Same thing with this one. This is something we can work So James, James E just a heads up, this is something that we can help Mindy understand a little bit more. You know, I think I hesitate to say that we really even want to investigate this, because this is probably going to be an ad service to the design team if we go back and undo the assumptions with FM Global, but again, it'll just be underneath the bottom line for leadership decisions, just understanding that there's going To be some schedule and ad service impacts here. I Yeah,
+
+Ryan Hankins  38:05
+I mean, I don't even know. I'll be totally honest with you without understanding exactly what those FM Global requirements are for your facility, based on you guys not having a lot of discussions with them, I don't necessarily know that that might be a potential risk. Now we've, we've put a lot of belts and suspenders on this thing across the board, with the fireproofing, with other stuff like that. So I have a pretty high level of confidence. But man, if FM Global is really something that we want to go down. I think having a more detailed discussion outside of what I just did in early April would probably be beneficial to the team.
+
+Speaker 1  38:50
+Yeah, I'm just gonna put this one at high risk because, because of our use, our uniqueness of our use, we're pretty much on our own to get the insurance policies in place as a facility owner. So my hunch is this line item is going to carry a very, very high risk. Should be should we deviate from that recommendation? Our insurance brokers have been pretty adamant about just making sure we do this so we can become in trouble. So again, I'll you know, just for everybody's food for thought, it's an opportunity, but it comes with a very high risk that's likely unachievable at this point. Now, quick clarification, when you say lightning protection, are you talking about removing the lightning protection or Yes?
+
+Ryan Hankins  39:43
+Can Yes, complete removal of lightning protection and go into more of a code minimum, yeah.
+
+Speaker 1  39:50
+And again, I think I don't know that that would carry a risk, being that our system has some very high voltage, amperage systems. I don't know that we want to put those at risk.
+
+Speaker 5  40:13
+Yeah, there's also an outbacks, right? I think you identified it that if you don't have this in your building, your carriers may charge you additional premium. So what you save up front you may spend on the back end.
+
+Unknown Speaker  40:30
+And I agree with that Conor,
+
+Ryan Hankins  40:34
+okay, another good one, the deferring the one line, four and a half million. Electrical was already down 4 million. And so this takes us to roughly eight and a half million dollars down on electrical, which is great.
+
+Speaker 1  40:53
+So electrical was already down 8 million. No, what was the first half of that?
+
+Ryan Hankins  40:58
+It was four. 4 million was what our new estimate was versus our old estimate, and then we're also pulling out four and a half million.
+
+Speaker 1  41:06
+Oh, gotcha. Okay, so, yeah, that's great. Okay, wonderful. James Hicks, that's just something that we want to highlight in our meeting with Keith for context, on the previous forecast we were carrying, we noticed a significant increase with electrical and mechanical cost to the tune of, you know, 20 ish, million dollars. So that's, that's great that we were able to sharpen the pencil there,
+
+Ryan Hankins  41:39
+and then the next three, or the next two, I think, were already accepted through mechanical and then the last one, which I haven't, I know, Rebecca asked, What's the difference between the impasse and the montage? So we gave you two different options. And once again, I think this falls into the same bucket as like the metal panels, where we need to go do some more research on it, but to go from a 10 foot Ameristar impasse to an eight foot Ameristar impasse, so just keeping the same product reducing the height, you save half a million dollars. If you change both the 10 foot to eight foot and the impasse to montage, you save a million dollars, and they're both anti climb options. That's the one thing that I'm not sure of. And we need to go do some more some more focus on
+
+Speaker 1  42:34
+Okay, let's go with the higher value. I'm just gonna do some quick, I don't know. Can you do some quick research in the background to see if the montage qualifies.
+
+Speaker 4  42:44
+Yeah, I'm doing it right now. I From what I see, is the montage doesn't is not anti climb? Okay?
+
+Speaker 1  42:55
+If it's not anti climb, then good thing. It's the gate. Okay? Is impasse anti climb?
+
+Speaker 4  43:05
+Yeah, impasse is anti climb. Okay, that's the biggest difference I see.
+
+Speaker 1  43:10
+Okay, if that's the case, we want to maintain anti climb. So I think what we'll do is line item 126, will be perfect. Okay? So then,
+
+Ryan Hankins  43:31
+so this one was this, take this. I
+
+Ryan Hankins  43:40
+me take this.
+
+Ryan Hankins  43:51
+Yep, this one is that this is just that means that I
+
+Ryan Hankins  44:08
+so roughly 19 million over budget versus the 50 million that we came in on. Okay, and it looks
+
+Speaker 1  44:14
+like additional, really, the practical additional operation. Opportunities would be the mezzanine, yep, and the roll up door. So that's 1.5
+
+Ryan Hankins  44:33
+it's about a million sorry, and then, yeah, we didn't, there's not much else. And I mean, we, we pretty much scrape the barrel on this and knowing, knowing that we were turning an estimate, and there was $50 million over budget, we, we scraped this thing as much as we possibly could. I would hesitate to say that without program change, there's probably not much opportunity to get back to budget.
+
+Speaker 1  45:09
+This is great Erica and Ryan. This is, this is really good. We understand, we we thoroughly understand the changes between, you know, 50 and 100% Ed. Thank you guys. This is this is going to tell a really good story, and it's detailed enough where we can have that conversation with leadership, and they can help us make some of these changes. And if there needs to be some program changes, we can go down that road, but very detailed. Thank you very much.
+
+Ryan Hankins  45:40
+Absolutely. And we'll, we'll get this cleaned up and back to you guys. What I'd like to do is make sure you guys are armed so that, let's say they want to dig into something. Then you guys can say, Oh, I have the attachment right here that can show you what's what's changing.
+
+Speaker 1  45:57
+Perfect. It was a favor, Ryan and Erica, if you can send me this worksheet today, like right after this call, we can, we can wait for some of the backup attachments. No problem. Nick James and I are going to be scrambling to prepare for a meeting with leadership in a few days, and we're going to start working on that today. So having this backup is going to be great to kick us off.
+
+Ryan Hankins  46:20
+Okay, yeah, we could definitely
+
+Speaker 6  46:22
+do that. No problem. Cool, Ryan, Ryan, we'd appreciate the chart too. We don't need the numbers necessarily, but there's very minor differences between your chart and what's on the ACC build chart, and would just be good to get those in alignment.
+
+Ryan Hankins  46:44
+Yes, we wanted to present this in a way that was more presentable, but I totally agree that Erica, we need to get all these values into that chart, just so that we can see that we've, you know, that all these are the ones that were supposed to be priced, and then the ones that are additional, we'll just add to the bottom of the list. Sounds good? Yeah, we'll confirm that.
+
+Unknown Speaker  47:14
+Anything else, I think, for ve This is great. I
+
+Speaker 4  47:24
+This looks really, really good, Ryan and Eric. I appreciate it. I know it was a lot of work to get here, but I think this is really exactly what our leadership is expecting. So this will really help us dial it in, and then after our meeting on Thursday with Keith, we should have some final direction on a couple of those items like the mesa. Me got
+
+Ryan Hankins  47:44
+to give a lot of credit to the design team too. I mean, they supported us quite a bit throughout this effort.
+
+Unknown Speaker  47:50
+So absolutely, yeah, absolutely
+
+Unknown Speaker  47:54
+great to work with on this. So
+
+Ryan Hankins  47:59
+what do we want? To do next?
+
+Speaker 1  48:07
+Plus deltas? I think what's, you know, very similar we, we need to tell the story of where that $50 million came from. So I think that's a good next step.
+
+Ryan Hankins  48:19
+And we knew that we were likely going there, so we already created the list for you. All right. So if we look at so the way we did this once again, the top is the DD estimate. If you add all of these up, they get to a bottom line, and the bottom line then gets the indirect supplied to it, and then it equals the new value. So I think from a communication perspective, this becomes a good tool for you guys, but basically starting from the top, for the preloading requirements, we talked through that with Thorn and tomasetti, it looks like our plan of staying a foot short because of your differential sediment parameters and your other parameters associated with floor flatness, floor levelness, we went ahead and just added a foot to every one of the mat slab every one of the mat slab elements. So just just to make sure that we could pour six foot preload it, and then just pour a foot on top of it and get it to be the right, the right finished condition. So roughly, roughly 730,000 for that the tunnel extension due to the pipe roughly 250 grand. That's that option 1b we were talking through Target chamber, edge of slab details in the buttress support, 115,000 okay, this was the with the base plates. Yep. And okay. Circular detail that thorn and Thomas Ed was looking at the MIT l covers. I know we said 13 million. We had a number at 13. We had a number at eight. We're trying to get to the bottom of it still on what the actual number is, but we carried $10 million allowance for right now.
+
+Speaker 1  50:25
+Gotcha, do you anticipate if we were to go with a borated concrete or a steel plate that just provides the physical loading requirements and not the shielding requirements, it will be for less
+
+Ryan Hankins  50:42
+than 10 I would say for $10 million you can pour a ton of concrete. And I know that boring concrete is probably more expensive, but I and maybe borated concrete is the most expensive concrete of all time. I don't know, but I could see this coming down? Yes, kind of curious.
+
+Speaker 1  51:06
+Have have you guys, were you guys able to reach out to like, CMX or a batch plan, or somebody just to say, Hey, do you guys know how to create 480 concrete I'm wondering how simple this is to do at a batch plant, or if this is going to be a
+
+Ryan Hankins  51:20
+special process, we're probably not going to batch it on site, because it's so little. I think we're going to have to do it at the facility, and me, especially in New Mexico, I would think that these guys have done this before. Okay, so
+
+Speaker 1  51:34
+we'll, we'll do something special on site.
+
+Ryan Hankins  51:37
+Okay? I don't the answer is, I don't know. Yeah, we're still, we're still evaluating it. We have guys that have experience with it, but we're, we're just, I still need a holistic picture, Conor, unless you have anything to add about borated concrete, yeah, that's fair. This So, yeah, I would, I would track that as a potential cost savings.
+
+Speaker 5  52:10
+It's, it's so driven by your process and use case, I feel like there's maybe some other solution that all of us, have not been thought about, but it's really so highly dependent on what you're storing in those large pits.
+
+Speaker 1  52:29
+So this is great information, something that will chip away at and see what makes sense.
+
+Ryan Hankins  52:38
+So so utility trench covers for the rest of the covers, roughly 4.6 million. The exterior entry canopy, as we talked about, we did not have that in our previous budget. So roughly 575,000 some interior railings that were specified at the docks, roughly 50 grand, small item, exterior stair screen support. Roughly 100 grand was not shown in the previous drawing set. We added 300 grand for the 40 foot overhead door openings, just understanding what it takes in the wind loads, and it's going to be a monumental upbringing to get that to work.
+
+Unknown Speaker  53:38
+Yeah, structural shell support for and that's for the two openings, correct, correct. We did 150
+
+Ryan Hankins  53:45
+per opening. We talked with frank about it, and we feel that's appropriate.
+
+Unknown Speaker  53:50
+Okay, gotcha, yep. Now that makes sense to me.
+
+Ryan Hankins  53:53
+Yep. So MEP, done it. These were some allowances that were shown in the drawings that were clarified by Frank that they are additional to the previous stated quantities, but 20 tons of MEP dunnage, 65 tons more at the wind girts than previously identified. 20 tons for the entrance canopy. Wind girts, 10 tons for the screen, wall framing at the cub roof, and then five tons for elevator, steel, hoist beam,
+
+Speaker 1  54:30
+if you had to throw a whack at it, what is our overall steel tonnage for this facility, including Some of this mask stuff?
+
+Ryan Hankins  54:41
+I mean, you're pushing, you're you're above 6000 tons. I mean, you're roughly 50 pounds a square foot. Mean with if you act, I mean the rest of this stuff. I mean maybe an extra 100. So you're at, like 6100, we'll call it divided by, I guess, multiplied by 2000 divided by 250,000 you're 4849 pounds a foot, and to their point, or to Thorn and Thomas Eddie's credit. I don't think that the, I don't think the design criteria has really settled. I mean, like, for example, like, you know, we're talking about fireproofing and all this stuff, and you could tell that they're nervous. That's just a nice way of saying it nervous in terms of, like, they're they're trying to, they're trying to design at speed, and, you know, we're also pushing them, but at the same time, base to design is not static, and so I know that they are. They're also being told to do some studies, and we're also pushing them on trench plates and all this kind of stuff. So they've got a lot going on. Yeah, Mark,
+
+Speaker 1  55:55
+Mark and Frank, probably, I mean, all of the design team is scrambling, but, you know? But, yeah, they are. They are very much overloaded right now.
+
+Ryan Hankins  56:08
+Yeah, and the 400 ton crane, like, I don't want to understate how crazy of a load that is. I mean, that's, it's, it's something that you don't see every day, and we have nothing really to compare this facility to so to 50 pounds a foot, doesn't necessarily scare me from that standpoint. Yeah, something they'll
+
+Speaker 1  56:36
+talk through once they've had a little bit more time to digest some of these changes. But I imagine the utilization rates of each one of the steel members is starting to get higher and higher and take up some of that, that safety factor that they once had.
+
+Ryan Hankins  56:52
+So I'm getting a little understood the biggest risk to this entire estimate is what we're going to get at the end of this week with the five eight set, and I'm pretty nervous, because I'm worried that the tonnage is going to go up, and we don't have that captured here.
+
+Speaker 1  57:10
+I think we need so Bill, I'd like to get ahead of that if, if Frank and Frank and Mark probably have the best understanding whether or not that seal tonnage is going to go up, I'd like to know sooner than later before we go to leadership and start talking through these numbers, because our intention is, our intention with our leadership is really to set a ceiling, right? So what Nick and James and I are going to be doing in the background is understanding what the owner contingency needs to be. So a lot of these loose leaf concerns questions at this point, if we find out there are additional plus deltas, this is when the project for us becomes real and we start to dip into that contingency. So Bill, if you wouldn't mind taking action and determining is that something we need to consider for the five eight set. Instead of waiting till we get the five eight set, I'm
+
+Unknown Speaker  58:12
+typing an email right now. Awesome. Thank you.
+
+Ryan Hankins  58:22
+We were directed to carry an additional allowances for some of the tunnel structural steel, like we were given drawings, but the drawings were basic details, not overall. So we added 300 grand just to make sure that we had all the intricate details also covered between connections of tunnel sections, connections to the buttress support pit, stuff that's just not shown at this point. More of a contingency. We'll call it the structural steel isolation separation from the cub. I'll be totally honest, this one we did not spend a ton of time on, I think I'd like to just see the updated drawings. We we put five, it's roughly about 500,000 I think that number probably is going to come down. But would just like to see the updated drawings.
+
+Speaker 1  59:15
+Did you guys have at least a good and generic understanding of what that meant with the details that SM W provided us, or is this just an allocation
+
+Ryan Hankins  59:25
+for now? It's, I mean, we had a they gave us a sketch, like Thorn and Thomas gave us a sketch. But to identify what was columns for, what was new columns? I'm assuming it's a whole new column line around the building on two sides. And you know that means there's new beams as well. So we took a pretty conservative approach to it, knowing that we're still waiting for the updated design.
+
+Speaker 1  59:53
+There's a separation between slabs, between
+
+Ryan Hankins  59:56
+the two spaces, 500,000 divided by we'll call it, we've we've got a good, we've got a good tonnage, like we have, like somewhere around probably 80 to 100 tons of steel. So if that comes down, then obviously that number should come down. Okay, remember, we don't have any pounds per foot, really on anything, so we're making assumptions overall, on steel, the wood slat wall panel we talked about that built in seating.
+
+Speaker 1  1:00:42
+Quick question, Ryan, and because this, and I'm actually, I may have an answer, but I just want to hear, hear your answer, because I think this is something that Keith may catch and then ask us about. So between the VE and then between the plus delta, we're holding something like a $582,000 number for the VE but here we're holding about 6000 or 600,000
+
+Ryan Hankins  1:01:12
+just curious. I'll make sure they match. Okay, yeah, it was, we were, we were filling it out, and we rounded. We rounded to the nearest dollar. Okay, all right, so it's a good catch,
+
+Speaker 1  1:01:28
+and you can just, just make sure they match for, I think every, every item Keith picks up on those little tiny details, and he loves to pick it up.
+
+Ryan Hankins  1:01:39
+Yep, I totally get it built in seating, wood veneer wall finishes that were added, and then the receptionist desk. So mean, overall, between mill work, mill works roughly 700 grand over budget, with, really the wood slat wall panel driving, you know,
+
+Speaker 1  1:02:05
+are we so the receptionist desk, so all of these finishes we're talking about, aside from the kind of the battens on that accent wall, Bill, just a Heads up, I think now with with these numbers, will want to understand the look and feel. I imagine it's not 100% reduction in finishes, right? It's Brian. Are we saying it's about a 25% reduction? I think we'll just want a generic understanding of the look and feel, now that we've kind of stripped, you know, some of these items out mainly for the more high profile spaces, which would be the board room. How does this the questions that we'll want to be able to answer immediately is, how does this impact the look and feel of the board room? I think the creative spaces and the War Room, those are things that are more back of house that we can we can lively up with our own program as we receive additional money as time goes on, but I think for day one, we'll at least want to maintain something relatively nice for the boardroom. The two teams need to reconcile.
+
+Speaker 6  1:03:27
+Yeah, same note on reception desk. Or what similar thought?
+
+Unknown Speaker  1:03:33
+Yeah, that's right.
+
+Ryan Hankins  1:03:37
+I mean, we run into this all the time on projects, and it's like, what we think is what we think you can live with, like, maybe you can't live with or maybe it's vice versa. Maybe we think something's too nice and or maybe we think something is nice and you're like, oh, that's way too nice. So I mean, going back to mean Erica. We have enough information now that we should be able to pull open that that overall cost for the interiors I think having another session with the interiors team and really diving deep into this would be good. Would love to have a meeting with, I'd love to have a pre meeting with with Bill and with with Dominic and Rebecca before that, just to kind of do a preview and make sure we all get on kind of the same page as far as what those costs are and and where those costs are allocated, so that when we go into the interiors meeting like we're all kind of aligned. But outside of that, yeah, I think we're, I think there's potential to to get more skinny, but at the end of the day, it's only what, 40,000 feet, yeah, Ryan, let's
+
+Speaker 6  1:05:00
+work through together, and we'll just get aligned on exactly what we're looking at. Down grading, I guess, for lack of a better word, or removing specialty finish extent, with a priority for the conference room and the reception.
+
+Speaker 2  1:05:19
+I I also I came in late apologies that I had to drop and come back in so I missed some of this conversation. I'm assuming that we're talking through like, kind of all of the different interiors design features that might be reduced. Is that correct?
+
+Ryan Hankins  1:05:37
+Yeah, I mean, at the end of the day, the VE list removes most of those high end design items, like this wood slot wall panel is like, the biggest item. And if we remove that, then, like, I feel like we're getting closer to where we really need to be. Got it. The question is, is, you know, is that enough? I don't know. I'm not the one that can really answer that, and I'll tell you that, you know, if you just keep cutting things, it's gonna look like, you know, it's not gonna look like you guys office in San Leandro right now, but, but there's, there is an opera, there is an option where it's like, we're cutting too much, and it's not that big of a space. It's really
+
+Speaker 2  1:06:21
+I just the only thing I wanted to add. And just for consideration, I think it's great that, yeah, if we can have a meeting with you and our team, our core team, to get aligned, I think that's great. And I just want to just speak for the what I've heard from the interiors team again and again, that they would love to have the chance to, like, do some holistic design cuts to make sure that they can meet the point that it needs to be. So I just want to kind of throw that into the consideration that still allow them, instead of just, like, cutting things out, give a chance to be like, well, this is where we need to be, and this is and then give them a chance to maybe do what we'll work with in that budget. So I don't know if that's possible or not.
+
+Speaker 1  1:07:04
+Yes. Rebecca, how would we go about doing that? How would we So, yes, I think that's a great idea. I think they should be driving, you know, some of the decisions and direction as well. We need to kind of come together. I think we're at a good point where we at least have somewhat of an allocation now. Ryan and Erica, we can probably, we can probably so very similar to what we did a couple weeks ago with Jen's team and Christian, where we we had that allocation provided, right? And I think it was $190 a square foot. Maybe I'm answering for your Becca, and I should just be quiet, but I'm curious to understand, how would you like going about that reconciliation exercise?
+
+Speaker 2  1:07:47
+Yeah. So I think at that last time that we met with interiors you all Ryan had put in, you had just kind of put a number in. Sorry, not to diminish what you did, but there was a placeholder number of 190 per square foot. We didn't have an understanding of how that aligned with the actual basis of design that was in the 50% DDS and then the 100% DDS. So so understanding what that comparison is between the 190 and what the actual basis of design cost. And then, if we're removing a bunch of these things, what do we get to? So maybe having three numbers of, like, we budgeted 190 the actual was 190 or 200 I don't know what it is we would like to be at 150 like, what? What is, where do we want to be? I think if we can give those three numbers, then it would help. And then give the interiors team, you know, a couple of days to put their heads around it. And I think going through these things with them, of like this wood slot wall is really, really expensive. These pieces of mill work are really driving cost. This type of finish is driving cost. And then let them kind of go to the drawing board for a couple of days and have some proposals. That's what I would think is a good process. But I'm not sure how that sounds to you all.
+
+Ryan Hankins  1:09:06
+I'm good with it, yeah, yeah.
+
+Speaker 2  1:09:10
+We have it all broken down, like that Rebecca that we can share with them in the detail. Okay, yeah, I think that would be super helpful. And then we just have the real numbers of like, this is what the design actually cost, and this is where we would like to get to.
+
+Ryan Hankins  1:09:23
+To be fair, the conversation we had previously was probably a little early because we were disconnected from what we priced versus what you know. So I would love another chance to have another meeting that would be more high value.
+
+Speaker 2  1:09:37
+Yeah, I agree. I think it'll be more more high value. And then Cory with you, and Kate, I mean, I think making sure that you're so yeah, the board room of like, what are the spaces that you really want to prioritize? And where are you okay, removing mill work or removing things, and potentially it's removing it for now and going back at a later time and doing, like, a small infill project of Justin mill work, and, you know, some of those corridor break areas or something like that. So maybe kind of prioritizing those things from from your standpoint of where you want to spend, if there's any dollars to spend, where those are going to be the most valuable for your team.
+
+Speaker 1  1:10:18
+Yeah, yeah, that's, that's exactly how we're kind of looking at it. Day one, we really just need to get into a facility, and then as we receive additional funding opportunities, we can certainly put that money to work in different places. But yes, I can. Sounds like we're ready to have that conversation. Rebecca, would you mind taking action to set that up with Jen and the rest of this team. And I think this this week, you know, in a couple days, if we can maybe spend minimum, you know, I would say 40, minimum, 4045, minutes to
+
+Speaker 2  1:10:56
+talk through this. And Ryan, did you want to talk with us beforehand? Or can I just go ahead and set that up with the interior? With the interiors team? It sounds like we'll probably all be aligned. Ish, I'm trying to work towards the solution. One other thing that I thought of, Cory, it's up to you all and how you want to handle it. But if it's like reducing whole pieces of the scope as opposed to finishes across the board, might be a way to still have something that's going to be nice, and then you're able to do these infill projects. And so that could also be an opportunity. It's like, well, yeah, we don't need all of these small little break rooms or like the corridor break areas now, but we can just have the design for them, because you've already paid for the design of them, and then you could just do that as individual projects in the future, as opposed to making a wholesale change. So I think it's kind of just whatever works for you, but that's just something that I had thought of as an OP as an option. Anyways, I'm happy to set up the meeting with them, and I think they'll have way better ideas than I'll have about how to, how to reduce cost.
+
+Speaker 1  1:12:07
+Question, question, I know we, I know we haven't gotten through everything here, but curious is, how much of FF, any and low voltage scope is that in here? Ryan, somewhere? We just haven't gotten to it yet. Which one low voltage FF and E, and then all the low voltage scope with some of the logic controllers.
+
+Ryan Hankins  1:12:33
+So we've got so we don't have any FF, any included. What we do have is roughly 4 million in low voltage scope, so security, telecom, all those types of things that's all wrapped into our number.
+
+Speaker 1  1:12:49
+Gotcha. Okay, so all of the furniture that was provided in the 100% Ed said that has not been priced in here, correct?
+
+Ryan Hankins  1:13:01
+We don't, we don't. Typically, that's typically something that owners take on.
+
+Unknown Speaker  1:13:07
+Yep, no problem. Just wanted to, wanted to clarify.
+
+Ryan Hankins  1:13:10
+You don't want me buying your furniture, I promise you, patio furniture from Home Depot, next basketball hoop on the back side of his door.
+
+Speaker 1  1:13:30
+Well, we like frugality, so maybe you are the right person. Okay, good to know. Just a heads up, James and Nick, that's a question we need to ask on our side, knowing that we don't have FF any price to this, do we start carrying that as a line item? And I think the answer is yes, and that's something that Kate will likely need to manage, but it should be, should be a part of, I would say, ds three, phase one. So heads up, James, something we need to talk through.
+
+Speaker 5  1:14:02
+We could probably give you a rule of thumb, by the way, just so that you're holding something on your side, but it is highly dependent on the tastes of whoever is buying it. But I think we could probably give you rule of thumb.
+
+Speaker 1  1:14:19
+Okay, so I would say, if there, that would be excellent Conor, and that would really help us out. And maybe to put some more color on that, I would say, if there's like on the spectrum of Ryan going on Craigslist, versus Kate, who probably has a much, much more luxurious taste, let's find something right in the middle.
+
+Unknown Speaker  1:14:43
+Yeah, we can give you a roll, yeah.
+
+Ryan Hankins  1:14:50
+So now I know that Cory thinks I shop on Craigslist.
+
+Speaker 1  1:14:53
+Got it. There's some great gems on Craigslist, especially in the Bay Area. It's very transient. People move in, loop out. You can find some good stuff.
+
+Speaker 5  1:15:04
+There's the recycled Office Depot right to where all office chairs die, versus the expensive parts of the merchandise Marty here in Chicago, you spot, yeah, I mean,
+
+Ryan Hankins  1:15:30
+all right, so next one, our favorite one, fireproofing, that's the seven and a half billion. So I really, I haven't really heard like, what the actual strategy is for waterproofing. We built into 180 grand for interior MIT L tank waterproofing. But would love to get more insight into, like, what the actual waterproofing strategy is overall. Watch the Mitchell tank. That's the chilled water, 30 foot deep tank that the $13 million stainless steel covers are going on top of.
+
+Speaker 2  1:16:11
+But I think it's the middle cool down pits. They're not actual tanks. They're just, they're Michael cool down. Yeah?
+
+Speaker 1  1:16:18
+Vault, yeah, concrete bolts. Yep, there we go. Yes, yes.
+
+Ryan Hankins  1:16:24
+Okay, we've got the money in there, but maybe we want to take it out. I don't know. It's something I think someone else needs to answer for me, the design team or Pacific fusion on what, what the overall strategy is for that waterproofing. So we've
+
+Speaker 2  1:16:41
+talked with our interior or, sorry, our building envelope consultant, and we have a plan now for waterproofing under the slab, so there's a vapor barrier in a majority of places, and then an actual waterproofing system that we're putting under those deep areas of just under the equipment Pit and the Mitchell cool down pits, vaults, and so that's, I think that's where that's included in this set that's getting permitted. We need to have the direction for that, and I feel pretty confident, just based on our conversations with structural with our building envelope consultant, that that's the right way to go, just to give a double kind of layer of protection at those deep areas, no matter what, from a moisture perspective, and then from anything that's in those spaces potentially seeping through. You know, it's like just a double layer of protection. Then on the interior of those what I'm what I imagine is going to need to happen. And we don't have a full understanding what's happening in those Mitchell pull down faults, but I think there will need to be some sort of sealant that happens on them, and whether that happens now or as part of phase two, because it really only needs to be there when there's something that has any amount of like, anything that's hot, from a radioactive standpoint, goes into those faults, which is What I think is what I think is going to happen in there things, there will be some sort of a sealant system. And I think that could probably happen as part of phase two, like the phase two bridging could give the spec for that, and that could get included then. So potentially, just what we include in this phase is that under the slab piece, that's just one, one option
+
+Speaker 1  1:18:21
+that's, yeah, that's exactly where my mind was going. Rebecca, I think that's a great opportunity. So we can highlight this 180 as yellow as potential capex savings, or just deferment. We can call it capex savings deferment, whatever. Ryan did. We price the waterproofing vapor barrier as part of 100% or Rebecca, is that something that's coming after
+
+Ryan Hankins  1:18:44
+we priced a Tremco product. Oh, underneath all of the mat, the tunnel mat slab wrapping up basically to the slab on grade, just, we'll call it a cheaper membrane that goes underneath the slab. So we've got, we've got all that covered. I'm pretty sure we even have it under the tunnels, or underneath the utility tunnels. So, yeah, all the trenches and everything. Yeah. I mean, it's, it's a belt and suspenders, but we think we just want to make sure the money's in there so we can talk about it.
+
+Speaker 2  1:19:19
+Okay, that's good. Yeah, we'll be providing some more info in this, in this next deliverable, end of this week, that will show, like, what our basis of design is. And I yeah, I guess it's we tried to to lean up what it was on, you know, under the slab, on grade pieces, versus on those deep areas. So do something that's a little bit more heavy duty and the deep areas, and then something that's just like a vapor barrier under everything. So I've used the trumpco product before. I'm guessing it's probably within range of what what's being provided.
+
+Ryan Hankins  1:19:52
+Yeah, you can always go with the damp proofing as well, if we want to go a little bit less belt and suspenders with drainage board. But you know that's that's up to you guys.
+
+Speaker 2  1:20:03
+We'll let you see once we get the details over to you, and maybe you can give some feedback at that time. I feel pretty confident, just based on all of the research and work that's gone into detailing out these how we're going to waterproof under the slab, that I think we have a good option, but we'll let you see where that price comes in.
+
+Ryan Hankins  1:20:24
+Okay, next one, expansion joints, right, wrong, or indifferent. We know I could go back and forth and if this should have been captured in the last one or not, but wanted to show that it was an ad from the previous Oh, Conor, you leave it See you later, buddy, right, wrong, or indifferent. It is a cost ad, and so wanted to point that out, I think especially now with the separation of the buildings and whatnot, I think it's even more important now that we have some of that between like the cub and the R and D building and whatnot, but we we built the cost in, and, you know, roughly half a million dollars in expansion joints between the verticals as well as the the horizontals on the roof. Okay, all right, Kingspan metal panels. Previously, we were carrying an allowance for metal panels. We didn't really, nobody in the market priced it. So that was a pure ad of roughly $2 million the VE that we've presented gets you close to being back to that original budget. And so that's where, that's where the pricing is landing out. I I need to check the value on this added exterior stairwell metal screen. We've already talked about that small change in door change and hardware, nothing really to talk about. The exterior storefront at the North elevation. We added like one section of glass. It's small. I tried to make this holistic. We're sorry, where
+
+Unknown Speaker  1:22:07
+was it? So the exterior storefront,
+
+Ryan Hankins  1:22:09
+basically just when you're looking at, when you're looking at the front entrance, I think it's the I think it's the like, if you're looking at the corner, there's a right side and the left side. I think it's the left side. There's one additional glass Bay, I believe.
+
+Speaker 1  1:22:25
+Is that in the in the lab space, Rebecca, or is that in the cafe, cafe, cafe. Okay, I think that's fine. If we're removing that skylight, it's, you know, it's one of those spaces that we want, we want to have it nice, rested refuge area.
+
+Ryan Hankins  1:22:45
+So all good. There was some additional interior storefront at the control room, in the board room, just some additional interior glass wall panels. From a quantity standpoint, you guys asked us to carry a $75 allowance, or $75,000 allowance, for the sky, for that octagon skylight, and end up being about 125 grand sun shades.
+
+Speaker 1  1:23:12
+Quick question the control room, we have glazing on one of the exterior wall walls for the control room. Have to go back and look at that. Is that true?
+
+Unknown Speaker  1:23:23
+Rebecca, I'm so sorry. Can you just say that one
+
+Speaker 1  1:23:30
+more time? So the control room that's close to the lobby, was that a Jeremy request to have glazing on the exterior wall?
+
+Speaker 2  1:23:38
+Oh, I don't remember if that was a Jeremy request or just there's already was glazing there at the front entry on that front corner, and the control room goes right in that space. So I don't know if he wants that to be glazed, or if there's a chance to infill our storefront system with like, metal panels or some other
+
+Ryan Hankins  1:24:03
+sort of infill. This is interior storefront. This is basically, oh, oh, yes.
+
+Speaker 2  1:24:10
+I think that was so that it can be like viewed as people are coming in. You can see, okay, that's on the interior side of it. Yeah. I think that that was a Jeremy request that makes sense.
+
+Speaker 1  1:24:21
+Yes, the interior that is a very that is a very profound space. It makes us look like some kind of, you know, government NASA operative. So, yep, that makes sense.
+
+Ryan Hankins  1:24:35
+Okay, sunshades, about 100 grand in sunshades,
+
+Speaker 1  1:24:42
+Joe, shades, Okay, sounds
+
+Ryan Hankins  1:24:46
+good, yep, go ahead. Added doors for the glass side. It's not much. 40 by 40, we got the quote from the Tisch. We plugged that. We got an install cost, and so roughly each one of those doors is roughly 300 grand after install, and the sub markups and everything there's automatic by parting glass doors from ASA el boy, roughly 100 grand
+
+Speaker 1  1:25:20
+automatic by partying glass doors. What area or location is this
+
+Ryan Hankins  1:25:26
+in Erica? Do you know, Chris? Do you know?
+
+Unknown Speaker  1:25:32
+I do not know where the by partying glass
+
+Ryan Hankins  1:25:35
+doors are. Lulu knows all about it. When I asked
+
+Speaker 3  1:25:40
+her, I'll messenger. Okay, okay. Rebecca Bill, do you know where this is looking? Are those?
+
+Speaker 2  1:25:46
+What are? I know that we have bipartisan doors going into the labs. There's like, large doors, but are? That's where we're having glass. That's, I
+
+Speaker 3  1:25:59
+think that's where they're at everything. Know that there is sliding doors going into the labs. I just messaged Lulu.
+
+Speaker 1  1:26:06
+Is that on the corridor side, or is that an RD side?
+
+Speaker 2  1:26:11
+The corridor side? Sorry, go ahead, Erica, no, I didn't say anything. I'm sorry. I'll get the answer from Lulu. I'm pretty sure those bipartisan doors are on the corridor side, and I guess I haven't thought through what the material is, so I'll have to look at our drawings and double check
+
+Speaker 1  1:26:29
+this might be a cost savings here. I don't know that we need fancy by party doors, aside from just a regular roll up door.
+
+Speaker 2  1:26:41
+I did hear I would just double check with Jeremy to see because I think there is a need for a door that can operate without someone doing anything to open and close it.
+
+Speaker 1  1:26:55
+Oh, understood, and that you can do the same thing with a sensor in a roll up door, sure,
+
+Unknown Speaker  1:27:03
+sure, sure. Okay, yeah, so,
+
+Speaker 1  1:27:04
+yeah, this sounds fancy. That's all I'm saying.
+
+Speaker 2  1:27:08
+A light parting blast. Or it does sound quite fancy for for those lab spaces, agreed.
+
+Speaker 1  1:27:14
+Yeah, maybe we can just Ryan highlight this yellow this is something we can talk with leadership about. Okay,
+
+Ryan Hankins  1:27:28
+performance coding, yep, lifts at the equipment pit. I don't know if this is really in our scope, or if this is facing our scope, you just saved 200 grand. All right,
+
+Speaker 1  1:27:46
+I think that's a great strategy. Let's just start pointing to machine
+
+Ryan Hankins  1:27:50
+install guys really quick. We you know, to that point, we still need the shop drawings for those pits in order to pour the concrete, and that's coming up. So, yeah, added office duct work. Oh, this is now mechanical. So I talked previously about how mechanical went up about 6 million when we were talking about the initial ve on Wednesday of last week. But basically added office duct work an increase in air side equipment and capacity. Think there was a couple different RT use that were added that Astrid was talking us through. The wet side equipment also increased. I think we added a additional air source, heat pump, and we added, we added some additional pumps, or whatever that caused an increase in controls, the energy recovery was added to the age use, and then, obviously all that comes with an increase in piping.
+
+Speaker 1  1:28:54
+So, so for context for Nick and James in February, we had the facility integration team had additional information about cooling requirements because of all the equipment that's going in. So we we essentially went from a 90% complete equipment matrix to 100% equipment complete equipment matrix in February, and that's what drove a lot of these changes, right? So that equipment matrix, the process changes, all the informations from information from the subsystem engineers and the facility integration team, drove a lot of these changes. Curious now that we opened up the spec, so we're not sourcing the Cadillac of air source heat pumps, and we opened up that spec to more of a performance spec. How do these numbers relate to that performance spec?
+
+Ryan Hankins  1:29:58
+I mean, that's where it becomes difficult, it becomes more of a science project, and with a lot of ambiguity, I would rather just say that we added 6 million with what we thought was required, and we ended up saving what 11 million overall. So it was a plus delta of, what, 5 million. The mechanical, it's going to be too hard to separate design development versus ve, especially since we were doing it at the same time. And then when you add an electrical, you know, with with it was sorry, it wasn't 4 million, was 3 million. Sorry, but you basically, it tells a better story there. If you combine MEP as a whole and you just start selling it as, hey, MEP went down or went up 3 million, but we had, you know, $15 million in savings that was incorporated over ve I think that tells a better story.
+
+Ryan Hankins  1:31:10
+Minimal stuff with mass grading, the geo peers, ads for lab slab on grade, Cub slab on grade. And then the settlement criteria, they went up about 600 grand. I think that start and become more static now that we understand the requirements better, fencing, we've already talked through that site, furnishings, you've already talked through that federated
+
+Unknown Speaker  1:31:37
+exterior that's exterior amenities,
+
+Ryan Hankins  1:31:41
+or Yes,
+
+Ryan Hankins  1:31:50
+federated model requirements. Just because you guys want a federated model, we had to add more. We had to add really VDC BIM into the job to get it to be federated. If you don't care about the federated model, then we can reduce those requirements. Oh, absolutely.
+
+Speaker 1  1:32:09
+I think clash early planning, clash detection and coordination is meant to set you guys up for success in the field. So I prefer to have that
+
+Ryan Hankins  1:32:21
+and then a miscellaneous adjustments bucket of 1.6 million. I can get more detail on that. I just need more time. We came up, we came up with the stuff we could identify. And then I was like, oh shit, we got another one and a half million dollars that we're we're needing. We fell short on so I can get you more detail.
+
+Speaker 1  1:32:46
+Okay, this is great, other than just a few clean ups of like, let's make sure anything that's represented in ve as a more dialed in number is also represented the same way here on the plus delta, and then anything that's, you know, I think, with the one exception of the $200,000 that's moved to machine install, it's like, if we can get these working documents shortly after the meeting, Ryan, that would be
+
+Ryan Hankins  1:33:15
+super helpful. Yes, I will shoot this to you right now. Cool. I it, and then, Erica, could you spend some time working on this with the team?
+
+Speaker 3  1:33:33
+Lulu the doors. I'll send the screenshot to you, Rebecca and you, Courtney. It's basically workshop, IMG, Target, fab and diagnostics.
+
+Speaker 1  1:33:50
+One other thing I wanted to bring up that was looking over we've got the owner furnished procurement contracts with cm das Tae and then the bridge crane. We've already aligned that cone cranes is going to install the bridge crane. I was surprised to find that the Tae system, that is something that needs to be installed by the contractor, but commissioned by Tae. Have you guys considered installing the Tae load side system as part of this?
+
+Ryan Hankins  1:34:33
+We have not, but we'll, we can look at that,
+
+Speaker 1  1:34:38
+okay, and my understanding, we're working through this with Marty, and is they, they will be installing the CM dos room. They will be installing and commissioning. And I that makes sense to me, because it's such a specialized product they have to certify it for, you know, an EMI threshold. So that makes sense that they're going to want to control that installation process.
+
+Ryan Hankins  1:35:03
+We don't have the installation of the crane in this number.
+
+Speaker 1  1:35:07
+That's great, because that is something that needs to happen on cones. And I think we, I think the one thing that we want to determine who's who's holding the crane rail. So there was an adult in the cone contract. Did you guys price the crane rails? Or is that I,
+
+Ryan Hankins  1:35:28
+my thought is that Conor should be Resi. We should make sure that, if we're going we're spending money on Conor, I feel like we should get out of Coney is way in terms of all the things they could potentially point at us with Chris, I don't know if you agree, but I'm I'm thinking, let's just, let's let them control their own destiny. I don't want them to be complaining about the crane rails that we provide not being perfect, and then their crane is out of spec or something, and there's just a finger pointing match down the road.
+
+Speaker 1  1:36:01
+That's fine with me. I know in Thorn Tom said he's steel list that they provided. I believe that crane rail is in there. So my hunch is you, you guys do have that in your number, perfect. Okay, so if we, if you guys wouldn't mind, as we do these little cleanup season cleanups, let's pull that out, knowing that that's likely going to move into somebody else's scope, because I know that's a big ticket item. Okay, I
+
+Ryan Hankins  1:36:35
+don't know how much that weighs, but yeah, as we get the new set this week, we can start to identify what that value is and break it out.
+
+Speaker 1  1:36:46
+I think we've gotten Marc sent a steel list so we actually have sizes for that crane rail. Let me go back in my reference documents, and this was something that, Nick, if you recall, I think this was something that was sent like a month ago, or part of the RFP process. I think, I think it was sent as supplemental information to the RFP process. Am I saying? Am I telling lies, Nick, or am I is my memory too hazy to remember?
+
+Speaker 5  1:37:24
+I think you're right. Double check. We'll go back and look,
+
+Speaker 1  1:37:29
+but just Just a heads up, that's something we'll want to reconcile. Okay,
+
+Ryan Hankins  1:37:36
+okay. Oh, one more thing we don't have contingency in this number. We kept this as an apples to apples comparison from our previous number, and so we don't have contingency Nick. I know you guys were carrying that separately from a contractor standpoint and from an owner standpoint. I mean, what I'll say is that we feel pretty confident in this estimate. We feel like we understand the project, the things we don't understand is everything that's changing. And it feels like things are changing consistent, or, you know, constantly. And so I would say the right thing to do is to carry 10% but I think that realistically carrying, you know, if we're at a true, if we're truly through DDS and not much is changing. And I'd probably say you're in the five to 7% range.
+
+Speaker 4  1:38:30
+Okay, so in that, are you saying just for contractors contingency, carry another 10% for now?
+
+Ryan Hankins  1:38:36
+Yeah, I think that's the right thing to do, until we I mean, Stantec is designing while the base to design is still evolving. And so, you know, to give them a little bit of, you know, credit and comfort, I think, I think it's needed, especially with the fact that we don't even have steel. We need to nail down steel first to get us more comfortable.
+
+Speaker 4  1:39:03
+Yeah, no, understood. I think that's a fair number, and we can all work with James carry that in budget.
+
+Ryan Hankins  1:39:08
+I'm assuming that's what you guys carried previously.
+
+Speaker 4  1:39:12
+Yeah, we were just carrying a big chunk. I don't remember if it was, I think there was 10% in there.
+
+Speaker 6  1:39:22
+And actually to that point, Brian Mark cannix, Thornton, Thomas city, reports that really the soonest that he could get a steel ton inch number, a new one for you is it would be the 12th, okay, so maybe still a little bit ahead of possibly when you guys might even really extract it so, but they can, they can't get to it this
+
+Speaker 4  1:39:45
+week because of the push. Will, Will bill, will the pounds per linear foot beyond the this next design deliverable, and we can pull it ourselves. AWS, Mark,
+
+Speaker 2  1:39:56
+I believe, I know Marc is providing the what is what is what you guys had agreed to for the mill order?
+
+Ryan Hankins  1:40:05
+Yeah, it should be on there.
+
+Speaker 2  1:40:07
+Just, I just wanted to throw in there. I don't think this is the most important thing, but for that interiors meeting, just because, again, of our deadline this week, I think I'm going to put that off until the beginning of next week. If that is okay with everyone. Rebecca, what was it? Sorry, my internet is not very strong right now. I'm going to put off the interiors conversation to the beginning of next week, just so that we can get through this deliverable this week. Yeah, that sounds good.
+
+Speaker 1  1:40:44
+So I've just found I believe the steel tonnage was sent sometime in early March during the RFP process. Nick Erica, Ryan Conor. Conor is gone. Does it look familiar to you guys.
+
+Ryan Hankins  1:41:01
+That does look familiar to me?
+
+Speaker 1  1:41:03
+Yes, okay, yeah, okay, gotcha so my hunch is we are carrying quite a bit of steel for the runway. I think we just needed to cipher what comes out, what stays this will be a main topic of conversation in our Conor crane meeting Thursday morning. Some more of a heads up. But I think the Ask from Clayco would be okay, how much of this is a savings to the is a reduction in the number that we're currently carrying for seal,
+
+Ryan Hankins  1:41:50
+understood? Erica,
+
+Unknown Speaker  1:42:00
+could you work? We've seen this. I need to confirm with with Dave on what he
+
+Speaker 3  1:42:06
+actually cared. He had a lot of conversations on this, so we can definitely come prepared to that meeting to kind of walk through where we're at Cory on Thursday. That's not a problem.
+
+Speaker 1  1:42:19
+Great, perfect. Much appreciated. Let me know. So this, this would have been as part of like that 50% said, let me know, Erica, if you want me to download this and send this to you, if you would just
+
+Speaker 3  1:42:34
+so I can compare it to it what we have and just make sure it's the same. Yeah, of course, yeah. But I know David, Dave spent a lot of time. He had a lot of conversations with Mark. There's, there's a lot of emails back and forth. So there was an effort put into this deep dive in better than I can perfect
+
+Unknown Speaker  1:42:55
+that sounds that sounds great, Yeah, okay, well, sending this off now, thank you. Applause.
+
+Speaker 1  1:43:39
+Well, you know, final thoughts, guys, and I know everybody did a lot of work to get here, and we were able, I see this as a massive success. We were able to stay on track, stay on point, based on the schedule that we were looking at. You know, the design team was able to turn out the sketches and hand those off to Clayco. And I know there was a massive lift Erica with your team to get this done. So thank you guys.
+
+Unknown Speaker  1:44:09
+It's been fun, awesome. I love I love it when we can keep things fun
+
+Ryan Hankins  1:44:19
+like we've only. I mean, we had our kickoff meeting less than a month ago. Yeah, it's just, it's been a lot of fun. And there's, mean, there's a lot of moving pieces in this one, but maybe from your guys side, from Stantec side, it's been, it's been really refreshing, because not every project that needs to move this fast goes like this.
+
+Speaker 1  1:44:41
+We've got a really good team. We've got a really, really good team. Everybody's taking kind of proactive approach and anticipating how we all set each other for success. So it's, it's been going really well.
+
+Speaker 1  1:44:57
+Okay, Nick any thoughts on your end? Nick, that, before we call it a
+
+Speaker 4  1:45:07
+no, nothing else. I think this looks really good, which seemed to I need a chance to really kind of scrub it and see what questions we come up with. But you know, I think you guys did a great job walking us through this. It seems very clear just on the surface. So, yeah, let us, let us put our our pencil to it, and see, see where our final budget comes out, and we'll get back with you guys and see if there's any other cuts that need to be make. Need to be made. I know we're up kind of against it with with leadership, in terms of, you know, making sure that we can find an affordable path forward that works for everybody. So hopefully this is as deep as we need to go, because there's not a lot left before we just have to start cutting scope. So appreciate all the hard work here in trying to keep us on track, and, you know, keep the cost down as much as possible. But that's really all I had. Sounds good? Okay,
+
+Speaker 1  1:46:06
+great, okay, well, looking forward to the continued conversation. Thank you guys. We'll come back to this, balls in our court now. Nick to disseminate this information so you and I now have a lot of work to do. Yeah, absolutely. All right, we'll give everybody 15 minutes back, looking forward to chatting later this week. Thank you guys.
+
+Unknown Speaker  1:46:37
+Thank you everybody. You
+
+Speaker 7  1:47:38
+Oh, my God, that last question I had fully slipped into like, a like, daydream, and you're like, Erica, and I'm like, I don't know what the fuck just,
+
+Ryan Hankins  1:47:47
+mainly, I was just like, hey.
+
+Speaker 8  1:47:49
+I'm like, What? What did he ask me? I'm like, fuck. I don't know if I'm answering. I should have said I couldn't hear you. I'm like, Man, I'm exhausted.
+
+
+Transcribed by https://otter.ai

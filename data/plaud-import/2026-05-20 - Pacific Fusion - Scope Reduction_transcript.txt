@@ -1,0 +1,668 @@
+Speaker 1  00:00
+He's aware that any kind of operational redundancy or backup power is something that will have to retrofit, so this this is approved.
+
+Speaker 2  00:08
+Okay, and you can, when you get more funding, you could pop a second generator in the service room if we need to.
+
+Unknown Speaker  00:19
+Yeah, that's right. Revisions, Susie, for a second one or a larger one.
+
+Speaker 2  00:25
+Yeah, we could, we could outline where that would go, I guess.
+
+Speaker 3  00:29
+Maybe that's a question for Courtney as well. Do we want to provision it for future, or
+
+Speaker 1  00:35
+that would all come later? I think, as long as there's a spare bucket on that switch gear, we can take it from there. I don't know that we want to build, you know, a breaker that's dedicated. I think we want to defer as much cost as possible, so as long, you know, there's going to be spare capacity on those switchboards.
+
+Unknown Speaker  00:55
+Well, we'll deal with it then. Okay, we don't want to prep for like a roll up gin or anything like that,
+
+Unknown Speaker  01:02
+we need to prep for a roll-up gen for by code for
+
+Speaker 2  01:08
+the in case the existing life safety generator is is going through maintenance, so we we will have
+
+Unknown Speaker  01:18
+that'll already be there, we'll have a cannon
+
+Speaker 2  01:20
+that'll be that'll already be there, but we'll save some money by reducing the generator size. The worst case is we could put some con, we can find a way to get conduits to the future location underground. We don't, we don't need to put them in. There's just a sea of conduits in the service yard. We want to make sure that if you put in a new generator, you can actually put in conduit to get to it.
+
+Speaker 1  01:54
+Okay, SR two, we're going to be eliminating the cub isolation. Clayco has an allocation, but heads up, Mark and Frank, we're just going to eliminate that isolation altogether and deal with any kind of vibrational effects at an operations level.
+
+Speaker 1  02:20
+Okay, Mark, Frank, any questions for me? Okay, sounds good. Moving on, I'm going to go quick here, so please jump in. Otherwise, I'm going to keep, I'm going to keep rolling forward. So, SR three, this is something, Jeremy, I'm not sure if we're final on yet, but we, we may, Susie, go back to the original TAE proposal. There's just some timing considerations we have to work through, but this may get accepted.
+
+Speaker 3  02:55
+Okay, go ahead. Sorry, I don't know if Susie has some thoughts here, but I'm not sure if P and M would accept a momentary three and a half megawatt load, a 15 second three and a half megawatt load. I don't know if anybody has some thoughts there or input on what they would accept,
+
+Speaker 1  03:22
+I We can run that down, Jeremy. My hunch is no, because of the way time abuse rates are structured. But let's have that conversation, Nick, with Grant and Gannon. Let's, let's just see if they're open to it.
+
+Speaker 3  03:36
+That was three and a half megawatts in 15 seconds, is that correct? Correct. Okay. Yeah. I can. I can ask the question.
+
+Speaker 1  03:46
+We would be maintaining a 10 MBA service, correct?
+
+Unknown Speaker  03:54
+Trying to make it fit. I'm not 100% sure if we can make that fit.
+
+Speaker 1  03:59
+Okay, I think for discussion purposes, let's see if we can just answer this question with the existing 10 MBA service while we do that diligence in the background.
+
+Unknown Speaker  04:09
+Jeremy, can you? Is it possible to get an answer in the next few hours?
+
+Speaker 1  04:16
+I think after this phone call, either Nick or myself can tackle it.
+
+Speaker 4  04:20
+Yeah, okay. Sorry, Jeremy, you say three megawatt or 15 megawatt load,
+
+Unknown Speaker  04:25
+an additional three and a half megawatts for 15 seconds.
+
+Speaker 4  04:31
+So, the question is, can they, can we have a three and a half megawatt load for 15 seconds pretty much every day. They should be able to, according to what I'm looking at, but you would need special permission.
+
+Speaker 3  04:43
+Yeah, I'm not sure what they can and can accept. That's a pretty big load. If it was under a megawatt, what I don't think it's an issue, but it's at the line of needing a discussion and approval for them.
+
+Speaker 1  04:59
+Jeremy, you said an additional three and a half megawatts. I just want to be clear, is that now a 13 and a half MVA service? Maybe a little further discussion today.
+
+Speaker 3  05:12
+Let's go ahead and assume that it's within the 10 and a half megawatts.
+
+Speaker 1  05:17
+Okay, I think that's, I think that's wise. Sorry, 10 megawatts. Yeah, I think that's wise. That'll, that'll actually get down to an answer as to whether or not that impacts how they bill us. So, I think that's that's good. Nick, you let me know if you want to take that, or just ping me if you'd like me to call Grant. I'm fine with either.
+
+Unknown Speaker  05:36
+Yeah, I'm gonna shoot it, shooting an email right now, and
+
+Unknown Speaker  05:40
+they don't respond. I'll call him in the next hour. Okay. Perfect. All right. SR four.
+
+Speaker 1  05:48
+So this is, we, we are trying to do our best here is to not impact the 10% entitlement rule that we're, we're working to stay under. Keith actually had a really great suggestion to defer or provide any kind of footprint, building footprint reduction as a for future development, so we're looking at two things, that's that's right, it's a different phase. I don't want to confuse folks with phase two, of which is machine installed, but that's right, it's going to be a different phase of construction. We would eliminate what we're calling the HEMA, right, but essentially that's let's get this labeled correctly, CUB one, CUB two, and Cub three, so that's about I want to say it's about 12,000 square feet. We would defer this for several years down the road. The idea would be, as we still show it on the drawing, so as not to impact entitlements, but we would just communicate to the city that we would build this out at a later time and
+
+Speaker 5  07:09
+Any questions here? What would the envelope look like for the temporary build? Are you Dominic?
+
+Speaker 1  07:23
+Dominic, we'll discuss that in our work session. So, I think any, any technical details associated with material, I just want to keep things at a very high level concept. Let's lag any risks with entitlements or Course or existing break ground, but technical details will work out during the work sessions.
+
+Speaker 6  07:54
+Hopefully, this is not a technical question, but is the intention still to like build the foundations and the columns and the beams for that footprint, but then just not put anything inside it,
+
+Speaker 1  08:06
+defer the entire scope, no slab, no ground improvement, no columns, no beams, no choice, no enclosure, it would be completely deferred, but just shown all the drawings as future construction, so the the maybe I'm not sure if I answer your question, it would be there would be a design thing we need to figure out from a design standpoint how much we need to design, but it wouldn't be procured and it wouldn't be built.
+
+Speaker 7  08:39
+Yeah, I think it comes into phasing, and I think that we probably can talk through the details later. My guess is that from the, I think there would be new detailing that's required for, for the, for that building, that then becomes a change of design for that building, even though we would still show it on the drawing, just so that it could be built at two different times, so yeah, just so that that's understood, that there would have to be some changes to the design to accommodate that type of change. Now, Courtney, but I think eventually, if it's going to eventually be built, and it's still shown on the overall site plan, my guess is that that would not change the entitlements that specifically would not change the entitlement. Yeah, I
+
+Speaker 1  09:24
+think so. Rebecca, yeah, that's Rebecca. That sounds good. Let's talk permit strategy in our work session as well. I'd like to see if there's an opportunity to.. what I want to do is any details associated with the design of the cup space that we would be eliminating would come in a later permit package, so as not to hold up the close out of this permit package.
+
+Speaker 7  09:57
+Yeah, and I think we need, we just need to talk about it a little bit more in detail, and I think just as a team, I don't think we can have the full conversation today, and so it makes sense to talk about it next week, but yeah, I do think that there are some implications to the current permit package with this change that would need to be documented before we can get the permit in, but I think that it's worth talking that through and letting us think through it a little bit more of how what the most efficient way to approach that would be.
+
+Unknown Speaker  10:27
+Yeah, understood. Rebecca, I think that's a good idea. Was there a question?
+
+Speaker 1  10:37
+Okay, moving on to number six. We are completely eliminating the mild pull down pits and covers, this was a pretty massive budget or cost overrun that we weren't accounting for originally, largely due to the covers. It was a pretty tall order to fill, and it's just it's something that needs to be eliminated, so this this will be removed. Frank and Mark, I wanted to jump into the conversation with Greta and Matt yesterday, but I didn't want to cause a distraction. But hopefully this makes life a little bit easier for you on some of those education cases you're trying to solve essentially is no longer an issue. Yeah, right. I guess I think
+
+Speaker 6  11:26
+if this is confirmed already, then my immediate follow-up to Greeta would be to basically not consider the cool down vault anymore. Is that the correct direction I can give to them, correct.
+
+Speaker 1  11:41
+We are completely eliminating these there. I don't even.. Nick and I were just talking. I don't even think they're deferred scope.
+
+Unknown Speaker  11:50
+They are eliminated.
+
+Speaker 3  11:52
+They're still deferred scope. It might be three or four years down the road we would add in some equivalent of it into the facility.
+
+Speaker 6  12:06
+Okay, okay. So, if it's deferred and there's a potential that it may still be built in the future, would it, would it be within the where we're currently showing it? And I guess maybe this is technical, but want to make sure that there's in the future there might not be potential impact to, you know, adjacent structure that we are designing in phase
+
+Speaker 1  12:31
+one, so we are not going to take in any design considerations of a future mitigal cool down pit, that's that's not where we were going to achieve savings, so there's going to be zero design considerations associated with a mild cool down pit. There, if in the future we decide to provide a means of mitral cooldown, we will need to, we will need to assess the opportunities available to us at that point in time. Okay, sounds good. Thank you. Okay. SR seven, we are going to be eliminating all of the utility trenches and covers, excluding, so the only one that remains is the DI 30 inch di water pipe, I will, as part of the blue beam session, I will update the trench that the trust trench that hosts the 30 inch water pipe. Jeremy, I think we were talking about sharpening our pencil on skinning up that trench, maybe that's something that we can do in the next couple days, but the intention here is to eliminate all trenches not associated with NDA water pipe,
+
+Speaker 1  14:02
+so Jeremy, do you think it's an easier, is an easy conversation with Morgan and Sarom to be able to understand the minimum trench depth and width requirements, if we're just taking into consideration DI water, is that something we can get within the next, like, end of day Monday, you think.
+
+Speaker 3  14:27
+Yeah, at a high level, Nina Frank, I think you know what that 30 inch pipe currently looks like, the path that it takes. So, as long as we can install that pipe and maintain it, then that's the minimum width and depth needed. Thank you. So, basically, the depth stays the same, but the width can come in considerably to whatever is needed to install that pipe. Okay. All right.
+
+Speaker 6  14:57
+Yeah, I think I think I have a good idea at the depth requirement, the with might need to coordinate with you and echo on that, for in terms of what the minimum needed
+
+Speaker 1  15:10
+is sounds good. Yeah, Frank, if you wouldn't mind starting that email conversation after this meeting, just so we can start tracking it and getting those answers for Tuesday, that would be super helpful. SR eight, we are relaxing the floor flatness, floor levelness criteria to what would be a standard industrial space. So spoke about this with Ryan. Typical industrial manufacturing space has an FFFL of 3525 so the hopefully the intention would be any kind of finishing slab is no longer needed, any additional troweling is no longer needed. Any questions or clarifications on this line item?
+
+Speaker 1  16:02
+Okay. moving on. This is something that's currently in Pacific Fusions Court to really dial in again. The intention is to have an answer by end of day Friday. There's an opportunity to potentially relax the cooling and heating requirements in the R and D space, having a cooling set point of 80 degrees F instead of 70 degrees Fahrenheit, and a heating set point of 55 instead of basically maintaining that 73 degrees at point plus or minus two degrees, doing so would eliminate a couple units, couple HURT units and This is this is currently in review. So, moving on, SR 10, Jeremy, I think with the way we were talking with Western Ground improvements, we are still maintaining a three eight inch settlement after preloading that is still a design requirement, so I'm not sure that we can continue to take this into consideration.
+
+Speaker 3  17:09
+I was looking at this one, I think this one we can go ahead and move forward with. I think we'll end up loading the foundation up to like 90% before we make the final connections, so we just need to know what that settlement is, so that we can account for it beforehand and verify that last 10%-ish weight does not impact the foundation or cause more than three eights an inch of settlement.
+
+Speaker 1  17:42
+Okay, understood. Are we designing now to so after preloading? What is the what is the maximum settlement machine install can manage? Is it three eights or one half, and one and one half of an inch? Three eggs after preloading after pre-load. Okay, so again, I guess my understanding of that, Jeremy, is this is we cannot relax settlement criteria to one and a half inches. It's going to remain at three inches of an inch after preloading.
+
+Speaker 3  18:20
+Yes, but I think there's two sides to that discussion, because there's the settlement that happens before preloading or during preloading, and settlement after, and I think this is during preloading, right?
+
+Ryan Hankins  18:33
+The difference between.. I don't think this is where I've been confused since we started talking about this settlement thing, but I don't understand why Pacific Fusion would be worried about the settlement before preloading or during preloading. I think you guys really only care about what happens after, right? That's correct.
+
+Speaker 3  18:57
+The equipment that I'm placing needs to be plus or minus point four of an inch from the model after all settling is done, and when I connect up the pole stoops, so I've got plus or minus point four of an inch when I connect up the pole stoops from the current model design, and then once they're connected, I can accept an additional three eighths of an inch of settling without causing a problem.
+
+Ryan Hankins  19:21
+Is that, is that primarily because of differential settlement,
+
+Unknown Speaker  19:29
+or is that because
+
+Unknown Speaker  19:31
+or before I connect the pulse tubes?
+
+Ryan Hankins  19:33
+Well, so what I'm trying to figure out is, like, is is that value tied to the fact that your your tube has to tie to one side and then the other side, or is it because your steel that supports those tubes is a certain size that it needs to, you know, what I mean,
+
+Speaker 3  19:49
+it's the difference between the two sides, the water tank and the imgs, so it's a very rigid connection of a very large pipe,
+
+Speaker 1  20:00
+so the way, sorry, I'm going to pull this up because I don't want us to get, get too into the weeds here, the way, so Mark and Frank jump in, but the way we've been discussing the three eights interest settlement has always been after preloading, Frank, is that a correct statement? Yes, it's our understanding. Okay, so the way, the way we're discussing this now, Jeremy, is that the design criteria three eights inch remains flex, okay? So we cannot relax that to one and a half inches. Therefore, the SR 10 is irrelevant to a scoping reduction. I'm going to go ahead and process out.
+
+Unknown Speaker  20:43
+Okay, I'll just verify it this afternoon.
+
+Speaker 1  20:46
+Okay, that works, Jeremy. Thank you. We are going to move forward with eliminating the 40 by 40 foot door on the east side of the facility. To there may be an opportunity in the future where we absolutely need this door. What we're asking the architecture team to do is just provide a knockout where that that that footprint of that 40 by 4440 by 40 foot door is in the model and if we need it at a later date great but we will remove it from the scope for now
+
+Speaker 5  21:20
+and the steel that would go with that door, to correct.
+
+Speaker 1  21:24
+Yes, please. Yep. Any provisions for 40 by 40 foot door is completely eliminated, except for what would be a knockout.
+
+Ryan Hankins  21:33
+Got it. So, if it's a knockout, I still think we need the reinforcement. So, Dominic, in your to your point, I don't think we're eliminating everything, actually. Now that I'm thinking about it,
+
+Speaker 5  21:48
+yeah, Frank will have to coordinate on that on minimal steel to support that panel, but I don't think we're adding any steel to support the future door.
+
+Ryan Hankins  22:01
+That's right, and that's, and that's where Frank, getting your thoughts on, if I mean, what I envision with this 40 foot door is like, you know, almost like sandwich plates on the unlike the header and the jams. If you don't think we need stuff like that, and we can just do it with rebar, then that's that's a different thing, but 40 by 40 is a big door, so if we don't need those sandwich plates until we cut it open and actually do the knockout, then we can, we can remove that steel.
+
+Speaker 6  22:32
+Yes, yeah, let's talk separately, Ryan, about this when it comes up. I've only feel like I've seen it done with rebar before, so the sandwich play I'm not familiar with that detail. So, if you can give me some context on that, we may have to
+
+Speaker 5  22:50
+just rethink the envelope in that section, Franken Round, to where instead of a sandwich panel, maybe we do just a typical tilt-up panel, and then we come in with continuous insulation stud and framing just in that area,
+
+Unknown Speaker  23:09
+if it's adding too much overhead, then knock out,
+
+Speaker 1  23:15
+yeah, yeah. Thanks, Jeremy. I think the whole idea is we do not want to plan for any additional provision, so if, if providing what would be a knockout is going to add additional provisions for future proofing, then let's go ahead and eliminate it, and we'll deal with it when the time
+
+Speaker 5  23:35
+I don't want to make it sound like we're adding additional provisions, it's more like it's just a different design consideration, a sandwich panel versus continuous insulation instead is not necessarily a cost ad, so I think it's just design thought, not we're adding a bunch of money to this
+
+Speaker 1  23:59
+with the existing design as it is, if we didn't do anything, my, my assumption and impression is we can come in and modify that tilt up with future steel to support a 40 foot door, correct? If we didn't do anything today, there's an opportunity to come in with additional steel supporting a 40 by 40. It would basically be a standalone steel system that supports that door, but
+
+Speaker 6  24:35
+that would be accurate. I think we would need to, I think the tilt up would still need to be designed for future openings, correct.
+
+Speaker 5  24:46
+Yeah, so I think we just need to think through some detail, Courtney, on this. It's not, it's not a make or break, like we're adding a million dollars here, just need to rethink, rethink how we're detailing it. Okay, so we'll come, we'll come up with a design solution to this. I think it's just something we can work with Clayco and Frank on. Okay, that sounds good. Thank you.
+
+Ryan Hankins  25:14
+Dominic and Frank are happy that I'm happy.
+
+Speaker 1  25:20
+Okay, moving on to 12. So, this is a discussion that's still in progress. Rebecca, I appreciate you reaching out to Decker. I think the thing that we really need to get to the bottom of, you know, we're at the end of the day, we're kind of hanging our hat on this SIO that was approved, maybe just through a height precedent based on surrounding buildings, but since we have that SIO, I think we really need to figure out how does that SIO grant us the ability to add, I'm going to call it H for occupancy in the future, so with with the original Type 2b we all know that Type 2b is actually going to be the most cost-effective way to do things, but we really need to understand how much square footage we have for future H occupancy spaces. Rebecca, I know you're running that down. I think you're running that down with Jensen Hughes today, is that correct? Yeah, so I think I'm well,
+
+Speaker 7  26:30
+I this is the first time hearing about it, because I had stuff going on this morning, so I'm now seeing that you have emails I haven't caught up on all of them. Okay, gotcha. I need to talk to Jensen Hughes, and I think I'm going to have Bill kind of move forward that conversation, so yeah, I think somebody will will get some information, and I'm not 100% sure that it will be there today, but we've all double check with Jensen Hughes, that's what I can say, I'll give them a call and talk through their report and see if we can put any clarification about that future h occupancy. If we can include any of that in the report,
+
+Speaker 1  27:11
+much appreciated. I also think so. I know Bill is out of pocket today, Rebecca, so I don't know if we need to leverage Natish.
+
+Speaker 7  27:21
+Yeah, I'll talk to Natish somehow. somehow, even though Bill's out of pocket, it's not stopping me from still sending confused messages at all, so, but yeah, 100% I'm in communication with both Bill and the Tish, so don't worry, it's gonna, it's gonna all work out, we're gonna work on
+
+Speaker 5  27:39
+it, okay? Sounds great, Dominic. Yeah, I think this is something we can definitely talk through the implications next week in the details. I've been thinking about this. I think it's achievable with limitations. We can define those limitations. My main question is, does this h occupancy need to be attached to your main structure?
+
+Speaker 1  28:12
+So, the only question that we're, we're answering right now is, how does the SIO impact h occupancy in our building. What is the maximum allowable allowable square footage? Yeah, that's the only question we're answering right now.
+
+Speaker 5  28:32
+Okay, we can follow up next week.
+
+Speaker 1  28:35
+Thank you, Dominic. Okay, moving on. SR 13, pretty easy. We are eliminating all performance codings. Okay, number 14. This is a big one. So, this is in review, eliminating basically 50% of the admin lab space. So, this is clearly noted in the Bluebeam session. So, from column line 10 to 12 we would be axing it, but on the document, so as not to impact entitlements, we would show it as a future construction date, but for this first construction phase, or first few construction phases, we would only be constructing column line seven through 10, this saves us quite a bit of money. I think Bill was chasing down how this may or may not impact entitlement, so those conversations are still happening. We'll dial that in during our work session with with BHI and the city next week, but this is something that is currently in review, and something that will, we hope to have an answer for the team by today, today, early Saturday morning. So, just a heads up. Moving on, this is another item that is currently in review. We are thinking of, you know, one of the big items, so if we look at all the big ticket items, steel, concrete, uh, electrical, mechanical, we have for the admin and and laboratory space, you know, we have a 44 foot tall building, the majority of that space is we're looking at reducing it by 15 feet, that's 15 feet less conduit that you need dropping into the lab spaces, HVAC dropping into the spaces, and then 15 foot reduction in steel across those columns, so there's some savings there that we want to capture. This is something that's in review again hopes to have a decision by end of day today, if not tomorrow morning. Moving on to 16, so just doing a quick time check. I want to be considerate of folks' time. I'm going to go very quickly here, because we only have 15 minutes left. Again, let's keep this conversation at just super high level. We will work out the details next week. The admin, we're basically stripping away all finishes. It would just be a sealed concrete floor. It would be very similar to the San Leandro build out, where we would, we would want to make provisions for minimum code, minimum requirements, including bathrooms, where we'd also have maybe a small cafe, those details are forthcoming, but we, we're basically stripping this all the way back. This is in review. We will have details on what those minimum provisions are by end of day today, early tomorrow morning. Moving on to 17 and the northern portion of the equipment pit, this is currently in review. 18, we will be eliminating all the asphalt in the parking lot. This has been approved, so this is just something that we need to get back into BH eyes hands. We are eliminating the showcase mezzanine and any provisions or future provisions associated with that, so, so, Frank, no future loading requirements for a mezzanine, we're just completely getting rid of that, along with the elevator and any of the steel associated with that mezzanine. Number 20, we are going to be eliminating the security fence or any future provisions for that security fence around the perimeter, so that's been accepted. This is something that Susie, I'd like to work with Astrodon. It sounds like there's an opportunity to completely eliminate the CDA RTU or significantly reduce it, a to 18. It sounds like if we rework some of the equipment layout in the cub, giving Astrid a solid enclosure surface to work off of, where she can add a louver. It sounds like there's a possibility to close that louver in the winter time, open it up in the summertime, dump the heat from the CDA unit into space for heating. Sounds like there's some opportunity there to, to get rid of that. I know we, I guess we did quantify it here, but we are approving that it's just something that I think we need to work through.
+
+Speaker 1  33:28
+All right, moving on. This is currently in review. Jeremy is working with the Pacific Fusion team to determine if we can really isolate the 100,000 the 800,000 pound transporter load to just a specific area of the R and D space, instead of along the entire footprint, which is currently denoted as the darker gray area, and latest 50% CD set. We're just sharpening our pencil on that, that is something that is in review, and we'll, we'll, we'll have more information for the team in the next day. SR 24 Yes.
+
+Speaker 6  34:13
+Sorry, just I know the the original discussion was just about what's happening in the RMD space. Is is will this also be clarified for the lab spaces as well?
+
+Speaker 1  34:25
+Yes, we will also clear, we will clarify exactly where that transporter will be, will be going when we provide additional direction. Okay. Thank you. Yeah, yeah, thanks Frank for bringing that up. Number 24 so we would be eliminating all concrete at the loading docks and just replace with base course. I'm pretty sure we can do this. We just need to double confirm with with BHI. All right, moving on here. FM global requirements question for you, Ryan. When we pulled this number together, was this just for lightning protection? Yes, this was just for lightning protection. Did it take into consideration code minimum lightning protection?
+
+Ryan Hankins  35:15
+No. Or yes, code. I don't think lightning protection is necessarily. I need to go back and look what the actual code is, lightning protection, but it would be whatever code minimum requirements would be, whether it's lightning protection or no lightning protection.
+
+Speaker 1  35:34
+I, Susie, maybe you can help. I want to make sure that we're not completely so, if it's code minimum. If this is the variance between FM requirements and what would be the code minimum lightning protection, I'm more comfortable eliminating this, but if this is completely removing any kind of lightning protection, I think that needs further discussion. I do,
+
+Ryan Hankins  35:59
+I do believe this is removing all lightning protection.
+
+Unknown Speaker  36:05
+I don't know if we want to do that. Susie, do you know Susie had
+
+Speaker 7  36:11
+to leave? I'm pretty sure, and so I think that we should. Yeah, I would be hesitant to remove all lightning protection without getting some confirmation from Susie and her team.
+
+Speaker 1  36:23
+Yeah, okay. So we're definitely going to put this on hold. Nick, you can speak to this. You guys get lightning storms out there all the time.
+
+Unknown Speaker  36:35
+We're a desert, so definitely not uncommon.
+
+Unknown Speaker  36:40
+Yeah, I create lightning storms just by, like, walking around in the winter.
+
+Unknown Speaker  36:45
+There's a lot of static. I'm, we may have to reject this
+
+Speaker 1  36:52
+if this was.. if this was just, I guess, take-offs of the existing lightning protection design that was in the document set. I might strike this, so I'm just going to say in review. In review, Jeremy, I, you probably have some discomfort with that as well.
+
+Unknown Speaker  37:16
+We can discuss offline. Okay.
+
+Unknown Speaker  37:20
+All right, moving on. Eliminating the 75 ton bridge grain, I'll just keep it to keep it there. More to come. End of date today.
+
+Speaker 4  37:31
+I think we just strike that. Okay, we can talk to offline Jeremy. You have questions, but I don't think we're gonna eliminate that.
+
+Speaker 1  37:46
+Okay. All right, moving on. You know, I think SR 29 reducing the bridge crane from 400 to 300 tons. This is in review.
+
+Speaker 4  38:01
+I don't think we do that either. Yeah, okay. I'll fly into Jeremy's, but
+
+Speaker 1  38:08
+yeah, I think that's wise. Okay, great. Some of these, these last remaining items are super easy. We, we basically eliminate a few roll-up doors, will clearly indicate what those exterior and interior roll up drawers will be, and then since Susie isn't here, we'd also be eliminating the tie ties between the 5000 at busses, there's four of them, so these, these are all accepted, okay. Okay,
+
+Speaker 1  38:46
+so this is just a high level glance of all of the items that we will be discussing in next week's work session. I will follow up with everybody, like I said, latest Saturday morning after I had a discussion with with some of my colleagues, are there any questions with the remaining six minutes that we have?
+
+Ryan Hankins  39:09
+The one thing that we talked about in our meeting with leadership yesterday, that especially since there seems to be less items approved than what I thought the expectation was, just needing to know what the bottom line number is that we're really driving to.
+
+Speaker 3  39:34
+Yeah, Ryan, why don't you and I talk offline? I think Courtney and I have come up with a pretty good target, and I'm happy to share that with you. I can give you a call right after this if you want. Okay,
+
+Unknown Speaker  39:49
+Courtney, you mentioned a blue beam session.
+
+Speaker 1  39:53
+Yes, yes, sir. Hold on a second, let me share,
+
+Speaker 8  40:02
+I yeah, I'll go
+
+Unknown Speaker  40:10
+ahead and copy this, and I will make sure
+
+Unknown Speaker  40:18
+I'll go ahead and just email this group, and make sure you guys have these links,
+
+Speaker 5  40:29
+and just to confirm, these are the thoughts requests from Pacific Fusion, and next week you want to run through design schedule cost impact and potentially high level code review, you know, going to be what are the implications, those types of things.
+
+Speaker 1  40:54
+Yes, and you know, I think it's worth saying at this point we need to safeguard a few aspects of scope, obviously budget and schedule. The top priority is break ground, so we need to work together as a team to safeguard a july 15 break ground date. We need to get creative with how we safeguard some of these procurement items, the steel, it sounds like based on some of the items that we strike today, there's a really good opportunity we can safeguard the existing well schedule to keep on with that procurement schedule, but that's the number one thing that we need to safeguard, the other thing that we really need to look into, entitlements gates our ability to break ground, so if there's anything that's going to kick us back and causes us or disables us from being able to break ground because it's kicked us in past that 10% rule, we really have to work through that, and I know there's some uncertainty with how we are reducing or eliminating some of the square footage. Bill and Rebecca
+
+Unknown Speaker  42:09
+keep going. Sorry, I didn't mean to interrupt you.
+
+Speaker 1  42:13
+Yeah, I know Rebecca, the Santec team is kind of working through that with, I think Mike is helping, you know, this is likely going to be a discussion with the City of Albuquerque, but we've got to get creative with how we document this, and, and all the permit strategy associated
+
+Speaker 7  42:31
+with it. Agreed, and just to make sure that, so I included it as a line in my email yesterday to Jay, just to confirm, and I can call him back and double check, but in the last city of Albuquerque meeting we had, Courtney, that entitlements process, I don't think is it's not blocking us from breaking ground entirely, because I don't think that that that needs to be in place prior to the early foundation permit, so I think that there is a little bit of time in which that can get worked through, and yeah, I think it's worth having a conversation with the City of Albuquerque to define the pathway for that, but having a really clear understanding of where we're going to end is going to be critical to making sure that that that can happen, so I think that early foundation package is not dependent on it. The building permit is dependent on it.
+
+Speaker 1  43:29
+Understood. Okay, that's that's actually really great feedback, Rebecca. That is, that is different from my understanding, but good news. I think we just want that confirmation from, yeah,
+
+Speaker 7  43:41
+I'm going to reply in the email, so it can come and write from him that I'm going to ask him to please confirm that understanding.
+
+Speaker 1  43:49
+That is great. That is great. I think that that gives the entire team a lot of peace of mind if that's the case.
+
+Speaker 7  43:57
+Yeah, so I'm, I'm well, yeah, if I'm like 95% sure, so there is a 5% of doubt, so let's fingers crossed.
+
+Speaker 1  44:07
+Okay, yeah. Thanks for looking into that, Rebecca.
+
+Ryan Hankins  44:12
+One more thing, yeah, is everyone is everyone leaving for a couple minutes, so just so, because, like, I think it's important for everyone to understand kind of like what my goals are from next week. Yes, I think the main priorities that we all get aligned, I think the main priority is that we start understanding the inputs that the design team is going to produce, so that we can update our construction schedule, but the other thing that I want to make sure that is going to come out of that meeting is that I'm putting together currently like a list of what it takes to get to break ground, like the things that are in our way outside of the design team and outside of the other variables, so like you know, for example, like contract, for example, like I mean, there's a lot of other things there. So, Courtney, next Friday, I'm anticipating to understand what all those things are, and I'm going to deliver that to you. Maybe we talk about it before we leave, but that's like my real big focus based on the conversation yesterday, does that make sense?
+
+Unknown Speaker  45:26
+That does make sense. Yeah, that does make sense. Okay, I'm also wondering, Ryan, I know we're holding off on any kind of
+
+Speaker 1  45:39
+steel orders, I'm wondering, is there any confidence that you have based on these scope production items? Maybe we should be asking Frank first, right? So, as not to put you on the spot, Ryan, but based on some of these scope production items, what are the ones pending that would impact to get this Ryan's R&D steel procurement
+
+Speaker 9  46:07
+order. Sorry, you, you broke up
+
+Ryan Hankins  46:14
+too. It felt like she was talking twice. That was interesting. Yeah,
+
+Speaker 1  46:21
+bad connection here, Frank. Question for you, I think the thing that we want to get to an answer, you know, sooner than later, and maybe there's benefit. I don't want to wait till the end of next week to come up with this answer, but Frank, if what you're seeing on this ACC list does not impact your existing mill order for the R and D space, let's let Ryan know, because I think that that right there is the piece of information Ryan needs to start piecing it all together. Yeah, I think in terms of the
+
+Speaker 6  46:55
+roof frame for the R and D space, I think we have a fair amount of confidence in that design is settled the the vertical bracing, however, I think we'll need to kind of circle back again with the hub being reattached through the structure because all of that vertical bracing was designed with the cup in the end and then on the on the office lab side again, fairly fairly high confidence in the in the roof framing that we have, the one item that I didn't, I didn't want to ask the question when it came up, but there was the the Scope reduction item to eliminate a portion of the office lab space, but I think that office lab space also doesn't, is where our vertical bracing currently is, and that affects the vertical bracing for the trains, so if that goes forward, I think you know we'll have to redesign, you know, where the vertical bracing is.
+
+Ryan Hankins  48:07
+It's a good point. I totally blanked on that. Glad we're talking about it.
+
+Speaker 5  48:15
+Yeah, yeah, I've been thinking through that. So, Courtney, this was something I was going to share next week, just a couple options for the impact of reducing the 10 to 12, and I think we may want to consider a corridor in the section that would allow the bracing to come down. If not, Frank's right that we would have to bring that precinct somewhere within this program, but I think there's.. I did want to talk this through more in detail with structure, because I think there's a lot of added benefit to creating a utility corridor egress, but also separation in the firewalls foundation potential. There's a lot of reasons why I think this approach would be a good idea, and if we're kind of going back to the drawing board, thinking about it to be, it might be worth looking at these issues that could solve a lot of problems with one stone, but anyway, I'm still thinking through some options on that, but yeah, Frank, I was probably thinking the same things, of where are we putting the bracing, and I think it also is the other question of the timing between this initial phase, like, are you building a full envelope along this blue line, or is this just a knockout wall?
+
+Speaker 1  49:54
+Because I, I'm gonna have to drop twice. Yeah, but I'm glad you're thinking double. This is really good, you're always like 10 steps ahead of everybody.
+
+Speaker 5  50:04
+Well, anyway, just the question, so we don't have to solve it now, but these are the kinds of things that we'll want to think through next week, implications and whatnot.
+
+Speaker 1  50:15
+Absolutely, no, this is great. Feel free to circle this, circulate this, Dominic amongst kind of the smaller group to give us the opportunity to chew on it. I wish I could spend more time on it right now, but I need to jump. Thank you. Yeah, that's fine.
+
+Speaker 5  50:30
+Brian, Brian, Frank, you want to chat real quick.
+
+Speaker 6  50:35
+Just started to pick on this sketch, but the southern race needs to get shifted up
+
+Speaker 5  50:41
+one, yeah. No, no, I, I, yeah, this was made very quickly, in like 10 minutes. So, thanks for catching that.
+
+Speaker 6  50:53
+This would need to be the entire corridor, because, because the vertical bracing would enter up
+
+Speaker 5  51:00
+the corridor, right? Yes, it would interrupt the corridor, but again, the it's not meant all for passage north south, as long as a person can get through, because their operations are really only going east west, so there would be enough for a person
+
+Unknown Speaker  51:22
+to get through, have like a 36 inch
+
+Speaker 5  51:26
+minimum, 42 inch minimum, yeah, and like this, this bracing is going at a pretty high angle, so I mean we can, there's there's design implications that we can do that, but again, I just get the sense that there's a lot of utilities that are not currently planned for that are going to need to come in somewhere that can't go in front of the crane,
+
+Speaker 7  51:48
+so it, yeah, I think in Ryan just wondering if that helps any with shortening the lengths of runs of some of those utilities, giving it like a big trunk location where it can run.
+
+Ryan Hankins  52:04
+No, there's not many utilities that go to those, those at least what's in our scope, especially since we removed, you know, we're doing natural gas fired units now, so really affect us. The bigger thing, I mean, just, yeah, man, I like this idea. Unfortunately, it's going to just add cost. I think the one thing, Frank, that would be helpful is that if we do this and you have your pathway on that left side, does that mean the rest of this area on the right side is all lightly loaded joist, and it's not, and it's not like these big honking W beams.
+
+Speaker 6  52:49
+Yeah, I think that's fair to say. I think probably along the brace frame lines we would still want to have wide flange beams, but then a lot of the, you know, the grid lines in between e point two, I think, C G, I think we could reduce the wide flange beams there, and then it's primarily, and then in the north south direction, it can be primarily joist and joist scooters, we probably only need the white flange beams along what used to be grid 12
+
+Speaker 5  53:29
+and what's grid and no, yeah, this is just this is just one option, I think. The other option, of course, is just to do it kind of like it was, and let Pacific Fusion decide programmatically, you know. Are you okay with the bracing coming down and interrupting? So this is more just this is like high level. Hey, this solves your problems. This is probably the best scenario of this new direction, but then there's another scenario of kind of going what they've asked for, which I think it caused a lot of potential issues, and highlighting those issues, code egress separation going to to be. I think there's a lot of added complications for now we're going back to all these separations, so yeah, we are saving on protection, but I think we just need to, at least on the architectural side, run through how all these spaces could relate together, because I don't think it's a simple let's just cut off this portion of the building, just helping, helping to have to understand what you know, all these, you know, another thing I thought is we have a fire riser coming in here, so now we have to move the fire riser, and really they're thinking of this office, she said 50% reduction, it's bigger than that. Also, I think this kind of becomes a core function, where now we're having to move all of our electrical, basically all the utility restrooms, like you got a
+
+Unknown Speaker  55:12
+plan with zero bathrooms.
+
+Speaker 5  55:14
+Yeah, so this, this whole area, now I think we need to rethink of it as like core, like office core function, rather than just office. So, what I think I can do for next week is show the program that would go in this space, just showing how much space it's going to take up, do some
+
+Speaker 7  55:37
+calculations on the reduced plumbing fixture count, figure out what else needs to go in there.
+
+Speaker 5  55:43
+The other piece, you know, and Rebecca, I didn't want to get too into it, but it, you know, is this a new facade, right? And what is the approval on that?
+
+Speaker 7  55:57
+Like this change on the right, did they tell us that I was.. did they tell us that that piece is going to get chopped off?
+
+Speaker 5  56:08
+Yeah, no, they kind of sidestepped the question.
+
+Speaker 7  56:13
+Well, yeah, so they haven't given us.. they, that one is still up, we don't have the direction on it, but that I've already done the calculations that will trigger the major amendment, I think, or minor amendment to the site plan, for the, that's more than 10% of the building swim footage, so it will trigger it. Yeah, and I
+
+Speaker 5  56:37
+kind of knew that, but I'm sure they didn't want to hear that anyway.
+
+Speaker 7  56:41
+Yeah, the one on the back side, if it's still going to be shown, and that's the thing, I'm like, do they want this still to be shown as part of the building, and I think there's quite a bit, you guys are right, I didn't mean to cut you off, you guys are right, that there's a lot of complication to, because we have to make that entire north west part of the cub would need to be self sufficient, and then each part is going to have to be its own separate self-sufficient building, so for from the design standpoint, that's that's a little bit complicated to get documented if it needs to be fully detailed out, so we'll just kind of, we got to figure out what's what's implied, so I think just so that you guys know, Dom and Frank, because as of right now we haven't been given any direction that we're not meeting the 615 date, and so I think that I am, I'm really, I'm inclined to either like I, and I don't have any say in this. I'll be really honest, I have say in almost nothing, and I'm going to try and start acting accordingly, but I may ask Bill, and I think Natish might ask Bill that we really allow the team to keep moving forward towards the 615 date until we have the clear direction that that's not going to change, so that might mean not having as many people involved in the workshops next week, unless we can get that clear direction, because I think there's a lot of risk to our team by giving up a full week of production unless there is going to be some assurance that that date will move for us, and so, yeah, I was, I was concerned also on on your behalf, Ryan, on the 715 date, but I love to understand more,
+
+Ryan Hankins  58:37
+I'm like that implies, I'm like, we're talking about elementary details about the building, like, like super basis of design elements, like schematic design programming for breaking ground. Pardon my French, but like two months from today, we have a shovel on the ground.
+
+Speaker 7  58:59
+I'm a situational cursor, and I really do not curse almost ever. My dad got stammed out of a lot of money, and this past week I've dropped like 3f bombs to the Tish. I never curse, like I don't curse, but something's situationally they really pull it out, you, but I'm trying to bring less emotion, because I know that I'm just crediting myself by getting so angry, and that's not good. Ryan, you just kind of roll through it, and that's good. I'm going to try and take some notes, change my entire personality. Wolfie, yeah, you can do it.
+
+Speaker 5  59:37
+Yeah, Ryan, I invited you to our internal coordination call on Monday, and as far as we're concerned, I know this sounds stupid, but this whole conversation isn't even real, and per Rebecca's note, the we're proceeding as if it's not real, and the we're proceeding with the ve items, which I've outlined to the team on what we can proceed with, and I think the only big remaining topic is from our side is like aligning on the interior stuff, which I know doesn't make a ton of sense if we're going to this workshop next week, I mean, my, my, I guess my, I think if we
+
+Speaker 7  1:00:29
+make Ryan talk about interiors one more time, that might be the thing that breaks up,
+
+Speaker 5  1:00:35
+I'm just letting you know where we're at, and what I've directed my team is to move on the things we know are going to be consistent between these two elements, which is we have a roof and we have walls and we have, you know, certain details that are going to remain there, but yeah, you're right, we're going back to programming next week. In my mind, there's a new design schedule with this approach,
+
+Unknown Speaker  1:01:02
+yeah, but we don't know that until we know it,
+
+Ryan Hankins  1:01:05
+so part I appreciate being part of your internal design call, because as part of, I mean, I'm going to deliver some pretty bad news to them next week after we get through our meeting. This is just, I'm forecasting where this is going, because tell them all the things.
+
+Speaker 7  1:01:23
+Curiosity, is this this is their call, but is it recorded in any way?
+
+Unknown Speaker  1:01:29
+That's a good point. I
+
+Speaker 7  1:01:31
+don't know. I'm gonna.. I think let's drop the call and just do a quick call on the
+
+Unknown Speaker  1:01:37
+separate on teams. Yeah, I
+
+Speaker 6  1:01:39
+think so. Yeah, good deal. Sounds good. Will you invite me to that? there is one thing that I
+
+Speaker 7  1:03:15
+Okay, that worked. Sorry, I got scared. Yeah, no, it's.. I already said a lot, so I would be the person who's who I, and that's usually
+
+Ryan Hankins  1:03:24
+well, when we got that email this morning about no recording conversation, like those little shady, yeah, nothing. I haven't told
+
+Unknown Speaker  1:03:35
+the team yet, but I need to pass that on to the team,
+
+Ryan Hankins  1:03:38
+so no. So, what I was gonna say was basically like the bad news is going to be that next week, like in order to break ground, they've got them. We think that this is a monumental effort. They have a monumental effort on their side to break ground in four weeks or in eight weeks, based on everything I'm going to give them, and there's going to be a lot of financial risk on their side. Now, what super concerning to me, and I texted you on the side, Rebecca, but like the fact that we can't get a budget is the most concerning part of this whole thing, and the fact that we don't talk about it openly. So I'm going to push Nick and basically say, like, hey, man, he's supposed to call me, but like, what is the reason why we're like, we all need to know everything at this point? Like, this is almost like design build in a certain aspect, target design, like we all need to be working towards the same goals, like this whole like you guys have this fictitious fake design schedule. I don't know why we're doing that still, and that's probably going to be part of my stipulations, and what I give them next week to break ground, just because, like, I need you guys to focus on things that are important and not things that are wasting your time,
+
+Speaker 7  1:04:57
+you guys being us or them, yeah, yeah, I think that's.. I appreciate that, and I think that that's right, yeah.
+
+Ryan Hankins  1:05:09
+Wait, if we're breaking ground in eight weeks, you're gonna start getting just clobbered with submittals eventually, and that's when he's gonna break,
+
+Speaker 7  1:05:18
+yeah, no, yeah.. and I think, yeah, we'll need to understand that, that'll be good for us to understand. Just because I think that means we'll need to have, we'll probably need to add another person from, like, our office locally to do full-time CA to be reviewing and responding to those submittals, if we're still doing full design effort, so I think there was a goal that some of those people.. it will not be you. It's definitely not you. It's going to be somebody who doesn't have any.. who doesn't know any of the.. of what's going on. They're going to be brand new, but they're going to understand how to review a submittal and might be helpful. It will not be you. Don't worry, it's gonna be somebody here. I'm looking at Clint. I mean, I'm looking at where Clint sits.
+
+Speaker 5  1:06:09
+Yeah, I mean, I.. we're back to programming, and we're back to design, and yeah, I.. it's a new schedule, right? I just saw in your mind, yeah.
+
+Speaker 7  1:06:23
+I think if you.. it's kind of like if you keep saying it, it'll be.. if you say it, it'll happen. But I think historically, what we know is that's probably not the case. I think there's going to be some element of what's currently.. we're going to need to be.. we're going to need to have some understanding. It just, so you guys know, I, I'm not able to make any of the decisions about any of that scope or fee or schedule that's out of my purview, and so I have a lot of strong opinions about it, but I'm trying to, for my own sanity, just let go of the things that I have no way of making a change in, so I think that means, like Frank, that the team is going to need to make sure that they're really vocal and not to me but to Bill and the people who can make some decisions in the best interest of the team, so I'll pass. I'm going to share that with the internal team on Monday, just because that's the reality of the situation, but I think that there will need to be some strong, like a lot of conversation with the team about what can be included in the in these packages, if there is a desire to move forward, and how what they're willing to do in terms of relationship building with the city of Albuquerque, because I think that at some point if there's really not a clear direction and we're doing things just for their schedule, it's there's there's some relationship risk there with the city of Albuquerque, HJ. So one
+
+Ryan Hankins  1:07:54
+thing I will say is that I feel like we're being collectively a little too nice right now, and I know Ryan, I know Rebecca, that you're that you're saying you can't control anything, but like, regardless if we be nice to them or not, like, there's a, there is a coming to Jesus moment that is happening in the near future that everybody's gonna get slapped in the face with, including myself, and so I do think that now is probably the time to stop being so nice. We're definitely going to start taking that stance, starting next week. That's good, and like from your guys' side, and this is where, like, our goals are meshed up right now, like I keep saying, but like I feel like you guys should also stop being so nice,
+
+Speaker 7  1:08:50
+because I've never received that feedback from anyone in my life,
+
+Ryan Hankins  1:08:55
+and I say that because like you guys, like I don't know, it just feels like this is heading to a shit show, and we all, we all see it coming, and we're not holding them accountable enough. Granted, I don't even have a contract. I could back away from this thing today if I was,
+
+Speaker 7  1:09:11
+couldn't you? That's nice for you. Yeah, I think, yeah, I do think that that's, yeah, definitely not the feedback that I'm getting from the leadership, so I to stop being so nice, it's to stop being so difficult, and to stop saying things that are so inflammatory, like, sorry, take the tone out, don't have tone, that's these are the things that I'm getting your be, and I, it's really true that I do discredit myself, because I do have a lot of sarcasm. That's just because I'm Italian. It's not that's just my way of interacting. But anyways, but I'm saying things that are inflammatory, like we'd like to look at how this affects the design schedule of B, like that's the type of inflammatory thing that I'm saying. I'd like to have this in writing from you. Those are the things that are super inflammatory that I can no longer say, so that's where I'm having a little bit of a hard time with that, but I agree with you, but I, I'm going to try and be nicer.
+
+Ryan Hankins  1:10:14
+Well, I hope that you guys don't just let me be the mean one next week, because I'm probably going to be a little mean, and it's not, and I hope you guys,
+
+Speaker 7  1:10:21
+that it's still gonna be like nice, though. I hope it'll still be nice. It'll be super professional, and I think you can do that. You can ride that line really well. I just, from my brief interaction with you, I feel like you'll be able to do a great job. Just, and I think that you might have the conversation with Bill, I think is my point. If you want there to be somebody where there's, you might need to have the conversation with Bill, because the voice, my voice is not there, and so you might need to talk with Bill, because he's the person who
+
+Ryan Hankins  1:10:45
+can do that. I've already talked with Bill. I think Bill's bills on the same page.
+
+Speaker 6  1:10:52
+I can, I can ask Mark. Mark is capable of being quite delicious with
+
+Ryan Hankins  1:11:00
+Mark. Mark's words are, are simple, and, but, but they, they cut deep.
+
+Speaker 6  1:11:08
+Yes. So, Ryan, if you feel like you know we, as the design someone on design team, so needs to speak up, you know, I can communicate.
+
+Ryan Hankins  1:11:19
+So, Frank, for example, this frickin thing that Dominic brought up about this, like, hey, we're moving, removing half the building, and that building affects your structural lateral design. Like, I think you gotta, like, we don't have firm decision on if that's happening yet, but we're breaking ground in eight weeks. Like, I'm bringing that up next week on repeat, I just think I need Mark or you or somebody to be like, what am I doing, like you know, like right, like hey, I need some type of direction on how to move forward, because like
+
+Speaker 6  1:11:53
+we need direction, but then Dominic's got to reprogram the whole whole building, exactly. Yeah, Dominic, can I do that? in one day, and then we'll relocate our voices in one day.
+
+Ryan Hankins  1:12:06
+I just.. I guess what I'm saying is, I just need you guys to back me up. I need you guys to come to my rescue, because if not, then it's probably going to fall on deaf words.
+
+Speaker 7  1:12:17
+I'll pass that along to Bill as well, and I think if you're able to just reiterate that to him, the kind of how important that is, I think that would probably be good. I'm still not 100% sure how it kind of really does depend on what direction we get by end of day to day, as far as like stop work or not stop work, that will impact who from our team comes to the to the media, at least from Stantec, and I'm not sure TT and Myers Plus, how that's going to go down, but I think if we don't get that stop work, we're going to have to keep working, so
+
+Speaker 6  1:12:59
+I think the current plan on our side was that Mark was going to attend, and I would call in as needed. If you know, as things come up,
+
+Ryan Hankins  1:13:08
+Dominic, you'll be there. Yeah, reluctantly, you sound super excited.
+
+Speaker 7  1:13:14
+Sounds super reluctant. Well, I don't think the decision has been made from our side yet. Who's going to be there? I'm like, I don't know if I'm
+
+Speaker 5  1:13:20
+going to be there. Oh, I asked Bill, and he said yes. So, and the email, I thought that was clear, but maybe not. I thought it was, yeah, no, I'm just thinking about how to be mean,
+
+Speaker 7  1:13:42
+I I think you can just keep doing, you, Dom, I think that you don't have to be mean to bring, I just, it's just, I think it's to point to find the hole,
+
+Speaker 5  1:13:55
+or just like, how do we make this real? All I want to do is like make sure we have a constructable building and a design that makes sense,
+
+Ryan Hankins  1:14:04
+and none of bringing out the critical path
+
+Speaker 7  1:14:09
+to make sure that we have a safe, a safe building, and and constructable, and what we're taking into account all of the world and implications. Go ahead,
+
+Ryan Hankins  1:14:22
+where I'm at is that wherever we feel pressure, they should feel more pressure, and I know that Courtney's in a bad spot, but I think we need to continue, like let's not let the shit just roll downhill, let's push it back up the hill. I'm 100% on board with that, like if we're going to be stressed because of things we can't control, like they need to be much more stressed than we are, and we just need to put the responsibility back on them to help us deliver, and I don't pull this hat out very, like I'm gonna like pull out my like asshole hat or something like that, but like it's just like, what are we doing? This is this is messed up. This is super messed up. I'm upset. I'm not even responsible for design, but I'm upset with how things are going, and I'm upset with you guys. Weren't in the call yesterday, but the call was not great. Well, it wasn't, wasn't bad, but the way that keeps me, no, I gotcha. Yeah, the call, the call was like, hey, I don't care, like, how are we breaking ground? And I was just like, okay, this guy does not care, he does not care, he wants results, yeah, but he doesn't understand what that means from his side and how much risk he's opening himself up to, yeah.
+
+Speaker 7  1:15:41
+So, yeah, interesting. Okay, yeah, I haven't heard anything about the meeting yet, but I'm not surprised that that was where it landed. Okay, well, I feel like this is a big
+
+Ryan Hankins  1:15:55
+therapy session. I love it.
+
+Speaker 7  1:15:57
+Yeah, that was, and then this is after I had, like, an hour walk with my best friend, who is an actual therapist, this morning, and only talked about this project, so much better spot than I was yesterday, but we'll see. I'm not sure how things are gonna go where we land on it, so yeah, but trying to figure that out. Go ahead, Frank.
+
+Speaker 6  1:16:20
+Oh, I don't know if we were wrapping up our current topic, but there was, there was one other of the scope reduction items. If I drag this back into a little bit of a technical discussion, that's good. Yeah, I was just realizing that may also have other impacts on structure, and I guess I always have a aversion to like last minute changes in design, because like I think in isolation it sounds like a good idea, and then you realize that
+
+Ryan Hankins  1:16:52
+you mean you mean you don't like how we ve the job in two in two days without any design input at all, is that what you're saying,
+
+Speaker 6  1:17:02
+you can, you can only control as much as you can. That's, I guess, what I'm always worried about is the ripple effects. And this one, I didn't, again, didn't think about it until we were talking later. There was one item that was something like to lower the roof by 15 feet, right? I heard that correctly,
+
+Speaker 5  1:17:22
+and let me, let me back you up there. Not on the by 15 feet to the 35 is that what you're saying? Yeah, the office lab roof, right between grid lines 10 and 12. So I think the lab office areas lowered a little bit,
+
+Speaker 6  1:17:46
+but it's assuming if we keep good lines 10 to 12,
+
+Speaker 5  1:17:53
+so 10 to 12 would be deferred, and that's being loaded 25 feet, okay, do I see. Okay, I see where you're going with this, though. That if we lower this, then yeah, it's
+
+Speaker 6  1:18:11
+not that dimension. Whatever PF is moving in this area gets, gets a lot smaller. We could, we could make this work exterior. but you'd have to contend with the roofing and the waterproofing around that.
+
+Speaker 5  1:18:28
+I think that the best way to proceed on this, Frank, is let me noodle on based on this blue beam session that I just received, kind of relaying out the program of what I think will work, I'm going to come up with at least two options of what they're asking for, which I think will talk to the impacts of just, hey, if we just cut this out, this is where this lands, and this is what you have to deal with, and these are the implications, and then here's a middle ground of what we think will actually address your needs. I'm going to give that to you, probably sometime Monday, and then you can let's take a look at just like quick section markups, specifically the section of what the impacts of this are, because I think they need to see this in order to understand what those ripple effects are. Yeah, because otherwise they think it's just like, oh, it's the same. It's like, no, it's not.
+
+Speaker 6  1:19:32
+That sounds good. Yeah, and I'll review that too, because I've heard bits and pieces here and there over the course of this week, but I haven't been in any of those calls, so I'm seeing a lot of this for the first time today.
+
+Speaker 5  1:19:46
+Yeah, so, so am I. So, well, yes, this is the first time I've seen the Bluebeam session, so I've seen Snips and Whispers up to this point.
+
+Unknown Speaker  1:19:56
+I've only gotten whispers, yeah, yeah.
+
+Speaker 5  1:20:00
+So, we're, we're at the, we're at the point where we're talking about it, but yeah, I think that's the way to proceed. I'm going to send it to you, I'll send it to Susie, and just kind of keep it tight to the people who will show up for that conversation next week, just so that we can have something in front of them, because otherwise they're just going to pay attention to the numbers and not the actual like design impact, and they're going to, in their head, have an imaginary building tied to an imaginary bullshit number, and we're going to be held to that, and that's not going to be fun for anyone, right?
+
+Ryan Hankins  1:20:43
+I agree. Let's get it on the table. Yeah, that's.. and I recall that's part of being mean, by the way.
+
+Speaker 6  1:20:52
+Yeah, I recall at one point very early on in the project, either you, Dominic, or Rebecca, you asked the question to Courtney, like, 'Hey, what do you guys care more about on this project? Is it the schedule or the cost? And they said the schedule, right, because, and they, we went down this road of, you know, like target chamber, like the transporter stuff, like all of these are really conservative design assumptions, right? I assume it was the same architecturally, and MEP was, and now, well, now it's like, well, both actually kind of matter, so
+
+Speaker 7  1:21:26
+there's a lot, and we have to keep the same schedule. Yeah, I think that was documented quite a bit, Frank, and that from, yeah, from all the disciplines, like, yes, we're willing to take on the risk because that is the schedule, is the most important thing, it's more important than cost, and we're fine with taking on the risk, and we're fine with using the worst case assumption or conservative assumption. So, yeah, so yeah, those are the conversations that I think they'll, and potentially our leadership here need to work through with their leadership, so
+
+Unknown Speaker  1:22:04
+alright guys, I gotta go, but thank you guys so much. Thank you
+
+Speaker 5  1:22:10
+later, get you something later today, Frank. Cool, thank you. I'll keep you copy, Rebecca.
+
+Speaker 7  1:22:18
+Thank you, John. Sounds good. Thank you. Talk to you guys later. Have a good one. See you guys.
+
+Speaker 9  1:22:35
+Yeah, solutions. Everything goes,
+
+Ryan Hankins  1:22:43
+submachines coming. Oh, gotcha. I'm gonna call, except that I'm out of town.
+
+
+Transcribed by https://otter.ai

@@ -1,0 +1,404 @@
+Speaker 1  00:00
+It's not that crazy of a thing. Like, we want to preserve all those returns, but like, the returns just go down. We don't, like, we don't lose half a billion dollars, maybe lose half a billion dollars in potential profit. Like, that's something that pays out over time.
+
+Ryan Hankins  00:23
+Yeah, it's wild. And why? So once again, like, I mean, there are people like you, but why are Is it because you guys already have these relationships set up, and it's just the easy button
+
+Speaker 1  00:40
+well, so on the bolo side, our competition is like aligned QTS, not so much core site, the hyper scale colo has a lot of competition of like traditional data center developers. But on the build a suit side, until, like, very, very recently, our competition was like, pop it in Black Chamber, like these people that you've never heard of. And so, like, we expanded this build a suit side of our business pretty fucking massively, because we were the only, only developer that was playing on both sides of the fence got it. And so now, like Vantage has, like since semi entered the build a suit world with the stuff that they're doing in Stargate, and then it seems like, like some of the Neo clouds, like the especially like Crusoe, who wants to be fully vertically integrated, like they're, they're kind of a kind of competition now, but also kind of not. They're like a customer and competition. It's kind of weird,
+
+Ryan Hankins  01:55
+interesting, but like, those guys will go out of business soon, I was gonna say because, like, it seems like they're taking on way too much. It's like, it's like the caterer of the data center business Exactly. Do Do one thing. Why don't we just do it all? Let's, let's hedge all of our bets.
+
+Speaker 1  02:22
+That's money, yeah, well, unlike I'll give you, so there's, like, the deal on the financial side that you can be really creative on, and, like, a lot of understanding that goes into how we put together our budgets and schedules and so, like, the scheduling side of things, I think, like you obviously understand that, and so, like, we set up these super aggressive schedules. Meyr is not this way, by the way, but we, we set up super aggressive schedules on some of our other deals, and like the way that the leases normally work, it's like that the end user has a termination right with a put which basically means that after a certain amount of time being delayed, usually around 60 days, they have the right to just reimburse us our cost for the data center and take ownership. Interesting. Which is, like, we don't get any return, we just get reimbursed. Yeah, it's we don't lose any money, but we don't make any money,
+
+Unknown Speaker  03:31
+either interesting.
+
+Speaker 1  03:36
+So like on all these really aggressive deals, we basically said, like to incentivize us to go fast, we're going to increase our development fee from three to four and a half percent, and then we're going to scale it down. And you get a termination right if we're a year late, but we just have a scaling debt fee. And so for six months late on these deals, we get what our normal debt fee would be at 3% and the dev fee is really only meant to cover our overhead, and we have plenty of it coming in. So it's, like, not that big of a deal to us. We basically have, like, outside of reputational risk. We have zero risk for delivery.
+
+Ryan Hankins  04:13
+Yeah, it's just, it's just reputational Yeah,
+
+Speaker 1  04:18
+it's like, our schedulers. They're like, we need to build so you continue seeing a schedule.
+
+Ryan Hankins  04:27
+Calm down. Do do the GCS, LDS? Do they cover any LDS that are on the on the tenant side?
+
+Speaker 1  04:39
+I mean, on those deals we have, like, we gave them a 90 day grace period because they're being super aggressive. But, like, 90 day grace period, and, like, I don't know it was, like, $15,000 a day or something like, it's, it's not going to make a difference. Like, we could, we could sell Valdes at six months grace period, yeah. And, like, increase the value, it's just not going to make a difference. Yep, but we want the G season to incentivize to hit the dates. And so like, for some of them, we've said, Okay, on time, early delivery, like minor on time, early delivery for a date, all Clayco gets, like, an additional two and a half million dollars for data. Hall got it, and
+
+Ryan Hankins  05:26
+that's just for being on time. That's not for being early, right? Yeah. Are we gonna hit that? By the way, or no, sounds like from our dinner list, probably not. Do you know,
+
+Speaker 1  05:41
+like the most bullshit thing, this is fucking hilarious. And like, every owner is late with equipment, yeah, yeah. But like, our supply chain team is fucking rock solid. And so, like, every week, you know, Chad would ask for updated delivery dates for equipment, and every week the dates would be the same. And like, we got within, like, a month of delivering equipment, like we're setting a month of delivering equipment right now, and Chad was, like, the building isn't going to be ready for the equipment. It's like, motherfucker, you told us when you needed these dates, and we delivered on them. Like we're delivering equipment to the site. What are you going to do with it? And Chad's like, we're not responsible for storage. You got to put it in storage. We're not responsible for storage. We mean, told us you needed equipment by this date, we delivered, like, go fuck yourself.
+
+Speaker 2  06:47
+It's coming out of your fucking 7% fee. Oh my gosh. That's funny.
+
+Ryan Hankins  06:54
+That's funny.
+
+Unknown Speaker  06:57
+Yeah, it's interesting times.
+
+Ryan Hankins  07:01
+Yeah, man, mean candle, like it does sound interesting, it's just mainly understanding more about that path. Obviously, I'm not there, so it's hard to visualize everything, but just getting more insight into that path, and it sounds like it's a kind of dynamic environment. And so I think one of the things that is is attractive is also the fact that I would have you as kind of, you know, a mentor, and to just, you know, help coach along the way as I'm getting integrated. But, you know, I mean, the other thing too, is the compensation. To be totally honest with you, I don't really like it's hard to understand, like, the both the equity and the other piece, or the equity in the commission piece, just because I don't know, it's like, hard to understand, like, how many deals I'd be touching, and like, which, you know, which deals would be would would mean what and how that would translate to compensation. It's hard to understand, like, without being in it. I mean, obviously, you know, with 220, current plus, you know, 100 bonus, I think I would need to, I'd need to understand more about the compensation piece and but I don't think, I think we could get there. I think it's just yeah, I think the other, the other part of it, I think, is the more important part of this point, which is understanding the path. And I think if we get there, then we can probably talk numbers and probably get get to where we need to be.
+
+Speaker 1  09:06
+See you basically need to be at 265, to match comp and then have the upside of commissions.
+
+Ryan Hankins  09:15
+265, 6269 plus 20% that's gets into 320 Yeah,
+
+Speaker 1  09:30
+exactly, that's 318 it was like 260 6.6
+
+Unknown Speaker  09:35
+gets you to 320 Okay, and then, I mean,
+
+Ryan Hankins  09:41
+like getting, getting an idea like, what that stuff could net me is, is going to be helpful, obviously, because it's just it seems like this. It seems like this, you know, you said 200 grand on a minor, you know, I don't know how many. It sounds like you guys have more miners coming up, but it's just, without being in that, it's hard to understand, really, what that means, or how it's, how it's measurable.
+
+Speaker 1  10:08
+Yeah, I mean, little says, like, we're already looking at minor, like, exactly the same deal as minor, except three times the scale in Savannah, Georgia. So like, let's see.
+
+Ryan Hankins  10:31
+But you know what I mean? I mean it's, it's not something I think you're going to be able to answer right now, but it's just something to think through.
+
+Unknown Speaker  10:40
+Yeah, so here's the, let's see so for 2026
+
+Unknown Speaker  10:55
+just the payments, just the payments for let me see, do I have
+
+Speaker 1  11:05
+every tree poured in here, and I don't have cold pepfy yet? So it's probably going to end up being better than this for me.
+
+Unknown Speaker  11:13
+But I have,
+
+Speaker 1  11:16
+like it's something to be somewhere like 85 to 90% of my salary in payments on commissions. So I like salary bonus, and then my commissions are like 80, 90% of just my salary. Jesus, yeah.
+
+Ryan Hankins  11:35
+Is that because you're touching every job Pretty much,
+
+Speaker 1  11:40
+yeah, but I don't get as much commissions. Like, it kind of depends, though, like, if I'm more in the sales forward role, then I'd get more commissions than some of the other deals where, like, we actually have sales people on it, and we're just supporting, like, at the director level, Senior Director, you'll get a little bit more juice. That looks probably, I mean, you could probably count on like, probably at least leveling your bonus. Like, conservatively.
+
+Unknown Speaker  12:20
+And then probably getting up to like at least 50%
+
+Speaker 1  12:32
+in the first couple of years. And then when those back end conditions start kicking in in like one to two years,
+
+Unknown Speaker  12:38
+it comes down
+
+Speaker 1  12:39
+to like like 80 or 90% so like, I got my first commission in 2024 and so those back end commissions are hitting now, some of those hit in 2025 some of them are hitting this year. And then, like the back end of minor
+
+Unknown Speaker  12:59
+will hit in 2027
+
+Speaker 1  13:04
+soul Shreve board, Soul pepper like so 2027 I think will be a fantastic year for me. That's great. But like, you build up that base and then, like, that's kind of medium term incentive program, these commissions, like medium term retention couple years. Like, you look ahead a couple years in the picture gets really good, and then, like, you look ahead five to seven years, and that's when the equity starts kicking. And that's the long term incentive program. So you have, like, the this, like, rolling equity, fund by fund, and then the commissions are great, got it, yeah. So, like, if you sign, if you, like, play a key role in, you know, a big deal. Like, not every deal is going to be minor. Like, not it's going to be that fast and that capital intense. But like, report, the directors were getting 150,000 and so, like, now you've, you've got 75,000 coming in, 2027, and then you build up another, you sign another deal, or two or three in 2026 and then early 2027 and then, like, now you're talking like significant
+
+Unknown Speaker  14:32
+dollars, gotcha, right?
+
+Speaker 1  14:37
+And like, none of it's guaranteed. Like we have to perform. You have to do deals, you know, yeah, but, like, it's incentive for performance. So you're, like, kind of taking a bet on yourself, like, I'll make sure that you get, you get made whole when, like, bonus season comes around, like, if, if it's been a bad year, it it doesn't mean it has to be a bad year for you. Yeah, understood. So, like, basically what I'm saying is, like you can, like the lower pressure version of you coming in is not like saying Hankins is going to come in and on day one who's going to run the pre construction team. It'd be like, get in as an individual contributor, slash partial manager, and like, deeply understand the business, move into a more senior role on the precon team. The promotion cycle happens every February for on cycle promotions. And so, like, if you pull the trigger like, you probably wouldn't promotion this February, but you could probably, or like, this coming February in 2027 but 2028 probably get you into a VP role, and then just keep growing from there. And like what the department looks like in 2028 like it might have multiple VPS got it. What I will say too is like preconstruction is a high priority group for, like, being part of the engine that drives the business and so like that it's we're going to continue investing in it. It's very important to us, very important Zac and like, I have that commitment from our CEO and for investors, frankly, they fucking blue. Al is like, what will you do without preconstruction?
+
+Ryan Hankins  16:49
+Is that what they see as a differentiator between you and your competition?
+
+Unknown Speaker  16:53
+Then, oh yeah. I mean, they see it as huge differentiator.
+
+Ryan Hankins  16:57
+How do the other guys not do this?
+
+Speaker 1  17:00
+Well, they didn't. This hasn't been that complicated for them. If they're, like, stamping out, like, really a core site, they're stamping out the same data center everywhere. It's like, they go spec, invest, and they can just rely on their GCS to come in and be like, here's what it's going to cost. And like, expect to generally cost that, whereas, like, what we're doing is kind of everything is first of kind. And like, the designs that are tenants one are changing every, like, six months to a year now. And so like, we're rapidly adapting to that. And so like, we have a much more like, difficult and intense business model than our competition. And so like, pre construction has to play a huge role.
+
+Ryan Hankins  17:42
+What, how, when, when does your cost and schedule lock with with your tenant, at least.
+
+Speaker 1  17:52
+So think about it. So that's the it depends on the deal structure. Well, that actually does not depend on the deal structure. But like, the way to think about it depends on the deal structure. So like, when we do these open book deals, it locks at least and there's a budget attached to the lease that aim through preconstruction, that includes everything from land, utility, the construction equipment, financing, contingency development fee at like six and nuts, and so that locks, and then we go manage against that budget. But you
+
+Ryan Hankins  18:28
+guys, you guys are hiring the GC at the same time and making that commitment.
+
+Unknown Speaker  18:35
+Yeah, exactly.
+
+Ryan Hankins  18:37
+And, or when you said earlier, GMP, you were talking about, you have a GMP with your client, or that you're talking about the contractor.
+
+Speaker 1  18:45
+GMP, it's a little both. So like, we'll sign a lease budget. That's the term that we mostly use. Like we said, a lease budget. It's essentially functions as a GMP for the open book contract. And then, like, we'll set so this is also like a tricky strategy point, which is like, as soon as we sign a lease, we want to go lock in our interest rates and financing, and in order to do that, we have to have a GMP from the contractor. And then these, like open book build to suit deals were usually like 0% to 30% design. And so we're going to the contractor saying we need a fucking GMP right now. And like, that was done kind of heavy handedly, and Ed Reed was like, willing to work with us and be like, Okay, we'll give you a GMP. But like, there's a lot of trust in this relationship that, like, you're not going to fuck us. And like, that's how our build a suit program grew, like, by hiring he Reed, and he Reed trusting us and us trusting you read, and now, like, it expanded, and Clayco was the next GC into it, and Chad was like, I don't know. And it's like, look, here's here's how this has worked for us in the past. Here's how it's gonna be successful. And like, if you have to put a fucking 10% contingency in there, fine, do it, but then, like, we're gonna work with you and like, those deals have gone Great,
+
+Ryan Hankins  20:07
+yeah, you know, like the, like, the ones in Avondale, Avondale,
+
+Unknown Speaker  20:13
+Lithia Springs, gotcha.
+
+Ryan Hankins  20:18
+Yeah? Interesting. Interesting, interesting.
+
+Speaker 1  20:25
+And by the way, like we put enough contingency in the Avondale budget, because it was, like the first time AWS did a fully air cooled data center, not evaporated evaporative cooling. And so like there were, there was probably 50 to $70 million of changes, like, in the first few months after we signed the lease, and we just, like, between us, Clayco basically asking Clayco, we just absorb that into the budget. And stayed under budget. Been like AWS loves that, like we don't ever have to go back to the well and ask for more money. Like, it's good.
+
+Ryan Hankins  21:07
+You guys set it up correctly to make sure that we don't get sideways. It makes sense. Yeah.
+
+Speaker 1  21:20
+So I mean, you can stop me if you're like, I'm sick of
+
+Unknown Speaker  21:25
+hearing these examples. No, no.
+
+Speaker 1  21:28
+So we've got this site in New Albany, Ohio that, like, the PUE there should be, like, somewhere around 1.4 it's like, pretty favorable conditions in terms of, like, weather and so, like, we shouldn't be higher than 1.4 on TV. And so we looked at there's 72 mega watts of gross power, which means we can get 51 mega watts of critical and AWS came to us, came to us, and we're like, we need 100% air cooled option. The fan club walls require more power. And so, like, The PUV goes up a little bit. And so our engineering team is like, well, we've got to do adiabatic assist on the and we got to get industrial water, and we gotta add all this equipment and it, you know, we started putting the early estimate, it would be like, 70 or 80 million bucks. And I heard about this, and I was like, What the fuck are you guys doing? Like, you're gonna spend $70 million to get, like, an additional three megawatts, like, just make it a 48 megawatt data center, and the capacity send these guys a fucking proposal, because pine kills all deals like,
+
+Ryan Hankins  22:42
+yeah, door, yeah.
+
+Speaker 1  22:44
+And so, like, we, like, everybody was like, Oh, holy shit. Why didn't we think of that? If you have the broader picture of, like, the technical side of the deal, the technical side of the design, and then the financial side of the deal, you can just say, like, this doesn't make any fucking sense, you idiots.
+
+Ryan Hankins  23:08
+That is hilarious. So is that? Is that? Where is that? What you're dealing with is a lot of the people you're dealing with on the development and leasing side just don't understand, like they either don't care to understand or they just don't understand, like, really the they understand like their client, but they don't understand like the facilities, yeah, and you're basically just walking circles around them.
+
+Speaker 1  23:35
+And we'll kill off the other scenarios. But like, until we get to that point, yeah,
+
+Ryan Hankins  23:45
+you're just keeping all the different options alive and exactly being able to pivot hard
+
+Speaker 1  23:51
+as part of this, yeah. But also the most fun part of my opinion, yeah.
+
+Ryan Hankins  23:57
+I mean, you're basically, I mean, while your competition is a one trick pony. For the most part, you're you're capturing five different options, and you're allowing them to pivot, just like the industry is needing to pivot on a frequent basis.
+
+Speaker 2  24:12
+Yeah? Or five trick pony, yeah? Five trick pony, there you go.
+
+Ryan Hankins  24:17
+That's fun. That's interesting, yeah?
+
+Speaker 1  24:21
+And honestly, like, if you have the technical brain for preconstruction data center design, and you're like, I need to organize this in the ways for other people to think about it, it's like, Okay, at this point in time, in this conversation right now, we're talking about a meta deal in New Albany, right? And then we're going to hop on a call tomorrow, and we're going to be talking about a Google deal with a totally different design on the same site, with a different schedule. Everything is different, but it's the same site. How is that possible?
+
+Unknown Speaker  25:00
+It's like, I was that possible. I love it. I love it.
+
+Speaker 1  25:07
+Yeah, that's fun, man. I love it. In case you can't tell,
+
+Ryan Hankins  25:12
+well, I could tell you love it. Sounds like, sounds like, it's been a great decision to go over there. Oh yeah.
+
+Speaker 1  25:24
+Like, Brooks every once in AWS, like, we need probably hire you back in like a director position in Denver. I'm like, go fuck yourself. Is
+
+Ryan Hankins  25:37
+he saying that? Because they just need precon people that can do what we used to do.
+
+Speaker 1  25:42
+You wouldn't like the demotion that I have to give you to come back to older and like
+
+Ryan Hankins  25:49
+the demotion, because that makes sense. Well, yeah, I um, I think it all makes sense in concept. So 265 is what you're saying, plus 20% bonus and plus the upside of the equity, yeah.
+
+Speaker 1  26:19
+I mean, I don't know if I'll be able to get there, I guess. And then I don't know on the equity. Definitely don't. So the things that are unknowns for me is like, Could I get a salary that high? I think I probably could. I'd give it, like, definitely higher than 50% chance the equity. I'd give a lower percentage chance. Like, we've talked about expanding that pool, but, like, that's a little bit harder.
+
+Ryan Hankins  26:45
+So, okay, makes sense. Yeah. I mean, is there a potential in the future to move into? Like, mean, if we're talking like I'm killing it. I'm getting it. Is there a, is there a way to build a path into that, mean at the table, kind of sales side, over time? Oh, yeah, yeah.
+
+Speaker 1  27:15
+So the way that, like, this is all changing live and like, none of this is set in stone on how we're going to do it, but basically, like, the way that, like, everybody kind of agrees, and I say kind of because, like, there are some people, some hold outs on this, but most people agree that we don't need a traditional sales team. Like, we're not selling data center capacity anymore. Like in the relationships need to be deeper than just like, hey, I might call my data center guy up when I need capacity. Yeah, and that's the way every, everyone's sales team is built in the industry. And so we've had this huge success on the build the suit side, and we have deep relationships with, like, a bunch of different people at Amazon, gotcha. And so there's, like, there's a guy Keith Klein is responsible for, like, overall data center delivery. And Mike, our CEO, and one of the managing partners at Blue Al, have a great relationship with him. And then one of his direct reports, who's responsible for Virginia and all of the government work. His name is Reed. I've got a great relationship with Reed, and so does one of the guys on the core development team, Jon, brilliant. And then there's, like, at the construction level, we have deep relationships. And then like, one level down, the guy who works for read, has a strong relationship with Logan. She's leading the development effort on our Culpeper site, and so, like, we have this like matrix relationship. And it's not like, I mean, who would pick up the phone and call us if they needed a site developed? It like, might be Reed calling me. Might be Reed calling Jon. Might be Keith calling our CEO or blue Al, like it could be anything. And so like when AWS came to us last year and said, Give us all your capacity in 2027 I was the one who was pitching it to Keith, and like walking him through all the sites got it so, like, that matrix relationship that has been extremely successful with Amazon is what we're trying to build with Google and meta and Microsoft, which we like, are starting to have it with Microsoft. And like, Microsoft and meta aren't set up to police at scale as like, the way that we want to do deals Google is kind of, but like, they've least Google and meta, least a bunch of colo, so is Microsoft, and they're kind of, like, stuck in, Like, the data center market of five years ago, but, like, we're dragging them into the 21st century. But like the wheels that they want to do, they just don't. They haven't got their heads wrapped around it yet. And also, like our traditional sales team didn't have the right context, like at Google. Our Google sales person was talking to people who are responsible for self perform, like, by self
+
+Speaker 2  30:32
+reform, I mean, like their self built data sets and stuff that they're doing for themselves and iron GC directly, obviously, that those people never gonna lease from you.
+
+Ryan Hankins  30:40
+Yeah, they, they don't want you to they don't want you to be involved.
+
+Speaker 1  30:45
+Yeah, it's like, how can you be so fucking dumb? That's funny. So, like, all that's changing. So like, what I mean about this, this matrix is, like, when you're working on deal. Like, what I'll tell you is, like, Michael, who was at dinner, Michael Bolton, yeah, he's got a pretty good relationship, and, like, developing relationship with Elizabeth, who is our deal lead for Shreveport at Amazon. Okay, so, like, that's something that on the next deal, if Elizabeth is deal lead, like he's already got a relationship with Michael. And like, if Elizabeth moves into a position responsible for all of, like, AWS Central Division, like that relationship already exists. Yeah, you know what I mean, yep. So, like, that's the, that's the growth path. And then, like, you start engaging with these folks, and then it's just like, when we need to do a deal, you have the relationship to go get the deal done. So like, there's definitely that opportunity to move into more of a commercial role.
+
+Ryan Hankins  31:55
+Gotcha understood.
+
+Speaker 1  31:58
+Oh, the other piece of this is like, as we're setting up what we're calling the commercial team, basically, there's, like, I don't know, four or five people who are proven, like, technical sales people in the entire company. And so, like, there's a short list of folks who will, like, leave be the tip of the spear for commercial efforts. And then there's a list of about 10 people that, like, we think could grow into the role and, like, start playing a bigger role. And so, like, you'll very quickly get yourself on that list, just with your experience. And then it's like, Okay, now, like, we grow that commercial team. Like, you'd have your day job, but you'd also be playing a role on the commercial side.
+
+Ryan Hankins  32:50
+Gotcha understood? I mean, I it this is this all sounds great. It's just, I'm trying to understand, like, what? And I mean, it's hard for you too, because when you know my experience, but I understand this is a new this is also going to be a little bit new, so there's going to be, there's going to be getting up to speed. But, you know, just understanding if it's a five year deal, or if it's a three year deal to, like, start to getting into some of these conversations, or if it's, you know, something that you think I'll catch on quicker, potentially, just trying to get my mind wrapped around it,
+
+Speaker 1  33:30
+it's gonna be faster than you think. It's. Like, if you set a timeline for yourself today, I guarantee it's gonna be faster. And like, part of this, like, if you want stability, if all you want is, like, to have, like, 100% stability, and like a process to follow, and like, not really a ton of creativity, like, stay at a GC, continue work at a GC.
+
+Ryan Hankins  33:58
+Well, that's what, that's what kills me, is like, we used to be like, I the thing I liked about my job when I was with Clayco first three years was that it was super creative, and I could do like, I can come up with creative solutions and try to get deals done and try to figure out ways to make deals move forward and like, Now it's like, it's just very it's just very rigid. It's like, it's like, fucking boring.
+
+Speaker 1  34:29
+I think probably some of that is like, you're just good at your job and like you don't probably like, the path is
+
+Ryan Hankins  34:36
+easier now, like, I used to be able to like, like engine like, come up with, like, engineered solutions that, like, got us a quicker way to deliver, or a faster way to deliver, or, you know, beating the market, just outsmarting the market. Like, that's what I that's what I love doing,
+
+Speaker 1  34:59
+what I tell people who come to Zac from the GC side is, like, your creativity levers in the GC, like you're sitting in a control panel. Imagine you're sitting in a control panel. You've got like, seven levers to play with. It's like, okay, like, change the design engineering, go faster. Or, like, go faster increase budget, you know, meets the client's needs. And so like, you have these seven levers that you're playing with at any point in time, and you can be like, that's your locus of control for creative solutions, yeah. And then you come to staff, and you're sitting at a dashboard with like, 50 levers, like knobs and shit and blinking lights, and it's like, the whole world expands for you. And like, how creative you can be interesting. Yeah, and
+
+Ryan Hankins  35:49
+is that what gets deals done, is being creative, or for the most part, oh yeah, yeah, oh yeah, definitely.
+
+Speaker 1  35:57
+Like, I mean, just AWS take, having willingness to take risk on a hyper, accelerated schedule at Shreveport and Culpepper, those two deals, and us saying, like, okay, like, we're gonna, instead of, like, building a bunch of contingency into the schedule, and saying, like, we'll target this day, but like, here's the real day we're signing up to. We're just like, we're gonna change the deal terms and we're invent this new thing, this new deal term that's never been done before. And this is like, yeah, good. Let's do a deal. It was creative. It protected our risk and, like, allowed us to sign up to these super aggressive dates.
+
+Speaker 1  36:42
+That's awesome. The other thing I wanted to tell you is like, so like, the the next, like, your other end of your spectrum from stability is like jumping right into one of these startup data center companies. It's like, fully chaotic and like, kind of like the stack that I jumped into three years ago, though, like, stack was a little bit more established at that point in time. And there's, like, the middle ground of jumping into stack, where it's like a rapidly growing organization. And like, I don't, I don't really have line of sight on career path beyond 2027 because I don't know what the market is going to look like. What I do know is like, there's significant demand for data centers and like, I don't see that stopping anytime soon. And so when you like, put that together, you're like, Okay, there's not a clear path, but there is a path, and it probably is, like, there are 10 paths in front of you for career growth and development outside of pre construction. Maybe it's a commercial role. I also need to take on more scope on the delivery side of things and like, help our construction team get to GMP. We get pulled into that every single time. So I formalize that. And so there's going to be like, maybe it's a different group of people focused on that. Maybe it's like, the same team that did the deal, like, but we're going to have expanded scope there. Like, we basically control the strategy for supply chain purchasing, like, all of our equipment purchasing. We're like, we have the pipeline view of the deals from the development team that we're actively working on and what the likely product is. And so we get to kind of set the strategy for what equipment are we buying and putting into our inventory program. And then there's, like, this deep engagement with the design and engineering team that's like looking beyond what we're designing today and, like, what, what is the data center of tomorrow going to look like, which is a thing that we're actually doing in pre construction right now. So there's, like, you know, these, these 10 things that you could possibly go do that, like, would expand your career in multiple directions, take on more scope, get a leadership role, like all of these things are, like, are open
+
+Ryan Hankins  39:04
+right now? Got it stuff that you guys don't necessarily have, like, a path lined out on, yeah, but are more like R and D type projects that you guys are trying to figure out still?
+
+Speaker 1  39:17
+Yeah? I mean, I can confidently say that, like, your career path could be you come to stack, you work in preconstruction, turn the crank, get promoted like take on a leadership role, manage the department, move into some position like you could keep it very linear, like that, if that's what you wanted and like that would be a stable career. But you also have this opportunity to go do all this other stuff, which, by the way, like the guy who was, like, managing all the R and D type product design and competitive intelligence, and, like we called it, he's a director of cost strategies. He quit last week. And so if you want that job, I'll hire you tomorrow for that job.
+
+Ryan Hankins  40:05
+I mean, what I'm what I'm trying to say is like, Yes, I do. I do think there's a lot of value in getting into this pre construction and getting that continued while you're trying to grow. But mainly I was just trying to figure out, like, five, you know, three, five years down the line, you know, is there, is there something more? If I feel like I've kind of hit the ceiling, because I, I wouldn't say that stability is necessary, I'm looking to bet on myself. I'm looking to take risk. But I also want to just make sure that there's, you know, I don't just fall into, like, a, you know what? I mean, like, you just get kind of stuck, and there's, like, there's places for, you know, people that are dynamic and and taking on additional scope. So, yeah,
+
+Speaker 1  41:00
+yeah, yeah, absolutely. I mean, like, the biggest thing is, like, if you, if you come into pre construction, there's, like, there's three core principles that you'll hear about on day one that are really important to me and Mike have been the foundation of what preconstruction is, trust, clarity and resilience. And so, like, the clarity, like, our job is to take this, like these extremely complex projects and like complex, not just in the technical side, but also in, like, the deal side, and then, like, extremely complex budget situations like we have with the utility companies, and then bring clarity to anyone in the organization about what that means. So that, yeah,
+
+Ryan Hankins  41:52
+that's funny. That's like, that's like, one of my big strengths is, mean, I handle shit that nobody else understands at Clayco, and I am the one that dilutes it down to help people be able to execute that's like, what I do on a daily basis?
+
+Speaker 1  42:09
+Yeah? I mean, it's like, it's fundamental to what we're doing and what but like, not everybody sees it that way. They see that, like, I put together a budget. Here's the budget.
+
+Ryan Hankins  42:18
+Yeah, it's like, that's garbage in, garbage out. Gotta understand it.
+
+Speaker 1  42:25
+Yeah. And then, like the trust piece is, like stack is making billion dollar decisions based on the information that we're putting in front of people. They don't they don't trust it. Then, like it does, construction
+
+Ryan Hankins  42:41
+is not worth. It is not as worthless, exactly.
+
+Speaker 1  42:45
+Yeah. And then the resilience piece is, like, anything that we do in terms of, like, our process and like, just the day to day with preconstruction, like we should be able to throw anything into the system and produce the same high quality results.
+
+Unknown Speaker  43:04
+Yep. So like those three things
+
+Ryan Hankins  43:09
+that makes sense,
+
+Speaker 1  43:11
+you come in and you do that, then, like, you'll get the recognition that you're looking for. You'll impress people, and you'll like Joe Cassidy did that when he came in, and I brought him in as a manager, and our COO basically demanded that I promote him to correct her on cycle this year. So if you, if you can do those three things, like, that's
+
+Ryan Hankins  43:44
+what's gonna happen. Got it? Got it perfect. What
+
+Ryan Hankins  43:59
+do you think? I think it's very intriguing. I would say that I'm getting a little impatient at this point. I do have a couple more. I don't think I'm like, I don't think I'm like, months, but I'm I think I'm probably couple weeks from being able to tell you one way or another. I think we just stay in touch over the next couple weeks, I have a conversation with my boss that basically he's acknowledged that like I'm a Abbott has basically acknowledged that I'm super dynamic. I remind him of himself when, when he was my age. And so my next question is basically going to be like, hey, like, what would you do if you were, if you're 15 years younger in my position, and just kind of put the ball in his court? And once I do that, and once, like, we're potentially going to be passing up this fusion job after we've been awarded it, like Clayco is going to go back on it, that's going to fucking,
+
+Unknown Speaker  45:07
+oh, the nuclear fusion job,
+
+Ryan Hankins  45:09
+yeah, when we do that, that fucking is going to seal my fate, pretty much so, and that I'll know that within the next, like two weeks, where that's going, and it's not looking good based on the questions I'm being asked. So, I mean, they're just like, the questions are like, the questions are like, you know, how many projects has the has the CEO? How many large scale projects has the CEO been involved in? And I'm like, he's a fucking nuclear physicist, like probably none. He's probably done some small scale shit, but he hired a bunch of people to go help him get this stuff, this stuff done. And so there's literally.
+
+Speaker 1  45:53
+Tim at Facebook back when he this, our Chief Development Officer led the team that our current CEO and Tim were on. And so this guy, like, we had dinner with this guy about a month ago, and he was just telling the story. I already told you this story. No, so Bobby was like, Yeah, you know, I got accepted to Northwestern and then went to college and realized I didn't want to be in college as a 13 year old. What we're like, hang on. Stop there. What the fuck did you just say? That's wild. Like, he's one of those. He's ridiculously smart, too, and, like, just kind of gets it, yeah. Like, yeah.
+
+Ryan Hankins  46:48
+So very personable. He just gets it, yeah, yeah, yes, that's fun. Good for him.
+
+Speaker 1  47:01
+It's, it's a good group, lots of really smart people.
+
+Ryan Hankins  47:06
+And that's, that's important. And i The one thing I'll tell you about the GC side, that's interesting. It does seem like talent is diluting, like with just everybody who's just fucking hiring now, between us, just so many people getting hired, I mean, and this is not just Clayco, this is the whole industry. Like pep like, we're competing for hiring people that we don't really know how qualified they are. We think they're qualified, but then we find out that, like, they were a senior manager as, like, the Tre of like, you know, like steel on a data center, and then they don't know anything else but steel, that's all they know.
+
+Unknown Speaker  48:04
+They just knew that they needed to call steel fab and then
+
+Ryan Hankins  48:06
+get the job done. Yeah, exactly. And I mean, the whole, the whole industry is getting like that to a certain extent. We have vice presidents and I'm just like, You're a fucking trade responsible engineer maybe. I mean, like,
+
+Speaker 1  48:26
+it's happening, that's happening everywhere. And like, part of it, like part of the problem, plays new entrance to the market. Like, yeah, market,
+
+Speaker 2  48:44
+like, yeah, net scale and
+
+Speaker 1  48:49
+all these guys, some ridiculous amount of money, Wetzel, Jeff IV, who was the stack guy, and this guy was a fucking ding dong. If he didn't have Joe Bartow there helping him run his projects like this guy would be fucked. He's not
+
+Unknown Speaker  49:06
+running like all of construction for Crusoe.
+
+Ryan Hankins  49:08
+Oh my gosh, construction. So they're, they're double fucked.
+
+Speaker 1  49:18
+I'm just like, there's a there's a certain amount of this. That's like, this is really attractive. Like, I could go probably get some ridiculous number thrown at me somewhere else. And, like, make up for all the stuff that I would lose by leaving but like, I'm not going to do it because, like, in the long run, I think most of them will go out of business, and I'll just have to jump somewhere else at that point in time. It's like, you just keep jumping around and never really build that like, that home stash of equity and that, yeah, like the home, and I've also got something that, like, I created that stack, and so it's like, like, I don't, I have zero desire to go
+
+Ryan Hankins  50:06
+anywhere else, yeah, With the pre construction group, yeah, yeah. That's awesome.
+
+Speaker 1  50:16
+Like, there's lots of money flying around and lots of titles, and so, like, somebody goes and gets a title, among these other companies realize the grass isn't greener on that side of the fence, and they're like, I want to come back, but like, now you have to hire them at a higher position and higher salary because they've got these expectations, but they don't have the experience to back it up.
+
+Ryan Hankins  50:37
+Yeah, and then you're pissing off everybody else. Yeah.
+
+Ryan Hankins  50:48
+All right, good deal. Well, this was informative. I appreciate the discussion. And, yeah, let's, let's keep in touch over the next couple weeks. I'll let you know how my discussions go. And I mean, as soon as that deal, as soon as that deal gets basically no good, and I have to go tell the client that we're not doing the job. I'm, I'm pretty much, like, I gotta start figuring out my exit plan, because we minimum, like,
+
+Unknown Speaker  51:24
+talking a few people, yeah, that'd be great.
+
+Ryan Hankins  51:30
+That'd be great, man, let's do it. And I mean, if it, if there are, they all in Denver, no.
+
+Speaker 1  51:42
+So Dan is Bob. He's in Seattle, but he's gonna move to Denver. Josh is in Denver, site strategy guy.
+
+Ryan Hankins  51:48
+I'll say, if it makes more sense for me to come to Denver, I'd be happy to do that too. Yeah, let me,
+
+Unknown Speaker  51:59
+let me think on that one. I think like,
+
+Speaker 1  52:06
+start out with some virtual calls, just feel things out. Yeah, if you want to come here,
+
+Speaker 2  52:12
+team, start to get serious about it. We'll do that. Sounds good.
+
+Ryan Hankins  52:17
+Cool. Sounds good, man, will you make sure that your daughter stays asleep
+
+Unknown Speaker  52:26
+so you can get some sleep? Just pass the fuck out. Good.
+
+Ryan Hankins  52:30
+We're good, all right, all right, sounds good, buddy. Alright? Bye.
+
+
+Transcribed by https://otter.ai

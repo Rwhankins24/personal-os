@@ -1,0 +1,2393 @@
+Conor Tighe  00:00
+That they may not, they may not be able to identify who their carrier is right
+
+Speaker 1  00:06
+now, yeah, for sure on the fire sorry, fire
+
+Speaker 1  00:16
+protection side, we are for sure. And then Courtney has provided comments and the 100% beauty set of all of all of the other ways in which the FM Global needs to be met. And so I think that the team is still working. It's not probably worked throughout this idea we are
+
+Unknown Speaker  00:29
+designing to FM Global. We have not sure
+
+Unknown Speaker  00:38
+just yet, but we're
+
+Speaker 2  00:41
+designing FM Global.
+
+Conor Tighe  00:42
+Yeah, we asked just because it's frustrating when industrial facilities thinks that they're going to achieve that,
+
+Ryan Hankins  01:01
+there are costs associated with that for sure, yeah, on the FM Global side, yeah. Keep
+
+Ryan Hankins  01:14
+coming, yeah. Well, I think we were cutting Dominic off. I think Did you have a couple more things to go through Dominic?
+
+Speaker 3  01:20
+I do, but I don't want to take over this entire meeting if we wanted to table some of this for tomorrow's discussion, because it's largely just for the value engineering effort. Your conversation was great. I added
+
+Speaker 4  01:32
+that into the meeting log. If there's any topics on the meeting,
+
+Unknown Speaker  01:50
+yeah, was was the message? No, it wasn't.
+
+Speaker 3  01:54
+But I did want to bring that up. Courtney, one ve option that we thought about was removing the mezzanine, and in lieu of doing a viewing platform to basically create an AV wall that would connect to cameras deep to see what was going on inside The r&d facility. Our name, you know, and we could use the War Room and, you know, basically, get creative to give your investors a full view of the facility from multiple angles, rather than just one. That may be limited, I'm gonna put on the list. I
+
+Speaker 4  02:42
+think there's I've been to a few fusion companies. Tae is one of them. NIF is another. Their control room doesn't look out into into the space. It's all surrounded by concrete. There's a significant experience and impact that comes with being able to see something from a perspective quantify engineers and designers. But, you know, I'm thinking the type of people that are gonna end up in that space are gonna be future investors or journalists, where they need that quick experience to really kind of overwhelm them and captivate them, and it's difficult to do
+
+Unknown Speaker  03:28
+that, so I think it's good idea.
+
+Ryan Hankins  03:30
+Here's another one. We can just let them go up in a forklift outside and put a window. I'm just kidding. I'm just I'm just kidding. Platform
+
+Speaker 1  03:42
+to platform to the bridge crane, there's going to have to be some platforms going up for the service of the bridge. Can you just let those investors right? Like there's
+
+Speaker 4  03:49
+going to be opportunities? I think that I get that perspective, it's something to kick around. Dominic, thanks for bringing that. Let's put a number on it to see how much we can
+
+Unknown Speaker  04:03
+save we have. Is there?
+
+Ryan Hankins  04:06
+Is there a height? Is there a height difference between the roof of the cub and the low roof of could we put a window there and put, like a nice little platform up on the roof? Yeah? Yeah, that was
+
+Unknown Speaker  04:27
+actually one of my ideas a long time ago.
+
+Speaker 4  04:29
+However, if that future space that we would be looking at is future handling
+
+Unknown Speaker  04:38
+windows on the opposite
+
+Unknown Speaker  04:49
+and then just rumbling because I'm scared. You don't know, yeah, I don't want to basically argue
+
+Unknown Speaker  04:58
+axis or. Yeah,
+
+Speaker 5  05:20
+okay, so that space there, it's, it'll be a substantial number, because the elevator and everything goes up there, that's the only reason for the elevator
+
+Speaker 1  05:30
+is to access that, right? Yeah, the elevator and the stair that are going up there, that's, they're only serving that. So if you remove that, you remove those items. But I understand put $1 amount
+
+Speaker 6  05:45
+to it, and it'll be a leadership decision, yeah, so it saves us a couple million dollars, and it's worth the discussion. No,
+
+Unknown Speaker  06:02
+just taking out to remove what the messenger,
+
+Speaker 3  06:11
+I do want to add that the design team does have concerns about that window opening, going into the R and D space, and how we would shield it in the future. It's not clear if, at this time, we need some type of special shutter system knowing that there's neutron radiation within that facility. So, you know, I know ETS land grant is coordinating some shielding requirements for the Ian peoples, but we're not clear on all how all of that will integrate with the viewing opening of the study. Yeah, Dominic, that's a good point,
+
+Unknown Speaker  06:50
+and that's a punt and kick the can to
+
+Speaker 4  06:56
+overcome the fish that is going to be in the fish, not necessarily be the interface of where that glass is right. It may be, it may be wrapping that entire room, because that room will have to be cleared for operations. So there's multiple options. If she'll be needs to be a part
+
+Speaker 1  07:17
+of the conversation for this room. You're saying operationally, no one will be in there if the machine is operating Exactly, yeah, and we just need to.
+
+Speaker 4  07:25
+So there's a few options, like whether it's the whether it's the boundary where that glass sits, or whether or not it's shielding the entire perimeter over room with
+
+Unknown Speaker  07:34
+the door and everything inside
+
+Speaker 4  07:36
+of it. That's a TDD that I think Jeremy and Jordan, phase out That'll come later.
+
+Speaker 3  07:46
+I mean, do we even build this room at this time, knowing that that's all coming later?
+
+Speaker 4  07:54
+So I will say yes, yes. Okay. I think the big decision we want to make is, let's maybe put a number to it, and if that helps us achieve the 10 million script it out, we
+
+Conor Tighe  08:13
+could always put once again knockouts where those windows are, yeah. And if you're like, I really want this to be honest. I don't think you probably would, but if you put knockout, it'll allow you to sort of punt it to later decision making. So that's good too, because removing an elevator, there's gonna be cost. It's gonna be possible.
+
+Speaker 1  08:46
+Okay, great. Thank you. Dom Okay,
+
+Speaker 7  08:51
+so maybe like 10 minutes to just quickly talk about the structure now, just kind of piggybacking off of what Susie and Dominic said. So again, I don't have a connection. Have a list of items off the comment that's written down, but just kind of going off of what they said. Some of the changes to the potential changes to the mechanical systems, if it's on it's on the rooftop, or if it's on the measurement level, whether or not it needs to be supported on equipment platform, things like the potential removal of the mezzanine. I guess my question there would be maybe, we think that there is a potential that we might solve as we still want to provide the foundation for that in the first packet, and should we still design the building columns to be able to support. The
+
+Unknown Speaker  10:10
+exercise I did
+
+Speaker 1  10:17
+write that down with Jeremy saying, Hey, we've got plenty of space. No, I think you say because it was brought up with the BEM mezzanine. Beauty and should be still, even if, even if the decision comes to remove that, should he still provide a foundation and column spacing that could accommodate it in the future?
+
+Conor Tighe  10:40
+How much additional tonnage Do you think you've added just for the mezzanine support structure?
+
+Speaker 7  10:47
+Not a lot in the grand scheme of things, but just, I guess there's some conservatism in our design right now, because there's uncertainty in some of the criteria that we're
+
+Ryan Hankins  11:00
+designing for, what's what's the biggest uncertainty from a criteria standpoint
+
+Speaker 7  11:09
+for the roof at the moment, I would say this new requirement that there needs to be fire boot is kind of the biggest uncertainty. Like the office lobby can feel pretty confident about structural design for it right now, but when the fireproofing issue came up, the options to achieve that right is to put concrete topping on the roof. We've designed it as a down that was, that was an idea that came up, or to spray, apply the spray fireproofing. But even that is some weight that we have not determined for in the loop design. So we would impact the loop design internally. We had some discussion about how easy labor was to achieve the fire cooking on Open Air joist cost prohibitive switch from the joist
+
+Ryan Hankins  12:21
+sections for Flann, which for you, Tom about fireproofing. No, I'm just
+
+Conor Tighe  12:26
+talking steel. Just steel, yeah, oh no, because you're gonna pay more for a wide flange. Yeah. Then you will
+
+Ryan Hankins  12:36
+with an open web, I can guess. But was thinking like, 1500 ton, 1500 a
+
+Unknown Speaker  12:49
+ton, yeah, what about, what about reducing?
+
+Conor Tighe  12:53
+Well, I feel like, as contractors, we fire proofs. Joyce, yeah, so I feel like we can figure that out. Yeah. I feel like we could figure out that part.
+
+Speaker 7  13:11
+Yeah, we do that to me, it seems like it's a huge quantity over such a large
+
+Speaker 3  13:22
+extent. It should be noted, Frank with the office will not require that the spray we only need to go do fire protection up to 20 feet in the admin area. Perfect. Yeah, everyone, everywhere else in the F occupancies and storage occupancies you need to protect all the way to tech. But the admin only needs to go 20 feet. Perfect. So you don't, you don't, you don't need to increase your skill load for that.
+
+Conor Tighe  13:56
+So, so the entire perimeter, though, of admin would be 20 feet from wall to 20 feet in. Or is it just on the wall for the R and D facility, it's 20
+
+Speaker 3  14:08
+feet from finished floor up to 20 feet above. So all the columns and primary structures supporting the roof and that would require that fire protection, whether it's air chip assembly or spray by okay, but Justin, Justin area, okay,
+
+Conor Tighe  14:36
+it's Gonna not look great, by the way, in the I introduce the advisor, and the admin is exposed.
+
+Speaker 3  14:44
+Ceiling, yeah, so we are having discussion with interiors on the impact of this. So Kristen and Jen are reviewing this, and we're trying to come up with some solutions that will. To achieve a better look, and not accidental. I mean,
+
+Conor Tighe  15:10
+I'm just telling we're about to have clouds in our future. Yeah, is that? Is that what you're looking at? Because that then, in fact, structure,
+
+Speaker 3  15:19
+well, we're looking at a drop ceiling of clouds again. This is admin chip. Sorry. Interiors just found out about this change as of last week, so we're still in the kind of design phase of that before we come up with a solution. But yeah, Cory, if the contractor says it's
+
+Unknown Speaker  15:50
+not gonna look good trust with
+
+Unknown Speaker  15:53
+the owners, And they're like,
+
+Speaker 3  16:01
+Yeah, I think, I think we perked up Jen's ears, so she's trying to get her microphone camera working.
+
+Unknown Speaker  16:10
+I'll see if I can find it.
+
+Ryan Hankins  16:16
+So Frank, oh, sorry. Do want to get back to steel or to structure, though too, because we haven't really talked about the underground tunnels, but there's some pretty I just want to make sure, especially since you guys are trying to get your foundation package done, that we spent some time on that too, with any critical design items you have
+
+Conor Tighe  16:42
+in there. There's two different types. This is the cementitious I think, and then there's,
+
+Unknown Speaker  17:00
+like, the fuzzy stuff. But if you get it, if you get a certain
+
+Speaker 1  17:03
+type, you, oh, let me, you just got and I let you, I don't touch it. I'm admitting Yeah, and then it just washes away.
+
+Conor Tighe  17:16
+So yeah, what you're gonna see is fuzziness. Fuzziness. It looks like,
+
+Ryan Hankins  17:27
+yes, when you're when you're spraying, it's overspread.
+
+Speaker 8  17:37
+Yes, it's overspread. I guarantee you it's going to be cheaper than
+
+Unknown Speaker  17:52
+Two. Sorry, now we're on The Price Is Right.
+
+Unknown Speaker  18:07
+All right, so we're on structure, yeah,
+
+Speaker 7  18:12
+something structure, critical design for us here, we're still trying to nail down the design of the foundation from just making sure that it's okay for settlement perspective, we are still kind of just collect all the final load inputs, still from Pacific Asia started off with some preliminary values, and Then over the past month or so, there have been some instances where the loads increased on us compared to what was previously provided. So the water tank and the target chamber loading, for example, we're working that into our analysis. But probably the Miss there is that as PFS team continues to
+
+Speaker 7  19:15
+design incremental the creep of the loads going up just as we get closer and closer closer to maybe we won't have enough time to react. So it's just making sure that we kind of have more conservative, curious
+
+Speaker 4  19:39
+tomorrow's conversation. Obviously they're going to be things that come out of that conversation are stressful that we'll need to go back. Teams will need to go back to drawing board, internalize spit something out hand. Back to Clayco. So Clayco, I know we're all marching towards this
+
+Speaker 6  19:58
+511 Foundation. Today, if we have this conversation tomorrow, we can get
+
+Speaker 4  20:11
+everybody to quantify these impacts, to make a decision
+
+Unknown Speaker  20:15
+by them following Tuesday or Wednesday? Is that still time? I feel
+
+Unknown Speaker  20:22
+like that. We've time make sure that the rest of the team
+
+Speaker 1  20:30
+that there's enough time for the rest of the team in Yeah. I think we need to see what the it's hard to say yes or no without knowing what some of the things are, yeah. So because we don't know if everything is changing or one thing, you know, it's hard to know. So I think let's, let's have the conversation and
+
+Conor Tighe  20:47
+make it I'm simplifying. We're sort of over designed at this point, just because you're sort of planning on the, you know, Pacific fusion having changed criteria.
+
+Speaker 9  21:01
+Okay? I think we more than that as
+
+Unknown Speaker  21:07
+well, but sometimes the science,
+
+Speaker 5  21:16
+yeah, so I think what we need to acknowledge is that, from a design standpoint, we can redesign it, but it's going to affect schedule. Yeah, that's where we need to throw up the roof like and say, Are you willing to take that risk?
+
+Conor Tighe  21:32
+So, okay, so, so I think on steel, it's an issue. Yes, we've talked about, like all of us have talked about this, on steel, it's an issue, like, we have to nail down the steel design otherwise, like, we just kill the lead time. So that's why concrete, like, maybe there's some opportunity
+
+Ryan Hankins  21:54
+so Well, I agree, yeah, but it all comes back down to like, expectations of when we're planning to start construction. And I think, like, so right now, like, we're kind of kind of trying to get all the inputs so we can kind of figure out what this break ground date looks like. I know June 1 was when we were planning to do it. There's like, I think we've got a lot of open items to go chase down for June 1 work, I think even for like, July 1, like, I'm getting a little nervous that we don't have everything kind of figured out. Not saying that we can't, but to conor's point, we probably have a little bit more time to figure out concrete, probably a little less time to figure out steel. But it all depends on what your goals are. Like, if we, like, just help, you know, hell bent on breaking breaking ground in June or maybe early July, then, yeah, concrete, super important. Like, we need to get that finalized. But, I mean, that comes down to, you know, what you guys want to do, I think
+
+Speaker 10  22:59
+break around, probably the latest we're going to be able to push it like mid July, because that's probably some of the dates we've already communicated out to. That's when we wanted to hold our media and groundbreaking. So holding to somewhere along that timeline, I think, would still be acceptable for for us as a diffusion,
+
+Ryan Hankins  23:19
+but as like, as like the real date,
+
+Speaker 10  23:21
+as like the real thing, yeah, but that's, that's the date that's been kind of communicated out, and they've been trying to target, like the Secretary of Energy, things, like some of the people, or all the people that are hard to scale. So those are they've been working towards that date based on their Cal points, right? So I think we're letting one person kind of drive our whole our calendar, and it's, it's looking like mid July is the day that
+
+Ryan Hankins  23:52
+we if that's the, if that's the if that's the drop dead latest date, then concrete is definitely important that we need to, we need to
+
+Speaker 10  24:02
+get that figured out. I guess the last thing I want to see is a large gap in construction, right? So I don't, I don't want to get to a point where I have unprotected, you know, waiting for the next day. So, yeah,
+
+Speaker 5  24:21
+what we need to do is just proactively say, like, if you have a threshold, you're going to save 5 million, because otherwise his schedule and changes will come that It will come at a higher estimate and cost depending estimate and cost if anything happens at this point, he just needs to finish his work now, and so you need to come up with a threshold number saying, Okay, we're going to see so much that we consider it otherwise.
+
+Speaker 7  25:10
+Already not only freezing the input, but making sure that we understood your inputs. Thus far, for example, yesterday, there's some areas, a couple lapses, that also totally agree that we still need to be happy.
+
+Ryan Hankins  25:38
+We have like, yeah, I would agree with
+
+Unknown Speaker  25:41
+you that the fact that, well,
+
+Ryan Hankins  25:47
+everything stopped, unfortunately, all this
+
+Unknown Speaker  26:00
+funding.
+
+Unknown Speaker  26:06
+We want to make sure that we understand
+
+Unknown Speaker  26:14
+and then, on that note, specific to the to the lab slots. To the lab slot on the gate is thickness of the slot, because we need to be, really want to be economical, really need to design it for the full 800,000
+
+Speaker 11  26:42
+pounds. And pounds.
+
+Unknown Speaker  26:48
+There's still a will, and it's not the full time area.
+
+Unknown Speaker  27:07
+For which
+
+Unknown Speaker  27:20
+Yeah, that's the
+
+Unknown Speaker  27:30
+concept that enter the chamber
+
+Unknown Speaker  27:42
+is coming in. As the full load of target chamber going on that
+
+Ryan Hankins  27:51
+path, just you, I was too far away, but you said it rests on the bottom of the pit, or it rests on, no, it's the full load.
+
+Unknown Speaker  27:59
+So there's, there's just making
+
+Speaker 6  28:08
+sure that you understand the inputs and how they're being used.
+
+Ryan Hankins  28:16
+So there's just questions. Yes, good deal.
+
+Speaker 5  28:22
+Good have we gotten everything because this last Park loading was something that was missed? Do we need to do a series of
+
+Speaker 6  28:30
+anticipated there should just be one outline outside of that. I
+
+Unknown Speaker  28:53
+it from pumpkins, but those vibrations
+
+Speaker 3  28:59
+mentioned, criteria. I could mention that they were going to get back to confirm on the Vcc or VCD vibration requirements of those areas, because currently we they require a depressed slab in those areas to meet those requirements. And the question from psi was, what do we need to reduce it to in order to not need that depressed slot? Am I remembering it correctly?
+
+Unknown Speaker  29:30
+Frank, yeah, that's correct. The wheel transport is intended to be Chad,
+
+Speaker 3  29:41
+right? So that in addition to a thick and like slap below that, you also have to press it further to meet the vibration criteria.
+
+Speaker 4  29:59
+My. Me. So my assumption is we're designing it to what your previous criteria wise, we're designing to produce criteria. She's working on reducing it that there's an understanding, by the time she she knows, if we can reduce it,
+
+Speaker 6  30:27
+we will have already passed that.
+
+Unknown Speaker  30:30
+Yeah, okay, so we're just going to the higher standard.
+
+Speaker 4  30:33
+At this point, we'll design to the higher standard. You said something before Dominic, Dominic brought this up. There
+
+Speaker 11  30:42
+was dominant property, oh, sorry, the wheel loading on the frame rail. Yeah.
+
+Speaker 7  31:00
+The wheel loading on the frame rail, yeah, I guess we have we should we have those? And that was what we were working with. I think what we wanted to confirm was that the cone frames provided the GA drawings and wheel load calculations we Have
+
+Speaker 11  31:20
+on March 27 we
+
+Unknown Speaker  31:41
+were all under the impression the insurance package, all the
+
+Unknown Speaker  31:46
+certifications we only got before the
+
+Unknown Speaker  31:48
+insurance package, which you're inviting me, I think to step out. I'm going
+
+Conor Tighe  32:01
+to excuse myself. Moment, if you so other sort of things I've seen go wrong, just the amount of seismic and vibration. Have you anticipated the amount of piping, hangers, everything else that actually needs to go against the structural frame. I mean, it's a pretty beefy structural frame. Yeah, mechanical may need to review that
+
+Unknown Speaker  32:41
+program. Yeah, as concerned would be there.
+
+Conor Tighe  32:48
+Yeah. But then you have a lot of load on that exterior, on the exterior that's, yeah, so it's, it's, it's going to be very concentrated.
+
+Speaker 7  32:56
+There is a portion of the load use that has been designed with it. There's some rooftop mechanical there, mm, rooftop mechanical there, designed that portion,
+
+Conor Tighe  33:07
+but it's just the concentration of it on the sort of exterior. And I don't I've just seen it become a problem with these very sort of heavy MVP facilities that it just it isn't fully thought out, and then all of a sudden we're doing saddles against walls, or we're doing
+
+Speaker 5  33:28
+crazy things. Yes, well, what I was, do we need to before they take it in the run? Do we need to sit to that goal and just run through like do a page turn and say, Hey, these are the things, because I'm worried that there's something lost in translation.
+
+Speaker 7  33:49
+I think, I think that would be a good exercise to do. We've gotten some feedback through many different venues, accord, accover calls just to sit down.
+
+Unknown Speaker  34:07
+So what we should probably at
+
+Unknown Speaker  34:08
+least ahead of time, to get ahead of some of these things. Here's our sheet,
+
+Speaker 5  34:17
+because the criteria has changed quite a bit, like those loading criteria and stuff like that. We don't want to make mistakes. Yeah, so perhaps just a page Jon, like, a week before it's due, with, like, how much room do we have
+
+Conor Tighe  34:30
+from the edge of the wall to the bridge crane?
+
+Unknown Speaker  34:37
+Measured? Well, you got a dimension on the Jon, however, was measured. The column line. So it was three foot two from the column to the edge of the
+
+Conor Tighe  34:51
+bumper side. So that means we've got about three feet to do any types of mechanical i. Process, cooling, water, piping, electrical.
+
+Unknown Speaker  35:04
+You can go above.
+
+Conor Tighe  35:07
+Can we go through the joist? We could go through the joist in certain areas, right?
+
+Ryan Hankins  35:11
+Yeah, I don't know, to your point, I don't know how exactly you get it around it, but most of that has been ran well, it's, well, okay, it's all, all the stuff that runs through there is mainly going to serve the units. So it's all going up to the roof anyway. And then the stuff that goes into the lab, you can just take it, I guess, outside and through the low roof. Yeah, we could do that. It just comes to how we're going to get it to the stuff that needs to be in the tunnels? Yeah, it has been a big topic of conversation because there's a lot I don't totally understand these tunnels.
+
+Unknown Speaker  35:49
+So that's that's why that's part of the process. Yeah, so
+
+Conor Tighe  35:55
+the tunnels are being used for part of the process, going yes to
+
+Speaker 5  36:03
+confusion, because that's the part that clear. He said he's oversized the tunnels. Yeah, for that clarity the tunnels,
+
+Speaker 3  36:18
+it's primarily to convey the mindful to the DI and water.
+
+Ryan Hankins  36:21
+Oh. Big and Michael water, it's like they're too small, but they're not small enough because, like they're too like, they're just super expensive details the tunnels, like, especially with the lids and everything that we're talking through, is there a pre fabricated
+
+Unknown Speaker  36:47
+solution, like a precast solution?
+
+Ryan Hankins  36:55
+Mean, like we would love to do like a, we would love to do like a, like a grade, some sort the concrete is just like it's, we have a lot of concerns about the lid with the concrete.
+
+Ryan Hankins  37:18
+It's just such a small area, like inside the trench that, like, you can't, you can't get in there unless you remove the cover. So, like, if there's a leak, like, you have to have removable lid everywhere. Basically, it's not like you have access points. If it was a six foot, you know, or four foot, or something like that, you can get somebody to crawl in there. But, you know, still safety, safety concerns, you probably need to go a little bit bigger.
+
+Unknown Speaker  37:46
+Is it cost prohibitive? If
+
+Ryan Hankins  37:53
+we made it larger, it would be cost prohibitive, but I think it'd be a better product.
+
+Conor Tighe  38:00
+I mean, what about reassessing whether you actually need the concrete lid? Like, could you just do metal grading, except for in areas where you think you're rolling over it for pathway, then it's concrete
+
+Speaker 1  38:14
+lid there. Like, is the concrete for the loads? Because I thought the steel was
+
+Unknown Speaker  38:20
+for the load steel. We're designing a steel trench cutting to just set up
+
+Speaker 1  38:32
+of the two access points to the basement. When I that's what I'm understanding. Courtney's not here. She can explain it better, but I think those are just like, that's just gonna go on top these large pieces of concrete on top of whatever is happening. But the trench covers, they're kind
+
+Unknown Speaker  38:53
+of similar to the concept. Yeah, it's like a six foot wide panel.
+
+Ryan Hankins  39:01
+I mean, like, in the grand scheme of things, how much utilities are we actually routing? We like, sounds like, you guys don't know either. Like design, these are, these are super expensive trenches. I just want to make sure, like, we're not just like routing a couple pipes in them,
+
+Speaker 1  39:24
+this conversation, because it's not, they're not our,
+
+Ryan Hankins  39:36
+no, it's The whole, the whole thought, everything, yeah, it's just
+
+Speaker 1  39:41
+very complex details, where it goes outside of the building and same trench. How do you
+
+Ryan Hankins  39:46
+yep, I mean, we talked about between the two cooling pits, the MIT l cooling pits, like there's that, you know, there's just, you know, there's a lot conduit, conduit, well, I mean, for electrical, you could do a lot with but. In fiber, but just understanding, like, the like, because I only saw a couple lines, I need to go to the cavern future. It's all, yeah, so if it's all future, then I kind of get it done.
+
+Unknown Speaker  40:13
+That's right. We don't know everything that's going,
+
+Speaker 1  40:16
+Yeah, we don't know. There's a lot we don't know. And I think that's, that's where I get concerned with doing it Value Engineering right now, because I'm like, but there's, there's so much we don't know.
+
+Speaker 10  40:26
+Yeah, so when we talked to Jeremy about it before, was saying that they're way bigger than we need. But we can confirm that things,
+
+Speaker 1  40:39
+things do change. Because when, when Frank was saying, there was some slight creeping up the loads, I think that for some of the things, you're like, more than doubling what you have been designing for. So there's and that's happening quite recently,
+
+Speaker 7  40:52
+being water tank, the giant water tank in the interior, the last time, the last set of loads we had done before the most recent one, just the shell loading around the perimeter
+
+Speaker 1  41:11
+of the tank. Was one in that then they just got that information very recently. So I think it's like things are in flux, but not in a flux of like, we're just going to inch it up a little bit. It's like, oh no, you have to reimagine what you're imagining. So this is
+
+Speaker 5  41:25
+like a giant tool, like an advanced manufacturing tool. You have all type all flavors of chemicals going in there, all flavors of exhaust and all that good stuff. Try to as much flexibility as possible. But you don't exactly know how much. So this is where Germany is oversized utility, utility trench, yeah?
+
+Speaker 10  41:49
+Walk us through what the operations look like, yeah, how full they're gonna be, what, what they're gonna be full of,
+
+Speaker 12  41:59
+in general, water lines, air lines and oil lines will be running through the trenches. We're still working on the layout of what that exactly looks like. I think we know to and from totally asking for some design support on routing those and mounting them in the trenches. I don't expect anything to be installed in the trenches beyond, there's the direct burial spot there that Frank's
+
+Unknown Speaker  42:27
+kind of highlighting, right? Sorry, there's the direct
+
+Speaker 12  42:30
+burial 32 inch pipe water that goes under the tank. So that trench there ends kind of at that wall. And so we're going to have a pipe that's buried under the foundation and leads over to the water tank. So that'll be the only thing that's goes in during corn shell. And then after TCO, I'm anticipating all the trench covers to be in place when we get TCO, and we'll come in, pull off a large section, install piping under there, covering back up, continue our installation at that point,
+
+Ryan Hankins  43:07
+does the so you said oil, compressed air and water. Those are the only three things that you'll ever need in that trench. Or is it just what you need, what you know you need today.
+
+Speaker 12  43:17
+There are some other pneumatic pipes that we'll have down there that need to move things back and forth. I've kind of said not to preclude controls or power as needed, but largely, I'm trying to keep the trenches to anything that we know right now that we can design and build in place and then leave overhead on the walls available for field routing
+
+Ryan Hankins  43:40
+so the oil does that just go to the two ing module spices, basically, because they just fill in the pipes, and then do they also drain the pipes, fill and drain, fill and drain. Okay, two different pipes, or two pipes, one for fill, one for drain, correct? And then for the chilled water. Is it just a couple points of connection here, and then you're also filling up these,
+
+Speaker 12  44:05
+just to make sure we have the same terminology on there, chilled water, I don't think is going through those line, through the trenches, we'll have our DI water. So through the 32 inch pipe, we'll have DI water that runs to the water tank, so
+
+Ryan Hankins  44:21
+that's filling, once again, filling. And then you have one drain through the same pipe, through the same pipe, okay? And then you don't have any other chilled water needs that go to the cabin or anything. You don't have any other chilled water that, like these pools I know, get filled up with something.
+
+Speaker 12  44:37
+No those will remain empty. They're a place for us to store some things in the future that need to be stored safely.
+
+Unknown Speaker  44:48
+It's dead bodies.
+
+Speaker 12  44:52
+We'll have some things to store down there, and then we'll put a lid on it and leave them down there
+
+Speaker 1  44:57
+for something that's where the lid needs to happen. Is that correct? The. Concrete lid.
+
+Speaker 12  45:01
+That's the whether it's concrete or we're talking about steel right now, several 100,000 pounds of steel.
+
+Speaker 1  45:10
+Dominic, are you remembering where the large concrete lives were requested to go? I'm remembering that somehow, was it on the cool down area? It was it in that, or was it in the
+
+Speaker 12  45:26
+about them being concrete at one point? And there's a few different selections of material, concrete, some always steel. And it sounds like we're kind of tracking towards steel
+
+Unknown Speaker  45:36
+right now. Yeah, yeah, materials and
+
+Unknown Speaker  45:42
+the minimum thicknesses.
+
+Speaker 3  45:45
+Yeah, I did want to comment on just these general trench covers that Frank is designing. We were discussing earlier about the fire protection for those members and if these trench covers constitute a part of a floor assembly. They could require two hour fire protection around them. We're talking to our life safety consultant, because it is a bit of a gray zone in the code whether or not this is considered part of a floor assembly or not, and if it is, then we will need to fire to protect so steel supporting it.
+
+Conor Tighe  46:28
+You're talking about the lids themselves,
+
+Speaker 3  46:32
+not the top of the lids, but the structure that Frank has to support the lids. Yeah. So if this constitutes a forward for code, which my interpretation is, it might we're double confirming that. But to your comment about concrete versus steel, that could be a benefit of the inherent fire protection of concrete, not that we can't protect this with into messenger, but just something to consider,
+
+Speaker 8  47:09
+is there other things that you need to protect? Like, is, is there protection that's needed other than your medicine?
+
+Conor Tighe  47:19
+Like, do you have to do any other shielding of those pits?
+
+Conor Tighe  47:28
+I'm just referencing whether you need any type of shielding, any type of shielding or protection, for protection of either ground surface conditions or occupants.
+
+Speaker 12  47:41
+No so the middle valves won't have any personnel down there. So we will lower some hardware down there and leave it down there for some time period. The lid cap, or whatever part that is, is intended to be the primary barrier, so that you could stand on top of it and be okay with the stuff that's
+
+Conor Tighe  48:04
+down there. I almost like regret asking it, but if you've done your has ops yet.
+
+Unknown Speaker  48:15
+We already have, we've had simulations and understand
+
+Unknown Speaker  48:19
+okay
+
+Unknown Speaker  48:20
+and still functions in that functions in
+
+Conor Tighe  48:23
+that way. I can tell you, from our perspective, we're not going to value engineer anything like you guys are going to have the dollars very specifically. Yeah, that's
+
+Speaker 3  48:33
+where you find us. Yeah. Something also that occurs to me. I know we talked about grounding of all the metal within this facility. And I don't, you know, Susan's not on this call, but I don't think we've looked at the grounding of these trench covers, or how that works. Maybe that's
+
+Speaker 1  48:53
+that would be a good question to add in, just to make sure she went through the grounding strategy. But make sure that these covers are included in that. That's a
+
+Unknown Speaker  49:01
+good idea, though, I know we did it for all of us. Sorry I missed that last piece.
+
+Speaker 3  49:13
+Susan, if you look in the drawings, we already have preliminary locations from where we're tying the grounding to metal supports on originally, on the way they call the tubes on the main machine, yeah, the pulse tubes, yeah, yeah. But when I was thinking, so I don't think it's a do that for this design yet,
+
+Unknown Speaker  49:37
+yeah, you just need to ask. No.
+
+Speaker 1  49:50
+Yeah, do we have any more questions for Jeremy before we stop holding him hostage in
+
+Conor Tighe  49:57
+this meeting? I mean, I'm sure there's probably more. But think it's enough. Yeah, trenches, thank you. We've got to maybe think about the best way of doing constructability.
+
+Speaker 5  50:13
+32 inch dill, water, other, anything other, any other utilities that are as big in that space? Process, exhaust, I know we have another exhaust in the
+
+Speaker 12  50:30
+trench, especially now in the trench, 32 inch DI water is the largest. Beyond that. See, there's some eight inch oil, six inch CDA.
+
+Speaker 5  50:44
+Do you foresee additional connection points in these routes, or is it just one
+
+Speaker 12  50:52
+and done? We know all the locations and these, any additional points with the NTS above?
+
+Speaker 1  51:01
+Just one question. I is gonna sound so dumb, because I don't even know how to ask it, but in the location where you're saying you're gonna have this water line be run directly into the concrete, there's not a consideration of, like, what happens if something happens to that water line, it's poured into the concrete, and it's
+
+Speaker 7  51:25
+expecting that to be either cast, like in the middle of the
+
+Ryan Hankins  51:33
+back slab, like put, like a casing around it, or something like that, like you'd do for like an exterior,
+
+Speaker 1  51:39
+like underground, yes, like a sleeve, that's what I am asking. Is there gonna be some consideration like that? Like a sleeve where you might, yeah, if something happens, then you can repair it, as opposed to chipping out or hedge him,
+
+Unknown Speaker  51:57
+you can't get through it. Yeah? Like, bodies are buried.
+
+Ryan Hankins  52:10
+Jerry's like, yeah, yeah.
+
+Speaker 5  52:20
+That's the other things we do, typically in advanced manufacturing and stuff like that. When you have any kind of underground utilities that you need access to, you do a trench. And that's things expensive, yeah, and that's why I'm asking if there's this couple of exhaust pipes there too supply and exhaust to these things that's in the ground. So we need to figure out, like, how, what is our level of comfortability with that? I'll be good at just leaving up there.
+
+Conor Tighe  52:45
+I will tell you that throughout construction, pipes break. You know that are put below grade.
+
+Ryan Hankins  52:55
+Especially we're planning on settlement,
+
+Speaker 1  52:59
+exactly, yes, and especially you're doing the initial settlement where you fill the tank is gonna so there's significant,
+
+Unknown Speaker  53:05
+there's a real risk to
+
+Unknown Speaker  53:07
+that strategy. So we need to talk
+
+Unknown Speaker  53:09
+about that could be discussed.
+
+Speaker 5  53:10
+Yeah, that's one pipe, and then the big the exhaust ones, and I think the other ones are the regular but we just need to work through this, or just write
+
+Unknown Speaker  53:22
+it down that we need to add it. Let's just
+
+Unknown Speaker  53:25
+work through this and see like, Hey, that
+
+Speaker 12  53:27
+was a major issue in all the conduits under the ground, especially the ones that went out of the chamber. Big foundations were all separated, full of water. Where was this facility? That's so we've probably,
+
+Ryan Hankins  53:42
+I was, I was gonna say, could we, like, walk any of this stuff? Is that possible for us to get, like
+
+Unknown Speaker  53:50
+we've done, hard to get in
+
+Unknown Speaker  53:53
+at the Livermore? Would they let us? I've gotten into Slack
+
+Speaker 12  53:59
+and tours over there. Generally, it's a pretty prescribed facility. They don't take people down into the base. Man, yeah, all the utilities.
+
+Unknown Speaker  54:18
+Would I have to have a special sensor on after
+
+Speaker 12  54:23
+they are NIF is a large red area. Plus, then on top of that, do
+
+Unknown Speaker  54:32
+you have anybody with a photographic memory?
+
+Unknown Speaker  54:36
+Let me know what you want, and I'll sketch it out.
+
+Unknown Speaker  54:39
+We don't want anybody going to prison
+
+Speaker 1  54:45
+for this well, so if it was a big problem, then we probably just need to figure out how we're going to deal with it, and let's work that through. Only one
+
+Unknown Speaker  54:55
+I'm really concerned about is the 32 inch
+
+Ryan Hankins  54:58
+water the. I didn't realize was 32 inch. That's a big pipe. That's a
+
+Speaker 12  55:02
+huge pipe. Exhaust lines. I think the supply and return, those are easier to handle. If something happens, line it,
+
+Speaker 5  55:12
+if there's a lot of settlement, that's the thing that I'm not we have so we had our internal, technical, independent reviews, marked it up for us, and that's why I'm asking you these questions. It's not that super intelligent. It just came up that like, hey, look out for this. Look out for this. And so I'm asking you the same question, how much how comfortable are we with these situations?
+
+Ryan Hankins  55:34
+And that's why I was saying I'm scared of death in these tunnels right now. Okay, so let's
+
+Unknown Speaker  55:38
+just work through it. We'll work through it specifically?
+
+Ryan Hankins  55:43
+Well, just the mean, I'm getting better context now, like 32 inch pipe. Now I understand why they are what they are,
+
+Conor Tighe  55:51
+but more likely to break. Yeah, that means to
+
+Speaker 12  55:55
+us, but not necessarily in the trench, the one that's under the slab.
+
+Speaker 8  56:00
+Yes, not worried about the ones in the trench. Fixable, Yeah,
+
+Ryan Hankins  56:06
+take that, yeah. What happens?
+
+Unknown Speaker  56:08
+How it breaks in the trench? It doesn't flood.
+
+Speaker 12  56:12
+I mean, what is the how much? Yeah, side, I have a lot of that, all right, where you can, like, close systems
+
+Unknown Speaker  56:26
+handle, there's like a cell
+
+Ryan Hankins  56:30
+sensor, and then we need to slope the trenches, likely to one point, or have, like
+
+Speaker 12  56:39
+we talked about that was in some that was in kind of some think we're going to turn that over, rewarding us. We don't have a flatness or levelness requirement on the bottom of the trench, and so we're planning for those as we see fit, break them towards a some a pump wouldn't necessarily be a pump. We're planning on just having a something may we're planning on just having a something there and then if we need to mobile pump to evacuate any fluids, mixture of different materials down there.
+
+Unknown Speaker  57:14
+Yeah, we're used to in that don't
+
+Unknown Speaker  57:18
+ask questions. So this, these are the some the animals are like an industrial coating that goes on the inside of that too.
+
+Unknown Speaker  57:29
+Yeah. Tom is working with coding days. Tom, you have your hands up. Tom,
+
+Unknown Speaker  57:38
+coding for the inside
+
+Speaker 3  57:40
+race the roof. That was a one of the options that I had on refining the extents of that high traffic coding. But yes, there is a coating within the church that we're specifying. It's Sherwin Williams.
+
+Speaker 1  57:59
+Yeah, it might not. It was, I don't know that it was shown that it was not a set, and it has, it was not in the 50% Yeah, it got added In after the 50% okay.
+
+Speaker 1  58:20
+It's like an epoxy. It's a, I mean, it's
+
+Speaker 3  58:27
+like an epoxy. I can send you what we specified. This is a big question, does Clayco have access to our 100%
+
+Speaker 1  58:38
+we do? You do? Yeah. And so it is in the product.
+
+Speaker 3  58:43
+And yeah, it should be. I didn't want to call out this part of the trench design, just something to flag to Clayco, where Frank is sharing his screen at the north end of the cove, the trench exits the building, where we currently have a tilt panel coming down to the base there. We're envisioning a knockout panel at that location, right at the exterior, because that's where the DI tank di and Michael one was pipes are going to come into the building at that corner. And currently that is not part of our phase. I think, as Cory said, that's a nutrition problem. It makes sense to me to route those pipes above and through the wall. But. I floating that for, I think, for operational reasons. PF, wanted all those pipes to come under ground. So there's an exterior, external trench that is entering into the building below grade. We haven't detailed any of that out yet for the space. We're just providing some knockout panel at that location, but just wanted to find it for clayco's knowledge and what PS thought process was for bringing those utilities in the
+
+Unknown Speaker  1:00:38
+building. Thank you. Thank you.
+
+Speaker 5  1:00:41
+So in terms of the the target chamber itself, considerably, we're assuming that's lost and that's going to happen. Okay, good, because his package gets super critical at this point in time. We're just trying to
+
+Speaker 12  1:01:03
+mitigate, yeah, we went through and did a pretty detailed effort to make sure we captured all the loads. There were some assumptions made early on that things like cables would be pretty small, several 100,000 pounds. We've captured all the
+
+Speaker 5  1:01:22
+loads. So I think based on that, what we were hoping to do is, before they go out for procurement, as soon as this sets ready for that foundation, we'll just do a feature your core team, the understandings outlined, and you sign off on it, because after that, it's going to be super expensive, and I don't know what we do with the concrete at that point. Just can't do anything to the concrete. No, it is
+
+Unknown Speaker  1:01:47
+what it is. It's done at that point. Further
+
+Unknown Speaker  1:01:52
+analysis done on your end
+
+Unknown Speaker  1:02:01
+from our discussion last
+
+Unknown Speaker  1:02:03
+Friday or two, five years ago.
+
+Speaker 12  1:02:07
+So I thought we only had the vertical component on the pedestal, and there's no additional lateral forces live loading back then.
+
+Unknown Speaker  1:02:20
+Loading from seismic Shawn or Cory permission, I'll
+
+Speaker 12  1:02:32
+follow up on that, but I was assuming on the seismic side, I think he already had numbers.
+
+Speaker 7  1:02:37
+Besides me, we had numbers based on our assumptions and code based calculations are appropriate.
+
+Speaker 1  1:02:58
+I just, I wanted to just like because we have a couple of people from our team who joined, but Astrid is here. She's mechanical with Meyr, and then Casey. I can't see everybody who's on here, but I know Casey Moore joined because they're a building envelope consultant. So I know there were some questions about what waterproofing. And I'm not going to put anybody on the spot right now, but just letting you know who's on the call. I don't know. We have several people from our architectural team on as well, but just wanted to make sure you were aware. I'm sure they were joining because of the critical design decisions. Was originally on the schedule right now, so we can jump into that if
+
+Unknown Speaker  1:03:35
+we're ready to that point. Do you guys have a list that you wanted to run
+
+Speaker 1  1:03:43
+down well? And I'm kind of letting that we kind of started with Susie to Frank. We went to Dom, so I'm kind of letting each discipline bring up any items that that are super critical for them in terms of having design decisions either from pep or from Clayco. So, oh yeah, Frank still has one more. Sorry. Everybody just didn't need to interrupt
+
+Speaker 7  1:04:02
+Frank, the one other thing would just be to follow up on that discussion. If that is something that's within our design responsibility, that does impact the foundations as well is we need to be able to coordinate the grading design the I need to talk internal items to make sure we I'm on the same page as what exactly our state was on that. Ben, yep, it seems like there may be a bit of
+
+Conor Tighe  1:04:38
+a Yeah. Maybe there's a follow up early, like on Monday, because we Ryan, we probably would probably pat the talk right
+
+Speaker 5  1:04:53
+internally, yeah, can we set up the calls with the TT week? 20th, I'll be. Yeah,
+
+Speaker 1  1:05:05
+next Thursday. So let's do that. Let's try Thursday or Friday next week for some of them, unless and why, we should have you as well. But I love anyways, I'm getting concerned about the dates, but that's okay, Rebecca,
+
+Unknown Speaker  1:05:21
+I would say, let's,
+
+Conor Tighe  1:05:24
+let's see if we can then get an answer by this week, because if you're gone next week, the concern is that
+
+Unknown Speaker  1:05:32
+we're gonna do storage.
+
+Ryan Hankins  1:05:34
+Yeah, I'm looking, I know, I know, yeah, I think, get it, but yeah, we just gotta, yeah. We gotta push this thing forward.
+
+Speaker 1  1:05:47
+Yeah, so, so, sorry. What? Who needs to make this decision?
+
+Conor Tighe  1:05:55
+What's the what needs to happen is we have to get on. We have to review internally on our side, the level of delegated design that we normally would expect for dill wall and then Frank, you have to, on your side, determine what your scope of services was, yeah,
+
+Speaker 1  1:06:13
+like, because I think it's been held as delegated design since early although it happened before I came
+
+Conor Tighe  1:06:19
+on the project. So yeah. I mean, we deal with this all the time when we're design builder, so we we forget we you have to review what your what your basic services were, and we have to, we have to evaluate what we're willing to do on our side. But that that could take two days that we can do, that we can do that pretty quick. We can do it rose actually, like I don't want to wait. You know,
+
+Unknown Speaker  1:06:46
+bad timing, yeah, yeah, that's fine.
+
+Conor Tighe  1:06:56
+Yeah, we have, like, we haven't. I mean, we CSI, who's the our concrete affiliate is, ultimately, you will talk
+
+Speaker 5  1:07:09
+yeah, because what we could find is a sweet spot, yeah, yeah.
+
+Conor Tighe  1:07:18
+They've had, had the discussion a week ago on a different system, so on a different project. So that's like, we just got to figure it out.
+
+Unknown Speaker  1:07:28
+Okay, sounds good.
+
+Speaker 5  1:07:29
+So a couple of items came in that Courtney. The major thing that I caught was we have some underground utilities connecting, like a 32 inch pipe that goes from EIA water piping that goes on the earth under the facility. So we all came to the conclusion that this is a risky item because of the settling in.
+
+Unknown Speaker  1:08:00
+So back on that and see like what AWS on the underground utilities are supplying that trench
+
+Unknown Speaker  1:08:14
+because of the settlement that will happen when you load it, and also the size, yes, besides, it's a 32 inch pipe, yeah.
+
+Speaker 5  1:08:26
+And the fact that if something goes wrong with that, then you can't chip through the Conor. It's just it has to be done. Plus the supply and exhaust that goes down there too. Mechanical supply and exhaust, it's under a lot of art and pressure down there to make sure constructability wise look good. And there's some things that they're tracking do.
+
+Speaker 7  1:09:11
+Question of how much you can tell in terms of assignment,
+
+Unknown Speaker  1:09:20
+or just the weight of everything, or do we need to sleeve it in the
+
+Unknown Speaker  1:09:26
+end, if
+
+Unknown Speaker  1:09:36
+we raise the pipe higher, closer to the top of The ground, the way we just step the foundation around
+
+Speaker 7  1:09:48
+it, not in the coffee, the foundation essentially, yeah, step down in the render, and then come up and then the water lay. The water tank.
+
+Speaker 7  1:10:06
+We're trying to avoid increasing. We basically continue to change just have the pipe as high as possible. But because we use for the water tank that Matt foundation might be mistaken. Pilot and then the water tank. However, why the water
+
+Unknown Speaker  1:10:41
+because Then I can see them in
+
+Unknown Speaker  1:11:00
+Justin snack,
+
+Unknown Speaker  1:11:35
+Professor, Okay,
+
+Unknown Speaker  1:11:50
+see potentially know.
+
+Unknown Speaker  1:12:22
+Installment, on either
+
+Unknown Speaker  1:12:30
+casting place section that
+
+Unknown Speaker  1:12:40
+would allow us to get so
+
+Unknown Speaker  1:12:45
+that's work, but you're also suggesting that we just leave out that Area al together. But
+
+Speaker 11  1:13:01
+we need to figure out stay to
+
+Unknown Speaker  1:13:06
+ask you,
+
+Speaker 5  1:13:20
+is, do you see any other options on our ground?
+
+Conor Tighe  1:13:33
+You're talking about on the utility, going underneath the slab, yeah,
+
+Ryan Hankins  1:13:39
+I mean,
+
+Conor Tighe  1:13:40
+other than letting it fully settle and not attaching it to anything and then hoping For the best in concrete or something, but it doesn't
+
+Unknown Speaker  1:14:10
+it's going to make it more rigid, so maybe,
+
+Speaker 8  1:14:20
+how far is the distance we needed to do something? Could we bore? Sorry, what distance are you? 32 inch pipe. I We
+
+Conor Tighe  1:14:59
+have. I mean, is there a reason to just not do a tranche?
+
+Ryan Hankins  1:15:20
+No child? Can't, because we have a six foot matte slab. It's pretty hard detail.
+
+Ryan Hankins  1:15:40
+I'm just you can't go through it and going underneath, it's pretty difficult. Yeah, you're never gonna be able to get to it anyway. In my opinion, the best way forward is to bring it through the side, yeah, bring it through the side, versus in the radius section. Granted, I don't know your process, but would be coming through there and then just routing it tight to the matt slab, and then, I'm guessing connecting to the tank or going above. That'd probably be best.
+
+Unknown Speaker  1:16:17
+Maybe it's just going from
+
+Ryan Hankins  1:16:22
+above. I yeah, I was yawn.
+
+Ryan Hankins  1:16:33
+Water right here. I can't help you that lovely water.
+
+Ryan Hankins  1:16:49
+We want. What else we have to get? We have a couple more people. Yeah, yeah, I think we have ASRS here. Casey Moore
+
+Speaker 1  1:16:59
+is here. He's our building envelope here. But I maybe can move to the next person right there, mechanical, Jen, buzzingers here, buzzing Sure, I'm sorry, Jen, I never know how to pronounce your last name. So mechanical,
+
+Unknown Speaker  1:17:17
+oh, I've never said it right.
+
+Unknown Speaker  1:17:19
+Jen's in two years. So do you have a preference?
+
+Ryan Hankins  1:17:29
+Would love to hear what's holding up? Mechanical, mechanical Astrid,
+
+Unknown Speaker  1:17:36
+your your top 10 peers,
+
+Unknown Speaker  1:17:42
+and you all 10 years. Okay, so, I mean, I think we've come a long way in terms of resolving some of the uncertainty in the design,
+
+Speaker 13  1:17:56
+I think the register, my camera, I'm I don't know what's been happening, but just to give a brief overview the right now, the plan is for most of the mechanical equipment to be installed in one vehicle as a part of phase One CD. So that central plant equipment primarily the cooling plant right and heating plant, and so we had to bake a lot of assumptions into the sizing of that plant without necessarily having finalized cut sheets from civic fusion, so we're working off of the best available information that they have at this time, I think that there is a Little bit of uncertainty still on.
+
+Speaker 13  1:19:02
+So we lose charge ahead, but yeah, we don't necessarily have, like, Final Cut sheets for all of the equipment, so we're going off with some assumptions. I think there's a big opportunity right now to potentially eliminate fluid cooler system that we expect, there's very little load left on that system. That would eliminate fluid coolers, the quals associated with that,
+
+Unknown Speaker  1:19:33
+all of the chemical
+
+Speaker 13  1:19:34
+treatment that would be needed for an open system. So I think that there's benefits to that, we need to confirm that all the Fusion's equipment would be happy with the lower water temperatures that would be coming from the shell water plant,
+
+Unknown Speaker  1:19:51
+where we
+
+Speaker 13  1:19:52
+generally right size it for the load, but we need to understand what the anticipated temperature rises across certain. These equipment, and whether they have any specific requirements beyond what's been previously communicated. So I think big picture, broad strokes, we have enough information to size the cooling plant, but I think there is a reserve risk that as we get more information on the equipment, once we get a chance to speak with manufacturers correctly, that additional requirements come up that we haven't necessarily planned for,
+
+Ryan Hankins  1:20:40
+and that's mainly related to the process.
+
+Speaker 13  1:20:45
+Yes, as I understand it, a lot of the any specific exhaust requirements for the equipment is going to be picked up as
+
+Ryan Hankins  1:20:57
+a part of technically. Got You say, How far are we in the process design, like the process design overall, is it like 50% complete, or do we think it's like 20% complete?
+
+Conor Tighe  1:21:10
+50 Yeah. I mean, do you know what? What requires process cooling water and that sort of process design, we have a pretty good idea, based on the equipment matrix. I mean, this seems like one of the easier systems.
+
+Unknown Speaker  1:21:39
+I guess it doesn't keep me up.
+
+Ryan Hankins  1:21:41
+No, it doesn't
+
+Conor Tighe  1:21:46
+like you don't need CD use or any type of technical water.
+
+Ryan Hankins  1:21:54
+Yeah, seems like DI water is mainly the big thing, yeah, the big tank outside.
+
+Conor Tighe  1:21:59
+But that's, that's, yeah, I think of that as a different system almost entirely,
+
+Unknown Speaker  1:22:05
+basically just for the pink in the middle, yeah.
+
+Conor Tighe  1:22:09
+I mean, in this package, it would be all dirty side anyway, so it's just good for us to understand what's happening downstream.
+
+Speaker 13  1:22:30
+Like, I think temperature, we definitely have a list of all the equipment. We have a list all the equipment that requires process water. That's what we're designed to at the moment, folks don't understand this equipment, and this is really like the detailing, the speeds we we have preliminary cut sheets with the general acceptable water temperature range, right? But like, flow rates are going to vary slightly depending on incoming water temperature, temperature wise, it's going to be different from equipment. And want to be able to capture that system level for just designing the plant, so it's more just, I don't think that it's going to change anything necessarily at the plant level, in terms of sizing, but just in terms of detail, like we might find that we need circulating pumps or like blending valves. For that, it makes sense to separate certain equipment off into like secondary loops or things like that, and we just don't have that level
+
+Unknown Speaker  1:23:38
+feedback up from manufacturers. Do we
+
+Conor Tighe  1:23:43
+for purpose of estimating, like, where's our D mark? Do you remember,
+
+Ryan Hankins  1:23:48
+like, there's, like, from a, there's not much, it's, it's, it was mainly HVAC, is what was shown
+
+Conor Tighe  1:23:57
+so, so is any of that work in a any of the process cooling water loops needed for process coming through. ARS, are you just doing that sort of things?
+
+Unknown Speaker  1:24:10
+Probably our next day.
+
+Speaker 5  1:24:12
+If it's not showing on the 50% of the 100% it's coming. So at least that's my understanding.
+
+Speaker 14  1:24:19
+So for purposes of like, our current scope, it's, it's very basic, yeah? Like, that's super basic, basic. Yeah, we're going as far as basically showing cat connections
+
+Unknown Speaker  1:24:38
+in general areas where an executive future meant
+
+Speaker 5  1:24:44
+to be located, yeah, Esther. Just to give you a heads up, I think on a 511 date, we were hoping construction team was hoping to have all major equipments confirmed. I think that's where we're walking back to. I mean, looking back from
+
+Speaker 15  1:25:02
+phase one equipment to be prepared. Yeah, they're wanting order items.
+
+Unknown Speaker  1:25:09
+That's where we think by that 511, date.
+
+Speaker 1  1:25:11
+So we're trying to figure out what's required to get us to that point.
+
+Speaker 13  1:25:15
+Yeah. So I think it would be really great for that date to have to make a decision on whether or not the fluid cooler system is needed, because if we don't carry that, then we'll need more air security bombs,
+
+Speaker 1  1:25:32
+and that's the conversation with structural because then it also means we need more steel to support the roofs if we're having more on the roofs and we're running out of space weather. So yeah, we gotta. There's all of these trickle down effects, yeah?
+
+Speaker 13  1:25:45
+And it wouldn't necessarily need more, because we'd be eliminated with fluid coolers, right? So it'd be like, we're swapping, yeah,
+
+Conor Tighe  1:25:54
+I think there's, like, the system's very simple for for us, but like, there's opportunity, and we'll talk about it tomorrow, but there's opportunities to go with potentially other systems.
+
+Ryan Hankins  1:26:07
+What about clean room like, Where have we defined the exact clean room areas, and then have we also defined the exact clean room classification?
+
+Speaker 1  1:26:16
+So the clean room is, we have a box. Sorry, you can see shit as or do you want to?
+
+Speaker 13  1:26:21
+Well, we had a little breakout session on just this past Tuesday, so I maybe get an update from that. Rebecca, you can add to it. I'm sure there's stuff that you're looped into that I may not be, but my understanding is, at the moment, there's two theme rooms that are expected to be installed within the diagnostic space, and it's going to be, like a box within box. So the diagnostic space is has like, 35 foot ceiling. That's going to be, like, I don't know if it's exactly 15 foot clear or something like that. We spoke with the manufacturer, who's providing a proposal for that in room on Tuesday, and they're on the back of that call going to, actually press their layout the clean room and tell us where we need to connect for supply and return so we're not responsible
+
+Ryan Hankins  1:27:09
+for the clean room loop. No, not that will be a phase two item, but okay, we actually want
+
+Unknown Speaker  1:27:15
+to get the majority wage back strategy in this first phase.
+
+Speaker 13  1:27:21
+Okay. Yeah. So we'll be installing the unit that will be providing effectively, like the incoming makeup, air and relief. But then that clean room is going to have a recirculating plenum within filter units that will be recirculating switching ISO level eight or five, the multiple. So it's a modular feet.
+
+Ryan Hankins  1:27:46
+Yeah, it seems like it's pretty small, then it's like only, like a couple 1000 square feet.
+
+Unknown Speaker  1:27:54
+Dominic, do you have to show the dimensions offhand?
+
+Unknown Speaker  1:27:56
+It's not very large. I just wanted to make sure it wasn't. I feel like the scales project.
+
+Speaker 3  1:28:09
+Oh, they're, they're not that big. They're 15 feet tall. And hold on right now they're,
+
+Speaker 3  1:28:22
+yeah, 20 by 44, okay,
+
+Ryan Hankins  1:28:31
+so those are, and there's two of them. That's not Yeah, and that's it. There's no other there's no other cleanliness requirements in the facility.
+
+Speaker 3  1:28:42
+I think that early on there were but then it got de scope to kind of a clean, non classified space, so no ISO requirements, but clean ish environments, okay, sort of as room classified as the official term, or sort of clean
+
+Ryan Hankins  1:29:08
+class 100,000 or something like that.
+
+Unknown Speaker  1:29:10
+Yeah, effectively, but just above,
+
+Ryan Hankins  1:29:17
+well, that's, that's easier than I was expecting. So perfect. Okay, anything else mechanical room kind of seems like that's anything
+
+Unknown Speaker  1:29:31
+Jon mad at you when you were reviewing our our sets. Any questions?
+
+Conor Tighe  1:29:41
+Think it's more of, are there opportunities to value engineer systems? Yeah, and maybe separate the tech, the cooling water requirements, from the ambient air requirements.
+
+Ryan Hankins  1:29:58
+And after here. In all the discussions today, I'm kind of feeling like we're not going to find much in steel. We're not going to find much in concrete, and so if we need to find $10 million it's probably going to come from electrical, mechanical. Is where I'm kind of seeing this come to a head.
+
+Unknown Speaker  1:30:22
+What's the was the cost savings that you found
+
+Ryan Hankins  1:30:26
+on the roof? Thing was the TPO mill, like, a million bucks. That's a good, good savings, yeah? Well, yeah. I mean, like, there's definitely some savings. But like, that's besides for the roof. One, there's some the money is really in the mechanical and electrical. If we're trying to save 10,000,001st trying to save 2 million, 3 million, yeah, I agree. But me P is going to be a big part of that if we need to get
+
+Speaker 16  1:30:59
+to 10 interiors. We will do where we can. You know, I think when we talked
+
+Speaker 17  1:31:06
+last week, particularly once we have a little bit better specifics and from 50% to 100% it's been dealt out as far as specifications and what's in there that there's always opportunity. You know, the ones we had sent, there's a lot of more on the project, besides workspace that we have, and so I know you can reduce that down. Some of that can be supplemented with printer, and some is just because it's in the filling the whole niche, and isn't necessarily automatically required. So that was one of them. There's different things we can do ceilings and what we're already going to do differently with the fire protection. And so as we look at that holistically here in this next week, you know, we always have that. How can we say cost, when and if we have to? And so we're always looking for those trade offs. One of the big ones too was the acoustics that we have at every conference room best practices. And so we can either cut that in half, or that can be a day two, day three, item that can be added as needs. It how much drywall, how tall some our walls are, where we have about that. There's a lot of ways in which we can do that. Those are some of the bigger to our DC point there, where we can really see savings switching out of tile here and there. It's very incremental, but obviously something that we haven't gone over the top on these finishes, but when there's an opportunity, we can continue to look for that. So understanding the target area also helps us, then where to focus that even in the lighting package, you know, oftentimes it's a selection for how the light which is functioning. And as several of you in the room know, there's different packages, different vendors, different ways you can work through that. So I'm feeling pretty good. We have this conversation, and then Dominic and some of the team were set to actually talk before things kick off tomorrow out there to go through some of that fire protection so we can look at it holistically and where we can help modify the design. Ensures better steps forward fire protection, but still maintains the level of workplace.
+
+Speaker 1  1:33:47
+Is there anything, Jen, because i Tomorrow we'll talk more more. Thank you for bringing all that up, and tomorrow we talk more fully about the value engineering items. But is there anything I know that you and Kristin have been working with Pacific fusion to get answers that you need in order to but for you all, is there anything that's like critical path for you getting the design completed? Or are you
+
+Speaker 17  1:34:12
+seriously, it's it's what dollar rain for? Honestly, that's the beauty about being in the admin work like side of it, we can also make stated assumptions, and that's getting us to the end workplace we know it's more dependent on it,
+
+Speaker 1  1:34:31
+okay, that's helpful, yeah, once you know what the target is, and you can kind of modify the
+
+Unknown Speaker  1:34:38
+design the Target dollar per square foot,
+
+Speaker 1  1:34:40
+yeah, is that? Is it like a Target dollar per square foot, or finish level, or what's the what's the matter?
+
+Speaker 17  1:34:49
+It's more about the dollar value we're trying to say, and
+
+Speaker 1  1:34:54
+carriers, we can make better decisions on where you are now based on the price that's been put together. Is there a. Anybody that's,
+
+Conor Tighe  1:35:04
+yeah, maybe, I think that's the best way that we look at it is we look at what was the amount that we included for a TI expense? Yeah, I,
+
+Speaker 1  1:35:14
+I based on the drawings. Yeah, it's probably that.
+
+Speaker 6  1:35:22
+Steve memories that will help you guys,
+
+Conor Tighe  1:35:27
+it gives us a good idea. I mean, let's say this the best way I can so in this sort of segment, interiors doesn't typically kill budget. What it does, what it can do is it can get out of hand more from a selection process to where there's not, like a clear, you know, person that is in charge of it, on the owner side, can't get through selections because people are thinking it's it, or they think it's like their home, and they struggle.
+
+Ryan Hankins  1:36:08
+You want to run a trip to pick up the tile? Yeah, it's been pretty good.
+
+Speaker 8  1:36:15
+Did I tell you about the 15 times somebody went to Italy to pick out stone? It happened
+
+Unknown Speaker  1:36:29
+first stone selection.
+
+Unknown Speaker  1:36:35
+It was a hedge fund. Yes, it was funny to help
+
+Speaker 1  1:36:40
+them with a stone selection in Italy. I feel like I would volunteer myself.
+
+Conor Tighe  1:36:47
+I mean, when, when the construction manager staff says that they're tired of going to Italy for stone selection, that you have broken people.
+
+Speaker 8  1:36:57
+So I guess, I guess, like, we'll be able to give you, like an exhaust per square foot
+
+Unknown Speaker  1:37:04
+kind of walk through all your assumptions during interiors, it's during 50%
+
+Conor Tighe  1:37:13
+it's based off of a high level. This is what we would see in this
+
+Speaker 1  1:37:17
+got it probably will be helpful, maybe at some point, Jen and Kristen show what the assumptions are to see how that aligns with what you're what the cost that you
+
+Ryan Hankins  1:37:29
+all I mean, to her point, it could be as simple as like, hey, we have 175 bucks a foot, and we want to go to 150 or we're at 200 we want to go to 175 25 bucks times x, and then do a design two budget, almost, and we can help with the iterations of that design process.
+
+Unknown Speaker  1:37:54
+Okay, cool. Thank you, Jen, sorry. I didn't mean that you had to go away, but I just
+
+Speaker 1  1:38:08
+sorry. Thank you. If you have anything else, please share. But if not, thank you so much. I appreciate it, and we'll, we'll keep on talking tomorrow and in the future, I wanted to just ask Casey, I'm not to put you on the spot, but I know there had been a question earlier about waterproofing the sub grade areas, and I don't know if that's maybe something that we can just kind of talk through with our building envelope consultant to see. What if you have a thought already, and if you don't, there's no pressure from Casey. Sure.
+
+Speaker 18  1:38:42
+Yeah, our recommendation was to potentially waterproof just the trench area. But considering that is pretty far interior to the building, the only water that area might be seen is, you know, perched water sounds like ground water is pretty far below concerned about any sort of hydrostatic condition for the ground water. We were just kind of marking up the specs now looking at something like, you know, pre proof 250 as kind of a
+
+Unknown Speaker  1:39:17
+benchmark for waterproofing of that, but we potentially go even lower than that, depending on costs.
+
+Unknown Speaker  1:39:26
+And that's just to you know, it may be difficult to get in there to repair anything.
+
+Ryan Hankins  1:39:37
+So for the tunnels and stuff we're not doing any, or for the trench, for utility trench, yes, but for for the pit and stuff like, we're not doing anything. We're just maybe using drainage board as we're back filling or something like that.
+
+Speaker 1  1:39:52
+Or, yeah, two minds of it. But I guess that's maybe more where we're headed. Or. Thinking in our in our direction. So what do you basically mean depends on them.
+
+Conor Tighe  1:40:08
+I mean, if you're utilizing a process that potentially cause a leak to demand water, you better waterproof it. Yeah, like, and I would be conservative here. I would too. I tend to agree with that, because that's the type of stuff where your name shows up in papers.
+
+Unknown Speaker  1:40:32
+Yeah. I mean, it's also water mixed radiological material.
+
+Speaker 15  1:40:41
+I think that's the point, yeah, like, better things, like,
+
+Conor Tighe  1:40:48
+it's, I mean, there's a cost associated to
+
+Ryan Hankins  1:40:50
+it, but it's like an insurance,
+
+Unknown Speaker  1:40:53
+yeah, see issue, if you have a problem, huge, yeah, you just,
+
+Speaker 1  1:41:00
+you just do it. I think it's a wise decision as well. I wouldn't type in that direction. I don't know what the interplay is between having a coating on the interior of all of the pits and trenches versus waterproofing and how that affects the concrete. But yes, we just work that through with the detailing.
+
+Unknown Speaker  1:41:20
+Yeah. I mean, I mean, we can, do, you know
+
+Ryan Hankins  1:41:22
+that, how we detail stamping heads?
+
+Conor Tighe  1:41:26
+I could ask somebody. And because
+
+Ryan Hankins  1:41:29
+I'm wondering, like, how that I'm not saying it's similar, but it's,
+
+Conor Tighe  1:41:33
+it's, I mean, I've been in a stamping pit, and it is a dirty, dirty process that I know that they have a protection behind the concrete wall. Like, I don't know if you've ever walked in, I haven't, yeah, so for an auto like, you have the pits right below, and it's just like, greasy and nasty, and it's definitely dirty. And so what he's asking is, like, what's the standard practice there? And I've, I've walked through them and Ben in them, I don't, but you don't know what they did underneath. I don't know, but we're currently in process of design design, so that
+
+Unknown Speaker  1:42:17
+would be interesting.
+
+Ryan Hankins  1:42:18
+Just it's 30, it's like 30 feet deep as well. So they're, they're comparable in size, and they're also a little weird in shape, kind of similar to this. So I think it'd be a good, I'll send a good parallel, yeah. But to his point, like, mean, if we're going to spend all this money on these pits and everything, like, it's small potatoes to spend half a million
+
+Speaker 1  1:42:45
+something, but you can't go back and do it. You can't phase two is not going to be able to carry it later. It's not something fix here.
+
+Unknown Speaker  1:43:10
+Know it's close, it's up. You
+
+Speaker 6  1:43:20
+as on this is either because there's there's external factors, but there's also the internal factors. We're going to be something that is first time we're operating. We're going to be taking things in parts and just the process of doing
+
+Unknown Speaker  1:43:42
+That. That
+
+Unknown Speaker  1:43:45
+we're good, yes, yeah,
+
+Unknown Speaker  1:43:49
+preferences, some of that.
+
+Speaker 15  1:44:07
+Now we cannot now it will cost 300
+
+Unknown Speaker  1:44:20
+Casey. What else do you have?
+
+Speaker 1  1:44:23
+Sorry, Casey, do you have any other thoughts on the building envelope or questions that you have that beyond what our team can answer? That maybe Pacific fusion or the contractor, Clayco?
+
+Unknown Speaker  1:44:36
+I guess the big one which I already mentioned was the rubber thing. What was the potential reduction? There was,
+
+Ryan Hankins  1:44:46
+like a million bucks to go from, I think it's 120 mal to 60 ml, and from a fleece back to a non fleece, back,
+
+Unknown Speaker  1:44:56
+okay, minutes, 60. What I was looking
+
+Speaker 18  1:45:01
+Yeah, our recommendation would be to bump up to a one, not necessarily 120 Mills back, but only if the roof was seeing a lot of activity. I don't really know what sort of like rooftop equipment is going to be up there. They're up there doing very regular maintenance on equipment. Then there's gonna be a lot more foot traffic, a lot more risk for punctures in the future that may no one notice, but you know, if it's just rooftop equipment that's there with periodic maintenance, then drop in pounds, not too big of a concern.
+
+Ryan Hankins  1:45:42
+So as far as we're concerned, I think that's just a client decision on if they mean what they're open to from a risk standpoint, the maintainability or upfront capex, but we understand that the better product is the thicker system.
+
+Unknown Speaker  1:46:07
+120, versus 80.
+
+Speaker 1  1:46:08
+Well, there's 60, and Casey is saying he would recommend 80.
+
+Ryan Hankins  1:46:13
+So maybe it's the reduction is maybe a little bit less, but yeah,
+
+Speaker 18  1:46:21
+yeah, 8090, is the next bump up from 60, and then you know, holding up from that. You could add the fleece back to an 80 or 90 membrane, and that just improves function, resistance. We've been
+
+Speaker 5  1:46:37
+using 83 spec out there on larger projects. But larger projects.
+
+Unknown Speaker  1:46:45
+Maybe it's a sweet
+
+Unknown Speaker  1:46:48
+spot in the middle awesome, anything else Casey, I guess, kind of to
+
+Speaker 18  1:46:54
+add to that, you know, depending on, you know, how risky things are, drop down a little bit in terms of membrane thickness and durability, but add in something electronic detection, with conductive grid that could be used in the future to check for weeks if there was a concern weeks Faster. That might be a happy meeting. And that's
+
+Unknown Speaker  1:47:24
+all I have for now. The other was kind of the entrance. No, it's more of a kind of constructability thing.
+
+Speaker 18  1:47:32
+Looking at this the size of that entrance storefront curtain wall supporting the canopy and the precast above it, making sure that all structurally works out.
+
+Speaker 3  1:47:49
+Yeah, I think the industry needs to be looked at more detail for constructability. Constructability more cost effective outcome? Yeah? So, yeah, we're definitely open to reevaluating an entry, yeah.
+
+Speaker 18  1:48:09
+I mean, I know, you know, the lighting there is gonna be great for very large opening, but that's gonna be pretty expensive, you know, a large extent of most likely curtain wall for the size of it, not just storefront, so potentially switching to, you know, a shorter section of veterans storefront, and then the addition of, you know, a few larger openings up higher, to improve a lighting that stays in the cross and Reduce kind of need for secondary structural support there to hang precast entrance
+
+Speaker 5  1:48:46
+and, yeah, I think we need to find figure out a way to just work through the approval process, just make sure that we're not rocking
+
+Speaker 1  1:48:59
+your boat, because there is for these minor Well, I think if we're making minor revisions or changes to the elevations, and they're within that 10% I mean, I think that's the benefit of what we did, are completely redoing the site plan process that now we have that full 10% change that we can just get incorporated in. So if we're having these minor changes that we just need to make sure we're getting it documented correctly so that it's within the approved.
+
+Speaker 5  1:49:26
+To compare the skylights, we probably get more bang for the buck if we redesign it from entryway, produce the overheads suggesting curtain wall to do store fronts to make it smaller, might still work and still
+
+Unknown Speaker  1:49:43
+work and still follow, easy to construct, and I guess my question, since
+
+Speaker 3  1:49:56
+we've produced these initial renderings, i. Yeah, or PEP, is there a requirement from if a certain level of prominence that we have to balance? I mean, I don't want to find the right balance and not completely strip away the original intent if it looks too different from what was initially shown. Differ. Defer to Cory on that, since that was just that we shared, yeah, I would say we want to do it's going to be a conversation with the city.
+
+Unknown Speaker  1:50:29
+I'm okay, really relinquishing some of the prominence or esthetics in the name of
+
+Unknown Speaker  1:50:42
+cost. You just need to figure out what's
+
+Speaker 1  1:50:49
+that tipping point? Yeah, so you're saying that it's not as much like what the leadership and or investors are expecting, as much as it is the process with the city,
+
+Unknown Speaker  1:51:01
+yeah, I think there's flexibility.
+
+Speaker 3  1:51:06
+Yeah. Is there also any way that Clayco could help us with, like, if we provided an exhibit to help determine, like, the potential cost savings of that redesign, just to find out if the Jesus weren't the squeeze. Yeah, yeah.
+
+Speaker 5  1:51:25
+I think Tom all we can do is, like, in house, do a couple of sketch iterations and just broadly and say, Hey, what's what are you getting out of this? Sounds good. Yeah, good idea.
+
+Speaker 1  1:51:40
+Okay. Well, thank you all. I don't know if anyone else has these items that are critical to get design inputs on from Clayco or Pacific fusion, or if you want to move on to the next item on your list, list, I think we've kind of gone through a lot of the disciplines.
+
+Unknown Speaker  1:52:00
+For Alicia, we covered every everybody on the call.
+
+Ryan Hankins  1:52:07
+Yeah, thank you all. Thank you guys. Did we
+
+Ryan Hankins  1:52:20
+review all the risks? Let's go through the risks. I'm gonna go ahead and pull up my
+
+Ryan Hankins  1:52:37
+assuming I'm still in the meeting, Looks like I am so
+
+Ryan Hankins  1:52:58
+it okay. So we looked at the risks two fold, for some reason. My Oh, wait, there we go. One from a corn shell standpoint, one from a process standpoint that affects corn shell. What we'd like to do since, like now, we're keeping track of risks. We'd love to have everybody be putting all of their inputs into this, so not only the design team, but Pacific fusion as well, just making sure that we're tracking everything, and collectively as a team, we're going through this, maybe not on a weekly basis, but you know, it's something that's top of mind, and we're closing these things out for the project as design and construction moves along. So we've gone through mill order. I won't hit on that again. We know long lead. We won't hit on that again. Design progression. Basically we were just saying that corn shell design advancing rapidly while process side still has some questions. I think we've talked through a lot of those things today. I think we know like schedule is paramount and that's super important, but obviously there's risk for change and whatnot down the line, and we'll just have to manage that as we go through it. Interface, risk. This is something Nick, I'd love to spend some time with you tomorrow on before we leave, just to talk through like a differentiation matrix that I have, and I'd like to start passing it back and forth and getting Jeremy's input and just making sure that we're staying aligned, the more detail we can add to that, the better, especially as we send so to your point, Courtney, about sending this package out to the to the city, there's also a component where the the market's going to see this, and where scope differentials aren't clear, and the. Design documents, they're going to be confused about what's in their scope and what's not in their scope. And so I think having the differential is important, but also making sure that the documents are clear on what's in our scope versus what's not in our scope. There's a lot of ways to do that, whether it's a matrix, whether it's you know, graying things out, whether it's, you know, there's million ways we can do it, but graying out, I mean, if it's gonna stay in the drawings, then gray out in your scope, yeah, and
+
+Speaker 5  1:55:37
+sorry, example is that offsite roads and stuff like that that was going that, yes, so
+
+Conor Tighe  1:55:46
+that it's not otherwise people start pricing it and you buy it twice, yeah, and they don't always tell us that,
+
+Ryan Hankins  1:55:57
+yeah, actually, yeah. Somebody has a great Christmas, yeah,
+
+Speaker 5  1:56:04
+yes, but it's also showing up on us, and we just need to play that.
+
+Speaker 1  1:56:10
+Yeah, we can do that. I think I do have a question about the landscape that's part of the that's outside of the boundary of our property line. It is that this is a small thing, but just come up great example, yeah, there is some piece of the landscaping, like the trees that we're required to have that are outside of the property line. And does that go in the off site package? Or does that like we need to or is that going it's on our landscaping plan, and I would say that would be just in our project and in your scope of work, but it just needs to get quoted, yeah? So okay, that's what we're assuming right now, because it's in our same it's easier for us to not have to break it out, because that was part of our original assumption. But we just wanted to make sure, yeah. And I
+
+Speaker 6  1:56:53
+think if it's that makes sense, you know, with the One A, B, C packages, we're not gonna
+
+Unknown Speaker  1:56:57
+have 1b anymore, but D is C, anything that's not
+
+Speaker 6  1:57:06
+that will be part of Phase Two just gets grayed out. Generally installed, owner furnish, owner installer.
+
+Speaker 4  1:57:19
+About catching that like the downside tanks is a perfect example.
+
+Speaker 3  1:57:22
+The outside tanks, housekeeping pads, site work either we dashed property. We call them as future phase. We're showing it dashed in the plans for this good outside, the property line.
+
+Speaker 5  1:57:44
+I think we're going to do it ourselves. If you what we should start doing is, if we're doing draft sets in house, we maybe will send it to you as well.
+
+Ryan Hankins  1:57:55
+Like, yeah, that's perfect. Another great example is, like, we know that there's capacitors, and we know that those are owner furnished. But the feeder that goes from the distribution board to the capacitor, like, is that grayed out, or is that part of our scope, downstream of that, is not right? And so we'll maybe, I don't know. There's ways we probably just need to make sure it's clear. So when someone's looking at it, they go, oh yeah, this is did our scope, and this is out of our
+
+Ryan Hankins  1:58:28
+skills. So we're making we're
+
+Unknown Speaker  1:58:34
+doing everything electronically, so color drawings are good.
+
+Ryan Hankins  1:58:42
+Marc, market labor capacity. So this just feeds into what we were talking about earlier. But like we just we need to secure a lot of this labor quickly in order to keep up with all the surrounding large projects going on. Bearing capacity of subsurface. I think we're an alignment here. We're getting the vibration report completed. We're getting the settlement criteria defined appropriately, and we've decided on Geo Pierce. So I'll make sure I update that and
+
+Speaker 5  1:59:20
+vibration. Can we do it across the board? Cory like, hey, as of this point, we'll go to the higher vibration criteria, and we'll call it really vibration. And those was to give you guys
+
+Unknown Speaker  1:59:30
+something with Trump going on.
+
+Speaker 4  1:59:39
+Last Malmo, fact checking and maybe we
+
+Unknown Speaker  1:59:46
+have is adequate, but not waiting this year. Design. Tend to correct them, but just kind of
+
+Speaker 7  2:00:04
+other forms of communications. And it's not has it kind of been picked up by a CW, in some cases,
+
+Unknown Speaker  2:00:15
+muddling with the waters, yeah, correction. They had called the cmdosterium as having a vibration,
+
+Speaker 1  2:00:24
+but just in an email, I think it would be helpful to get all sketch updated. There was also the
+
+Unknown Speaker  2:00:30
+we have incorrect call out. I think
+
+Speaker 1  2:00:44
+smooth. It gets like, just because we do get the inputs there, sometimes it's just it's muddled and it's hard to keep track of them. When we don't have it's like, we look back at that, and if somebody doesn't, wasn't in the meeting, or looks back, they're not
+
+Speaker 4  2:00:59
+going to happen.
+
+Speaker 7  2:01:02
+I yeah, I've communicated, well, I've communicated to Jordan, kind of the need to revise that brand idea that they provided before, just so that it's print to us. And it's all in that
+
+Unknown Speaker  2:01:22
+scare. So we should just
+
+Speaker 1  2:01:25
+get SMW to update. SM and W did update their report based on the removal of the vibration criteria in the CM dos room. This that you're saying about the IMG modules I'm not aware of, and I don't know that they're I know. I made sure they were aware.
+
+Speaker 1  2:01:48
+Okay, it was clarified in email. The question is, Frank, are you okay? We allow SM, w8, to the seven.
+
+Unknown Speaker  2:02:00
+Okay, we allow SM W to wait to the 17th to make that change. Or do
+
+Unknown Speaker  2:02:07
+you want to see we're going
+
+Unknown Speaker  2:02:09
+to have something after 20? Do we need to
+
+Speaker 7  2:02:17
+see another memo? Memorial? Just you? One of those things.
+
+Ryan Hankins  2:02:36
+Some of these are now we're getting into the process level, but just as we figure out the sequencing of how we're turning things over lethal hazards during installed near energized di tanks containment, we still it Sounds like it sounds like we have our containment situation kind of figured out now, based on Jeremy's discussion, it's manually pumped if there's an issue and it's going to in the trenches are going to be sloped to some pits we'll Call it. Do we have that water
+
+Speaker 4  2:03:19
+containment? She has, to memorialize it, create a memo. This is something that will happen our back pocket.
+
+Speaker 1  2:03:32
+They're running it down. And I think they do want to just have the conversation. They're running it down with Justin Hughes. They want to have a conversation with City of Albuquerque, just to, like, double check, and if just get the minimum. But yes, they are
+
+Unknown Speaker  2:03:48
+just because
+
+Ryan Hankins  2:03:50
+they're so gallon Well, yeah, I don't necessarily know how we were talking about that. I don't know how you're going to contain that.
+
+Speaker 1  2:03:57
+But, well, we're hopefully not going to have to, okay, that the what we think is we won't have to. We're having a hard time locating the code that says yay or nay. So I think there's they have some questions, and Hughes has some questions. We just want to make sure we're getting the final input from city of dollars
+
+Ryan Hankins  2:04:16
+that that's perfect. I'm glad you guys are all over that one,
+
+Ryan Hankins  2:04:26
+basically just that the demonstration system generates intense electromagnetic pulses that can fry in shielded controls, electronics, diagnostic components. I know you guys are all over this, but it's just something just for us to monitor more of the same, rupturing em barriers. It sounds like that's not really part of our scope. Is kind of what it sounds like, because it sounds like the grounding grid is taking care of most of that, and then phase two is going to put the EM barrier on the exterior walls. So I think from our standpoint, you guys don't really need much more from us, except for the grounding. Okay, that's perfect, yeah.
+
+Ryan Hankins  2:05:17
+The grounding is basically, yeah, there is part of phase two. They're going to put up something on the empty or size.
+
+Unknown Speaker  2:05:28
+They're creating what that means for
+
+Speaker 10  2:05:42
+like, door. For like door frames, doors themselves,
+
+Unknown Speaker  2:05:47
+carrying all that
+
+Speaker 10  2:05:48
+information and shielding What are your thoughts on doors and openings that don't have any Are we just relying on the material
+
+Unknown Speaker  2:05:59
+of the door itself?
+
+Unknown Speaker  2:06:04
+Back and forth on this early
+
+Unknown Speaker  2:06:07
+to try and see what we want to do and soon, probably need meta boards with the end baskets.
+
+Speaker 19  2:06:20
+We like, we need some kind of organization. The architects
+
+Speaker 4  2:06:26
+understand there's going to be an EMI detail that we do need to incorporate into the frame of all the doors that we use, and we just need to help you guys develop that.
+
+Unknown Speaker  2:06:42
+So guys develop what's in the plans now.
+
+Unknown Speaker  2:06:54
+Tom, yeah, regular Hall, metal doors, right. Oh, you're muted. Do?
+
+Speaker 3  2:07:04
+The next it's all metal doors in the lab area. But then we also have some sliding aluminum frame doors.
+
+Speaker 5  2:07:15
+We'll just have to come to coordinate the specs and make sure that we're following the shading requirements on the doors in the audience.
+
+Speaker 3  2:07:30
+So we need to, yeah, all the all the doors between R and D and the lab area are Hallo metal, or they're rolling quick. What
+
+Speaker 1  2:07:44
+about the role you play? We knew, so we're going okay, and this will be, we're going to be developing this detail. It's not like EPS Lind grant is providing us some information.
+
+Speaker 12  2:07:57
+Provide us some guidance. I don't know they have.
+
+Unknown Speaker  2:08:02
+But
+
+Speaker 1  2:08:05
+you you will help define what's required so that we can and you will be able to review the details and see if it is meeting the requirements, even
+
+Speaker 8  2:08:17
+if you have to sort of where they open like this.
+
+Ryan Hankins  2:08:26
+That's why I don't like those doors. I don't know how we're going to do it.
+
+Speaker 1  2:08:33
+I worked on a very small lab that was an x ray lab, and so I can imagine what the shielding might need to look like for doors. Just face to that situation.
+
+Speaker 17  2:08:44
+Yeah, we've done a couple of these heavy duty like satellite Bill spaces and then also for the government of the EOP shielding. So I know we have a full detail and experts that can help us navigate, okay,
+
+Unknown Speaker  2:09:05
+on a 40 foot door by 40 foot door, there's some big, interesting things that we've done that I think we can solve this.
+
+Speaker 1  2:09:17
+Thank you, Jen, that's that's how we'll pull in some of our internal resources to help develop That's great. Yeah, okay.
+
+Ryan Hankins  2:09:42
+So safe shutdown design changes. Sounds like Jeremy's got that all figured out, as far as like the hazardous and any potential issues that could happen.
+
+Conor Tighe  2:09:58
+This just goes. Down to the generator and your shutdown sequence in a lot of ways, like it sounds like we're page stand text, just gonna sort of size it, and then hopefully we work. You know, whatever size on the generator sort of works. I would say maybe as,
+
+Speaker 12  2:10:24
+yeah, yeah, yeah, I still love Susie,
+
+Conor Tighe  2:10:29
+yeah, because it's the generators are going to just be along. You know, there's possibilities to chain them together if we needed to, you know, versus one large, yeah, and it's not efficient,
+
+Conor Tighe  2:10:56
+yeah, I think, I think the ideal solution is that You just hit the generator size that you need, and we get one generator, assuming that we also avoid the generator sizes that are used in mission critical, which are the ones that are like 60 to 72 weeks. Yeah, I don't, I don't think we're in that bucket. But the worst case, we just make sure that we have enough page Stan tech, make sure that there's enough room right next to it. In the case that there needs to be a secondary
+
+Conor Tighe  2:11:36
+agenda, I would just say, do your your best at the calculation. If it's off,
+
+Speaker 10  2:11:44
+is there, like a size threshold that pushes us into that, like mission critical space,
+
+Conor Tighe  2:11:52
+there is, let me check what the Met 48 megawatt standard is, because there it's moved all over the place because the hyperscalers are now just trying to figure out how to avoid each other.
+
+Ryan Hankins  2:12:06
+Yeah, used to be like, 1.25 generators per building.
+
+Conor Tighe  2:12:13
+Yeah? So that it's been all over the freaking place.
+
+Unknown Speaker  2:12:20
+I can, I can get a list.
+
+Ryan Hankins  2:12:23
+Yeah, tank tolerance. So did we figure out what the actual tolerance was of that slab? Well, no, I know that's the settlement. But like, the actual, like, plus minus over that, is it? Is it one millimeter?
+
+Unknown Speaker  2:12:49
+It's got to be constructible. Just have
+
+Unknown Speaker  2:12:59
+somebody at the bottom on somebody at
+
+Speaker 1  2:13:10
+the bottom. Oh, okay, okay, yeah, this is it happened before me. So it's been something that's just been a blank in my design decision log. Is like, This already happened, so I don't know it,
+
+Ryan Hankins  2:13:23
+we saw somewhere plus minus one millimeter. So for saying 5035, we are good.
+
+Conor Tighe  2:13:28
+Maybe we find where the plus minus one millimeter? Yeah? Because if a contractor starts looking at that as they're gonna be scared
+
+Ryan Hankins  2:13:35
+and sad, yeah, well, and they're gonna be expensive when they realize
+
+Ryan Hankins  2:13:42
+we talked a lot about like, pre loading, or pre loading, but then also we talked about the crane and how the crane is going to require some pre loading, and so it's not something we necessarily have to figure out today, but I think we need to focus on that over the next 60 to 90 days, like how we're going to do it, and working with you guys. And I mean, there's like, I forget. I think Marc was talking through how he would typically see it where it's loading certain sides and then going to the other side and each column, yeah, so almost like going through, like a pre commissioning type approach.
+
+Speaker 10  2:14:30
+Is that another breakout session you want to have just around loading or, I guess
+
+Unknown Speaker  2:14:34
+it's almost two. We probably
+
+Speaker 10  2:14:37
+need one just with cone cranes, and then another one to see how we're going to reload this lab.
+
+Ryan Hankins  2:14:44
+Yep. Plus, they said that they talked with Conor. You can only install these from above, so that's going to not necessarily screw up our sequencing, but we're going to have to work that in somehow. What's the lead time of the crane? Well, it's. 80 weeks, I think, but I think you guys bought her a while ago.
+
+Unknown Speaker  2:15:12
+That was a great question. How did we put the roof?
+
+Ryan Hankins  2:15:16
+I mean, yeah, now that you said it, I'm like, Yeah, that's the obvious question of when it's gonna get there. Because, yeah, yeah, sorry, is this one of these? We could just make the teachers problem so deliver.
+
+Ryan Hankins  2:15:45
+June, yeah, that's that's the danger zone.
+
+Ryan Hankins  2:15:57
+So Jeremy needs to know that, because he can't install his tank until likely we get that one. Yeah, I think we were talking with Matt saying,
+
+Unknown Speaker  2:16:07
+Hey, listen when you guys installed. We also need to meet our schedule and we mark.
+
+Speaker 4  2:16:22
+Marked up like a little spot, like, hey, if we left on the far south side of the RFP space and we
+
+Unknown Speaker  2:16:30
+dropped it from above, could we you guys are nice conversation we do need to have that they were saying, hey, comfortable.
+
+Ryan Hankins  2:16:53
+Stretches, I know we talked about you guys were asking everybody to go out and get new numbers from the install. After that, hearing that, I think we have to go with Conor on the install, I don't know if it makes sense to do anything else. There's too much risk
+
+Unknown Speaker  2:17:12
+value in having somebody else do it anyway.
+
+Speaker 5  2:17:17
+Yeah, this is almost a conversation with the tank window, Tony guys and you guys to share
+
+Conor Tighe  2:17:25
+that space, yeah, because we'll have the temple roof and for almost nine months, right?
+
+Ryan Hankins  2:17:35
+Maybe not nine, but yeah, close. It's, it's an extended period of time.
+
+Unknown Speaker  2:17:42
+Just talk
+
+Speaker 5  2:17:51
+about, I almost feel like there's value in identifying all the other big vendors, yeah,
+
+Speaker 1  2:18:01
+for advanced take, yeah. A have a sync with all
+
+Unknown Speaker  2:18:06
+of all those parties, make sure,
+
+Speaker 5  2:18:09
+like even from a design standpoint, if there are certain quantum connections, I think we have an equivalent matrix that we're working off of, but
+
+Ryan Hankins  2:18:20
+I'd love for you to take the lead on that, figuring out how crate
+
+Unknown Speaker  2:18:30
+installed. You probably know,
+
+Ryan Hankins  2:18:35
+hey, this one is our subject matter experts. One to take. This is the radiation. Do you want to talk through some of the things that you were talking about?
+
+Conor Tighe  2:18:46
+I mean, we sort of already went through this just overall concern of and I guess it doesn't relate as much to our scope as it is at the end of the day, whatever your has of and how you're using it, but we are sort of conscious of the fact that you may have pathways you ultimately, like, you have design considerations that you have to effectuate due to those pathways.
+
+Speaker 5  2:19:20
+Like, along these lines, there's some language that we've added to our project information scope to to help identify this process of the project. Because, like you, we are not aware of all the things that have happened later on. Yeah. So there's a bit of like, Hey, this is no one's
+
+Conor Tighe  2:19:43
+hands, yeah. And I can just tell you what we would do if we were in your shoes, which is to make sure you have an SME that's looking at overall radiation and thinking about
+
+Speaker 14  2:19:57
+how and I would third party it even. You have this, I would say this, this group is very shielded from
+
+Unknown Speaker  2:20:03
+the kind of the greater cops. What's going to happen,
+
+Unknown Speaker  2:20:04
+simply because we got to fill the
+
+Unknown Speaker  2:20:12
+building as work as possible,
+
+Unknown Speaker  2:20:21
+understanding that was safety officers that licensing at
+
+Unknown Speaker  2:20:30
+the state level. So there is, there's almost a redundant segment facility, really, this team has kind of developed
+
+Conor Tighe  2:20:45
+Yeah, yeah. We get that and we we try to be transparent and not hide anything, but also make sure that if we think that there's like a concern, to raise it, knowing that it's not, ultimately our concern. It's your operation of the facility. And if there's anything that we need to do on our side, you have to let us know. It's it's a it has been an ongoing conversation on how we responsibly
+
+Unknown Speaker  2:21:17
+recognize ourselves.
+
+Conor Tighe  2:21:22
+So yes, I can tell you that there's probably something we'll ask for in contract to make sure that it's very clear that that's not our responsibility. It's just the way it
+
+Ryan Hankins  2:21:40
+is. The next three kind of follow that same line, which is it's just means and methods. DI water system. We just want you to be aware that when you do go hire that out, those tanks are pretty fragile, and we know that they're long lead as well. So just be, you know, we'll, we'll be, we'll be support as you guys are doing that. If you guys have questions, you know, use this as a resource brittle. The ion exchange resins are basically brittle and fragile, and you know that just causes more issues downstream.
+
+Conor Tighe  2:22:12
+Yeah, and these may come off of the ventral log because they're we're not doing process like you can take them for whatever reason that you want them, but if it's, if we're not, because we're not doing the piping, yeah,
+
+Ryan Hankins  2:22:29
+we'll take it off this list. Yeah, it's a risk
+
+Conor Tighe  2:22:30
+for us, though, right? It is. But we're going to tell you that it like, hey, as we sort of looked at what this facility was during the RFP process. This is what we've identified. Well, the ones that I've done in the past all had huge embeds too, that we had to coordinate and install for the tank installer. So I don't know if there's any of that we've got to consider. We have embeds in the internal tank, right? That will happen?
+
+Speaker 1  2:23:02
+In the internal tank, right? That will happen follow working on that anchor acreage for the tank,
+
+Conor Tighe  2:23:14
+like we brought up other ones, yeah, if you have cryogenics in your facility, some of these facilities do, if you do have that, look into OTR, which is oxygen deprivation, sort of something that we do see in those types of facilities as well, responsible for the area
+
+Unknown Speaker  2:23:42
+on assistance, area, so any code requirements that
+
+Conor Tighe  2:23:49
+come with that. So Jensen Hughes is our code consultant on the cryo Johnson facilitation. So I can tell you that Jensen Hughes has just been working on that code requirement. There's, I can offline, make recommendations to you if you need anyone. But that is sort of more specialty. On that sort of side,
+
+Unknown Speaker  2:24:22
+is wanting to but there's also a question, install
+
+Speaker 5  2:24:31
+stuff, because obviously it's something that, yeah, this is a good example from our site. We're getting some of our nuclear folks to look at it from a business standpoint too, yeah, just to make sure that, hey, this is a process, and it's not fully regulated at this point because of the way it is, but we are giving feedback to understand. We. That cryogenics was a good example. This is the first time I'm here in cryogenics.
+
+Conor Tighe  2:25:04
+Yeah. I mean, if you have it in the facilities, it may impact exhaust, because usually you have to exhaust out, particularly if you're using hydrogen exhaust out at the facility in that particular area, which means that you have these like mushroom exhaust fans
+
+Unknown Speaker  2:25:25
+that push out. It all depends on the size and what how much cryogenics you will infect.
+
+Unknown Speaker  2:25:42
+Cryo the
+
+Speaker 5  2:25:49
+cradle with MRIs, it's a good fine point that he's making. Sometimes it's like the requirements from a construction core standpoint, we can bring it up, or even we know what it is, and sometimes we don't know what it is. So it's a it's a really good point that you bring up, and it's difficult to offset every single item with this. So I think it's something that we'll have to work through on the basic phase. And if there is a requirement that gets pushed into this, we need to be nimble enough to push it here, but it requires a little bit of transparency and openness at some point, yeah,
+
+Conor Tighe  2:26:22
+depending on the size of your system, they may also have to design those, those breakers onto the ATS backup system, because you can't have super cooled fluids. All of a sudden, warm up, they expand. So you have to, like, have
+
+Speaker 8  2:26:47
+a warm up process. So it's,
+
+Conor Tighe  2:26:54
+yes, it's those two things, potentially an ODR warning system, which is just a big summer
+
+Unknown Speaker  2:27:03
+equipment list that we see.
+
+Unknown Speaker  2:27:22
+I don't know how to mitigate that risk. Something
+
+Unknown Speaker  2:27:40
+is absolutely good, yeah, something the researcher picked up,
+
+Ryan Hankins  2:27:45
+I think the last thing was, sump Do you want to talk about the sump pump?
+
+Unknown Speaker  2:27:50
+Is this just the waterproof thing and,
+
+Ryan Hankins  2:27:52
+no, this is the one under the target that we have to cast into concrete.
+
+Speaker 8  2:27:58
+Yeah. End of Day. I'm forgetting specifically,
+
+Ryan Hankins  2:28:03
+we basically were worried about if it goes under the tank, like, how does it, how do you replace it? Like, what's the maintenance of this, some pump that goes underneath the tank? Yeah. Like, the waterproofing associated with that as the as, as the as as the pulses happen, like, there's likely some weakening of some joints and whatnot. And I don't know if that falls in our scope, or if it doesn't fall in our scope to, like, build that pit.
+
+Ryan Hankins  2:28:42
+But no, that was the last thing on our list, really, yeah.
+
+Conor Tighe  2:28:45
+The concern was the shaking,
+
+Speaker 14  2:28:48
+the fact that how you access it just don't lift up the tank. We did ask Jeremy this
+
+Speaker 5  2:28:57
+question, because we got this new low criteria recently on the rates down, Frank just asked Jeremy about, hey, about the sloshing around sideways movement. I think we were told that it was not a concern earlier, but Frank's having his own criteria for that from us. Yes, we need that needs to be a part
+
+Unknown Speaker  2:29:21
+of it. That needs to be a part of the decision. It's negligible. That's
+
+Speaker 1  2:29:41
+when it becomes, I'm not sure if I'm the best person to write that whole thing for the design decision log. I think potentially you would be better able to write like, what the what the description is, and then what the response from Jerry. I. Mean, if I say it, it's gonna just sound dumb, which is fine. I'm
+
+Unknown Speaker  2:30:12
+okay. So the sump pump itself is for the ionized water
+
+Ryan Hankins  2:30:15
+at this point you're talking about. It's not for the utility trench. It's for underneath the big tank. Like we looked at that, we looked at that product data of that advanced water tank or whatever, and it showed that there was a sump, like literally right below the tank. And we were questioning whether or not that is doable.
+
+Speaker 8  2:30:35
+Well, it's doable. It's doable. Is it maintainable?
+
+Ryan Hankins  2:30:42
+It's put it. It's kind of like the pipe under the ground, like we can, we can put the pipe in the ground, but if it breaks, like, do anything about it. Yeah. So what we'd ask is that, like we went through our risks, like we're asking as a follow up that both the design team and Pacific fusion let us know what else you want us to add to this list, and we'll keep the kind of master risk, water email or put
+
+Unknown Speaker  2:31:10
+in ACC or something where we can all
+
+Ryan Hankins  2:31:14
+access it. We would be more than happy to put all of our stuff in ACC, so we'll work with you guys?
+
+Speaker 5  2:31:21
+Would you set up a project at your end and we'll have your end ACC or do you want us to set up a folder for you guys? CMAR, put it there, temporary deal. Think about that and
+
+Ryan Hankins  2:31:31
+let us know we are using Procore. Yes, we just switched over. So like I'm trying to I don't know
+
+Unknown Speaker  2:31:41
+we're using Pro core as
+
+Ryan Hankins  2:31:43
+of two weeks, yeah, and so I'm like, so, yeah, let's, do you want us to just, let's try. Let's try ACC for it. Give us a few weeks to get caught up.
+
+Unknown Speaker  2:31:57
+Yeah, I've used, yeah,
+
+Unknown Speaker  2:32:16
+it's pretty it's great from the user side, things get assigned to me. We do them.
+
+Ryan Hankins  2:32:26
+We respond. Do you want us to send a daily email of all your action?
+
+Ryan Hankins  2:32:38
+I'm just kidding. I get those emails, and I'm just like, we
+
+Conor Tighe  2:32:41
+just put everyone's due date. It's like two days.
+
+Unknown Speaker  2:32:52
+GC standard,
+
+Conor Tighe  2:32:58
+yes and no. I can tell you that I've told many a team member don't do it. Prioritizing is important for all. Yeah, everything
+
+Speaker 1  2:33:09
+is due. Yeah, we only have the one brain. Oh, that actually reminds us, if you can
+
+Speaker 5  2:33:17
+do a submittal schedule and all that good stuff so we can get ahead of stuff. Yeah, get ahead of stuff.
+
+Conor Tighe  2:33:26
+Priorities, yeah, just make sure to answer the submittals within seven days. Yeah, no designing on the submittals. Guys,
+
+Unknown Speaker  2:33:42
+there's a special a spec session that talks about it.
+
+Speaker 1  2:33:48
+Yeah, it's gonna be good. We're I feel like we're responsible. I'm very responsive. It's gonna be fine.
+
+Unknown Speaker  2:33:53
+Yeah, we've got to figure out the right cadence so
+
+Speaker 1  2:33:57
+that you're not slammed. Yeah, that's what we get. Getting every single
+
+Unknown Speaker  2:34:03
+one week. We won't do that too
+
+Conor Tighe  2:34:05
+in a way that trust, trust us. We can't do it. If we could, we would have in previous infancies of our careers. But no, it's it's gonna come in
+
+Unknown Speaker  2:34:16
+by your priority is better?
+
+Conor Tighe  2:34:19
+Yeah, we would. We prefer to try to prioritize it on I'm not worried. I think it's gonna be, I mean, what would be good is if we see the submittals lagging, is just to have a Co Location period and just get through them, yeah, with a quick start that may, be necessary for certain structural trades.
+
+Speaker 1  2:34:45
+Yeah, I mean also when they're going to start coming, because if they're coming when we're getting these major deadlines, it might be more challenging
+
+Ryan Hankins  2:34:55
+you get, yeah, like, I'd say you guys are safe until May, at least, because. We need. We're not going to start really procuring until May.
+
+Unknown Speaker  2:35:03
+If you look at between May and June, I wouldn't worry about it.
+
+Ryan Hankins  2:35:14
+We're gonna, yeah, for like, all those long lead packages. We're probably gonna end up just coming over to Albuquerque and just sitting with you for three or four days and just like working through it all with our vendors, and yeah, it would be the easiest way to get it done. Yeah, just make sure everybody understands, and yep, and that we actually have a complete submit all and all that stuff. Yeah, it's
+
+Speaker 10  2:35:35
+gonna be great. So is there any other Do you guys have any risks that you wanted to review, or we'll just wait and populate the risk register. I have some that, yes, we've been tracking. Some of them have been closed out already, but and I'll share those with you. There are
+
+Speaker 1  2:35:55
+items, are things that we've got for Pacific fusion, and they're like on our side, making sure we have all the complete design inputs. And so that's really, I think, what the team flagged today, of the items that they're like, wanting to get clear direction from you all and you on, are what we're tracking. So I think
+
+Unknown Speaker  2:36:15
+that kind of is our items for now,
+
+Unknown Speaker  2:36:17
+we could probably share a diamond in times. Intense is spit out of our risk decision law, yeah,
+
+Ryan Hankins  2:36:29
+I think we have access to it now. Yeah, I don't think I was added to the DD or I have the DD one. I don't know if I have the updated one.
+
+Speaker 1  2:36:40
+Well, it's just a Excel file on the ACC. And I thought that I had added you into
+
+Ryan Hankins  2:36:45
+it, but all you might have, so don't, yeah, you might have.
+
+Speaker 1  2:36:50
+I did. I added Clayco in. So if you don't have it, you guys are all four of you have been added to it. It's just an Excel spreadsheet.
+
+Ryan Hankins  2:37:02
+So, we have a lot of follow ups, like meetings, and what I was tracking was a PNM coordination meeting, and I think that was sometime, maybe next week, next Thursday.
+
+Ryan Hankins  2:37:22
+Okay, is that just you or Chris and me? Yeah, we were talking about a geo pier ground improvement workshop. Are you guys gonna set that up?
+
+Unknown Speaker  2:37:40
+Yes, we are waiting for a date.
+
+Ryan Hankins  2:37:42
+Okay, we talked about a steel foundation vibration breakout next week between Frank Mark and Clayco. So,
+
+Speaker 10  2:38:10
+yeah, I was also tracking a meeting to review off sites, so I'll get that on the calendar. Probably wait until we get the check set from bhi, and then I'll get something on
+
+Unknown Speaker  2:38:22
+the couch in about two weeks. Perfect. I think
+
+Speaker 10  2:38:31
+we should probably have that conversation, yeah, at least, so they can understand today what's in scope and what's not so that's not
+
+Ryan Hankins  2:38:52
+officially okay. So that is for sure. Yeah, an advanced tank, Clayco and Connelly crane meeting, just to talk through all the different things that need to be talked about, I recommended a
+
+Unknown Speaker  2:39:20
+Tuesday breakout
+
+Ryan Hankins  2:39:30
+session. I love it weekly until we don't need it anymore, whenever that is, and then we'll Yeah, I think that's great. A handover TCO sequencing workshop. I think we're waiting on inputs from Jeremy. Once we get that, I think we'll probably set that up, and then the follow up to that is once we understand that it's insurance builder's risk stuff. Stuff that we need to set up after that. Let's see. You guys are probably
+
+Speaker 4  2:40:10
+kind of curious this first GMP is just general conditions,
+
+Speaker 10  2:40:15
+so we should
+
+Speaker 2  2:40:21
+imagine we use them as you?
+
+Speaker 8  2:40:26
+Yeah, we would at least need the GL strategy wrapped up.
+
+Ryan Hankins  2:40:37
+So I mean, I would, I
+
+Conor Tighe  2:40:39
+would tell you, like, let's focus on getting the agreement done, because the agreement does allow for early releases without the GMP. It's still best for us to package eventually to a GMP.
+
+Ryan Hankins  2:40:53
+But based on everything we're talking about today, we don't have, and I'm not saying like, it's not like, we shouldn't get it done quickly, because I think actually, Keith is actually, I think it's on his radar to get it done, based on my conversation with him last week. But given that we're not going to have the next real design package that we can buy off of until May 15, and then taking the actual procurement. Like, I'm not saying it's not on the critical path, because, like, but we need, we need to get this done. But it's not like, if we don't have it done in three weeks, like, we're, we're in trouble. We have a little bit of time just coming out. Was it gonna take
+
+Conor Tighe  2:41:40
+us three to four weeks to turn this GMP year? Yeah, like I would I would tell you, if we need to get MV gear and transformers released, we just do it on an early works package. We get the rest of it sort of wrapped into the GMP, knowing that at least, because GMP process takes 30 to 45 days like it, because you have to then review it, you're reviewing a larger stack,
+
+Ryan Hankins  2:42:12
+you're reviewing all the trade packages, and I
+
+Conor Tighe  2:42:15
+get it like it makes it sort of easier on our side, it's a little more organized. But if we're really, truly running into a lead time issue fair, let's, let's hit, yeah, it would be really great if we understood the kind of contracts,
+
+Unknown Speaker  2:42:30
+GMP strategy,
+
+Unknown Speaker  2:42:36
+overall agreement strategy, release you guys
+
+Unknown Speaker  2:42:38
+to be able to do those early work orders, being
+
+Unknown Speaker  2:42:54
+able to have that conversation,
+
+Conor Tighe  2:43:02
+that'd be great. He's gonna kill me later. The GMP is easier.
+
+Unknown Speaker  2:43:16
+The fact is, I think, yeah, we're fine.
+
+Ryan Hankins  2:43:22
+I want out of this conversation right now. All right, we also need an estimate alignment, meeting with the design team and with Pacific fusion. We can do this over the phone. I don't think it needs to be in person, but what I'd like to do is go through our entire estimate and make sure that we're aligned. And then also talking about what's not included from the 100% DD, and what needs to be tracked, you know, yes. And here's like, Cory, here's like, my biggest thing I've been stressed out about the last like week is that we have $10 million to go find, and there's been these other exposures that have popped up, and I'm freaking out a little bit because I'm like, does that mean now we need to go find 20 million? Because I don't know how realistic that is with the schedule and everything so
+
+Unknown Speaker  2:44:22
+far. Plus deltas coming out of this, just based on the assumptions that were made during
+
+Speaker 10  2:44:30
+during bid, right? So, I mean, I we walked through everything, okay, there's, there's a lot of gray areas that didn't get price, so kind of talk, I think that's one of the
+
+Speaker 4  2:44:41
+first so worship, than 10 million, right? We're just finding a collection. There a separate and independent exercise is understanding
+
+Unknown Speaker  2:44:51
+what was forecasted
+
+Speaker 4  2:44:53
+versus when this popped up that wasn't anticipated. That's a separate exercise, or.
+
+Unknown Speaker  2:45:00
+Events that is keeping them at night as well.
+
+Ryan Hankins  2:45:03
+Okay, I'm glad it's not just me chop
+
+Unknown Speaker  2:45:10
+up the GMP. We want to get comfortable with this team first.
+
+Speaker 10  2:45:18
+Yeah, and there's a lot of things I feel like we're kind of pulling forward that would have been in the phase two that we're doing now in court shell. So if we can kind of clearly identify, I mean, those other items would have been budgeted in the second phase of the project. So now we're just pulling it forward into the first phase and just being able to clearly articulate that the keys that would really help us in understanding why, the price didn't move right? We added 10 million and save 8 million or whatever, basically wash out. So, you know, those are as long as you have kind of that defensible alignment, where we understand where the where
+
+Ryan Hankins  2:45:58
+we took and where we had it, and that's where we want to spend a lot of time with you. Because, like, you know, we're, like, taking this to Tokyo, like, when this thing is when this thing is done. Like, yeah, let's figure out.
+
+Speaker 10  2:46:11
+Last thing we want to do is deliver a product that they can do. I know there's appetite to do things as retrofit, but they're going to cost us three times the amount, if not more, right? So a lot of them need to be done now, and if it makes more sense to do it now, I'd rather have that conversation with Keith than say, why this can cost me $20 million when it would cost you no need to do it in construction, you know. And I'd much rather have that conversation now, you know, two years down the road, certainly, or doing whatever we're doing,
+
+Unknown Speaker  2:46:45
+so you're not chipping out underneath the six foot. Yeah.
+
+Ryan Hankins  2:46:53
+I don't know if you could pay somebody enough to
+
+Ryan Hankins  2:47:01
+eight inch. Eight inches, yeah, you can at least saw cut a six foot. Okay, we're feeling a lot better after today.
+
+Unknown Speaker  2:47:18
+Yeah, this is great. You guys. The alignment would be the thing that's keeping me up at night.
+
+Unknown Speaker  2:47:24
+Let's definitely get that. I think
+
+Unknown Speaker  2:47:30
+that should
+
+Unknown Speaker  2:47:35
+be probably a thoughtful conversation.
+
+Ryan Hankins  2:47:38
+Yes, definitely, could definitely say, I think, I think the right way to do it is by discipline. And maybe we do like, you know, like, like civil, and then we do, we do one, like, one hour session for civil, an hour session for for concrete, an hour session for structural. And then MEP could probably be 142
+
+Ryan Hankins  2:48:09
+hours, unless we want
+
+Conor Tighe  2:48:10
+to give it. I would split it up by disciplines. Otherwise you have people, yeah, charging you. We do have our structural and
+
+Unknown Speaker  2:48:21
+our MEP.
+
+Ryan Hankins  2:48:22
+For themselves. We probably need that for production, though. I think we probably need to keep that because, like, you know, they're trying to get a set done, and so we're kind of stealing their time for this. But I think it should be
+
+Speaker 1  2:48:44
+probably figure out the time. It's yeah, it makes it. I mean, I think I agree with you, and there's a lot of meetings in our week that are currently happening, so I think we got to do it. That was my question.
+
+Ryan Hankins  2:49:02
+I would be happy to do that.
+
+Speaker 5  2:49:04
+Yeah, I think as a process, what you guys are going to do is that you have an estimate based on the 50% set. You got to consolidate that with 100% set that separate line items. Then you're going to have your big ticket items that you really want to speak about. Yep, some of the things that it's brecycle package, and if it really doesn't move the needle. We don't want to wait. No, yeah, totally.
+
+Ryan Hankins  2:49:28
+Like you want it, yeah, absolutely. I think we need to get, we need to get the feedback from her team first on the 100% set next week, and then we can probably set up for later, next week.
+
+Speaker 5  2:49:42
+I think even after the 100% set, is that 80% paint and all that stuff. So there's, there's a bit of work to be done, and we'll help you out as best as
+
+Ryan Hankins  2:49:51
+we can. Yeah, absolutely. The idea is that we all put together a budget that is representative of where the design is going. It, and the better we can do that, the better off we can deliver a confident message to Keith, just
+
+Speaker 1  2:50:10
+really quick. This is, I mean, not to break up the moment with this conversation, but you said that there needs to be a vibration conversation with burn Tom city. I think we're meeting that you said, and I'm gonna set it up, but I just want to make sure I'm putting this correctly. I had a different idea that there needed to be a meeting with cone frames. I wrote some meeting
+
+Speaker 10  2:50:32
+with echo for seismic and vibration to review, like the video loading criteria,
+
+Conor Tighe  2:50:41
+it's, it's sort of a general issue, right? Because vibration obviously affects your frame. Vibration typically impacts our hangers, right? There's all sorts of things that sort of go on with vibration. And I think the concern is your process is essentially a little mini Boom, baby boom. So it's just trying to, like, get our arms around the vibration criteria we see, as you know, impacting how we sort of view hangers, how we sort of use parts of the structure then impact your parts of the structure as well. So the
+
+Speaker 11  2:51:26
+way we're adding that information on it is not super transparent. We do
+
+Unknown Speaker  2:51:30
+have engineers here that are simulating that, analyzing
+
+Unknown Speaker  2:51:37
+it, and converting that into force vectors. How been there
+
+Unknown Speaker  2:51:50
+assumptions, so we're basically communicating
+
+Speaker 11  2:51:58
+for that data for them, but was a so
+
+Conor Tighe  2:52:13
+I think, Well, the reason we bring it up is sometimes on the mechanical piping, In particular, the seismic hang or design is delegated to the contractor. So I don't know what you did in your spec, but,
+
+Unknown Speaker  2:52:30
+yeah, they're not, they're not. So is that, that's what
+
+Conor Tighe  2:52:34
+you're saying, it's part of it. So it's, it's, it's in, you know, as contractors, we don't totally avoid the implications of structure and seismic and it's sort of constructability, sort of element that sometimes touches it to what we do, things like differential settlement of slabs. We just, we just get implicated all over the place. And so rather than just, like, hide behind the Hey or not the design team, we sort of address it.
+
+Speaker 8  2:53:19
+Yeah, I mean, we have a entire team that, like looks
+
+Unknown Speaker  2:53:24
+at their design, provides comments, no
+
+Unknown Speaker  2:53:26
+offense, yes, I'm not gonna set up that
+
+Unknown Speaker  2:53:31
+meeting immediately.
+
+Conor Tighe  2:53:34
+I would say, not yet. It sounds like maybe we collectively get on the same page of what's actually coming out of the
+
+Speaker 1  2:53:42
+process, and we're getting the vibration study will be provided April 17. It's not CC, that's that's
+
+Conor Tighe  2:53:51
+the thing like the vibration study by a third party without actually using the implications of the processes.
+
+Unknown Speaker  2:54:02
+It actually may be a distraction.
+
+Speaker 1  2:54:06
+Yeah, so it sounds like I'm not if I'm setting it up, I want to make sure I understand what I'm setting up. And if I'm not, then I'm not doing it right now. We're going to hold on switch.
+
+Unknown Speaker  2:54:23
+Because structural tip foundation you need to give us.
+
+Unknown Speaker  2:54:34
+Like, yeah, let's, let's talk about it. Let's do
+
+Unknown Speaker  2:54:42
+that. Then we can set up preliminary meeting.
+
+Speaker 1  2:54:52
+And then after that, we'll decide, sorry, I'm just trying to make sure that I'm not dropping the ball or anything. That's why I'm asking that question. But setting up a meeting. With WGI, Pacific fusion, Clayco, that is on the list, and I do understand that. Oh, Western Western ground improvement,
+
+Speaker 9  2:55:11
+WGI, that's the name of the geo tissue. Okay, yeah, thank you.
+
+Speaker 5  2:55:20
+So we'll set up the structural tilt Foundation, geo care coordination for modern the vibration meeting is coming from PF. The PNM meeting is coming from PF. The Advanced tank, Clayco phoning meeting is coming from PF. That I fire life saving right now that
+
+Speaker 1  2:55:43
+Jens and Hughes Clayco To do a ve workshop for fire life safety. I have that on my list, and I have it on my list to set up the meeting with City of Albuquerque to discuss permitting strategy,
+
+Speaker 5  2:55:59
+a permanent strategy. I mean, I mean, I really
+
+Speaker 1  2:56:04
+want to just have our kick off meeting. You guys are welcome to come, but what you want to do is kind of walk them through where we're at now, with the gray box over the tank, over the tank,
+
+Ryan Hankins  2:56:14
+slash machine. I think you guys are in a good enough path right now for permitting. We're like, we don't want to like. The next, next the next step for us to really provide input is going to be when we get the TCO schedule. And right now we just don't know that. So I don't know if it's going to add a ton. I don't want to talk through and
+
+Speaker 1  2:56:30
+just make sure that we are documenting and have an understanding of how they're going to respond to the things that they're submitting. So, yeah, do you know how they want to do the change?
+
+Unknown Speaker  2:56:38
+Or you know how we want
+
+Unknown Speaker  2:56:45
+to do the i two chain for the city? Oh, 1b. Well, should we just update that sheet at this point?
+
+Speaker 1  2:56:50
+Yeah, we're gonna just have that. I don't, I don't know how we're gonna do it, but
+
+Unknown Speaker  2:56:55
+we're gonna do it. Okay.
+
+Speaker 10  2:57:02
+Good. Okay, good. And I think that's it for, like, new meetings, right? That we need to set up. What about existing meetings that we need to pull these guys into? Are they already included in everything?
+
+Speaker 1  2:57:15
+So that's I want to kind of understand, is, is your guys's goal that we have them included in every meeting, and you come when you want to, don't or what's the, what's
+
+Unknown Speaker  2:57:23
+I was saying more design focus. I don't know where you guys want to draw that line.
+
+Ryan Hankins  2:57:31
+We're signed up for precon. So, yeah, I think, I think, like being half baked isn't always great for when we're trying to build momentum. So,
+
+Unknown Speaker  2:57:49
+yeah, internal meetings will keep
+
+Unknown Speaker  2:57:50
+it, yeah,
+
+Conor Tighe  2:57:52
+we don't need to be a part of your internal design. Cory,
+
+Unknown Speaker  2:58:00
+I'll make sure to include them on
+
+Conor Tighe  2:58:05
+so it's just you four. It's eventually, it'll eventually be a PDX. Well,
+
+Speaker 1  2:58:14
+yeah, I mean, so we need to talk with everybody else, yeah, like Jordan of the structural meeting, and Meyr And yeah, we'll, we'll make sure.
+
+Speaker 10  2:58:27
+And OAC, is that now that we have them, there is, I think it's only 30 or 45 minutes long. Is that enough we need to expand? And is there any other like agenda items that we need to have now,
+
+Ryan Hankins  2:58:45
+yeah, I think, I think from a like, procurement and tracking the contract and like, you know, yeah, I think there's regular things that we're going to be reporting on.
+
+Speaker 10  2:58:57
+Would it be beneficial if you had kind of your own section of the meeting? Yeah, run. Yeah, it's usually an hour. Usually an hour, yeah, what are we at now? Is it only 30
+
+Speaker 1  2:59:09
+it's scheduled for 30 minutes. I think that it's been tight on just so I would be fine. I'm fine with bumping it to an hour.
+
+Conor Tighe  2:59:22
+I mean, a 30 minute OAC is like my journey. What
+
+Speaker 5  2:59:36
+we've typically seen is like, as the contractors come over to CMAR process, they start opening the way we they start owning the way. It's up to you. Give
+
+Ryan Hankins  2:59:50
+us, give us a little while, once construction starts, we'll take it over for sure. Let's not bring you guys you know. Your guys momentum.
+
+Unknown Speaker  3:00:04
+Sorry. Are you okay with you changing it to be an hour we can talk?
+
+Speaker 1  3:00:14
+So you guys are gonna get to experience the fun change
+
+Ryan Hankins  3:00:19
+that's right in our calendar. Yeah, two weeks they're changing to stand tech emails.
+
+Unknown Speaker  3:00:25
+Yeah, we'll still get our old emails for three years.
+
+Conor Tighe  3:00:34
+But I used to support a subsidiary, and
+
+Speaker 8  3:00:40
+I remember the Stantec. The Stantec people
+
+Conor Tighe  3:00:53
+always they took over ESD in Chicago. I don't know if you've ever heard Yeah, they were, they're fantastic, and, you know, they're still fantastic. They still do their own stuff, like
+
+Unknown Speaker  3:01:08
+they run their own movie show, yeah?
+
+Conor Tighe  3:01:12
+Conversation, I don't know how they made that happen.
+
+Unknown Speaker  3:01:17
+They bring a lot of revenue, so they can make a lot of stuff happen.
+
+Speaker 8  3:01:21
+Yeah? Okay. I happen. So is Paige.
+
+Unknown Speaker  3:01:25
+You guys, we're hoping,
+
+Speaker 9  3:01:27
+yeah, who did W SP just buy didn't they bite somebody just recently?
+
+Conor Tighe  3:01:37
+It's funny between like Alberta,
+
+Ryan Hankins  3:01:40
+kW, Michigan, kW, Michigan, kW, engineer, yeah, yeah, yeah, which I thought was nuts. That was one of the last big acquisitions.
+
+Ryan Hankins  3:01:58
+We have dinner at five 3005. No, no.
+
+Speaker 1  3:02:11
+Thank you, bye, Jake, thank you guys. It was a
+
+Speaker 15  3:02:15
+productive day. I'll take the glasses. Oh, thank You. Thank you. Bye, you ever
+
+Unknown Speaker  3:02:45
+Facebook.
+
+Speaker 1  3:02:52
+So what are you saying? I should go to let me go. If I couldn't do this to be there, Tom I'll just
+
+
+Transcribed by https://otter.ai

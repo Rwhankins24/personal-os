@@ -1,0 +1,458 @@
+Speaker 1  00:00
+Has met the Pacific fusion team already. Oh, oh, you have Ryan. Okay, well, we'll do a quick, very, very quick introduction once they hop on, or maybe, well, I don't know what's the best thing to do is, let's start now, because then when they come on, they can introduce themselves to you as well. So I'm Rebecca Belle, I'm the project manager for the AE team, and I'm based in Albuquerque. And DOM Do you want to introduce yourself?
+
+Speaker 2  00:30
+Sure, Dominic wood, I'm the project architect with Stan tech. And then not very important is Nitish. He doesn't, he doesn't matter at all. So I'm just here to take all the credit. That's why he's so bummed.
+
+Speaker 3  00:45
+Principal architect at how picky,
+
+Speaker 1  00:50
+okay, Wayne, do you want to introduce yourself?
+
+Speaker 4  00:54
+Yeah. Thanks. Rebecca, hello everybody. Wayne, goal with Meyr Plus engineers. I'm a principal and mechanical and based in San Francisco,
+
+Unknown Speaker  01:03
+okay, Astrid.
+
+Unknown Speaker  01:06
+And I'm Astrid sardines. I'm also mechanical,
+
+Unknown Speaker  01:09
+okay? And then Frank,
+
+Speaker 3  01:14
+I am Frank ball structural engineer with doing Thomas Ed based in San Francisco.
+
+Ryan Hankins  01:19
+Okay, so that was we, Frank. We're really happy to see you're back.
+
+Speaker 1  01:27
+Thanks. He really got hit with it today. We scheduled an 8am meeting for him first Monday back, which seems so rude.
+
+Speaker 3  01:38
+I was getting beat up right before I went on PTO, and I come back, and I'm finding myself continuing to get beat up,
+
+Unknown Speaker  01:45
+but with a great attitude.
+
+Speaker 3  01:50
+I used to do taekwondo in college, and I would just, I was always Rahn, well, no, I was always the smallest person in the sparring ring. So I'm used to getting beat up.
+
+Speaker 1  02:01
+You can take it. You can take a punch. Do you punch people in Taekwondo?
+
+Speaker 3  02:06
+No punch. Mostly kick. Get kicked in the face.
+
+Unknown Speaker  02:11
+Oh, that sounds horrible. That sounds like it prepared you for this career the first four
+
+Speaker 1  02:20
+is I feel like we've made the use of the first four minutes of this meeting. Did you Have a Good Trip? Greg?
+
+Unknown Speaker  03:40
+We are and try to keep up with all the information that's coming across from you.
+
+Unknown Speaker  04:02
+All the information that's coming across from you guys, we're cranking.
+
+Speaker 4  04:09
+I always say this, yes, we're making a dent, but hopefully we're not creating any bubbles.
+
+Speaker 3  04:15
+I'm glad. Yes, either one, no bubbles this point.
+
+Speaker 1  04:22
+Yeah, I'm wondering. I mean, I don't know, because I did not write any helpful notes for myself, but I know there's a lot of mechanical me items. I set up this meeting and yet did not write a helpful note of what we needed to cover. But Astrid, I'm assuming, you
+
+Speaker 5  04:39
+know, yes, yeah, okay. Well, I was expecting to use this time to walk through the markups that I sent through on Friday, just because there are quite a few different mechanical bees, make sure that everything's clear, and just give the Clayco team an opportunity to ask questions or provide feedback on what we're proposing for the bees.
+
+Speaker 1  05:01
+I'm wondering if people are okay with us, because I don't want to miss the opportunity to do it. So can we just get going, and then if Cory and Nick come, then we can catch them up. But I would say,
+
+Speaker 2  05:15
+let's go. Let's do it. Do you want to record it? Does anybody have a problem recording it? Now? It's recorded.
+
+Speaker 1  05:22
+Okay, now you gotta do it. I'll stop with the jokes. Yeah, you don't make any more jokes. Okay, I'm clicking Start Recording. Okey, dokey, now
+
+Ryan Hankins  05:39
+that we've started recording. Now nobody can talk. No, I'm just kidding.
+
+Unknown Speaker  05:45
+Thanks for starting recording.
+
+Speaker 1  05:47
+Yeah, absolutely. So Astrid, I'll hand it over to you. Ben, that would be great.
+
+Speaker 5  05:52
+Great. All right, I'll share my screen again. Here we go. All right, so I'll walk through these the items. Wayne, please feel free to jump in and interrupt me at any point, if you have something to add. Starting off, I just wanted to there were a few minor adjustments to the 100% Ed set and or clarification to the 100% Ed set that I want to make sure get wrapped into any basis of design pricing to make sure that the relative the cost of the VE, whether it's an otter, deduct that relative pricing is accurate. And you know, there's some kind of history here. We were given a lot of clothes for the specific fusion equipment, a lot of clarification for that happened right before 100% DD deadline. And so we were able to update our calculations and update the plant sizing. But there were some downstream things that didn't get picked up, or inconsistencies between, like schedules or diagrams in some cases. And so I just want to clear those up. So it's like, super clear what should be priced as the BoD. And then, yeah, just make sure that the B, E pricing is as accurate as possible, and turn my camera back on. So I'll just walk through those very quickly. And please stop me if there's any questions on this. So one, one of the things I want to be clear about is the number of Air Source Heat Pump banks that we have at the 100% Ed, we do have five of them, as shown in the schedules and the plans. But I think it wasn't picked up on the diagram before the issuance, and that was to reflect, again, all of the latest information that we received from Pacific fusion for their loads. And technically, one of those only needs to be it's only going to be operating in its cooling function. So it doesn't need to be a four pipe unit, and we don't need, like, any kind of change over valves or anything like that at that unit, because our our basis of design cooling load water water cooled cooling load is greater than the heating load. And then, yeah,
+
+Ryan Hankins  08:22
+so sorry. Just just to level set, so the the background of the drawing you're marking up, that's the 100% DD drawing set correct.
+
+Speaker 5  08:31
+Yes, exactly. Actually, let me. Let me take a step back. I i added some page labels to this CD markup, just because it's quite a few pages, I included at the very end 100% drawing for reference. All of the sheets that I've marked up on the set are the 100% DD drawings and what I actually did for because I making some clarifications here on what the 100% DD kind of baseline should be. I'm I've actually, like carried those forward and just grade them out on my DD markup. So I think that that, hopefully that'll be clear when we get there. But you'll it should be really clear, hopefully what the basis of design is, I just want to walk through super quickly. I did want to highlight here that for our air hailing units, whether it's rooftop package units or chilled water hot water units, we are bumping up against the heat recovery requirement for a lot of our spaces, and so that needs to be priced in the baseline, as well as the RTU option and
+
+Unknown Speaker  09:50
+a couple on this one.
+
+Speaker 5  09:54
+Yeah, I actually think it's 2021 iecd. I thought it was 2018 originally, but I reviewed it this morning, and that's 2021 but it's a mandatory requirement for this climate zone, at least it wasn't 2018 so I'll just double check that that still holds in 2021 but I
+
+Speaker 6  10:10
+wouldn't expect it to get slashed. Okay, and before we jump off of this page down the next schedule there shows rooftop unit for the fire pump. Do we really need a roof type unit there? We typically do only heating and ventilation for a fire pump room, unless there's another requirement driving the cooling.
+
+Speaker 5  10:37
+We Well, I mean, we're doing this to because we have that 95 degree design day, and we're trying to keep the room a little bit cooler than that. I mean, would you expect a large I feel like this piece of equipment, if you can do the heating, you can do the cooling, unless you're suggesting a different kind of solution.
+
+Speaker 6  11:10
+Typically it's just a big box warehouse or a fire pump room, or any building we traditionally do not see cooling, provided that's just 10 degrees above ambient, and then a ventilation fan in there.
+
+Speaker 5  11:25
+We can look at that. If you feel like it would be a cost savings. I think if we did the ventilation separate from the heating, we would, I mean, we would still need heating, correct?
+
+Speaker 6  11:38
+Yeah, we got a little bit unit heater in there as well.
+
+Speaker 5  11:40
+But we can normally see like electric resistance unit, heater, yes, okay, okay, we can take a look at that certainly.
+
+Unknown Speaker  11:51
+We can show you the cost difference to make a decision.
+
+Speaker 5  11:59
+Eater, you Okay, make that a different color,
+
+Speaker 5  12:17
+alrighty, okay, and then just picking up some some updates to the pipe sizing, because we did end up upsizing the plant last minute these I noticed that these pipe sizes weren't updated, weren't picked up on the floor plan and the riser. So I'm just indicating that here. Basically our main is 10 inches for just water and eight for hot water with the updated loads. And so I'm reflecting that also on the riser diagram, so that it's clear. And then the other thing that I wanted to just clarify and make sure we're pricing accurately in the BOD is originally we were evaluating two options between doing packaged air source pep versus a modular approach, and we ultimately opt for the modular approach, and that's what we have scheduled at the moment. But our detail, our detail on the Ryor diagram, still reflects the packaged approach. And so I'm just specifying here that in the basis of design at the moment, we have control per module, and that can be simplified, and that's one of the bee items that I'm proposing. But I just want to make sure it's not getting price for DOD.
+
+Ryan Hankins  13:40
+So just to be clear, did we add an air source heat pump?
+
+Speaker 5  13:51
+We have? Okay, so the 100% DD drawings show five air source heat pumps on the schedule and five on the plan. And that is accurate, but it wasn't shown on the diagram, so I'm showing that here for avoidance of all doubt. The other thing that I've shown more accurately, accurately here are the number of modules that we have per bank. Because if you look at our plans, it's not necessarily readily apparent how many modules there are per bank, and our selections at the moment are, it's three per bank. There's 123, and so, you know, in our basis of design, we have a control valve per module to be able stage these on independently
+
+Unknown Speaker  14:44
+we're getting rid of that. Is
+
+Speaker 5  14:54
+that a statement? Yes, yeah, okay, yeah, that's one of the ves that I've marked up so that Clayco can go ahead and price that if you still want to see pricing for it, I suppose
+
+Speaker 5  15:11
+that is, yeah. So we'll move on to the items. Now, if there's no questions on those clarifications, Oh,
+
+Ryan Hankins  15:19
+got you okay, I apologize. Now I get it. So this, everything we've been looking at, has just been updates from the 100% that you're making sure we're capturing. Okay, yeah, yeah.
+
+Speaker 5  15:29
+Again, because we had some, we had some last minute load updates that I admittedly did not get picked up consistently across schedules, plans, diagram, and so I don't want there to be confusion when you go back and do your pricing exercise on On what basis of science got it? Okay, these are things that I noticed as I was preparing the PE markup.
+
+Ryan Hankins  15:54
+Okay, so now just real quick for Ryan and for Tom. Did you guys have any other questions before we move on? Just to make sure you guys are, you guys are following along? Are you guys good with everything that they've that asteroids talked about so far?
+
+Speaker 6  16:12
+I think before we maybe just recap on the mechanical 100% DDS. There is an additional air source, heat pump now than once before, and the capacity of the air handlers, as well as the quantity of air handlers, has increased. Is that accurate?
+
+Speaker 5  16:30
+Yeah, yeah. So apologies, the set that you all have seen is you saw the 50% VD set originally, as well as 100 Yeah. So you're absolutely right from 50% DD, we've added a bank, ARS heat pump. There's a few more air handling units, just because there's certain spaces that want dedicated ventilation. And actually there were, there were some of the units got larger because we got more information on specific fusion equipment, and some of that load is being seen by the system as a load to the ventilation systems that's going into the space that's being picked up directly by the air helium,
+
+Speaker 7  17:13
+five air source heat pumps. Was that included in the schedule for 50% and 100% or, I guess maybe the question is, Ryan, did you guys pick up his five ARS, her sleep bumps on the schedule, although it wasn't showing on the browser diagram,
+
+Ryan Hankins  17:30
+I think what we did, yeah, go ahead and Pick up that fifth one. Okay, okay.
+
+Speaker 5  17:39
+Okay, good. Um, right, let's, let's get into the meat of it all. So we have a few the options that we spoke about last last week or the week prior. It sounds like Pacific fusion feels confident about proceeding with number three here, which is eliminating the fluid cooler system. Let me just repeat them from from top to bottom. So we're looking at potentially replacing all of the air housing units with rooftop units and the probably the cheapest option is to go natural gas RTU that we need to, you know, understand how, how we're getting gas to the site, and just, you know, cross our teeth and dot our eyes and make sure that that there's no constraints
+
+Speaker 7  18:39
+that sometimes we track down in different meetings, it sounds like there's natural gas right off the earth the northern Street, which is into traffic that's right down the street.
+
+Speaker 5  18:53
+Okay, so the other version of this, the item that we would like you all to price for consideration is the heat pump RTU instead of a natural gas RTU, in lieu of the chilled water and hot water air handling units. We requested some example selections from one of our reps for these rooftop units. We'll get to it. But it does seem like, at the sizes that we are looking at for some of the spaces, it bumps us into like a custom RTU back for a few spaces. So that is kind of a con for this option. And then. And I just want to note here that there are some interactive effects between the options One and two and three, because they all impact the size of the plant. So I've, I've kind of created another ve option to show the overall impact if you elect to do both of those. And then the last three here are a bit more straightforward. Four is making the secondary loop, glycol water mix same as the primary loop, and that enables you to remove the heat exchangers on the chill water system and hot water system. And then we the last to the items are really impact, I think control, controls costs, and maybe some piping costs. So I think there's a little bit that we can do there just to simplify and reduce costs at the at the plant, at the air source, Pep plan. I created this, this matrix that we can, you know, go through very quickly if, if people find it confusing and not helpful. This is how my brain works, and I'm just aware that some of these de items have interactive effects with one another. So what I've done is provide a markup for all of the bees relative to the 100% DD, basis of design, the natural grass RT use and the heat pump RTS are going identical, with the exception of the actual equipment spec. And then I've also gone ahead and just done a markup for a scenario where you elect to do the RT use and the fluid cooler together, because, again, that has an interactive impact on the overall size of the plant. And it felt like it might be likely that we were going in that direction. So I wanted to make sure to capture that just as super clear. I think hopefully, with all of these be options marked up. It should be, you know, if we decide to do some other combination of the ease, hopefully should be relatively straightforward to to price different variations based off of the information provided. I didn't want to go ahead and do like all 10 or however many there are options, because that seems like overkill.
+
+Unknown Speaker  22:18
+What do the red boxes represent?
+
+Speaker 5  22:21
+The red boxes are the ones that I marked up in the stock now,
+
+Unknown Speaker  22:28
+separate price for each red box I
+
+Speaker 5  22:30
+get like we're starting on Friday instead of Monday. I think that maybe that's for discussion at the end, based off of how likely it seems like we're going to go through with some PE options, I think I would look to specific fusion for that,
+
+Speaker 8  22:53
+like when we look at it, and then I can leave you guys a sense of what we're looking at. What was this? Yeah,
+
+Speaker 5  23:04
+sorry. Courtney, what was that? I was getting some background noise. I think I got everything but your
+
+Speaker 8  23:11
+last sentence. What was, what's the specific question? I think I
+
+Speaker 5  23:18
+can provide. I think Clayco question is, do you want all of the ve's that have been marked up to be priced?
+
+Speaker 7  23:26
+Yes, absolutely, because likely we will approve those ve's. I think this is the where we're going to achieve the bulk of our savings asteroid and and Ryan and Ryan, so yes,
+
+Speaker 5  23:41
+yeah, but let's just clarify, alright. So let's get started. The first PE is the heat pumper to you again, the natural gas RTU is going to be very similar, at least in terms of mechanical scope, with the exception of the spec. So I've identified here the number of both on schedules, plans and schematic, what the changes are to the capacity of the ARS Jr, cpunk plant. So in reviewing the loads it currently, we have basically one bank of Air Source Heat Pump would be sufficient to meet all of the water cooled specific fusion load. So it is a significant reduction in the size of the plant if we move to RT use and so I'm picking up those, the knock on impact of that by eliminating the basically the hot water system. That system goes away because you're doing all of your heating at the units, right? So that means you're getting rid of your heat exchangers, you're getting rid of your hot water pumps. You're getting rid of the hot water buffer tank, the expansion tanks, the air separator, right? That's all marked up. And then in addition to that, the chilled water equipment gets smaller. So I'm showing the nominal capacity of the heat exchanger, the reduced flow rate of the chilled water pumps that would be required.
+
+Speaker 4  25:25
+Question, Does that, does the air source, heat pump, the remaining one? Does that include the load that was on the fluid coolers? Because I know the food colors in this are still showing, or is that a separate
+
+Speaker 5  25:40
+Yeah, it does not so i that is the one the E that I've that I've gone ahead, that's the one scenario that I've gone ahead and marked up separately so it'd be super clear if you would like to do the fluid cooler and and the RT use, I've marked that up in the one, when the stock here, okay, got you so that'll be the next one,
+
+Speaker 4  26:09
+which is probably the most likely one, right? Because we know the fluid colors are essentially gone,
+
+Speaker 5  26:21
+okay? And then on the air side here, I'm showing so here in gray, you can see, this is what I was talking about. Anything that is a part of the basis of design, I've kind of carried over my mark stuff in gray, so it's clear, hopefully. So you're kind of seeing that these units as part of the basis of design require heat recovery. So it shouldn't be like an ad that's priced when you look at the RT selections. And then we have some example Dyken cuts that we were able to get from our rep. And I think what we did was ask for a few sizes that were fairly representative of our overall unit sizes. I can't remember exactly what they are off the top of my head, but I think we have one that's like 12,000 CFM. One that's like around 25 one that's around 40. So hopefully you should be able to
+
+Unknown Speaker  27:24
+kind of find the closest cuts and get an approximate price.
+
+Speaker 5  27:32
+Our rep did flag that some of our units exceed the capacity of the off the shelf he pumps RTUs. And so these units in red would need to be a custom RTU, not Daikon, like a Scott Springfield or annex air or similar.
+
+Speaker 6  27:55
+Are we able to use a semi tufts option from a Daikon or train or carrier if they offer it to meet that capacity.
+
+Speaker 5  28:07
+Wayne, do you have a better understanding of the nuance between manufacturers?
+
+Speaker 4  28:15
+Available? Yeah, no, we're open to looking at train or carrier if they you know, because different manufacturers of different ranges. So, yeah, absolutely okay.
+
+Speaker 7  28:26
+And I think question back to Clayco, do you guys have enough input? So I think that's equipments, back to something that was more performance based, rather than a specific equipment and models Clayco, do you guys have our opening day to be able to travel? I'm sorry
+
+Unknown Speaker  28:47
+I had a hard time hearing the question.
+
+Speaker 8  28:52
+Clayco, do you have, do you have enough information to be able to shop around outside of these naked model numbers? Yes. Okay. Thank you.
+
+Speaker 4  29:06
+Maybe just don't go to Jordan for those Petra units. If you've ever I've had problems with those in the past, and I've never gotten over it. If, if there's people that you don't want us to use, like sometimes that happens, just let us know.
+
+Unknown Speaker  29:25
+Yeah, it's usually more of an issue with elevator
+
+Speaker 4  29:36
+companies, I guess, another question. I don't know if anybody knows the answer to this, but I think we brought this up before another important thing for Pacific fusion will be future maintenance and service of these units. So, you know, in different in different areas of the country, different vendors have better reputations for service and maintenance. I don't know, in Albuquerque, if there's, you know, companies that are stronger than others when it comes to that, but that'll be important, very important to we want to take that into account here when
+
+Ryan Hankins  30:08
+we, when we do a bit of valuation on the equipment procurement, and I was talking to Cory a little bit about this last week, but that'll be part of the evaluation, and we'll be able to decide, You know, hey, this vendor is or this this manufacturer is X dollars less, but they have worse service. Doesn't make sense to pay the premium. And then we can make a decision as a as a team, what makes it that's great, right? Thanks. Ryan,
+
+Speaker 5  30:34
+perfect. Okay, and then this RTU option, which, again, these modifications are also I've marked them up on the plants as well, so hopefully it'll be clear. But there, the knock on impact is that for the admin space, I think that we likely would want to have dedicated perimeter units to enable those perimeter spaces to be in heating while the interior zones are in cooling. If we no longer have hot water, going to Dave reheat that we're not going to be piping any hot water to that space so it it's not necessary. It's a little bit more air flow, technically, not that much. It mostly just gets split between, instead of having one unit three. I know
+
+Speaker 6  31:30
+it was touched on briefly in the be meeting, electric reheat is that off the table in the Office Admin space? Ben we would traditionally do fan terminal units or VAVS to help to zone the space and allow simultaneous heating the cooling.
+
+Speaker 5  31:52
+I i would not recommend that for a climate like Albuquerque, because it's not just a reheat load. It's a heating load on the perimeter and electric resistance for a climate that has 19 degree design day is going to be very inefficient. Okay?
+
+Ryan Hankins  32:23
+Okay, so Ryan, then are we good on the HVAC units?
+
+Unknown Speaker  32:29
+Then, I believe so, yeah, well, we have enough information already. Have some vendors pricing up some of the capacities provided earlier, so we should be
+
+Speaker 4  32:47
+okay, great. And obviously there's going to be, you know, associated increase in electrical cost for these package rooftop units. I'm assuming that will be factored into your cost analysis.
+
+Ryan Hankins  33:03
+That's correct. Yep. Just to be clear, the question that was asked earlier was, did we have the five air source, heat pumps? I went back to look at the 50% there was only four shown. So we only carried what was shown in the 50% so Courtney just wanted to make sure that we level set on
+
+Speaker 7  33:27
+that right. I think the discrepancy Ryan was we have shown five in the schedule but four in the riser diagram. So there's a question back to Mr. Rankin, whether or not you pressed it off the schedule or the riser to clarify.
+
+Speaker 5  33:43
+Just to clarify the between 50% DD and 100% DD. That's when we got updated loads from Pacific fusion Cortney. And so we added that bank in the 100% DD set.
+
+Speaker 8  33:59
+Gotcha. Okay, so it was missing from the 50% altogether. And okay, right. So if that
+
+Speaker 5  34:04
+was the basis of the pricing, whatever preliminary pricing has been done, then yeah, it would be relative to that size.
+
+Unknown Speaker  34:13
+Okay, all right, thanks.
+
+Speaker 5  34:20
+Okay, just to wrap up here. So we're, you know, crossing out, removing the heating coil on the BJ boxes, since that the heating will be provide, will be provided at the RTU unit level. And then we did have some van coal units serving electrical, smaller electrical rooms and IDF rooms, so those would get replaced with transfer fans. And
+
+Speaker 5  34:53
+then I've gone ahead and I've marked up these changes on the plan. So I've marked up everywhere where we have hot water piping that would be eliminated. So for example, the hot water piping going to the VAV reheat in the Office Admin space and the area one would go away. Ditto for area two, the chilled water piping to the air hailing units also goes away, but we do still have a small run of piping of a reduced size that I've marked up here that needs to make its way to the diagnostics room because there is a water cooling requirement within the far Ed advisor rooms for laser cooling, so we need to still pipe two inch chilled water to this area.
+
+Ryan Hankins  35:58
+Not gonna lie. Astrid, this is super impressive. Thank you for putting this together. This is really helpful.
+
+Speaker 5  36:06
+Okay, great. I hope it's clear, but yeah, obviously, feel free to reach out to me if anything is unclear, as you're reviewing it on your own. Similarly, there's a little bit of nuance in this space. Is there? Yeah, so all of the piping that's going south to this south bay of the R and D, all of that can go away because this is only serving air handle units, but we still need chilled water runs on the north side to cross this R and D space to get to that diagnostics lab. That's like roughly over here that we looked at in the previous plan. And I've shown the associated decrease in size here as well. And
+
+Speaker 5  37:02
+then then again, same deal here, kind of just like moving backwards as we get closer to the source, the air source heat pumps in the cub space. So all of the hot water piping goes away. The chilled water piping runs that go to the air hailing units go away, but we still have some chills, water piping that is feeding Pacific fusion equipment. So we have a run that's serving some my vault equipment down here. And then there's, there's, there may be another now that might be it, because the cdhr is being picked up by the process system in this scenario. And then it also means that in our meds, again, this is where all of the the pump buffer, tank, expansion tank, are located, all backwards way. And then if we move on to our roof plan in this corner plan northeast corner, I've just marked up roughly. This is not precise at all, but just just to show that we would need two additional RT use, I'm thinking one for each facade, so we can, you know, do heating along the facade and still be able to pool interior conference rooms and things like that. And so this, this unit over here, which is the current admin unit, would get smaller. These would get bigger. We would need, you know, structural support at these two locations.
+
+Speaker 2  38:37
+Astrid. Is there any way we can take those a little further away from the edge of the building, like a little interior,
+
+Speaker 5  38:45
+or do they have? Yeah, yes. And we, we need to think about, like, if we actually go this out, we need to think about and coordinate where we actually have that duck drop, because you have all of your open office space right here, and you probably don't want a duct just like dropping through the space. So you probably wanted to kind of drop over the conference rooms and still run across to move them in for that very reason.
+
+Speaker 2  39:11
+Yeah, and also I, but that one on the right facing the roadway, want to be sensitive to the okay, what's the design body that runs this for facades? Why am I blanking on the name Rebecca? Thank you. The group that cares, they want the facade or the screening around any equipment that can be potentially viewed from the roadway there. So if we took it a little further back, the viewing angle is better, and we don't need to provide any screening there. So anyway, just calling that out something, yeah,
+
+Speaker 5  40:00
+yeah, it's a good point. I wasn't thinking about that when I marked this up. I meant for it to be illustrative, but just kind of knowing what I know about where our duck runs are, like, we probably want these units to be, like, even closer in, because our runs are kind of coming from the core and then extending out.
+
+Speaker 2  40:20
+So, yeah, we're aligned, just calling it out.
+
+Speaker 5  40:28
+Man, do what I've done. Okay? And then over here I'm just referencing this in large plan. So here I'm showing the ARS or sea pumps that go away, the hot water piping that goes away, the section of chilled water piping that goes away, and the reduced pipe size. And then I've also marked that up on the schematic again, just crossing out hot water sections, hot water piping. There's a lot of layers here. The air source, heat pump section that goes away again. This is what I was mentioning, all of those markups on the first few pages that are like clarifications for the 100, 100% DD, based of design scope. I've carried that over here in gray, and then I'm tracking the reduction in hide size. Okay,
+
+Speaker 5  41:38
+all right, so the next item is this interactive item in the event that the heat pump, regardless of whether it's heat pump or natural gas, in the event that the RT use are elected, along with fluid cooler option, so there Is some impact to the overall capacity that's needed that ends up getting shifted from the fluid cooler on to the onto the chilled water system. Now I realized, as I was going through this exercise that I had, I had already kind of started to factor that in, when I was doing doing the updates for 100% DD and so eliminating the fluid, we actually don't need to add anything basically above the one air source, heat pump bank that we saw in the previous section, because I kind of already started to account for that, and there's, there's very little load that is left on this fluid cooler system. Once we factored in the updates for the 100% DD set, it was pretty minor. So there's no meaningful change there. It's mostly just the deduction associated with with eliminating the food cooler System equipment. So that's the fluid coolers themselves. That is the condenser water pump and any associated expansion tanks, air separators, etc, etc. I'm not going to go over all of the hot water deductions, because there's the same from the previous option. So I'll just kind of stick to the differences here.
+
+Speaker 4  43:46
+Could I ask you a question on the air source, heat pump, your notes at four modules? Is that a change from the previous
+
+Speaker 5  43:57
+Yes, yes, you're absolutely right. Wayne, thank you. So yeah, you're right. So technically, we would need to increase the size of this bank by one module, so it would go from three to four. Good catch. I caught that on my note, but not in my overview. Just now. I hope I picked that up on the riser as well. If not, I'll mark it up. Actually, don't think I did a riser.
+
+Ryan Hankins  44:29
+Are we? Are we open to different manufacturers? Mainly because if we're going to go get updated pricing from some of the like, you know Daikin, for example. I know Daikin does have some products in that realm. Should we also get alternate pricing from them for these air sources?
+
+Speaker 4  44:51
+Yeah, I guess. Does it even need to be a heat pump anymore, right? It's just a chiller. It's not doing any heating anymore, right? That's true. So, so, yes, I think it could be taken carrier, York train, high efficiency, air cooled shell. I mean, I guess one thing we we just would want to make sure that that we've got good available turn down on the chiller, because we're just to handle any, you know, part load performance or part load demands from the from the equipment that it's serving
+
+Speaker 5  45:44
+Yes, I think we'd want to be careful about going to something that's just like a packaged unit that we would we'd have to understand what the turn down on that unit is.
+
+Speaker 4  45:56
+So we're now about 280 ton tons. Is what we've got. Yeah? So yeah, there's a lot. Yeah, there's lots of manufacturers in that range. I think that can support that.
+
+Unknown Speaker  46:06
+Yep, yeah, the heat pumps are a little different, but yeah, standard air cooled chillers,
+
+Ryan Hankins  46:15
+that's good, Ryan, you good with that ranking?
+
+Unknown Speaker  46:20
+Yes, is there a minimum turn down you're
+
+Speaker 5  46:30
+looking for? I would need to review it. I would need to review specific fusion, like operating hours, and see kind of evaluate roof, and He kind of
+
+Speaker 6  47:00
+evaluates the minimums they are so cheaper. Equipment, we can tell you what their turn down ratios are.
+
+Unknown Speaker  47:17
+Yeah, that sounds good, yeah.
+
+Speaker 5  47:20
+I think for what it's worth, there's a good amount of equipment that operates 24/7 or at least, is indicated as operating 24/7 on Pacific fusion spreadsheet. So it might not be quite so low, but I do want to verify that number i
+
+Speaker 5  47:47
+Okay, all right, a nuanced difference between the prior ve item that we looked at and this one, which incorporates the consolidation of the fluid cooler system, or like Our processed water system with our chilled water system is that we just need a little bit more piping in this scenario to little more chilled water piping to extend to the target fab space, though, the alternative is that we would have process water lines running to this space. So it's going to end up being pretty similar. I think, I don't think it'll be in an ad. It should still be a deduct, because you you don't have to run that process water in parallel to the chilled water on the R and D space. So over here, the you'll see, like the processed water lines, which are in between our chilled water lines and our hot water lines, those go away. So this run goes away. And it does. It does create a slight up size in the chilled water pipe from the previous option, which I think was the two inch in this option, is the three inch
+
+Unknown Speaker  49:04
+all of the piping to the air hailing units still removed. I'm showing here.
+
+Unknown Speaker  49:14
+I'm showing here the extent of the process water piping that goes away
+
+Speaker 5  49:22
+in this in this option, because we hadn't detailed out this section of the run that needs to go to Target fab in the BoD. I think we showed it up to the R and D space. So it is this full length that goes away. And then I've marked up on the roof plan, the elimination of fluid coolers, that additional module that gets tacked on to this bank, and the pipe sizes.
+
+Speaker 5  50:00
+And then I'm also marking up in the cup plan all of the process water, the branches from well, not the branches the mains, rather, from the fluid cooler. And then running to the R and D space that all goes away. I
+
+Speaker 5  50:27
+and then so I think the other thing, just to make sure that you price as a deduction, is the elimination of water treatment for this loop, and in particular, the specific filtration requirements for the condenser water loop that we would otherwise need. So I've listed here the specs that cover our water treatment for reference,
+
+Speaker 5  51:00
+because we did have this basis of design. It's a it's a hybrid tower, so we have a closed loop over here, but then there's an open loop running through the tower, which would need treatment.
+
+Speaker 5  51:17
+Okay, any questions on that? I Okay, I'm going to skip through this next one because the next option is just the elimination of fluid cooler. So we've kind of already covered it by covering the scenario where we do both the fluid cooler deduction and the RTU combined. I'm
+
+Speaker 5  51:43
+and then just jump straight to the option where we make the secondary loop a glycol water mix. This allows us to eliminate the heat exchangers. So I'm just showing that on our schedule, heat exchangers go away. A set of expansion tanks go away because instead of two hydronically separated loops, now we have one, we would look to have a hydraulic separator between the two loops. And so our air separators would basically do double duty there. So I've included a spec for that, and I've marked that up on the riser diagram. Just the deductions here. I've also estimated. Now this is a rough estimate at this time, but especially because the chill water system volume might be changing, but I have a rough estimate of the overall volume of the system so that you can price the add the additional, appropriately, glycol that would be needed for
+
+Unknown Speaker  53:06
+both the chill water system and the hot water system.
+
+Speaker 5  53:17
+Any questions on that one, that one's pretty straightforward.
+
+Speaker 6  53:20
+Can you confirm the capacity on the air source, heat pump for this option,
+
+Speaker 5  53:25
+it doesn't change from baseline. So I apologize I didn't pick up the markups from the BOD here, but it doesn't there's no change. Got you
+
+Speaker 5  53:46
+Okay. This next item, reducing the quantity of control valves at the air source, heat pump, our BOD is calling for valves at each module. But we don't really need that to get the level to get the same level of control. So we can achieve that by keeping one bank of modules with control valves, or, sorry, one bank of air source, air source heat pumps with control valves at each module, and then for the remaining banks, just doing a control valve for each bank, so that you can basically stage on one module at a time. And then once you get to the point where you need an additional module, you stage on you know this bank plus one module, so that allows you to get rid of quite a few control apps, and
+
+Speaker 5  54:59
+it gives you the same amount of staging control. It just means that these units are operating instead of being able to, kind of like, spread the operation across your your air source, epoxies get quite a quite a bit of use. I
+
+Speaker 5  55:25
+um, this ve kind of effectively goes away or, or is not really impactful in the event that we go with RT use right? And the food coolers, because we end up with only one bank in that scenario. So this is really a ve on the basis r so, yeah, I'll leave it at that. And then similarly that we can reduce, we can reduce the number of four pipe units that we're showing in the BOD by making two of the units change. Just change two pipe units, and then doing change over with our piping configuration, so that, I think, makes these two machines cheaper, technically, and then I would still recommend keeping at least two units in the base of design for pipe to get the benefit of simultaneous heating and cooling during the winter, when that when you have your your equipment cooling loads running concurrently with your envelope heating loads, and I've shown a detailed mark up of what that change over would look like.
+
+Ryan Hankins  57:09
+This is awesome, Astro. Thank you so much.
+
+Unknown Speaker  57:14
+Okay, that's it. Very if you can hear me, which likely
+
+Unknown Speaker  57:22
+not, but very
+
+Speaker 1  57:28
+Yes. Thank you. Astrid, that's That's wonderful. Thanks for walking everybody through that,
+
+Speaker 8  57:33
+of course, and likely just to give everybody an understanding of kind of where precipitation is, we will likely do all inside a majority of these ve options, where they're where
+
+Speaker 7  57:50
+you see these as being kind of the top ones to organize. Thank thank you again as true
+
+Speaker 1  57:59
+and we, I just want to kind of tag you. I know I mentioned it before, but Cory for you, and in for Clayco as well. So I know that we, Natasha and I and our team, still owes you, like, what the impacts are from a scheduling, cost standpoint, for the design and so that's something that we are going to still be providing. I know that, yeah, it sounds like you have, you want to move forward, or you're, you're looking positively at moving forward with some of these items, but just want to make sure that you have all of that data when you're making your final determination.
+
+Speaker 8  58:34
+So for call with Bill and sell you and
+
+Speaker 9  58:41
+let's talk you about tomorrow. I'll send you a few times, if not tomorrow.
+
+Speaker 1  58:49
+Yeah, it might be Wednesday. I can do that sometime this week. I think our team needs a little bit more time to put that information together. Courtney, so it might actually even be Thursday, because I've given our team till Wednesday to give us the impact for the things that affect their disciplines, just because they've spent so much time putting the information together. So I want to give them a little bit of time to really think through what the change would mean for them.
+
+Speaker 9  59:21
+So, yeah, I love back into the Tish Bill and I sit down and talk to that in our policy meeting. Yeah, absolutely.
+
+Speaker 1  59:33
+That sounds good. OAC meeting, let's let's touch base, and we can let you know where we're at. And then that sounds like a good idea. So maybe take the second part of that meeting.
+
+Unknown Speaker  59:47
+Thank you all. I need to hop okay.
+
+Speaker 1  59:51
+Sorry, thank you. Thanks everybody. Bye. Thanks, everyone. You i.
+
+
+Transcribed by https://otter.ai

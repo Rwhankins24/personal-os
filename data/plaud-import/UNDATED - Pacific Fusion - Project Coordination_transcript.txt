@@ -1,0 +1,326 @@
+Unknown Speaker  00:10
+Hey, You
+
+Speaker 1  00:42
+I bit
+
+Speaker 2  01:28
+I Hey, Mark, good morning, good noon. Hey, there, wherever
+
+Ryan Hankins  01:58
+you guys are, hi, it's Friday. Everyone get excited. Yay, almost there.
+
+Speaker 3  02:09
+That's right, I'm gonna try off my camera because I'm somehow still eating my breakfast camera. I know I'm
+
+Speaker 2  02:17
+very deep time for early lunch. All right?
+
+Ryan Hankins  02:22
+Hopefully mark my email didn't didn't overwhelm you with everything, but I figured it's easier just to know the information than wait till the meeting.
+
+Speaker 2  02:39
+Yeah. No kidding, I looked through it. I got some comments on it, so we'll use that as our guidance for our discussion. Yeah,
+
+Speaker 4  02:51
+can we do a couple of introductions here? I don't think I've met Theresa or tinny, so Chris, we should do that. Yeah, do
+
+Speaker 2  02:59
+we have everybody from the Clayco team or Yes. Okay, great. Yeah. Happy to start with introductions. And so I don't know who wants to go first. Yeah, I'll go first. I'm Chris Tinney, project director with Clayco. I'll just, you know, be Ryan's support through precon, and then be running the construction team all the way through completion. So you
+
+Unknown Speaker  03:29
+want to go ahead and finish the
+
+Ryan Hankins  03:30
+Clayco group, then absolutely. Yeah. Ryan Hankins, Project executive, handling the preconstruction effort, as well as sending through the operations process, I am, I am your support for everybody on the design team, to help you with pricing, to help you with schedule evaluation, to help you with making sure we're moving in the right direction. So feel free to reach out at any time Cool.
+
+Speaker 2  04:00
+I'll jump in then. So Mark canning Thorn Thomas, a structural engineer, as of this week, I'm the EOR for the project. I got my license in New Mexico lined up, so we're good. And then Theresa, you want to go?
+
+Speaker 3  04:21
+Or Hey everybody. Theresa Curtis, with Thorn and Thomas Ed, I have been involved in the project kind of at a high level, just overseeing, kind of from the principal level here at Thorn and Thomas Ed. And given the fact that it is spring break time, I would actually be in the VE meeting next week. So I know that. I know the ownership side, but I haven't been involved as much with with you guys on the project team. So here to say hello today and looking forward to it next week.
+
+Speaker 5  04:47
+And then Frank, Hey, Ryan. Hey Chris. Frank Fong, Senior Project Engineer at doing Tommy city, so I will be at the Wednesday meeting.
+
+Speaker 2  04:59
+Yeah. So the timing next week gets us a little bit bad. Frank is available on Wednesday and then travels, and I'm out all of next week, so I miss both of the fun days. So that was why we had asked for this meeting in advance, that we could kind of get ahead of it and make sure that Theresa's well prepared, that everybody's on board. And because I have a lot of thoughts about this diagrams that you said, so we might as well share those now. So any other introductions we need to do, or
+
+Speaker 4  05:30
+make you want to do yours, we just do AWS quickly here, because I don't think
+
+Speaker 6  05:38
+like late October. So haven't been involved in the project since the beginning, but yeah, great to meet everybody and look forward to seeing you guys in person next week.
+
+Speaker 7  05:47
+Good to meet you. Nick Justin, yeah, can you hear me? Okay, yep, great. Yeah. This is, I'm Justin, Chief of Staff, and CTO, I'm here more just, you know, observe, I'd say, for the most part. And I'm really excited. I'm actually on PTO today, and I'm driving, so I'm that's why I'm camera off, and I just wanted to call in, since it's the first meeting. And, you know, because I'm excited. So thanks.
+
+Speaker 3  06:19
+Yeah, I'm sorry because I haven't I'll just finish so that we can all meet Theresa. I'm Rebecca Belle. I'm in the Albuquerque office for Stantec, and I'm an architect, but I'm the project
+
+Speaker 4  06:31
+manager for the AE team, architect principal in the Albuquerque office with Stan tech.
+
+Speaker 3  06:36
+Wonderful. Good to meet everybody. Yes, this is awesome.
+
+Speaker 2  06:41
+All yours. Mark, all right, cool. That done. I sent through the list, and Ryan provided a lot of responses to it. I was just gonna go through your document that you provided. Ryan, I had some comments and questions and things I'd like to discuss, and then we can jump back to the other part of the I don't know if there's anything going to be left on the agenda after that, but if there is, but if there is, we can go through that. Okay, so you sent through this. I reviewed it looks great, answers a lot of the questions, the I'll just work through it top to bottom. It doesn't necessarily align with maybe the questions and the way I line them out in the email, but we'll get there eventually. So first one, I noticed you guys are doing a sloped cut for the excavation, for the deep aspects of the pit and cool down vaults. As I saw it, I was like, Oh, I wonder how this is going to influence the geo peers and whatnot. I did reach out to WGI, and they confirmed that they talked with you about it, and that there is some sort of a process involved to make sure that the geo peers work. And just so we'll keep interfacing with WGI on that, just to make sure that we have the right stiffness and the right bearing capacities in case anything changes with that erection. But when I did see this, I was like, I wonder if that kind of alters some of those assumptions we having. So, yeah, nothing here, really.
+
+Ryan Hankins  08:12
+So, I mean, our, our biggest thing was when we get to the, I mean, we know that it's going to be a process with the geo peers, whether it's before, during and after, to make sure the bearings, the bearing pressure is good. The ideas we had at the bottom of the pit were kind of needing some direction from a design perspective. One was either we were going to go with the geotech reports recommendation of just structural fill for six feet, I think is what it was calling for. The second option was to go with geo piers, and the third option was, let's just pour a bunch of slurry back fill. Either way, we do plan to pour a matte slab, just like a working like mud slab type thing, yeah, to work off of. And so however we want to address that, we're generally fine with just wanting to see what input you guys have.
+
+Speaker 2  09:10
+Sure sounds good. That seems like a better fit in sectional discussion. So sorry about that. I have a lot of questions on this one. I'll try to not look at those right now. So you're saying that you would below the pit here, you would consider putting in fill below it and to meet the geotechnical report. I think that was your first comment, right? Yep. And I want to kind of address those all step by step. If that's okay, this particular area and under the vault will be one of the more sensitive in terms of high loading and also settlement criteria. So we can have the conversation with geomet and WGI, but I thought that they were having a lot more excavation in that area to meet the deflection criteria. So I just want to make sure that we don't go down a path that would be leading us in different direction. But as long as we're meeting that criteria, I think we can work with whatever soil approach is required. So but we are right now pursuing do peers under even the lower parts based on what the values are that they provided to us. And then I think you mentioned a rat slab under there. Yeah, either one of those is fine for us. It does not, does not impact our design at all, we will want to talk to you some point in time about the construction process of it and where you want joints. I This is way too deep for today, but I assume that you'll pour the bottom slab, and then you'll pour the walls, and then you'll pour the top slab. Every time we assume that some other contractor comes in and says, No, I want the joint somewhere else. So we just want to make sure that we've aligned our joints with where you're going to build it, but that's a little bit further down the road. So, and then was there you'd mentioned a part about either like slurry or backfill. Was that the part beside the walls that you were thinking about doing to, or was that the part underneath it? That was just the
+
+Ryan Hankins  11:24
+part underneath. So we had three options. But we we agree that if you, if you, because we didn't have the settlement criteria and all that kind of stuff you're saying geo peers is the right option, we're on board with that and we will proceed. So yeah, we
+
+Speaker 2  11:41
+so our other work that we're doing right now with WGI is that we're we've modeled the foundations put in their soil springs and their varying values, and we've give provide a heat map to check that settlement and deflection. The first iteration is showing really good performance. Actually, I think it's a little bit off and needs a little bit more refinement, so there'll be some adjustments to it, but it's showing that we're meeting that criteria, and that is with all of the criteria that WGI had. So yeah, it's a bit of a tough it's a tough, tight criteria. So all right, turn me back up here. I didn't have any other questions on these sheets. One other
+
+Speaker 4  12:26
+mark question, sorry that crane pop, that Do you have any concerns with the crane pop? After, it sounded a little dicey to me, so I was just like, Oh man, that's scary. So you know better.
+
+Speaker 2  12:43
+So the the overall erection process is kind of similar to how I would have expected it, where you're kind of running cranes in the outer bays and then and using that as your working path makes a lot of sense to me. Fish. I'll get to your comment in just a minute after this sheet. One thing I'll point out is that our lateral system is where these magenta lines are the braces in my like, if I was, hey, this is a great thing. The braces on this wall a little bit closer to this edge so, but you won't have the stability of the structural system. You'll have to rely on temporary work until you get most of the r, d space complete, just because the braces are way over here, right? And you won't be able to rely on those until you get done. You know, as long as you guys are kind of aware of that and you're like, Yeah, we got the temporary that's perfectly fine. We have not designed for that temporary process, and I don't know that we necessarily align really well with the process of working from the left to the right. So just to kind of throw that out there and make sure that you guys have that understood for temporary works,
+
+Ryan Hankins  13:58
+understood, yeah, our Rector will end up engineering the temporary work. Okay, all right,
+
+Speaker 2  14:05
+sometimes on these long span or larger buildings, we are able to work with you and get it so that we can use our structure for more of the temporary but it doesn't quite line up with the process you're working on. All right? And then the crane path, and this is a tissue you were starting to get at some comments here. Just want to make sure that we're aligned. Starting over, my mouse is driving me crazy today. Over here, the crane paths you guys are showing that you're going to pour to the top of those img containment mats, which are three feet down, and then the piers would be a second placement, it looks like, and that the cranes would be running on this level. That's like three feet low. Is that the intention and correct?
+
+Ryan Hankins  14:55
+And the reason, the reason for that is because those, those picks along those two, those two bays, they have some extremely heavy picks, and so if we needed to stay out of that area, we would just need to upsize our crane fairly substantially, just because of radius and whatnot.
+
+Speaker 2  15:19
+Sure, the kind of impact on our side is that the we will need some dowels, vertical towels coming from the mat up to those pedestals and then up to the wall. Also that's on this side. So kind of based on that those would either need to be post installed or have some other method of connection. So post installed more or less, we'll need to look at that and be able to design for it. We'll see if there's a different approach to be able to do this. But I don't really want those bars sticking up and you guys just running over them for a year, however, many months, while you're erecting this deal. So this is one area where we'll take a look at it and see what that impact is for the constructability, and we'll make sure that we align our detailing kind of with that approach. But slight, slight difference there. And then the next one. Next one is, I see the joint, kind of running through the red line running through this six foot that mat, and the mat being the part that's at grade, but under the tank, is that a graphical thing where it's like, hey, we drew a straight line? Or is that? Was that intention that you would only pour the top the bottom half of that map?
+
+Ryan Hankins  16:35
+No, the only can No. So to answer your question, I don't, I don't know. I we probably could have been more specific about what that line about what that line was. But we, we want to pour, like, if that, if that's a six foot Matt slab, we want to pour five foot of it, and then we want to pour the other foot, just because it's super hard to get, probably the tolerance, as you guys are looking for. We want to pull that last foot, you know, at one time. Okay.
+
+Speaker 2  17:08
+Okay, that is good information for us, because we will need to detail that accordingly to make sure that we have the capacity for that joint that goes across there. So we can do that because we're designing it like right now, so that can work for us. And if we find any issues with that, we'll come back to the team and say, Hey, this is causing this impact in terms of steel quantity or some rebar qualities or something like that. But we can work with you to discuss what that is. So it and then if that Matt were to be made smaller, I'll have to think through this in terms of the other process, because I know we have a lot of things that are anchoring through there, like the tank and the buttresses and whatnot. But if we were able to make that thinner and keep the same volume, and if that wanted to be too porous, could that be the mat and then essentially a topping slab, but that provide the same performance for
+
+Ryan Hankins  18:06
+you, yeah, as long as, as long as we have the ability to pour a smaller thickness for that last point, yeah,
+
+Speaker 2  18:15
+we're fine. Got it? Okay, we that's helpful. We know your criteria, and we can work towards that. So, all right, and then the other thing that's come up recently is that the vibration consultant is suggesting that the columns in the R and D space may need to be separated from the other foundation elements and the other foundation elements that have a strict vibration criteria. So we're obviously showing these things integrated right now. We may need to lower this foundation under the columns just to make sure that we can separate it. We have a call with them on Monday to kind of go over that and find out if we have any, if there's where the leeway is on that, but so that one might be separate. I don't know if that causes any wrinkle into your guys's plans.
+
+Ryan Hankins  19:14
+So okay, I think we just need to, we just need to Resi against a little bit, but nothing we can't live with. All right.
+
+Speaker 2  19:23
+And then one of the other reasons I was kind of asking about the erection sequence was because I wanted to kind of understand how you're doing the concrete for these foundations with all this other concrete. And then the the column, the steel erection, just to clarify, it seems like you guys are basically doing all of the concrete construction in this area before steel erection, and then coming back in and filling in the piers and the walls and then the trenches, right? That's kind of the stuff that lags after steel erection.
+
+Ryan Hankins  19:55
+Yeah, all of the, all of the utility trenches, those are going to come after the fact the steel erection. Want to stay away from those which we agree, and then pouring the last part of this like the infill slab that'll be after. But yeah, everything else will be done pretty much before steel starts surrounding.
+
+Speaker 2  20:18
+I think that addressed the comment that you were asking that discussion, is that right? Okay, great. All right, I'm gonna jump back. This is a little bit out of sequence, but one thing that we're kind of looking for thoughts and input on were the vaults, and this might be us as a design team and contractor team discussing, but it might also go back to fusion to discuss seeing these two deep vaults right next to each other and kind of a small space in between. We were trying to figure out how to construct that efficiently. They've been shown as independent vaults, right? I assume that there will be some benefit in connecting them, and whether they still have two walls and a gap between them, and then that gap is filled with something flowable fill, or something like that, and allowing us to do water perfing Only around the perimeter. Or if there's any reason, and this is the part I'll have to go back to Pacific fusion, if there's any reason that those actually need to be separated with earth between them for that cool down mechanism to work well. But you guys have any thoughts in terms of what would be the most efficient way to build those anytime
+
+Ryan Hankins  21:35
+we're you know, working in close quarters like that, flowable PHL is going to be more preferred. It's going to be more expensive, but for critical details like this, it makes sense. The only concern we had, the only real concern we had was that it looked like there was a utility trench going between these two pits. That seems like a constructability Challenge
+
+Speaker 2  22:00
+is a good word. Yeah, yeah, that turns is up near the top of this 30 foot tall vault, or three foot deep vault. So I don't know that we have a section through there right now, but a section through there would help kind of further this discussion. So it's not like they can actually get necessarily closer together these vaults, but maybe if there was any reason to have soil in between, it could be that there was only one middle wall between them, and that the opening at the ground floor would stay the same size and the same position to allow that trench to pass between them. But I think there's a little bit of detailing we can do with that, and we can work with you guys in terms of the constructability of this fault.
+
+Ryan Hankins  22:46
+So the biggest, the biggest constructible can biggest constructability challenge we saw, in regards to those trenches were actually in the entrance to the cavern, just FYI like how that integrates with that six foot Matt slab and we were, we're, we're pretty how that all comes together. Yeah, I
+
+Speaker 2  23:04
+noticed that in one of the images. And I'm not sure where it's at. Let's see where you guys put that. Yeah, this one, because you've, jeez, highlighted this as though, you know, there's the six foot thick mat here that's existing, and then there's the trench in around underneath it, whatever, in our understanding, the trench actually comes to the edge of that mat, and then within the MAT there's actually the pipe is placed in the mat For this and then comes into the tank. So this, this is really servicing the water in and out of the tank, big diameter pipe. There's a hole in the mat that we're kind of working on coordinating, and then our intention is that that pipe would just be embedded in the mat for the length in this zone. So I think that might resolve your concern. Might make other concerns about how to place it, but might reserve
+
+Ryan Hankins  24:10
+one concern. We'll save the other concern for another day. But yeah, I agree.
+
+Speaker 5  24:19
+Just going back to that middle cool down vault. By the way, no one from mechanic was on but I believe there's also some sub grade mechanical ducts running in between these cool down vaults as well. So just something to think about too, from a constructive melody,
+
+Speaker 2  24:38
+step, okay, and all the space is used, all right, let's see. Jump to the next comment. This is the same we've already discussed it, you know, Pierce not poured and cranes will be rolling over. That sounds fine. Works.
+
+Ryan Hankins  25:05
+About the brace frame locations here, one question for you, is there a tilt wall that spans between on column line seven, between R and D, and I'm going to call it the admin lab building
+
+Speaker 2  25:18
+along this line, going upward from the lab office roof up to the higher level that is been shown as imp on that side. No, sorry, I
+
+Ryan Hankins  25:30
+meant, I meant from the lower section,
+
+Speaker 2  25:33
+the lower section, I'll have to look to some males. I don't remember what that wall construction is along there.
+
+Unknown Speaker  25:39
+I believe that's Kali, a metal stud. Wall, perfect. All
+
+Unknown Speaker  25:49
+right, let's see. We talked about this one
+
+Speaker 2  25:58
+might be there's one last comment on here. Oh, yeah, so the cub was one of the other areas we were looking at. So right now we have the steel for the cub and the steel for the R and D connecting the columns in the R and D space, and then the steel and the cub has to connect to it and through a tilt up panel. I think that this is in the process and maybe be resolved based on vibration, separation requirements. Again, we'll find out a little bit more on Monday. If it's not there's a detail there that we really need to discuss with you guys in terms of how that can work, because we were assuming that, yes, everything on the R and D gets erected steel wise. Tilt up panel goes up, and then there's a stub sticking out through the tilt up panel that can receive steel on the cub side, I think it gets a little bit cleaner. There's more columns and a little bit more conflict at the foundation level, but it gets a little bit cleaner if they're separate, and a little bit more pacing, but it might resolve that detail, which we thought was a bit tricky. So anyway, this concern I had here might go away, and I can show you that markup of the cup. I have it open perfect. We have made a markup of what we see is the changes for the cub. If we decide to isolate it, we've tried to highlight the changes in red. I might not be 100% consistent on that, but anything that's in red would be a change. So we need a few extra base frames in the cub, because it becomes independent, not leaning on the R and D space we've thrown them in, they probably need to be coordinated. I totally understand that. And then there would be additional setup columns along this interface. We need to have a conversation with vibration consultant about whether the foundations need to be separated, which would be a little bit more challenge and something else that we have to resolve. But so right now, we're not showing that. We're just showing that only the superstructure is coordinated or separated the mezzanine level. A few more changes here. We need to work through this and coordinate it. So I'm not going to go too much into it. The interesting part about the roof is that we had always actually had a mouse, come on. We had always actually had a steel member outside of the on the exterior of the tilt panel because of needing to frame in the roofing and spraying in the joist and whatnot. So there aren't that many changes to the steel framing at this level. There's a little bit of movement around, hopefully moving this column to get it to align a little better, and then adding the brace frames. So as we work through it here, the changes additional steel were not as much. It's columns and brace frames. So I'm happy to send this through everybody can look at and comment on it. I think this will help you guys have a little bit of an idea in terms of the pricing for it. And then if you have any questions, you know, happy to go through that. So, okay, 30 minutes, I feel like I've just been rattling things off. I can't remember anything else that I missed. I'll open up my email here.
+
+Ryan Hankins  29:37
+Sorry. I'll go on mute for a second while I gather my thoughts. I I'll
+
+Unknown Speaker  29:49
+share your email.
+
+Ryan Hankins  29:58
+Yeah, we were wondering how, because of the, I mean, we're expecting that that tank to weigh anywhere from eight to 9 million pounds, is kind of what we were originally forecasting, just how it transfers the load. And so we were, we saw it drawn like the left, but we were thinking it probably is going to be more like the right potentially, not that it needs to be, but more just asking the question of how you guys saw that happening, so we can plan, yeah,
+
+Speaker 2  30:31
+we have not. It's probably a mix between these two. We have not currently shown, like this extension of the foundation outwards from the wall. I think generally we have a small extension there, more or less just to allow you to set the formwork on it, and so you don't have to perfectly align those two edges. But right now, there is not a requirement that we extend the foundation outward beyond the face of that wall. That is something that we're working through with our stiffness and our soil spring studies. But for right now, we haven't seen that as a huge concern. So probably more like this image on the right, but with a very short extension, if any. As long
+
+Ryan Hankins  31:20
+as there's an extension, I think we're happy.
+
+Speaker 2  31:26
+Yeah, you guys usually need something to set your formwork on and whatnot. So, yeah, got it cool.
+
+Ryan Hankins  31:33
+On the same topic, the settlement. So, like, and I've heard some things about the vibration. We haven't necessarily dug all the way into it. Yet, heard some things about the settlement criteria, but would like to better understand, because our thought was, hey, let's go in after all these matte slabs are poured and the pits are poured, and let's go preload it. And wanted to understand, generally, from an engineering standpoint, how that would all work. And if you guys like that idea or not,
+
+Speaker 2  32:05
+we generally do like the idea of preloading. And I'm trying to open up our current results that we provided, so I'll reshare here in a minute. Generally like the idea of pre loading. The tower crane seems to be the tricky one, but also the one that might have the most impact. So since the soils are not elastic, they're sandy soils. Once they compress, they compress, and they'll be in that space forever. As long as we hold the load on for a week, or something like that was the criteria we've gotten, then the settlement will be there, right? And it will work well. So what we've been talking about internally was we've kind of created a chart showing all the loading inside the R and D space, and we've broken it up. There's a couple of things that we feel are intermittent or transient loads, which is the fluid and the water in the tank, the oil and the IMG modules, and then the actual crane load itself, because it can move across right? Since it's non elastic, it doesn't matter too much if it's transient, but it does matter whether that load has been in the space before whatever starting time is right? So we've gone through three studies, depending on which of those things have been in the space before that settlement calculation starts, and trying to figure out if which ones are important or not, the crane load itself seems to be pretty important right now. The water tank is, but is not, maybe as important as we thought. So we're, let's see this is, this is the first one, as in, we take every we've preloaded everything, and then all the settlement occurs afterwards. We're still getting a little bit of settlement at the crane levels that this is bearing pressure. Sorry, we're getting small summit, but the critical settlement is actually at the column locations, which is we need to dig into that a little bit. I think that the there's some coordination we do with the soil springs in this area and whatnot. So there's refinement needs to happen. But the results are actually showing quite well. And even if we take what we thought is the worst case of, hey, there's no pre loading of the structure, which is this last one we're getting, the settlements are pretty close to what's required. So again, I think there's refinement that can be done in this, but we're within range. So which I was kind of shocked by, to be honest. So either WGI did a great job estimating this, or everything's working out better than we thought. Which fingers crossed that stays that way? Not sure. So yeah, anyway, my point of bringing this up the crane, if we can figure out a way to preload the crane, that'll probably be the one that helps us the most with this criteria. But it's also maybe the trickiest, because you have to actually get the capacity of the crane held over one of the columns or near a column for a week, and then, you know, move it to one side of the high bay, and then the other side of the high bay, and then move it to the next column location and keep working it along. So I think there's some schedule, you know, thought there. And also, what is this thing that we're lifting, but I know you'd have to do a crane capacity test, and usually it's done with big balloons of water. So maybe those big balloons of water are just held through the space at intermittent times while you're working on some other area of the project. Not sure that'll be the hardest one. I think, yeah, that's a good point. The other half of that message is, I think we can make it without that, but that is one area right now that has an impact on the performance. So, yeah,
+
+Ryan Hankins  36:19
+oops. There was, I think we kind of talked about separation, via, by for vibration criteria. I think you guys are still working through that, but, and you guys were talking about maybe lowering some foundations so we could probably, we could probably kick the can on that for until next week.
+
+Speaker 2  36:45
+One other, sorry, one other thing I do see in reading through your notes, the tower the bridge crane installation, at least for the 400 ton crane. Guys, I don't know if this thought is based on anything. We had assumed that you would have to install it from above, leaving out a panel of the roof and getting a giant crane to lower to bring it in. Again, I don't know if that has any basis behind it or whatnot. If that is the case, we I think we can talk and work through it. We don't have any real critical diaphragm at that upper highest roof level. So if we needed to leave out the, I guess it's the southern most Bay, right next to the cup, or whatever, we could leave that panel out of the roof for installation later, after the crane is in. But I guess it's something that we should discuss in terms of how that crane is actually
+
+Ryan Hankins  37:45
+put in place. Hey, Nick, who are you guys? Who's your contact at Conor crane?
+
+Speaker 6  37:53
+I don't remember his name off the top of my head. I can get that to you, though. But Yes, Mark, to your point, that is the proposed plan they had is to leave the roof open.
+
+Speaker 8  38:06
+Yeah, it's Matt Adams. We'll get you guys on an email.
+
+Ryan Hankins  38:11
+Okay, I'd love to set up a and I know there's, there's people that do the install at Intel there and everything. So there's, there's probably another option. The steel erectors were a little scared of putting that that crane in, so I'd love to get a call set up, maybe with you mark and Connelly cranes, and just talk through some of that.
+
+Speaker 2  38:33
+Sure. Yeah, yeah. Our thought now that coming back to this, is that a portion of this 102 erection sequence could be left out so that it's close to the edge, and you can rect and place the crane right in this last bay. So because we would need, really, the majority of the structure has to be complete and in place before it's erected. It kind of has to happen close to the end. But we don't have any significant diaphragm requirements up in this upper most roof as the way that we've set out the structure. So we could leave out this last bay for that one. So if you said you were going to do the same thing for the 75 ton cranes, we might have a little bit of a discussion, because we do have a diaphragm at that lower roof level that's doing some good work. So just to kind of put that one out there as well,
+
+Speaker 9  39:22
+I one
+
+Speaker 8  39:29
+out there as well. Just, yeah, just a heads up. I'll send an email out, but we do need to include, at minimum, Nick myself and an individual named James trebesh. He's on the delivery side of Pacific fusion. He's running points with cone cranes. Thank you.
+
+Ryan Hankins  39:54
+One thing that you guys should be aware of is, and I know schedule is super important to Pacific fusion. And we're we're obviously focused on that the biggest risk to the schedule, as it currently stands, is getting steel through the mill. And once we get steel through the mill, then it's fabrication capacity. But I can't hold anybody's fabrication capacity until we understand when the mill is going to be able to deliver us material given, given the and this is, you know, I mean, this is, it's got a lot of requirements this project. And so it's probably going to require heavy members and big members. But all this has to go through a new core. Most of them are new core, custom shapes. And, you know, a lot of the projected rolling dates, even the future ones, are all closed and so, and I know you guys are still working through, but any, any advance we can get on a mill order will help us with going to secure that steel. And then we can work through the detailing. We can work through all that stuff after the fact, but I just didn't know what you guys timeline looked like for that.
+
+Speaker 2  41:07
+Well, actually, from our side, I mean, seems like it was pretty standard request of having, like, a mill order release or deliverable, right? We as a design team have not discussed it, so I'm a little bit reluctant to commit or provide any thing right now, what might be good for us to do is identify which ones of those, the critical ones that are required for that early mill order, and then see get an idea of our confidence level in those sizes. Because then, you know, I feel like we've done it pretty good for DD level. Our analysis is pretty developed for the big sections, and I think that we could get you a mill order fairly shortly. But I do want to have the discussion internally, and then also identify what those sections are. Is it just these sections that are shown kind of in this blow up that are the big or is it the red so highlight ones? I was a little bit confused by the,
+
+Ryan Hankins  42:10
+yeah, the the mill is, I mean, to put it bluntly, the mill is kind of a shit show right now because of all the data center construction going on in the US. I mean, everything that's shown in red on this, I mean, basically everything that's scheduled is completely closed. And that's even through smaller members on the larger members, the ones that are in the right side of that graphic that I'll have read, all of those are completely closed through the next opening. And so we are projecting that September is the next date, but as soon as anybody gifts gets a whiff of that, they're going to start filling that up. And so getting in, getting our spot in line, is going to be pretty critical for what we think is potentially a September date. Secondly, on the smaller member side, while the next projected weeks are not closed yet, those considering that they're all pretty much closed for the current those are going to also start filling up quickly. And while they do require while they do have more roll dates for those, it's just, you know, schedule, schedule risk, versus getting it locked in is going to be our friend on the schedule.
+
+Speaker 2  43:31
+How does, how does that mill order date like, what is your guys's mill or day? If you were to pull back and say, I need big shapes by this date, and all shapes by this date, when would those be? We have the ability to meet those requirements in one way or another. Maybe this deals a little bit bigger than we need it to be. But if it's a schedule issue that would push the project, it would be very much worth it to do that right, and we, we do that somewhat regularly.
+
+Ryan Hankins  44:05
+So we're, we're, we're definitely open to it, if yes, I mean, I think we just need to work through it, and I need to work closely with Cory and Nick and so, yeah,
+
+Speaker 2  44:22
+from our side, the really big sizes are more or less governed by the crane, and the crane loads, the rail loading, and then the columns for it. We've done a lot of work. Preliminarily for those, we have that those sizes pretty well locked in. The other big members are for the long spans at the roof. And I think again, we can dial those in and make sure that we, if we need to, we can have a little bit of a comfort zone on those, but we could work towards getting you the information you need to meet that schedule. So rather meet schedule than to have an amazing like, we save just a few pounds of steel type of design, so schedule is going to be king. And I
+
+Ryan Hankins  45:09
+know we haven't absolutely,
+
+Speaker 6  45:12
+yeah, I definitely agree with that. Mark schedule is paramount for us. So even if we're slightly oversized on some of those steel members, I think we're willing to accept that that additional risk or cost that associated with it to maintain our overall schedule.
+
+Speaker 3  45:32
+Rebecca, can I just this is probably a really dumb question, but just so that I have an understanding so you were saying the next mill date that you're kind of looking at is September, and then just in terms of your schedule and how that works, when would you need the information from TT onsetty, of like, what would be a schedule of when you would need to get that mill order and the sizes
+
+Ryan Hankins  46:01
+locked in. So the new core is a little bit like, and this is, this is a close conversation here. And this comes back to my humor, Rebecca, but new, new core is a little bit of a MA is like a little bit of the mafia, like the steel mafia. And so everybody thinks they have good relationships with them, but they don't answer to anybody. And so, I mean, it doesn't matter if you do $20 billion of business with them, like, they just don't care. And so when a you know, they've told us that they think the next rolling, projected date is going to be September, whenever it fills up and whenever it opens, like that's just up to chance. Normally it's so, it's like, so if I told you a date, I mean, I would say, I think we just need to figure out. I think what Marc was saying was probably the appropriate route, which is, let's figure out these critical members when, if we have the information, that we can say, hey, we're solidified. I think that gives us enough to start going off of in relatively short term. And then let's start working towards getting the rest of the design solidified as soon as possible. Because no matter what, we're always going to have that risk until we've solidified on our mill, on our mill order.
+
+Speaker 2  47:20
+And all right, does that September date fit with your guys's kind of construction fabrication schedule? And then the other question would be, is there, is there room for it to move backwards, or is it kind of like that? Is we have to meet that to meet schedule.
+
+Ryan Hankins  47:39
+There's, there's room like we may have to re sequence the project potentially, but, you know, until we September is when I want to try to get it, because if we wait longer, then we're looking into first of next year. And I mean, it's a quarterly shift, it's, it's for these bigger members, I would say once a quarter, maybe once a quarter and a half got it. And when we get the mill, like, let's say the mill is September, then we need eight to 12 weeks to fabricate it, and it's got a it's got a ship, and it's got to do all those things. And so, you know, getting steel on site by December would be great. I think that's what we're kind of planning on right now. But if it pushes then there may be re sequencing, there may be schedule impacts there. It's just until we have it solidified. We just don't know. Okay, got it?
+
+Speaker 2  48:38
+Okay? So that was this one? We'll keep talking with it on the schedule. I don't know who has the action item in terms of that. Is there something that you need from us, or is there a date that you want to provide in terms of your target?
+
+Ryan Hankins  48:56
+Here's that. Here's what I think understanding now what you've told me, let us talk about this next week in person. I think that'll I think giving us a couple days to think about it will allow us to respond better.
+
+Unknown Speaker  49:09
+Okay, sounds good.
+
+Speaker 2  49:14
+Cool. Then I think the section really skipped over was the structural cost drivers. So this is the request here was to kind of help guide us in terms of as we're looking towards the E items.
+
+Ryan Hankins  49:29
+So the difficulty with the cost drivers for the concrete and the steel is, I mean, first off, just like the massiveness that we need of concrete, for example, and the massiveness of the steel we need. I mean, 50 pounds a foot, that's a heavy building on steel. And once again, not saying that that's like out of line, because, you know, for the loads we're experiencing, you know, you would, you'd almost expect that we'd be in that range. But you know, typically, we're seeing green fields in the 5750 to 6150 a ton for like, for example, like a data center, a little bit lighter pieces of steel, but the way we've priced it, and we didn't have necessarily information to go to market, but we are budgeting around $6,500 a ton right now, just because of the complexities and the weights and some of the larger picks right now we're budgeting on that higher end. And so I'm not necessarily saying, I think for us to necessarily give you detailed Value Engineering on this. I think we need to see more of kind of where the design setting for us to be able to give you true input. But once again, like we're kind of in this conundrum of schedule versus cost, and then not having the design yet is is pretty tough to necessarily give us, or to for us to give a bunch of Value Engineering on the steel.
+
+Speaker 2  50:59
+Yeah. Okay. In terms of that steel, I assume you guys, do you guys have a fabricator picked or who would be okay? Not yet
+
+Ryan Hankins  51:11
+we, we do, we do self perform some of that. And so depending on how, depending on how this goes, that's an option that we can pull on to help just get capacity. We also have a good relationship with like, am fab and some of those guys that may be more local to the Albuquerque area, so we're but, you know, you work with one, and then all of a sudden they get this huge data center project, and all of a sudden their fabrication capacity is gone the next day. And so we are going to be looking at several avenues for fabrication
+
+Speaker 2  51:46
+in terms of identifying things in the design that are kind of driving the steel cost, whether it's detailing or you guys suggesting, hey, instead of, you know, buying this new core steel, we want to do it as play goods or something like that. Is there a process for that where you have somebody, an Erector or the steel fabricator, is looking at it saying, Hey, this is expensive. Is there a better way to do it? Yes, we do.
+
+Ryan Hankins  52:13
+And if we want to have a detailed discussion around that, I think that would be worth it.
+
+Speaker 2  52:19
+Yeah, I was gonna suggest the same. I think it would be better for us to have a conversation and kind of walk you through where we are on the design, instead of producing something and taking the time to produce it. So the conversation would probably be really helpful. Yep, so, all right, so then I guess is that something that can be set up. I don't know when next week, week after something
+
+Ryan Hankins  52:47
+like that. Yeah, let's, I mean, I think we're right now focused on getting a good kick off and successful value engineering effort next week. I think maybe let's aim for Friday next week, while we're all back in our seats, that might be the best timeline for that.
+
+Speaker 2  53:04
+Okay, we'll look at that in terms of our schedule. Sorry, I might want to push it one more day The following week, but let us look at it and see. I think that getting our team having some alignment to make sure that we can really show you the design would be really helpful, instead of just kind of talking in fake terms. So I want to make sure that we have the right team members
+
+Ryan Hankins  53:31
+available Absolutely. And you know, part of the next week too is like we're hoping to walk away knowing, like we have this 100% VD set. It's on my desk right now, but knowing where the designs heading so that, and then also giving our feedback overall to make sure that where we see the design going, and where you guys have the design going, just making sure that, like, we're walking into that meeting, kind of like, you know, have a good handshake, and that we're all the same page.
+
+Speaker 2  54:02
+I and then on the concrete, kind of refinement, value engineering of those, I think there will be a good amount of refinement in the foundations. Some of the things we won't be able to refine, like the trenches and the depth of the vaults and stuff. But like we have based our design, the design that you saw, on the geotechnical recommendations, which were a lower bearing pressure, and we were concerned about meeting the stiffness requirements. So as we work with with WGI, we will start to see that concrete reduction come through in the design. And so we are working on that, and we it should come through design. So I think that that is the real process for us on that topic.
+
+Ryan Hankins  54:46
+So I would agree. I mean, we would expect that in a with with geo, peers and whatnot. And so we'll just, we'll wait for your guys leave there. I think Courtney had a really good option, and Courtney, we went ahead and looked at it. We're actually doing a mock up right now of a different product, the steel fibers. We think it's a good idea for, like, flat work type, standard slab thicknesses, maybe up to, like a foot, but anything more than that, it's going to be tough to replace rebar. So I think for the pits, I think for the matt slabs, I think for some of the other structural components, we're probably gonna have to stay with rebar. Yeah, no worries.
+
+Speaker 2  55:29
+Yeah, yeah. We would kind of agree with that, that user flat work is a great, great place for it. And I don't know that we'll get all the rebar out there, but at least significantly reducing it. So, yes, yeah, okay. One thing in terms of replacing or pulling rebar out, and just to kind of put a pin in this so everybody can keep in their mind, I know that there is a requirement to have a grounding grid throughout much of the rd space, and we're using the rebar for that. So I don't want to take it all out and then be like, Yeah, we don't have the grid anymore. So just so we're keeping that in mind.
+
+Ryan Hankins  56:07
+So, and actually, that was one of my constructability items, is like, we show, we show that that 30 foot grounding grid, or whatever, some of it's going over the tunnel. And so how we actually extend that around. The tunnel is going to be a pretty big constructability item we'll need
+
+Speaker 4  56:25
+to work through. Okay, cool. Mark and Ryan, next steps, I think the week after Nick, next mark will go over design criteria with Brian to look at out of the box items. And Mark, will you set up the date for that? Or do you want us to set up the date for that?
+
+Speaker 2  56:43
+Let me send you some dates of availability, and then I'll let you guys set up coordinate. Is that fine?
+
+Speaker 4  56:50
+Yes. And then I think the second part also is the geo peer, geo tech, that kind of group talk as well. Mark, just to get ahead of that, yeah,
+
+Speaker 2  57:02
+we're kind of, we're iterating, going back and forth with Craig from WGI So, and I think that that's going pretty well. I'd like to see when he provides his next set of feedback in terms of how much different it is, if there's big changes in it, then we should have a conversation and say, hey, what can we do? I suspect that there will be some changes. It will be small. And if that's the case, that means we're actually converging, and we're getting close to the answer. So let's wait and see what his next piece of feedback is. And I don't have a timeline for that, when we should receive it for him, so I'll reach out and find out. But then I would say, once we get that back and we have an understanding of how far away we are from convergence, then that would be the time to decide whether to have a conversation or not. Perfect. All right.
+
+Speaker 1  57:56
+Cool. All right. Anything else? Happy? Friday.
+
+Ryan Hankins  58:02
+Happy Friday. Good call, thanks. Yeah, I have a call in three minutes. But I just mean, these are, these are fun problems to solve. We're, we're super excited. And you know, the fact that we have the very capable design team with us is great. And I think we just got to put our heads together and get through some of the stuff.
+
+Speaker 2  58:23
+So agreed. So looking forward to it. Have a weekend. Thanks. You. You
+
+
+Transcribed by https://otter.ai

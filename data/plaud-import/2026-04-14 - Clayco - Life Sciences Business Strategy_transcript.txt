@@ -1,0 +1,368 @@
+Ryan Abbott  00:00
+Why don't we? Why don't we go group by group here? So for the life sciences pharmaceutical team, things that you're thinking about, or opportunities for business compute.
+
+Speaker 1  00:13
+So jokingly, you pointed at me, but I do have a question about all of these. So there's a lot of talk about hiring and bringing in subject matter experts from a talent standpoint, curious to hear from any of the groups, what have the discussions been surrounding, either promoting or growing people from within? Because that's how we started talking about the day. So is it the best model to go out and look for these folks? Or maybe it's a combo of looking at the bench that we have, and how do we grow them quicker? So what have some of the groups
+
+Unknown Speaker  00:45
+discussed surrounding that?
+
+Ryan Abbott  00:47
+No, that's a great one. Maybe we could talk about what, what has been happening in life science right now. So we've got several folks that we're working with in an affiliation or outside of the firm, but they're, you know, gun for hire, and we brought into projects as an SME, like I can think the milk for sigma is probably one of the most interesting ones, where it's a strategic partnership that we're getting that expertise and able to push it forward as a bridging strategy. I can't tell you, one of the challenges with SMEs is until you have a body of work that they can go and work on, it's very difficult to sort of get them hungry and interested in that. You know, one off the word, but, yeah, that's what do you guys think we definitely, we definitely
+
+Speaker 2  01:33
+need a combo like Shawn dysiek is an example of somebody no life science experience, but he's doing an excellent job. It's really, I mean, we say life sciences, and a lot of it's just communicating, knowing the client communicate with me. I haven't been asked about a buy record, so people don't have to know how all it goes together. But I would say we're looking at a pharmaceutical life
+
+Speaker 3  01:59
+sciences from a design perspective, Jon, Elizabeth,
+
+Speaker 4  02:05
+I would just say that it is a combination. Of course, we do have some great experts on the team. This is about expanding them into new markets where we don't have that experience, and we are identifying some younger people who could be market leaders, growing towards those positions. And that's been part of this is putting them in position to succeed there, too. But I think what we're really focused on are the areas where we don't have those experts, and that's where we do need to bring them from outside.
+
+Speaker 5  02:33
+I just had a Bruce to get another Bruce to get Palmer, and thought you guys are probably already thinking about this, and I did see we talked about a list of peers and competitors. Gil Ben, I think, was on your list. And so the idea of partnering with someone who's already noticed that
+
+Unknown Speaker  02:50
+within that market, that we can go into
+
+Speaker 5  02:53
+a market they want to get into, trying to enter the data center space. So it could be a great opportunity to partner and get benefit to two sides. And honestly, we need JV parties in the data center space anyways, because the capacity is So those could be worthwhile discussions.
+
+Speaker 6  03:13
+One thing for training. There's a group called IP, International Society of pharmaceutical experts. And there's, there's there's chapters in every region, and part of it is just education. They do seminars like weekly, monthly. And so it would be great if we could get people who are interested in life sciences nationally, within Clayco to attend those, be a part of them, get our name out there and learn these are really technical topics. And that's one thing we can do. It's most of it's free or it's pretty cheap.
+
+Speaker 7  03:42
+Doing so gives us exposure to the market too, and helps us recruit candidates, because our names active in the circles that we're talking about. It is true for each of the markets.
+
+Ryan Abbott  03:55
+I think it's a little bit of everything play for us is where we're at the it's figuring out how to attract some talent that's got the specificity of helping early beginning and get a project up and running correctly. It's it's us going and strategically partnering. I'll give you a really interesting one is we're seeing a whole bunch of detail people over at Lilly as an example, running that program. An example running that program. So they've been as they've blown up capex program has expanded exponentially. They've had to go to other industries and drag people from semiconductor to other. So it's, it's a little bit of everything
+
+Unknown Speaker  04:37
+he used to grow within. Dude.
+
+Conor Tighe  04:48
+Yeah. So one of the things I've seen effective with some of the business market segments is understanding where the flow of money is. That's Chicago with the DCEO funding from the state of Illinois. And this may be a more general question, but in pharma and life sciences, is there opportunities to have an SME based off of permitting, things that are regulatory in basis, things that we can show as extra advantage, that may also work in food and Bev things to where we can show to a client that we're thinking outside the box and we understand, like, what is necessary to get their project launched out of out of ground.
+
+Speaker 8  05:32
+That's That's right to the point yes. That's the difference knowing exactly what they need and talk their language, yes. And we have a couple of SMEs that actually know the regulatory part of it, so now clients can get some respect, or they understand our business. We would
+
+Speaker 6  05:49
+call that compliance as a service, yeah? Like getting their facility FDA and EU compliant?
+
+Conor Tighe  05:56
+Are we seeing the same thing on the food and Bev side?
+
+Unknown Speaker  05:59
+Yeah? I mean, it's definitely combines true USDA, FDA, just depending on what market,
+
+Speaker 9  06:07
+sub market, they have so much risk on their contractors, whether it's life science or food and beverage,
+
+Conor Tighe  06:15
+I feel like it's just a good wedge, like on the healthcare side. I know we're not doing that. It's the CO end process, right? It's figuring out where these wedges are and taking them so that the client understands that we can get their project launched.
+
+Speaker 7  06:31
+Good way to set yourself apart having that expertise that's more
+
+Speaker 10  06:35
+like commissioning. You know, also when you take commissioning at the end of a project, but there's a lot of risk associated with that, I often yearn for the white box. Days, here's your
+
+Speaker 11  06:48
+white box. I'm coming from the positive side is not inherent.
+
+Mike Pierle  07:00
+Different operator is not inherent in what we are
+
+Speaker 10  07:05
+focused on. You'd have to start a commissioning division of people with subject matter expertise in these areas.
+
+Ryan Abbott  07:13
+When you look at that work, oftentimes they want somebody completely independent, with the expertise coming in and doing the validation and verification that it's done in a way that they can stand up and not lose a job over right? You know, on the expanding, you know, in the business enhancement, a compliment to Life Sciences is we've got projects that are led by CSI out there, like MERV, we've got projects like on Lilly, fully integrated Ventana working on it, and we've done a great job of integrating with the design team and a true design build methodology on two campuses. I think, I think that's a huge testament to the team thinking pretty broadly. I do think there's a lot of opportunities for CDC, and a lot of the things that Graham you were presenting, there's opportunities for all of those things inside of these facilities, steel equipment, you know, bringing in things that are true, you know, building and campus centric, you've already been doing elsewhere. So I think that's something we need to focus on this year, is figuring that out and then, and then, advancing to the future tense of having some of the true process equipment as part of our operating and clean rooms for Sei, I mean, I think that's those are all opportunities, any anything else for Life Sciences, Business enhancement that Anybody wants to talk about, any other great ideas. Michael, anything? Okay, okay, let's talk to CSI in Chicago. I mean, obviously there's a compelling case, and there's a market sector here, anything that we want to double down on, or questions that you want to ask the team about, that you've been thinking about,
+
+Mike Pierle  09:02
+questions that the whole union relationship and deciding back up and the long term liabilities that come with the union obligation. I think that's certain that's been discussed and evaluated, but think that has to be folded into the risk portion of that real money.
+
+Speaker 12  09:27
+Mike, it also could be a study on the unions have gotten broader with what
+
+Unknown Speaker  09:38
+they want you to sign up for Jerry County, Tennessee.
+
+Speaker 13  09:41
+Mike, you're specific to CSI and Chicago land presentation or in general?
+
+Unknown Speaker  09:46
+Yeah, well, it's in general, but it's really not okay. I'm sorry.
+
+Speaker 12  09:51
+We've talked long and hard about the union agreements. We've talked about potentially being double breasted. We've talked about starting a different company under new heading. You know, that could sign up and splitting up operations. And I think all those things are for discussion. There's, you know, this has been happening for several years. We've been talking about it, but it is a real challenge to try to operate union and non union, which we currently do, but we control our signatory areas carefully, and we don't sign up out of those inventory areas unless it is a project specific, or a PLA or something that we can control. It doesn't have, you know, Evergreen agreements, and doesn't have multi state, you know, deals, because we have, you know, if you look at our project list, we're, we're in most states right now. They're everywhere, and the majority that is non union. So about the time you sign up a union agreement, you know, you find out, well, all of a sudden, we're working in a job that that union is signatory in, or an area now you put yourself at tremendous risk. So all good discussions, and I think we want to, I want to continue to accelerate those discussions, to see how far we to get and where we go?
+
+Speaker 13  11:01
+And there's others I've done it. So it's really going up to the market. Find a union lawyer that has represented firms that have done that before, but absolutely talk through it at length, but don't, don't let it tail out for years.
+
+Mike Pierle  11:16
+We do have a client. And related test was trying to break the paradigm in New York, and they did that in as they were, direct opposite to working. One of the largest union jobs ever occurred in New York. So related may be a way somebody, people that have access to perhaps give us some thoughts on, how do we how do you do this? And they literally bought companies they owned and operated. And I know that because years ago, in previous life, that's what. We managed seven construction residential sites across New York, and we managed it with the native affiliates that were non union. So that was a quite an eye opening experience.
+
+Conor Tighe  12:06
+Kibbit does it as well. They're double breasted. They're also an opportunity to learn. The related people are probably a good because they had fun breaking Yeah, we
+
+Speaker 14  12:18
+think if we're going to do it like, now's the time, right? We've got the backlog, we've got the revenue, we've got teams in place to help other teams from CSI and clay pill that work together, so we can figure out how to do it. Like, if you need $27 million you already have that right, and figure out how to do that small. And in the Chicago market, we got the hospital, we've got South Bend, we've got site Quantum. I mean, this is a great time for us to kind of get in and do that expansion, but it might have a two, three year window, and then we keep
+
+Speaker 12  12:50
+growing it. We've done studies with that same labor attorney that Jason we were mentioning, and he's very insightful with regards to double breasted, what what increases risk, what decreases risks. And I know Carmen was a part of all that as well. It gets exhausting, which is probably why it hasn't happened yet. It's a lot of effort to put in.
+
+Speaker 10  13:13
+I'm all for it. No, seriously, I'm all for it. We have had this discussion at multiple junctures, but the most interesting thing you said is that if we're going to do it now is the time right? Because we have the backup, we have the capital. But the thing about doing it is it cannot be the way we are integrated right now. It cannot be integrated like that. It has to be a free standing, standalone company with its own infrastructure and that that costs money, it costs time, it's less efficient. So you're building inefficiencies, and what is otherwise a very efficient structure, but if you are paying for it, and it pays for itself, and it can be funded. So I've always said it's all it's all about the business plan and the leadership of that company. Has to be different. Cannot be the same as CSI, cannot be the same as sei it has to be completely different.
+
+Speaker 13  14:01
+Yeah, otherwise you pierce. I went through it with my last team. He pierce the
+
+Unknown Speaker  14:04
+corporate veil, correct, and then it's a nightmare.
+
+Speaker 13  14:07
+You can't have any adjacencies of reporting. Has to be completely standalone. Other to Ben,
+
+Unknown Speaker  14:12
+and that's the operational challenge that we have.
+
+Speaker 12  14:14
+So what one discussion was to find a smaller, mid size concrete contractor in Chicago, acquire them, purchase them, and then let their operation become the new operation, if you will, again, separate ownership because
+
+Speaker 10  14:28
+it's cleaner and it's it can have common ownership. It just can't have common management. So there's likely, I think that's
+
+Speaker 5  14:35
+important to consider, that initiative is, if you have money to invest, is that the highest and best use of your investment? Would you choose to go there, you know, for all the pros and all the cons, or would you invest that money, either in some other aspect of the current operations to fuel that, or somewhere else that provides more benefits for less cost? That would be a part that should be part of the process,
+
+Unknown Speaker  15:03
+for sure, the other the other
+
+Anthony Johnson  15:05
+part of that analysis too. I think I mean some of the high margin work in that market, like Rivian, for example, we're able to go up there and do that work without having an office up there, you know, big like the bear stadium. If we were to get that type of project to I would expect that self perform would be a negotiated part of that deal too. So, I mean, to your point, it is a lot of work for a business that would theoretically perform a $5 million in net income at a one and a half percent market growth rate, year over year, you know. And it's also, I mean, you know, like, like, some of the comparative peers are, you know, the McKee, most companies doing vertical work. I mean, those are special crews got to build and all that too. So, I mean, with with the growth rates that CSI is on right now, and even just, you know what, you're spending a lot of time on Grant, how to drive up 50 basis points, 100 basis points? I mean, seems like there's a lot more wall hanging fruit. Oh yeah. It comes to, like, figuring out where to focus.
+
+Speaker 12  16:07
+There's plenty to do, that's for sure. Yeah, yeah.
+
+Conor Tighe  16:11
+And I mean not being full, like not being signatory to 150 in Chicago isn't going to kill you. Like, the market can still be penetrated.
+
+Unknown Speaker  16:21
+I think we are. We are signatory with certain we just had the list today. Spencer Justin, oh, we're not in 150
+
+Conor Tighe  16:29
+Yeah, you're not in 150 but you're in laborers and carpenters. You should be able to operate in Chicago with laborers and carpenters. You don't necessarily, yeah, we mentioned potentially, but those three, yeah,
+
+Speaker 14  16:41
+that's if it's a PLA, right? We have a PLA. We can do the work with you guys. You could come up
+
+Unknown Speaker  16:46
+and do it, right? Yeah, the PLAs would be a lot easier
+
+Speaker 14  16:49
+than non PLA, right? So maybe that market is exists. If there's a PLA and it's not working, there's not
+
+Conor Tighe  16:56
+Yeah, so PLA in Chicago isn't going to allow you, like, the PLA is not a solution in the six counties of
+
+Unknown Speaker  17:03
+Chicago requires all union
+
+Conor Tighe  17:05
+Yeah, requires all Yeah. So it's,
+
+Unknown Speaker  17:09
+I think it's a longer discussion, yeah, we're not going to run into
+
+Ryan Abbott  17:15
+expose what we can do and can't do and then figure
+
+Speaker 10  17:18
+out well and do the cost benefit analysis. Because in my experience, I've only been here 13 years. Every time we do this analysis, we decide that cost benefit decides that there's other lower hanging fruit that we'd rather pursue.
+
+Conor Tighe  17:29
+But there's, there's some advantages for Jr services alone within Chicago, because we could run consistent crews and make earnings on rates to where we're clearing overhead. So there's a there's probably an in between there without, like, doing full concrete, just having Jr services, because that's with laborers and carpenters.
+
+Ryan Abbott  17:53
+Okay, we got to move the bullet number three, food and beverage opportunities for market expansion or
+
+Speaker 15  18:06
+enhancement question, Ryan, it kind of pertains to all of these. There's like, there's something in the market shifts, like mission critical to do this 70% of our business right? And I know we're trying to focus on the hyperscale with 90% 10% percent. I think back like the Amazon days of pre covid, when that business slowed down, they stopped, you know, like a year ago, Microsoft stopped projects like, how quickly we think as an organization, we can kind of speed up some of these projects that we're chasing. Like, say, if you lose
+
+Unknown Speaker  18:50
+a $4 billion project, are we going to fill it with another compute project? If it's
+
+Speaker 15  18:57
+a $4 billion project, we'll be following with anything and everything we can scale these divisions to fill back logging projects. You project market shifts overnight, like the Amazon
+
+Anthony Johnson  19:05
+microphone, yeah, I mean the answer is, we've done it four times, probably in the last seven or eight years between covid, the first advanced manufacturing boom, the second advanced manufacturing zone, super low interest rate, industrial development boom market. And you know, we were up to 80% concentrated in industrial twice at Bank and 70% a third time. And you know, I think what was interesting is we had, we had like through the E commerce, the Advanced Manufacturing booms, we had started to build our really strong manufacturing talent base, technical builders, mechanical electrical expertise. We'd started building the mechanical electrical side of CDC, and when those markets shifted, we had built out the technical build infrastructure to be able to fill an org chart on another project. So I think that's the beauty of kind of where we have been building the enterprise, is that we have the ability to pivot, but we want to try to pivot in differentiated markets where we can, you know, play in the field that we're in and command a higher premium and drive self performed services. So, you know, if you shut off and manufacturing is booming, got a whole host of people that could pivot on over, you know. So, I mean, look at aefc, when that job stopped. We had that whole entire job site redeployed in less than two weeks, it
+
+Speaker 15  20:42
+translates better, yeah, versus we're living through those transitions with the years ago, where we were just big Box or E commerce harder to take those skills.
+
+Speaker 16  21:02
+Yep. Cloud. Anthony's point on that. You know, we always call it the rust chart, but we've looked at over 15 years. There were three or four kind of critical milestones, and all the things we just talked about is what we're able to do. But we never missed a beat because of the execution strategy and always being able to lean into other markets that over that time horizon, with those four shifts in the markets that occurred, we never missed our numbers. We continue to grow the bottom line 20% or more. And maybe the worst case was one of the years. Our revenue is flat year over year, but we still do our bottom line by 20% and that's because of the model the services and everything else we've talked about. So there's history that's tied back to and we're, I think, no definitely what you just described, Josh, that because of the investment in the people and technical aspects of what we do now, even easier to transition, where as we saw, life science is a huge opportunity, and others, we're more primed for that today than we probably have been at any other point in our history, yet we still executed when they occurred.
+
+Unknown Speaker  22:13
+And I agree that I was asking more community what was
+
+Ryan Abbott  22:28
+Yeah, I do think that data infrastructure is that it's infrastructure and it'll get used for something, right? It will either go to silicon and get even more square foot, or it will turn to manufacturing, or turn to robotics, but it's going to find its way.
+
+Anthony Johnson  22:48
+And Josh, that's part of what I mean. The segments we're reviewing today are the segments that we're in, we are in currently, that are on a differentiated field. It's not, you know, traditional commercial type work, and really just being sure that we're investing in the right areas so that we're prepared to grow as we need to grow newer business, growing to that business over time, and then tomorrow is other market segments that are in a differentiated level that we're not currently and sort of with the exception of solar, so hopefully you guys have good reviews on the solar one, but, but, you know, because we're trying to, we want to be, obviously leaning in hard to where, where the market is today, and also, you know, laying the foundation for where we need to Be, and want to be in three years and five years
+
+Unknown Speaker  23:46
+and 10 years, record backlog, data center, 75% in order to do all this New talk about today, then
+
+Ryan Abbott  24:07
+no, I think it's, how do you get these so that you're not losing opportunity in data infrastructure, like, how do you get these to stand up to where you're able to do the design, you're able to do the Per camera, you're able to do things that you're you that you're maybe not able to do on some of your data infrastructure. I look at it because
+
+Ryan Abbott  24:37
+of data center businesses, which is the right opportunity? Right?
+
+Mike Pierle  24:41
+Yeah, speaking to the affiliates, I think that there's margin opportunity and just on how we have to behave. It's one thing to be integrated with one it's another thing to look at the margin loss that we've had year over year with the affiliates or at Clayco, related to affiliates, so that there's a there's a tension there that continues to exist from the operations of all those groups working together. And if you just look at the downers over a period of the last five years, I think that would be incredibly enlightening. And so I think one of the things that all three of the entities are, all four plus Clayco, needs to put together, is what is the execution strategy? It's one thing to promote and to continue to expand in scale. I'm all in, but it has to be done well. Has to be done super well. We've not really talked through the execution side of this, and I think that there's a massive challenge, I would guess, to make Bret would we lose 10 million last year?
+
+Speaker 16  25:50
+Might matter. No. Last couple of years, we've been executing highly. Now there has been projects, yeah, perform early on that were missed opportunities, but as a whole, we outperform the last couple of years more so than we've ever had
+
+Mike Pierle  26:04
+to outperform. But you're I get all that, how much money do did we leave on the table amongst just the affiliates in Clayco that we otherwise should have captured
+
+Unknown Speaker  26:17
+by not on jobs we didn't do by not
+
+Mike Pierle  26:19
+using services or by performance related kind of issues, fee erosion, fee erosion, that's that's involved. I don't know what the number is, but it's a big number. It's 40 to 50,000,040
+
+Speaker 16  26:36
+to 50 million. That's just mostly missed opportunity or services, but a few projects that did not perform on top of that. So if we were to say we hit on all cylinders, it could be as much as that.
+
+Mike Pierle  26:49
+So how is that being measured?
+
+Speaker 16  26:52
+I think, through what we talked about earlier on, the sales, we're leveraging the Enterprise E to be, I think, an operation for reviewing the enterprise, and there's hard conversations in the go no way when the right opportunities don't present themselves. When it comes to services, right returns, we continue to get, I think, tighter and tighter, but we still have opportunity to lean in and improve on that picture as well. I think that's the biggest thing we're talking about here today that I think everybody sees on the point that you're making with all the success, there's still opportunity on the table.
+
+Conor Tighe  27:31
+I think it's also making sure that there's alignment between the affiliates and the Clayco Sales Team at the go, no go, and that we're not pencil women like go, no go. Just filling in CSI, 50 million. They make 2525 50,000,025% and not having the conversation with SCI that's that's why we've added all the affiliates, go,
+
+Speaker 17  27:54
+no go. It's not just absolutely,
+
+Ryan Abbott  27:59
+yeah, I love what's happened there, from just a leadership I've seen so many people in this room rise up and go, like, I'm going to put together a business plan that's going to work here, and then sponsor it through an executive review, and then sponsor I've seen that transition. I'm excited to see what that does. And I would just Mike Rose point. I would take it beyond that, I think two things I've been seeing on the project team,
+
+Speaker 18  28:28
+between that training like we're I think we're doing a great job talking about how we sell it to the clients and but internally, Setting up our processes to set up Sei and see CDC for success, and then, you know, making sure our teams understand the value that they bring to the project, not
+
+Unknown Speaker  28:51
+just, not just additional enterprise fee, but, you know, why would we want to use CDC and Cooper steel over somebody else, Right? Like, that's something I think we could
+
+Ryan Abbott  29:10
+develop. How about, how about, as we come down, anything for the LJC in terms of business enhancement from the presentation and software, are you feeling a difference in the organization structure.
+
+Unknown Speaker  29:31
+Zac was thinking about nodding, I can't tell
+
+Speaker 19  29:35
+you, I have noticed a difference when we were looking at the electrical speed initiative. Reach out to Anu, and she has an electrical engineer take a compute so it's easier to navigate through who you need to talk to and how to align the different parties to be able to execute new initiatives on
+
+Speaker 14  30:02
+meta. Conversations on meta and like, you guys refer to fee. It's, it's basically your hours and what you have into put the fee in right. And so how we preserve that as a business seems to be something that you know. I know you guys have made some shifts as an organization, but continuing to enhance and train on that, that like, hey, you know, this is our contingency. It shouldn't be spent. Or, you know, we have the 30% rates, and so this can't come out, so you can't use these hours. And so I think teaching the business side of LJC will be, you know, when we ask some of those questions, well, we're not really sure, and we got to the bottom of it right even through math and your other stuff. But I think, you know, having some of the young staff, and then even some of the upcoming staff know that and treat it like a business, I think would help.
+
+Ryan Abbott  30:50
+I I think that goes back to the first slide, where it was talking traditional enterprise like you leaning into the enterprise like as you curious about how that works, right? And then you get the lesson learned, and then you can bring up a generation of folks that can do that really well.
+
+Conor Tighe  31:08
+I have one question for your team, because this has changed over the years. Is your preferred deal, lump sum, or is it time, read?
+
+Unknown Speaker  31:18
+I prefer time, Cory, almost everything we do that's for the industrial side they like. It'd be
+
+Conor Tighe  31:35
+great to have like a cheat sheet of like in this segment, we really want to go lump sum. And this segment we'd like to go time rate card.
+
+Unknown Speaker  31:53
+I mean, those deals can be built into our integrated design,
+
+Speaker 20  31:59
+yeah, because what the market will bear changes totally, and that's why the complexity, and that's why we align the market, because every market is priced differently, like a percentage of healthcare commercial might be square footage data sanders are based on, you know, megawatt. So I mean, every market is priced differently and different margin to e commerce is low but profitable, like low percentage.
+
+Unknown Speaker  32:31
+He's more looking for Rosetta Stone.
+
+Anthony Johnson  32:35
+Dialog going on, really LJC, manufacturing and food and beverage together. You know, just thinking back to the initial LJC discussions, you know, I think tip of the spear was the wording that we've used. And really that restructuring of LJC and really rebuilding that business to be not a service following construction. But you know, first in the door SME, entrenched organization selling the expertise of design, of engineering and so, so like, when we think about food and beverage, for example, it seems like, if we're the contractor, they're talking to a food company. Somebody else has already been talking to them about the plant, you know, and all the equipment and everything. No different on manufacturing too. And I think all the compliments came to Jon today, like, reaffirm that. Like, you know, the subject matter expertise on the design side and those technical market segments is what gets the door open, gets gets what gets the client comfortable that we understand the product. No different on the data center side, you know, as we built that team out too, and added the mechanical capability and the electrical capability, and now we've got the trust of clients that we know we're doing that space too, on the design side, you know, conversely to that, like food and beverage just, I'm just gonna throw like a stereotype out over the industry, like a lot of the contracts are really shitty contracts. The payment terms are bad. You know, the jobs that the owners are, you know, a lot of times difficult to deal with. So I say that to say, like, again, rewinding to the beginning of this meeting, like we're in a phenomenal market right now, and I just don't know that I'd lose a whole bunch of sleep over trying to sell a billion dollars of food and beverage projects next year for bad clients, bad contracts, that, whatever. So you know, back on the SME thing, like keeping your foot in the door in that market and having a reputation on that market with having top engineering, top design, which is what the customers are buying at the end of the day. Anyways, that's kind of a low risk, lower risk, low cost way to do that. And when the big projects for the right clients come along, we've got a team here that can build anything for anybody, anywhere. So so I know that just might be one way to think about all that too, is just, you know, really be focused on the right customers and deals versus really focused on that market per se, you know, and lead with design.
+
+Speaker 10  35:16
+Yeah, yeah. I want to follow on your comment about food and beverage. Everybody knows, I'm not a fan of a bad contract, but if we're going to do a bad contract, we want to do work for Coca Cola, or, you know, other big names, right? We just have to have a commitment that we have to put our A teams on those projects, because you can't have a bad contract and a B team, you know, performance you because it's all becomes all about execution, because if the project is properly executed, then the contracts are relevant.
+
+Unknown Speaker  35:50
+Yeah, just one. Your attorney just said,
+
+Ryan Abbott  36:02
+Okay, super quick. We're in lightning round. Here was anybody else surprised by what you saw in the CDC and the SEI presentations? Raise your hand if you were surprised. How about that? Yeah, I think, I think that was time well, working to see what the capabilities are, and then, if you can just see into the future, what the future tense of both of those groups to be, it's pretty extraordinary. That does mean that when you run into a problem, like, pick up a phone and call and go, like, Hey, I've got like, like, Chad on medium voltage table, right? He's like, I need, what, four and a half miles of it. That's what I remember. I need that, or I need bus stack. Or, you know, Ryan, you know, selling a whole bunch of steel for interstial steel in his building. I think, I think these are probably some of the most exciting solutions that I see out here, and they can integrate into everything we're talking about, right? And I mean it, when somebody says, Hey, we're really worried about how many electricians we can get, it's like, well, let's get super
+
+Speaker 5  37:13
+creative about that, right? Two and a half percent increase from 12.5% kind of subbing out to 15% e to be with the self perform, I think some additional study one within those numbers, but if it is just a two and a half percent pick up, is that worth the risk having promote self perform across job sites? Is that the right solution versus providing that more modular that connects to the life science, connects the data centers, connects to all these other markets, is that a lower, containable risk that yields better profit is something we need to think through.
+
+Speaker 19  37:57
+That's a good point. I think we're being conservative on what we show there the trend of what we have seen, especially, for example, dynasty, when we self perform a billion dollars, then we landed at 24% at the end on gross margin. Galaxy is different, because we're just talking everything out. But we internally, we were targeting higher.
+
+Speaker 20  38:22
+Yeah, no, but
+
+Speaker 13  38:31
+it's more of, I think, also selective, like we weren't saying, Hey, we're going to take whatever we're doing and do all self perform. It was more of a recognition, especially in this next year or two is, what is, what is the piece we want to pull out that is at least risky. So when you see that those basis points, it's because,
+
+Unknown Speaker  38:49
+and the last thing we want to
+
+Speaker 13  38:50
+do is over present, because Anthony is going to go, that's great, and he doubles the number we wrote down. So it's, I don't think you would make sense to go into that, of course, because of how risky labor is if it's only two and a half. So I think you're seeing a number because it's a select but I do agree with you. I think there's opportunity clean room, where we can do a control, where it was brought up earlier, where we can pipe racks different ideas to address labor and quality concerns.
+
+Unknown Speaker  39:22
+Usually, in quality concern.
+
+Speaker 21  39:26
+One thing on CDC in particular, we have active contracts where we've negotiated CDC forming of steel, etc, and we're really outpacing that growth, right? So we're walking away from $140 million of steel procurement on Rivian, just because we can't confidently execute it. So back to the, you know, the first part of today, if you work with a good steel detail or coordinator, etc, on your projects, like, let's get those names bubble up to Graham and Bret and teams, we can hire them because, you know, walking away from that, like Rivian steel procurement, that's $15 million but we just can't confidently do it right. So we're showing discipline, walking away from it. But it's, it's real dollars. So that recruiting efforts,
+
+Speaker 13  40:09
+yeah, the capacity rank for Sei, CDC, all the subsequent teams right now, but especially on jobs we already have. It's painful to say we just don't have the team to do it. And it's not even a matter of saying, Let's Get creative.
+
+Speaker 8  40:26
+It would be very unsuccessful on these emerging markets we understand. Go back to the execution we cannot afford. But there's still a lot of barriers
+
+Speaker 8  40:48
+between working out of this. What are we doing? We can be buying more things. They don't know how much. I don't know if you can do cross painting by having people for a small amount of time working together.
+
+Ryan Abbott  41:13
+I love it. I think, I think we should talk about that at 205, tomorrow. I think that's a great idea. I think that's a great idea.
+
+Unknown Speaker  41:36
+Okay, anything for CRG as I want to tell you how much I love
+
+Unknown Speaker  41:51
+you, all right,
+
+Anthony Johnson  42:00
+less than five minutes wrap up here because I know everybody is tired. The HVAC that guy did his job though. I kept up with everything. Let's see. So we talked a lot about services today. So just curious. Pop quiz. Anybody remember how much of your bonus check was related to services? Six? That's right. So again, when you think about the enterprise model, that is the impact the services have on 61% of everybody, bonus check on the services side of business. So, so that's why it is important that we, you know, continue to help them improve theirs. You know, obviously they can grow in scale, but just like the construction business, in any business, they can also improve their efficiency and enhance their margins. So it's kind of a two way street that each aspect of the business is working on, of both growing and scale at a reasonable, responsible rate, but also improving the way that we're doing business just to be more profitable and better at what we do. So just to quickly scan through some notes I highlighted for today. So on the talent development side, you know, really seems like, broadly speaking, leadership developments gap we have. McCarthy type models seem to be something folks were latching on to. So highlighted that good comment at the end there too, of training the organization better on services, how that works. And like you said, Ben, both the margins, but also the value proposition, making sure people understand that. Let's see on the comp side, comp communication, understand the phase approach, and then also time comp for company objectives, making it more tangible, meaningful for the employees, understanding what they need to do to earn. The performance side and have that objective align with the organization. Recruiting side. Tyler team has been focused on key leaders, and again, the constraints of our projects are key leaders, the overall number and then the Keiko experience people. We're going to show you tomorrow what exactly like the higher end profile looks like with the current backlog and sales profile, just so everybody understands what that tool looks like, how it expands and contracts on the Enterprise margin side, I think we started some good conversations and talks on, how do we get accountability through the process, making sure from sales to hand off for sales to estimate to precon to hand off to operations, to close out that we're being held accountable through the process. I think it's important just to confirm what we talked about earlier, like having that visibility shouldn't just be at the executive level. We got to get that visibility down to the project team, so that the project teams understand what they're driving and have the ability to drive it. Let's see. On the pre qual process side, a lot of efforts there to pull pre quals, pre qualification itself, to the left for free, I think, as Adam mentioned. And then, you know, I think a little bit more dialogs needed to run the approval authority, which we can do separately. FP and a I could just have some follow up there. Just understand a little bit some of the roadblocks and the LJC side, probably somewhat caused by the merging of two businesses too, and that's sure delaying a lot of the data. Change directives. Great impacts. There big numbers, you know, some simple things like monthly change order meetings, another training aspect, you know, training continually, training the organization on change orders. Ever do enough of that? I mean, we experienced that last week. We were down in Alabama, and then on the sales and market initiatives, you know, we'll talk a little bit more about these tomorrow. I think you know, the underlying message, as we mentioned at the beginning here, is like, again, when you take a look at the organization as a whole, right now, we're in a phenomenal position. And so the important thing for each one of these existing businesses is to play the long game and make sure that we're, you know, aligning ourselves with the right clients and right customers. And really, building the business for long term and sustainable growth. Lots of things to continue to explore. There. Great comment on the joint venture partnerships. I think that is a good opportunity to kind of leverage our marketplace on the compute side to help life sciences and probably some of the other new businesses we'll discuss tomorrow as well. And then, you know the note on notes on CSI, I think the union hopefully means a whole lot of study. And like we said, seems like given everything else going on right now, like we can probably selectively continue to play in the Chicago land market.
+
+Anthony Johnson  47:01
+My comment, I didn't give any feedback one way or the other, but SMEs, you know, really the design is, I think, where the opportunity is, food and beverage building out the manufacturing side even more to with respect to those two market spaces, being focused on the right projects in those markets, and, you know, continuing to see the growth of the long term growth of the service businesses too. Do you think one thing we'll need to dive into on the SEI side too, is just how we deliver that value proposition? And, you know, help our employees understand that, because that will tell you when we explain what you guys did at galaxy to meta at their office in New York a couple weeks ago, they were like, Sign me up. We need more of that. So so the ability to drive offsite manufacturing at a rapid pace, and combining engineering offsite manufacturing the installation piece, that's a huge value add that not too many people do. So they miss any key points today? All right, so I know everybody worn out, so we got a little bit of time here, and we'll wrap up the day right here. Look forward to seeing everybody tomorrow morning. We'll get kicked off at eight o'clock again. Marc should be open shortly. So appreciate everybody.
+
+Speaker 7  48:30
+Holy crap. Jeez, three,
+
+Speaker 9  48:50
+I got cold out
+
+Unknown Speaker  49:25
+like, 6pm last night, dad, I got an email.
+
+
+Transcribed by https://otter.ai

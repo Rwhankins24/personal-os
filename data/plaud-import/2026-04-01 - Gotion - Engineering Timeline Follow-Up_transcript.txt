@@ -1,0 +1,131 @@
+Ryan Hankins  00:19
+Accomplishable. That's yeah, um, again, I think this is all driving around the best electrical side of things. I think Civil and Structural, we're pretty set there. Can we? Can we agree on that, like civil war? And that's when we got tracker here, and let me,
+
+Ryan Hankins  00:44
+I know, Luke sent an email this morning, kind of outlining what he thought needed to be in the sets to go in for permitting. I don't know if that's helpful to look at that or anything else, but
+
+Ryan Hankins  00:56
+basically it was layouts and cable connection details is what he wanted. So like that. That's the level of where these guys are at. So go ahead. Justin, Sarah, I'm
+
+Ryan Hankins  01:14
+just trying to get caught up here. From Jason, what the previous call was being tracker joined late there
+
+Ryan Hankins  01:21
+we were understanding cable size, because you freaked us out yesterday by saying it was 1500 MCM cables.
+
+Ryan Hankins  01:30
+He's saying so that this is that changed, and we need to go back to three feeders, the three PCs each. Is that correct?
+
+Ryan Hankins  01:39
+That was our quick little discussion. Instead of having these extra large cables and more than one size, is what can you do to even it out, you know, and keep one cable size one set of, you know, tea body sizes that we need to order and simplify the system, because it's not a lot of cables, and we don't want to really parallel runs. I mean, if we're going to parallel runs, we might as well just have two separate have two separate runs with less
+
+Ryan Hankins  02:05
+on it, 115 100 KC mill cable is generally hard to come by. Like long, pretty long lead time. I i
+
+Ryan Hankins  02:29
+So swing back here. And so as far as what y'all are, what y'all are looking for, and when you're looking for it, for the electrical side, you mentioned think on the list that it got sent over to me, it looks like basically everything in the 60% except for the the vendor drawing review, because I'm assuming y'all aren't have vendor drawings by that time. And then a couple of things pulled in, even from the 90s up to the 60s. Now, you mentioned cable connection details, or is there a specific cable connection detail y'all are looking for?
+
+Ryan Hankins  03:06
+That's they don't they don't understand the system we're giving them. This village does not
+
+Ryan Hankins  03:11
+right, right? So I guess it is there when they say connection details, as we get to interpret that it sounds like so, yes, what might I guess, as far as y'all interpretation, or what you'd be expecting from us, what would that look like? Are y'all just wanting to give them the MV I would, I would assume y'all want to go like, simpler than than giving them like everything. But I guess that's kind of part of, part of this scheduling conversation is around that, and then I do want to just caveat, and again, I wasn't on that call. I don't know why it wasn't on my on my calendar invite, but with changing those feeders and the number of PCs on it, like, totally understand we were trying to support, you know, the expedited schedule here, we got to get y'all something that you can procure so that you can put it in the graph. It in the ground and start putting it in the ground to meet schedule. Some of that, as far as, like, those little nuances in procurement, like, Okay, we can't get 1500 that's the stuff that's really going to kill us, being able to expedite those, those things forward, because, you know, now there has to be work to go back and update that on a something that we were thought was locked in, and we're going to be able to be, you know, getting me all that coming here in, like, 410, so,
+
+Ryan Hankins  04:31
+so tracker, I just want to say today, or was it yesterday? Was the first time I ever heard about 1500 so, because we haven't seen a single line diagram or had any communications about this, we had no idea what was up your sleeve. So that's why getting us a single line diagram or talking to us about these points would help us greatly, like we you know, I'm sorry that you weren't on that call earlier, but we just quickly hash through a lot of things that would make construction a lot easier. And, and procurement,
+
+Ryan Hankins  05:04
+yeah, no. And I totally, I mean, like, that's, we definitely want to, want to support that any way you can, right? Like, we want to give a design that's, that's easy, constructible, and helps y'all out. You know for sure, I think that you know, if there are items like that, that y'all know, right ahead, like, up front, like, Hey, these are where it has to be, like, you know, I don't think that's just like any kind of, you know, specification or from your procurement, like, this is the preference that we have to sit by. Like, we're really going to need to know that up front if we're going to be hitting these, you know, this kind of schedule compression is, I guess, what I'm getting at.
+
+Ryan Hankins  05:42
+I think, I think we to Karen's point. I think we need to see that initial single line in order to even give you those preferences, because we don't know what we don't know what game we're playing yet. If that makes
+
+Ryan Hankins  05:57
+sense, can you get my handy dandy wheel out? April 10 is when you guys said you're going to have the 30% done, right?
+
+Ryan Hankins  06:06
+And I got the right date there, right? Justin, Yep, yeah, you did.
+
+Ryan Hankins  06:12
+Travis, when did we say you wanted a electrical material showing up? So you want to start, you want to start breaking ground around the beginning of July, right?
+
+Ryan Hankins  06:20
+Yes, we need electrical material in August. Start in August.
+
+Ryan Hankins  06:25
+August 1, okay, so if I work back from August 1 to April, 10, just a minute. Oh, I don't have my wheel, right? I said, 36 at first, be a long day. Okay, that's 16 weeks team. And I already know from a friend I reached out to yesterday that the AWS power transformer is going to be 18 to 20 week lead time. That's why we were asking you to get us whatever you can so we can start lining these long lead time items up. Now Travis doesn't need to install that on August 1. He's got a few weeks lead time, but that 18 to 20 weeks doesn't involve us coming to contract and T's and C's, which, you know, takes a few weeks, from what I've learned with any procurement group I've worked with, not saying you'll be like that. Shawn, so do you know what I mean, that that's why we're pressing you for this. And I, you know, I'm sorry, Tracker, I'm not trying to be vulnerable
+
+Ryan Hankins  07:27
+and push No, no, absolutely. And I mean, and part of that is, I mean, like, like, that's, we're still having those conversations, and I think we were kind of zeroing in on on a schedule that we could meet for y'all because, I mean, part of us too, like, I'm not trying to be, you know, horrible back, right? Is for us to be transparent and tell y'all, like, what we can support and what we can't, because otherwise we're just, you know, it makes us all look bad if we're saying we can hit something and we can't. And so, like, you know, we were, I think me and Justin, correct me if I'm wrong. Justin, I think we were just about ready to, like, zero in on, hey, this is what we kind of would propose back, or how we're going to creatively meet y'all schedule and be able to get y'all some of that stuff in hand, both for the permit and for construction reasonings, and then kind of, you know, with with that change on cable size, that's again, kind of like, oh, okay, yeah, we got to go back to the drawing board to see, okay, how long do we have to work on getting those rearranged and the calc redone? And see, I don't know if, I guess, I don't know, the point of this call was really to go over that, that timeline and what we could do. I think that we probably had something close right Justin, but I don't like we, we can kind of pitch what we had, but might need to go back and I see Jason's on now. So, yeah, talk about what we're what we're able to do with the changes that even we, you know, had, you know, got conveyed to us today.
+
+Ryan Hankins  08:50
+Yeah, so in I can share my screen. This is what you you sent Travis, and you can keep you added on to it. So I'll just share my screen so that we're all kind of looking kind of what you came about, Luke, with some of your conversations with the county, or, you know, the village there. So kind of what you're, what you're seeing here is, hey, they they want a layout. They want some one line diagrams, grounding plan, and they're one like the details and the cable details, etc, to go in that permit, correct?
+
+Ryan Hankins  09:21
+Yeah, and obviously they didn't see this table. They didn't highlight it. That's me taking cable terminations and interpreting that into the deliverables list. And that aligns with what I think, what I said yesterday about we could try to submit it with what you guys have ready at 30% or at 60% on June 1, but it likely would be that July 7 date, when all that would be ready. But continued.
+
+Ryan Hankins  09:48
+Sorry, yeah, sounds good. The one thing we'll maybe talk about in track, or can maybe give some more examples, but I think the one thing we may want to take a look at and just confirm is this lightning plan or this lighting plan. But that's that's here and there we'll talk about schedule. So here, here's my proposed thought process in what I was talking with tracker about prior to that call earlier, Luke, so let's say we tentatively start the next design stage at 420, correct? That's what we're aiming for, assuming Gotion, everyone has their comments to us that Friday we can roll into Monday, and we have all RFIs. So what I'm proposing is we do a jump to 90s without doing a 60% deliverable. If you look at our original like 10 of schedule here, this is kind of what I'm thinking. So our 60% so just think of the 60 duration in here was we had planned for a 35 day iteration here would have put us about six five for deliverables on a 60% design. Now if, let's say we go straight to a 45 or excuse me, a 90% design. So give us the extra couple weeks. We're looking at about 619 that's a long time. And I'm sure you guys are thinking the same thing. That's a long time. From 420 to 619 without taking any looks at and we're going to 90% my proposed solution to that was almost like a quick stop around 515 to have call it a page turn, call whatever you want, of like, Hey, this is how far we've gone. We won't have all the deliverable mixed tricks, but we'll have a good chunk of them rolling, and it'll give you guys a good idea of like, hey, what expect? Maybe it's some good chance opportunity to talk with Gotion like, Hey, this is where all takes out with the design going to 90% if you have any comments like, this is a good time to say, Hey, this is we wanted to change this. Or, hey, we're looking at maybe changing, you know, whether it's equipment or whatnot, we can probably still get that in before we go to the full 90% package. And then you be able to submit your permit with a 90% confidence at a 619 instead of going to a permit at a six one, so it would take a little bit longer, but you would have a little bit more confidence in a 90% package on a 619 versus a 60% deliver permit on a six one. But that's kind of what I'm looking for from you. Luke and the Clayco team, is like, hey, like, is this feasible to even submit a permit on 619 to work with you guys a schedule? Because I know we talked about having a seven or a 90% due on seven seven so that would crush that seven seven mark, but it would come a little bit later than that 60% mark. You guys are looking
+
+Ryan Hankins  12:34
+for 619 for electrical. Sounds reasonable. Is there any way to get civil earlier?
+
+Ryan Hankins  12:41
+Yeah, sorry. I'm just talking about collection here, civil, I think we're all on the same page. And sorry, Luke, structural and civil, I'm still game planning 90% going on in six months. Okay, this is just electrical talk. That's, that's our biggest concern is, like, there's a lot of components to electrical, and that's where, like, that's why we just want to, like, hey, we need a little bit more time, but I think we can get to a 90% confidence on, like, a six, sorry, 619 date, which crushes it, like I said, the 770 but it would be coming in later than that. Six one date you're looking for permitting, and that's where I just didn't know how that necessarily works with, like, what you're trying to submit on six one, yeah, so
+
+Ryan Hankins  13:21
+Travis, that seems reasonable, reasonable to be we get, we get Civil and Structural in six one, get that permit. Process started, permits in hand before the end of June, and then electrical ready on. You said, 619, 619, and then that gives us two and a half, three week buffer between what between that seven, seven date we saw originally, and you're still getting your permanent hand before the end of July, 1 start of electrical early August. So that seems like a good plan to me. My only concern would be those procurement items that we're not going to have here in a week and a half that we need to get procured. Are we procuring those off of that, that pause in design for us to view? Like, are you guys going to give us those details as they're developed for us to go procure? Or how do we want to handle those one off items?
+
+Ryan Hankins  14:20
+So I would probably say, like, at the at the 30% right? Like, we can give y'all snip of that, that Aux panel board with the with the throat connection, so that y'all can, like, you know, a conversation starter, if you will. And then for 10 comes, y'all get the spec and the design basis that has some of those more, you know, thought out. She had two weeks to review the 30s, and so any, any major items that y'all identify there, where you're like, oh gosh, like this, this piece of equipment, we're never going to get it. Or that, you know, kind of like, maybe, you know, if y'all can get some feedback in those two weeks, to us to say, hey, this, this cable size has to change. Or this, you know, this rubber good can't be bad. Or however you want to do it there. Then when we start on 420 we've got kind of, if you will, y'all, I say, procurement preferences, anything that's coming from y'all, and we can start rolling. And then when we do that page turn, which I would call it a page turn, so we won't be like submitting. The plan is here that we wouldn't be submitting or going through a bunch of QC for a 60% package to get to y'all, but that, you know, we could share, like, the overall layout share, you know, the big picture in just a screen share. And if that's, you know, if that's a two hour screen share, or if y'all want a four hour or whatever y'all want, like, we could support that. But the idea would be that out of that meeting, we would basically have firm direction. There wouldn't be, like, a lot of review time that we'd need to waste going back and forth with, with Gotion or whatnot. It would be okay. Y'all like, this is where we were a little bit off. Okay, we're all aligned. We've got the major comments you had from the 30s. We've got these, you know, major, these minor to moderate comments you've got at the page, turn screen, share event, and then we're good to go with 90s. And then y'all can, you know at that point, I think you know some of those procurement items, you could even probably move from the 30% if you know, if you know that cable is not going to change again, I don't know how much you know risk tolerance y'all have, but like, typically, the MV cable is not going to change after that point. Or if it does, you can, you know, you can identify those like, Major, oh, this has to change. And then you could, you could do it at the 60% screen share. Sorry,
+
+Ryan Hankins  16:32
+I'm just playing around with this, so that way you guys kind of see roughly what I'm thinking here. You
+
+Ryan Hankins  16:46
+I don't know. I mean, do you think you'd want a week in there to review, like with Gotion, like where we're kind of at with phase one, or do we just do a couple days. I mean, all this would probably help expedite schedule, but this is kind of cracker, correct me wrong. This is kind of what we're thinking, right?
+
+Ryan Hankins  17:08
+Yeah, that that review and comment period after in your phase one, like, I that's the piece that I would, I would minimize, but, but, I mean, like, if that's something y'all want, you know, we could, we could build that in. I do think that, you know, the hope is, again, if you're going for just quick schedule, then you know, some of those nuances that might be optimizations, you know, again, I don't know how sensitive to Gotion is going to be to that. Or if we're going to, you know, you have to be doing a full turn like we would at a 60% so the benefit of skipping the 60s is not having to do a package, not having to do the QC, not having to go back and forth with comments, and being able to get get more of the actual design done.
+
+Ryan Hankins  17:58
+So hence my preference to take out that, that review comment page, or at least to minimize it, you know, I think we could probably work with, you know, two days instead of a week. That might be, you know, kind of a good compromise to say, Hey, y'all, y'all can take two days to look, to look at this, or, you know, time to get back and forth with Gotion for any, again, kind of minor to moderate comments.
+
+Ryan Hankins  18:26
+Yeah, and we've, we've done this before where we've tightened up the review periods and kind of turned it into like, maybe this means Luke, that we meet with Gotion in person for two days, and we sit down and go through, do a page, turn together with them, right? Just seems like a lot more gets done in person on these types of activities versus kind of piece mailing RFIs and emails back and forth with questions, right? So we could, we could schedule something, even if it's a full day where we just went down and page turn to these six days at a certain period and said, okay, here, you know, we capture it all live and then move move forward. So I'm sure there's going to be some things to get brought up that are going to be controversial, right? Like they're going to be they're going to want something that we're going to tell them that there's not enough time for, and it just takes way longer to do that over emails than it does, you know, in person or, like, on a scheduled, long call where we go through it together. Is it possible, Ryan,
+
+Ryan Hankins  19:32
+you're pretty muted enough. Your Mike's far away.
+
+Ryan Hankins  19:34
+Yeah, Ryan says it possible to do it at 30. I don't know the detail that we're going to get the comments on is going to be available at 30. It's like, right now we've got the site plan, and that's going to be a lot of what we're seeing at 30 is that kind of honed in and Travis to your point, I would think, generally, yes, in person would be better. But the problem is, with Gotion is the people we're dealing with don't know what they're looking at. And the individuals in China, Mal and Albert, they can look at it, but they're going to be leaning on other individuals within Gotion. So essentially, our design just gets forwarded out to who knows how many people, and Gotion is not going to fly an army of people in to review this design, like that's just not the way they operate. Yeah, they throw this into a void, and then get a whole bunch of comments back. Don't understand the comments. Send them to us. We respond. They get our responses back. Don't understand the responses, send it to the engineers, and that's how we get this huge feedback loop of emails and questions. Because we're dealing with we're not dealing with the people actually know what they're talking about. And, yeah, I guess that
+
+Ryan Hankins  20:44
+makes sense. Yeah. No, it does. We're kind of playing a game of telephone, and sometimes, by the time it makes it through their engineers and back to us, it's different than the way it went in and we that's what, that's probably what we need to maybe confront with them, though, right? It's like you've identified a pinch point, Luke, right now by, you know, calling out that we're just talking to their spokesperson. Not that, not the true subject matter experts, but maybe, if that just means us meeting in person with Muhammad and these guys that are here in the States, and then getting on an all day call like we've done that as well, right? Like Karen's had me sit on an in on a page, turn for two days straight, for six or eight hours, you know? And we just go through it. We just have, we have to hash things out in real time. We don't have time to for it, to go through all the filters. And maybe that's a point that Hankins needs to make with Gotion, when we go back to them with this schedule, right?
+
+Ryan Hankins  21:41
+Yeah, and we can sit down with, I definitely for sitting down in May Tino with Gotion
+
+Ryan Hankins  21:47
+and Morris and Muhammad. The issue we'll run into is when we're in these 8am 9am meetings with the team in China, it's 10pm
+
+Ryan Hankins  21:58
+yes, there's a time thing too. There's a time thing,
+
+Ryan Hankins  22:04
+and that's where I'm almost more. So I want to get the input from I want to get the input from Gotion on 30% and then that is what it is
+
+Ryan Hankins  22:16
+like we Yeah, to what Hankins just put in the chat. Yeah. Make, make Morris and Muhammad review with us. Get the the answers to our questions. And, yeah,
+
+Ryan Hankins  22:34
+I mean, Luke, I think I'm on the same page as you. Let's get this initial review out to Gotion on 30 percents. Let them know. Give them a stop clock. Let them know this. We're under time crunch. Need it back by x date, and then at some point in time between the 30s and the 90s, we need some one of a more of an informal review of this with Gotion in us, and it's going to be up to us to push on them to do it expedited, right? Yep, and along the way, we're going to need material specs to start placing orders. So if six, I heard 619 a 90% electrical set that we could set the time you need to start construction and submit, submit permit. Where does that leave us with getting an IFC set then?
+
+Ryan Hankins  23:35
+So I looked at what you guys put for the IFC and that's what I kind of was playing around with here. So your guys are tracking about a 728, date for IFC is Luke. I mean, the big thing tracker correct me if I'm wrong. I think the big thing for IFC is we just want to make sure, potentially, of what comments come back from the county for these 90s, and may want to get implemented here. I don't know tracker, what your thoughts
+
+Ryan Hankins  24:04
+are, but yeah, I'd also say one of the things that we usually see is the big item for the IFC is, or the hold up on the IFC is. I think y'all already, Karen, you already alluded to it like, you know, 54 weeks for a junction box, or what I mean, getting vendor drawings. So we typically don't, don't issue IFC is until we have vendor drawings. For obvious reasons, right? We're stamping it. We need to make sure that equipment is is correct, or else you get IFC with a ton of holds on it, and then we have to reissue an IFC later, which nobody wants. So that's, that's the big pieces as you're as you're purchasing some of these pieces of equipment, like when, when they're going to have vendor drawings ready to go, so that we can start incorporating those when you're going to have that, you know, kind of plant, SK, a security, fire, whatnot, information available for us to incorporate into that IFC, i i think i.
+
+
+Transcribed by https://otter.ai

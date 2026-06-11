@@ -1,0 +1,329 @@
+Speaker 1  00:00
+You guys, all right, what is that?
+
+Speaker 2  00:08
+Capacity and assignments? We're going to talk about quality, and then we'll wrap up. And then we wrap up world class. We're going to talk about operation, structure, growth, reimagining, hopefully represented, stabilize or stabilize world that
+
+Speaker 3  00:50
+conversation. This group here, most of us work together anyways on some of this stuff. So we're just gonna tell you a little bit about what happens behind the scenes when it comes to staffing and capacity. It is some stuff that we've changed moving forward, and give you guys an insight of what's coming up. So I'm just gonna kind of go over this in a high, high level workflow type scenario with sales and Ed group. And they find some prospects, they loaded into our CRM system attracts all of our potential projects coming up. We do kind of a early strategic fit to see if it's like a light no go go, no go process. We decide that's going to happen. They get populated into bridges, and that kind of starts to trigger the next phase of our capacity study bridges with the software we use to track all of our people. So then from there, we'll go into a more official GO, GO process and really start to understand if we have to be a key process that's going to move forward. And at that same time ops executives and say, Hey, give us a org chart, rough estimate beyond this, when's it start, when to stop? Go to the milestones. Fine tune what lives in Bridget so that we can get an accurate forecast with how many people we need coming up. And then as that goes through, then if the project, we fine tune that as the bid process goes, or the proposal process goes, and then eventually, when we win the process project that I'll be populating the bridges, real people, next slide. But just what are we solving for? Sorry, yeah, whole bunch of, whole bunch of opportunities, right? We're trying to get the right people in the right place at the right time with clear communication. So that's the other thing that we've been working on, is, how do we identify all these people that are moving around so we can have consistent communication to all of our stakeholders,
+
+Speaker 4  02:56
+good afternoon. So one of the recent tools that we've added to our operations staffing process is our project assignment form. This is a form that's filled out on Clayco access by every manager working here. It really provides good visibility to our staffing moves from project to project, so kind of see just a sample of what the form looks like. And again, we have a fixed distribution list. So whenever somebody moves from one project to the other, housing gets notified. Payroll gets notified, it gets notified. But then also we have project specific notifications as well. So the current project that the person is working on gets notified of them leaving, and then the new assignment team gets notified of them coming on board. It's shown to be a good tool to help just communicate that process of moving staff from one project for the next.
+
+Mike Pierle  03:59
+The other piece that is driving towards is helping to make certain that an individual weaknesses are communicated from supervisor to the new supervisor, so that if there are any gaps or items that need to be filled, we make certain that receiving team has a clear understanding of What the capabilities of the person has been decided.
+
+Speaker 5  04:22
+Okay, alright, so one of the big things, one of the big, I guess, themes throughout our discussions on this was this process just needs a lot better communication. So I think previously, there were some challenges our bridges system, I think works very well. The plan is to keep that, but there were some issues with I'll call it some relic projects, some old information that was skew in our manpower needs when those decisions were being made. So there's going to be an emphasis with the ops exec group to make sure when Brian mentioned, when a project is assigned and started, the staffing plans are in Mark's hands, and when they change that, they're updated. This is a really good system that a lot of projects have been using. It's just color coded on when the person is needed. Obviously, our standard staffing plan works well for that as well. Mark can take that, put it in the bridge it, but I think better communication is the theme here, keeping the manpower fresh in the system.
+
+Mike Pierle  05:27
+The project exact, just really starts when we're in the midst of pursuits. And so there's some deals that start, you know, from day one. And this is what we sometimes hear, oh, we need three people. Well, three people, meta sizes to 18. And the next thing you know, everyone's wondering, why we so, why are we so short? So this process starts at the inception. We can do an evaluation, and we'll have a couple examples to show you here once we wrap up.
+
+Speaker 3  05:56
+One of the things that's important here too is it doesn't have people's names. It's just positions, different levels of positions, so we can feed in and understand, you know, in the management field, supervision side, etc, what we need. Don't have to worry about putting people's names in there or anything like that.
+
+Unknown Speaker  06:14
+Well, they're really good at putting names in there,
+
+Unknown Speaker  06:19
+especially Roberto, yeah.
+
+Unknown Speaker  06:28
+Yeah, Tuesday morning pass around the wish list.
+
+Speaker 5  06:32
+So another thing we're looking at is project tenure in the mix of a specific job with the various levels of tenure for each Clayco employee. So obviously, we can't stack, you know, 4010 plus year Clayco people on one project. And conversely to that, we can't have a project full of brand new people. We shouldn't do that anyway. Yeah, we shouldn't. So this is an analysis that's going to be going into place to help get that good mix of tenured versus new employees.
+
+Mike Pierle  07:05
+Anything to add to that? Mike, yeah, I think on this, this is something that is going to be generated with AI tools. It's in the midst of being created as we speak. It is using all the resident information, of the information we have on every person that's within the organization, I will say, falling back a little bit to bridges. That's informing us a little bit better, but we've not been able to maximize it, and we're actually now able to see at the fingertips are Resi actually have a better understanding of the years they've been in this business. They've not been in this business at all. So please understand we are making conscious decisions and choices when we're making assignments. It's not just because we don't care. We didn't know it was a life science job. We know it's a life science job, but sometimes it is. It's a little bit of the accounting message. Last In First Out, first in first out, we are having to deal with that while we're still wrestling with the overall numbers, but this will also give us an insight to the leadership and the total composition. And that's where Anthony, I think you mentioned that yesterday, is it's count absolutely fill the seats. Two, its leaders, and then three, what is the Clayco experience factor.
+
+Speaker 6  08:25
+Our next slide is our supply and demand chart pulled directly out of bridge. Dash line, horizontal line, workforce. Bridget is not projecting higher. So that's that's the line. That's the amount of people we have today. The vertical lines are the roles needed to fill on our current projects and prospects that are in our business plan right now. Today. What this graph shows here is that basically, in the July time frame, we have a steady increase on demand going into the early 27 and those numbers come out to show that we need about a net positive 20 people per month on the hiring end to meet that demand. As you can see on the next bullet point there below, we've had a really successful start this year, and we're
+
+Unknown Speaker  09:25
+at a positive 33 people
+
+Speaker 6  09:28
+through March in 2024 we peaked at only 13 people per month, and last year was only nine people per month. So we're up to a fantastic start, but we got to keep that momentum going to meet our current business plan, which this model matches.
+
+Unknown Speaker  09:45
+This is Clayco. Clayco Alman
+
+Speaker 6  09:49
+and logic. The groups that are included in this chart are project
+
+Unknown Speaker  09:52
+management, Superintendent, safety,
+
+Unknown Speaker  09:55
+cost, VDC,
+
+Unknown Speaker  09:56
+quality, commissioning,
+
+Speaker 7  10:01
+otherwise, just avoid conditioning. Want to just these are the projects that are in the planning.
+
+Unknown Speaker  10:13
+What the enterprise so as projects move in to this
+
+Speaker 7  10:20
+or become, as a lot of people in the room prospect, if that goes a key prospect or verbal all of a sudden, that's not contemplated in here, so that would be additional pressure on this staffing requirement. So that's good context. So it's sold and keys sold and keys, Yes,
+
+Speaker 8  10:41
+Mark, can you explain how that also ties this graph ties to the stuff you talked about earlier, with the org charts and all those things.
+
+Speaker 6  10:49
+Yeah, org chart that we looked at color coding that's really important to me, so I know the timing on when each role is needed. A lot of times I'll get an org chart that shows every single role, but it doesn't show the start date. So timing on the start date is very important.
+
+Unknown Speaker  11:07
+It's really a staffing plan, right? You want name
+
+Speaker 1  11:18
+Big good.
+
+Speaker 5  11:27
+So, yeah. So some of the things we've done, for those of you that don't know how the system pretty much works now, is every other Tuesday, right? Or every other Tuesday? Steve, Mike, Rick, Brian, a few others all meet to assign these and so they're using, again, they're using the latest and greatest information they have which to reinforce the point. Again, it's, you know, critical that ops execs are keeping that up to date, and they make those assignments at that meeting. You know, Bridget is the main tool for that. What we're working to do is basically put better information in the decision makers hands so that they can more efficiently staff these at the end of the day. What we're trying to get rid of is me calling Mike and saying, Hey, I need a project manager on Monday like that. You know, he has to deal with, you know, 30 of me doing that, you can all see why that doesn't work. So looking forward, keeping your projections updated is important. And also say, not just startup project staffing, but your project the MO plans are extremely important too. Not just calling mark and saying, I need to get rid of a PD tomorrow. But you know, before you start be moving your project, you know, we're pushing to the opposite sex, you've got to, got to send that demo plan in and keep it updated. I think hand cooks a good example. We we demo. We demoed that project pretty much damn near perfect, on schedule. But that's because our onsite team was updating the demo plan constantly. Hey, something came up. These two people are going to be needed a little longer get that information to mark, because it's junk in, junk out. If Bridget is not up to date, then the decision makers, you know, don't have what they need to make the proper decisions. And then kind of going back to what Mike was saying lots of future plans to use AI to give them even more information, not just role, available date, but who is that person? What's their experience? What's their tenure? Just to help improve the I'll call it the staffing mix of our teams overall. Yeah. And then the
+
+Mike Pierle  13:40
+last piece is with pro core. It's a part of it's called phase 1b We're working with concrete strategies. Primarily they have a picture that the staffing plans are incorporated so they can measure advantage of productivity. But the idea is, how do we take the bridge, a foundation that we've created, perhaps getting consolidated in order to utilize pro course, so that when teams are doing their actual forecast, the information can be updated automatically. Rather than us having to kind of constantly touch, we'll still have the high touch. This is a people business. Things do change. They certainly can change between forecast, but enable that to have the information at our fingertips at the moment. So one of the things I did want to show, I'm going to attempt to do this. I'm going to show kind of bridges, just very briefly, and I will tell you the reason why I'm sharing this is not to Blow the room out or blow this room over All
+
+Unknown Speaker  15:00
+it's one of the
+
+Unknown Speaker  15:10
+most important operational decisions I it?
+
+Speaker 9  15:42
+I know, do just say something, just talk about something else.
+
+Unknown Speaker  15:52
+Project specific. This is also
+
+Speaker 5  15:55
+available in measure. Yeah, that's a good point. So measure up produces reports pulled straight out of bridge. If you get a snapshot on who's available, any questions? Mr. Joe Rahn, because most of us don't have access to bridge.
+
+Mike Pierle  16:13
+Okay, so I just a quick this is an analysis that was just recently done, and to give perspective, here's our supply demand. You can see our deltas, all right, this is a scenario we have the ability to go up in area plan. So I'm going to throw in SK, T, meta six, which I know is going to happen. I throw in, sorry,
+
+Unknown Speaker  16:39
+yeah, which we've been awarded. Yeah, we've been awarded.
+
+Mike Pierle  16:41
+I'm going to throw in the concept that has been discussed this week of throwing in Microsoft LPO and Microsoft E K. I'm going to apply that look at the change in the impact. So don't projects. That's just three projects. So now don't get caught up in the numbers, but in this scenario that we ran, we ran each of those buildings, LPO and eki have five builds. Three. It started off with 90 people on one build. We reduced it on the second build to 45 the next one to 45 next one to 45 and one of the projects is at 25 Do we have them all layered in correctly? We think we are correctly. We think we have the time based on the latest information that Ryan has been able to provide. But this is giving us real time information to understand what the level of impact is. Are of the decisions. So let's just say our forecast that came out of the out of the gate was say it was 30% off over okay, we'll just do the quick math. We can make that adjustment on the fly in the moment. It enables us to make some quick decisions. So when you look at again, I go back to the scenario plan. These are all projects that we have talked about. Make an adjustment to pull out LPF. There you see something that's still in a very heightened level of numbers, and it changes the numbers that were presented in the forecast earlier. But okay, now it spurs. Okay. Do we have a JV agreement? So we do some other way to try to augment the need of the people. Because if you look at our peak, we were in September, two weeks ago, Mark, we were probably flipping at 140 but here's another thing that this factor is in, is your jobs are shifting. They are changing. And so this is accounting for that ebb and flow of what's happening to work. And what it is not necessarily addressing is there are absolutely strategic fields orders that need to be filled, so to speak. Perhaps when we have a person Resi, perhaps when we have client pressure on our overall performance, those types of things are not necessarily managing that we have a separate list that we keep up with all the absolutes or the high
+
+Speaker 10  19:12
+any questions on maybe just speak as well to requirements change as the job goes on, too, and we had, we've had a couple pretty Big upticks and requirements from initial forecast on staff and so just explain, yeah, so
+
+Mike Pierle  19:26
+we talked about the planning needing to come from the project, but we've had an example. We had one job. We added to the plan. We needed three resources that turned into 18. We have another project where we thought we were level, set and done staffing, and it was Haskell. The next thing you know, a week and a half later, we need 42 people. So we went from we took people that were actually targeted to be assigned to Haskell, because 42 now turned into 28 so it is constant. Haves us moving people, and when people are coming in, they're looking for a level of certainty of where they're going. And there's a difference between going to Phoenix versus going to no man's land Texas. So that's one of our challenges, that we're constantly wrestling with the new talent. But even for our own talent that has been here for two, 510, years, they want clarity in where they're going. So the criticality the early information is so critical for us to really have a better assessment and capability to understand what the art of the possible is in what we're going to have to do, what level of effort is it going to take to overcome the challenges that we're constantly faced with. Now keep in mind, this is not accounting for when people have long term illnesses. This is not accounting when people have personal challenges and causes reassignments, not accounting for the resignation. The net number that we have of the 20 is accounting for that. That is a net number to achieve this year's business plan back. I guess we established that really in December, January, we kind of established that we had everything alive. But the numbers change consistently. I literally, I think we could tell you that by tomorrow morning, what I put on that board will be different than what I presented here. And so leadership level, one of the things we are doing, we are meeting every Monday for about 3045, minutes, and we are helping to try to make sure that there's a even Keiko and tempo. We're not racing out in front of ourselves. Same token. You know, the Anthony's, the Ryan scores, they have context of the shift in gains and losses that we're having with just what's happening on job site. I do want to just echo one thing that was mentioned on the close out. Here's one of our worst behaviors. Well, the job got substantial completion and got TCO last Friday. Everyone go. You're free by child. Go to the next job. Whoa, whoa, whoa, you kind of get the dog on thing closed. It's got to get to a financial close out. So one of the things that's happened to us in our our zest and our interest to fill the orders we've left 168 jobs behind that are not closed. So that's taking another level of effort and another level of resources that to help clean up the old news and help get our subcontractors paid. So that's just a side bar for the back
+
+Speaker 5  22:47
+that situation drags out close out substantially as well. We're bringing in new people to backfill, release some people too early. There's a adjustment period.
+
+Speaker 11  22:57
+Yeah, and Mike, I don't know. I've heard of competitors doing this where they have like punch I think you care, because they have dedicated crews to close each job.
+
+Speaker 8  23:14
+The philosophy sounds good, but then the problem is the team excited about the next job, you leave a bunch of stuff behind, right? Thought about it, but
+
+Unknown Speaker  23:27
+you're talking like a dedicated, small team that travels out.
+
+Unknown Speaker  23:32
+Whether it works or
+
+Speaker 12  23:38
+not, there's a pretty steep learning curve.
+
+Speaker 11  23:42
+Well, does the CRM populate the project? Piece of bridge it without the talk directly. You don't need
+
+Mike Pierle  23:49
+to manipulate it. It's linked, and Mark and Kelsey kind of helped make certain that we're staying in sync. In fact, there was a job that LPO job I just showed you. It was a no go, and so it was literally getting ready to come off of visibility and bridges. We were able to intercept it on Monday, and we click the right button. It stays in the system until there's absolutely so yes,
+
+Unknown Speaker  24:15
+obviously they're critical.
+
+Mike Pierle  24:16
+It's CRM getting it right is meaningful those days, because that is what was used initially to populate the project, etc.
+
+Speaker 9  24:27
+For the staffing is and CRM, is it pulling out from the go no go form.
+
+Mike Pierle  24:33
+It's not. It's not at that level yet. Staffing is Jose hands, me say, hands mark.
+
+Speaker 9  24:43
+Him that when we send him the charge,
+
+Unknown Speaker  24:50
+everybody put information,
+
+Mike Pierle  24:53
+no, no, just get it to Mark. Mark will take care of he can take your Excel files. Uses AI to get it all loaded into Bridget, super quick method, so it's not a lot of reproduction and breaking.
+
+Unknown Speaker  25:07
+Does the CRM go? No go.
+
+Speaker 13  25:15
+There's something we'll talk about. May be an opportunity to where it actually goes. It's developed. It goes into the estimating software. Does Bridget show it's an opportunity. We'll talk
+
+Mike Pierle  25:30
+about it. The question is, does Bridget show tenure? Yeah, yes, it is. Now we have any information, Mark, you want to walk through that? Yeah, it shows it's company.
+
+Unknown Speaker  25:41
+Tenure recently added
+
+Speaker 6  25:43
+more information about their former company, what it's worth and the type of work they've done. So yeah,
+
+Mike Pierle  25:51
+it also gives, it will, at a point time, give us also industry experience,
+
+Speaker 11  25:55
+but it only shows that once you've assigned that body to a project, that's correct mark,
+
+Speaker 14  25:59
+it doesn't also show variances, right? We've talked like, we change it, like, by change the staff, it doesn't necessarily show the variance of what was originally projected. No. And so I think that would be helpful, that we guys can see that, and then we can see for the projects, like, there are certain clients that are all of a sudden fill more. And then does it also, can you guys get data to the operations team where it says, you know, we're going after an SDN, like, hey, yeah, you're averaging this many people on these projects because you currently have them assigned.
+
+Speaker 6  26:31
+Yeah, I would almost recommend pulling that information out of page.
+
+Unknown Speaker  26:36
+Me, actual hours are charging job
+
+Speaker 6  26:40
+sometimes I always do. There's times when I don't know, say, a safety person or superintendent lands on her job until a couple months later. So my data might be 98% accurate. I would pull out. Are
+
+Unknown Speaker  26:58
+you looking for more, like FTEs of what?
+
+Speaker 14  27:01
+Yeah. I mean, like, as we go to people, you know, we we come up with a number. We think we're close to hopefully solving that, but we also need to track to, like, we think we needed 110 people, but now we have 140 that was a problem. And so, so then, how do we change the metrics to make sure we're not using our 20 people moving forward, and we're always 20 feet or vice personally. How are we not? I think sometimes we're overstaffed. And how do we, how do we have? How do we say, hey, you know someone's for 30 people. Be like, well, a year ago, we did the same job with 30 less people. Why do you need them? And that's happening, right? And that way, we have informational balance source that we can challenge or discuss. You know what the staffing should look like if we're not under staffing or over staffing to make appropriate decisions?
+
+Mike Pierle  27:57
+I mean, there are some checks and balances that we're utilizing to help make certain that we're in some reasonableness. Yeah, the LPO and eki. Those were good conversation we had earlier this week about, I think the total head count is 266 266 total head count requirements, you know, you just do adjust to rationalization. Does that make sense? Compared to Meyr, compared to Haskell, compared to some of the other mega jobs? And, yeah, it's probably a little bit overstated, but it doesn't change materially. Okay, instead of recruiting Frank, Frank Steve's got 35 a month. Okay, now we only have to get 33 a month. That's not
+
+Conor Tighe  28:47
+moving we we also have a broken data stream, the when we build the GC monitors and when we look in executive reviews, the actual, the actual hours from jde are not coming in to that analysis. We're looking at historical based off of this, and we're trying to figure out a way to solve that, because that that then solves some of what you're talking about. There's actualization of staff based off of their their category, safety, quality, schedule, correct, management,
+
+Unknown Speaker  29:21
+or, we know it's there. Joel, it's just having
+
+Mike Pierle  29:25
+found our conversation. Thank
+
+Speaker 15  29:37
+you guys. Go back. Matthew, members, Chad Jorgen, Ben, here, eight months now, enterprise quality, so looking across the enterprise, but we're really focusing on build, but we're going Amy and Shawn.
+
+Unknown Speaker  29:56
+Brenda, you it so the focus
+
+Speaker 16  30:08
+of our initiative here is, what is quality? For quality enterprise, we have been deeply thinking through, how do we right size our quality initiative, or that we talked about at
+
+Speaker 17  30:26
+length here all the various businesses, quality messaging and ownership in regards
+
+Speaker 17  30:42
+to how do we commute? And who owns the quality? There's a little bit of confusion in our company, I think currently, again, even some great presentations today,
+
+Speaker 16  31:02
+various from sports and entertainment to solar aviation, each one of those may require slightly different solutions on that for what type of successes we're bringing in might require Some expansion of our boots.
+
+Speaker 17  31:21
+Beyond that and then the the drumbeat that we want to get across operationally here is that everything should be largely driven by data, metrics and trends. We should get away from subjective
+
+Speaker 16  31:35
+reviews of what rate looks like, very repeatable across organization and all the businesses, what we consider day quality repeatable, no matter what the specifics of the project are, and then AI initiatives.
+
+Speaker 18  31:55
+We'll talk about that a little bit later. But how does that? How is that underpinned by new Lilly? Do?
+
+Speaker 16  32:02
+Fire, a big thing here that we want is our quality is on par with our safety, we have done a tremendous job as an organization with safety, in drilling that into the culture. Everybody understands what great safety looks like. The education piece there on how we produce
+
+Unknown Speaker  32:34
+those networks and safety, it
+
+Unknown Speaker  32:37
+is driven by data.
+
+Unknown Speaker  32:42
+Is a through organization of both culturally and
+
+Unknown Speaker  32:49
+operationally. How we produce that, and we need to improve as necessary, replicate that. We need to ensure big piece of it. As far
+
+Speaker 19  33:12
+as the individual, team, the
+
+Speaker 17  33:22
+superintendent, on the job for him, which now
+
+Speaker 17  33:39
+require but we really need to get back to kind of a core concept where it is the project owns the quality, take that total responsibility, and then we have quality, compassionate that educate, measure, frame, make sure that the consistency There across our project
+
+Unknown Speaker  33:57
+for what quality looks like.
+
+Speaker 15  34:02
+I message can be coming out, but we're getting away, like the TMS, the quality program, great, but what does it mean? What's the passion? It's like, you got to do it right? We got to do it once, and we have to own quality. That's the message we want people to feel and really focus on all the tools, all the techniques, great, but then what right is they don't do it once, they don't own it. We're not making that progress. We're not making it
+
+Speaker 17  34:33
+cultural, so operationally, driving on the project plan. This is something that we need great improvement across the organization. We have this phrase for precon operating, push to the left, right, heavy, heavy into the planning. This Quality
+
+Speaker 17  35:01
+Enhancement Award the project planning is the core of a great foundation of a great quality plan.
+
+Speaker 17  35:13
+You should be with Americans, but it should be project specific, and should have all the stakeholders participating in on that, that plan at the very outset of the quality plan starts from day one or two. A lot of our efforts and time process, we can
+
+Speaker 17  35:36
+have a solid, well thought out quality management plan from day one. We talked about a quality risk matrix being developed and a living quality plan. The quality Risk Matrix essentially should be a deep dive. Look into the specifics of that project, and we need to right size our resources,
+
+Unknown Speaker  36:00
+utilizing our quality professionals properly on these jobs
+
+Speaker 17  36:05
+is to make sure we're addressing the risk so certain jobs have enhanced risk in certain areas. And we should be, it shouldn't be just a blanket of all you know, we use, I've heard the past we've said things like just have a quality manager on every single project. Well, that may not hit the nail on the head. You may need different sets of expertise on the job, time with the project schedule, on that project. So during your underground instructor, foundation stage, your structure coming up, may need a certain set of skill sets there. Move on into your MEP. You need a different set. So we need to dissect this a little bit better and apply the right skill sets at the right time. And that comes from
+
+Speaker 17  36:57
+really set ourselves up for success by the steps that we talked about really, does that mean the job? And then another business is our phrase, right? Are we doing a great job at orientating our craze? Do they know what great looks like? Are we helping them understand the specifics of the job? Are we having a great conversation with them in the beginning, our pre planning, precon meeting coordination piece. I think we need to get deeper into that to make sure they understand on the project and plan that out so that they're ready and able to deliver a very high level high level quality for us, zero punch we talked about that. Build this concept. I think the Chad you said this is somewhat of a slogan right now. We need to move it into actionable items here and that that really is a functional difference. Have a continuous infection evolving throughout the process. So the zero punch, what we're heading for there is lowering the number of observations from the owner at the end, and we're going to talk about a little bit later what that metric may look like, and then just having a really solid coming into the finish of any project with your energization, your startup, Your
+
+Unknown Speaker  38:37
+instruction and testing,
+
+Speaker 17  38:41
+all that for a food Ben, venture. This piece down there with the quality department, we pulled out three things the AI, we're going to talk about that in a minute. Delivery of the quality
+
+Unknown Speaker  38:56
+program, harnessing all the heart.
+
+Speaker 17  39:02
+Information, organized again, we talked about the deployment of the quality personnel and more welcome manner resources most effectively, and then again, having our metrics. So there's going to be KPIs for quality, just like safety that we utilize to measure how are we doing. So every team member should
+
+Speaker 15  39:39
+know at all times, how are we doing? Safety? Safety quality, very similar. I a big change that we're making is is creating this one team. It is one quality team. And right now we've got tank, we've got Qt, and we've got mission, federal commission. I've talked to a lot of projects like, Well, who knows what? They're all quality. And the way to look at this is the project owns quality, but the personnel are bringing that technical expertise, you know, pay currently is bringing this deep knowledge on building enclosure, on architecture, on MVP, to the project. The project still owns that scope. Well, as the risk goes up, we need to bring full time people that really under understand inspection, testing, and how do we achieve that documentation, and obviously vision can get these systems to work, especially as they get more complex. Ultimately, we're changing, this is quality. This isn't Qc is not tag is not commissioned, and we're going to quality a quality manager, Quality Commission, quality director. Vaccine is going to be applied based on the risk commissioning. We're keeping commissioning. It's well known. It's really focused on getting those systems operational. So really on your project team, it's going to be a qTX team, not team not going to be q and CF, come together to address the risk. Go from initiation all the way to turn over to the get operational systems. So yes, the name is going away. They're not going away. The name is going away, function stay what's going to be a cohesive way. What this really means is, as Amy said, we are approaching every project on a risk basis. So what's the project? What's the risk? And the risk changes throughout the project. You know, we're not going to apply one person all the way through, because they may not have the talent, and we need that early engagement back in precon. Well, that's part time all the way to full time on a project. So we're working with the project executives. What does that look like? For example, the bottom here is, we just went through the Rivian. It's not a one size fits all well. We do have risk early on of how do we understand the design? How do we get it set up for success? How do we know what those initial quality plan is going to be when we get into the CSA work, we're going to start really heavy on quality, people full time on the project, but as we go through, we don't need the CSA at the end. We don't need those five people. We need more MEP people, and then we need more commissioning people. So we're looking at this on what's the risk, what's the resource you need, then how do we apply it? We're all quality personnel. That's where the project owns it, quality personnel are coming in to help elevate ensure we're achieving the goals for the project and mitigating
+
+Speaker 20  42:52
+that risk. So on the data side, we do a really good job as an enterprise, tracking safety metrics and publishing those out through the team so we know where every project stands. We can trend that information. We can identify some problem areas and help shore that up. So we fully intend to just mirror that with quality, sending out weekly quality summaries, reviewing these regularly and week or sorry, monthly project quality reviews, identifying trends, and that's all in an effort to reduce the rework, save time and money for our trade partners and ourselves as well. So on the next slide, one of the focuses will be tracking quality incidents, almost like safety incidents. So we want the cost and the severity frequency to stay down and to the left. So if we start seeing trends with subcontractors or certain areas, we want to be able to help shore that up. We would go through an RCA process like we do with quality, try to understand the root cause, figure out where the breakdown in the system was, just like safety, an incident or an injury was a breakdown in our system somewhere along the way, and we do a really good job trying to understand where that happened so we can fix it and prevent it from happening. So we need to copy that, that same process and model quality as well.
+
+Speaker 15  44:22
+I think a few things on that. The quality incidents, for me, is built into pro core ready, very simple check box. This is not a complicated form to get the data so we know where we're bleeding. And also on this, we are looking at proactive what do we need to know the system the project is running well to get ahead of risk. There is a reactive as we talked about before this punch as you build, how well are we getting ahead of issues that owner should not find, and that's from day one. So you'll have a punch as you build ratio saying, Are we doing our observation so the owner doesn't have to find the pharma space, and that'll be a health check leading to
+
+Speaker 13  45:10
+So, I mean, I think a key thing we want to do in the company is create seamless layers and put AI on top of how we operate. They there's different pieces of quality that are a little bit disjointed in terms of, how do we use AI to help make that seem more streamlined, because gather this quality is a lot.
+
+Speaker 21  45:31
+So we have looked at the different areas of kind of a quality framework, and then put
+
+Unknown Speaker  45:38
+an AI layer on top three components that one early detection,
+
+Unknown Speaker  45:52
+alcohol.
+
+
+Transcribed by https://otter.ai

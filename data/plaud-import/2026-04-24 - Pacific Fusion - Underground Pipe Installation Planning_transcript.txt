@@ -1,0 +1,632 @@
+Speaker 1  00:00
+Think if anything is going to be the federated model, which I can pull up unless Jeremy the Creo model,
+
+Speaker 2  00:07
+I've got a slide on it. Okay, yeah, pipe in the ground. I I'm
+
+Ryan Hankins  00:34
+sorry I'm not sharing my camera. I got kicked more from home today, and I got kicked into the room that is just kind of like our storage room. So it's not it's not great to share camera in here.
+
+Unknown Speaker  00:52
+We all have one of those rooms. Ryan, yes, band and boxes, electronics from the 90s. Yes, yeah, exactly. There we go.
+
+Unknown Speaker  01:21
+Water fill pipe. There we go. Can everyone see my screen?
+
+Speaker 2  01:29
+Yep. Okay, so I think the question here is about the cast in place or underground pipe leading to the interior water tank? I will say I'm not sure if it's 32 inch or 30 inch. We'll need to follow up on the exact size, but I don't think that really changes the discussion here. From what I saw, the information Mark sent over, we could either place it pretty much in the middle of the six foot slab, or have the pipe be four inches below the top of the pipe be four inches below the six foot slab. Operationally, if the pipe is in the middle of the slab, kind of, see, we do have a valve here that's in the trench. So if that was towards the middle of the slab, that bell would be above the top of the trench. So that doesn't really work. We could do it, but we'll have to put a Jon in the pipe to lower it down to what is this? The bottom of the pipe roughly a foot above the current bottom of the trench. If we put the bite of the pipe underneath the slab, four inches underneath the slab, it actually lowers that pipe in this trench a little bit. And so we're probably gonna have to put a Jon to raise that pipe up so that it's at the same level, or we need to lower the entire trench,
+
+Speaker 3  02:54
+including the pump. Fit is as you've drawn, is this kind of the most desirable elevation for the pipe, or where would the pipe be if there was nothing? No other constraints
+
+Speaker 2  03:10
+at this level, I believe the pipe touches the bottom of the slab. It's not to say necessarily that this is ideal. It's just where the current trench and pit depth is so if that were to change, we could accommodate a different pipe height, or we could put a small Jon in the pipe before it enters the trench. I think the big question has been from Ryan for the, I guess, how do I say it, the survivability of the pipe underground?
+
+Ryan Hankins  03:49
+And just to, just to frame it correctly, Jeremy, the way that, like I feel like I have, like, a professional due diligence to tell you when I think something's a bad idea, and for where you're for how much money you guys are spending on the facility, you guys are making some really good decisions with, you know, future flexibility. To me, it feels like just saying, Hey, we're going to bury this underground. Is a potential disaster waiting to happen that could potentially be like, I'm not in this is out of this is out of my purview, but it's like betting the company almost to a certain to a certain point I and that's where I'm like, I don't want anything to do with it. If this is, if this is the route we're going, I start getting super nervous that, like, you know, there's going to be a problem. And I don't necessarily want to tie my name to it.
+
+Speaker 2  04:56
+Yeah, I really appreciate the input and the forward thinking here, and I definitely do not want any issues with this pipe. Once we cast it in place, we're going to have a year of effort installing equipment above the pipe. So if we need to pick up the foundation or something to rework the pipe, it's a major, major effort, a huge setback.
+
+Ryan Hankins  05:20
+Yeah, I mean, it's removing the tank. It's like, I mean, I just can't even think how much time. It's probably six month effort to probably get everything dug up, just for one pipe to be fixed. And so that's kind of why I'm making a big deal out of it. Otherwise, I'd probably just let it go.
+
+Speaker 3  05:41
+But, um, yeah, okay, so I think that issue is probably one of the critical ones to resolve. If I can share screen just a little bit, there's two parts that kind of start to weigh on me a little bit in terms of that, or there's an approach that we can take. I swear I started sharing. There we go. So if it wants to be accessible, we can, we can put it a notch or a trench in the top of the mat. My concern is the way we've drawn this is relatively nice and convenient for us. It's kind of a shallow trench. If we would get to the point where this tren step starts to become deep as or as deep as or deeper than the normal depth of the trench, the detailing gets a little bit more complex and complicated. But this does kind of show some of the complexity we would have at that step, which is a little bit why we like to show it and say, Hey, there's some complexity with it. But we could definitely do this and then put a like, fill the void around the pipe, and then put a topping slab, essentially on top of it. The part, I'm sorry, part I'm struggling a little bit with is that when we look at it and plan, and this is all just rough sketching diagrams, right? If this is the drain hole as currently shown, and then the pipeline, there's a portion that is actually literally under the tank, right? And so I don't know how we can make that part of it accessible, like removing the tank would be tough, but I guess if you had the trench there, you could excavate tunnel into it, almost to fix the pipe over this length of it, or something. But I don't think it's ever going to be like free and clear, always completely, fully accessible, I guess would be my point. So, so I wanted to kind of bring up our structural approach of how we could do it and some of the constraints we have. But I think deciding whether it needs to be accessible is probably the key first decision.
+
+Ryan Hankins  08:00
+Jeremy on that same on that same topic, one thing that when we saw your shop drawings for the tank, the part two to this is that, and once again, this is not part of our scope, just professional due diligence. It looked like there was a sump being cast into the concrete underneath the underneath the pit or underneath the tank. That's also like, the way I look at those two are kind of in the same boat. I just, I think there's got to be a tunnel extension underneath so that we can go fix it if there's something that happens down the line. I mean, it's just the the damages you're going to have are monstrous compared to whatever we're going to pay today on insurance,
+
+Speaker 2  08:47
+hoping the sump would be being cast in place wouldn't be a concern or wouldn't be an issue. But I I'm really looking to everybody's expertise to understand where the concerns are and what we could do to alleviate any potential issues down the road.
+
+Ryan Hankins  09:08
+So for the sump, like, let's just say the sump. Mean you can get a sump rated for 1020 years, but you know, eventually that sumps gonna break. It doesn't matter if it's today or tomorrow, or 1020, years from now, and then also the manufacturer of that pump, if, if there's a failure, they're going to replace the pump. But that pumps probably, you know, 30, $50,000 they don't they're not going to cover anything with your equipment. They're just going to replace it's kind of like when you when you have a leaky faucet, they'll replace the O ring, but they're not going to give you a brand new faucet. It's just, I'm trying not to be combative, but at the same time, like I just feel like I have a due diligence to do here,
+
+Speaker 2  09:57
+I'm definitely open to ideas here,
+
+Ryan Hankins  10:01
+and that's where, like, my idea for, like, the tunnel, extending under, you know, extending underneath where you're going to be connecting. That is my best solution. And I know that there's additional turns, but or there's additional Jons in the pipe, but that can all be, ideally, that's something that can be engineered, like, whether it's, you know, static, static forces or whatnot, all that could typically just be engineered into the pipe, or engineered the pump or whatever it
+
+Speaker 2  10:41
+may be. Rough numbers in my head would probably have to go up to, like, a 36 inch pipe to accommodate the additional Ben to meet the flow requirements,
+
+Speaker 4  10:52
+which I mean, do you see any other concerns, Jeremy, if we extend the tunnel? Is that that a deal breaker? Or what are your thoughts there?
+
+Speaker 2  11:01
+It's really just cost. That area does have a lot of equipment that will be down there, so we'd have to kind of rethink about where that equipment lives, how we manage this pipe. We can't really do it in that specific area, so we'd have to come up with another path.
+
+Ryan Hankins  11:22
+I mean, we haven't started digging the tunnel yet. Can we just make the tunnel three feet deeper? That's kind of like, you know? I mean, once, once we start digging, yeah, like, it starts becoming an issue. But we're we haven't started construction yet. If we need to change something, we can change something now pretty easily.
+
+Speaker 2  11:41
+So that the you're talking about that entire tunnel area, yeah, equipment pit, as we're calling it now.
+
+Ryan Hankins  11:48
+Equipment pit, yeah, so we do
+
+Speaker 2  11:51
+have a lot of equipment that's designed down there, and it's sizing has been designed relative to its current floor height relative to the foundation height. Okay, so I have quite a bit of rework there.
+
+Ryan Hankins  12:08
+Could we just make the pits wider, like overall? I mean, if, if it's an, if it's an issue with you, want to keep everything exactly the same, why don't we just push that north wall out three feet to accommodate the pipe.
+
+Speaker 2  12:23
+And I guess kind of as an alternative, is it possible to make a the area around the pipe a separate pit?
+
+Ryan Hankins  12:38
+You could, but you'll still need. The problem you're gonna run into is you always need to access, like, here, let me see if I can pull up. Can some I'm not like, in front of a screen? Can someone pull open?
+
+Unknown Speaker  12:55
+Yeah, Ryan, I have it open so I can share my screen. Okay. Thank you. I
+
+Speaker 5  13:05
+you. Thank you. This is your email that yes, and this is what you're talking about, right?
+
+Ryan Hankins  13:12
+Yep. And so basically, Jeremy, what this would do is, on that north side, you don't even need to make the whole pit three feet to the north. It's just that small section where that pipe goes in and out. But we'd always you wouldn't you it wouldn't be getting access to it from above, like you wouldn't. It wouldn't solve the problem. Just to have access to it from above, you would need access to it from likely, within the pit to replace it.
+
+Speaker 2  13:45
+Just what I'm saying is from the the utility tunnel extension to the equipment tunnel extension, follow the original route of that pipe and kind of make that a separate pit accessible from the trench. If that makes sense,
+
+Ryan Hankins  14:09
+we could, sorry, I want to make sure Mark gets his question, his thoughts in here.
+
+Speaker 3  14:16
+Sorry, on this layout, before you go to the next layout goes back to the other one. Could the vertical pipe from the tank move to be over the current pit to avoid 290s in your pipe?
+
+Speaker 2  14:30
+The hard part is the equipment. Pit currently has full of equipment, if we
+
+Speaker 3  14:40
+extend it north, as being proposed, could the vertical pipe move over to that location to avoid the 290s because the 90s that increase the size of your pipe, right? We might be able to
+
+Ryan Hankins  14:58
+to answer your question specifically. Can we put another, another pit in there? Absolutely, but that just means we're building two separate pits that are both equally like, I mean, it's a you'd have to have access. There would likely be code requirements associated with it. Just, you know, we, we could do what you're what you're saying is a separate pit. It would just be, it probably more expensive to do it that way, in my
+
+Speaker 3  15:33
+opinion. And then for just to kind of put this out there for the structural side, if we put a another pit underneath the part of the mat that's supporting the tank. We would need, again, another the walls would be thick on that side, maybe not the four feet thick, but maybe three feet thick. And then the mat, there would be another mat on the bottom of it. And depending how wide that new pit is would depend on determine how thick that additional map would be. So there's, there's a lot of structural down below that that gets added, essentially, if we extend the existing pit to make it wider in that section, a little bit worried that we're we're standing a longer distance with a very heavy load of all the water in the tank and then the buttresses over that zone. So a little bit nervous about that, but we can evaluate that and provide input if we decide to go down that path. So
+
+Speaker 1  16:42
+question, question. This may sound like a very silly or stupid idea, but what?
+
+Unknown Speaker  16:49
+What about
+
+Speaker 1  16:53
+the horizontal run? If we created kind of a concrete tunnel that the pipe could slide into, alleviating issues of settlement over time, or not that there's going to be settlement over time, but just alleviating the concern of that pipe cracking. It's like a sleeve within a sleeve, so to speak. I know it's a long run, but does that feel like a solution? I mean, it's kind of similar to your first detail mark where we had, I don't know it was an aggregate. It was gravel over a concrete cap. It's similar to that where you somehow have access to it, but it would be access to the horizontal piece, right? Just need to pull the pull the pipe out. I'm just spit balling here again. I don't know which is better.
+
+Ryan Hankins  17:57
+I would say, from a settlement perspective, you're better off putting it in the top after it's settled, like a lot, like preload everything, like, if we were to, because we already said that we're gonna leave the top 12 inches out from the initial pour anyway. So you what? So what you could do, in theory, is pour five feet of the matt slab. Do what you're saying with the with a sleeve or whatnot, preload everything, allow it to settle, and then connect it. And that would technically be less risky, but it likely wouldn't alleviate all of the risk
+
+Speaker 1  18:44
+when we form out that, I guess it's a 32 inch pipe, right? So for the 12 inches, when we what do we form out? Yeah, how do we do that? I forgot
+
+Ryan Hankins  18:55
+that it's three foot. Yeah, I think that's off the table.
+
+Speaker 2  19:02
+Sir. Can concern if it's cast into the middle of the six foot slab, that we'd have some failure of the pipe or the sump? And note, the sump is just a connection point to the water tank. The pumps are in the cub.
+
+Speaker 1  19:20
+It's a horizontal run, correct, Ryan, that we're concerned about. It's just a long horizon around it.
+
+Ryan Hankins  19:27
+I I just don't think you're gonna find anybody that says, Yeah, this is a good idea. Let's go ahead and do this, and I'm gonna stand behind the work. Yeah, I think, I think no matter what you do, you're gonna, you're gonna be taking personal responsibility for it as the organization, and nobody else is going to stand behind
+
+Ryan Hankins  19:51
+it. So it gets back to and then, like, from our standpoint, like, we want to see you guys succeed, and we look at that, and we're like, holy crap. It just, you know, we want to see you guys succeed.
+
+Speaker 1  20:08
+Jeremy, there's no way. So one of the ways to mitigate this, not to make this more complicated, is we've got the trench, dropping it down, so creating a 90 to drop it at a lower elevation below the slab, underground. I don't know if that's alleviating anything, and then bringing it back up vertically at the point that we want to connect to the tank. Does that do anything? I know it's going to impact us. Jeremy, I know it's going to impact our pump skids because we've got now more head that we have to overcome. What does that do from a mitigating fracture, breakage over time? I
+
+Unknown Speaker  21:13
+yeah, I can't answer that question.
+
+Speaker 4  21:21
+It has another option, you know, I think we're talking about maybe lowering the, you know, the bottom, elevate the bottom of the tunnel down possibly three feet. And I know Jeremy said there would be rework if we drop that elevation. Is it? There may be a potential to lower the bottom of the tunnel, but install maybe some grading, or something over the top of, you know, where that pipe goes. So your floor elevation doesn't change. We can maintain that, but it's kind of like, I don't know, like a false floor else to describe it, you know, sitting, like maybe grading on top of the pipe, where we can still pull that and access it if need be. But your your elevation for your equipment doesn't change.
+
+Speaker 2  22:03
+So the other issue with this is the utility tunnel extension. I'm assuming that's the same thing the trench, an extension of the trench, right? That's the cast in place. Case
+
+Speaker 1  22:19
+is that the cast in place piece. Or is that a, is that the actual tunnel, the
+
+Ryan Hankins  22:24
+stuff that's the stuff that's hatched there, that the Martin members kind of on, that's just a extension of the three foot trash or whatever it is, four foot trench.
+
+Speaker 2  22:37
+So we initially had something like that, sorry, Nick, not to kind of derail the conversation there, but kind of playing into your comments. We initially had that trench extend all the way up to the water tank, and actually underneath the water tank too. And the problem was, we've got a lot of equipment that mounts to the top of that area, and we, I don't think we found a way to reliably secure the loads today to the top of the trench so large, so we ended up going direct barrier in that area.
+
+Speaker 3  23:14
+Yeah, it's like the poster supporting the pulse art tubes, right? And then the buttresses for the tank and all those things end up in that space.
+
+Ryan Hankins  23:22
+Right for context. Can we get, can we get access to the full model? I know, I know we got access from from page for the full we'll call it non process model. But can we get access to the process model as well? That will give us some extra context.
+
+Speaker 2  23:44
+I think these details are in the federated model.
+
+Speaker 1  23:48
+I think Jeremy, I don't know that we have process piping in there.
+
+Speaker 2  23:52
+We have not process piping, but the equipment that mounts out in that area, yeah, the pulse new ports are in the federated model. Yeah,
+
+Speaker 1  24:09
+we can show you where to pull that. Ryan, I'll send a I'll send you a snap of where you can get
+
+Ryan Hankins  24:14
+that file. Okay, perfect.
+
+Speaker 2  24:18
+At least they're placeholders in the federated model right now that equipment is being designed.
+
+Ryan Hankins  24:24
+Because the thing with the pipe support is, is like you could always bridge and like, from my standpoint, from my standpoint, you know, supports being in the way should not be something we can't solve. But I also don't think I understand all of your guys. Hop Scott, you guys have to do,
+
+Speaker 2  24:57
+doing me understanding. PF has taken the responsibility here. But if the 32 inch pipe was in the middle of the six foot slab, and the trench extended all the way up to the edge of that six foot slab, and we could access the pipe up to that point, do we think we would have a concern or an issue with the pipe being buried in the slab.
+
+Ryan Hankins  25:25
+So outside of me, I would say, bring it up to insurance, like, bring it up to like, your building insurance. I don't know if that's going to be an insurable detail.
+
+Unknown Speaker  25:35
+Yeah, and Jeremy right now, we don't have, we don't have an insurance
+
+Speaker 1  25:42
+policy on board for this, or even OCIP on board. We do have a broker, so get run it by the broker and see what they say,
+
+Ryan Hankins  25:53
+especially if you're going FM Global. I don't see FM Global approving this in any way, shape or form.
+
+Speaker 1  26:00
+Yeah, and I'm really, I'm just throwing it out here, Jeremy. I'm really thinking Pacific fusion is going to kind of have to make some compromises that will impact those kids and offer some additional flexibility with rerouting, because I I'm going to echo Ryan's points as well. I I don't think it's a great idea to be idea to
+
+Ryan Hankins  26:23
+be you. You might, you might sneak it past the goalie, because they may not understand settlement and may not but like, as soon as they start seeing like, if it fails, they're going to be like, Oh, we're not ensuring that that was obviously going to fail, or we're not paying that out. I
+
+Speaker 2  26:47
+I guess I don't understand the settlement enough to understand what the risk are if the pipe is in the middle of the six foot slab.
+
+Speaker 1  27:01
+If it's in the middle. So it's the same issue if it's in the middle of the six foot slab and is cast in place, the horizontal piece is exposed to fractures and break down over time, which would just put us out for six months now I think, I think if it's in the middle of the slab, and we do something that maintains structural integrity, but provides kind of that sleeve tunneling solution, and gives that pipe the flexibility it needs. That may be an opportunity, but I'm not sure what that elevation would be with a 32 inch pipe and the minimum mark, it sounds like the minimum Mark needs above finished floor is four inches correct. So Mark, if we were to have a hollow, hollow tunnel, yeah,
+
+Speaker 1  27:56
+I'll pause there. The minimum that you need below finished floor to start that pipe. The outer dimension of that pipe is four inches. Is that correct?
+
+Speaker 3  28:04
+If there was a six foot mat, then there would be four inches under that, and then, then we could have the pipe, and that's if it's below the mat, if you're trying to put it kind of as high in the mat, or you're putting like a topping slab over the mat, the pipe that's buried, I think the dimension would be more long lines of 12 inches at a minimum. So 12 inches from finish four at a minimum. That's not really thinking about the poor sequence of splitting that in half. So we'll have to get through that. But assume at least 12 inches in that case. And then if you bury it completely below. It could be four inches below the mat. That would be six feet, four inches to top, up
+
+Speaker 2  28:46
+top of pipe. Yeah, largely assumed, if it's in the slab, it's in the middle third, yeah, of the slab.
+
+Speaker 1  28:54
+Sorry. Mike, what do you or sorry, Mark, what are you suggesting from finished floor to the middle of that pipe.
+
+Unknown Speaker  29:02
+Finish forward to the middle of the pipe would be 28 inches minimum.
+
+Speaker 1  29:10
+Okay, 28 inches minimum. What is so sounds like there? We would need to do some additional exploit exploration with Anchorage, with the pulse tubes, and even maybe the tank,
+
+Speaker 3  29:24
+it would kind of be like coordinating those support points with the tunnel, or adjusting the tunnel away from those points, or whatever. Yes, exactly.
+
+Speaker 1  29:37
+Ryan, what do you think about this tunnel idea? So if we pair the tunnel idea with some flex joints within that pipe, you know, giving the pipe three degrees of freedom with Flux joints, say, I don't know, every 20 feet or so. And we had a tunnel which is slightly bigger than the pipe itself. From it, does this feel like the right thing to do? Standpoint is it past the sniff test?
+
+Ryan Hankins  30:12
+I think we're getting closer. I think I'd like to see it kind of a little sketch of kind of exactly what we're talking about, just to make sure I'm thinking about it the same way you guys are.
+
+Speaker 1  30:26
+I'm thinking this might everything that I'm hearing. I'm thinking this might be one solution where we can maintain close to the existing elevation that we're already at, not adding additional head to the pump skids, but alleviating some of those concerns on that bearing load on that pipe.
+
+Speaker 3  30:48
+Courtney, do you want us to kind of work through? The option that you're leaning towards is creating a trench in the mat, burying the pipe in that trench with a slab on a slab over it, right? Is that what you're kind of leaning towards? And my question is going to be, do you want us to kind of work through some of the details for that and try to show identify any conflicts with the anchorage points as Jeremy was mentioning, and all those other support points, and just kind of see if that's a viable option.
+
+Speaker 1  31:27
+Yeah, yes, I think we're almost there. Mark, I wanted to get alignment with the team to see if that that seemed like a viable option. So essentially, you've got, you've got where your your trench stops and then picks up again. You'd have a tunnel, yet you'd have a circular tunnel or square tunnel, I don't know which is easier to construct and maintains that structural integrity, but you'd have a tunnel that is not accessible except from the end, so you'd basically have to slide the pipe in. I am I making sense?
+
+Ryan Hankins  32:04
+That's that's making sense. The thing that I think I'm struggling with is, like, how you make that final like, if you had to replace that pipe, how you'd make that final weld, or final connection to the sump you'd have
+
+Speaker 1  32:20
+to the sun. Well, you'd have, let's see. So the equipment tunnel extension, this hatched area that's over on the right hand side, there's two hatch areas. The more densely hatched area that is accessible or
+
+Ryan Hankins  32:34
+not accessible, that's what I'm proposing to be accessible from the main equipment pit. And that would, it doesn't have to be 30 feet. It could be, it could be 10 feet, but basically you would always have, the way that I looked at it was, you would have a vertical like, if you look over to the right, that green mark, the concrete casing, that would basically be a vertical joint that would go directly through the slab, that, ideally, that would never, that would that would be no no break, or there would be, there'd be nothing that would be causing that to have stress. And then beneath that, that, that vertical pipe section, you could then, you could then replace or re weld to that pipe underneath that slab component. And it doesn't have to be 30 feet. It could be 10. It could probably be six. But that was just kind of my initial thoughts.
+
+Speaker 1  33:37
+Yeah, I don't see any issue with adding an additional kind of basement section to support this. I think it's whether or not we can actually do it with what Mark, Mark is saying as far as spans and and
+
+Ryan Hankins  33:57
+it doesn't, doesn't have to be super wide either. I mean, like, if the pipe is three, three feet in diameter, maybe it's a four foot. Nah. I mean, Chris, you'll probably have to say more, because we'll have to reach around to weld it, but it might be four or five feet.
+
+Speaker 1  34:19
+I'm jumping around here when we go back this blue section that's in the existing basement. Profile, Jeremy, are we saying we can or cannot do because do we
+
+Speaker 2  34:31
+if we, if we can avoid all the Ben's? I think that's my preference. Just trying to open this up and see
+
+Unknown Speaker  34:56
+here, I guess I can do this. Let me
+
+Unknown Speaker  35:07
+screenshot this.
+
+Speaker 1  35:08
+Why wouldn't we do a 45 by the way, why wouldn't we have like a 45 elbow coming into we got a lot of Ben's here we do 45 that the trench itself wouldn't be straight 90, but it would be diagonal. That's fine, from my perspective. Yeah, maybe we do. I'll sketch this up. Maybe we do a 45 but what I'm trying to do is have just a straight run that will Allow
+
+Unknown Speaker  35:56
+because we're right under the pulse tubes here. So I don't know that it's possible to have that tunnel extension.
+
+Unknown Speaker  36:10
+So what if new colors, so if the trench extended out. Can I make that wider? I don't know. Can you see the green mark?
+
+Speaker 2  36:30
+So if the trench extended out to here, we figure out how to support the pulse tubes. You end up coming in from the sum and we make a fairly straight pipe here.
+
+Unknown Speaker  36:45
+But then the tunnel, the equipment pit, extended, something like that.
+
+Ryan Hankins  36:58
+You probably wouldn't need that much, but yeah, that's that would be fine with me.
+
+Speaker 1  37:05
+Frank and Mark, we're anchoring. I think it's just, I think it's possible. We just have to get creative with the bridging contract. If you have Jeremy with Nitish, how we anchor those pulse tubes? I know that's something that Frank is looking at, but we've will.
+
+Ryan Hankins  37:25
+Cory, remember, nothing that we're talking about here is affecting the six foot slab. You still have a full six foot slab. All we're saying is that this is going to be below that six foot slab.
+
+Speaker 1  37:40
+Ah, okay. So, okay, so this is a confined space tunnel that's not accessible.
+
+Ryan Hankins  37:46
+It's confined space that's accessible from the existing equipment pit.
+
+Speaker 1  37:51
+Okay, gotcha. It's a true tunnel. Okay, that makes sense.
+
+Ryan Hankins  37:56
+I think that's it. Yeah, I think I think that's the answer. But, yeah, would love you, would love you guys to just talk it over and just make sure you guys are good with that. Marc, just so you're just so you're aware I was talking to Cory about this, like you guys don't need this in your 511, set, unless, unless you guys can get it. But you know, this is something we'll have to work out ahead of construction, and we'll be tracking it as something that is a cost item, and we'll work with you guys on that. But don't let this derail all the things that we're making you guys do otherwise.
+
+Speaker 5  38:35
+Yeah, Mark had a job, Ryan, but I was messaging him on the side, and yeah, I agree that I think we're going to proceed with the foundation design as is, and then this modification will have to handle after the 511 deadline, after the permit.
+
+Speaker 1  38:55
+So what happens here? I just want to talk through the changes of what happens here, so I don't know that I can mark on the screen, but page left as we come out of the trench, the pipe is going to drop right to get to get by probably another three plus feet.
+
+Speaker 2  39:17
+Now the pipe would be assuming, at this level, we're attaching the pipe to the bottom of the six foot slab, so the height wouldn't change relative to where it's currently shown in our models. In the trench.
+
+Unknown Speaker  39:31
+How deep is that trench?
+
+Unknown Speaker  39:34
+The top of the pipe is six feet below grade.
+
+Speaker 1  39:41
+Okay, there may be a small drop in elevation, maybe, maybe not, but okay, it sounds like there's not a significant impact that elevation is maintained relative to existing. Okay. I just wanted to talk through that to see acknowledge if there was any process.
+
+Ryan Hankins  40:00
+Now, Frank, the only the other, last thing I see that's a potential issue, is replacing that sump eventually. Do you want the ability to replace that sump from below? Because if you you're already building the tunnel, the question to Frank is going to be, can we, can we design something that is, that is that is able to do that. I don't know. I'm purposely being vague on that because I don't know exactly what I'm asking.
+
+Speaker 2  40:37
+I guess the question is, how much of this area is exposed in the six foot slab, or is the sump cast in place more or less than the six foot slab and flanges out somewhere?
+
+Speaker 5  40:54
+Ryan, when you say, replace the sump from below, is that accessing it through this equipment? Pit extension? Correct. I would want to ask the question, if that, if where that pipe is feeding the DI tank, if it could be perhaps shifted to minimize the extent of that extension. That makes sense it because I right now I think we would need, we can, I think we can design it. But right now is I feel like it would be an extension coming off of that semi circular piece. Yeah, it wouldn't be the, it wouldn't be the shape that's outlined in red. At the moment, it'd be, I feel like it'd be, kind of starting from the midpoint of that semicircular piece extending 45 degrees up.
+
+Speaker 5  42:02
+Here. Now, if you move your cursor, Jeremy, to to the target finger, to that, to that mid point of the sinner cycle, at the top of the target chamber on the plane, yeah, and then just go up from there. And then, yeah, once you hit that diagonal line, then am I able to control I
+
+Speaker 2  42:30
+was trying to control earlier. Screenshot it and opened up paint.
+
+Speaker 1  42:35
+Take a screenshot at this. Frank, is there any opportunity to use if we're worried about spanning now that we're opening this up, is it a matter of just putting boxing out some structural steel and dropping some columns for additional support? So I think that that area doesn't necessarily have it's really just going to be used to access that vertical pipe that's coming through the bottom of the tank. So if we, if we use structural steel to, yeah,
+
+Speaker 5  43:11
+yeah, I think so, we would need to support the bottom of the tank, and then the tank itself, the tank design, I would need to make sure that their bottom of tank design can span the distance between supports, so
+
+Speaker 2  43:29
+the tank can't span any distance the bottom.
+
+Speaker 2  43:38
+Yeah, and I believe the sump was intended to be cast in place to support the load, I think they have, like, eight inch stainless as the bottom of the tank.
+
+Ryan Hankins  43:53
+I mean, if, if it, if advanced tank is, you know, if they're standing behind that then I guess that's on them. Yeah, is
+
+Speaker 1  44:06
+that I'm wondering, is this like a dual effort with advanced tank reinforced in that area,
+
+Speaker 2  44:14
+and I'm less worried about the sump, especially if we have this access here to the bottom side of that sump to be able to do a little bit of demo in the event there's an issue down the road, I
+
+Speaker 1  44:37
+think we kind of need to see I think we're almost there. I think we just kind of need to see some details of this.
+
+Speaker 5  44:49
+But yeah, Cory, I think I would propose that for us to kind of sketch up what our understanding of these options are. It's a little difficult to follow just from the text and verbal descriptions. And then I think we can circulate that with the team to make sure we're all on the same page.
+
+Speaker 1  45:12
+Yeah, I think first is, I think we're all aligned that this approach is going to work right maintains a similar elevation. I I don't think it's going to add a significant cost to the project, you know, kind of creating this tunnel extension, just more form work. And it'll be an add cost, for sure, but I think it's probably one of the more elegant solutions we're going to come up with just, I'm looking for a nod from Jeremy.
+
+Speaker 2  45:46
+Yeah, I think so. If we've got a big concern about the pipe in the foundation or under the slam, only thing that we need to do is probably bring an advanced take next week into the discussion to understand the details around that some and what the impacts are on the foundation for getting the something to the foundation package.
+
+Speaker 1  46:11
+Yeah, I definitely think wherever that whoever has that blue dot, where that intake is, this is going to be a cross functional effort with advanced Inc so I think we have the general concept next steps. Frank, you guys can detail this out so we can all have a clear understanding of what we're speaking to. And then Jeremy, you or I, one of us, we can work with James David dehan to get something set up with advanced tank to talk through the concept, and then, likely, all parties need to hop on a call after that those details are finished from Thor and Tom city, just to talk through our level of comfort with the solution. What do you guys think I'll
+
+Ryan Hankins  47:00
+add one more action item. So Chris, are you still?
+
+Speaker 6  47:07
+Yeah, I'm like, just playing around with something to try to figure out how this can be built. But, yeah, can you?
+
+Ryan Hankins  47:15
+Can you spend some time digging into how big that would need to be to maintain and replace that pipe, just so that we can give throwing Thomas Ed some parameters of what we think the maintenance window looks Like.
+
+Unknown Speaker  47:31
+Well, yeah, yeah. Certainly
+
+Speaker 6  47:40
+does where, where that drain is. You says vertical pipe right there. So I'm assuming that the vertical pipe is basically flush with the top of the slab right there. And then you connect to that with the tank. When you install the tank, I
+
+Speaker 2  48:01
+don't know what those details look like.
+
+Ryan Hankins  48:04
+Yeah, Chris, from my perspective, like there's some tank coming there's some pipe coming from above. We have a concrete grouted we have a concrete casing with a grouted detail around the pipe that's coming through the six foot slab. And then at that point there's a there's an elbow that goes 90 through that, that underground tunnel.
+
+Speaker 6  48:34
+Yeah, I was just like playing around with the the 90s and whatnot. I mean, just to put a 90 on a 32 inch pipe. I mean, you basically need like, five and a half feet, you know what? I mean, that's where it's complicated.
+
+Ryan Hankins  48:53
+Yeah, that's why, like, my initial thoughts were, like, we probably want to plan for like, 10 foot deep, just five and a half feet. Plus we probably want to get the elbow, you know, not flush with the bottom of the slab. We probably want to give ourselves a foot. And then we need some, some work ability beneath that,
+
+Speaker 6  49:16
+the utility trench itself, the floor in that what is that elevation relative to the finished floor, elevation of the six inch slab or six months, I
+
+Speaker 2  49:28
+want to say it's six meters down. I think the end the height of the equipment pit to the bottom of the six foot slab is like four meters Okay,
+
+Unknown Speaker  49:42
+so it's quite deep.
+
+Speaker 2  49:44
+Then, yeah, at a high level, I assume we could keep that same height in this 32 inch pipe access area. And if you have one set a meter of pipe and three meters of access, then below that, plenty of room for working around it.
+
+Speaker 6  50:12
+So Would you guys mind if I just showed what I was playing with? I'm just kind of work. All right, let's see if I can get this to go then the what
+
+Speaker 6  50:39
+is the Can you guys see this? So I'm just basically showing you know to change where the trench goes in up to that six foot slab, 90s, up into the slab, and we basically modified the full slab to allow, basically a trench to access that pipe with like a metal plate pop or something. You know what? I mean.
+
+Ryan Hankins  51:20
+No, Chris, we were talking about keeping it out of the slab, going beneath it.
+
+Speaker 6  51:28
+Well, if you created basically a trench through the slab, you can change, you can reinforce this slab. You can change the depth of this slab around it, to reinforce it. I mean, I'm not trying to engineer it, but I think that there's options to do something with that slab, to keep the integrity of the slab and still have a trench through it. Is there not?
+
+Speaker 2  51:56
+The hard part is we won't be able to access that trench Once we install all the equipment over the space, maybe even the area labeled utility trench there, once we install the machine, it'll take us a few months to access that location of the pipe. It's probably a year to get into the area labeled trench cover. Yeah, okay, this is more or less what we were initially thinking. But then ran into issues with supports and the foundation and the bottom of the tank.
+
+Speaker 1  52:39
+Yeah. Yeah, I think, I think Frank's study is really going to provide some transparency on they have the anchorage plate configuration for the tank and the pulse tubes. Likely it's going to take that in depth exercise frame to really understand how the two clash, but I'm hopeful that I think extension of that tunnel and access through that tunnel is we can find a way to make
+
+Speaker 5  53:19
+it work. Chris, could you pull up that, snap back so I can take a screenshot of it, and then just a couple clarifying questions on that is, for that scheme that is just a trench in the top of this slide, right? We would not be extending the equipment pit tunnel.
+
+Speaker 6  53:42
+Correct? Yeah, it would basically come up here, 90 into the top section of the slab. And it's, it's accessible in a sense, where you'd have to remove all the equipment, yes. But ultimately, you know, you don't have a cast in pipe where you have to jack hammer and tear everything up that
+
+Speaker 5  54:09
+way, right? But you also the portion that's under the water tank, we would still have this issue of that portion potentially not being accessible, right?
+
+Speaker 6  54:21
+Yeah, well, I mean, so you're talking about putting a sump pit in there, right? Why not just have the sump pit in the utility tunnel itself? Because that's at a lower elevation. So if something goes wrong in that trench, it's just going to fill up with water and end up in the tunnel anyway.
+
+Speaker 5  54:54
+That's scary. Is there a need for where the sun fit has to be located.
+
+Speaker 2  55:06
+Well, on that, if there's I had to guess, I think as long as this sun pit was the same distance from the center of the water tank, we're probably okay. It could be located anywhere along that ring, but it can't be located closer to the center or to the edge of the water tank.
+
+Speaker 5  55:32
+I see it, but I think that, you know, with that constraint, but could it be located in a way that it's accessible from the equipment pit tunnel, rather than where the rather than where the pipe is entering the tank,
+
+Speaker 2  55:54
+as long as it didn't go below the Bottom of the six foot Foundation, if that makes sense, because we've got equipment that's going to be located in the equipment bit, and some of it mounts to the ceiling of the equipment bit. The bottom of that six foot foundation
+
+Speaker 6  56:18
+I see. So the sump pit itself. Is that to serve the 32 inch water line, or is that to serve something else that's being installed in there,
+
+Speaker 2  56:34
+the sump pit on the water tank? Yeah, yeah. That's the connection point, essentially, for that 32 inch pipe to get into the water tank.
+
+Speaker 6  56:47
+So it's not really, necessarily, has to have a sump pump in there.
+
+Unknown Speaker  56:52
+Oh no, there's no pump. It's a low point in the tank for us.
+
+Speaker 6  57:00
+I guess I was thinking of backup drain, you know, type of thing, so you're just needing to be able to have access to make the connection to that pipe. Yeah, that makes sense.
+
+Speaker 5  57:19
+Okay, that's helpful, I think, yeah, Courtney will sketch up these two ideas that we've discussed.
+
+Speaker 6  57:29
+Scenario though, that the trench versus trench cover that could be all open, essentially, right? I mean, just like
+
+Speaker 5  57:43
+except for the portion under the water tank, because that we need to fully support the water tank.
+
+Speaker 1  57:54
+Yeah, the portion under the water tank, let's make the assumption for now that it's, it's fully supported by concrete or concrete, that vertical section is concrete encased. Well, Jeremy i and James, James Trevor, she's our heavy fab subject matter expert here, we'll talk with advanced tank to see if there's any opportunity to reinforce the location of the inlet. There may be a hybrid solution here, but obviously we need to chat with them first. But I think for now we can, we can make the assumption that is cast in place. I don't think there's, yeah,
+
+Speaker 4  58:38
+Frank with your updated sketches, how? How soon do you think you can get those to us?
+
+Speaker 5  58:43
+I'm going to try to work on them after this call. I think this is pretty hot item.
+
+Speaker 4  58:47
+And then Courtney, I guess we need to set up that meeting with advanced tank. I don't know if we want to let this linger until next Friday, or if we want to try to set something up sooner. What do you think we'll
+
+Speaker 1  58:58
+definitely set something up sooner. I'll get with James. He's in New Mexico, but, you know, I think we can set something up for early next week. Just a quick check in with them and Frank, if so, everybody on this call will will include you guys, so you can be a fly on the wall. I'll get an email going to figure out folks availability, and we'll get it set up.
+
+Ryan Hankins  59:25
+We'll also in next Friday, we'll give a couple options for allowances Courtney and Nick just so you guys have a full picture on the cost of
+
+Speaker 1  59:35
+everything that's perfect. Ryan, appreciate it. Yeah, I think throwing a wax at this stuff instead of waiting until everything's dialed in, and design is a great way to keep keep a reality with the existing estimate forecast.
+
+Ryan Hankins  59:56
+So the other I know we're over time, just does everyone still have a couple minutes?
+
+Unknown Speaker  1:00:04
+I do need to get to another meeting.
+
+Unknown Speaker  1:00:07
+I can hang on, if you want, right?
+
+Ryan Hankins  1:00:08
+I want to talk about pre loading.
+
+Speaker 4  1:00:12
+Who's doing, if you if you need to drop Jeremy, go. Go for it. We can, we can get you perfect.
+
+Unknown Speaker  1:00:18
+Thank you. Thanks guys. Everyone is
+
+Ryan Hankins  1:00:22
+everyone else still good?
+
+Speaker 6  1:00:26
+So for the preload, I actually got to run. I got another meeting to go to. Sorry, guys,
+
+Ryan Hankins  1:00:31
+it's okay. Well, so from a pre loading standpoint, I met with me and Erica met with the geo pier guy Craig earlier, and there was a couple things that he brought up. One, you know, obviously he's waiting on finalized settlement criteria. Still, he feels pretty he feels pretty passionate about that the 3/8 inch has to start after everything's been preloaded. Have we enter, you know, as a team? Have we talked about that being the basis, or are we thinking it's from when concrete is poured? Or what's what's that thought?
+
+Speaker 1  1:01:17
+Yeah, we've already talked through it. Craig has been part of some pretty thoughtful discussions with our the facility integration team, which Jeremy is a part of. So that criteria was shaped based on a number of scenarios. Right? How we're going to install this we we can walk through that criteria again, but yeah, we're we. We found a scenario that meets our requirements. I guess maybe I should ask you what, what's the concern Ryan, and what do you think we can back off on and why
+
+Ryan Hankins  1:02:02
+here's here's, what we were talking through is like, just rough, we'll call it sequencing, to get to your differential sediment goals. So we were thinking like, I think you guys know at this point that we're planning to pour a lot of these plate a lot of these thick, matte slabs, low. And then we're going to do an almost topper, just to get everything perfectly right. We think the pre loading makes sense to do before we do that top, that topper. So we would basically pour the six foots at five foot, pour the two foot, the three foots at two foot, and then we would do the pre loading, and basically let it settle. And then at that point, we can come through with the laser, and we can pour the topping, so that if we need to pour an extra half inch somewhere, or an extra inch somewhere, we can do that to make everything perfect from a differential sediment standpoint between the different components,
+
+Speaker 1  1:03:04
+yeah, and I think he's also including, so are you just talking about, where does the rest of the building come into play? Because I think if I'm following the additional loading of the facility, the facade and the steel structure needs to be a part of that, and then slab loading needs to occur. That's the way they're doing their analysis right now.
+
+Ryan Hankins  1:03:32
+Okay, see this is good. We're talking about this. So we would, and that's, that's fine anyway. So we would, we would leave it low in all those areas. We would wait for the structure to be erected. We would then preload, including the columns for the cranes, likely at the same time, we would do all the preloading. We'd probably plan for that happening over the course of a month. We'll call it. Then we would go back, once everything is confirmed to be settled by whoever is the person that signs off on that. And we would, we would move forward with pouring the top, the top portion of all the mats. We'd give it another week or two to let it settle and cure as much as possible, and then we'd pour all the surrounding slabs to match up to the top of the mats.
+
+Speaker 1  1:04:29
+So Ryan question, what is the concern with waiting to load until after so I understand the sequencing to pour the slab, you pour low, then you finish it off with the finishing slab to get the final flatness and levelness. What is the issue there with doing loading after that's been completed?
+
+Ryan Hankins  1:04:53
+Because at that point, any like if they settle differently, then your img modules might be an inch off of what the tank Pat is. And I'm just, that's just an example, but I'm trying to figure out, like, you know, I think there's there's more, it's more.
+
+Speaker 1  1:05:17
+You think it's more controllable. Yes, to pre your you think settlement is going to be easier to control, yes, through a pre loading scenario. Help me understand that a little bit better.
+
+Ryan Hankins  1:05:30
+I think that the more we like before we pour that final topper, if we preload first, then everything becomes more predictable, and if we need to add an inch in certain areas, we can do that after the fact.
+
+Speaker 1  1:05:47
+Okay, I see what you're saying. Yeah, that does make sense. Ryan, I think now that we have the scenario that going, Frank, I I think this discussion definitely needs to happen with you know, both Frank, Mark and Craig, maybe even our geotech. I think we all need to be a part of that conversation just to make sure we're not missing anything. But I get your point that right now this is a simulation study and a paper exercise, but and a paper exercise. But what actually happens in the field is could be drastically different, and if it is, we have the flexibility to make up that variation with the, you know, the additional foot of slab we're pouring. I just don't know how that additional weight of that topper slab could impact settlement even more, if that makes sense to you, right? So we should be able to correct it. But if adding across 300 by 350 feet adds another level of loading, another layer of loading, that causes everything to settle and shift just a little bit more, then there's a, there's still a layer of uncontrollability there.
+
+Ryan Hankins  1:07:08
+I totally agree, but we're hoping that it's more it's more predictable at that point.
+
+Unknown Speaker  1:07:16
+I think we've got to talk about as a team, Ryan, you bring up a good point, it's what we're doing on paper, you know, as an engineering
+
+Speaker 1  1:07:28
+study is going to be very different than how we manage this in the field. So What? What? Basically, the question is, what method gives us the best flexibility to make up for those variances we didn't account for.
+
+Ryan Hankins  1:07:43
+And to take it a step further, like, who's prescribing? Because, like, all this settlement needs prescription in some way, shape or form, in terms of, like, what we can do, what we can't do, like, for example, if Frank says, Hey, you can't do pre loading on a on a five foot slab instead of a six foot slab, because it's not going to work. I mean, like, so someone's got to work through the engineering of the sequencing of how that all works, how it all ties together, if we need to load the columns for the cranes at the same time we're doing the pads. And, like, what's the sequencing for that? There's just, there's a lot of, we'll call it engineering. That probably needs to be part of this that I'd just like to understand, like, who's providing that, and then who's who's actually prescripting How the measurements happening of the actual settlement, and, like, there's, there's more here, I think we need to figure
+
+Speaker 5  1:08:37
+out, yeah, yeah, to your point, and if I can interject too, I think that was the question that I had was we wanted to better understand one what's your current proposed procedure for the preloading so that we can review it, and In coordination with how we've been doing the settlement design. And then we'd also like to understand how you're intending to do the pre loading itself as well. I think those two pieces would be good for us to get a hold of, if you can send that to us so that we can review it.
+
+Ryan Hankins  1:09:21
+The other question is, like, who's who's doing the preloading? Is it us, or is it the process team, through their contractor?
+
+Speaker 1  1:09:28
+No, it would be on us. The process team is not anyone in Pacific fusion. It would need to be a part of this phase one. Ryan, so I see kind of a part two exercise that needs to be done with so frank. We had this conversation with Craig and with Mark and you and I think even Matt Kramer from Matt was on the call, but we went through the scenarios of how things would be loaded. But now that we have the constructability piece and the assumptions of how we finish a slab due to for flatness and level this that that now needs to be a part of the conversation. So Ryan, we essentially did the same exercise, but really only from a design lens, without really taking into consideration the sequence of how that slap is going to get poured. So I think now that we have you guys on board, we know something new today, and I think there, we just need to have this conversation again, looking at it
+
+Ryan Hankins  1:10:34
+from a constructability lens, absolutely. And I'm bringing it up because we have time, right? I mean, it's not like we need this plan prescribed tomorrow, but I just bring it up early. Let's get it figured out so that when we get there, we're not all scrambling. Yeah. NDA, thanks
+
+Unknown Speaker  1:10:51
+for bringing it up. Makes sense.
+
+Speaker 5  1:10:54
+Brian, the other question, just with regards to your preloading sequences, you mentioned, you know, pouring the six foot mat up to five foot thick, and then be loading it at that point, we were anticipating relying and being able to use the full six foot thick mat for a strength perspective. And there's also going to be a ton of anchor rods, rebar, they'll be sticking out of the slab and cast in place, embedded in the slab. Have you given that any consideration as to how you could achieve the preloading with all of those structural elements still sticking above the five foot?
+
+Ryan Hankins  1:11:39
+So a few thoughts that that's a great it's a great comment that I hadn't really thought through. But can we do epoxy doweling, or is that something you're not going to allow? And then secondly, if six foot is what we need to what we need, let's pour six foot, leave it, leave it 10 inches, 12 inches low, and then pour 10 inches on top of that.
+
+Speaker 5  1:12:04
+Yeah, I don't think we can make epoxy dialing work. And actually, I think speaking to the tank itself, only, the tank anchorage only, I think the tank designer has designed, has to place anchors for the for those so if, yeah, if they, if we need to do that, then we need to go back to them as well. Okay,
+
+Ryan Hankins  1:12:34
+fun little Rubik's cube we got here.
+
+Unknown Speaker  1:12:37
+Yeah, this is where the fun begins. I I think this
+
+Ryan Hankins  1:12:44
+is fun. Personally, I think it's I think it's awesome. I'm excited.
+
+Unknown Speaker  1:12:53
+This was a really great conversation. Thank you guys.
+
+Speaker 7  1:12:57
+This was really good. I've been taking notes. I'm updating the constructability blog. We got through two items today. We probably need to get another one on the books to go through some more items that we have. But this was very good. I'll continue to summarize it and get this saved out to everybody.
+
+Speaker 4  1:13:17
+Perfect. Yeah, I did set it up Erica for every Friday. So we'll should have that invite. You should have that now and then. Yeah, we'll set up some ad hoc ones to bring you, like advanced tank and some of these other ones into the conversation as well. Definitely appreciate your guys's time this morning. I do got to run now. I gotta take my dog to the vet real quick. But you guys have a great weekend, and I will talk deeper.
+
+Ryan Hankins  1:13:42
+I don't know about you guys, but I'm just, I'm just upset that Paige had the snow day today, you know, like, yeah, Ryan,
+
+Speaker 5  1:13:58
+we're gonna share with them our proposed expanded tunnel, and they're gonna rip it apart from a life safety perspective,
+
+Ryan Hankins  1:14:06
+that's exactly what my thought was. But we'll, we'll fight that another day.
+
+Unknown Speaker  1:14:10
+Yeah, yeah, an occupied storage area. Buddy. Go you?
+
+
+Transcribed by https://otter.ai

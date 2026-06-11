@@ -1,0 +1,500 @@
+Speaker 1  00:01
+Hi, everyone else, senior facility engineering, phase two of the projects, so everything that goes inside the box that Cory and Nick are building. Hi,
+
+Speaker 2  00:19
+I'm echo wood. I lead the machine system engineering team here, so it's just an integration team. So mostly what I'm trying to do is collect all of the engineering machine requirements to make sure that they're being representative and represented in the building design.
+
+Unknown Speaker  00:38
+Jordan, I'm on Echo's team, so a lot of the same stuff. Awesome. I think that's everybody on the PS side, we can hand it over to start the design team. Rebecca, you want to start introductions?
+
+Speaker 3  00:50
+Yeah, nice to see you all again. I'm Rebecca Belle. I'm the project manager for the AE team. And Bill, do you want to go ahead and then we'll hand it over Tom.
+
+Unknown Speaker  01:03
+Bill Huey, architect
+
+Speaker 4  01:06
+based in the San Francisco office, and good to see you guys again. Good to meet the new faces, Mark, do you want to introduce yourself? Sure? Hi, Mark. Can make certain Tom city structure engineer, I'll be the or for the project based in San Francisco. And then Frank.
+
+Speaker 5  01:31
+My name is Frank Fong, Project Engineer based in our San Francisco office as well. And Nathan, hello. I'm also part of the San Francisco office with TT supporting Frank and mark this project.
+
+Speaker 6  01:50
+I think I took up enough of your time with the introductions here, but yeah, welcome to the team, guys. Glad to have you on the call. We'll be spending a little bit more time together, hopefully in person, we'll get to meet the team all next week. So great to have you guys, but I'll hand it back to you. Rebecca, I don't know who's in charge of this meeting. I don't
+
+Speaker 7  02:11
+think it's me. So thank you, Clayco, for joining the team. So for the rest of folks on the call, we do have, you know, we do have a couple design breakout sessions throughout the week. We have our design coordination call. We also have our MEP process call. The Clayco folks and their precon team will be sitting on those meetings to get up to speed very quickly here, we do also plan, we'll give you more details in Wednesday's design coordination call, but we do plan on having a formal pick up call with these guys at the value engineering workshop, which will primarily be the design folks going through, going through some of those items and figuring out ways to reduce the cost of the overall building so they will become smaller phases as time goes on, and feel free to jump in and ask questions. Just kind of bear in mind we do kind of have a tight agenda, so maybe what we do is we just save questions for the end.
+
+Unknown Speaker  03:17
+And if there's any follow up,
+
+Speaker 7  03:21
+my co team. Happy to happy to spend as much time with you guys offline as well. Okay, Jordan, you want to go through the structure items. I think what we want to do is prioritize the SMW MO That was circulated last week. So for everybody's understanding, we did get a vibrations and acoustics recommendation from our acoustics consulting engineer. I believe we've all had an opportunity to review those recommendations. We've sent kind of some correspondence over last week. I think what we want to do is kind of bring out any, bring close, any items that the one top study needs for this next foundation permit package. So I'll start it off with Jordan. I'll hand this meeting back over to you, but we should start with this topic, and ultimately, Marc and Frank, we'd like to understand if you need any specific direction from fusion based off those guidelines. In the SM, W memo,
+
+Speaker 1  04:35
+I believe Rebecca, there was also action items responded to late last week from that memo and the attachment Correct. I don't know if that has been forwarded back over to Thorndyke city.
+
+Speaker 3  04:46
+I don't think that I did. Let me just look really quick.
+
+Speaker 1  04:53
+So yeah, I guess for Frank and Mark, is there anything that rests with you guys that you need input from Pacific fusion or any other Marty to help you continue on this scope of work and get a little bit more aligned with what we need based on that letter and the responses to it.
+
+Speaker 4  05:16
+Well, from my side and Frank will correct me when I say something wrong again, as always, I What? There's a couple recommendations in there that aren't exactly clear to me. So I think we need to have a discussion with Jerome about those. The first one being isolation of the columns from all the surrounding structure and whatnot. A little bit difficult the way we have it set up, the way we have the foundations currently set up, and will require a little bit of extra detailing. And the big thing we'll need to find out from them is how much isolation we need and how much vertical isolation we need. So I think that was one thing that stood out. And then the second one was the and maybe somebody read this more clearly than I did recommendations for under the target chamber and under the basically the whole the r, d space. I wasn't clear if they were requiring isolation in there. And so maybe somebody else read that better and understands it. Otherwise, we'll follow up with you all and get some clarification on those two items,
+
+Ryan Hankins  06:34
+just so we're following along. This is a report from the vibration consultant. Correct. Yeah, that's correct, correct. Could you guys forward that to us, just so we have that for getting up to speed?
+
+Speaker 3  06:49
+Yeah, I don't know if you're asking Courtney, I've got it. Yeah. Okay,
+
+Speaker 4  07:00
+so I think that that rests on us to have a conversation with Jerome and just clarify those items. Sorry, there's one other thing so a third, they're also recommending that we separate out the cup from the rest of the structure, which could have some implications, and fix my headset here, they could have some implications in terms of the structure in that area. So I guess that would be an area where direction would be helpful. Should we proceed to separate that, or should we have discussions and try to mitigate that?
+
+Speaker 7  07:39
+Yeah, I think we need to, sorry, which way to do which one? Yeah. So the central utility building is housing not only the process equipment, but also a majority of the HVAC equipment that will serve the R and D space. So there's no doubt that those will be operational during a pulse. So I'm inclined to take that recommendation and separate, provide that level of separation, and I think it's part of these exercises and decisions. Nick and Clayco team, we're hoping we can also quickly understand cost associated with with doing this. So maybe what we can do Nick is take some of these design decisions that are going to have a cost implication, and we can, we can have a separate conversation with Clayco about saying, if we can put some wax to it, just to understand what it does to the overall, overall cost of the building. But for now, I mean, I'm inclined to say that we're going to need that separation.
+
+Speaker 6  08:50
+Okay, when we, when we say separation, is this an expansion joints, like an isolated slab? What are, what are we
+
+Speaker 4  08:56
+thinking there? Their requirement was, or recommendation was a two inch separation, isolation, joint, so independent structure, two inch gap. Okay, so right now at the interface between the two, we have one structure, everything supported on the column, the same set of columns, right? So we would need to add another set of structure outside the tilt up wall panel, creating a separate structure for the cub. We have two or three brace frames in the cup right now, but we would need at least one more, if not two more. So we would need a total of four. So we'll have to find and locate those and then put those in position, we will need to have some conversation with SM W about making sure that we don't need to separate down to the foundation level, because that would again become a little bit another layer level of complexity that we need to kind of sort through So but I'm understanding about the part of upgrade the superstructure. Need to confirm with them about the foundation part so all with them, either way. Yeah, we do need to get with them. But your direction is very helpful in terms of knowing that we want to move in that direction and just figuring out what it takes to get there, that's really helpful.
+
+Speaker 7  10:25
+Yeah, and I think, you know, ultimately, Mark, if there's a way to do kind of a quick sketch to understand the additional members that we need, price range that we need to do this, I think that that will be able to help us make what I'll call a final determination. I think we want to move in that direction, but I'd also like to understand if we can give like that, something a little more specific to price off of to help us make that determination.
+
+Speaker 4  10:58
+Sounds good. I think we would need to make that level sketch, just to have the conversation with SMW, anyway, so w, I can never get those in the right order, sorry. So just to have the conversation with them, I think we'll need a sketch. So we'll make this sketch, and then we can have the conversation circulate. That. No problem.
+
+Speaker 7  11:21
+Okay, sounds good. Does this decision, and this decision, I'm assuming, impacts our foundation package. We're trying to target a date at four, eight to have you all, to have all of those inputs to you. I'm just hoping that's what we're still shooting for.
+
+Speaker 4  11:38
+Yeah, I mean, this would impact the foundations, so, relatively small area of the foundation, so if it changed after permit submission, not the biggest, but yes, it would have an impact.
+
+Speaker 8  11:58
+Are they considering instead of trying to isolate foundations and structure isolate underneath the equipment numbers, I mean, that's maybe cost effective.
+
+Speaker 4  12:12
+That's a good question. In terms of isolating the equipment in the cub from all the structure around it, that was not the way I read the recommendation. So we can have that conversation. We'll put that on our list to discuss with them. Quick question on the
+
+Speaker 2  12:35
+document here. I'm also just kind of catching up in terms of what the recommendation they're saying actually means. It says cm das prefab for VC D, but I think our original requirement we put on it was not VCD, and so I guess, are they just saying that they think that the CM das needs to be
+
+Speaker 7  12:58
+VCD, because I think it's one of those things we can easily overlook. But, yeah, it was a mistake from our end. There's no vibration requirement for CMH, okay, I thought Jordan had sent that out like
+
+Speaker 2  13:12
+over a week. I think he said that out eight days ago, the feedback that was not needed, and the same for the not needing VCD under the ing tanks. I just
+
+Unknown Speaker  13:25
+want to make sure that the feedback that Jordan and PEP sent is received and all good to be incorporated for the next go around.
+
+Speaker 3  13:34
+So the email that Jordan sent our teacher, ROM and SMN W game and Thornton Thomas, Ed, we're all copied on it, and we, I think we did receive it.
+
+Speaker 2  13:48
+Okay, so, but this report was just made before the feedback
+
+Speaker 3  13:53
+was given, yeah, but pretty sure that you provided that based on that. Yeah, the feedback was based on this report that we provided to you all last week. So yeah, this report is from prior to that feedback. I have
+
+Speaker 1  14:07
+it open if you want to go through it real quick, but if it's been circulated, everybody's on here. So no, yeah, sorry.
+
+Speaker 2  14:12
+I was just confused because it said this is March 25 and we said March 23 it's why, but if it's I just want to make sure that the feedback has been received and then that's going to be incorporated for next time is all I really
+
+Speaker 3  14:25
+care about. Yeah, this was the preliminary report, and we'll need to have just a follow up conversation with SMN W to make sure, but I'm pretty sure that that Jerome responded to part of this, so we'll make sure that it's incorporated echo.
+
+Speaker 5  14:44
+And to add on top of the three points that Mark brought up, which was for I understand there's some corrections being made to the vibration design criteria from what was shared with us on March six, is that something you can provide an update to the to the floor diagram of the vibration requirements too. You had that plan marked up.
+
+Unknown Speaker  15:17
+What change are you talking about?
+
+Speaker 1  15:19
+Frank, it's the fact that, like we talked about the the plan Sheila included conflicts with what was written. We have the VCT requirement, yeah, so all updated, Frank, sorry about that, just so you have it as a memorialized document.
+
+Speaker 3  15:37
+Yeah, I think that would be better. And I think that actually, now that you're saying that is where the confusion came, yes, because we were directed to use that, that sketch, and then we did receive the email, but yeah, that'd be great. Thank you.
+
+Speaker 1  15:48
+Jordan, yeah, I tried building it so it was apparent, but I will, I will fix it and send back over you guys. We like, it. Let me get back to the meeting minutes. Does anybody else have anything on the vibration, acoustic? Subject of what I have, it sounds like Mark Frank. SMW, we need to get everybody in the horn, and if there's some issues, yeah, think
+
+Speaker 3  16:21
+that's correct, Marty, I'm adding, oh, go ahead. Oh no. I was
+
+Ryan Hankins  16:25
+just gonna say, when's the final report? Do I was 417
+
+Speaker 3  16:30
+is because they're the final report is going to include the site study, where they were doing, they did a five day site study to so it's, it's going to take them some weeks after that that was completed this week and the or end of last week, and then they're going to need Intel 417, to produce the final report.
+
+Ryan Hankins  16:50
+Okay, yep, sorry, no, no, you keep going
+
+Unknown Speaker  16:53
+with your question, and then I'll ask Courtney my question.
+
+Ryan Hankins  16:56
+No, I was just going to say, How long after that final report. Does you guys need to finalize your foundations?
+
+Unknown Speaker  17:09
+How long do we need? It's going to we have until five eight.
+
+Ryan Hankins  17:14
+You guys have until five eight. That's what that's what your schedules currently shows. Yeah, that's right. Okay. Well, as we're getting up to speed, we'll, we'll work that into our schedule and see how far we need to pull that up. It's gonna be quicker than that. But, yeah, what's
+
+Unknown Speaker  17:36
+that? Were you saying?
+
+Ryan Hankins  17:41
+Let us render an opinion. Talk with Pacific fusion offline and give us, give us a minute to get up to speed, and then we'll, we'll, we'll talk more in detail about when we need the foundations. I didn't mean
+
+Speaker 7  17:55
+to derail the meaning, Brian, just a clarification we are submitting for foundation permit. So Marc is in design, design development right now. We're submitting for foundation permit on five eight.
+
+Ryan Hankins  18:09
+Okay, gotcha, yeah. So,
+
+Speaker 7  18:16
+everything counts. 511 is the date we're really pushing to provide, you know, Value Engineering discussion and input. I think we're having that meeting on the ninth, but I think Marc, you really need, or you really need those inputs finalized so you can get to work shortly thereafter. I know it's the eighth, but the be workshop won't
+
+Speaker 4  18:42
+happen until the night. So design team has been noting is actually tomorrow, April 1. Give me a thumbs up on that.
+
+Speaker 3  18:50
+Oh yeah, I would say 327 is the final input. And so yeah, 327 is the final inputs that we're we're kind of going to be able to, for sure, coordinate throughout the set, and we're going to try our best with all the other inputs. But we really do have to lock down when these inputs are coming in. And so we're we know that you all are getting up to speed. And so that be workshop is going to be super critical for eight. Was we thought the earliest feasible that you would possibly be able to put something together for that? So we we put that as four eight, and that was like last possible second. But we do not want to put all these decisions off until four eight, because that's going to make an incredible amount of work for our team to get coordinated throughout the whole set. So that's why we're really pushing the Pacific fusion team, and it's going to all of us are pushing really hard so and that's that's what we're going to be able to hold to.
+
+Speaker 7  19:39
+So let's up in our OAC meeting tomorrow, Rebecca, let's let's already have a good understand we're creating our agenda for that be workshop. Let's have a very clear understanding of what opportunities we have with the foundation scope, and what we can do to maybe advance those decisions. So let's tomorrow, Mark, if we can come prepared with those opportunities, we'll see what Nick and I can do to work on those
+
+Speaker 3  20:11
+for the 4849, workshop. Yep, that sounds good. Cory, just out of this, my question was going to be so I have written in the design decision log that that you want the team mark and Frank and Thorn Tom said he to move forward with isolating, structurally isolating the cup from the R and D space as a decision and a directive. Is that That's how I understood it. Is that what you meant?
+
+Speaker 9  20:43
+Yes. That is the directive today we do need. So that is the decision that we're making. We do need to follow up on that to really understand cost applications that will be ongoing effort
+
+Unknown Speaker  20:55
+with dispatch dispatch, and determining overall impact. So, yes, yes for now.
+
+Speaker 3  21:06
+Okay, so yep, sounds good. I'm going to put it into my left bolded column. Sounds good.
+
+Unknown Speaker  21:19
+Okay, we good on this team before I move on.
+
+Unknown Speaker  21:23
+As good as it can be, I think
+
+Speaker 1  21:26
+this is an hour long meeting Greg, so we should be good to keep rolling Cool. We'll start from top. I believe Courtney just sent out, I mean, probably an hour ago, Cal package for the tanks. Is that accurate statement. Cory, that
+
+Speaker 7  21:43
+is an accurate statement. So question, back to the rock. Tom Sandy, is this sufficient for your reference documents for the 511
+
+Unknown Speaker  21:53
+permit package? Frank, I hope you've opened it. I have
+
+Unknown Speaker  22:01
+not had a chance to open it yet. I've been in meetings.
+
+Speaker 4  22:05
+Wait my green, yeah, so yeah, we'll read it tonight, and we'll back to you tomorrow.
+
+Unknown Speaker  22:13
+That sounds good. Yeah. Thank you guys. Settlement, I don't remember we ended on this.
+
+Speaker 4  22:23
+So since last week, we made some pretty good progress. We have the models are created. They're not quite running. They're not quite iterated together well enough to kind of really show the results that we're expecting or hoping to see so but right now, and we're the target was to get some information back to Western geotechnical tomorrow, and so we're ground improvement. Sorry, Western ground driven, so we're on track to do that. We'll have one more kind of pass at it yet this afternoon to kind of get the two parts together. So
+
+Speaker 1  23:08
+yeah, you still think that for one date is achievable, or, yeah, for the
+
+Speaker 4  23:12
+first pass definitely achievable. It'll take some iteration after that, but it'll help us understand where we are. So yes, and I will say, so far, we've been seeing good.
+
+Speaker 1  23:31
+PF, side, I believe there's an action item for us to confirm the criteria is suitable for our operations. Echo, I don't know if we've ran this down at all.
+
+Unknown Speaker  23:39
+If not, we probably should.
+
+Speaker 2  23:41
+You mean the creates, the requirement isn't creates inch, right? That's what we're still working towards.
+
+Unknown Speaker  23:49
+So the work industry, yeah, so
+
+Speaker 1  23:53
+situations back corner and forward corner. Yep, you can't really see the
+
+Speaker 2  23:59
+requirement is still three eights, and that's already been communicated. Marc on it,
+
+Unknown Speaker  24:04
+that's fine. We're working towards it
+
+Speaker 1  24:07
+sounds good. Trench covers, I sent you guys over some information. You being northern Thomas Ed information over from DTA inter pack. I believe we're poised to proceed with that vendor. So that should help us a little bit, but I believe I sent over some of the wheel loading information they carried. Think the big concern is we are running very thin on margin based on the current loading of that, that wheel transporter, for that 184 psi loading we tried to capture with the last week. I don't know if you've had time to look at it or get an opinion on what they sent over, or if you need anything further from them. I think my main comment was given, we're on margin. We may want to build in some capacity into the floor in the trans place, just in case we're we go over for some odd reason. I don't anticipate it happening, but you never know. We don't want to, you know, start to crease or patch plates or have any adverse effects. So I know you guys have a lot of things you're working on. So I don't know if you've read that email yet, but thought I'd ask,
+
+Speaker 5  25:17
+yeah, Jon and I have, I guess, just to follow up on the kind of the fitting, making the cover as thin as we can, you know, based on the 324 update there, we were able to get a plate thickness of one and a half inch to work with Stephanie beams. So that brings the total thickness of the trench cover down from 18 inches previously to 16 and a half inches. And so again, this is kind of, this would be the revised upper bound. Let's call it because that was based on the heated, transported transporter loads that we had have had made assumptions for, I think, with the DTA transporter, just given the quantity of wheels that that transporter has, you know, we'd be able to get even thinner on the on the total covered thickness
+
+Speaker 4  26:22
+was there direction to go with the DTA, or is that still not decided?
+
+Speaker 5  26:27
+I think that was just kind of confirm mark.
+
+Speaker 1  26:32
+We have enough, yeah, to confirm. It's not officially confirmed, but we're poised to confirm, given the fact that it has a lot of positives, including, you know, considerations in the floor with that wheels that will loading. So I think if you guys can look at that email and
+
+Unknown Speaker  26:53
+see if you have any
+
+Speaker 1  26:56
+impacts associated with that, yeah, we can circle through and
+
+Speaker 4  27:00
+refine it again. I think we're getting to a point where this
+
+Speaker 1  27:05
+is making more sense, making me feel a little bit better. The only thing I'm hoping with that is there's a trade off, right? Like if we're having to carry additional loading past 100 484 psi, because that loader is very thin on margin. Obviously that has building costs to consider. Or we add an initial wheel line, which I couldn't put in there, how much that costs? So the balancing act as usual. So let you process that. If you have questions, let me know we can get the mug on the phone or ping pong with a sensor in Spain.
+
+Speaker 5  27:44
+So, right, Jordan is there, is there a certain amount of additional safety that you would want for this transporters that you know, if we previously had a 184 and based on the wheel loading that,
+
+Speaker 1  28:00
+honestly, based on, yeah, based on that calculation that they're using, I think they're kind of double check their assumptions. If their assumptions align with yours, and you think the 184 will work, then we just proceed with that and call it good. I don't anticipate us loading the vehicle more than that. I think that's going to be the upper bounds of loading for quite a while. We'll have wider stuff that rolls on it, but that will be less of a consideration.
+
+Speaker 5  28:28
+Okay, I think we can move forward with that
+
+Speaker 2  28:33
+Frank, just so I'm aware that. So we're going to move forward with the plate thickness of the one and a half inches. You sent over the sketch of what that looks like, right already? Or do you mind bumping that for me so that I can get my team to model that in properly into our trenches?
+
+Unknown Speaker  28:55
+Sure. I'll send you an updated sketch.
+
+Speaker 2  28:57
+Okay, thank you. Appreciate that. And then, oh, mark the mark, Did Mark have a question?
+
+Speaker 4  29:07
+I think there's a request to refine it a little bit more, right? We will find it just to get the weight down a bit. I don't think it'll change any of those dimensions significantly. So the 16 isn't going to go down to 12, but it might go down to 14 or
+
+Speaker 2  29:21
+something like that. I will wait then for the Finalize, and let me know when that happens. And then I wanted to mention that in the 100% DD set, I did include the equipment clearance numbers that you guys were waiting on,
+
+Unknown Speaker  29:35
+just so you're aware.
+
+Unknown Speaker  29:42
+And then,
+
+Speaker 2  29:48
+sorry. One quick thing, I guess, when are we going to be able to close out on that total thickness plate, just so I can give my team a date to click on to
+
+Speaker 4  30:05
+I would say, by end of week, but if you give us until Monday, that'd be good.
+
+Unknown Speaker  30:10
+Thank you. I definitely give you until Monday. Thank you.
+
+Speaker 1  30:24
+The diagnostics bridge. I know there's some information in the I'm forgetting the acronym, the assessment, the vibration consultant letter had some information on isolation of this bridge. I know. TT, you guys are still working on a preliminary layout design for the bridge, which will kind of speak to that, and it helps inform PF on some things. So we can try to work some magic on our end to reduce the requirement.
+
+Speaker 4  30:57
+But yeah, can I share right now? We do have something that we've progressed a bit. It's still see that should work. It's still somewhat in progress with the sizes are kind of generally right. So what we talked about last time was doing it beside the counting room was not acceptable. We looked at the two options of either reducing the counting room and trying to get the bridge off to one side, or to extend the county room a little bit to get it so it was fully supported on we would like to we'd recommend doing the option of extending the kind of rooms that the bridge is fully supported on it. So in section it looks like this, got a lot of edge distance here. And then in the spanning members of it, we are planning to take out essentially all of the load, majority of the lateral load, onto the counting room, so we have some good supports there, bracing, using the column here at the end, near the target tank, and then also using two columns over here adjacent to the lower part of the structure, spanning it, putting a truss, a horizontal truss, in here as our diaphragm, to make sure that this bridge kind of spans together. And then we need to look a little bit I don't think we have the clearance for this, but we're needing essentially a 24 inch deep This is a 24 inch deep beam. It's probably really actually 27 inches deep, but we're needing a 24 to 27 inch deep beam to span the distance and give us the collection criteria that we're looking for. So I don't think that there's enough height clearance there, so we will be looking to upturn this beam and place it on either side of the bridge. So we'll continue to work on that sketch for next week. But two things First, we'll actually have a conversation with her, have a conversation with Jerome about this one as well, just to make sure that we're providing the stiffness that they would need to be able to put the isolation on top, to isolate the equipment that's going over the top of it. And then the second part of my conversation is, if this kind of works for everybody, and the geometry is okay, we have the ability to extend the county room that gives us the information that we need for the foundation package. And then we will continue to work on the bridge design and develop the structural framing for that as a part of the phase two work. Work out a long way. But if we can get confirmation that extending that county room is acceptable and supporting the bridge on top of it as such, then that gives us what we need for today. Are you able to provide
+
+Speaker 1  33:58
+this and maybe some dimensions on anticipate
+
+Speaker 1  34:10
+that engineering expansion,
+
+Speaker 2  34:21
+okay? Jordan, you can get that action to me. I think Marc, just so, you know, I think that's going to be fine. But I'll, you know, triple check with the optical team and show them what you've done so far. Appreciate you putting the mark in. Sounds great.
+
+Unknown Speaker  34:40
+My presenting, I can't tell.
+
+Unknown Speaker  34:43
+Yeah, sure. Okay, perfect
+
+Speaker 1  34:46
+for flatness, for levelness. Again, we determined last week, we're just familiar with the most stringent obviously, if we go with the DTA transporter, this kind of goes away, because that was what was largely driving this in the first place. But for now, we'll still proceed with the hidden FFL requirement, vibration, carment, we already went over. Mitchell pep covers, is there any update to this fourth or long study,
+
+Speaker 5  35:22
+not at the moment, but now, now that the DTA transfers directions been confirmed, we'll get to work on this.
+
+Unknown Speaker  35:32
+Sounds good. I
+
+Speaker 1  35:44
+sounds good. Tank medical anchorage review for from TT, I believe. I don't know if you have a update on this, or if there's an update to provide at this point, based on information,
+
+Speaker 4  36:01
+no real update on it. Say that we are working on it, and we have kind of a preliminary set that shows that we're in the right ballpark, but we want to make sure we've got the numbers dialed in before we confirm that. So looking pretty good so far. And I was actually sorry. I was actually thinking about the target chamber, Anchorage. This is actually a tank. Sorry, we'll look hopefully that didn't think information that was just sent
+
+Unknown Speaker  36:40
+to us, water tank fill. This has to do with the piping correct going through that
+
+Speaker 2  36:47
+closed portion. Yeah, this is on me. Morgan went out of office, so I still need to confirm the diameter, but I should be able to give it to you tomorrow on the try the radius of the curvature of the fill line as it comes into the sink. Yeah, yeah, sounds good. Crane travel limits. Erica,
+
+Speaker 1  37:16
+you had questions on this. Do you want to go over in this meeting, or do you want to formulate your to formulate your thoughts and send an email
+
+Speaker 2  37:25
+or something? I put some questions on the 100 CD doc, so we can do that wherever happy to chat through it. Now, if we have time, if not, if there are other pressing
+
+Unknown Speaker  37:35
+items, we can do those first. Okay.
+
+Speaker 1  37:42
+Do let's go to game real quick, and then we can go back to it. Does it make sense? Sure thing. Okay, we're taking your points. I mean, that stuff was we just delivered those cows to you today. I don't think there's much on here, to be honest, basement ladder locations. I think that's acceptable based on what we saw in the model. I think the next thing for us to determine is, how are we covering it up top? Ideally it'd be flush with floor. Ideally we'd be able to drive anyone's rated next to that. Obviously it's not going to be the 184 because we can't get close to it, but needs to be traffic rated, opening up top. So we need to work on that with PT and page, I think, to further figure out what we want to do there, manhole cover or otherwise. Not entirely sure. So figure that out. But yeah, do you want to share something echo, or do you want to just talk through your comments on the crane travel limits?
+
+Speaker 2  38:51
+I was trying to pull up the 100% DD, right now, let's see if I'm successful. Mostly it was, I think we had given dimensions on the buffer stops. It looked like it was dimensioned off of the column, and I wanted just to clarify how I should be interpreting that. It's mostly my question. And then, sorry, I'm trying to find the book page it's on. I
+
+Speaker 2  39:25
+153, I think I would know these pages like the back of my hand. I hope how many times I went through it. Sorry, unless anyone else happens to have it up.
+
+Unknown Speaker  39:46
+This is your sandbox. Do you know what sheets
+
+Unknown Speaker  39:52
+on? It's 25
+
+Unknown Speaker  39:56
+okay, okay, I can find that.
+
+Unknown Speaker  40:00
+But I'm guessing, no, I'm sure I think it was even better, as 31
+
+Unknown Speaker  40:05
+was my other guess. You're muted.
+
+Unknown Speaker  40:08
+Frank's trying to tell us the answer.
+
+Unknown Speaker  40:11
+Oh, I found it. You're right. That's 25
+
+Speaker 9  40:18
+okay, let me share my screen. You so
+
+Speaker 2  40:39
+question I had here was on this dimension here, I think it says three point. I hate how the little guy covers with three foot two. Okay, in that dimension, though, it's based off of the center line of this column and so, but not based off of the inner wall, I guess, of the building. So is it, I guess? And then the column itself, yeah, I guess. I just wanted to confirm that that's right, that it's, I should just only be referencing it for three foot, two inches from the center line of this outer column, and not the wall. That makes sense.
+
+Speaker 5  41:31
+That's right, we were intending to dimension off the building grids, okay, but that makes sense, if not, be difficult for us to pull in the art background and show the extents of the interior wall. If that's more desirable for your no worries.
+
+Speaker 2  41:55
+I understand that this grid is more important anyways. So, okay, yeah, that's helpful. Just wanted to confirm that's what was going on. And then basically, we're still in talks with cone cranes on what the soft stops gonna look like. So basically that's the hard stop. And then we'll we have, like, kind of an estimate of what the soft Stop Is, but that's going to take a little bit of time before we know that. Right, right. Okay, cool.
+
+Speaker 5  42:20
+Okay, the current size of the bumper stop was based on a very high level preliminary estimate of the bumper stop force that was given to us by Tom a while back. But yeah, they didn't like, you know, however long that soft stop on the train is, I don't think we've had that information.
+
+Speaker 2  42:43
+Okay, and so I guess this heart stop here. Do you think this is a conservative or do you think I should internally add some buffer to it for any kind of lifts that we're accounting for right now, a little information that you guys have? Sorry, what was that mark? I thought
+
+Unknown Speaker  43:03
+was conservative. Okay, great, okay,
+
+Unknown Speaker  43:07
+okay, great, okay.
+
+Speaker 2  43:09
+And then I think the only other question I had is I got, in the last drawing that we had, that this span was 123 and six inches, and I think now it's 123 and four inches, or two inches, two inches is here. I'll be like, that is what exactly changed there between those two.
+
+Speaker 5  43:38
+So between the there were, there are two versions of the 400 ton train cut sheet that we received. We received one back sometime last year, and then we received an updated version of that earlier this year. And one of the differences between those two cut sheets was the minimum clearance between the between the center line of the rail to the face of the supporting structure. And so it went from one foot seven previously to one foot nine. And so that's your two inch difference on either side. Okay, so it's on the crane. Great. That's all I wanted to I just want
+
+Speaker 2  44:18
+to make sure we didn't like nothing changed on the big structure holding the cranes. But so it's the crane itself that changed, and the clearances basically got pushed out this way versus being closer in that way. But the center line of this is the same, correct. Okay, cool. Okay, I think those are all of my questions. And then, yeah, I think my other question will be for Beale, Jordan and Courtney on when we'll know more on the soft stop for the crane that's not on, you guys, that's on Kim cranes.
+
+Speaker 5  44:58
+We were expecting. I don't mean stone to call that we were expecting. Ga drawings from concordance by the end of the month.
+
+Speaker 7  45:09
+We are following up with the Conor cranes. They do OS general assembly drawings of the quality assurance package that was supposed to come on Friday. We're poking at them, but to so we'll push for them to send something in the next 48 hours. But echo, I'll go ahead and take this up, some question, and we'll get that rundown.
+
+Speaker 2  45:36
+Okay, thank you. That's kind of why my questions were just clear. They're mostly clarifying questions.
+
+Speaker 1  45:45
+Thank you. Echo. Aside from that, I think that highlights a lot of the things we wanted to get done today. I know we're bit early on the close so open the floor to any other discussion points we want to make, if we want to dive back into any of the topics discussed today or new topics. I'll leave it to anybody on the call.
+
+Speaker 3  46:08
+Can I just ask a question that's not super structural, but it will affect structural So, Nick, I sent you an email just wanting to confirm who from our team you're wanting to have at that ve workshop, and if you just respond, that would be good, because then I can start getting the team prep. Since it is just next week, I would just want to make sure people
+
+Speaker 6  46:29
+have time. Yes, I think you're right. It should be the same team that we had for the previous meeting, but I'll respond to your email right now.
+
+Speaker 3  46:37
+Okay, perfect. Sounds good. So I'll coordinate with our team.
+
+Ryan Hankins  46:45
+Is there any way, this is Ryan with Clayco. Is there any way we can get access to some of just like the design decision logs that are being worked on, just so we can be up to speed on kind of what decisions being made, just so that we're because design is going to always keep evolving. We just want to make sure that we're as we're getting up to speed. We're keeping up with what's changing and what's what's currently being discussed.
+
+Speaker 6  47:12
+Yeah, Ryan, I think I sent that to you. It was in with the 100% DD said you should have our most recent design, design decision log, there.
+
+Ryan Hankins  47:24
+Perfect. Okay, yeah, I only, I just had a chance to print out the drawings, so I probably should look at the rest of the stuff you sent me. So apologize, it's a lot
+
+Unknown Speaker  47:33
+of information, but yeah, it should be, it should be in there. I think, yeah, there's a document there for sure.
+
+Unknown Speaker  47:38
+Okay, perfect.
+
+Speaker 7  47:41
+And I think there's a broader there's a broader access question page you want to get, like a team. I think it makes sense to have you guys on the ACC platform. That way you're getting real time
+
+Unknown Speaker  47:55
+updates with the rest of us, including when these months being posted. We lost a lot of the
+
+Speaker 7  48:06
+document module there, so please take it up. It would ideas that you guys have access to that platform. You'll also have access to all the different modules from the team and your details, but we'll, we'll talk about it offline.
+
+Ryan Hankins  48:32
+Perfect. I think Rebecca, you did start adding us to ACC, which is good.
+
+Speaker 3  48:37
+We got you all set up in ACC and so, yeah, Cory, I'm so sorry. I only got like, a third of what you just said because I didn't understand it, but because you were breaking up. Sorry, not because I'm done, but I just if we can have a follow up conversation of what you want them to get added into, I think that would be good, and then we can just add them in. I'm saying that like it's super easy, and I keep seeming to have troubles with it, but eventually we get it worked out. So yeah, I think let's maybe put that on the OA meeting tomorrow to just talk through where we want to add Clayco in.
+
+Speaker 7  49:13
+Sounds good. Rebecca, generically speaking, and hopefully I'm not breaking up right now, but generically speaking, they should have the same level of access that Nick and I have,
+
+Speaker 3  49:22
+okay, that's great. Thank you. Yeah, well, we'll start working on that. I think we'll, we'll figure it out. And if you don't have access to something that you should, or Ryan, if Courtney is like, just look at this and you can't see it. Just let me know, because some of these are, like, a case by case basis, and some of them are, we'll figure it out.
+
+Ryan Hankins  49:43
+All good, yeah, we've worked in the ACC before, so very familiar. Also, I was totally kidding earlier. The comment about the foundation design, that was a joke. My attempt at humor, but no will hilarious.
+
+Speaker 3  50:01
+I don't know. I typically think that I'm the funniest person in a room that you guys are beginning in a professional setting, so you don't really know that, but that I did not know your sense of humor. And I'm like, Oh, buddy, that's
+
+Ryan Hankins  50:15
+that's how we need to get no, that's why I was excited to get in the same room with you guys next week, and, like, just really get up to speed with, like, what all you guys are working on and what, what our priorities are for construction, just making sure we're aligning our plans, just plans and expectations. And, I mean, we're coming into this with what we thought was the right plan, but like, that may be totally off from what you guys have been working on. So just need to, we just need to sync up and just make sure that that leaving next week, we're all in alignment, and that we're all kind of moving in the same direction.
+
+Speaker 3  50:49
+Yeah, I'm really looking forward to getting that alignment with your all schedule. I think it's going to help clarify so much. So I'm looking
+
+Ryan Hankins  50:56
+forward to that in any cost studies. I know there was a couple things today talking about, you know, separating the building structurally between the cup and the main building. Yeah, we can absolutely work on a cost study for you guys and that stuff. Just, just make sure that me, Chris and Conor are copied on everything. And, yeah, any, any, any sketches you can get us mark just to make sure that we're pricing the right thing would would be, would be helpful and appropriate, or if it's a tonnage, you know, there's, there's a million different ways we can slice it, but we can, we can act fast. So, okay, sounds good.
+
+Speaker 3  51:41
+Are we good? All right, good. Thank you guys. Appreciate it. Thank you all. Thank you.
+
+Unknown Speaker  51:48
+Thanks Everyone. You i i You.
+
+
+Transcribed by https://otter.ai

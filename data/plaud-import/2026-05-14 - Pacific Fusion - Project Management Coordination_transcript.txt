@@ -1,0 +1,203 @@
+Unknown Speaker  00:15
+You're a mute if you're talking. But hey guys, still a couple minutes.
+
+Speaker 1  00:20
+Literally, a I'm just I set this up, kind of set up yesterday, trying to get off high center on the speedy stuff. And the most pressing item is the natural gas change. So I think what we need, from what we need to understand, is what option among astrid's several options was selected, and are we proceeding with? And they need to basically high tail it into gear to get to make the June 15 deadline.
+
+Ryan Hankins  01:03
+Understood, yeah. I mean, I feel like we're putting the cart before the horse here, but I totally understand where you guys are at so
+
+Unknown Speaker  01:17
+and we wait till
+
+Unknown Speaker  01:19
+my need to jump into it now,
+
+Unknown Speaker  01:23
+yeah, let's give a hashtag a minute. We don't have to explain to her. I also
+
+Ryan Hankins  01:28
+forward it to our mechanical guy. I don't know if he's gonna join because it was short notice, but we will see if he can join. Okay?
+
+Speaker 1  01:42
+And then I'll just put real quick. I know you're you guys have a package that you're going to send over. I believe Ryan and I think a lot of those decisions like we that are i less impactful to the design effort. But you know, we do have a question.
+
+Ryan Hankins  02:00
+So I keep getting asked to do more and more things, and now we have this meeting today with Keith. And so, like, I'm trying to keep my head above water right now, yeah, and this meeting with Keith is, like, it's crazy, because it's kind of like a theatrical thing, and so I'm trying to my performative I have my leadership asking me, like, what are we supposed to say? And so, like, I'm trying to get everybody, kind of like, ducks in a row. And so I have not, unfortunately, had any time to spend on the VE for what I consider to be. And I know you guys have a goal, but the goal once, and I think I've talked a couple you guys about this, your goals are not in line with what the project needs. And I know that your goals are being set by Pacific fusion, but like, they're we're, like, totally disconnected from, like, what's reality versus what's what's needed.
+
+Speaker 1  03:01
+Listen, Ryan, you are preaching to the choir. We're all in we're all in the same boat. Here's the ticking clock that we're up against. Okay? Is what if Keith picks up the phone and calls Peter Thiel, who says, Okay, I'll open my wallet and give you another 100 million dollars, and all of a sudden, the June 15 permit deadline is back in play, and we have to, we have to submit, because it's in our contract that's nuts, and that's the eventuality that we're trying to manage. It's a distinct possibility. I don't take it off the table. Yeah, I try to get Cory to take it off the table. You heard me?
+
+Ryan Hankins  03:45
+Yeah, I asked several times about pencils down directions. I've I've asked her too, because I was just like, we have, we have way too many possibilities going on right now for what can for what can happen.
+
+Speaker 2  03:56
+This group is in the same page. This was done into a therapy session last year. Session focused on the problem. I'm just gonna share. Sorry. Go ahead.
+
+Speaker 1  04:09
+Real quick. As for today, thanks for making this call this morning. I know you guys have a lot going on as well. What? And I've been, I've been catching up with petition Rebecca and Dominic on kind of where we stand, but really desperate to get off high
+
+Unknown Speaker  04:26
+center. And I'm
+
+Speaker 1  04:30
+going to recap, and folks can correct me if I'm misunderstand. But as for do you put together a great package of the E options with a number of, you know, one ABCD, one A, 1b and one or more of those was selected by Pacific fusion. And we just, and I think you need direction on exactly what was selected so that you guys can move forward with design revisions.
+
+Speaker 3  05:00
+Yeah, I think what we're looking for is really just written confirmation. It can be as simple as an email saying we're going to go with these options go forth. Because the only thing that I've seen, I think, was the pricing that Keiko put together, that was was sent through from the first I believe I was out on PTO, but I saw that come through with a summary of of all of the the estimates for the deducts, but there was no follow up or direction from Pacific fusion definitively saying we're going to do these. And so because a lot of these are especially don't know on the hydronic side, their deletions. I don't want to go through and start deleting things from the model and then have based off of a decision that hasn't been finalized and and then have a lot of pretty work. Yeah. Yeah.
+
+Ryan Hankins  05:56
+Understood. So at a super, super easy to explain. Standpoint, we priced exactly what was on, what you gave us now, the items that I believe are accepted, but to your point, we've been trying to get this documented. It's 2d so natural gas fired, RT use in lieu of chilled water and hot water. Aux, eliminating the fluid cooler system and shifting load to the air source, heat pump, plant per year drawings, reducing or eliminating insulation on exposed supply duct work and conditioned spaces requires supply air, reset controls during humid conditions to avoid surface condensation. Per your drawings, or actually no that one, give us a drawing.
+
+Speaker 3  06:50
+Yeah, that wouldn't we? We didn't end up talking about that one because it seems like low, lower hanging well, not low hanging fruit, but it seemed like a lower value ve I think when we had our initial like working session, but I did see that it's resurfaced, and I got a question via email. I do think that I'm not sure what you how much work you priced for that, because that would only be for areas that are exposed, that don't have a ceiling, right? So that's the open offices. I think it's the IMG service room and R and D. I'm I do not recommend removing the insulation from the R and D and the IMG service because those spaces have large roll of doors. I think there's conditions where we can't control the humidity in the space, and they're going to get condensation on the duct work. So I would limit that one to the open office space.
+
+Ryan Hankins  07:46
+I'm fine with that. We just mean, basically we were asked to just price removing all the insulation from the supply, so
+
+Unknown Speaker  07:55
+from all of the supply duct work.
+
+Ryan Hankins  07:56
+Yeah, I'm fine
+
+Speaker 3  08:01
+discussion. Let's say, with Pacific fusion site, we haven't discussed it.
+
+Ryan Hankins  08:05
+Okay, that's fine.
+
+Speaker 2  08:08
+Well, Brian, if you, if you can, just to get to this point, what is included in this particular line item, in the 9.2 million, if you can, based on Astrid sketches, what is, because I saw her mixing and matching solutions at one point, and I'm not sure if that was the intent or not. Can you just tell it what? Tell us what is in this 9.2 million that way we can say, hey, based on this, that's here. This is a, yes, there's a there's a drawings that are marked up and will move forward. Is there something that's simple, like that, or there is no simple bullet?
+
+Ryan Hankins  08:46
+Yes, someone please capture notes about our collective understanding of what's a pre review, what questions
+
+Ryan Hankins  09:02
+I really need our mechanical guy here. Yeah, I it was short notice, and I he, but I know that man, because I've talked through an excruciating detail, the holistic package, what you gave us for option 2d like, I mean, Ashley, you did a phenomenal job of outlining what was changing. That was what was priced as part of that that deduct,
+
+Speaker 3  09:29
+yeah, I, I mean, I think that's clear to me. The idea is you have these individual ves. If you elect to do a few of them together. It does start to impact the cost relative to the the base of design. I put together an option for two ease that I thought were highly likely to get to move forward, which is the art use and fluid cooler. It seems like that. So one, I called it 1d because I was looking at the heat pump. RT use, assuming that you priced 1d as natural gas. RTS. I think that's
+
+Ryan Hankins  10:11
+very clear. Yes, that is what we did. So this is, this is what we came up with. Like, this is where, like, I'm being communicated with internally about, and forget the numbers, because I think some of these numbers might be loaded with with indirects and whatnot. But the way, the path that I think specific fusion is going is pathway to natural gas RTU, convert everything to glycol, and that's to D. That is which to D, obviously includes three a as part of that converts. You know this one was remove heat exchanger on chilled water systems and make secondary leaf like water. We went ahead and just we priced that down here saying that convert all process cooling water to glycol and delete the heat exchangers. That was a $250,000 deduction. So we are what we understand is that that that's accepted, and then deleting the RTU for the fire pump room and providing heat vent only that's accepted, and then the electric reheat for Office VAVS in lieu of hot water reheat that was accepted from our understanding. So that
+
+Speaker 3  11:33
+one, I did not do a ve for that one. So I'm curious what was priced, because I would not do electric re like I wouldn't, if we have any electric reheat, it's going to be very minor. Most of the heating should be coming from the natural gas. Or to use electric reheat as like primary source of heating in this climate, would be highly inefficient and potentially not code compliant. I would have to look into that. That's fair. Was this just looking at, what if we remove all the hot water quals and replace them with electric reheat, as I was priced? Yes. So I mean, I would look at, ideally, zoning a part of the RTU ve with adding in a few additional RT use so that we could separate out the perimeter spaces from the interior, and that additional zoning will hopefully limit the amount of electric reheat that we need. So arguably, that that price, I guess, could be included in the RTU price.
+
+Ryan Hankins  12:50
+But so, yeah, I think these two need to be discussed further. I think is what we're talking about. Hey, for this, Keith, meeting. My boss is coming in. I gotta prep him. Yeah, I apologize. Let me, but these two, I think, are the ones we need to talk about. From what I think Astrid, you're saying, at least with specification, yeah, correct, yeah, and yeah, let's, let's revisit this after the Keith meeting. Let me get through that, and then we can get back to this. Okay, thanks, Ryan. Thanks, guys. Thanks, Ryan, yeah.
+
+Unknown Speaker  13:27
+So pastor, based on this
+
+Unknown Speaker  13:28
+conversation, just want to get the latest.
+
+Ryan Hankins  13:32
+So, yeah, we had a kind of a pre meeting, but basically, Keith cut 50 million. Like, we spent the last two days going through like, hey, like, let's cut program. Here's the things that we can cut. Like, like, all the trenches that are, you know, underground for utilities, cutting like, these big pits for cool for cold water, for cooling down their process after everything gets super hot and violent, and we basically went through everything and decided showed what was actually driving costs from the requirements and basically dial it down. So he accepted 50 million yesterday night, so we're basically down to about 200 million for our budget now, for this meeting today, like knowing that we don't, there's still a lot of inputs we don't have. If we look at the goals of the meeting, Keith's going to be Keith very dry and direct to the point I think you've picked that up. He may even say, like, so are we still on schedule. That may be his opening.
+
+Ryan Abbott  14:42
+Yeah. And the comment would be that your design team's doing did the work and needs to redo the work.
+
+Ryan Hankins  14:49
+Yes. What Courtney said is, like, there's a couple ways this can go. She goes, if you go into the meeting saying we can't do this, saying we don't control things, saying, like, there's a lot of things unknown. Yeah. He thinks he's hiring us to go coordinate all that. Yeah. So that's just the context
+
+Ryan Abbott  15:07
+which is great. Like, I bet I we don't, I don't want to speak for Stantec totally
+
+Ryan Hankins  15:13
+is going to be on the call too.
+
+Ryan Abbott  15:14
+So they like, Hey, that sounds like a question that Stantec needs to
+
+Ryan Hankins  15:19
+respond to. Perfect. Yep. So the goal for the overall goal for the meeting, knowing that he may be leading with this, is just showing that like we're going to accommodate the scope reductions he gave us, they don't appear to affect structure, yeah. So we don't think there's going to be a holistic redesign on steel and the late design changes, which basically means we're protecting the steel and mill otter and the other critical long lead items. We need to say, whether it's performative or whatever else, that we still are breaking ground in July, and that may mean that we're not doing anything for a couple months. Yeah, but what Courtney said is, yeah, you have to say that, because he's looking for that, and he's already committed to that with his investors, and so that may we're not saying, We can't say that the other parts of the schedule change, but that, I think, is what he's looking for. Where's, where's
+
+Ryan Abbott  16:15
+all of the cost pressure coming from? Is it because they're spending it on equipment, or the fundraise isn't going as well as they wanted, or,
+
+Ryan Hankins  16:25
+no, it's because certain things have been spoken for within their series. A Okay, and so, mean, what I just talked to Stantec about is like, you know, they're like, Hey, he may go to Peter Theo or Peter Thiel and say, Hey, I need $100 million and Peter Thiel might say, okay, yeah. And if that happens, then, like, this whole problem goes away.
+
+Ryan Abbott  16:45
+Are there going to be permits in place for this shit? I mean, so
+
+Ryan Hankins  16:48
+that's what Stan techniques answer. Like, what
+
+Ryan Abbott  16:51
+I what I don't want to get into a is we commit to pricing. It never gets represented in the documents, and then we're in a really big problem with the market, you know what I mean? Yeah, yeah.
+
+Ryan Hankins  17:03
+Civil design is fine. Structural Design, we think, is close. Except for concrete. Concrete is going to change a little bit, but ideally.
+
+Ryan Abbott  17:14
+But foundation heights, column height,
+
+Ryan Hankins  17:17
+that should all be fine, okay, these
+
+Unknown Speaker  17:18
+troughs and trenches just,
+
+Ryan Hankins  17:20
+just basically putting x through is, is how I understand how we're going to move forward. It needs to be represented in a drawing.
+
+Ryan Abbott  17:29
+Well, there's an inspector that's going to show up at some point and want to see all of this tied together and where your shear is coming from. And that's the risk, yeah. Okay, and so we'll stand tech is going to have to answer those questions.
+
+Ryan Hankins  17:41
+Totally agree. Okay, but I think what we're saying is that, you know, within the confines of what we can control, I think we're, we're game, yeah, the other thing I don't know is, like, how much are we actually, like, are we not going to do this job, you think? Or, yeah,
+
+Ryan Abbott  17:56
+we're, I think we're going to do this job. I think what I am trying to protect like this, the fastest stuff you see in the news. Microsoft wants us to do a three and a half billion dollar job, like everyone's head is right now. Like, how do we do that? Right? Meanwhile, this is, like, a little fly on nail that's ass over here. You know which I'm like, it's going to be locally staffed, you know what I mean, but like, this stuff makes everyone nervous, and that's where, like, Ryan's getting us into, like, Ryan's getting us into a deal that is going to not pay the bills. We're going to be fighting to get money out of these guys. They're going to over commit on the equipment side, and then they don't have enough money to pay for their contractor. Like, those are the things that are running through their head, because that's what they lived on, both AC and group 14,
+
+Ryan Hankins  18:54
+and that's where I think, like this call, I think, is, like, your setup, yeah, for like, some other conversation that you're going to call him, have a direct Yeah, because he's setting expectations. Yeah, yeah. And I think we need to also set some expectations from our side, yeah. Of like, what we need out of this? Yeah? Because right now I think he doesn't understand the construction market, yeah. So I think that thought process should go through your mind as we're having this discussion too. Okay, all right, okay. I mean, there's a lot of pieces we don't know about right now,
+
+Ryan Abbott  19:28
+but it's got to be tough to be a Courtney and Nick in the middle of this.
+
+Ryan Hankins  19:33
+It's very tough. Courtney has had a rough week,
+
+Unknown Speaker  19:37
+just, just with drama.
+
+Ryan Hankins  19:40
+I mean, like, we priced $80 million of items in the last two days. Yeah, I'm just like, Yeah, I'm just like, fucking wagon, a chainsaw blocking. So, yeah, it's, it's, it'll, it'll be interesting to see how this goes. But I do think that Keith, I mean, I asked Cory, I was like, knowing Keith, he's just gonna say, Are we on schedule? Yeah. And she's like, I wouldn't doubt it, yeah, that's how we open. So, yeah,
+
+Speaker 4  20:10
+you got your No wife, no kids hair. Fucking love that for you. What do you mean?
+
+Ryan Hankins  20:14
+They're out of town, right? Yeah, you could tell love it. I ran out of I ran out of products. You don't need products. It's great. Yeah. And I was playing I ran out of product, and I was playing tennis this morning, and so I was like,
+
+Unknown Speaker  20:29
+you call it product instead of stuff? Could just be like, stuff, stuff, yeah, anybody
+
+Speaker 4  20:41
+for Dolan? It's a tough one. Not everyone's on the card list. No, I've
+
+Ryan Hankins  20:54
+already told him everything. He's like, I mean, there's people in this business that are, like, Brian's one of the best architects ever worked with. Like, he's just through and through. He's just that guy. Well, he will run through a brick wall for the sake of the project.
+
+Ryan Abbott  21:10
+Listen, I'm married. I'm married to an architect. I have a whole bunch of designers in my family there. There's like, like, it takes a certain amount of ego. It takes a certain amount like, Dolan's the opposite, where he's like, Yeah, shitty work. Like, I'll shovel shit. Like, let me in. Like, yeah, yeah. All
+
+Unknown Speaker  21:59
+right, I'm love Ryan,
+
+Ryan Hankins  22:19
+if you know you know Mike. I've already spent an hour talking to him, so
+
+Speaker 4  22:28
+we got to get some recordings of his laughter so we can play it. Yes. So be on the lookout for that. Seriously, I agree. Record that shit.
+
+Unknown Speaker  22:38
+He's a good dude. I will. I.
+
+
+Transcribed by https://otter.ai

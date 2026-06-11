@@ -1,0 +1,248 @@
+Speaker 1  00:00
+Round conduit that's running to a pole dock, pole box in the R and D space. The conduit only is going to be routed as part of Phase 1b the conductors will be run as a part of Phase 1c it terminates in a pole box. One way to coordinate those locations with Dominic, I think that was discussed earlier today, and
+
+Speaker 2  00:23
+and we, if we don't need a pull box, from a pulling standpoint, we can just terminate the underground with capped with just capped, capped conduits and capped rigid steel. Then they could be extended for phase one.
+
+Speaker 1  00:38
+See, that's true, I think, yeah, or maybe, I guess, temporary pull box or something like that. Yeah, temporary
+
+Speaker 2  00:47
+pull box are kept, yeah, yeah, just something to protect them
+
+Speaker 1  00:50
+from construction. Yeah, I feel like they're gonna get otherwise they're gonna get smashed. But yes, yeah, I agree, yeah.
+
+Speaker 3  00:58
+And just so you're aware, Susie, we're going to want to follow discussion on where that conduit is coming up, just because there's a couple locations where some openings are moving, where we want to pull boxes to terminate. And also, with the foundation update coming into this week, some of those footings are going to be get resized. So we'll just get on a call maybe sometime next week to finalize some of those locations for the 1b package.
+
+Speaker 2  01:35
+Okay, it's if the foundations are moving were and changing, we got to look at that, because we may not be able to do our rework fast enough to get them. We may need some extra time if the foundations are changing, we may need some additional time to modify our underground. We just need to see how much of it affects us. I don't know what those changes are yet. Okay.
+
+Speaker 1  02:12
+Okay, and then from this, we'll say temporary pull box or stub up location as a part of Phase 1c we're going to route rigid steel conduit vertically in the RFC or in the R and D space, terminate in a pole box high. And then that will be phase the end of phase 1c scope, phase two, scope is going to be future conduit, or busway that's routed to the R and D electrical equipment. Does that kind of align Jeremy with what you were expecting? Or are there?
+
+Speaker 4  02:58
+Yeah, I just want to make sure, I guess it was, sounds like either a breakout session or some point here to discuss where the pull boxes in the on the ground are, or the stop ups of the rigid Yeah. Okay.
+
+Speaker 5  03:16
+And we have, and we have a lot of that already modeled. Correct? Is all of it modeled, or some of
+
+Speaker 1  03:23
+it all of its model? I mean, all of its model include, including this future phase two, this. This probably needs to be updated a little bit, but it's currently modeled right now. But I think to Dominic's point, probably these locations, these step up locations, need to be updated based on the updated foundation plan. But once we get that information, what we can look at it, react and update our drawings accordingly.
+
+Speaker 5  04:00
+Yeah, Jeremy, you have access to the federated model. Do you want to review it kind of on your own first, or do you want to review it with the group?
+
+Speaker 4  04:16
+I guess I can try and go through here and see, add some notes, comments.
+
+Speaker 5  04:22
+I don't know if the federated model will actually allow you. I've never tried that. Let me see if I let me see if that function exists. Dominic, do you know if we can tag issues in the federated model or in the view?
+
+Speaker 3  04:39
+Yeah, you can, do you want me to show you? Yeah, I don't actually show you now because I after five, I'm gonna disappear.
+
+Unknown Speaker  04:53
+Yeah, that's fine.
+
+Unknown Speaker  04:55
+I think we've got plenty of time you just
+
+Unknown Speaker  04:56
+vaporize after five.
+
+Speaker 3  04:58
+Yeah, no, I just turn into, you know, useless mush. Have to figure out who I am, what I am, what am I if I'm not an architect, you know, start asking the real questions. But anyway, so if you go to the View tab and you're in the actual federated model. And maybe, if I back up a little bit, if you're in model coordination, and you go to views, there should already be a federated model view created with all the files compiled. It's project source, federated, model. Click on that guy, and you'll see this little ribbon on the left. And there's view ports, levels, model, browser, glasses, issues. You can click on issues, and this is what I've been using to create the issue report. So if I'm scrolling through the model, and I want to take a section cut, and then I spot some clash, like, oh, I don't know, maybe the conduit that we were just talking about, and I go in there, and there's this little create issue for the types I use clash, and that's what I filter through when I'm creating those reports. And you can literally click anywhere in the model, and it will associate that clash or issue in 3d to whatever you've selected. And you kind of have to select into it, title it, you know, call it conduit class, or conduit versus and or opening. Then you can assign it, give it over to Alex. I mean, we're already aware of this. And then you can assign watchers, Susie, myself, Nick, now the dot thing at the bottom, you can add additional notes, but as far as you know it goes that creates the issue, and the issue lives in that 3d component. So I can scroll around wherever I took that section cut that is the associated issue, and you can either view it in the actual federated model, or if I go think back to the issues, same with how you would see them tagged on the plans. You can filter by clash, and it'll show up here, so you can access it from a model, or you can go directly to the issues,
+
+Unknown Speaker  07:55
+perfect. Thank you.
+
+Unknown Speaker  08:00
+You can also send us an email if there are things,
+
+Unknown Speaker  08:08
+navigating a lot easier than it really is if you
+
+Speaker 1  08:12
+send us an email if you there's some or, you know if there's if you want to have a breakout call to talk through how it's happening. We can do that too.
+
+Speaker 3  08:24
+But yeah, I would, you know, in the case of what is being drawn, I would give more credence to the PDF drawing, and I would the actual model at this point, because that's what the contractors are going to price and build off of,
+
+Speaker 1  08:43
+yeah, and our drawings, our model, is not, I mean, our drawings are the most accurate terms of what's being so, yeah. So if we need to talk through anything, we can do that too.
+
+Speaker 2  09:02
+We're in the process of reorganizing a lot of things, including the Orient kind of the layout of the duck banks are getting narrower for a number of reasons, which means they're a little deeper, but they're pretty wide right now and shallow. So we what? We don't have anybody. We don't have Frank on the call, or mark Dominic. Do you have an understanding of what the what the foundation changes. So the
+
+Speaker 3  09:41
+foundation changes are primarily for all of the trench design, kind of refining those elements, actually getting the captain. So it's not a complete redesign. Where it affects where it affects you. Is because of the Western ground improvement edition, a lot of the footings are getting smaller, so if anything, I think it's going to end up getting better. Yeah, it's going to help conflict. A lot of issues. I didn't mean to scare you. Not everything is changing, but what is in there now is not enough for us to determine, hey, this is where your conduit needs to go. Let's just wait until Frank makes that update, and then next week we can get together and find better locations for where your conduit can come up in the slab. That's all I was saying.
+
+Speaker 2  10:40
+It takes us a pretty long time to do those designs, so we're supposed to be issuing tomorrow, next week, for progress. That's why I'm
+
+Speaker 3  10:51
+getting, yeah, I'm, I'm talking about nudging, you know, a little bit to the left, or Okay, to miss a foundation, because we've been looking ourselves in the model, just to see where we are seeing conflicts. And there's just a few locations where it's coming up in a wind brace footing, and we may have to shift where
+
+Speaker 2  11:15
+your conduit is coming up there. Okay, so to one. So Jeremy, do we want to schedule a separate breakout session to go through? Let me
+
+Speaker 4  11:31
+make some notes on here and put my thoughts on maybe I'll just grab some screenshots and sketch in some thoughts and email it to you. Okay, perfect.
+
+Speaker 2  11:50
+Do we want to talk? Is there anything we need to talk about on mechanical or do we want to move to the generator?
+
+Unknown Speaker  11:59
+Something about the CDA
+
+Unknown Speaker  12:01
+unit, okay, was
+
+Speaker 6  12:09
+there something that you wanted to discuss on that?
+
+Speaker 4  12:12
+Jeremy, oh, yeah, just see what the status was, where we're currently at with that design or concept. I don't know exactly where we left off.
+
+Speaker 6  12:24
+So the last time that we spoke about it, I think it was before the PE exercise, and I summarize basically what's driving the sizing of that unit. So the air flow requirement is being just directly driven by the makeup air requirements for the CDA machines themselves.
+
+Unknown Speaker  12:55
+So that's what's driving. Though I think it's like 115,000 cm, or something like that. That's quite large.
+
+Speaker 6  13:04
+And originally we were planning on doing heat recovery at the unit by doing maybe something like a run around coil with our ve which is pushing us toward rooftop or, sorry, yeah, rooftop RT use I think we start to run into some issues with getting an off the shelf unit that's that Large, I believe, and so we could still do heat recovery, but it would have to be a wheel, which I think is okay, so long as we can keep the leakage across that wheel minimal. But we may have to, I think, depending on on the selections that we, that we get back from, from the different manufacturers, we might have to split that unit, maybe even into two, just because it's so large. Alternatively, Alternatively, we could keep that this was an idea that Wayne threw out there. We could keep that unit as a chilled water unit, potentially, because it's it's located right above the plant, so it would be very minimal chilled water piping, and that would allow you to get a single, larger unit,
+
+Speaker 6  14:50
+so we would still need heating, so maybe that pushes you back into the RTU space. Yeah, basically point being, I think the capacity is what it is, unless you've changed the size of your equipment in terms of the air flow. And I think with this change to RTU, we may just need to split that if they aren't able to provide a if it exceeds their standard unit sizes, which I think it does.
+
+Speaker 4  15:23
+Is it possible to reduce the electrical load at all? We don't necessarily need to pull the air too much to that space or to the compressors. Yeah, some potential impacts to the space. I don't know if we can handle that with insulation.
+
+Speaker 6  15:45
+So it's not the it's not the cooling. I think that's dry. Well, okay, let's think about it previously. What was driving the large electrical load on that unit? I think it was just the fan size generally, because we had our compressors at our plant, so it's still going to be a lot of fan power. I don't, I don't think that the again, we're talking about off the shelf products here
+
+Unknown Speaker  16:17
+moving to RT use. I think we would
+
+Speaker 6  16:18
+have to see. I think with that amount of air flow, you're going to get a certain capacity, a certain cooling capacity associated with it that probably even exceeds our cooling needs.
+
+Unknown Speaker  16:39
+How much power does the current system require for
+
+Unknown Speaker  16:45
+the air handling unit?
+
+Speaker 4  16:47
+Okay, so that's not really even most of that's not heating or cooling. It's simply no
+
+Speaker 6  16:55
+right because right now, all of that heating and cooling is being done at the Air Source Heat Pump plant.
+
+Unknown Speaker  17:03
+So when we move
+
+Speaker 6  17:04
+to RT use it's my guess is that it'll go up.
+
+Unknown Speaker  17:12
+So my fear about that,
+
+Speaker 4  17:15
+my last look at the electrical for the facility, electrical demand, I was at little under nine and a half megawatts, and that was without the CDA HVAC unit, ACU or au 18, adding that in, that brings us up to 10 megawatts for The building, which isn't the end of the world, but doesn't give any additional capacity, right?
+
+Unknown Speaker  17:51
+Our load summary is right at right at capacity right now, with that unit,
+
+Speaker 4  18:02
+may not guess ultimately it is what it is if we need it. I'm just curious if there's anything creative we could do to reduce that load.
+
+Speaker 6  18:18
+I think there are probably creative things, we could reduce the cooling flash heating load, but as it stands right now, that load is is just the power required to bring in that much makeup air.
+
+Speaker 4  18:40
+Are those on VFDs. So if we have one or two compressors off, we could throttle that down.
+
+Speaker 6  18:48
+All of our fans at the air helming units at the moment. Yeah, do have the FDS, so you would be able to ramp down. I we would need to, we would need to work through a sequence though to be able to link the operation, like the number of units that are operating to certain like fan ramp down or speed. I
+
+Speaker 6  19:28
+I'm certainly, certainly doable with with custom controls, I think with the art, if we go towards our to use, a little more limited, there will still be stages. We could, we should be able to ramp down at least two. We can map, I guess, the number of units operating to different compressor stages.
+
+Speaker 4  19:56
+So that's knocking on 700 horsepower of motor. That air handling unit, 8218,
+
+Unknown Speaker  20:15
+let me bring up our drawing. I
+
+Speaker 7  20:41
+and supply and return.
+
+Speaker 6  20:51
+I am getting 480 horsepower from our schedule.
+
+Speaker 4  20:58
+Okay, so then the rest was heating and cooling. Rest of the power,
+
+Unknown Speaker  21:08
+four amps.
+
+Speaker 6  21:14
+There's no heating and cooling like electrical power at the unit right now, though, I'll double check. I'll double check that unit. Fla, it should be mostly coming from the motors. There's some other, you know, minor power draw the unit. But it should be
+
+Unknown Speaker  21:34
+motors, yeah, double check that. We should just look at that. I it.
+
+Speaker 4  21:48
+So 400 and something around there horsepower to move 120,000 ish CFM through the system, and that's accounting for, I'm guessing, the air compressors have fans to also move the air through the air compressor.
+
+Speaker 6  22:13
+So right now, we do have, we have supply and return fans at the unit, and that's because the the air compressors do have fans, but there's very limited static at those fans. And in order to get heat recovery, we're ducting back to the unit and through a heat recovery device, which I actually think in our selection, we have a heat wheel, and I wasn't confident that we would be able to get that off of off of the compressor fans themselves.
+
+Speaker 4  22:56
+Yeah, I agree with that. All the fans there I've seen really intended just to move air like,
+
+Speaker 2  23:04
+yeah, yeah, okay. Nasty, that follow dance and that horsepower, seems, seems, it seems right. It does, yeah. It may be a little bit high the PHL damps, but not, not by a lot.
+
+Speaker 4  23:26
+Yeah, for both air through the system, and that's ball park, is where I'd expect. This thing has probably 150 ish horsepower to push air through the system, but if push and pull, so 300 maybe it's 200 on each side, so 400 total.
+
+Speaker 2  23:56
+All right, sounds good. Do we want to get into the generator conversation emergency power as ballistic?
+
+Speaker 4  24:13
+Yep, I think that'd be a good one to cover, too.
+
+Unknown Speaker  24:16
+Thank you. Sure we and do you want to Yep, yeah, Justin, maybe
+
+Speaker 2  24:27
+everybody might have been on the call yet last week, I wasn't, so just talking through the kind of programmatic requirements which you guys did last week.
+
+Speaker 1  24:40
+Yeah. So in this generator load Calc, I've added in the I'll go to the HVAC load tab so everyone can just see it the air handling unit 10, which serves target fab air hailing. Unit 14, cavern makeup, air handling unit 15, metal makeup, and then cub storage, and then exhaust fans five and six. So those are all now
+
+Speaker 2  25:19
+on the generator. Okay, so
+
+Speaker 1  25:22
+those are on the generator. We also have one air source heat well, two thirds of one air source heat pump that would need to be on generator power to do minimal heating in an emergency condition because there is no, as we just talked about, there's no heating or cooling being done at the air handling unit. So there's also two thirds of air source heat pump, which is what Astrid and I talked through yesterday, being the minimal amount that we could do to do so we are bringing in. We are freezing out the space basically, and correct me if I'm wrong, say anything wrong?
+
+Speaker 6  26:11
+Yeah, that's right, and this is with a little bit of a buffer, yeah.
+
+Unknown Speaker  26:19
+Okay, so
+
+Speaker 1  26:22
+if this isn't the base condition, so what we have right now this our current design. We add this HVAC equipment. We had 300 KVA of future equipment load. We've added in an additional 200 KVA based on what we heard on the call yesterday, and we're at,
+
+Speaker 4  26:48
+oh, go ahead. Sorry, that was the future equipment load is PFS phase two equipment that we'd be at, yep, okay, for clarification there that the total is 200 for both those lines.
+
+
+Transcribed by https://otter.ai

@@ -1,0 +1,212 @@
+Unknown Speaker  00:00
+Conversation this morning.
+
+Ryan Hankins  00:06
+Or no, not really. I've been in meetings since we since we got off the phone this morning.
+
+Speaker 1  00:14
+No worries at all. It was, it was mainly focused around the contract stuff Erica, which I think we'll work through. I don't think we need to belabor this, yeah, with that portion of it, I think we should focus on scope and pricing and making sure that we're getting you guys the information you need to be successful next week with your pricing, both in getting you the price, but also, like I talked with Eric, making sure that or sorry, with Ryan, making sure that we clarify it, because it's a moving target, We seem to keep getting new information every day, from civic fusion on what their requirements are. And so I just wanted to walk through some of that, because I've noticed you guys haven't been copied on much, if any, of that stuff. And so it puts me in this kind of weird spot of obviously, I want you guys to be informed, but you guys have a marching orders from your client too, and so I don't want to get in the middle of that. So anyway, understood, yeah, so I mean, from a scope perspective, let me, let me pull up. So one of the things that I was mentioning, let me share my screen here. So this document, if you can see this, this is kind of our iteration that we've been going back and forth with, with structural on the settlement heat map. This is basically the settlement. And these are the Pulsar mats, obviously. And then this is the large mat where the tank and target chamber are. We have always been targeting the differential settlement as being this red eye shaped that that's where you know all the heavy load is, and that's where we need to make sure that we're in this tight, three eighths inch settlement. Well, just last week, it came to our attention that they want to be able to come at this angle here, from the Pulsar mat to this whole area, the blue hourglass shape. Well, that's problematic, as you can see, because these slabs don't have any load on them, and if you don't have load, you don't have settlement. And so all of this, we were really working hard, as you can see, based on this color, was all settling together and settling the same together. But now you introduce areas that aren't settling at all because they have no load. And that's that's what I was expressing in my email, that is new information that kind of put us a little, I don't say, in a tailspin, but it that's gonna be more problematic to solve and we express, go ahead
+
+Ryan Hankins  03:22
+and when you say, when you like, you just gotta give me the frame of reference. We say, problematic to solve. Is it something that can be resolved with cost, or is it something that's going to affect schedule, or is it just difficult overall?
+
+Speaker 1  03:39
+Okay, yeah, the short answer is all of the above. I think, I think in some regards, it's if they wanted three eighths of an inch of differential settlement, starting from the second the concrete was poured across this blue hourglass all the way to them, loading all, all their equipment, putting the water in the tank and loading everything. I don't actually think that that's possible, and they and they know that we've communicated that what's most likely the solution is that they don't make their quote, unquote, final connections until this area is all loaded with what's going to cause it to settle. In other words, the tank is set. The tank is full of water. All of these units in this area are set, and then they make their final connections, and then the three eighths inch differential will be met, because all of this will settle. This soil is not elastic. As soon as it load hits it, within a week, maybe two, at max, it will it will settle and it will stay down. It won't come back up. Like, in other words, you fill that tank, that whole area is going to settle, and then if you took the water out of the tank, it's not going to, like, go bounce back, it's going to stay it's going to stay down. And right now this tank, we're at about an inch and a half of total settlement. But so was this area. And so we were basically getting roughly an inch and a quarter to an inch and a half and all of this hourglass shape, but it was all settling together. And so that was great, but then they introduced this shape, and now this is settling zero, because there's no load right there. And now our differential, if we don't free load, is now an inch and a half instead of the three eight that we've been targeting. If that's making sense, yeah. And so the short answer,
+
+Ryan Hankins  05:55
+real, real quick, just so I can level set, this is what I was sent. Yeah, is this just familiar to you? Yeah, this is created that. Oh, you okay, well, perfect.
+
+Speaker 1  06:09
+So is this? That's our that's our document. The one I'm sharing with you, because it's a little bit prettier, is structural document, but they do their settlement. We do our settlement until they converge. And that's when we know that we've because we gave them parameters, then they give us new loads. We drew an iteration, and we go back and forth until we're getting the same settlement. And that's that's where we're at right now. And that and their their heat map very much
+
+Ryan Hankins  06:34
+matches our heat map. So that 1.41 is that that inch and a half or so settlement that you're talking about, exactly, okay, all right, I'm on the same page. My bad for interrupting. But no,
+
+Speaker 1  06:47
+no, this is, this is super important, and I I want you to interrupt me, and I want you guys to understand this, because I think it's really important. I believe that the solution is not to throw so much money, money and you appears at this to reduce the settlement, even though that'd be great. I mean, I'm fine to put in as many geo peers. Anybody wants to pay me to put in the right solution is pre loading this stuff. It is sequencing the loading and making sure that we're all on the same page of communication that basically the tank has to get set. The tank has to get filled with water. All of the is it ism is that what they're calling the pulse art, pieces of equipment, I assume, I think, or the modules, yeah, I call it a pulse art. The Pulsar mats, is what they were calling before. But there's, there's a there's an acronym, a three letter acronym, for those, those modules, those modules need to all get set and then make your final connections. And I think we're fine. So I think we're going to solve this by loading sequencing, if that makes sense, and we've expressed that all along. In fact, you know our proposal, both to you guys and to Pacific fusion, said that all along. Now it's becoming even more critical that that happens because of this new hourglass shape. Who's go, who's telling me
+
+Ryan Hankins  08:17
+how to preload this, who's telling me where to put loads? Who's telling me how much load?
+
+Speaker 1  08:25
+So it's not, I use the word preload, and maybe I should use that a different word. We're not going to add artificial load to this. That's not going to be it's in its that's real. It's just installing the real equipment before you make any final connections.
+
+Ryan Hankins  08:43
+Well, no, so we think that the right thing to do might be to truly preload it.
+
+Speaker 1  08:49
+Oh, if that's the case, that's fine, you know. So you're saying, in other words, instead of putting the modules on, put barrels of water that aren't the same weight of as the modules ahead of time, that that's fine, as long as those numbers match what the final load is that, from our perspective, that's that's an acceptable
+
+Ryan Hankins  09:11
+solution, but, but who should be the one specifying that, like how we do it, like the means and methods? I wouldn't think that's me.
+
+Speaker 1  09:18
+No, it shouldn't be you. It so we're going to be given. We've been given. Well, let me take a step back. Structural has been given loading information from Pacific fusion. Structural took that, put that load on their slab, on their map Foundation, and gave us reactions to what it does to the soil. We use that to do our design. We gave them back structural information, and we went back and forth as long as as long as the loading. I want to use my words carefully, Pacific fusion gave us what the weight of their equipment is. Any preloading would just need to match what the weight of their equipment is.
+
+Ryan Hankins  10:13
+I don't, you don't. So you're not order, doesn't I would probably say, this is a page thing, though. Like I would go to page and say, Hey, Paige, give me a solution for temporary preloading.
+
+Speaker 1  10:24
+And that's fine. I think that's an acceptable request, and we would, and we're happy to be part of that solution, as long as it matches what the final weight is going to be, and it's what it's what structural used, it's what we used, then that would be, that's a very viable solution. The one thing that does give me a little bit of pause is there's also floor flatness requirements, which you guys obviously are aware of. And I'm talking all this is going to settle when the equipment is put on it, but you also have four flatness requirements, and it just in this hourglass shape. I've got a slab right next to a matte foundation. My Map foundation is going to go down 1.4 inches, and you've got a slab tying into it. Well, that means you can't really pour that slab until that equipment's loaded on So, so maybe, Ryan, your pre loading requirement, you know, or idea, might be what's necessary so that you can pour
+
+Ryan Hankins  11:30
+your slab. And so we're, because these slabs are so damn big, we're actually, I mean, the stuff that is inside of this I beam, we'll call it right now, like the eye. That's pretty reasonable, because it's a lot of really thick concrete sections. There's six foot slabs, and then there's three foot slabs. So what our approach was is to leave it about a foot low. And what we could do is we could preload, if structural is okay with it, preload with it a foot low, everywhere, and then go back and pour the final slab after everything's settled.
+
+Speaker 1  12:13
+From my perspective, I really like that, because that solves the settlement issue and the floor flatness issue, the loads are a lot. I don't, I don't know if you have a game plan on how to preload this stuff,
+
+Ryan Hankins  12:29
+because that, well, that's saying, like, I don't want to, I don't want to.
+
+Speaker 1  12:35
+I can tell you how much load. I'm just saying what that looks like. I mean, this is, that's a lot of barrels of water, or whatever I've seen barrels of water use. That's why I use that as an example. But I mean, the loads that they're talking are really heavy. I don't know the practicality of doing that. I love it, barrels of water. I mean, I'm
+
+Ryan Hankins  13:01
+almost wanting to say it's a Pacific fusion problem to go deal with.
+
+Speaker 1  13:06
+Well, I think I don't know if I have all of the information to know of any other solution, but I am concerned about, as you guys, obviously are too about sequencing. It's one thing for me to say this, I beam is going to settle, you know, 1.4 1.5 inches after it's loaded. But you can't, like, slide a slab underneath all the equipment and have it be perfectly flat, flat. You need to place that have it be perfectly flat and then load it the map foundations aren't going to be a problem. They're going to all move together. They're five, they're three and six feet thick. As you mentioned. What really gives me pause and is concerned is i is the possibility of a step at this slab on grade that's not going to settle? Well, we would, mean
+
+Ryan Hankins  14:00
+we would place that after like so our whole plan is actually to not place all because remember, we have all these tunnels, so we actually have to. We want to get some of the matte slabs in. We want to roll our crane through the building to go put up steel. And while we're doing that, we can almost preload and then pour the top foot of all the mats. And once that's had like a week to cure something like that, go back one where, once, once all the tunnels are finished, then pour that, that final top layer, basically just to match where the settled Matt slabs are at. Okay. I mean,
+
+Speaker 1  14:40
+I like that approach. From a engineering perspective. My my construction brain goes to, what are you to use to weight this thing down well?
+
+Ryan Hankins  14:51
+And that's where I'm like, I don't want to be, I don't want to be part of that.
+
+Speaker 1  14:59
+I think, I think your boot might be a little dirty barrels. I think the heaviest load is the tank. I mean, I think there's a, I think there's a, I don't know the sequencing, because I obviously haven't, you know, not part of your guys's super detailed schedule. I don't know when that tank is going to be available, when it would be set. I mean, the tank is going to be when the majority of that load occurs. And obviously the easiest thing would be to put the tank in there and fill the tank with water, if that worked from a sequencing perspective. But maybe it doesn't. It doesn't Okay, gotcha.
+
+Ryan Hankins  15:44
+I mean, like, they need, they want to be in there in March, and I don't think they're going to be filling the tank until like, August. I mean, like for us to leave the slab out, it just doesn't make sense. Okay, okay. Okay, all right. So, I mean, so one thing that I'm like not clear with still, is what I'm trying to do is because we had our meeting with the city today, and it went well, they did say initially that they wanted geo peers to be part of that initial submittal. I wanted them. I tried to explain to them what a geo pier is, because they seem to think it was a case on and I think they're getting more comfortable with it. But the thing that because Courtney came back to me and she's like, Hey, we need, we need Craig to design everything in two weeks. And I was like, Well, if I was Craig, the first thing I would ask is for everything to be static, so that he can go, he can go, expedite his design. So I was like, So when are we going to get him all the things he needs to be static? And so what I told her I would do is I would go back to you and see if we can get a prescriptive list of things that you need to be static, so that you can go start your engineering. Because the let the last thing I want to do is wait till 585, 11, get this new drawing set. And like, there's still things moving around. There's still things screwing around, because then you really can't do anything. And then if 511 you can't start your design, whether it's two three weeks, I really don't think it's that big of a deal, in my opinion, but I don't want there to still be questions. I want to hold people accountable today saying on the 11th, this has to be static so that you can go start your work rather than just, you know, hey, there's still things moving around. We get to the 11th, nothing's changed. You're still freaking out like I want to, I want to prescript those requirements today so I can hold people accountable.
+
+Speaker 1  17:56
+No, I appreciate that we I can get you that. I can give you that list. Did it seem like the city backed off and we're going to be okay with a deferred submittal if they were no way we'll have it. There's no possible way we'll have a design by May.
+
+Ryan Hankins  18:16
+I think I'm pretty sure the structure is not
+
+Speaker 1  18:19
+going to design by May 8. Or mean they're gonna struggle to have a design by made. We need
+
+Ryan Hankins  18:24
+to, we need to get final confirmation. But after they realized there was no rebar and no concrete, they seem to be a lot more comfortable.
+
+Speaker 1  18:35
+I'm shocked that the amount of projects we've done in the city of Albuquerque. I mean approaching, we've got to be approaching 100
+
+Ryan Hankins  18:45
+but people hear. People hear what they want to hear. They hear what they think they hear. And yeah, okay,
+
+Speaker 1  18:56
+I'll get that list together. That's no problem. I mean that the big thing is ultimately making the decision of, we know the load, but it's when. How is the differential going to be measured? When is when? Is the kind of benchmark. And we've when I say we, I'm talking mark, and I the structural engineer, and I, we've been continuing to ask Pacific fusion, you know, when they want to make these final connections. And the last conversation I had with Mark was, we're doing kind of a stopping point. We're gonna have to tell them that you have to do this loading to make it work like it's now, it's now. It's not we're asking. We're telling you, these are the steps, and if that's the actual loads, if that's artificial pre loading, I don't really care, but the and so I think Marc on the same page, and ultimately he has more pressure than I do, because I don't start till he's done. And he so he's been pushing to get the information so he can finish his work.
+
+Ryan Hankins  20:11
+We need to just tell them, in your mind, we need to tell them what we want, because otherwise we're going to get what what Jeremy wants. And Jeremy isn't a construction guy, so I think we got to tell Jeremy what's best for him.
+
+Speaker 1  20:32
+And there was somebody that sent something the other day when Marc expressed this concern that, hey, you've got unloaded slab on grade, and you want, you know, no differential from that to a six foot thick mat with a tank on it. I mean, that that's, that's a big ask, but if you're not a construction person, you don't realize that's a big ask. And Mark expressed that, and they were like, well, maybe we can live with more than three eights like Mark, kind of, I mean, he didn't actually, but you could just see his eyes, kind of, throwing his hands up, of like that. Three grades is the number you guys gave us, and we've been working to and targeting. So it is a bit interesting. They that seems like at least not their entire team knows what they actually need. But anyway, we'll get there. I i think the prescriptive loading is going to be what's going to ultimately be their requirement, and then go from there. I love the preload idea, because then when they come set their equipment, it's already been pre loaded, and there's no settlement. They could start doing final adjustments the second they're setting their equipment, and frankly, in any order they want, versus what we would need is them to put all their equipment there, let it sit for two weeks, then shim it all back up to be level and make their final connections, which they're not going to want to do. So I love the idea of preloading.
+
+Ryan Hankins  21:55
+Okay, so, so we talked about what's being priced for next week. Yeah, like, there's some, there's some things I think you're still saying, and I want your list of items, and you can send me those after the meeting. But generally speaking, like we do have to draw a line in the sand. I think we are going to assume that we're going to let that we're going to measure the settlement from, you know, the the more the more favorable way for us. I think that's the way you have to, yep, I think that's the way you have to think about that within your pricing you currently have, you currently have, included the geo peers, within all underneath, all the foundations for the project, even the other buildings. I think you give us an option to add the geo peers underneath the slab for the cub, like we talked about. I think you give it to us as an ad for the lab space as well, but nothing within the admin.
+
+Speaker 1  22:57
+So let me just jump. I agree with all of that. The only other thing that changed that we didn't have included before, which I mentioned in my message, is they want us to pick up the perimeter footing for the till panel all around the building. So that's going to be an ad that we didn't have before. Okay, but
+
+Speaker 2  23:14
+that's not isolated. Yeah, yeah.
+
+Speaker 1  23:19
+No, you're fine. So so we've got our marching orders there, and I want to show you one document that we just got today, and this was new to structural as well. Are you seeing this?
+
+Ryan Hankins  23:37
+Yeah, what is that?
+
+Speaker 1  23:39
+Well, it's, it's their loading plan, but they were just told by Pacific fusion that there's some cart that can roll the target chamber around anywhere in this R and D area, yeah. And that's why, that's why we have peers in this whole R D area, because that this heavy load could be anywhere in this R D area. We were just that was what we were
+
+Speaker 2  24:00
+showing you, Ryan, that that little machine, and that's why we have all that steel in there now.
+
+Speaker 1  24:06
+So Pacific fusion just told structural that they want to be able to roll this thing over the lab. And so this, are you guys seeing this? This dark gray areas over here are now susceptible to Ben, if you can read that note, but are susceptible to that heavy point load of that target chamber, wheel lift, transporter thing. So now we have to put geo fears in this area to support that. So that's going to be something new. And it gets to the point where, like now, the only thing that we're not going to put you peers is the slab in this office area, which is fine, we can do that. I i think it seems reasonable for us to just do the whole lab area instead of trying to, you know, we're gonna come do over x in this
+
+Ryan Hankins  25:06
+little metal shape. So, I mean, at that point, yeah,
+
+Speaker 1  25:14
+I mean, you see where I'm going, like, at what point in time you're like, are we really saving any money when you're implementing a new prep for slab. I mean, this isn't an insignificant area, but I guess my point is, maybe I should just give you an add al for the admin, and then you guys can decide what you want to do. Slap on gray in the admin.
+
+Ryan Hankins  25:37
+Yep. Do me a favor. Do us a favor, though, like when you give us your number, your number should start with the number you had before, and it should be, it should be the A La Carte ads for all the things that are going on top of there.
+
+Speaker 1  25:52
+And even if some of them aren't elective, you still want to see them like, like the till panel. That's not an option. We have to do that, but you still want to see it absolutely.
+
+Speaker 2  26:03
+Yeah, so think of it. Craig, like we had our 50% DD, we're going to 100% DD, so what's shown on these drawings? And then there's all these other things are being asked that's like, outside of those two buckets.
+
+Ryan Hankins  26:17
+Okay, so like to go to, like, the hourglass versus the eye. You know, I would please give me that price, because I'm gonna, I'm gonna go try to scare them off. They've got some budget issues already, but I'm gonna try to scare them off with with the number two on that.
+
+Speaker 1  26:36
+Well, I don't, I don't think that the hourglass is solvable without preloading, which doesn't cost me anything. I guess my point is, there is no cost for me for the hourglass, because I can't do it. So I don't, I can get it better, but I can't. I guess my point is, we had 1.4 1.5 inches. I can't get that number to be three eighths, yeah, like, no matter how many geo pairs I throw at this thing. And so the only option, if that's what they would want, and you're never going to want to do this, is to make that whole hourglass shape, one six foot thick, matte foundation, so it all moves together, and that's not happening like there's no way that's happening. So the only solution is to preload the parts that are going to settle So, so the rest of it, I will give you that a la carte, because that those things are we can do. But the hourglass, if the three eight starts from pouring of concrete, it's not possible. So the only option is to, is to get some load on this thing and get some that settlement out, and then it will be the three eights in the hourglass is that I don't want to be put my foot down, but that's the reality of that situation.
+
+Ryan Hankins  28:06
+That's fine. We're good with that.
+
+Speaker 1  28:08
+Okay, okay, right, okay, right. Erica, yes, yes. Because, like I said, the only other solution is to make that whole thing one huge matte foundation so that it all even though a little part in the middle doesn't have any load, that the whole thing moves together, and that's just insane. Yeah, so and so and structural said the same thing. They're like that. That's that's not I mean, and they agree and understand. So I'm letting him kind of be the, I don't say bad guy, but delivering that news that that we need to sequence this. And because I'm, even though I'm a designer, they I think, I think Pacific fusion thinks of me as more of a contractor and and so I think they trust structural a little bit more, which is fine, I don't care. So I'm letting him have those conversations and let them know that that's what we need to do to make this work perfect. Okay, okay. I think we're I think we're good. I mean, I don't think we have a lot to change. I mean, I think our original price, we still hold to the original scope. So I think the only changes are going to be picking up the till, yeah, picking up the tilt. That's really it. And then the adults for the cub. I guess the lab is not an at all that has to happen. So I guess I'll put the tilt and the lab support as required changes. And then the Add al would be the cub slab on grade and office lab on grade. And then I'll let you guys decide those are just a numbers. Thing is the over x cheaper and faster, or the geo peers cheaper and faster. And I don't have a preference. I um, we've got our we've got our marching orders. I think because none of the actual loading has changed, it's just been trying to extract from Pacific fusion their actual settlement criteria. I mean, they gave us numbers. We made assumptions, so the actual loading hasn't changed. So our solution still holds. We just it's now more critical than ever to preload. Have they talked to you at all about pre loading, the crane, the overhead crane, in these in this
+
+Ryan Hankins  30:36
+area, they did, and I mean similar, I don't like, similar to the preloading of the slab, like I need someone to tell me to do, because I'm not that. I feel like that's an engineered approach, and so they're working through that. I don't know the timing of it, but I assume it probably happens relatively at the same time as the other pre loaded?
+
+Speaker 1  31:04
+Yep, I agreed and that that is one that because the crane the craving load is sequencing or pre loading could be a little bit challenging, because obviously each of those columns are are designed for that crane to be at max load anywhere. Well, you obviously need to park the crane by each column to get the worst case scenario for each column, and so that that prescriptive loading could take a little bit of time. Basically need to park the max crane load, unless you did it artificially, you know, put barrels of water and the base of that column, or something like that, I don't know, or crane weights, or something I don't know, yep, okay, because the the last map that structural did that I was showing you the hourglass shape, he didn't have the crane loads in that, in that pressure map. So you see, ours, ours has some heat at the cranes, because that's the worst case scenario of each time the crane's loaded at that position. So, okay,
+
+Ryan Hankins  32:10
+man, ideally, I mean, it's gonna all be loaded at the same time.
+
+Speaker 1  32:16
+That's that's the ideal situation, because all the stresses do overlap. So if you, if you load it, potentially the tank, and then took that load away and then loaded the crane, it's better than not loading it, but the best is to load it all at the same time, because those stresses on the soil do overlap, and those stresses will push down together. So yes, the short answer is that that is the right approach. So clear as mud, yes, and Cory did send out another meeting request for for Monday. I don't know if you got invited to that. She sent one out for Monday for a discussion with geo Matt and us. It just says geo Matt, geo peer discussion. It doesn't clarify the actual topics, but it looks, it looks like some of your teams involved, but it doesn't look like you guys are actually, I'm on there.
+
+Ryan Hankins  33:28
+Oh, are you okay? Good, good, good. And actually, don't we have a lunch and learn after that?
+
+Speaker 1  33:34
+Yeah, I was actually gonna tell them that I have to leave hard at 130 to be able to get to you guys opposite too. But if you
+
+Ryan Hankins  33:44
+want, you can, you can work out of here.
+
+Speaker 1  33:46
+Would that? Would that be all right, if I just came there for that meeting and then just stay for the Okay? That'd be awesome.
+
+Ryan Hankins  33:55
+You can do that. You can come earlier. If you need to come earlier, if you want to come at like you know, if you want to work here all day you can. Or if you want to work here half day, it's up to you.
+
+Speaker 1  34:04
+Okay, awesome. That'd be great. We call it a lunch and learn. What do you guys want me just bring, like, some snacks and stuff for do you want me to actually bring, like, lunch? Lunch? Just bring some snacks and drinks and stuff
+
+Ryan Hankins  34:19
+we have. You don't even need to bring anything. Yeah, we've, we've got lunch provided. I mean, if you come to the office, you can have our lunch, you can hang out with us. You can, yeah, yeah, yeah.
+
+Speaker 1  34:30
+All right, doing it. I'm doing it. Okay. Well, maybe I'll bring some cookies or something. I don't know. I'll figure something out now, but yeah, I think it probably would make sense that way, not scrambling, because meetings always run late, and then I'm gonna be, you know, Hall and across town to get to your guys off. So I think I will probably just come for that meeting. And then, yeah, and then hang out there, if that's all right. Perfect, absolutely, okay. Cool. Anything else that you guys had or wanted to chat about. Thank you. This was great.
+
+Ryan Hankins  35:00
+Thank you. Get us that, yeah, get us that list so we can help break down the barriers that you need to be broken down,
+
+Speaker 1  35:09
+as far as the list of the what we actually need so that we can hit start on our design, on
+
+Ryan Hankins  35:13
+five, yeah, 511 i just i The late, the least, the less prescriptive we are, the more we're going to all fall, fall short, and we're asking a lot of thorn and Thomas Ed, so when we ask for things, yeah, we just need to make sure we're being very clear.
+
+Speaker 1  35:31
+I think that documentation is going to be important, because I think decisions aren't being made in a timely manner, and you're going ultimately need to be able to say, you know, we said this was the deadline, and we didn't get it till this so yes, we are going to do everything we can to beat our schedule, but this is the reality. So obviously, you guys know what you're doing, but that I I'm seeing that happening on the design phase, and I don't think it's going to be any different once you guys get started. Yeah, so we'll get there. It's cool project. We'll get there. Luckily. TT, I think they get it. So they're they've been helpful, and then I think they'll continue to be helpful, which is good, so awesome. Well, if anything comes up between now and Monday, let's obviously keep the dialog open, and then, if not, I'll definitely see you guys at your office on Monday around noon or so, it.
+
+
+Transcribed by https://otter.ai

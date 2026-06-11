@@ -1,0 +1,278 @@
+Speaker 1  00:08
+Okay, all right, hi, strangers, hello, hello, don't take the phone on
+
+Unknown Speaker  00:28
+Chris, it's very expensive Exclusive.
+
+Speaker 1  00:40
+James and Matt, want to introduce you to our GC, Clayco, Ryan, I'll hand it off to you to introduce yourself.
+
+Ryan Hankins  00:52
+Absolutely, yeah. Ryan Hankins, with Clayco Project executive out of the Phoenix office.
+
+Ryan Hankins  01:02
+I Chris? Who I got next?
+
+Speaker 2  01:04
+Yeah, I'm Chris Tinney, project director for Clayco. Just wanted to comment. I couldn't see Ryan's face, but Hi,
+
+Speaker 3  01:16
+I'm Erica Stewart with Clayco. I'm in the preconstruction division. Good afternoon, everybody. Matthew Adams, Project Manager for Conor.
+
+Speaker 1  01:30
+Craig James, do you want to introduce yourself to the Clayco team? I don't know that you guys have met.
+
+Unknown Speaker  01:34
+It would appear that someone was tuning into
+
+Speaker 2  01:42
+actually turn that off. I'll introduce James.
+
+Speaker 1  01:46
+On behalf of James, James Reves is working with Matt, who's with cone cranes, but James Reves is with Pacific fusion. He's our heavy fab subject matter expert. So he's been he is also managing the advanced tank contract for the DI target tank. So part two of earlier this morning's conversation, James will be in that as well. But yep, that's, that's the team we also have. We have Nick, who just joined perfect, yep, I just want to make sure that he was invited. Hey, Nick.
+
+Unknown Speaker  02:31
+Apologies. I don't know why my camera is not working, but I'm here that Google meet surprises.
+
+Speaker 1  02:38
+You. Weird, this camera unavailable. No worries. Nick, Well, Matt, thank you for sending over the Nick, have you actually had a chance to meet Matt Adams with phone cranes? I think we did briefly meet one of the previous calls. And yeah, I think we made introductions before. Yeah. Okay. Perfect. So James, James, I'll just go ahead and run point with the meeting, knowing that you might have to hang up pretty soon here. But Matt, thank you for sending the GA drawings over. I understand from your email that you need Pacific fusion buy off by the first which we can do. So I wanted to kind of talk through, I wanted to talk through a few things with you like so first, let's get familiar with some of the dimensions here. I will want to back check it with the earlier proposal that was in January's po but I think the Clayco team has some questions about installation and testing and loading that we want to talk through as well. Clayco team, is there anything else other than those items you wanted to chat through today?
+
+Speaker 2  04:00
+Maybe also what we're thinking location wise to you know, crane in these cranes through the roof.
+
+Speaker 3  04:14
+As far as the installation, I'm assuming you yes, there's quite a few question marks we got as far as that that goes when it when it comes to the install time period. Not the least of all is what the staging area looks like. What the stability of that staging area is? Concrete, psi. It's reinforcement, whether we got to bring Matt's into the cranes, type of crane to look at. So we have the 50% VD drawings with our currently proposed installer, and we're looking at those. But a couple of the items that are outstanding would be you. Basic stability of where we're going to be placing the crane, what that looks like for space constraints, because I understand that we've got a lot of trades that are going to be in that building, and I think the floor is going to be unoccupied for a grand total of five minutes before everybody starts flooding that facility with a lot of floor space constraints. Is that fair to say?
+
+Speaker 1  05:31
+Generally speaking, yes, I think that's fair to say, yeah. That's Clayco is going through those sequencing plans kind of as we speak. Yeah. So yeah, good points, Matt. I think we're going to have to kind of dial in how that all looks with the multiple subcontractors in the same space. I think Chris was, Chris and team, myself included, were kind of thinking along the lines of, you know, leaving off certain sections of roof to allow you guys the space that you need to do that install?
+
+Speaker 2  06:04
+Yeah, I don't necessarily need to know, like, details and whatnot yet, but I think that we have plenty of time to work that out. But I'm just thinking in terms of, like, general approach to the install of the crane. What would you what are you guys proposing to do? What are you guys thinking you would like to do? What makes sense? And then we can kind of come together and and build a plan, sure.
+
+Speaker 3  06:32
+So in general, yeah, we would want to have a section of the roof open to be able to drop a hook through there, each beam up and set the hoist as well. But again, I'm trying not to get hung up on details, but it really does start from the ground up, because how much stability we have, what loading we can put on the ground, it dictates the size of crane, the footprint that we can operate in, what kind of matting and disbursement we have to have for point loads when it comes to the crane, when it comes to the overhead crane that we're putting together, when it comes to the test weights we've got so what that looks like for staging and everything, the state of the concrete foundation when we set up the crane. Is it asphalt? Is it six inch board reinforced for 4500 psi? These tend to make a difference when we're talking about which equipment, which in turn, informs how far away from the building we have to be, what what the boom configuration needs to be how far away that determines load chart, which is determined by the machine itself. That machine then determines how much boom we can have out so the stability really starts from the bottom. What we can what we're using as a baseline to calculate the created tonnage and loading.
+
+Speaker 3  08:11
+Okay, so you have anything for us to work from, like a design. I mean,
+
+Speaker 2  08:19
+if you were to go by the 50% DDS. I mean, you can see the overall, you know, high bay framing plan and the low Bay framing plan. And there's a lot of, you know, the center Bay, if you will, between d and f is really the only section of roof that doesn't have cross bracing through that space. So were you intending to, you know, hoist and lower in all three cranes through that middle high bay section, or
+
+Speaker 3  08:55
+no, the 275 that are on either side that have to come, we can't go through the roof, and that would only need to we don't have to miss the cross bracelet with the crane. We have to miss it with the block. So if you leave a section down that we as long as we have a center pick point that would miss whatever structural it can go down through the building, we can pick the machine on the floor, it will rotate up enough for us to clear the rails and rotate back to set down. And the only consideration is the rigging that we have there as you start to come up, whether or not that would contact structure.
+
+Speaker 2  09:37
+So essentially, if I'm following you correctly, I think what you're saying is you guys would be able to pick through the high bay with all three cranes, and then you can from the inside, you can maneuver them around on the floor, and then hoist them into their specific locations. Is that kind of what you're. You saying
+
+Speaker 3  10:05
+on the the two side bays, we would not be able to manipulate those 275 from the center Bay. If I'm looking at the do you not have an end approach on the the building that would be open for us to be able to go in, either a roll up door or something on the ends of the building. But the two
+
+Speaker 2  10:22
+engines, there are some roll up doors. Yes.
+
+Speaker 3  10:26
+Okay, so there's a couple of different approaches. Those are a much smaller machine than the 400 so we can construct, if there's enough space outside, construct the crane and pull it through those doors, provided they're wide enough to be able to we could do that with rollers. We could do that with double handlers, or having the forecast to be able to get inside the building. But we can't. You can't traverse from the main hall, as it were, the center Bay, to the side with the crane. That would probably be more problematic than anything. If you have an avenue for us to go from the outside on the end of the building,
+
+Speaker 2  11:07
+okay? And the larger of the cranes, the 400 would be, yeah,
+
+Speaker 3  11:14
+something similar. It's going to depend. Obviously, we want to construct these as close to our picking point that we're going to be picking them up and putting them on the rail. So I don't know what the end of the building looks like at that those stages for us to be able to assemble that crane, that that machine is a lot to move once it's assembled, even in sections. So we can complicate matters, the more we have to move it as a single piece. So if we can have it in the building enough with enough space so that we can actually pick it from inside the building initially and set it on the runway, that would be more ideal. But we're having those discussions right now. I would just like to know what our what our operational area is when we do that assembly like, are we having the entire ends of the building, and how far into the building? What's the floor look like? How many vaults do we have on the floor that we have to maneuver around? Do we need to assemble this in the parking lot and pull it in, because there is either obstruction, there's, you know, trenches or floor voids that we need to avoid, so that that level of detail we can get to. But in general, I need to know what our operational assembly area is supposed to look like, because you do have some of the trades that we've talked about being at one point, there was a discussion of the tank being assembled or installed during the time that we're doing our load test. I wouldn't, I wouldn't recommend that at all. That is the time at which that's the sheet is going to be under its maximum amount of stress.
+
+Unknown Speaker  13:06
+So I wouldn't any other
+
+Unknown Speaker  13:11
+trade would be around that
+
+Speaker 2  13:13
+my notes show, like, basically middle of June is kind of when you were thinking the to move these in, right?
+
+Speaker 3  13:23
+Yeah. So the the initial runway construction, so the power bar and the rail would be in advance of that, so that we can get started earlier. First of June, we've got thermite welding that's required. So that does take several considerations, time, space, access and fire. So we want to make sure that we're not creating any issues for anybody else, or conflicting schedule there. But the rail must be done in advance of putting the machine on. So the it is in Houston, I believe the 14th Cory, or somewhere around there, 14th, 17th, mid June. And then from that point, we'll be shipping, thinking about a week to get it to site. From there, we will be assembling the machine that will probably well back up a bit. So the rigs for the crane will actually be needing to be assembled. It'll probably take, depending upon which one it is maybe weak, to have a setup for the picking crane, crane that will actually lift the overhead crane onto the rail and do the assembly work. Those will take a while to assemble, and then the cranes will arrive. We'll start doing assembly, and we'll put it up on the rail as soon as we can, because not only does that get it out of the way, but it also helps us do our ring out and testing faster. So. I
+
+Speaker 2  15:04
+think we definitely need to spend a little more time to develop, you know, more more of a detailed schedule. But you know, I've done plenty of these before. You know this major structure, you know, supporting the crane, is put in in one mobilization, and then the second mobilization is usually something where you guys are onsite to assemble what needs to be assembled, and then wheel it in and hoist it into its location, right?
+
+Speaker 3  15:41
+Yeah. So most of the time it's dependent upon the site, right? Because sometimes you have, you know, GC, such as yourself, wants to use the overhead cranes for assembly of materials inside of the plant. You want to use the crane for crane edge inside of the building. So that'll dictate that as being earlier in the schedule as soon as structures up, that also tends to lend itself to a lot easier install, because we have less things to avoid when it comes to that rail being put up on the runway and the crane itself, 4851, doesn't have to dodge as many structures on the floor the typical I think in this case, what we have is a single mobilization. So all three cranes will show up at relatively the same time. The main picking crane will be there from start to finish. It'll probably take three weeks, three weeks to a month. We've baked in enough time for the preliminary work rail in the bus bar that that work will be well underway and sufficiently completed so we can actually set the cranes on the rail, even if we're not completed with runway at that point, we just need the sections that the crane is going to be
+
+Ryan Hankins  17:00
+resting ventilated shoot seats immediately. Do you have fog lights are running when we go to set it so you have accurate link.
+
+Speaker 1  17:13
+All right? I know we have only 15 minutes left. I think we can dial in installation and sequencing as the weeks go on,
+
+Speaker 3  17:27
+available whenever you schedule a meeting, and I'll reach out to our subcontractor, and we'll see if we can have a more in depth conversation about needs and information.
+
+Speaker 1  17:37
+Yeah, Matt, I think it's a good time, sir, setting Ed cadence with the teams now that we're all all together as one team, so to speak, and trying to figure all this out. So really quick, want to take a step back on alignment here at one point is best suited to install the crane. Is Ryan, hopefully I'm not saying anything. I'm not not saying anything, or is that still something we need to discuss? Yeah, I think you're you're right. Cory, okay, I just wanted to agree. Okay, all right, so I think we're all aligned. Matt, we do want Conor this. So with that said, it's just a matter of working with the Clayco team to figure out how we negotiate space and the timeline that we have. Let's, let's take action to dial that in. In the coming weeks, would you guys like to set up a bi weekly meeting, a weekly meeting for now? What? What seems right at this point,
+
+Speaker 3  18:45
+happy to accommodate. As long as you have questions, I'm available to give answers. So as a matter of course right now, what we've got a lot of immediate potential course corrections to make, maybe every week right now that becomes exhaustive. You can certainly cancel it if there's nothing that's urgent. Yeah, right now we have GA to settle we've got this is a quick view of these other discussions. I'm quite happy to talk things.
+
+Ryan Hankins  19:12
+Should fucking give you answer. Course, perfect.
+
+Speaker 1  19:18
+So let's do that. We'll go ahead and set up a weekly I think that's the right thing to do, especially with the GA drawings here, Matt, you just sent the GA drawings. I'm going to form those the Clayco team right now so they have those in hand. Give me just one second.
+
+Unknown Speaker  19:35
+We're quick to point out that
+
+Speaker 1  19:39
+highlight already. You know, you know, that's what I was looking for. Yeah, it's this is just something we have to work through. And let me finish up forwarding this. Okay, so Ryan, Chris and Eric. Erica, you should receive those drawings from from Matt just forwarded them. So Matt, give me about 30 Seconds to bring up to speed on where we were and where we are today. So what you guys are looking at in the above drawing is the new proposed below previous save an
+
+Ryan Hankins  20:26
+extra for that reason, we have to send these over
+
+Speaker 1  20:34
+to our structural team,
+
+Ryan Hankins  20:39
+but just for from a 9.99 envelope,
+
+Speaker 1  20:45
+dimensional certified, look like the trolley grew by about five inches on either side, six inches on either side, 40,000 which I don't think from a dimensional standpoint. I don't think that's a huge 22 miles. We do have to do that hoist 2023, plan study to see if it is an issue. I don't think it will be. But what I'm more concerned about, Matt is, how does this additional?
+
+Ryan Hankins  21:12
+There's so many options online,
+
+Speaker 1  21:14
+impact, wheel loading. Yeah, I'm not worried. I just want to see do you have where you can provide
+
+Ryan Hankins  21:27
+companies? But obviously, if you go in there, that's like 40,000 you're going to try talking. So you will have,
+
+Unknown Speaker  21:37
+we can approve this GA without the wheel loading.
+
+Ryan Hankins  21:42
+So if you this is almost done, if you look down, this should be your max wheel loading should be further down, okay, let me Yeah.
+
+Ryan Hankins  22:01
+I love you and I trust you.
+
+Speaker 1  22:05
+I feel like you're gonna do bad. Let's looking at the cut sheet you sent over.
+
+Unknown Speaker  22:17
+We've got full way to create. I to look at
+
+Speaker 3  22:24
+the we look at the previous drawing. Just a moment. I
+
+Speaker 3  22:56
+Yeah, it's the same. I'll double check with the engineers, but the weights are the same, so the wheel loading should be the same or less. But I'll get you the individualized wheel loading diagrams that we have runs through our own program, and it'll show wheel loading in all the individual cases. So as the hoist is all the way to one runway side, and it's under its maximum load, you get that value.
+
+Speaker 1  23:25
+Okay, yep, I hear what you're saying, I trust what you're saying, but I just need that documented before we can approve.
+
+Unknown Speaker  23:34
+Yeah, no. Screenshot didn't happen.
+
+Speaker 1  23:38
+I appreciate it. Matt, so this is something you'll be able to send either end of day today or Monday. Monday, I would think
+
+Speaker 3  23:53
+they've already assured me this loading as something won't change as a result of this actually likely, potentially, to go down.
+
+Speaker 3  24:07
+I will point out that we have the proposed drawing post diagrams. You have a pin opening. We have two other options, so it depends on what it is that you need for your below the hook. We have very little information when it comes to your below the hook device. So if I would draw your attention to that particular aspect to make sure that this is coordinated with whatever your below the hook device needs are to make sure that we're without that pin diameter in particular coordinating.
+
+Speaker 1  24:41
+Gotcha. That is something that James can coordinate. So James has a pretty good understanding of the rigging associated with this. My knowledge stops hooking up. So. James will confirm hook configuration.
+
+Speaker 3  25:05
+It's all you need to know, really, is, this is very much a Goldilocks situation, not too loose, not too tight, just right.
+
+Speaker 1  25:14
+Okay, well, this, this thus far, looks great. You know, we again, we just need to run this through the team and make sure they're looking everyone's looking at it from a different lens. So we just want to make sure everybody can get a hold of it and make sure it makes sense. One other question I have for you, Matt, so we're working through the details of the hard stops, how far proud of the hard stops, would the soft stops need to be programmed for? So is there, like a minimum distance you typically program the soft stop, and then, if that feels the hard stop, is there to
+
+Speaker 3  25:59
+typically when it comes to hoist on the bridge itself. What we said is our own limits, less than an inch. You can see daylight between there. And it's, it's fine at limits, which has, it activates prior for a slow down. And then it has the so it's, it's not moving at speed, at a high rate of speed, as it's approaching any end stop, either on the runway or trough, and so you have that slowed down. So when it gets to the end, even if it was to run past that, you'd have the bumpers and that compression. So we usually set it to less than an inch.
+
+Speaker 1  26:38
+Gotcha. Okay, perfect. That is, that is great news. That is everything I needed for this conversation, Matt, we will work towards a Friday approval for you. If we get the loading diagram on Monday, we'll set up a cadence weekly so we'll come back on Friday, hopefully with that verbal approval, and we'll send you an email, just memorializing it. Clayco team, Nick any other questions for Matt in the meantime? How? How, I guess, how does, how can we help Matt be prepared for next meeting? From from an installation standpoint, are there specific questions you guys want to chase down?
+
+Speaker 2  27:25
+Yeah, I would ask that. I don't know if it would be possible, but getting rails installed, you know, one month to two months earlier than June might be beneficial. I don't know if that's something that you guys could accelerate.
+
+Speaker 3  27:44
+We could accommodate that now would be a good time, because we have to order that material at that tonnage. It's, yeah, want to know now, and if that's something you want to do, I think it's like a minimum additional mobilization, it's not much, and if I can, I'll avoid that, because it might be we've factored in or priced in a separate crew, which would mean that that mobilization isn't an additional cost, it's just an earlier cost. But I'll let you know Cory about that. If there's any financial impact, I will say that I wholeheartedly agree with that, because the less people around with rail, rail tends to be some of the squirreliest stuff that you work with when you're putting these in, you know, trying to lay spaghetti on on the counter, perfectly straight while grabbing the middle. And that's where you're at so, and we'll be doing the thermite, so the less amount of lower occupation, the better.
+
+Speaker 2  28:47
+Yeah, I'm just, I'm mostly worried about Jeremy's group and when they're coming in, and if we can get those rails out of the way before that. I mean, that would be very, very beneficial, because then, then we're talking just small areas to hoist the actual crane unit itself up to, you know, and do work up there.
+
+Speaker 3  29:08
+So, so if you can give me a target date, Chris, and then also, I would let you know that there's a minimum requirement. I don't know if you have CMH requirements for the rail and its relative elevation straightness. That's part of the contract we have. The structures got to be laid out in a certain way. We just don't want to get there and have it too much of an elevation outside of CMH tolerance. So if you don't have that, I can provide that for you know, when it comes to leveling and straightening those runway beams. Yeah, that would
+
+Speaker 2  29:43
+be beneficial, for sure. If you can get me those requirements, that'd be great. I think it's a
+
+Speaker 3  29:49
+part of the quote that I can get a standalone sheet to send you. If you'll send me an email, I'll reply with that. So if you send me an email with these questions, or any questions and requests, i. Um, and ideally the date that you want to start, then I'll reply with our response to that, and then the CMH requirement chart.
+
+Speaker 2  30:13
+That sounds good. I'm in the next week. I'm really starting to work on the schedule a lot more. So I'm hoping that next week before our next meeting, I should be able to respond with with that, and
+
+Speaker 3  30:27
+I'll start checking in on whatever target dates you have. Is that something you wanted to try to target for
+
+Speaker 2  30:38
+people? I mean, I would like to just before Jeremy's guys start working in the area. I mean, that's ultimately what I'm looking at. So give me a few days to kind of wrap my head around it, and I'll kind of give you an idea of what I'm thinking that's fair.
+
+Speaker 3  30:58
+I would block maybe three weeks for us, it's because that's a lot of real
+
+Unknown Speaker  31:12
+sounds good. Appreciate
+
+Speaker 1  31:19
+it. Yeah, thank you, Matt. Super informative. It's coming together. Now this is good. It's coming together. Remind the team again. I think When's our manufacturing time slot,
+
+Speaker 3  31:37
+we'll start basically the first of the year. So we'll have when I say manufacturing, the assembly in Houston will start at that point, will steal will be ordered before the end of the year, third quarter, and received before the end of the year. The components themselves will be received in Houston prior to the end of the year. All of that will take place third and fourth quarter this year for the assembly of those.
+
+Speaker 1  32:09
+What are we doing for let's say that I guess q2 if when we approve these GA drawings, what are we doing in q2
+
+Speaker 3  32:20
+as far as progress and project, bulk of the engineering so the both engineering packets will be finished. So there's a substantial amount of structural that has to take place after the General Assembly and its basic guidelines are laid down. We have all of the engineering that has to take place for all the components that we have, all the electrical and you'll also get single line schematics that will are basically a 30,000 foot view of the way the electronics are laid out that we have our own internal full material, so E bomb and the rest of the layouts when it comes to electrical so all of that and the factory slot has been scheduled now, so that'll be in all of those efforts will be in advance of making sure that we have all of that in before the manufacturing slot. Usually try to get it in maybe a couple weeks to a month ahead of time. Okay.
+
+Speaker 1  33:31
+Okay, great. Well, we're four minutes over. I think we're in a good spot. Any final questions, comments, reminders,
+
+Speaker 3  33:41
+pay particular attention to the access points and whatever building access you want, you would want to outline that, not just in the top view, but in the side view, that location, how that integrates with the building and what those elevations would be.
+
+Speaker 1  34:00
+Okay? Gotcha. So part of the comment and review is identifying and or confirming access points on catwalk.
+
+Speaker 3  34:14
+Okay, you've got a very busy floor there, so primarily we have a man left oriented access. From an emergency standpoint, you could have a rat line that runs along the runway on one side that has that built in access to the green because you have a technician have fall arrest the entire time they're making their way to that machine. Can't get to it the amendment. But currently, all of the hoists have trolley access via man lit between the bridge girders, and there is potential for adding a trolley access on the main girder. So pay particular attention while you're envisioning this in your head, how a technician, how someone is going to. Able to orient themselves on the machine to get to everything. If you can't get the man left
+
+Speaker 1  35:06
+with that said, Do you have a STEP file that we can put into our 3d model to start? I think those, those to your point, those discussions, are much more productive, and we're looking at a 3d setup. What do you happen to have a STEP file for?
+
+Speaker 3  35:29
+I probably not, but I do know that we offer the ability to generate a three dimensional model. The timeline is usually within, I think, two weeks. So it's not too long. There's the cost associated with that, because it's not a normal thing in the ad unless it's added in the sales process. Let me see what our engineers have for any sort of drawing right now that has manipulation capabilities that you can actually plug in, if not, though that may be something you'd consider, especially for a holistic approach on your plant design.
+
+Speaker 1  36:06
+Yeah, I think, yeah, we may consider it for a number of reasons. Yeah, let's, let's talk on the side about cost impacts there. Matt, if you, if you wouldn't mind shooting me a proposal. James, that'd be great. I Okay, all right, good reminder. Thank you.
+
+Unknown Speaker  36:33
+Not for me. Oh, this was really helpful. I'll send out the notes to everybody so you have it,
+
+Speaker 1  36:44
+and we'll get our design and engineering team on the same page as the group here. Great. Well.
+
+Unknown Speaker  36:56
+Thank you. Everybody. Have a very happy Friday, and
+
+Speaker 3  37:02
+next week, have an excellent and restful weekend. Folks. Take care. Thanks, everybody. Thanks, everybody. You i.
+
+
+Transcribed by https://otter.ai

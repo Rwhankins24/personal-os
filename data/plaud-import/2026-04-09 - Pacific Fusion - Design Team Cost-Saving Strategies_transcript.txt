@@ -1,0 +1,1196 @@
+Speaker 1  00:00
+Date, the decision by date. So we're tracking towards all of these permit dates. Some scope needs to be pulled up more than others. So helping Nick and I understand when the design team needs us to make a decision around implementation will be super helpful. After we get that date established, we kind of work backwards from there, right? So we need to figure out, what does the design team need to provide to the Clayco team and just identify the owners and hand off criteria. So the rest of this presentation is just some of the topics per trade. Are there any questions about kind of what we're doing today and how we're going to go about it? Do
+
+Ryan Hankins  00:52
+you want to go through the list, or do you want to go through trade by trade?
+
+Speaker 1  00:55
+I think we should go trade by trade. So prioritizing Josh's work, and I know Josh, you've got about 20 minutes. I don't think it's going to take that long. So the way
+
+Unknown Speaker  01:07
+I have chopped this up is just trade by trade. Let me see if I
+
+Unknown Speaker  01:21
+can you guys see myself. Through so he
+
+Unknown Speaker  01:28
+knows, let's just go to
+
+Speaker 1  01:38
+civil we're it Okay, So Josh, we've got a civil line item here, item number 50, remove asphalt from the parking lots. Only put in base course, is this mutually exclusive? I would assume yes. This is just this. Justin packs, civil nos credit.
+
+Speaker 1  02:12
+Okay? And then we're thinking, I don't know if I put this estimate in here, but between Clayco. Do we have any BJ and Clayco? Do we have any high level estimates or rom Do you think this may save us?
+
+Ryan Hankins  02:31
+So just to be clear, is this, like, we don't put any asphalt in. We're just like, putting rock down, basically,
+
+Unknown Speaker  02:37
+yeah, we would put in,
+
+Speaker 2  02:39
+you know, an extra two and a half inches of base course, right, whatnot. Ben, no asphalt, just base course in your parking areas, we want to keep those main driveways still asphalt, and especially the dock right, still be concrete. But parking areas and some of the driveways, we can try to reduce any asphalt
+
+Ryan Hankins  03:01
+that's unique item. Yeah, let's look up how much asphalt we have in total quantity. Josh, is
+
+Speaker 3  03:11
+there any requirements from Mesa del salt or anybody else that we should be worried about
+
+Speaker 2  03:17
+that's, I don't believe so. Okay, no, I don't think there's gonna be anywhere that we get ourselves in trouble with doing this, I will caveat it right. There is a higher potential of erosion if we put a base course, a little bit more maintenance, it's going to be required for that erosion, and it's going to be fairly dusty, right? So as those are really the downfalls to it. And then when you do decide you don't put a payment, you're gonna have to remove some of the base course that put in your asphalt layers.
+
+Ryan Hankins  03:49
+The good, the usual downsides, the good news is you can, like, with putting extra base course down, though, you can always just do it later, like, as a deferred item. Like, whenever you guys get tired of it, you can just put it in the base course and then
+
+Unknown Speaker  04:02
+potentially use the base course on another lot if you're
+
+Speaker 2  04:10
+developing, yeah, that's why we would just increase that base course section that way. You know you exactly just talked about, take out the two inches and put in your two inches of asphalt.
+
+Ryan Hankins  04:20
+So on that same note, can we do that with other areas? Like, for example, I think the like the mechanical yard outside, like, is there any way that we can remove concrete out there? Or should we stick with what we have, keep the concrete even in the electrical yard, like, by the capacitors and whatnot? I well, is anybody?
+
+Speaker 4  04:41
+Let's ask the question about that when Meyr Plus is on the line. Okay, I think because, yeah, I don't know the answer, but I don't think that that is the way forward. But I would like Meyer's plus.
+
+Speaker 1  04:57
+We would need minimum housework impacts, and then I think the weight of the food in the tanks may require some additional
+
+Ryan Hankins  05:11
+site. It would, yeah, like, we understand that the equipment needs to sit on a piece of concrete, but, like, it's everything outside of the footprint of the equipment would basically just be, you know, rock.
+
+Speaker 2  05:30
+Okay, perfect, near the tank. I think that is all concrete. That's correct. I think there's specific reasonable and called to define what those requirements were, but we were trying to keep the electrical yard area
+
+Ryan Hankins  05:49
+base course. I think the big note is that, I think for the team to go away and look at where can we remove surface area of concrete or asphalt overall, and see if we can convert it to base course, whether it's parking lots, yards, whatever it may be, exactly, yeah, that's, that's a
+
+Speaker 1  06:08
+good point. Ryan, okay, so design team to look at areas where it could remove
+
+Speaker 3  06:17
+that asshole. Josh, can we? We can probably put together an exhibit and say, yeah, absolutely. And say, Absolutely, yeah, conversation,
+
+Unknown Speaker  06:30
+great. And Josh would said,
+
+Speaker 1  06:33
+we've already submitted and we already have approval. So I imagine this is something that we could submit, a change, a
+
+Speaker 2  06:41
+Delta to. I don't believe this would want a change for any of our entitlements. It doesn't impact grading. The slopes wouldn't change. So I don't think we have any entitlement concerns. If we were at this page, is that something we need to confirm or leave? I don't believe so, because we're going through another traffic circulation way out with building permit at that time that we would define those payment sections throughout, as long as we keep a roadway for fire access that could meet the weight requirements of the fire apparatus truck, which ace course can we're okay. So I don't believe there's any need or reach out to anyone Cory to make sure that's okay. Okay.
+
+Speaker 2  07:32
+That sounds great. So Josh, practical time frame, Monday is Tuesday. Quick exhibit showing where we can remove apples or
+
+Speaker 3  07:44
+when you have an exhibit ready, could you share it with Rebecca so we can run it
+
+Speaker 4  07:49
+by the team? Yeah, absolutely, yeah. I don't know, Josh, if you're able to have it for our Monday internal meeting, we could talk about it with Myers, plus then, but just just throwing it out there, not to put any pressure on you. Okay, that sounds great. Yeah. Well, Dom, can we add that to our list for Mondays
+
+Unknown Speaker  08:10
+and Cory and PF team? Are you guys okay with the maintenance?
+
+Speaker 1  08:19
+Yeah, I think what we'll do is we'll we'll take an action to internalize, and that'll be part of the decision. So we'll work to quantify the opportunities and fusion will make that decision, and once that decision is made, we either will or will not implement into a design stage. Okay? And then Clayco, if you guys get this handed off by Tuesday, Tuesday latest, how long would it take you guys? This is pretty simple.
+
+Unknown Speaker  08:46
+This is simple, yeah, we'll turn it around right away. Yeah, yeah. All
+
+Speaker 1  08:57
+right. And then, as a design team, Pacific season would need to make the decision by I would say that Friday would
+
+Unknown Speaker  09:11
+this be like, if it's $2 million that's great. If it's like half a million or less, that may not be the kind of decision you're looking at?
+
+Speaker 1  09:22
+I think we need to look at maintenance. I think we need to look at overall costs relative to some other opportunities, and just determine what makes sense.
+
+Speaker 3  09:30
+Yeah, and I'm just trying to see if we can, do you feel comfortable six figures or not?
+
+Ryan Hankins  09:34
+Yeah, it's not, not half a million. Yeah, it's, it's low, low six figures. Yeah, it's also on verdict. We could tell you what it is today, yeah, because of the Kurt conflict in the brand, like the product itself isn't petroleum,
+
+Speaker 5  09:51
+probably not multi
+
+Ryan Hankins  10:04
+Yeah, but if, but if you're looking for one of those, you know, Couple 100,000 Yeah, 100,000 we could we get there?
+
+Speaker 1  10:22
+Okay, Josh, I think that was it for civil any other items except
+
+Speaker 2  10:32
+for I don't think so. I think civil fights pretty efficient right now.
+
+Unknown Speaker  10:37
+Okay, well, thanks for adding that Josh was there
+
+Unknown Speaker  10:48
+a lot, or
+
+Ryan Hankins  10:53
+I knew this. I knew this when we submit our proposal, because we dug into this quite a bit. I believe it was pretty balanced. Yeah, we need some.
+
+Speaker 2  11:07
+It's not a whole lot, but we're short right now. And there is opportunities where you get that dirt from, depending on how you guys potentially take down other tracks around your site that you grab some dirt from there. So, yeah, I think we're just for short right now,
+
+Ryan Hankins  11:28
+Mesa Del Sol also has an agreement that you can't export anything and you can't import anything. It all has to stay within the development. But to his point, since you bought those other tracks, like, if we need to go dig a little bit of a hole somewhere we can go work through it with dig out the palms. Yeah.
+
+Speaker 1  11:53
+Moving on to architecture. We'll just start off with the first one. Ryan, do you want to talk a little
+
+Ryan Hankins  12:01
+bit about access. Yeah, one second,
+
+Ryan Hankins  12:12
+there was actually so in the spec, it did say internally, fabric, or scrim reinforced fabric, back TPO sheet. But it did say 60 mill. So I think we just need to decide what we want. We went with our pricing with that 115 mil fleece back, bonded TPO per what we thought was the spec. If we want to go with the 60 mill and remove all the belt and suspenders, we can do that. That saves you a million bucks. Or if we want to go somewhere in the middle, I think someone was saying 80 to 90 mill, okay, I think that's just a team decision on what we want to go price. If we want to go price to intermediate, we can go do that.
+
+Unknown Speaker  13:02
+We looked at any other products besides TPO?
+
+Unknown Speaker  13:06
+No, we have not yet, but we can something you want.
+
+Speaker 6  13:09
+Is that something, you guys would be open to it? Because I find, I think that PDX is something that works. I
+
+Speaker 7  13:20
+don't know there's, I know there's other cheaper options, the best for long term, because I feel like
+
+Ryan Hankins  13:28
+TPO is pretty cost. Like, that's what all like the developers use on like, spec buildings. They're not building anything expensive. And so I'm I feel pretty confident that like a TPO is going to be like your best price point. I think it's just thickness, unless you want to go with a more premium product.
+
+Speaker 8  13:48
+But on a lot of our buildings, we spec out 60 million.
+
+Unknown Speaker  13:59
+Yeah, and you know,
+
+Speaker 7  14:01
+like life span. What's the delta between 60 and 50?
+
+Ryan Hankins  14:05
+I think 6020 years. Either way, you get a 20 year warranty, yeah, but to that point, like there is potentially more maintenance if you're up on the roof with these units, we could put some walk pads. We could do that to help with longevity. But, you know, belt and suspenders approach is probably 120 fleece back. But the, you know, I wouldn't necessarily disagree with what you guys are saying at the 80 to 90.
+
+Ryan Hankins  14:35
+And we can go get pricing on that. I don't know what that is today, but it's probably somewhere in the middle of zero and a million. We Yeah, safe, guess Yeah. Safe, guess Yeah. So look at both options, 60 and eight, yeah, look at
+
+Speaker 1  14:50
+we'll look at both options. We'll do a little bit better research ourselves. I do basically an estimator. I happy. So you guys have everything you need. You just want to price out. Looks like you already have the 60 mill. Want to price out the 80. Eric, going would be practical time to get that information
+
+Speaker 9  15:19
+in the matrix. We can have that done by next Friday for sure.
+
+Speaker 1  15:32
+So if we made that decision mid week of the 20th so the 22nd it's an architectural item, Rebecca. If we made that decision by the 22nd any impacts you guys? Tom, I
+
+Speaker 4  15:49
+know, but I we can talk about it and decide, my guess is, update,
+
+Speaker 1  16:00
+sure something or just any other thoughts on TPO? I'll hand it off to you.
+
+Speaker 10  16:19
+For sure. I don't know how much of a production this would actually be. Just calling out that we're carrying an assumption for the thickness of these panels and that they are deferred engineering on them. You know, I don't know how much bringing down half an inch of concrete across the office the building will save you, but it is something to consider.
+
+Speaker 1  16:48
+What is the four inches? So why? Why four inches? Why not three or two risk with
+
+Speaker 10  17:00
+reducing the exterior? That's what I used to seeing anywhere from three to four inches. It's typically where you come against opening coordination, and there's a turn back in the concrete on that thickness, and then where you position the actual window wall in relationship to that. So again, it's more of a detailing concern. I think if we detail, we may be able to shape off an inch. We haven't studied that extensively, you know, an inch across the whole building. That's reduced material, yeah,
+
+Ryan Hankins  17:39
+if we think that, if we think that the structural portion of the panel needs to be that fixed. I think you said 16 inches. It like to have four inches of cover is a better product, for sure. Other otherwise you get more brittle. Like, you know, somebody throws a tennis ball at the wall and, like, you know, it starts to actually make an impact on the exterior facade. It's a little, it's a little aggressive on the comment, but you know what I mean, like, it's just, it's, it's less, it's less of a quality product that's going to stand the test of time. So, and you're not going to save that much for shaving off one inch off the front.
+
+Speaker 11  18:22
+Yeah, so we're talking about just the architectural wipe with the exterior. So a lot of the times, what I see is that that number of inches, it also depends on reveals that sort of thing architecturally too, that you know, I've done very, very boring walls that have two and a half inches because there are minimal to no reveals in it. So there is a lot of, there's, there's definitely some design aspect here that I think we might need to look into as a whole. And geogramming thicker is, you know, going to get you a bit more robustness there that it's going to be. But again, we are weighing things, so it does depend on then how much, how much that cost is? I will say that one of the things that we should look into with that cost, though, is also it is additional weight, so additional foundations. Again, it's small, but it is there. So this one to me, we might want to do just a little bit of study, because I know that we also can just validate the thickness of the actual structural panel too, and look at this as a whole. But I do think there are some design aspects there that are that we should look at with the four inches, because there might, there might be something, again, I just don't know if it's worth, if the
+
+Ryan Hankins  19:49
+cost is there an inch is like you're still doing all the forming. You're still doing, like the labor is natural, so it's material. It's not
+
+Speaker 10  20:06
+Yeah, yeah, and then yeah. The to comment on that, on the reveals, there are a lot of liner panels on this facade, so that four inches would reduce by half inch to three quarters going into the panel. So, you know, realistically, it's like that four just gets reduced to like three and a quarter,
+
+Unknown Speaker  20:33
+yes, but that's why you have four inches.
+
+Unknown Speaker  20:38
+Exactly, yes, yeah. Yeah, and
+
+Speaker 1  20:44
+then from a reveal standpoint, and that was part of entitlements, I'm wondering
+
+Speaker 11  20:49
+if, yeah, that might be a non starter to really to mess with.
+
+Ryan Hankins  20:55
+Yeah, yeah, that's fine. So
+
+Unknown Speaker  20:57
+we're just going to call this. I
+
+Unknown Speaker  21:02
+think we have other things because we have just the opinion
+
+Speaker 5  21:05
+is, like we have to focus on right things that are probably more real amount of design regression
+
+Speaker 1  21:13
+we're at that makes sense. Okay, so did not pass the zip test, Dominic
+
+Speaker 10  21:25
+will move on to eight. Yeah, the high performance coding. Again, we applied this fairly generously throughout the entire R and D and live space, but it's our understanding that there may be a more greater refinement on where we position those high traffic coatings versus pedestrian traffic coatings. We need a better understanding but of where that's occurring. But the first thought is, everything under the actual machine obviously, probably doesn't need a high traffic coating if you're not rolling over all the time, so that could likely be reduced. But throughout the R and D and between the lab spaces, I think we would need Pacific fusion to tell us where these travel paths are and where the walking paths are in facility. And if there's a area where there's only pedestrian traffic, then we could reduce the expense of the high traffic coding.
+
+Ryan Hankins  22:33
+So here's, here's where your price point is, here. So you've got, like, you know, there's, there's a range of products in the resinous flooring applications, there's a $5 a square foot product that is probably going to need more maintenance in the long run. There's a $30 square foot, you know, stone hard product that's like, ideally, you never have to touch it ever again. And then there's, you know, really durable products like, or really durable applications like, like stone grinding or grinding. What am I trying to say? Polished concrete where, like, you drop something on it, like a hammer, and like, you don't even really see it, because it kind of just blends in. And so I think, and that's like five six bucks a square foot. So depending on, like, what your guy is looking for, there's super affordable options. I would say the cheaper, resinous flooring. You typically have problems with it. I like, I like the look of a polished concrete, but I think that's up to you guys. And then there's options of grit. You can go to 10 bucks a foot, or you can go to five bucks a foot, depending on how you know much you want to grind it, to try and reduce
+
+Speaker 1  23:48
+those costs. Yeah, and I think there's also an important aspect you do want a bit of grit because of some of the fluids that are naturally going to just end up on the floor. You know how many times you try to squeegee it? So we'll want something there. Okay, so Pacific fusion do? Will that be done on Friday? So we'll have a better idea. Okay, early next week. So Tuesday, we'll have an idea of where those areas can be reduced to, yeah.
+
+Speaker 9  24:21
+And I think on my end, what I'm working on is pulling out what we actually carried in all the TI costs, so that we have, like, a really good breakdown, so we can compare areas and make a good analysis of that, so all have that in parallel with what Jeremy is putting together.
+
+Speaker 1  24:37
+Oh, perfect. And then we can determine if there's any additional options that options.
+
+Ryan Hankins  24:45
+I think the big thing that we're gonna like, going back to yesterday's discussion, deciding what the waterproofing situation looks like in the trenches, I think we have to do something
+
+Unknown Speaker  24:55
+there. We're dealing with
+
+Unknown Speaker  24:56
+it there, then maybe we don't deal with that on
+
+Ryan Hankins  24:59
+the floor level. Yeah, and that's just a decision I think we all need to make as a team. Yeah,
+
+Speaker 4  25:18
+no, and that was where my concern was, I'm like, if the waterproof is, I think is the right call, and we have water on the top, then what are we doing that doesn't help the concrete. There's nowhere.
+
+Unknown Speaker  25:31
+Yeah, you're thinking about the concrete.
+
+Speaker 10  25:37
+Yeah, I know that we have grounding throughout the facility, but does this entire floor finish need to be ESD, flooring within R and D? No, okay, I think we did. I think we determined that fairly early on. It. Just wanted to re answer the question.
+
+Speaker 1  26:06
+Okay, all right, so we will hand off the SK Matic to the design team on Tuesday. Erica. You guys are going to dig into your quest date of the 17th.
+
+Unknown Speaker  26:20
+Yeah, that's perfect.
+
+Unknown Speaker  26:21
+Okay? And then we'll make a decision by the 21st
+
+Unknown Speaker  26:28
+okay with the 21st if we make that decision,
+
+Speaker 4  26:33
+this is the 1c package that should be enough time to I think I know that you want us to give you a date on everyone. We need to see what all the changes are. So I think give us the information when you have it, and we can, and we can get that decision, maybe more holistically for how it's affecting. I know that you want for every item, but it might be like more just like, yes, we'll try. We're gonna try with everything. I'm gonna
+
+Unknown Speaker  27:00
+just throw a date on here. So yes, if you need to change it, everybody has access to this.
+
+Unknown Speaker  27:07
+We're just absolutely, yeah, that's a good idea. And
+
+Speaker 3  27:16
+would it make sense to do just finish doing separately, because we might like to know what you use, and that way, we can see all of the finishes holistically, item by item, I mean, and it's not critical at this point, we can push it next week into a session to go over all the items that you've chosen that make a little more sense.
+
+Ryan Hankins  27:46
+Probably mean, especially for like, the office like, like I said yesterday, I think it's a design to budget. Yeah, exactly, whatever we whatever we extract from our estimate and whatever we come up with, we can decide as a team, $25 a square foot reduction. Or we can decide $10 like and then it just is a value,
+
+Speaker 12  28:06
+but super helpful, because there's a pretty big jump between the 50% and it's not necessarily like adding fun design things. It's like basic stuff. So we'd love to see what you've actually guys, and we can work backwards from there and where that means hit either
+
+Ryan Hankins  28:20
+bulk number or, okay, yeah, that makes a lot of sense. But just to be clear, the flooring, like the traffic coatings we're talking about like, none of that was baked in. So that's, that's an exposure identify
+
+Unknown Speaker  28:41
+exactly where. Like, what decisions? It's not the last one.
+
+Speaker 5  28:46
+I mean, you do have to do some verification of
+
+Speaker 6  29:02
+other things related to it. So you do have to do some design checks, but not super urgent. It can
+
+Unknown Speaker  29:13
+be, it potentially could be an ultimate
+
+Ryan Hankins  29:18
+season fair, like an allowance or something, yeah. Man, to give an idea like for this, for this 100,000 square foot R and D area, $5 a foot, half a million dollars. So half a million dollars is probably where we should be thinking overall, is the budget for that area. You know, that buys you. You know, a simple, polished concrete that buys you a cheap epoxy product overall. And I think, to your point looking at those areas, but yeah, we can push this down the line and just say we have a $500,000 allowance.
+
+Speaker 1  29:55
+Are we currently carrying? And we are currently carrying the background to show you how much we have. Background, or is this an ad?
+
+Speaker 9  30:05
+You're thinking, we don't have the the traffic coating. So that is an ad. It is an ad floor finish in the area. We had some floor finish area. So that's a breakdown, not Polish. There's like a
+
+Speaker 13  30:19
+Euclid sealer, sealed sealed concrete, yeah.
+
+Speaker 9  30:24
+So I want to pull all of the qualities and all of the areas and what we carried so that we can see, like, Oh, do we have ceramic tile here that we don't need? So there's some dollars that we can move to this bucket so it just gives us, and then we can target it to, like, an overall cost per square foot, and that'll just guide us. Yeah, okay,
+
+Speaker 10  30:50
+yes. Sorry, what was that? Vermont and number nine, yes. Do you want me to share my school for this one? Yeah, so I'm thinking this one over. I think ultimately we just want PS buyout on the design proposal, and I can present something a little more formal for final approval, but this is about the extents of what we'd be looking at for reducing the overall entry canopy. So we still want the height for the lobby and the board room area. We can dial back to the left here on these two panels, we still want a one of these large windows going into the office here. So really, you know, we are reducing the amount of glazing, but I think the big ticket item here is the steel that is supporting the system that we're looking to reduce. So even though we're still maintaining some of the window wall coverage. Our assumption is that by reducing the steel that this this may be worth further investigation, also the height currently, I believe these last two windows are above the ceiling of the lobby, so it would either be spandrel or you'd be looking into HVAC above. So I don't think there's a programmatic need for the height of this. This initial design, I think, was complete of when two stories or two story office was an option. Knowing that this is going to be one story, feel pretty safe about reducing the scope of this entry here. Just need PS final approval on this to move forward.
+
+Unknown Speaker  32:53
+What this would kick us back into entitlements?
+
+Speaker 9  32:57
+This would probably kick us back into entitlements. I don't Well, is
+
+Speaker 4  33:00
+this within the 10% change? I would have to choose some populations to see what changes on the overall elevations, to see it's, yeah, I don't know that. I see it being like a massive issue to get the elevations reaped and re recorded with the city, because it's seems like it's very much in the same vein. It's not drastically the design. It's like the same design. It's just kind of refining it. So I don't see this as being a large issue.
+
+Speaker 11  33:39
+And also, I mean, As Donna mentioned, that the structural steel supporting all of this is a good amount of the cost potentially, I assume that that's the answer. There are some things on the structural side that we know that right now, there are things that are very inefficient in this design that we I think we can iterate on as well to, in addition, make these design changes from the from the architectural side. But then also, how do we support everything? I think there are some ideas that have been thrown out in the past that were kind of said, No, that's not preferable. But we might want to revisit those, because again, right now we've got way too much steel, honestly, from my opinion, supporting all of this, right? So, which includes some kickers to some of that steel to reduce tube sizes, locations of columns, that sort of thing. But I think we should
+
+Unknown Speaker  34:35
+take a look at in this area
+
+Speaker 4  34:37
+and within this Tom I'm not sure, but I know that, Eric, maybe yesterday you mentioned reducing the overall depth of those canopies to like 18 inches as opposed to five,
+
+Unknown Speaker  34:49
+could help a lot.
+
+Unknown Speaker  34:52
+Yes, so maybe that's part of the overall solution there.
+
+Unknown Speaker  34:58
+Yeah, agreed, yeah. Worth pursuing. Sounds like, we would need a sketch
+
+Unknown Speaker  35:03
+from both time
+
+Speaker 11  35:05
+study and page, and we'll need to do some coordination between page and TT,
+
+Speaker 3  35:11
+yeah, one thing you're telling Frank yesterday was yes, make sure that this doesn't affect
+
+Ryan Hankins  35:20
+our quest. So like, yeah, yeah. Like, I mean, like, we're
+
+Speaker 11  35:24
+we just need to know, we need to make this decision. We can make it sooner rather than later, so that it doesn't affect anything. This is a small enough area that I'm sure that we can just, we can, yeah, it's
+
+Ryan Hankins  35:34
+definitely her for that, for that 511 package, if we didn't include this, we'd be
+
+Speaker 6  35:39
+totally fine, yeah. Yeah, cool.
+
+Unknown Speaker  35:44
+All right, I'll give it
+
+Speaker 3  35:51
+back to on the other side of this. Are we doing anything?
+
+Speaker 10  35:58
+Is it similar, or if we're reducing the overall height and extent of that lower canopy, yes, but the extent and plan would remain the same, shifted a little bit,
+
+Speaker 4  36:13
+yeah. I think it was shortening it just slightly based on what Kristin had mentioned. I think
+
+Speaker 12  36:19
+yeah, not one out of the DS three control room because it was eating into there. Then I think we removed the
+
+Speaker 10  36:26
+window, yeah. I mean, that was like a foot, yeah. It was very small amount.
+
+Speaker 1  36:38
+Theresa, Rebecca, target date to have the sketches prepared. Yeah,
+
+Speaker 11  36:54
+by the by the 17th, by the 17th, the last is that a first round spot, because we'll need, I'll need something to then come to you guys and say, like, Okay, this is where we may and then we need, and then I need to go, and then we will need to coordinate one more time. So, yes,
+
+Unknown Speaker  37:20
+yeah, yeah, I think the 24th is fair.
+
+Speaker 3  37:24
+Ryan, for you guys, if we do a blue beam sketch and tell you what we're trying to do, and if anything changes drastically, that will call you up, yeah, you can start your pricing along the same time correct. So we can do this after until the 24th
+
+Ryan Hankins  37:47
+good, yeah, yeah, if we want to start a session, we can start like that's fine too, yeah.
+
+Speaker 4  37:59
+Oh, sorry, our cousin. So there you go. We have to do it by the 23rd or we can't. We can't be on our computers on the 24th at
+
+Unknown Speaker  38:14
+all, in our offices. Okay.
+
+Unknown Speaker  38:20
+We can it. Can we can do that.
+
+Unknown Speaker  38:27
+Enjoy your technology free.
+
+Speaker 1  38:28
+24th design will hand off to Erica and team on the 23rd
+
+Speaker 9  38:34
+Yes, Erica, let's track a week. We'll see. Yeah, because if I have a good idea, we can get the ball rolling.
+
+Ryan Hankins  38:44
+Carrier pigeon works too, if you want to, like, sketch something, yeah, yeah, that's perfect.
+
+Speaker 10  38:57
+Do we have a ballpark feel for like, $1 sign, $2 sign, the value that we might be able to get from this.
+
+Ryan Hankins  39:07
+Yeah, I do think it's probably a $1 sign. That's my initial thought. But I'd love to see, I'd love to see what you guys come up with. When are we reducing glazing by 50% if so, that's probably, I'm throwing something out there, but I think we had a million dollars in that curtain wall. And so, you know, there's potentially half a million dollars in just curtain wall savings we have to add back in tilt. But I mean, like, there's, right, there's, there's some savings there, depending on how much you reduce,
+
+Unknown Speaker  39:46
+okay, making sure it's worth the worth The push Dominic and Rebecca, last responsible
+
+Unknown Speaker  39:55
+moment for us. The last responsible moment for us decision,
+
+Unknown Speaker  40:06
+once we get it to you on the 23rd
+
+Unknown Speaker  40:09
+So Clayco will have pricing the end of the
+
+Speaker 1  40:16
+month on the third year. You know, I think we'll just need a couple days.
+
+Speaker 4  40:21
+I think think, in general, like what our answer will be is, for anything that's affecting that 1c package may 1 is going to
+
+Unknown Speaker  40:31
+be like our last responsible moment.
+
+Unknown Speaker  40:33
+So if that can, I'm going to do some math really quick.
+
+Speaker 1  40:40
+There's about abusive money in June, because our last is our last day to
+
+Speaker 4  40:44
+get giving our team time to kind of incorporate everything maybe I'll pay for and
+
+Unknown Speaker  40:52
+that kind of is across the board.
+
+Unknown Speaker  40:54
+Okay, well, we'll just shoot for me first.
+
+Unknown Speaker  41:02
+Sorry. DON What were you gonna say?
+
+Speaker 10  41:05
+Well, I'm just thinking so in order to make this decision, pF, needs the cost to make the final decision on this, or are they good with like, if we got a blue bean to them on the design intent. Is that enough for them to make a decision? Or do they need just
+
+Speaker 1  41:30
+we'll track off the last responsible Dominic an issue to get you guys something sooner, sooner, I think I just want to double check the entitlement impacts and see if that's valuable. That's valuable. That's not going to kick us back in anything. So okay,
+
+Speaker 4  41:47
+do actually, now I'm going to just start a list with and maybe I'll just have a call with Jay to go over, like if we change the base, of course, we don't think that affects if we reduce the expense of this. I don't. Are there any other items that we've said so far that I don't think so. I think those aren't you. I'm going to just start that with, sounds good.
+
+Speaker 1  42:05
+I'm going to keep moving on. Just doing a time check. We've got 30 minutes to get through and hold other architectural items. Yeah. So we probably do need to kind of pick up, pick up the conversation.
+
+Speaker 10  42:15
+Sure. Yeah, yeah. So MC Nichols product. I mean, I think this is just looking for a different screening product.
+
+Ryan Hankins  42:25
+Just so I'm just so clear that I think what I heard in the meeting last week was that it was like the roof somewhere, but I couldn't find it, as the roof anywhere along
+
+Unknown Speaker  42:40
+got you because we're required to
+
+Unknown Speaker  42:44
+execute the equipment. It's also being used at the exterior.
+
+Speaker 1  42:54
+Do we need the exterior stair covered? Is that a code requirement, or can
+
+Speaker 10  42:59
+we just have this was a, this was a security discussion on making sure that you didn't have people who used like go up to your roof.
+
+Speaker 8  43:10
+We could adjust that, though, and put a door to the roof right where you can get but I'm hearing is the city
+
+Unknown Speaker  43:21
+requirement. Hearing is the city requiring you to scream,
+
+Speaker 4  43:25
+no, I wouldn't, yeah, I wouldn't leave that open. I think we could potentially look at the extents and having it stop at 10 or 15 feet above the ground and not go to the roof, like look at the expense of it. I don't think it would be a wise decision to be that open for people to access. I don't I would just feel pretty uncomfortable with
+
+Speaker 1  43:50
+that, sure. So there's an opportunity to, I think, revisit the screening along the roof, but also eliminate or reduce significantly the screen on the stair, just bring it down to the accessible location by maybe 1015, feet, just enough so folks can't climb over to Dominic sketch.
+
+Ryan Hankins  44:10
+New product we have seen like just a standard like decking product be really cost efficient, and what we've used on a lot of our data center work for screening. It's, I mean, it's not like the prettiest product, but it's cheap, and it gets the it gets the job done. But, yeah, it's, it's, you know, I
+
+Speaker 11  44:33
+need to check with our team to understand the support, especially for the roof screen, what we've assumed for if there's any perforation, or who assumed very solid, there's perforation currently perf. Then if we went to a solid material, then the structure supporting it's going to increase. So that's just something to keep in mind too.
+
+Unknown Speaker  44:53
+Yeah, yeah, mainly due to the wind loads on that.
+
+Unknown Speaker  44:58
+Yeah, yeah. That's all based. Sorry, yes.
+
+Speaker 10  45:04
+Especially on the roof where we're there's a 45 angle coming back, and that's a
+
+Speaker 11  45:10
+really tall, like cantilever. Yeah, I'm not, I'm not. That doesn't really have any impact on the stair screening. It's really the roof screen. Is there
+
+Ryan Hankins  45:18
+any reason why we couldn't just make the tilt walls just just taller to account to 16 feet taller.
+
+Ryan Hankins  45:30
+Well, I mean, like, no matter what you do, from a steel standpoint, it's gonna be expensive, like we've done, we've done, like the light gage framing, and it just becomes a nightmare from a maintenance standpoint, with like, rain, like, even if you get them to be galvanized, it just still is not a great application. I just feel like, if we're already putting a tilt wall there, I think it makes more sense just to continue the tilt wall panel up and just, yeah, anytime you're adding things on
+
+Conor Tighe  46:02
+top, things issues, would that be?
+
+Unknown Speaker  46:10
+Always expensive? Yes, 100% Yeah.
+
+Ryan Hankins  46:16
+Because, like the steel, the steel on these screen walls, is getting so expensive. Like, yeah, oh yeah. The detailing, the waterproofing for the connection point. I mean, like, versus just like, taking the roofing up another 16 feet and just like terminating it like a Yeah, yeah, just becomes so much easier. I don't think we have
+
+Speaker 4  46:37
+a design concern that. I do think it's gonna I mean, that's
+
+Speaker 11  46:43
+a change in our elevator, but I think that's my word. We'll just, I'll put it on my list for entitlements, and then what's, what's, what? Can you remind me what the height of the tub roof right now is? What's the story inside 44 Okay, all right, I'm just cantilever backspan, just thinking through that. So that's, that's that's totally fine. That's not a problem. We will need to then include that. That's a lot of additional load. So I need to look at the design of the building and the foundation. I know that because we're separating the cup from the rescue structure, we need to look at the design of the cup anyway. So that's one, one kind of re look. So that's fine. So I don't have a problem with this. I'm just noting that, yeah, we will need more foundations, because that's a lot of additional load, and it'll go into that lateral redesign of the building, I guess,
+
+Unknown Speaker  47:30
+minimize the amount of light we have to go up, of course.
+
+Speaker 4  47:35
+Yeah. What does this create? Right? Yeah, we did some studies of what makes it all soul is requiring for for the visibility, I guess, in terms of maintenance, and if you have to replace the units on the roof, a contractor is going to have to have a crane to pull it replace. Yeah, so that's VW is. We shouldn't Park on
+
+Unknown Speaker  48:09
+this side. Visitor parking.
+
+Unknown Speaker  48:19
+Visitors, good.
+
+Speaker 1  48:28
+I see so it sounds like we've got two options that we're looking at. So a new, cheaper screening product is still one option, correct? So more cost effective screening product, even if it's
+
+Speaker 4  48:41
+a perf, but not MC Nichols product. I don't know if there's, like, a cheaper version,
+
+Ryan Hankins  48:45
+but yeah, yeah, the perf. The only problem with the perf is that they they code it before they punch the openings, and what we see is, over time, that there will be rust right around that opening. And so, I mean, that's what, that's the and especially if you go away from MC Nichols, like, that's what you're going to definitely see. And so if we want to have a best long term product, it's probably more of, like a solid panel, and that's where, like, we see the beef deck be super cost efficient and longevity. I mean, the other option we could do is, like, just, I mean, like that staircase. I think the big concern is the is the elevation view. Do we just put a concrete panel up in front of it? Yeah, just full height. I would be super awkward just continuing the facade. But, like, you don't have it on these two sides. You just have it on the one side. Well, I mean, we could put, like a get put, like a smaller tilt panel or something. Or we can use a fence, or we can, there's a million ways to secure it.
+
+Ryan Hankins  49:59
+That would be cheapest for sure? No, the cheapest is the fence.
+
+Speaker 1  50:06
+Yeah, yeah, I don't know that we're too worried about esthetics with extreme staircase. I think it's more just security. We want to make sure nobody climbs our drinking access, so bringing some fence or screening, yeah,
+
+Ryan Hankins  50:23
+that's the, that's the cheapest and easiest.
+
+Speaker 1  50:25
+Yeah, let's do that then, okay, so what type of fence are
+
+Ryan Hankins  50:32
+we having? Yeah, that'd be, that'd be cheapest, you
+
+Speaker 8  50:46
+stone, probably a door at the top. We already have a door at the second
+
+Speaker 14  50:52
+level, so a door at the top could replace the fence.
+
+Speaker 4  50:59
+Well, if we're going to say to having a parapet that's like 1516, 20 feet tall. If it was only a five foot tall parapet, I wouldn't think,
+
+Unknown Speaker  51:15
+okay, so we'll do, do you guys need a sketch or I
+
+Ryan Hankins  51:21
+mean, if we're just Yeah, sketch would be good, just so we're on the same page, but it's pretty easy for us to price.
+
+Speaker 1  51:32
+It Do we still want to go with a non perforated, solid equipment panel
+
+Ryan Hankins  51:40
+option, or a cheaper for that for that roof, for the roof, there's two options,
+
+Unknown Speaker  51:45
+ARS higher, tilt up versus
+
+Unknown Speaker  51:49
+cheaper project, the product that's
+
+Ryan Hankins  51:51
+not preferred. I still think the tilts, and I'll defer to the rest of the team here, but I still feel like the tilt is going to be cheaper. You're already setting up the panel. You're already forming it. You're just, it's just more material at that point.
+
+Speaker 11  52:07
+Yeah? Like, yeah, I've got it on my list to do that study of what would, what the ads would be, yeah, for the concrete panels. So, yes, we can start working on that. I think I understand enough to do that.
+
+Speaker 1  52:25
+All right, let's just get some dates in there. So Paige, to provide sketches, Theresa, anything that you need, page to provide you to do your study. I mean, I
+
+Speaker 11  52:34
+probably end up putting my information on top of their sketch, but we can go ahead and get started on that, because I have the information, I think, to do that so, like, if I can have eight hours after y'all have a sketch just to pull it all together, I don't need much more than that.
+
+Speaker 10  52:52
+Yeah, I don't know fast should or any from mechanical zones at all
+
+Unknown Speaker  53:00
+at this time for at this time,
+
+Speaker 10  53:10
+it's just that the height of that equipment was what was originally driving that 16 feet. So I think we may be able to come down a little bit, maybe more, along the line of 12 feet on that extension, so I don't think has to be as dramatic. And the other question that I had just so that I understood correctly, that when we're talking about the exterior here and doing the fencing material in lieu of this panel option. Are we saying just bringing up the fence to a certain height, and then it's all open stare above That's right, saying, okay, yeah, so 15 feet at the bottom, there's a chain link fence product, and that's not attached to Any kind of steel structure that is a standalone chain link fence product that can self support at 15 feet. Does it need to attach to our building in any way? Yeah. Okay. And are we thinking barbed wire. Are we thinking like, like, what level of security we're talking about here, this chain link, someone can still potentially find
+
+Conor Tighe  54:49
+that you can, you can do the security mindset sort of Ben out, yeah.
+
+Speaker 10  54:54
+So basically the same Jen, same material that we're doing on the outside of the property, we could extend here.
+
+Speaker 7  55:05
+So in this space, right we're extending, we would potentially extend the precast up as well, right as the mechanical screen at the top. Yes, I think that was the conversation, yeah. Can we just punch a door in that recap.
+
+Speaker 10  55:21
+That's what that's what we're doing with the panel system. So I assume that's what we would also do concrete. So we would extend everything up to that.
+
+Unknown Speaker  55:33
+If we just have a security
+
+Speaker 4  55:35
+door at the top, yeah, you put a security door at the top, that's fine. And then you just have to have a handrail on the
+
+Unknown Speaker  55:43
+guardrail so
+
+Speaker 7  55:45
+they may already have security fencing around the outside of the perimeter of the property in that same space, don't we? Yeah, all, it's that concrete wall, and there's
+
+Speaker 4  55:53
+like a full door that seems good, and you just have to protect their we have access control.
+
+Speaker 12  56:01
+Yeah? Access control. Yeah, so we're talking about eliminating Eli together, okay, Jerry wants that, so we'll eliminate the fence all together.
+
+Unknown Speaker  56:11
+We have access control at the doors,
+
+Unknown Speaker  56:13
+and then we would eliminate all of that
+
+Unknown Speaker  56:15
+screening around the stairs,
+
+Speaker 4  56:17
+so the screening will go away and you'll just have to advocate, yeah, we already have girls Jones.
+
+Unknown Speaker  56:27
+We're gonna keep rolling here.
+
+Speaker 10  56:30
+Yeah, sounds like we'll need to do more investigation on that.
+
+Speaker 1  56:37
+I have three panels, Ryan, I think I may have put this down and put your name on it, but I didn't
+
+Ryan Hankins  56:45
+finish myself. Yeah, our what was the product on the imp panels? Do we know?
+
+Unknown Speaker  56:52
+Like, I can't recall.
+
+Ryan Hankins  56:57
+I think we were thinking we yeah, good sir.
+
+Speaker 10  57:00
+Oh, I think we were thinking King spin, but I don't know that was actually what was in the spec. It was a similar product.
+
+Ryan Hankins  57:10
+Let us do this will be our action item. We'll just go evaluate the market and see what because we
+
+Speaker 9  57:14
+carried it as an allowance, because we didn't have a manufacturer at the time. So, yeah, we can go evaluate that. This is just potential
+
+Unknown Speaker  57:25
+product, yeah, product swap, yeah,
+
+Unknown Speaker  57:27
+yep, that's easy. And then end of next week, yes, in the next week, we should have some ideas.
+
+Speaker 10  57:38
+Yeah, I think we are open to a similar product. The main thing that we want to make sure is that whatever product is selected has the available color options to match PS, main color band, okay,
+
+Speaker 1  58:00
+yeah, yeah, we're so gonna move on. I think we have already decided we're gonna remove the basketball court that was that may or may not have been baked into your estimate. I don't know, but we're, we're gonna eliminate it all together. Number 15, Ryan, we've got modified fencing to critical areas not around the entire site. Jeremy question,
+
+Unknown Speaker  58:26
+set the critical areas
+
+Speaker 1  58:29
+already remove entry. Rivian canopies, I think we already discussed part of this. Yeah, yeah. Remove landscape canopy.
+
+Speaker 10  58:51
+That's that's the one. That's the one right outside the main entry. It's the what do we call out a product?
+
+Unknown Speaker  59:02
+Yeah. That you share a picture.
+
+Speaker 10  59:05
+Yeah, sure, it's not. So what's in the what's in the rendering currently kind of shows a solid product, but if you look in the landscape drawings, it's what we selected was more open. And there's also two columns, not one. This is like imaginary architecture, yes, from Deckard. Sorry not to throw anyone in device. Yeah, we saw that. Yeah. So yeah, there's, there's at least two sets, and I think at the front three sets of columns, but all of that is detailed out in a landscape drawing under the 100%
+
+Ryan Hankins  59:54
+thinking set. The only way to build that cost effective is to build it like a parking canopy. Otherwise it's going to be cost prohibitive, most likely. But not to say it's a bad idea. I just think, you know, if we're going to do it, we just have to know that there's going to be a fairly significant cost with that. Mean, even, I mean, you could see it, it's kind of like on, like an angle, like anytime you're making it non standard type shapes that adds cost, more of a rectangle is better than a triangle. Yeah. So if we want to do something, we can, but I recommend that we limit the size and make it more of a rectangle. That'd be the value engineering item that I would say, if
+
+Speaker 1  1:00:41
+we eliminate it all together, that would definitely be an entitlement question.
+
+Speaker 4  1:00:47
+Yeah. I mean, as the list for entitlements keeps growing, I feel like we get closer and
+
+Unknown Speaker  1:00:50
+closer, or beyond that 10%
+
+Speaker 4  1:00:52
+so especially because all the things are going to be considered at the same time,
+
+Speaker 7  1:00:57
+what did you guys price for the canopy? I don't even price at all.
+
+Ryan Hankins  1:01:02
+I don't think it was in the 50%
+
+Speaker 10  1:01:06
+it was, it was It wasn't detailed.
+
+Speaker 9  1:01:09
+It wasn't detailed out. So we included that in kind of our allowance looks like,
+
+Ryan Hankins  1:01:21
+where is it? Is it in the landscape drawings? Is that where it's at? Yeah, landscape,
+
+Speaker 10  1:01:29
+and I believe it was also in civil I
+
+Speaker 1  1:01:38
+detailed it. There's a sheet for the county. Okay, so there's two options. We either eliminate it all together, Rebecca and I can run down how that impacts our 10% with entitlements. The other option is to develop, we're not going to be able to design this so to find a more efficient design that's not a pizza slice and something more rectangular, probably a sketch from architecture Theresa's team.
+
+Unknown Speaker  1:02:10
+Yeah, May and structural. Does it need to be that big?
+
+Unknown Speaker  1:02:19
+Yeah, that was the off one option. It's really big,
+
+Speaker 4  1:02:28
+yeah, just end it like around where the window the big windows
+
+Unknown Speaker  1:02:34
+in half. We'll say minimum reduced. Yeah, percent.
+
+Speaker 9  1:02:47
+What sheet on the landscape drawings? Is it on? On the 50% do you have that
+
+Speaker 10  1:02:53
+50 to 50% is what was priced?
+
+Ryan Hankins  1:03:00
+Yeah, I was like, I don't remember seeing that that looks, that looks like a foreign object to me. I didn't see it in the 50% documents. And I'm looking right now, and I still don't see it.
+
+Speaker 9  1:03:17
+Okay? So will, if you change that design to something so simplified, maybe smaller, we'll put a cost to it so we can track that and decide.
+
+Unknown Speaker  1:03:26
+So either way though, this is kind of a plus delta, yeah,
+
+Speaker 1  1:03:36
+we've got to look into the entitlement, yeah, to determine how much I think reducing it is at minimum, yeah, there's an amenity shade area
+
+Unknown Speaker  1:03:51
+sitting outside about that. This is all you hold the building entrance.
+
+Speaker 4  1:04:03
+Under the maybe it's Yeah, I think it takes away from it will work,
+
+Speaker 9  1:04:13
+yeah, Al together, or maybe yeah, eliminate it, or somehow incorporate smaller sections of it into the building. Because right now it just looks like a weird add on, like it's just it's taking away from the fins and the canopy at the front.
+
+Speaker 1  1:04:30
+I think this is where maybe the original amenity space had been planned
+
+Speaker 4  1:04:37
+on the 50% set, LP, 301, it's just a dashed line, though. That's the only place It was called out, just so that you will Oh, there we go. Got you so it was pretty subtle. Yeah, yeah, pretty subtle.
+
+Speaker 10  1:04:51
+Metal candy. It didn't get detailed down until the following stuff.
+
+Unknown Speaker  1:04:57
+Okay, okay, we'll work through that
+
+Speaker 1  1:05:00
+making notes here. We got to move on. We've got, we've got, probably about 10 more items to go through. Let's, let's see swap some auto slider doors for manual doors. I think we can take this offline. Rebecca,
+
+Unknown Speaker  1:05:22
+auto slide. Are
+
+Unknown Speaker  1:05:27
+those large I would be next week,
+
+Unknown Speaker  1:05:29
+some auto slider doors.
+
+Unknown Speaker  1:05:31
+Dom, do you know, off the top of
+
+Speaker 10  1:05:38
+your head, yeah, there, yeah. Those are, those are all the sliders. All of those need to be manual. Need to have badge control,
+
+Unknown Speaker  1:05:49
+have a safety system. However, we can have
+
+Speaker 8  1:06:01
+a safety system lock the door and someone be able to open
+
+Speaker 4  1:06:05
+it, walk through and have it closed behind them. Yes, but it needs to be, it needs to operate. It needs to have the mechanism to not have a person pull it shut. Oh, that's what, I think that's the question is, yeah. Grocery, store.
+
+Unknown Speaker  1:06:26
+These are not the role of doors. These are the these are the personnel doors, Nick and Dom,
+
+Unknown Speaker  1:06:37
+yeah, I can, I can share.
+
+Speaker 4  1:06:40
+But I think that also, Courtney was saying we can take this offline and talk about it later, because we want to move on. So let's just not, don't take the screen. We're going to move on. We'll talk about this.
+
+Speaker 1  1:06:50
+All right, moving on. Remove mezzanine, elevator and stairway. I think that's self explanatory. Erica probably don't need to sketch for that. Okay? And next week, it's probably large, so maybe give us a
+
+Speaker 9  1:07:04
+little bit more time, because we're already stacking up with a lot of deliverables for end of next week, the 24th Yeah, that would be good, thanks. And if we get it sooner, then that's better.
+
+Speaker 1  1:07:17
+Yeah. So just eliminating that all together, we just want to put a price to it not making a decision. I know that's your office. Moving on here.
+
+Unknown Speaker  1:07:42
+Let's see elimination of skylight.
+
+Speaker 10  1:07:45
+Can I? Can I just make make one comment on the previous scoping question on the mezzanine? So the concern of removing the meeting room. So it can no longer be a meeting room. We had this discussion with Jon and life safety on this, and we exceed the maximum travel distance with one stair up there. So it has to be reduced even further, and it can't be an office. So you could only go up there to stand and look in that area, just calling that out,
+
+Speaker 1  1:08:27
+yeah, no worries. Don't make Yeah. We'll just, we'll remove the furniture, eliminate remaining skylights. Okay, so we've got skylights in the admin area. And we also have that large skylight for the cafe. I think we just put a price to it, and we'll make that all there's going to be more of an operational cost with with lighting and the admin space. If we remove the skylights, we'll figure that out internally. We'll just get a price for it, okay, yeah.
+
+Speaker 12  1:08:59
+Are we able to print those out too? We have the ones in the corridor. The Open Office is like
+
+Speaker 9  1:09:03
+one bucket. Oh yeah, we can break them all out so that you can prioritize. And
+
+Speaker 1  1:09:10
+Eric, you know this is stacking up, 24th 24th All
+
+Speaker 1  1:09:20
+right, eliminate shell locker rooms, if not code required. Again, similar scenario. Let's just put a let's put a number to it to see how much we can save there.
+
+Speaker 12  1:09:29
+So we need to keep the toilets, but not necessarily the showers,
+
+Unknown Speaker  1:09:33
+not the showers or the
+
+Speaker 12  1:09:35
+or the locker is true, but we do get to keep the toilets or find,
+
+Speaker 1  1:09:40
+yeah, no, that is mixed out of the toilets. Eliminate showers and locker rooms. That may be the final decision. We'll just see how much that gets us.
+
+Speaker 9  1:09:54
+Yeah, let's do that, sir, what else? What are you going to do with the space when we remove that stuff, like, what does it become?
+
+Unknown Speaker  1:10:03
+We may end up just putting in lockers later,
+
+Speaker 9  1:10:09
+like, little Okay, so it just be, like, kind of a shell space with minutes, okay, all right. I just want to make sure we're pricing it out. Okay, yeah,
+
+Unknown Speaker  1:10:15
+we may go to Ikea, okay.
+
+Unknown Speaker  1:10:18
+Yeah, furniture. Okay.
+
+Speaker 1  1:10:25
+Remove exterior stairs screening. So this done dance. Remove exterior sunshades. I don't know if we can do that. That's a California that's a current environment. Exterior sunshades on the glazing,
+
+Speaker 10  1:10:42
+the vertical shades. Yes, there's vertical sunshades, and then there's the sun shades above the taller windows. I don't believe that's a code requirement in Albuquerque, but I'm not too familiar. I don't sure Rebecca here. I don't think it's a
+
+Speaker 4  1:11:02
+code we're requirement. It is something that we tend to do, especially on west and south facing windows, because it really, really can heat up in spaces, right?
+
+Speaker 5  1:11:12
+So it's a cap x versus, I don't know
+
+Speaker 1  1:11:14
+if this is work, maybe we can put a number to it. I don't know if it's worth pursuing, because the cooling cost, yeah, you're gonna have maintenance costs.
+
+Unknown Speaker  1:11:21
+There's gonna be other costs that are costs. It's gonna trickle down the size. If you're gonna have more deterioration. I mean, the sun really
+
+Unknown Speaker  1:11:30
+can deteriorate materials. I'm inclined,
+
+Unknown Speaker  1:11:36
+I'm kind of inclined just to eliminate this material together. We'll just cross it off.
+
+Speaker 1  1:11:44
+Okay, fireproofing strategy. So this is going to be a breakout session right side, 40 by 40 foot door. I talked to Jeremy yesterday. We need to keep that door for the build. So the 240 by 40s need to stay
+
+Unknown Speaker  1:12:02
+discussion we've been having today, if we have $1 amount for
+
+Conor Tighe  1:12:05
+it, just put $1 amount. Was it? Was it removing the two, one of the 240, by fortys, or also removing the loading?
+
+Speaker 1  1:12:15
+That is another line. So I've got two line items. That's the other one, just this first one is eliminating the 40 by 40, yeah, so that the steel goes close to everything that comes with that. We'll just put $1
+
+Speaker 4  1:12:32
+amount to it in. The conversation was removing that, but having like, a removable wall
+
+Speaker 1  1:12:37
+panel for a knockout, a knockout. Oh, so eliminate door, but include 40 by 40 knockout in case you want to install later. Yeah. Or, I thought
+
+Speaker 4  1:12:47
+there was some thing that was brought up yesterday about, like,
+
+Unknown Speaker  1:12:51
+potentially that can be removed.
+
+Conor Tighe  1:12:53
+No, it was, it was that it had a knockout. That's not a wall panel. It's like, once you, once you knock it out. There there was though, yeah,
+
+Ryan Hankins  1:13:06
+it just depends how it can be implemented.
+
+Speaker 1  1:13:09
+Yeah, I think probably the easiest solution is just boiling it down to knock out. Let's figure out what that price variance is.
+
+Speaker 9  1:13:19
+Everything you need. I'm sorry, that's fine, yeah,
+
+Ryan Hankins  1:13:23
+the only thing is that, like, I don't think we're clear on the door. Like, I mean, because you're asking for a cost savings for, like, we don't really know how to price that door.
+
+Speaker 4  1:13:35
+Tell you what door we were looking at. And there was the overhead door. Company that we're we've overhead door we've talked to has recommended going with a higher end because of, you know, the better gears and the better motor for moving these large doors. Yeah, we can kind of tell you that information they have, like, a higher end than the lower end. I don't know that the
+
+Unknown Speaker  1:13:58
+lower end would serve you in such a
+
+Unknown Speaker  1:14:00
+large door? Yes, that's
+
+Speaker 5  1:14:03
+also talk internally. And Brian, like Austin marks, has done a bunch of the high bay stuff. There's, like, a bunch of other team members that aren't in this room.
+
+Speaker 15  1:14:13
+Yeah, there's 4400 employees. So they may have run specifically into
+
+Unknown Speaker  1:14:21
+this huge or so, I think maybe we Canvas internally. Yes, okay, Yeah, there's others. I was
+
+Unknown Speaker  1:14:58
+Shawn, understand,
+
+Speaker 1  1:15:01
+and understand allocation that was already applied to the forecast, and then put maybe a more realistic price to it. So just put the 430 there Erica. So Conor, next one would be eliminating the loading docks in between the 240 by 40 doors. So I think the question would be, can the W 67 trucks access along that eastern edge, and will that be sufficient for operations? Likely, no, to be honest, but I think we're going to want access to that center Bay at the rear with some of those smaller loading dock doors. I'll take it internally with Jeremy and see if we can eliminate it. I know our team has done a lot to scrub the openings. I think for now I'll say no, but for now,
+
+Unknown Speaker  1:16:01
+we did okay. Guys, any last thoughts on architecture before we move to interiors?
+
+Speaker 1  1:16:16
+All right, Jen and Kristen, we've got a few items for interiors. If we already have a plan how we want to tackle this,
+
+Speaker 12  1:16:27
+I think we wrote a couple ideas, but realistically, not knowing what was actually priced, it's kind of hard to
+
+Speaker 1  1:16:34
+have a full conversation. I think it's a good idea. Somebody suggested, let's do the pool finishes breakout session. Eric has some time to look and see what was allocated, and then from there we can Rebecca take the Yeah.
+
+Speaker 4  1:17:00
+That would be great. Yeah, you said next week, next week, like towards the towards
+
+Unknown Speaker  1:17:04
+the end of next week, because I'll have the pricing broken out by then. Just move ahead, yes, so
+
+Unknown Speaker  1:17:14
+we can make a lot of things work. Yeah, and Cory, you want to be at that. Obviously you and Nick,
+
+Speaker 1  1:17:22
+obviously you and Kate, so
+
+Speaker 1  1:17:35
+some of the items I will go over, you know, we'll look at the finishes, what's been allocated. I think now that we have one of those renders, what's been allocated and what would be the new allocation based off some of those renders I passed off to you yesterday, there's probably a variance there, yeah, likely a press. And then we'll talk about something a little bit more realistic. There's a few other opportunities to reduce the locker depth the mill work. So I'm seeing here, reduce the height, remove acoustic baffles that open office and provide spray acoustic add debt. That would be a good one. Remove the exterior and amenity spaces. Definitely, I don't know if that was priced in amenity
+
+Unknown Speaker  1:18:26
+they were called, yeah, there was no detail of what
+
+Unknown Speaker  1:18:28
+was included in them, because that was just developed.
+
+Speaker 1  1:18:37
+So I think probably by the time we have that breakout session, yeah, buckets are
+
+Speaker 12  1:18:45
+and so the 100% DD set and the renderings are pretty aligned in terms of what's called out there might be slightly different, like we chose this versus this
+
+Unknown Speaker  1:18:54
+pattern product. So
+
+Speaker 12  1:18:56
+those two hand in hand, I think, are great on the electrical list, really
+
+Ryan Hankins  1:19:09
+looking at the lighting package. Yeah, that's a big one we go through so real quick, just to get your guys thoughts like, what are you guys envisioning that this office looks like? Like? I mean, we're sitting in this space right here. I don't think this is what you're looking for, but are you looking for like class, a super like world class, headquarters, office space? Are you looking for the opposite?
+
+Speaker 1  1:19:32
+You know, the reality is, I wouldn't minimalist, not much more premium. So this is, you know, humble beginnings, we I would say this, obviously there's going to be some nicer finishes, because it's going to be brand new construction.
+
+Ryan Hankins  1:19:55
+Like, I mean things, things that I see is like, do you want glass? Glass is a premium. Do you want wall finishes, besides for paint? Do you want like ceilings? Do you want them to? Do you want like exposed industrial look? Or do you want like architecture features with like, cloud ceilings or like, you know, Shadow trim or like, it's more
+
+Speaker 16  1:20:21
+about functionality. About functionality. Like, I'm thinking about sound panels, like, obviously, it's a great example of something that we could use here, right? We have some, but it's not what we really need. So I think the industrial, you know, feel, is sort of what we ended up with here. And I think we stick to that to some degree, but it's really about the functionality. So I think there's a lot of room for more fabric in that sense, right? Like things like that.
+
+Speaker 12  1:20:47
+I think that's a really great point, because that's the finishes. Are acoustics. We're not adding these luxury things, yeah, one like big moment is that landscape wall, which is just a painted wood applied product. Yeah, it can be. There's variations with standardizing that flat. But we're not calling out specialty finishes, really anywhere other than the acoustics for the function of the space. We're not really calling out clouds other than the baffles. Most of the locations are AC T Yeah, I think we have two specialty ceilings. Specialty being Jip, and that's the cafe in the War Room. So for the most part, it's pretty standard. We're not looking at super high end ones.
+
+Ryan Hankins  1:21:23
+Is the, is the lobby, like some Grand Lobby, or is the lobby just like, kind of like what we're looking at,
+
+Speaker 12  1:21:29
+a ceiling to it, but it's mainly good, yes, yeah, which, even though I think changes, I think 50% we called out Rahn Earth, which is, yes, a price point, which
+
+Ryan Hankins  1:21:42
+we know that was just for me to get my bearings on, like what we're looking at, because we've seen all the above, yeah, and it just depends on what you guys are looking for. And, yeah, yeah. Functionality. Are you able to share? You could spend 500 bucks a foot on an interior space, or you could or you could spend like 75 and like, we're kind of looking at this, yeah, lots of wood.
+
+Speaker 12  1:22:13
+Yeah, this wood is a wall covering. It's not even a Ben ear. So we've really tried to be thoughtful in the materials while getting a higher looks, but super durable, thoughtful materials.
+
+Conor Tighe  1:22:24
+Okay, this is a lobby, so that that's mill work, and then what is that like?
+
+Ryan Hankins  1:22:34
+Polished concrete. Okay, yeah, this is okay, so this is just polished concrete that's actually
+
+Unknown Speaker  1:22:41
+just sealed concrete or sealed Perfect, okay, but the countertop on
+
+Ryan Hankins  1:22:45
+that is a style stove, so like things are going to drive cost, is anything that's real costs more. I mean this, I'm just saying radiuses, we want to save money. That's an easy thing to usually do. You can keep the same materials, but it just, it'll cost less to do a square. Yeah, it won't. There's only
+
+Unknown Speaker  1:23:13
+few areas, actually. Yeah, this is an example of the board room and, like, this is an example of mill work that can be removed.
+
+Speaker 1  1:23:22
+Do we want to keep a nice horse so out of like, the few spaces in admin that we pretty up a little bit more than, I would say, modest, medium expensive. The majority of the admin should be modestly priced, but maybe the War Room and the board room,
+
+Unknown Speaker  1:23:40
+yeah, have something prioritize Exactly, right?
+
+Conor Tighe  1:23:43
+So other questions are, like, you have glass on the board room? Do you need switched glass, or is it just
+
+Speaker 4  1:23:49
+regular glass? No, it's got a film. Yeah? Okay, so it's just okay, yeah,
+
+Unknown Speaker  1:23:54
+perfect, beautiful, because it looks great. And I was like, please,
+
+Unknown Speaker  1:24:01
+that's a wall covering. That's not a veneer, okay? And you have all the specs on that. Yeah, okay, yeah. We're going through the doing it right now. So, yeah,
+
+Unknown Speaker  1:24:18
+yeah, and then we can analyze and go through everything. ARS, I just want to bifurcate it so it's really useful for you.
+
+Speaker 12  1:24:31
+So this is a solid acoustic panel, or the felt that's just that okay. Again, paint that very small breeze button would be one thing.
+
+Unknown Speaker  1:24:44
+Okay, yeah. I mean, Jen and Kristen
+
+Unknown Speaker  1:24:49
+did a pretty good job of kind of keeping it. What's this feeling right now? It's that is a ship, I believe, just
+
+Speaker 4  1:24:58
+a large that is a skylight. So that is one area that we can look at.
+
+Unknown Speaker  1:25:03
+What level of finish are we calling four? Depends what
+
+Unknown Speaker  1:25:08
+four, unless the five is required, yeah, yeah, yeah.
+
+Speaker 1  1:25:16
+We'll just start off with, you know, what do we allocate? What would be the new pricing based on these records, and we'll start the conversation Exactly, yep,
+
+Speaker 9  1:25:25
+we have all the numbers, but the team is going through the drawings right now, like all patterns
+
+Unknown Speaker  1:25:29
+you're seeing, or just acoustics, yeah, as well.
+
+Speaker 5  1:25:30
+So furniture FF and E and audio visual is not released in our estimates. So typically, that's sort of fit out.
+
+Unknown Speaker  1:25:42
+I is sort of fit out components,
+
+Speaker 1  1:25:47
+so like the couches, so I'm not sure that's easy for us to take care of. I think AV is part of the document set. That's yeah. So we had TVs in there. We didn't have
+
+Unknown Speaker  1:25:54
+TVs that we had, yeah, we had all the wire, all the infrastructure, yeah, like we have the back backbones for it, but we don't have the TVs, so we will usually hold the cable.
+
+Unknown Speaker  1:26:09
+Okay, then we so Jeremy, that's just an
+
+Speaker 1  1:26:11
+item we need to track. With James, we should carry AV equipment,
+
+Unknown Speaker  1:26:15
+maybe in pushing
+
+Speaker 1  1:26:17
+install things, or I can add in my budget. Doesn't matter, just a matter. We better try, yeah,
+
+Speaker 5  1:26:28
+exactly, yeah. You don't want to, like, show up and you're like, where's our TV?
+
+Speaker 1  1:26:35
+Something to talk about, because we do have AV drawings that may have just been incorporated 100% you may have not. May have not seen it in the 50 but we do have TVs and other AV equipment in the conference rooms. So just keeping it under Yes, Bill, maybe that's just yeah plus delta, exactly.
+
+Speaker 9  1:26:55
+We could carry it on others if you want us to.
+
+Speaker 1  1:26:57
+So okay, well, we'll have breakout session and dive into this two minutes early,
+
+Unknown Speaker  1:27:11
+fantastic, and we'll come back yesterday, and I'm like, Just
+
+
+Transcribed by https://otter.ai

@@ -1,0 +1,428 @@
+Speaker 1  00:00
+That needs to happen. And I think it gives us a really good picture of all the coordination that's going to have to start happening. And it's a little bit earlier than I think we were anticipating in, you know, starting April May time frame. And it's not overly intrusive work, but just wanted to put it on your guys's radar so we can all kind of understand what it all entails, and you know, potentially any support that is needed from your teams as well. But Jeremy, would it make sense if you kind of walked through the SMR and all that, all the pre TCO tasks?
+
+Speaker 2  00:35
+Yeah, so I tried to break this up based upon TCO to simplify the discussion here. So kind of these pre TCO tasks? So I guess if we're planning for August next year of TCO, give or take, but as looking at these start and completion dates aren't 100% accurate, but ballpark, we're going to have as ARS that need to be installed and then surveyed in the facility, just really the monuments, and real quick,
+
+Ryan Hankins  01:07
+can we go through what SMR means?
+
+Speaker 2  01:13
+So these are small monuments, a receptacle for a retroreflector that we can use for surveying the building and knowing exact locations of the building the foundation equipment as it moves. We can create a survey network. What does SMR stand for? Small monument retroreflector, or something like that, but it's one of your standard like FARO Laser Tracker.
+
+Ryan Hankins  01:44
+Is it basically just a, like, like a geolocation type thing so you can make sure everything's correctly installed.
+
+Speaker 2  01:52
+Yeah, yeah. Small little monument, the ones we're looking at, or something on the order of, like, a two inch diameter by two inch deep hole that would be drilled into the slab, and then you epoxy in the monument. And later we'll come back and survey all those monuments and create a coordinate system for the building based upon the and So maybe
+
+Unknown Speaker  03:00
+I think you're installed,
+
+Speaker 2  03:25
+yeah, that we can do it that way.
+
+Speaker 1  03:27
+Okay? And then I guess, you know, installing them Clayco, I don't know if the best way to do that is to prep them, you know, while we're pouring the slab, or we come back and drill them out later. I guess we can kind of talk through what that what that sequence would look like.
+
+Speaker 3  03:47
+These kind of monuments would probably be better to put in after the fact. Yeah, that's
+
+Speaker 1  03:53
+what I was kind of thinking. There's a lot of coordination. They don't need to be exactly perfect. Jeremy said they there's some, some some variability in where we install them. So we have some we have some freedom there.
+
+Ryan Hankins  04:06
+Yeah, we would just ask that they be like, You scan for rebar before you drill, yes,
+
+Speaker 1  04:17
+and they don't go too deep. So fortunately, they're only about two inches deep into the slab. So they're like the size of a hockey puck, so theoretically, we probably be away from the rebar, but I'd rather get it in between the map. Yep, easy.
+
+Speaker 2  04:34
+Yeah, just gonna show a picture of one if you're interested. I
+
+Unknown Speaker  04:45
+it. So
+
+Unknown Speaker  04:58
+that's what it looks like. Yep,
+
+Speaker 2  05:05
+small little monument, little cap to open up a little plate, and there will drop a one of the retroreflector spheres.
+
+Unknown Speaker  05:20
+How many of them are there? Jeremy?
+
+Speaker 2  05:23
+I don't have the exact number, somewhere on the order of 100 maybe 200 something like that. I
+
+Speaker 4  05:36
+think that's overall Jeremy in this lab. I think it's club. It's closer to 100
+
+Unknown Speaker  05:42
+Okay, yeah, it's in that ballpark.
+
+Speaker 2  05:49
+So once those start to go in, we'd like to come in, bring in our laser tracker and start surveying their location and creating a coordinate system for the building.
+
+Speaker 3  06:01
+And you guys would provide the layout for those, right? I think you said it was in your model, but Correct?
+
+Speaker 2  06:09
+Yeah, we have it in the model, like we can find a way to convey that information, but realistically, because telling nick the position of them is not critical, from my perspective, give or take, a foot or two is probably close enough. Once we survey them all, we'll create a map of the entire facility.
+
+Speaker 4  06:34
+Hey, Chris, yeah, I think to sorry, Ryan, really quick, I think to Jeremy's point, we're not super tied to location that we've conveyed in our in our model. So when you guys see that, I think what's more important is when you guys kind of take over the model and get it to that LOD of 500 doing that, if it's possible to do block outs at the surface of this lab. If it's easier to do that instead of having to drill, it really depends, right? We either do block outs or we come in after the fact and we core that out and set those in. But if we can do that level of coordination as part of the constructability model, that would be great, if not, we just, we just need to know and do a little bit more
+
+Speaker 3  07:24
+coordination in the field. I would say that typically, you know, if you've got three, four and five of them, that wouldn't be a big deal. But if you're talking, you know, 100 or more, I mean that at that point, I think that it might affect the floor flatness? Yeah, I think so, yeah. I think you're right. Chris, yeah, I think to get a quality product, the best way to do it is to drill it after the fact.
+
+Ryan Hankins  07:51
+Yeah, that makes sense. Chris, what about because we're going to be putting epoxy in a lot of this floor. So how does that also like with getting a quality floor product.
+
+Speaker 3  08:04
+Well, those will flush out right with the floor, I mean. And let's just say if that floor finish for the epoxy is three Mills thick, then you take that into account when you when you set these things too. But I think that, you know, the real thing here is they're capped, right? And you take the cap off and and then that's what's surveyed, right? And it provides you guys just an overall grid so that you can get everything set exactly. I mean, you probably have isometrics for all of your equipment that's going in there, and you want to make sure that everything is fit and put in the right spot, so that eliminates a lot of rework later. So that's really what it's all about, exactly. And I'm not even sure if, if epoxy got on the cap, that that would even be an issue, right,
+
+Unknown Speaker  09:04
+as long as we can still get the cap off.
+
+Speaker 3  09:06
+Yeah. I mean, obviously we would tape them off and all that. But yeah,
+
+Speaker 2  09:16
+okay, so those are the monuments. The next one, we've got a pedestal that we'll need to assemble. And this will be a large, round welded structure, something like 2223 feet in diameter and 10 feet tall, something in that ballpark,
+
+Unknown Speaker  09:39
+center water tank, right?
+
+Speaker 2  09:41
+The indoor water tank? Yep, this goes right in the middle of the water tank, the foundation, and it's the it's the bottom of the water tank. So it has to go in with that water tank be welded in place when the water tank is welded on, and we'll cap the bottom for the leak test.
+
+Ryan Hankins  10:03
+Does that pedestal? Does it? Does it drop below the tank in the pit? Or is it inside of the tank?
+
+Speaker 2  10:10
+Fully 5050, right around that pedestal, there's a step in the foundation that goes down. I don't know exact numbers, two feet or something like that, into the six foot slab.
+
+Unknown Speaker  10:32
+So it's embedded into the slab.
+
+Speaker 2  10:36
+Okay, yeah, it doesn't. It goes in after the slab is complete. Oh, okay, yeah, so we'll set that into place and then anchor it down.
+
+Speaker 2  10:55
+We can have some additional discussions later about what that looks like, but really it's some welding surveying of the equipment to get this pedestal built and then located in the building. And then part of that will also have the water tank assembly that needs to happen in that May through July. Time Frame next year.
+
+Speaker 1  11:24
+Would I guess so Clayco would help install the pedestal. Correct? Are they, I guess? What support do you need from them for the water tank? Or is this just more awareness that PF will be in in the space installing?
+
+Speaker 2  11:38
+I think it's more awareness right now that PF will be in the space assembling this equipment. Okay, the water tank is coming in from a contractor. The pedestal. I'm not 100% sure who's going to perform the welding.
+
+Speaker 1  11:56
+Is that something we may want to have Clayco investigate?
+
+Speaker 2  12:01
+We we, it would be good to have some discussions there.
+
+Speaker 1  12:04
+Okay, so I think kind of guys, as we, as we kind of walk through this, I think a lot of these activities, we would just need to create probably separate WBS codes to track the cost separately. Just, you know, just so you guys know, this would be more of the machine bill, budget that it would be going to so we would just have to track them differently, but we can figure that out.
+
+Speaker 3  12:31
+Yeah, and depending on the extent of the assistance that you need from us, I mean, we, we do have a self perform group that can do that kind of stuff, you know, if we plan it, you know, so it doesn't I mean, for instance, your steel is going to be completely done by then, right? So anybody welding on steel would be gone, and we could just bring in our self perform guys that do that same kind of work, so we're flexible with that.
+
+Speaker 2  13:09
+Sounds good? Yeah, we can have a more detailed discussion on the pedestal and what that looks like in the effort needed to assemble it. I it. So then moving on, we have the lay down space outside the building. Had a conversation yesterday with Keith on this Nick and it sounds like we'll find a different location for this.
+
+Speaker 1  13:35
+Yeah, that's what it sounds like I was, I was hoping to get a tent out there for you. But yeah, I think Keith wants us to go a different direction, yep.
+
+Speaker 2  13:43
+So this will do in another location, so no coordination needed there.
+
+Ryan Hankins  13:47
+By another location? Do you mean, like, not on the job site, correct?
+
+Speaker 1  13:52
+Yeah, probably like a warehouse somewhere nearby,
+
+Unknown Speaker  13:56
+if you want to scroll down a little bit
+
+Ryan Hankins  14:02
+one, one thing that'd be helpful is like, and I know you guys probably don't have all the answers, but just to start the conversation, the s the SMR, not super worried about, but the pedestal in the water tank, understanding, like, what that entails. Like, we're like, where you need us out of the areas? You know, just like a couple logistical items don't need it today, but just something to start thinking about as you guys continue those conversations. And because the more you can communicate to us, the more we can plan around it.
+
+Speaker 2  14:39
+Yeah, for those it's really the say the center Bay, the 110 foot center Bay, in the r, d space.
+
+Ryan Hankins  14:47
+You just want to there
+
+Unknown Speaker  14:49
+pretty much that entire area. Okay, you
+
+Speaker 4  15:00
+I'm sorry. Hopefully I'm not distracting you guys. I'm just adding another level of detail for the cranes that I'm getting from their latest schedule that they sent over.
+
+Speaker 2  15:18
+Perfect. Yeah, I did leave the cranes in there. I figured those ones, we've already there. Those are known, right? So we need to negotiate their understand what that install looks like, delivery and installation,
+
+Unknown Speaker  15:34
+basic, it comes at the very last minute.
+
+Speaker 3  15:38
+So just so I'm clear, is, are these and I would assume so. But are these activities something you would like us to reflect in our schedule as well, so that we can track to them
+
+Unknown Speaker  15:54
+to make sure?
+
+Speaker 4  15:55
+Yeah, I think that would be a good idea. Okay, I there's also another item in here I just want to make folks aware of right now there's cone cranes is still not sure they have an add al to install the crane rail. So that's just something we need to work out with a few Clayco, sorry. To go back here. We just need to figure out whose scope that's going to be in, whether that Conor crane is going to take on the crane rail, procurement installed, or if you guys are going to do that,
+
+Ryan Hankins  16:33
+highly recommend they do it. Schedule is critical. We can't be like if we bring somebody else in that, you know, mink Conor cranes is the most qualified to do it, because it's their crane. But if it's screwed up, then we can all point to them and say, You guys need to fix it.
+
+Speaker 1  16:57
+Exactly. Who do they use as our installers? That is it big. J, I forget who it is. Actually, does the does he install for them? They know they use a third party.
+
+Speaker 4  17:10
+Yeah, I don't know. I can find out for you guys.
+
+Ryan Hankins  17:13
+Mean, we'll need to coordinate, because we're going to be removing the roof and whatnot. But yeah, just as we talked to the steel erectors about it, we talked to a couple other people, the number that came back was more than what Conor cranes actually gave.
+
+Speaker 4  17:33
+Yeah, yeah, they probably have better deals. Okay, is there anything else you guys need on the crane? So we've got delivery, crane, rail install, and then install. And I'm assuming commissioning should be on here as well.
+
+Speaker 1  17:55
+Yeah, it's loading it as well, right? So I don't know if that's you're including that in commissioning, but
+
+Speaker 4  18:03
+it should be, I think load, any loading that up should be part of it. I think there's likely going to be an additional workflow with slab settlement loading, yeah, and how we want to manage that.
+
+Speaker 3  18:19
+So this will just be load testing of the crane itself, but we'll have a separate area for slab loading. Yeah, that's right, yeah. And I would assume Conor would do their the crane loading, right? Yeah. Proposal, yeah. So if we're, I can't remember, based on permanent power. What were we saying? July? Was it?
+
+Speaker 1  18:49
+Yeah, July is permanent power. Nate that. Because I think, you know, may we may have an opportunity with them here while they're doing the crane loading, because they're going to have all the weights available while they're doing that. Maybe we try to work in the slab loading at the same time, so we're not doing it twice.
+
+Ryan Hankins  19:14
+You know, on the on the crane, install line item for the West, for the 400 ton crane, West and then east. In addition to just the crane install, maybe getting, like, a duration they need the roof open for would be helpful. Maybe they just say it's a day. Maybe they say it's a couple days, but just so we can plan for it up front,
+
+Speaker 3  19:38
+I would assume that they've moved their rail into the building, and they'd set those from the inside, and then the actual crane they would lift or set through the roof, right?
+
+Unknown Speaker  19:53
+I think we need to talk through that with them.
+
+Speaker 4  19:55
+Okay, yeah, yes, sir. And to your point, what window between five or six? June 21 through 716 do they need to keep the roof open?
+
+Ryan Hankins  20:10
+Yeah, okay. And then Jeremy, when you say you need everybody out of that area. I mean, we have some pretty significant overlap with some of your activities here, and so you can't be working underneath them while they're installing their crane.
+
+Speaker 2  20:30
+Yeah, I guess it's really we need to coordinate the access to that area. And as Courtney was adding the dates here for the rail installation has taken notes that we're going to have to look at this and see how the tank and pedestal installation construction overlaps With the crane.
+
+Speaker 3  20:59
+Nick I have a really good question. I was just thinking about, you know, we were talking about schedule earlier today in Phoenix, that July time frame is like, right in the middle of monsoon. Do you guys have the same kind of monsoon that we do? Here we do. It's more in the August time frame, but it's, you know,
+
+Speaker 1  21:28
+I don't know the weather's been so weird. I don't know when it's going to hit this year. So everything seems to be happening earlier and earlier. So, yeah, I would say August is our typical monsoon season, but we'll just get, like, you know, a couple crazy rains, more lightning storms than anything else. Sure that that's going to be your biggest headache, okay,
+
+Speaker 3  21:49
+just something to be mindful of when the roof is open for them. So, yeah,
+
+Unknown Speaker  21:54
+we'll have to figure a way to tip it in. Yeah. I
+
+Speaker 2  22:07
+Okay, so the other items to coordinate the CM dos room install,
+
+Speaker 2  22:19
+and then we also have equipment in the electrical yard coming in. One of the big items are the TA energy storage system.
+
+Speaker 1  22:28
+So those are the ultra capacitors, right? And then, based on our discussion earlier, Courtney, those ultra caps are we? Clayco is going to install those. We need them to do that. That is correct.
+
+Speaker 4  22:45
+Tae is only commissioning, and you know, we're going to have to do an onsite certification
+
+Speaker 1  22:55
+as well. Were you guys, Ryan Erica and including costs already for the ultra caps, or was that not
+
+Ryan Hankins  23:01
+on your radar? No, I would like to learn more about, like, how they're going to commission those and whatnot. It seems it's a little it's a little odd, and it's a lot of power, whether it's, I mean, I don't even, I don't even know if it's load banking.
+
+Speaker 1  23:26
+Yeah, that's a good question. I don't know how we would look. I guess once we get firm power, we can, we can probably find a way, but
+
+Speaker 4  23:36
+I don't know if they have that's a really good question. I know in their factories, oftentimes these energy storage companies will have a place to dump the load. So I don't know if part of the commissioning is to it should be to charge up the system at full capacity, but I we can ask to see if part of that also includes dumping the load to ensure that we're getting so one of the specs is to make sure that we can discharge at 15 seconds the capacity requirements that we're looking at. So that's a really good point. We're not going to have a load set up to be able to do that. Maybe they can bring something onsite to act as that load? We'll see,
+
+Ryan Hankins  24:24
+then the CM Das, just because we skipped over it. I don't think, I don't think I really have a full understanding of, like, what is going on in there. I don't think we need to talk about it in this meeting overly more, you know, in more detail. But whatever information you can get us to just, kind of, like, help us, like, kind of wrap our mind around, like, where our scope is and where your scope is. That would help with me, and I understand, I think we're building a box, but like, what does that box look like?
+
+Speaker 4  24:53
+And delivering, they're delivering a box. I think we would be installing the box, and they would be certifying the box for an EMI level that we're looking at, but that's a good point. I think we need to have a better understanding of what, what the handoff or handshake looks like.
+
+Speaker 1  25:17
+Would Jeremy be able to do like maybe a 32nd overview of the function of the space, just so they understand what what it'll actually be doing when it's all said and done.
+
+Speaker 2  25:30
+Yeah, so this room is a EMI shielded room. We're going to have 50 server racks inside full of sensitive electronics, so are really providing an environment for those electronics to operate with minimal impact from the outside environment, the room itself is a panelized system. Courtney can correct me if I'm wrong. I don't think ETS is looking at installing this themselves. I believe they were looking at Clayco to install it with their guidance.
+
+Speaker 4  26:04
+That's correct for for Tae or for ETS. ETS, oh, ETS. Let me dig into that a little bit more. I'm a little hazy myself. We wouldn't want Clayco erecting the structure. That's something that I think is so to ensure the continuity and reliability of the box. It's a massive metal shield. I imagine that ETS is going to do that. But as far as installation on the depressed lab and securing it in place. That's likely something that Clayco would need to pick up. I'll action to get a better understanding of that. No problem.
+
+Ryan Hankins  26:51
+Because the other, the other part comes like, like access and like, where we need to leave things open. Don't need to know it today, but just like, putting it out there that you know, that's going to become important eventually,
+
+Speaker 1  27:03
+yeah, yeah. And I think understanding any utility interfaces there, if they're going to have to tie, tie it into power, or whatever that looks like, if we could identify those things.
+
+Speaker 4  27:17
+And, you know, I do have TAs I just received their proposal, so maybe let's just take one or two minutes and I can At least give you that right now morning.
+
+Ryan Hankins  27:39
+See six exciting bit opening Erica. You get to see this every day.
+
+Speaker 4  27:49
+All right, let me feel free to take snapshots of this schedule, let me blow up my screen so you guys aren't having to squint like me. It's a
+
+Unknown Speaker  28:13
+little hard to see, but Oh, wow, yeah. So this is
+
+Speaker 4  28:22
+just sent to us. We're pushing them through a procurement process. So this won't formally kick off for another couple weeks. It looks like some manufacturing will start August 14. Factory testing will occur May of 27 they will ship out at the end of May, installation and commissioning will occur early June through mid mid July. But I think ultimately, there's a lot of flexibility with these dates guys, I think if this is going to cause interruptions to some of the core trades that need to get in there, including Pacific Fusion's delivery team, we could push this out to later in the year. But Jeremy, I think that depends on what you're looking at with your with your installation schedule. Did you, Jeremy, I think I'm I'm remembering correctly. You actually wanted an August installation date correct
+
+Unknown Speaker  29:36
+for the TA system.
+
+Speaker 4  29:38
+No, this is, this is for ETS. Yeah, sorry, nope. This is Tae i I'm sorry, guys Friday, I didn't have breakfast, I didn't have coffee.
+
+Speaker 1  29:54
+Yeah, this Tae will probably have to push that date, I mean, at least to start commissioning reading through the proposal, they give kind of the readiness requirements for for commissioning to start, and we have to be connected to perm power so in the we have, so we have to be and we need to validate the grounding as well before we can do it.
+
+Speaker 4  30:16
+Yeah, yeah. So for Tae, this schedule looks right now. For ETS Ling grant
+
+Speaker 2  30:25
+clarification, this one, the tea system is probably going to get pushed out, right? This one's more flexible. I mean, at a high level, it could come many months later than this and still be okay. We've got a lot of flexibility here, but the ETS system will be needed by August.
+
+Unknown Speaker  30:56
+So Jeremy, if this slip to the end of 2027 we'd be okay with that. The Tae system slipped to the end of 2027, that would be okay, yes, okay.
+
+Ryan Hankins  31:22
+It and if you need to pull it up, just, we'll, we'll talk about it. It's, it's outside, it's in the yard. I you know, should be okay, but we'll talk about it as it gets closer.
+
+Speaker 2  31:37
+I mean, realistically, it could even go back further if it needs to so this wouldn't need anything that this could impact. I think we need to do the other stuff first. We've got plenty of time for this system do
+
+Unknown Speaker  32:09
+kind of go back to the other Excel sheet.
+
+Speaker 4  32:14
+Yeah, yeah, I think that's best. Let me find once I have the ETS information, I'll get it into the spreadsheet. And we can talk through it at the end of the meeting.
+
+Speaker 2  32:36
+Gonna pull up the others. Thanks, Nick. So I think those are the primary items that we have for coordination before TCL, and then after TCL, the R and D space, and ideally the cub will be pretty active with the BF team
+
+Ryan Hankins  33:00
+after TCO,
+
+Unknown Speaker  33:03
+yes, August 2070 Right, yeah, August 27 I
+
+Ryan Hankins  33:15
+mean, give me an idea like, how many people you're talking about, like you're bringing 100 people, and They're going to be scattered throughout the place, or
+
+Speaker 2  33:24
+probably on the order of 100 to 120 people, spread across four shifts, 24/7, installation, primarily in the r, d space. I would like to try and get the cub equipment in at that point too, if possible, and then start installing things in the CM dos room.
+
+Unknown Speaker  33:51
+So with that, if we're running 24/7 with PF only people, I guess.
+
+Speaker 1  33:59
+What does that mean for you guys? Ryan, would you guys need any additional site supervision? It sounds like we may need additional facilities on site, you know, restrooms, things like that. It just, it's a lot of people just want to get your take on it and just start talking through it. I mean,
+
+Ryan Hankins  34:20
+if they're your contractors, then we would like our the way that we would structure our agreement would be that you guys would be responsible for your own people. Mean, maybe we mean from like, a temp toilet standpoint, like, yeah, we can just order more temp toilets. Like, it's not a big deal if we need more trailers, we can order more trailers just, it's just cost. But, yeah, I would say that you guys would need, like, I just, I just got done with a project where it was a startup client, and you guys are not this way, but they came from SpaceX, and they were just in there installing electrical wire by themselves. And I was like, You guys are nuts. I don't think you guys are going to do that. Think you guys are hiring contractors, but, man, I'm looking at Jeremy as a question mark, but I would say you guys need to make sure you guys have representation on site if you guys are doing stuff,
+
+Speaker 2  35:21
+a Electrical Safety Officer at Lawrence Livermore National Laboratory, so aware of the requirements in that area.
+
+Ryan Hankins  35:29
+Okay, all right, yeah, because I wouldn't say that we would be planning to work 24 we would have people on site. 24/7 if we didn't have any work under our contract agreement going on,
+
+Speaker 1  35:41
+okay, yeah, so we can work that out. Jeremy on the on the side,
+
+Ryan Hankins  35:48
+sounds good. I've also dealt with the Chinese, where the Chinese, they come in and flip flops and, you know, stand on 10 foot tall pieces of equipment, and you see safety violations all around. So we've seen it all.
+
+Speaker 2  36:13
+Okay. So on the high level, for the work that we have going on in the R and D space, we have equipment that will get installed inside the water tank. So we'll be using the crane getting the some large, plain, wing sized objects and size and installed in the tank. We're bringing in our img modules, the shipping container size modules that you saw when you're out here, installing those in the building. And the cub will need to be installing our various compressors and fluid pumping systems. Sand dos room, getting the server racks installed, start populating the server racks. Get power to those control room. Later in the year, I'd like to build out the control room too. This is a nominal date. Doesn't have to be done by the state. There's some wiggle room there if needed.
+
+Speaker 2  37:17
+And then outside the building, we have some large tanks to bring in next to the electrical yard, the three big tanks out there, and then in 28 nominally January ish, start accepting some oil delivery. So several trucks a day coming in, bringing in oil.
+
+Ryan Hankins  37:40
+All that seems fine. We'll just have to work we'll have to work closely, right? Chris,
+
+Ryan Hankins  37:57
+I think the only thing I see as a potential issue right now is probably just the cub stuff, but I think we could probably work around each other in that and we've, we've cohabitated before, so I think it's just more of a coordination effort.
+
+Speaker 1  38:14
+I think maybe if we start, you know, kind of trade stacking, if you will, for lack of a better term, with our with our two groups, potentially, Jeremy, maybe we only work in, you know, two shifts out of the day, where we're working the evenings and nights, where we're not on top of each other, just to give them space until they're done.
+
+Speaker 2  38:35
+Sounds good? Yeah, the cub, I figured that would be one of the areas that we have some closer coordination on since it wouldn't be ready quite as early as the R D space, the only other areas certainly, I think
+
+Speaker 1  38:50
+this gives us a really good idea of all the activities. There's a lot of stuff we're trying to run concurrently. So appreciate you guys being able to support that. And yeah, we can talk through a lot of those details as we move forward. Yeah. And if you guys want to send me this sheet here, I'll,
+
+Speaker 3  39:10
+you know, we can put it in one work breakdown area under owner, installed stuff, and then I'll pretty much keep it in the same format, and then we can just tie it to activities, you know, on our side, so that we're more monitoring that, okay, yeah, I think that would be great so we have a little bit more of a holistic schedule. And, yeah, no problem.
+
+Ryan Hankins  39:41
+We're also keeping track of design in our schedule and stuff. So I know that you guys have been working with Paige on a schedule, but really, I think everything is going to start being integrated from your side and our side within the schedule. So perfect, yeah.
+
+Speaker 3  39:57
+And I think what we're, you know, we're not so much as tracking like their QC process and that kind of stuff, but more, more or less like the deliveries or the hand offs to us to start, you know, putting together GMP or whatnot.
+
+Speaker 1  40:26
+All right. Well, I will. I'm downloading this now, and I'll shoot you over three of you, Erica, Chris and Ryan, I'll send you guys this list. Is there any other information from today that you guys need that we shared with you?
+
+Speaker 3  40:42
+I don't think so. I mean this, this is a really good start. We'll get this populated in our schedule right away. We're still dialing all that in. I've got a couple more meetings set up with our scheduler next week to kind of, you know, just refine what we're what we're doing.
+
+Speaker 1  41:02
+But, yeah, we're getting there. Perfect. When do you think, Chris, you would have a draft schedule that you would be able to share
+
+Ryan Hankins  41:14
+with us? We so, before you answer that, Chris, so we just had our first meeting. We're trying to convert, like I already did, a schedule effort that we could probably go through on a detailed level. We'll call it maybe next week. From a high level standpoint, we're currently incorporating it into p6 and getting to a full baseline schedule. We probably need a couple more weeks for that. But if you wanted to go through something at a higher level next week, like we could do that just to get the ball rolling. Yeah, I think
+
+Speaker 1  41:44
+that would be good. So we can just make sure we're aligned on some of that stuff. And that way I can kind of review any any owner milestones that we want to track, or just otter activities primarily make sure we're covered. I Okay, perfect. Well, I'm sending over that email now, as if there's no other questions, we can give you guys a little bit of time back
+
+Ryan Hankins  42:13
+this morning. Perfect. Thank you all. Excellent. I'll tell you, Jeremy, that it's not very often on a project like this that we get somebody that's super knowledgeable about what they actually want and what they actually need. So it's it's pretty cool.
+
+Speaker 2  42:31
+Yeah, good to hear. Glad that we have you on board and we're all working together on this. This is going to be a fun project and seeing not getting to see NIF built, let's get to see this bill. So cool.
+
+Ryan Hankins  42:48
+All I gotta say is, it sounds like you guys aren't actually creating the fusion till later, but we want to be invited back, hopefully for when that day comes,
+
+Speaker 2  42:57
+definitely, we'll keep you on the invite list. Feel free, once we get the machine built, to come out for a tour too, so
+
+Unknown Speaker  43:06
+this thing's gonna be Massive. All right.
+
+Unknown Speaker  43:13
+Cool. Thank you, everyone. Thanks. You. You
+
+
+Transcribed by https://otter.ai

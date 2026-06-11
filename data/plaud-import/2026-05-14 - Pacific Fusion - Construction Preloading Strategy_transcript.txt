@@ -1,0 +1,167 @@
+Speaker 1  00:00
+Whole, so 25% of the module, Matt Foundation, is after the final connection. You want us to run that and assume everything else has been the tanks been hydro tested, all the other dead loads there. Okay, I think, yeah, we can run that. I think that we'll find that that's going to be good, would be my gut feel, but we'll run numbers on that.
+
+Speaker 2  00:23
+Okay, perfect. So I have a question you guys. You know we've been talking about the preloading activity, and our plan previously was to preload the six foot slab prior to putting the topping on it, right? So is there? Is there? If we don't do that, is there a chance of differential settlement between that six foot slab area and the rest of the slab? I think
+
+Speaker 3  00:59
+that's what we're talking about here, we will get differential settlement. But the time when we care about that differential settlement is after all the equipment is installed in our final connection. So once we place our large img shipping container size modules in the building and make the connection between those and the water tanks, when we really care about the differential settling before that, as long as we can place everything within a half inch tolerance, then we're okay.
+
+Speaker 2  01:35
+I guess I get concerned when I hear now we're okay with a one inch settlement. There goes your floor flatness and levelness criteria. So that's all going to change. Then I assume
+
+Speaker 4  01:49
+that's been relaxed as well, Chris, we've, we're we've reverted back. We haven't shared all the different scope production items that we're approving because we're still trying to clean it up. But the floor flatness, levelness. Criteria is that of a standard manufacturing space, industrial space, so typical. And I think it's 3525 so we're relaxing that quite a
+
+Unknown Speaker  02:16
+bit Mark had his hand
+
+Speaker 5  02:20
+actually took it down again. I was kind of gonna go into that for fitness, yeah, so I'm glad that's gone.
+
+Speaker 4  02:32
+So I just want to, I want to make sure that we kind of memorialize this design criteria. We've had a lot of conversation. So after pre loading, and I think we've identified some of the major components to preloading here, with bridge, crane, water tank modules and final connection. Actually, I assume there's probably a slab pre loading that needs to occur as well, which can happen in phase two. So after pre loading, I just want to be abundantly clear Jeremy, after pre loading, the machine install can only accommodate what level of variation I
+
+Unknown Speaker  03:24
+I guess, what's the slap pre loading?
+
+Unknown Speaker  03:27
+So pre loading would be all of the number three.
+
+Speaker 4  03:33
+Justin. D Oh, slap reloading. Yeah, yeah. There's kind of an open question about that 800,000 pound transporter and where that's actually going. My assumption is you don't want to preload this lab in those areas to that weight as part of this effort, but
+
+Speaker 3  03:54
+that wouldn't impact the six foot slab relative to the IMGs. I is the water tank to the IMG?
+
+Speaker 4  04:05
+Correct? Well, the 800,000 pound transporter at minimum is occurring in that center Bay.
+
+Speaker 3  04:16
+Correct, correct. But with that, I guess it's a question for the group. If we're loading areas outside of the water tank, the pulse tube and the img is with the transporter, with the transporter driving around impact the water tank to IMG settlement,
+
+Speaker 4  04:38
+I think it would, I think, but I shouldn't answer that
+
+Speaker 1  04:43
+at all. So a couple of questions, if I may, and I want to go back to the bridge crane as well, because we've talked about the possibility of needing to preload the bridge crane. How will the how will that be used? I kind of any reason. I know that's a very broad question, but the only way that the bridge crane loading would induce any settlement is if there's a substantial, you know, close to max capacity load held close to a column for a long period of time. So is that crane going to pick, potentially the target chamber or something up, move it and set it back down in a reasonable amount of time, call it a shift, or a day or something, or is it going to be holding a piece of equipment for a long enough period of time for some work to happen? That would that we need to be worried about, not worried, but that we need to factor in that, okay, the. that's
+
+Speaker 1  05:49
+while you're pulling that up, not to add to that, but we need to include once Marc is done and we need two weeks to do our Geo pair design once the foundation package is finalized. I mean, we can maybe improve that a little bit again, on how depending on how much changes, because, you know, hopefully a lot of the stuff will stay the same. But generally, let's assume two weeks after foundations are done, that we need to complete our design.
+
+Unknown Speaker  06:15
+Yep, we're looking at 628,
+
+Speaker 1  06:24
+how's the how's the conversations been with the city about submitting what we have and then handling the change via like an ASI or something, as a design change, not a whole scale permitting change.
+
+Speaker 4  06:40
+They're receptive. Yeah, that was the plan that, you know, we were going to submit on Monday. And we'll go ahead and, you know, submit your design when it was completed. So let's see, June, July, 26 Okay, so Western grant improvement, we're looking at 710, completion. So 626, would be when we submit for permit. Western grant improvement would be when we
+
+Speaker 1  07:13
+Yeah, the deferred submittal, it shouldn't hold anything up, because they said they were okay with the deferred submittal. So I just want to make sure we're tracking it.
+
+Speaker 4  07:21
+That's all, yeah, and Stantec. Remind me again when nobody say Stantec is not on the call. Let's see
+
+Unknown Speaker  07:35
+what's the 529 design direction.
+
+Speaker 4  07:44
+That's that's us, pyramana specific fusion. So if we can relax this and you're saying, hey, we need two weeks,
+
+Speaker 3  07:55
+I want to help. Yeah, we're going to need more than that to get to a real a number, to get to a better design when we can give guidance. But enough, let's talk offline about that and see if we can pull that
+
+Unknown Speaker  08:13
+in. Pull this in or out.
+
+Unknown Speaker  08:15
+Pull it in.
+
+Speaker 4  08:17
+Okay, all right. I'm just gonna use this number for now. I just want to do a very simple exercise so I can get feedback from from Clayco, so the city would approve. I think it's a three week cycle time, three weeks. Nick, how long does civil site work? Early site work take usually? Nick Ryan, I
+
+Unknown Speaker  08:49
+think we had about two months worth of site work. Is that right?
+
+Unknown Speaker  08:52
+Chris, that's, that's what we were tracking.
+
+Speaker 1  08:56
+Courtney, how long we hadn't scheduled for just Earth work? Yeah,
+
+Unknown Speaker  09:04
+yeah. Okay, all right, so civil site work. This is starting. We're starting mobilization on the 15th.
+
+Speaker 4  09:21
+When would we actually or we're starting break around on the 15th. So we're looking at August, July, August, September 15, when this package would need to be approved, so you can start working. We're not, we're not looking at procurement right now. That's definitely another topic.
+
+Ryan Hankins  09:49
+What is what is this package? Is it just a geo pier Design
+
+Speaker 4  09:54
+Foundation package? Foundation and permit package. So civil site work needed. I'm just throwing Chris is probably cringing right now, because I'm doing very high level. I'm thinking, I'm thinking out loud here guys, just to see if we can do this to give Pacific fusion us kind of better direction on how we need to tighten things up.
+
+Ryan Hankins  10:35
+Go ahead, Ryan. I really think that this, like planning this out right here in this call is kind of shooting from the hip a little bit. I think next week being in person, I think this is one of the topics that we should address holistically, once we understand the bigger picture.
+
+Speaker 4  10:58
+Understood I've we just need to move very quickly here. So Jeremy and I are going to have a conversation after this call. And I, Jeremy and I, we are going to focus on this line item here. But yes, this needs to be dialed in. I let
+
+Ryan Hankins  11:22
+us go back and let us go back and think about it, and there's been a lot of moving pieces the last couple days. I just need to make sure I'm keeping everything straight.
+
+Unknown Speaker  11:32
+Yeah, yeah, no, I'm not trying to take over Chris's job, believe me, we'll
+
+Unknown Speaker  11:41
+make it happen. Whatever we gotta do.
+
+Ryan Hankins  11:44
+There you go, Chris.
+
+Speaker 4  11:50
+Okay, anything else we need to kind of work out. So I think we have a very clear understanding of how we need to preload this lab right now, the design criteria is still set at three eighths of an inch Jeremy. Let's work together over the next couple days to really put an action plan together for now, we're holding off on foundation permit. I don't want to exercise the design team. I don't want to exercise the city until we get to Jeremy, until we get this design criteria worked out. We're holding on that design package.
+
+Speaker 1  12:26
+Yeah, Craig, go ahead, yeah. I just if I could share my screen real quick. I just want to make sure that I'm that our marching orders are correct on where that transporter load can be, if I could share my screen real quick, Yep, good idea. Just to make sure that we're Are you guys seeing the slab loading sheet? Yes. Okay, so the this dark gray, I think it's 7b Right? That's the location that the transporter can be it's not going to get into this lighter gray area in here. Correct. Correct. I mean, we'll double check, but I feel really good that we're that it's probably not going to have a negative effect, and we shouldn't have to spend a lot of effort preloading, because it's really pretty far away from the target chamber. So I was envisioned that it was needing to get in right in here. And that was going to give me a little bit of pause, but we'll run those numbers to make sure. I just wanted to make sure this is the triangle that
+
+Speaker 5  13:32
+you're talking about. The seven a part is a part I think we might need to preload. And then I think we just, if we have to preload that, we preload a big enough area that if the transporter gets close to it, we've already
+
+Speaker 1  13:45
+kind of covered that. So that was kind of my, my thought, okay, but that would just to be clear, though, that that seven a right here is only 250 psi f with no transport or point load, correct?
+
+Speaker 5  13:59
+Yeah, that's correct. The problem I have with that part is that on our heat maps, that's been the part that has been zero or very little settlement, and everything else has been high. So it's almost like we need to make it settle.
+
+Speaker 1  14:14
+I'm not questioning, I agree with you, Mark, and I'm just, I want to make sure two different things, I guess a little bit is one, that the transporter isn't going to have a negative effect on things. But then this is a valid point. I also think that's a discussion for even industry, or regular industrial floor flatness could be a discussion here, because you're, you've got a matte foundation that could move an inch, and this could move zero. So you you could, this could be a problematic area if we don't plan ahead.
+
+Speaker 5  14:50
+I mean, the weird thing about that seven a zone, to me is that it's all covered by pulsar tubes, right? So as long as we can install those at the right elevation. You know, I'm kind of throwing out one of my thoughts here is, I've never understood that needing to have a floor flatness, full levelness criteria, because it's not like where you're going to be operating anything in that space once those tubes are in place, and it's just making sure that you can get the tubes to the right place. And so,
+
+Speaker 1  15:18
+sure, well, and to add to that, this settlement will have occurred by the I mean, we're talking about all of this being pre loaded and hydro tested. 75% of the weight on this area being before those tubes are, you know, put in place, is my understanding based on this discussion is that, is that right? And do I understand that right? Jeremy, yeah, so I will run those numbers, but I think that's really, I think we're heading in the right direction. The second question I had is just to put a bow on this our Geo peer design schedule. Are we to be moving forward with designing based on the information we have today, and then we're going to revise it at a later date, or are we kind of in a holding pattern until a decision is made that potentially will affect the foundation package?
+
+Speaker 4  16:11
+Yeah, we we haven't given anybody direction to go pencils down. So your understanding is correct. The only thing that's on hold right now is the the foundation package. But Jeremy, this is really important to understand the further we go down the road, designing criteria, the longer it's going to take the design team to go back and redo things. Unfortunately, I can't give you guys a pencils down directive. We're just holding off on that foundation permit so we understand we're incurring changes and impacts of those changes that come.
+
+Speaker 1  16:56
+Yeah, we're fine. Just didn't want there to be a misunderstanding of we think we should be moving and we're not, or vice versa. So I just want to make sure
+
+Unknown Speaker  17:07
+it's clear about that. Yep, yep.
+
+Unknown Speaker  17:08
+No. Thank you for asking. And I
+
+Speaker 1  17:11
+think Rebecca and team, I know she's not on, but they were working on getting us the cat files. Or was your team working? Oh, she is on,
+
+Speaker 6  17:19
+Dean that we should be able to get those CAD files to you, and I think that was the last remaining thing that you needed from us. I. Hello, i.
+
+
+Transcribed by https://otter.ai

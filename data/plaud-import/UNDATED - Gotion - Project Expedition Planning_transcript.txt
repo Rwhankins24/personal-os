@@ -1,0 +1,164 @@
+Ryan Hankins  00:00
+You Hey everybody. Good afternoon, Ryan, good afternoon. And it's Friday. Friday. Happy Friday. Mark, I don't think we've had an opportunity to meet yet. I know you. You've talked with like half of our team at some point, but it's nice to be it's nice to meet you.
+
+Unknown Speaker  01:01
+Yeah, nice to meet you too.
+
+Speaker 1  01:15
+Let me check if there's anyone else we're waiting on. I don't think so. I think we can get things started.
+
+Ryan Hankins  01:22
+Okay, perfect. So I'll go ahead and start. So first off, thanks for setting up the call again, since, since our meeting on I believe it was Wednesday or Thursday last week. Think it was Wednesday the 25th when we found out that we needed to expedite. I mean, we've basically been working full time on trying to figure out how to make this happen. So between Luke Travis myself, there's another, another woman named Karen, which I think you guys are familiar with we've been working around the clock trying to figure out how to expedite engineering, how to figure out how to procure all the materials needed to go make this be put in place, and all the other contractual vehicles and whatnot that are needed to go do all this in a quick timeline. All of those things are part of what you're you're hearing about today. We are very happy to tell you that we, we think that the end of October is totally doable from a installation timeline, but it does require a lot of things to happen in a short amount of time. From Clayco, from from Gotion, from, you know, like flex Gen, from com Ed, from some of your other guys, partners. And so we just want to make sure that, that we kick off the call sharing, that we do have good news, but that we do have a lot to do in a short amount of time to make sure that this is all going to line up and work appropriately. Any any questions for we get started.
+
+Ryan Hankins  03:10
+Okay, I'm going to go and share my screen. I will look for I'm going to turn it over to Luke and Travis. Luke, do you want to go through design?
+
+Speaker 2  03:25
+Yeah, talk through that real quick. So our first design milestone is coming up here, end of next week, with a 30% set. So in order to accelerate the overall engineering timeline, we were only slating a week for Gotion to review that first set, and then once that's complete on 417 we'll take your comments, and then we'll roll right into 90% design, with a target of completing 90% Civil and Structural sets by six one, which is going to allow us to go for permit early and Begin some of the early site work in July. Essentially, we're, we are cramming all of our design into the 90% phase, which is going to require Gotion to not make any major design changes after this 30% set, typically the 60% set, there's various design developments occurring, but within that set design changes can be accounted for and accommodated. Since we're eliminating that, that will require Gotion to basically make all major final design changes at this 30% set.
+
+Ryan Hankins  04:39
+The good news too on that is that, I mean, we've, we've pretty much beat this thing to death in terms of, like, we know what you guys want. And the design changes that are being put forth now are pretty subtle. Mohammed and Morris has done a good job of reining in the larger team, just with, you know, like, for example, we talked about adding another entrance to another driveway on our design meeting on Wednesday, and we talked about, you know, is it really needed? We're more we're more focused on production. So we've already started to see, you know, the Gotion team, with, with with with raining in the changes, which is good, and we're going to need to need to continue that thought process as we get into the 90%
+
+Speaker 2  05:28
+Yeah, and I think over this first the first four or five weeks of 30% design, we've been very open and collaborative with your team. We haven't just sat here and kind of done our own work in our own silo and then come to you guys at the end. We've been trying to engage you that whole time. That way we're minimizing changes as we move forward.
+
+Ryan Hankins  05:49
+And just to reiterate what, what, what Luke was saying. So this basically, I mean, we had like, nine weeks in our schedule for 60% this basically eliminates the 60% and basically says we're going to expedite and do do our 90% basically within the timeline we had our 60% so you are getting pretty, pretty extreme acceleration from the design standpoint.
+
+Speaker 2  06:19
+And in order to do that, there's obviously, you still have the same amount of design hours, so we're engaging more engineering staff, pulling them from other projects in order to get this done in that short period of time. And this is also going to require more preconstruction and estimating team members to engage the market in order to get that final design data for what we're actually going to procure, and get that integrated into this design as quickly as we're trying to do it here before June. So we're basically doing a mountain of work here April and May, in order to hit this June 90% Civil and Structural issue for permit set, and then a few weeks after that, on 619 you'll see the next line item, electrical will follow. There's a lot more detail that goes into electrical than structural and civil so that is going to require a little extra time to get to that issue for permit set. And then once we submit for permit, then we will, right there you see highlighted the 20 day duration from the village of mantino for permit reviews. So we'll submit for permit for those respective packages once they are ready on June 1 and June 19, and then we'll immediately roll into IFC design, with targets of IFC for Civil and Structural being complete before ground break in July, and then IFC electrical end of July, Before we begin electrical installation work in early August.
+
+Speaker 1  08:04
+Any questions on design I have to Luke, so we're working with flexion to get a more concrete timeline. And two things are looking for is the mechanical design freeze, and also when the design will be finalized, enough for them to start beginning for their side of work and commission. So that being said, what are the key days around that for from
+
+Speaker 2  08:28
+clinical side of you? Yes. So typically, skda, which flex Jon, would fall into the skdata, typically, in a traditional renewables project, they would start their work at 60% and since we're saying that, we're locking the substantial layout and configurations of single lines and all that at this 30% they will essentially on 417, when you guys are done with your review, they could begin work right after that, which I Think aligns with when they're saying they need a PO and need to get started in order to hit your dates. Yeah, that's perfect. Okay, maybe there may be some comments from owner review on the week of the 13th that have to be picked up for them to get going, but we'll evaluate those once we get them
+
+Speaker 1  09:20
+got it and things are mechanical. I presume that's when equipment delivery outside and everything right from their side of you.
+
+Unknown Speaker  09:32
+Sorry, I understand the question,
+
+Speaker 1  09:35
+yeah, because when they say mechanic, they're talking about, I think, equipment delivery and whatnot. And then I see that you said the facility mechanical completions in October. So is that a time frame I can communicate with them? Or would equipment arrival be completed in July? I just want to make sure I communicate
+
+Speaker 2  09:55
+so, so their, their power plant controllers can be delivered, really, whenever is that's going to go into your control room. But depending on how much capacity your control room has, they may be able to install them, get them configured kind of whenever they arrive the field network enclosures will be dictated based on the PCs from cine when that arrives and gets installed. Oh, I see. Okay, there's two pieces and then, and then, obviously, there's fiber optic cable that needs to be ran and spliced and terminated in order to connect all of those. And then energization needs to happen on the PCs in order for that field network enclosure to have power. So that'll all start happening at the very end, when we start doing how to publishing,
+
+Unknown Speaker  10:45
+got it okay. I think I blind needs to communicate with them.
+
+Ryan Hankins  10:48
+Thank you. So then that ties into our next activity, which is procurement. And Travis, do you want to take us through that? And by the way, Travis, why don't you introduce yourself for those, those of the group that don't know you?
+
+Speaker 3  11:04
+Yeah, definitely nice to meet you all. I'm fairly new with Clayco. I started back in December, but I'm definitely not new to battery storage and solar. I've been in the industry for about the last 15 years building solar battery storage, substations and high voltage transmission. So nice to meet you guys. I've been on some of the calls, but yeah, it's nice to formally introduce myself. I'll be in charge of execution and operations on Clayco side, so delivering these projects through construction. Yeah, the you know, Luke, Thanks for walking us through the engineering. A key part of engineering is going to be really dialing in materials and lead times. So some of these longer lead time items, since we're following the less traditional engineering methods, we're going to be essentially touching base with Al tag almost daily, and getting quantities, specs, things like that. And we've got some solutions, maybe being a little bit more conservative. For instance, if, if Gotion comes back, or, I'm sorry, full tech comes back with a material like 1500 KC mill cable, which I already came back with, and we are finding long lead times, we're going to immediately start working with them to provide different solutions, like maybe parallel runs, smaller cable things like that. We've already started those conversations with old tech. Yeah. I mean, that's yeah, go ahead and I
+
+Ryan Hankins  12:36
+mean from a procurement standpoint, I mean, you get things like Auj transformers, and I know that Gotion knows how long lead those things are. Right now, we've already started engaging looking at the used market to help. You know, like so pretty there, there is a there is a used market, and there is some, some small amount of risk with that when it comes to buying used equipment. But if we're trying to hit a date, either we're going to be able to find something on the new market and we're going to go ahead and buy that within the timeline needed, or we're going to go to the used market and find something that will will temporarily get us tied in, or a more permanent solution, depending on what we find. Either way, you're going to be aware and you're going to have sign off on what is being procured when it's being procured.
+
+Speaker 3  13:27
+Yeah, precisely a key part of this execution is also the owner furnished materials. So the PCS is the batteries, we already spoke a little bit on Flex Gen. And does you know the skating equipment, so the power plant controller and the field network enclosure, so we're going to need to keep a high level of coordination between us as well and your guys as vendors to make sure that those pieces of equipment arrive on time, so that we can stay on schedule. I think what they expedited, or the breakdown of scopes and engineering has really allowed us to kind of stretch the construction sequence out a little bit. So if we can maintain pace and release these Civil and Structural packages and get them out to permitting, and get our sweet permit following the timeline that Al tag is committed to that allows us to get out there, you know, in July. So our construction timeline is going to be from July to, like, mid October, and we live two weeks in late October as as, like a commissioning timeline. Yeah, I think this is very doable. We can fit it in there. There's a lot of things that have to align, but we're no stranger to aligning these things and making it happen. This is, hate to say, it fairly common in our industry, but I think we can make make this consolidated schedule work.
+
+Ryan Hankins  14:52
+So we've done a lot of talking. Is there anybody from the Gotion side that has any questions on their overall plan so far,
+
+Speaker 3  15:09
+I know we didn't go line through line on the on the schedule, and you guys probably haven't had much time if you need to digest this. So if something does come up throughout the call or or even later, feel free to raise those questions as soon as they come up.
+
+Ryan Hankins  15:31
+Ray, I know you were really involved in the call last week. Was wondering where you were sitting and what we've talked about so far. I
+
+Speaker 4  15:44
+I'm good, I'm good. And we just want to know the timing overall, when we're going to be you know, started the permit applications. That's the key for us to, I mean, the to follow up the construction work. Appreciate you guys have done for us, yes, yeah.
+
+Ryan Hankins  16:01
+The just to, just to make sure that you're clear on what those timelines are. And we'll, we'll send this to you after the meeting. But the the permit drawings for Civil and Structural are beginning of June. That's six two timeline. And then electrical is 622
+
+Speaker 4  16:22
+okay. Beginning of June, if we can start construction that at the end, that makes sense. If we can
+
+Ryan Hankins  16:30
+pull earlier, even better. No. The previously you guys were asking us to, you guys were asking us for 60% design by the, I think, middle to end of May. What we're saying is we've we've bypassed that. We've actually gone faster. And our 90% design, which is ready for permit, is going to be submitted on six two and we're going to work with Ben F and the city to work to have approval by the end of end of May or end of June, end of June.
+
+Unknown Speaker  17:04
+That's pretty good. That sounds very good. Yeah, appreciate that.
+
+Speaker 3  17:07
+Yes, we're going to be out onsite in a couple of weeks. Ray, and the plan is to go talk to this HJ and you know, there may even be some other opportunity to accelerate, like maybe they've got a fee to accelerate the review. I know that's very that's common in some hJS or county reviews. So we're going to explore all avenues to bring this to the left. So what you're seeing here is a pretty conservative approach that still gets us built in October.
+
+Speaker 4  17:37
+Okay, okay, see that? Yeah, let's see how fast we can do or try, okay, yeah, if we need to accelerate that with the time, we can make a judgment. We can if we need to pay for extra fee for that, we'll make a decision. And then
+
+Unknown Speaker  17:53
+thank you.
+
+Ryan Hankins  17:54
+Though, something else, one more thing, Ray is that starting on site earlier doesn't mean completion earlier. And the reason I'll, I'll walk you through that these timelines of these purchases on the Aux transformer, all the cabling and whatnot, those are going to be driving. Those are going to be driving your end date, versus starting on site earlier. Because if we start on site, let's say, let's say we started onsite today. We we'd get out there, we'd grade, we would, you know, install foundations, and then we'd be sitting there waiting for for wire and a transformer to go finish the construction. And so we'd probably have to demobilize. So starting earlier doesn't necessarily mean better starting starting procurement, which is what you're seeing here, is that we're looking to expedite purchasing of all those materials early in order to make sure that we can hit your end date.
+
+Speaker 4  18:58
+Yes, we can. After you guys have designed that post of design done, we will see how fast we can do a procurement. I mean, today we have the purchase of review with the flood scene and fractal. We also asked them to accelerate the delivery timing. They see how we can go. Yes, understand it.
+
+Ryan Hankins  19:21
+Okay. Mark any questions from you? Mark
+
+Speaker 5  19:32
+No no questions for me. I'm just trying to get caught up on some of the details that you guys are working on.
+
+Ryan Hankins  19:39
+Okay, Luke, was
+
+Speaker 2  19:43
+there something? Yeah, I was gonna say Mohammed and Morris. You know, we've been engaging the village for code studies on the fire protection system. I think something that would probably be wise to ensure that we're quickly getting through the permitting process in June is having Gotion Pay the village for a early review of the 30% set to get initial feedback and make sure we can incorporate that into the design before we resubmit for permit, and then that way, there's no revisions that need to happen in the middle of June while we're trying to scramble and get permits, I agree with that.
+
+Speaker 3  20:34
+It's worth noting in Ryan, you're probably going here next, but one of the driving factors, or the critical path to achieving this October cod is going to be getting to contract, so turning a price around, and getting to some sort of an agreement that allows us to move quickly and make these purchases right. So I think it's worth discussing that. Hey, we've, we've got a, we've got a 30% design that's coming out that we're going to propose. We've given, we've allotted ourselves two weeks to provide a proposal, and then Gotion has got a week to review it in the schedule and essentially turn us loose now, and there is 30 days in there for us to, work their terms and can T's and C's, but here,
+
+Ryan Hankins  21:25
+let me just let me, let me talk to that real quick. So there's a couple things we definitely want to talk about. So as we talked about before, and Marc just says, you're getting up to speed. The only thing that Clayco is contracted to you right now is a very simple elementary NTP for design work, construction is not even really part of that. And so we don't even have the contractual vehicle at this point to go buy things. So what we're saying moving forward is there's a there's some things that we need to make sure that we're on the same page, to make sure that we can go hit this schedule. So the first thing is, is as part of, as part of the Gotion battery project, mark that I think that you're working on, Gotion requested that Clayco executives travel to China for that interview process, and we ended up submitting an invoice in April of 2025, it was supposed to be paid 30 days after we would like that to be paid, and so if that's something that and I actually in what you're getting today, you're actually going to get that invoice. It's actually attached. But if you guys can work to get us that paid, that would be super helpful for us to continue to be extremely nimble and helping you guys with with moving forward.
+
+Speaker 5  22:47
+Yeah, so I forwarded that to a couple of our folks, including Mohammed, and they're there. They're working on submitting that in that issue, so hopefully we get that taken care of here quite now.
+
+Ryan Hankins  23:03
+Okay, perfect. I appreciate that. The second thing is agreement to the updated cost structure for the engineering work, so with what Luke was talking about. So basically, I mean, we've been I went back and looked the first time I build time to this job was in 2024, and granted that we just started design, there's been a lot of inefficiencies with with owner changes, expedited engineering for what we're showing in front of you today, additional packaging of disciplines to expedite permitting as We talked through redirecting resources from all of our other projects to help you guys meet this timeline, and then also the preconstruction services that we discussed. Basically what that would mean is that our new contract for the design portion of this work for phase one and phase two would be 4.4 million, and opposed to our previous price of 2.4 million or 2.5 million. And so we would need agreement with that. We would need that to get implemented into the NTP, and we would look for that to be implemented by the time we we deliver the 30% drawings. Next week, just so that we can start our expedited plan of delivering this. So with that being said, we would also need to quickly work through a 141 design build agreement with a lump sum cost structure. We would give you guys that budgetary pricing at 30% construction documents. We would start that effort on 410, and then we would deliver that final pricing to you guys at the 90% set, which the 90% set is 619 and so we would get that pricing to you a few weeks after that 619, date, the new design proposal, as we talked about, is expediting the design literally as much as we possibly can. Per the Gotion leadership request, to expedite, we are removing the 60% milestone drawing submittal, as Luke said, that basically means that design changes to the layout, etc. We really need to be super minimal in nature so we can get that into our design. And we really need to be we really need to be working on production design versus design changes we will attach to the NTP and contract our design decision logs, just so that we're all on the same page as far as what decisions have been made and making sure they're implemented in the contract. But just know that more changes equals more time, especially with how fast we're going. We already talked about procurement of key materials. Really need a contract to be put in place in order to start making those commitments. And then we would like to see costs continue to be integrated into the escrow agreement as we continue making commitments on behalf of Gotion. So we will need to continuously update that escrow agreement as time goes on. And the last thing Ray, what we talked about last week was that we really want the A 141, design build contract to be for the full 400 megawatt build out. We know that you're only going to proceed with building phase one, that's fine. We don't need the cost for everything to be approved and proceeding, but we just want to make sure that at the end of the day, that if you guys do proceed, that we already have that contractual vehicle in place.
+
+Speaker 4  27:00
+Let's see the face number one, we can really, I mean, do the design, build everything by you guys. Face number two, on, hold it from for a moment, and then, because the timing is conveyed where we also timing will wait for, I mean, the for the substation, there's also, there's a top judge we need to do, it does it takes time, and then I do not want it make any commitment for fix number two, honestly, it's not my decision. It's really a management call,
+
+Ryan Hankins  27:33
+and that's fine. We will give you an out in the contract that you can you can remove it, but we would still like it to be in the contract. And Mark, I don't know if you've done this with I don't know if you've done this before in contracting, but we may need your help with that. But I mean, it's pretty standard to be able to give you guys an out for that second phase.
+
+Speaker 2  27:55
+And Ray, I want to clarify too, that the Phase One installation work will require the entire site to be graded, including the phase two area, the entire road to be installed and the entire fire loop to be installed so that the fire department has access. We can hold off on foundations, in electrical and obviously installing the equipment, but that site needs to be graded right off the bat.
+
+Speaker 4  28:24
+Okay, in that case, you can separate that. When you do the Amino quotation, you basically, yeah. I mean, what is the common for both phase one phase two? What is the phase one and separate phase two? I mean, the in the core areas, yeah, well, then we can affect judgment on
+
+Ryan Hankins  28:54
+So, yeah, like I said, there's, there's a lot to do if we're if we're aligned, we can work to start getting an updated NTP to you guys, and we will get the updated a 141 design build agreement to you guys as well. We'll just need your guys go ahead so we can start putting all that stuff together so we can gear up for the busy April, May and June. Timeline
+
+Ryan Hankins  29:28
+sounds good to me. Okay, so I would expect something. I would expect something from me early next week on both of those, the NTP, in the in the A 141, contract. But in the meantime, if you have any questions, please reach out to us and let us know.
+
+Speaker 1  29:53
+Sounds good, Ryan, just to come from when you're in touch next week, will this timeline be sent to us as well?
+
+Ryan Hankins  29:59
+Yeah, I'll give this over to you guys today.
+
+Unknown Speaker  30:02
+Okay, sounds good. Thanks so much.
+
+Unknown Speaker  30:06
+Thank you. Appreciate it
+
+Ryan Hankins  30:09
+absolutely. Thank you, Ray.
+
+Ryan Hankins  30:18
+All right, unless there's anything else everybody else, have a great weekend, and we will talk next week. Thanks everyone for the time another weekend. You.
+
+
+Transcribed by https://otter.ai

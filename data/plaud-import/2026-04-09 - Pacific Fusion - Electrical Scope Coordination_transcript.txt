@@ -1,0 +1,992 @@
+Ryan Hankins  00:00
+We don't mean I want to go, but I just did not say, Yeah, all right. We
+
+Speaker 1  00:29
+but definitely, the CMH may not be a need for the IMG service area. Imagine, you know, the majority will ask, I on
+
+Unknown Speaker  00:51
+the same like dance floor
+
+Speaker 2  01:02
+to look in security, phone and price that what was stolen. I'm trying to put this into words,
+
+Ryan Hankins  01:10
+no, I'm just gonna say, next Wednesday, the guy is gonna mark up drawings of where he thinks things were stolen. Okay? And he wants people to go look at it.
+
+Ryan Hankins  01:35
+Yeah, I can't even make this shit up.
+
+Speaker 3  02:00
+Are you Talking about safety? Here's A picture. Yes, that's Like
+
+Speaker 4  02:45
+I would train. Oh, I'm not dire well, but Mine is not being used
+
+Speaker 3  03:42
+right now. What
+
+Ryan Hankins  03:50
+is on his
+
+Unknown Speaker  03:56
+head? Oh, God, I ah, is
+
+Unknown Speaker  04:18
+this distracting? I didn't I didn't
+
+Ryan Hankins  04:29
+mean good, very important meeting, you need to keep
+
+Unknown Speaker  04:34
+that on. Sorry for Friday. Friday ideas.
+
+Unknown Speaker  04:47
+Me, obviously,
+
+Unknown Speaker  04:56
+Dominic has a lot of time understanding the Google meet technology.
+
+Unknown Speaker  05:06
+This is an extremely serious goal.
+
+Ryan Hankins  05:09
+This is, this is Dominic trying to steal money from the project in terms of the,
+
+Unknown Speaker  05:15
+yeah, this value engineer.
+
+Unknown Speaker  05:25
+I'll stop Dominic wire.
+
+Unknown Speaker  05:37
+Pirate so me Sorry, sorry, putting my contracting hat on.
+
+Speaker 1  05:42
+My contracting hat on, I bet you guys, because They are. Thank you guys for laughing. Yeah, haha, do
+
+Unknown Speaker  06:28
+okay, it is 101, give it a couple more minutes for other folks to hop.
+
+Speaker 4  06:56
+I join in case I Need to share screen. I
+
+Unknown Speaker  07:20
+Tom so if
+
+Ryan Hankins  07:40
+it's if it's, if it's helpful, I can start again by talking about, kind of like, what the major cost drivers are.
+
+Unknown Speaker  07:44
+That'd be great. If we're ready.
+
+Ryan Hankins  07:47
+Are we waiting for anyone
+
+Unknown Speaker  07:53
+from the Keiko side? Yes, Mike should be joining and Susie just you on
+
+Speaker 4  07:59
+the Meyr. Yeah. It's just kind of okay.
+
+Speaker 4  08:11
+That's just me. Case study to share screen. I be.
+
+Ryan Hankins  08:37
+Is anybody from your end? There is but if he doesn't make it, we'll be okay. Get started. Yeah, catch that person up. All right. So if we look at the electrical scope, kind of in a nutshell, there there's like, if you look at just material, equipment, material, quoted equipment and labor, we have roughly about 120,000 hours, 130,000 hours, or hours With with inefficiency for working at the 100 foot height we felt. We feel that's, that's, that's in the range we have roughly about $10 million in a gear package, everything from anything larger than 250 amps, basically on the panel, board side. And then, from a material standpoint, roughly about $17 million in material. And so if I break that, that 17 million in material down roughly four of that is bus way. Okay, so that's like a quarter of the material is basically in the bus way bucket we can take.
+
+Speaker 4  10:04
+We can just put that into phase two. Okay, we'll have to pat back in some probably rigid steel. I've been wired to a point, but we can agree on what that where the handout is between one
+
+Ryan Hankins  10:23
+package one and package two outside of busway. We've got the other cost drivers are roughly about 4 million in the rest of the wire and conduit. We've got about a million bucks in grounding, and then the rest is kind of just sprinkled throughout, but those are kind of like the major cost drivers we're kind of seeing. And just want to make sure we started at the global level. So
+
+Speaker 4  10:58
+let's go down the list. I list. The first one is treatment for ground treatment for grounding system. And thought I had a link in there for showed up for a i
+
+Speaker 4  11:25
+We, I haven't personally used this, but we've used our teams use some of this. It's this cement, just cementious product that goes in with the grounding rod that basically makes the area around the rod more conductive. Adds conductivity to the soil. One of our issues here is the low conductivity the soil. It's just so dry, it's not wet. We don't have the moisture content to increase that conductivity, so we've got long ground rots 30 feet. Ground rots in what I think is probably very rocky soil. So there's probably some even unknowns there, but I think maybe we look at there's more labor associated with this. So I don't know you know what the trade offs are exactly, but
+
+Speaker 5  12:28
+this would reduce the frequency of the rods too. I don't
+
+Speaker 4  12:32
+we'd have to talk to Dan your brown expert to see what his thoughts are. So maybe we start there.
+
+Unknown Speaker  12:42
+Do we have an understanding of how much increase you can get out of these with an increase in resistivity?
+
+Speaker 4  12:54
+Let me call the manufacturer. It's, I don't have those numbers right off the top of my head. But it's, it's a pretty big increase. So where we've used these before is where we we couldn't get the couldn't get the it down to the low level, the low resistance we needed to these, when you look at grounding effectiveness, you measure it in ohms, you try to get down to a five, oh, which is, which is low resistance. This material was added, and it allowed us single, you know, add single rods to get that low level resistance. So I'll get that information.
+
+Unknown Speaker  13:49
+Would this potentially reduce the number of ground
+
+Speaker 4  13:54
+rom I think so, but I can't tell you, but I think we need to work with Dan, and I can work with, I could, I could calculate that he's dictating it based on, based on the expected
+
+Ryan Hankins  14:16
+pulse, even if, to that point, even if, like, the grid stays intact, but like, maybe we even go My thinking is, yeah, like, we still stay with 30 for some but then, like, the others are 10, or I'm making something up. Yeah, we need to reach out
+
+Unknown Speaker  14:35
+to the manufacturer and get the new rating. Okay, it's probably varies we use
+
+Unknown Speaker  14:42
+of the ground that the total needed, so the value of the saving would be less, yeah,
+
+Ryan Hankins  14:52
+the other, the other concern I had was, like, we have a lot of concrete. When I say a lot, I mean, like, it's crazy how much concrete within the area of this. So like, for us to pound a grounding rod 30 feet into the ground, there's probably going to be some drilling, potentially, or coordination around some of these heavy concrete elements, or the way that it, like, I don't know how it's actually interfacing, you know what I mean, like, because we have a six foot concrete matte slab on the top. And so where are we putting these grounding rods? And how are they peeking up through that concrete? My thinking is
+
+Speaker 4  15:36
+that these go in and then the concrete poured around. So there's they go in the the rebar is set for the matte slab. This is just, I'm just talking under the RFP space, and then the grid, which is made up of four off copper, bare copper conductors that are made into a mesh so they're clamped at every joint. That's that 12 foot by 12 foot grid across the r&d space, which is huge, and that gets tied off, tied to the rebar to hold it in place when the concrete or the other fee item was, could the rebar? Could the rebar be the grid itself? But that would require, you know, an inspector, to make sure that that rebar was continuous everywhere, that the grid wasn't broken anyway, so you blew up adding all this copper conductor, which there's a lot of it was looking at the rebar and having the rebar be the grid. So for the DB set, we made a decision to go with that, because this is an important element to this rd space working. We went with adding the four conductor, four AWS, pretty big, and it's in the to the slab. And the slab has trenches and basements and pull down pits and so that that grid has to follow the profile of that slab. The other option is to delete it and make sure that the rebar can make up that grid in some fashion,
+
+Speaker 4  17:48
+which design, how my concern is it has to be electrically continuous. Yes, it's not that we've got a problem. I'm worried the labor.
+
+Speaker 1  17:57
+I'm pulling up a picture right now, it's just slow to move, but I'm worried that so you wouldn't be able to tie the rhubarb, you'd have to do some kind of welded or threaded connection at every intersection. Yeah, that
+
+Speaker 4  18:13
+might be even more intensive than laying copper wire, doing a doing a like a clamp, met, built for purpose clamp that goes with two conductors, cross and and then it gets tied to these rods, 12 feet on the center. Basically one of these rods happens every day. The great prices
+
+Unknown Speaker  18:42
+I Yeah,
+
+Speaker 1  18:46
+so, I mean, it's possible to do that, but Ty and rebar is pretty labor intensive. It is needing to move to something like this. I think now you're talking about needing, I don't know if this is the easiest way to do it, it's just the first thing I found you now have to tap the rebar.
+
+Ryan Hankins  19:09
+I the reason why I don't necessarily like it is because, like, once the concrete is poured, like, if it moves, or it, like, disconnects, or something, like, there's no way to go back in and, like, fix it. Yeah, I do think I like the grounding rods the best. I just I'm still having a tough time, like, understanding, like, we have so many different undulations of concrete. And I think you said, hey, it's a follow the tree somewhere at a
+
+Speaker 4  19:47
+layer at the top level, you know, you're just going to have, you're just going to have wires that go down, and then the Ruby starts at the lower level, where the trenches. So it's just going to have to wrap the it's it's going to have to wrap the slab and where, like there, probably there won't be a ground rod in the trench, because it's pretty narrow. They're 12 feet apart. Lay it out so the trenches, it just goes below the trench. But in the basement there will be, there'll be essentially down conductors that will continue to met the grid at the basement.
+
+Speaker 2  20:30
+Sorry, just have understanding that are like wrapping the inside of the wall of the equipment pit and then connecting back.
+
+Speaker 4  20:37
+So think of a grid at one level. Every 12 feet, there's going to be a conductor going down the lower level, so it's going to come down, come down inside the wall, so it's
+
+Unknown Speaker  20:50
+going to come directly, straight down, correct?
+
+Ryan Hankins  20:57
+Does there have every 12 feet, just some understanding? Does there have to be another grid at every 12 feet in the vertical, just in the vertical? Not, not the whole, okay? I don't think so. Okay, just one level.
+
+Speaker 4  21:17
+Well, we're going to have it at the level, but then you're going to have conductors that may travel a little longer than 12 feet until it gets to the bottom of the basement, and then the 12 foot grid starts again at the bottom of the basement. Ryan asked a good question. You have to have the grid on the sides of the walls as well. So I mean technically, every every 12 feet. We want to have that, and will there be horizontal roundabouts going? I was
+
+Speaker 6  21:52
+for clarification. I think it's a single grid in the concrete that has a copper mesh 12 foot on center every third post in there, so every 36 feet, and we have a 30 foot ground rod that folks down connects up to this grid that's just a single level throughout the foundation. In the pits, we would pull that down and have a the same grid extended down at the bottom of the pit that doesn't necessarily need to be, I thought we do need it to be electrically continuous.
+
+Ryan Hankins  22:29
+So at the bottom of the pit there's another 30 foot, or no,
+
+Speaker 6  22:34
+yes, there is the 30 foot round rods. There's a 36 foot.
+
+Speaker 4  22:40
+Oh, 36 and I misspoke. I said the matrix is 12 feet on center. The Rahn rods are in third position. So, yeah, it's 36
+
+Speaker 4  22:58
+feet on center for the rods, there are 30 feet long
+
+Ryan Hankins  23:07
+in length. This kind of feels like one of those things, once again, where it's like, if this, if we sacrifice scope here, and we get this wrong, it feels like this is something kind of like the tunnel, like we just can't fix, I don't know, like, if we save 200 grand by going with a cheaper solution, like, mean, Jeremy is gonna be mad, and we're gonna say we need to think, we need to cut out six foot of concrete somehow and make this work. I Yeah, it's up to you guys. But, yeah, I don't know
+
+Speaker 1  23:49
+what there's two parts, right? There's the connection piece, just utilizing the rebar, and then there's this self lubricated grounding rod product. I think there might be an opportunity. We just got to dig a little bit deeper with Dan.
+
+Speaker 4  24:02
+Let me look at the mentor, the ground enhancement material, I think, and we run. We talked about this before, and came to the same conclusion that that let's go with the copper conductors, not the rebar, because you've got the traits doing the rebar. Are accustomed to doing the rebar that'll keep that efficiency predictable. Let the electrician put in the ground. Let the electrician put in the ground and grid they're used to doing the ground clamps and that work. And it's a really important it's a really important component for this research. So if we can take the ground rods from 30 feet, if there's a way that maybe shorten those, maybe that will say something, they're just steel. They're copper, flat steel rods.
+
+Speaker 1  25:01
+This is a foundation item, so this is probably another high priority. Yeah, this is going in first, yeah,
+
+Unknown Speaker  25:10
+so that conversation between Dan and the manufacturer to figure out comfortably if we can reduce frequency and length
+
+Speaker 1  25:20
+to get Clayco to maybe put a price of that million already. I think, I think there's good opportunity for that. Susie. I think it's just about producing a sketch for or
+
+Unknown Speaker  25:40
+just some notes. Yes, I think this is yes, you want to say maybe next week? Yeah, let's, let's do the
+
+Speaker 4  25:53
+I don't know if I can get Dan that quickly, but we'll poke in prime and so we'll shoot for it just, just real quick on that.
+
+Speaker 2  26:12
+In that sketch, I don't know if you're put it back up Courtney or the drawing that shows the grounding, I just want to make sure that I'm understanding it that let's pick the underground
+
+Speaker 4  26:25
+plan where it shows what's in the foundation, or, sorry, no, the above, yeah, this is the first floor.
+
+Speaker 2  26:33
+That's the underground. So the rods go in those locations where the equipment lifts are in the basement. I just want to make sure that we're understanding what's happening, but I guess we can talk about that later, like where those lifts are and there's a grounding rod, and if there's a wire that's connecting down.
+
+Speaker 4  26:52
+So these little squares are just symbols, and they they're kind of big. These are below the slide
+
+Unknown Speaker  27:02
+on the below, the lowest, below the lowest level. So these, those are a symbol. It's kind of a symbol showing 36
+
+Speaker 4  27:15
+on center. Yeah, they are on the underground slab because they're in the ground and they might be at different heights, because at some focus lab is higher, we're going to do a section,
+
+Speaker 2  27:32
+yeah, no, I, as long as figured out,
+
+Speaker 1  27:36
+great things might end up in the basement level. In other words, it's just not at the level of detail. Yeah, that's detail,
+
+Speaker 4  27:43
+but yeah, we have a section that didn't we finished after the extent went out, where it's taking TT section through the previous slab and showing material. It just didn't get enough.
+
+Speaker 5  28:02
+So I think so this is the 36 foot intervals, right? And then you've got a series of them in the lowest portion. So how does that 12 foot grid tie into the rest of the grid?
+
+Speaker 4  28:21
+So sorry. Let me see if I understand your question.
+
+Unknown Speaker  28:27
+The it's a 36
+
+Speaker 4  28:30
+so the 12, if we go to the ground, the first
+
+Ryan Hankins  28:34
+floor, it's E, 1013, a, 1b, D, into 50% no. The 50%
+
+Speaker 4  28:47
+slide four, I think it was, it was in the 50% too, yeah. So that gives you looking at it if it was all in one plane.
+
+Speaker 5  29:04
+So well, that would make total sense if it was in one plane,
+
+Speaker 4  29:08
+but it's dropping down. Yeah? And we have a way to make have it make sense. We're just like Jeremy articulated. We're dropping conductors down and continuing that grid at the lower level,
+
+Unknown Speaker  29:33
+I can send a section to help you understand
+
+Speaker 1  29:38
+that when You guys price the original because I know this was supplemental information that we passed off after we asked you guys to start pricing this we did make some changes. Curious to know if we picked those up. So we eliminated around the perimeter of the central utility building and admin. We eliminated every other grounding rod the R D space perimeter spacing would be the same and adjacent to that, but the intention was to carry the elimination of the grounding rods throughout the perimeter of the admin and R D space. Do we know if we picked that up in that $1 million baseline
+
+Speaker 4  30:22
+you're looking at the 50% set. It's got these changes.
+
+Speaker 5  30:29
+Okay, there was a reduction. Yeah, I don't think we have that captured.
+
+Speaker 2  30:34
+Yeah, Mike, you would have priced what was on the DD drawings. You have not updated that Correct, correct.
+
+Unknown Speaker  30:42
+So, so the updates on the 100% yes.
+
+Speaker 1  30:47
+Okay, so there's at least, we know at least there's a VDC. Think the only other one we're really looking at is, once we have a conversation with Dan and the manufacturer, we'll figure out what that reduction and Lake could be. We've got a link where you guys can probably reach out and introduce Clayco to the manufacturer. You guys can get ahead of protein. So by the time you get that information, that's just a part to Bob.
+
+Ryan Hankins  31:20
+Uh, real quick for that, you're talking about that product. The the extra thing, does that have to be, do we have to drill that hole? Or is it like, I mean, is it, is it, do we think it's going down 30 feet, or we think it's just going down like, 20 feet, 10 feet, because we're probably gonna have to get some kind of a drill, yeah? So you would have to do that for sure.
+
+Speaker 5  31:45
+The other way they just use them pneumatic deal, and drive those runs six feet
+
+Ryan Hankins  31:54
+Yeah, it'd be six feet below most likely. Sounds like this is a small potential savings, but
+
+Speaker 6  32:03
+possibly a risk and implementation, especially down the road. I don't know if it's worthwhile exploring this or sticking with the current design.
+
+Speaker 1  32:12
+I think, yeah, no, I hear you. Jeremy. I think that conversation probably shouldn't it take interesting take too long between Dan and we have a pretty robust design right now anyway, so shortening, if there's opportunity in shortening the length, having that conversation with the manufacturer and Dan, probably shouldn't take more than a couple days and then getting a sketch or some language over to Clayco, you guys could probably price it in a couple days. Yeah, yeah, it's part of the Foundation says, so we'd want to make that decision within the next week and a half at most. So could be like,
+
+Ryan Hankins  32:57
+Yeah, I mean, let us price it and then let you guys figure it out, but yeah, that way you guys at least have a value to it,
+
+Speaker 1  33:05
+not seeing more than, like, maybe two, three hours worth of work. I'm probably underestimating the amount of time it takes to figure this stuff.
+
+Ryan Hankins  33:17
+You guys own us right now, so I
+
+Speaker 1  33:24
+sounds good. So Susie, I'm targeting the 15th for hand off to Erica, and then Erica, I think maybe by the end of the week the following week on the 17th. Yeah, just target it. Okay. You
+
+Speaker 1  33:45
+and Dan is here today. I have a hunch we're going to finish early, so maybe, yeah, what we can do is just pull him aside trying to see if
+
+Unknown Speaker  33:53
+we've got any kind of technical data that will help the screen
+
+Speaker 1  34:13
+is Not sharing for something. There we go. Okay, so, 417 and we should be able to make decision that day or Monday, and then, you know, we we think it's too much of a risk item, we just don't make the decision, no, design
+
+Ryan Hankins  34:40
+drill, that's what I figured. Okay,
+
+Speaker 1  34:52
+so the next item here, wrap that up. Moving on to item number 21 this is just a general comment for MEP. We've covered mechanical we've covered plumbing, but anything we can do with the material spec,
+
+Speaker 4  35:03
+yeah, and I think you guys put work, we're comfortable, and we've included in our spec, spec if you didn't price MC cable for the admin area, for lighting power above ceilings and in Walls, if it's exposed you want that to be to
+
+Ryan Hankins  35:24
+suppose, Hey, Mike, do we? Do we price MC cable? It's part of our space is pretty
+
+Unknown Speaker  35:36
+big. There's a lot of lights. And yeah, let's see
+
+Ryan Hankins  35:44
+if we can. Let's do a ve on that, Mike.
+
+Ryan Hankins  35:53
+We'll get the breakout
+
+Speaker 4  36:00
+value. Okay, we I don't know what was price, but our feeder schedule has copper conductors up until through 100 amps, and then anything over 100 amps, we allow aluminum conductor.
+
+Unknown Speaker  36:13
+We included part of the schedule, okay?
+
+Speaker 4  36:19
+And then aluminum, bus aluminum bussing on all the switch boards and transformers.
+
+Unknown Speaker  36:30
+Okay? We went light and less expensive for all the gear,
+
+Unknown Speaker  36:42
+different things about the cost of aluminum. Cost of
+
+Unknown Speaker  36:47
+copper goes up. Aluminum gets more attractive. It
+
+Conor Tighe  36:56
+goes up so was, I guess, the question would be, would you be more? Would you be flexible? As we
+
+Speaker 4  37:12
+get closer, we allow aluminum for the for anything over 125 I think, for the smaller branch circuits, not that
+
+Speaker 7  37:28
+comfortable with, it's not worth it, in my opinion, for longevity and use as an electrician, the smaller conductors are
+
+Ryan Hankins  37:39
+not conductors. Mike, I'm, did you guys coordinate before this call? No, they work good, but they will last
+
+Speaker 7  37:56
+as long as the copper. I don't I don't I don't like aluminum or commercial work at all, or any industrial except for feeders
+
+Speaker 4  38:07
+above the longer what happens is, when people are in a hurry, they don't make the connections right. And if you have a lot of small ones that aren't done right, that's why the need for speed on the smaller scale. On the smaller stuff, just one of the issues and the big in the R D space, the conduit in the big R and D space for the EMP protection wants to be rigid steel, and that's that I want to make sure you guys have. That's Mike, that's a big that's an expense,
+
+Speaker 1  38:55
+that's an EMI protection thing. That's something we don't want to compromise on.
+
+Ryan Hankins  39:00
+But good cowboy, did you have rigid steel?
+
+Speaker 7  39:04
+I don't think we're priced that much rigid steel, except so let's
+
+Ryan Hankins  39:19
+how so like, so how, how much like, you're kind of scaring me a little bit. Is there a lot? Because I know we have a lot of busway in there. Well, there's, yeah, there's a lot. There's a lot, okay, outside of the
+
+Speaker 4  39:34
+bus way. So what our our plan? And we said, this is something that I'll get you next week. Is our sketch. Is where we pull the drawing, but where we come into the r&d space on the west wall. My thinking is that we turn up, go vertically right now, we turn up and there's a cable tap box. And then we go bus way throughout, I think my my design, modified design to eliminate that bus way is, we come in through the west wall, turn up the rigid steel, go up to the elevation that we want to be at, which is, which is under the truss, but above the bridge crane, would we just steal and end either at just the pool box or end at a bus way termination box that Phase two will extend bus way over to the platforms and down so we stop up there. So I'm not answering your question whatsoever, but where we would take those feeders up to an elevation where Pacific fusion would take it. So I can show that on the draw.
+
+Ryan Hankins  40:54
+So if that's the case, because the one line does show more work happening downstream of there, yeah. So is there more? Is there more scope that might be overlapped right now, phase one, phase two, on that one line,
+
+Unknown Speaker  41:07
+so on the from 50% dd to 100% DD, we clarify by issuing a color coded single line.
+
+Ryan Hankins  41:21
+What was face to Yeah. So we're that's green.
+
+Unknown Speaker  41:25
+So that is,
+
+Ryan Hankins  41:28
+well, I guess there's red, blue, green, and then, so
+
+Speaker 4  41:30
+it's really mainly on the it's the blue that space too. So you go over to the second diagram. Okay, we may provide. Okay, you can't read our mic. I was curious.
+
+Ryan Hankins  42:01
+All right, so Mike's gonna love this, because he asked me how far each of these connections were for, like, the there's, there's, like, motion control box and stuff like that. So the fact that that's not in our scope, yeah, I think we probably need to get you what that breakout is. Yeah, okay, we currently
+
+Speaker 7  42:24
+included a an average link for connections with all of those devices that show on there, and then other stuff. Yeah, so, if we're
+
+Speaker 4  42:39
+so, that's great. Mike, the red is phase 1c. That the purple, if you can see, you probably can't see the color differentiation here, but the purple is underground, okay? And the blue, the blue, is phase two. So, I mean, coming into the R D, we have two 1200s and two, 2000s on one side and probably the same on the other side. Actually three, 1200s and two. So there's a lot of feeder, a lot of rigid steel. But we're not, we're not buying the blue switch box.
+
+Ryan Hankins  43:24
+So for are we putting
+
+Ryan Hankins  43:35
+so this fear, are we just putting in conduit or just putting in Conor? Okay, so everything that's, yeah,
+
+Speaker 4  43:46
+well, we should talk about that. Okay, that's if we terminated a cable tap box. We'll put in wire.
+
+Ryan Hankins  43:55
+You can't. Let's add like a, like a gray color.
+
+Unknown Speaker  44:01
+That way, there's conductors. We could also got. You're also
+
+Speaker 1  44:08
+gonna add a note like, which is rigid, which needs to be, yeah, rigid
+
+Speaker 4  44:13
+Conor, yeah. We have that on the drawings and in the specs, but we'll clarify that
+
+Speaker 1  44:20
+maybe is just as easy you guys are. This is going to be your good scoping delineation, yeah.
+
+Ryan Hankins  44:29
+This is awesome. This is what I was worried about, like, about, like, some of the delineation stuff, but this is really helpful.
+
+Conor Tighe  44:37
+May look, there is a legend on there. Tell us the standard elevation where we stop the conduit, the drawing will the drawings well, so we'll say, so much off the
+
+Speaker 4  44:53
+floor. I need to get with Jeremy and agree. So exactly what these two would
+
+Unknown Speaker  45:02
+be, where that yeah, where that ends? That's probably just a simple this color coded, plus the plan view and calling out all
+
+Speaker 4  45:17
+of those points we'll send you. We need to update our drawing and send it to you. But Cory, we are taking bus white out of bars for putting it in phase two.
+
+Speaker 1  45:31
+So that was the $4 million right? Yes, roughly $4 million so as I've just announced, 4 million add to the electrical
+
+Speaker 2  45:45
+scope delineation, something that I don't know. I've had it on my design decision box, or is it decided? Do we know? I just haven't filled
+
+Speaker 4  45:52
+it in? I think we know there is some details on exactly where that was, but I think, I think we've got clear, clear information from Jeremy, or at least
+
+Unknown Speaker  46:06
+it's shown on our block. We think we have it right. I think it's a matter of just
+
+Speaker 1  46:13
+going through once again. And it may be a bit of a wash. So it sounds like we, we didn't estimate Bridget conduit throughout the entire r, d space, but that's an absolute requirement we can't back away
+
+Speaker 4  46:25
+from for EMI protection. There was ETS language said there is smaller feeders, smaller parent circuit. There's a there's a breakpoint below, and I don't know if we know what that number is yet. I need to get the BTS for them to price that. Okay, I may need to just send, can't think of his name, an
+
+Speaker 1  46:50
+email to Marty. Marty, or Marty is he's working on a cm Dallas, but we are working with a different
+
+Speaker 4  46:59
+group of folks for this, so I'll send them an email to I also want them to reconfirm bus wave is acceptable.
+
+Ryan Hankins  47:13
+Yeah, no, this is great. Thank you.
+
+Speaker 4  47:14
+So these two services. Scroll out these two services. There's two on two on the first pages. This is the second riser diagram. Two on the second page. This is this riser diagram is dedicated to just the R D space. Okay? And we have, we are including the HVAC for the r, d space and phase one. So it's sort of warm shell, if you will. And then you guys do know that the ultra capacitors are by Pacific fusion? That's what the green is. Mm,
+
+Ryan Hankins  48:13
+Jen, the capacitors, no, yes, we did
+
+Ryan Hankins  48:22
+easy save. Spin. No, no. I mean, so the question that I'm thinking the answer is yes, is that everything that's shown in blue, we price that as part of our base scope? That's what I thought. Okay, so, yeah, there is savings coming up.
+
+Ryan Hankins  48:54
+We let us price it. Yeah,
+
+Speaker 4  49:19
+I love it. I love it in the future and may, may not matter, but all the equipment in blue will be have the distribution boards and panel boards already do, but will have covers. They will they won't be exposed breakers like you normally see on that distribution board. They will be like nema 3r enclosures with metal, metal big doors to protect those breakers from the EMC.
+
+Unknown Speaker  49:47
+So even inside this space,
+
+Speaker 4  49:52
+we have Neema three arm. Inside the space, they may not be Neema three yard, meaning waterproof, but they will have metal covers across the front. You ever walk up to a switch board, you can see the breakers these, these cannot be they have to be enclosed.
+
+Ryan Hankins  50:13
+So one thing we can also offer, even though it's phase two scope, is that if you want us to take advantage of the amount of stuff we're buying, we can add that to the package, just to get it off the critical path, and we could separate it and just have it as like, deliver, you know, freight on board, and we'll offload it for you guys. And you guys can do, you know, that way it'll be on site or be in a storage facility, or wherever it's going to be, but at least they'll be secured. I
+
+Speaker 4  50:46
+it several transformers. Yeah, it's a number of distribution boards, several transformers, lot of panel boards.
+
+Unknown Speaker  50:59
+It's all the blue. I generally, sounds like there's another easy, 4 million reduction if we just move the bus stuff back into your scope, whether we're doing bus stops,
+
+Speaker 1  51:21
+it's fine, it's one of us has to carry it, okay? So the hand off. We've got an electrical sketch that we just need to modify per region, the plan view sketch, the color riser you guys have now you're aware of the EMI rigid Conor requirements. We need to have conversation with, et ce, if anything
+
+Unknown Speaker  51:51
+below 20 volt, 20,
+
+Speaker 1  51:53
+whatever may be in something else, right, just the empty, when do we think we can kind of reconcile, compile, and all
+
+Speaker 4  52:01
+of that off, it might come in little. It might come in phases. I need to get with PTS Lindgren on the rigid steel break point. I'll try to send them an email tomorrow to see if we can get that Jerry, did you recall hearing the break point between what could be, what size feeders were, rigid steel, and what was EMTs? Remember
+
+Unknown Speaker  52:29
+correctly UTS and above being
+
+Speaker 1  52:35
+rigid, I'll confirm remember Tom Adam probably knows, to Adam, he probably knows that we were talking about that, but
+
+Speaker 4  52:46
+I don't recall, okay, we'll get that. I think most, yeah, look at that. I think everything is, everything that we're bringing in is over at 200
+
+Speaker 6  53:02
+and yeah, sorry, 4 million was just the bus stuff, distribution
+
+Ryan Hankins  53:15
+panels, yeah, that was just bus way. It was roughly. Give you exact it's like 3.7 million. So bus way and cable, bus.
+
+Speaker 4  53:28
+Jeremy, what's going on is my drawings right now have converts coming in, underground, stepping up, and then at the wall, we're transitioning pretty low on the wall to from conduit to busway, and then having the bus go up 100 feet and then over. I'm thinking right now, we come into the building, take Rivian steel all the way up to the elevation, put in either a kibble cat box or pull boxes. It can be a bus stop transition, or it can just be a jump, a quick junction box, and then phase two comes out. So it's not the way it's shown in my drawings. Now, there's more plus way and less phase one work right now, but so I'm going to get that rectified, send it to Clayco for just
+
+Speaker 6  54:26
+a side discussion on the high water levels. I'm counting
+
+Speaker 4  54:37
+for transformers phase two work, yeah, so on the mezzanine work, we were coming down with either 2000 or 1200 and then all your servers so the transformers are stepping down.
+
+Speaker 1  54:53
+And this is not doing this maybe. Is this impacting any of our longer read items? This hand off anything we need to could we push this out? Maybe to
+
+Speaker 4  55:06
+busway has a it does have a long it has a long lead time. And what happens is the shop owners that have to go back and forth, and so when we pull the bus way out, yeah, that's going to make our package a little easier. I don't know if it turns a lead time, because the primary switch gear and the substations are probably the longest lead time. And the bus was in the family staff are pulling the bus way out. Will take that shop drawing phase out of the sequence. So there, there could be some time
+
+Ryan Hankins  55:36
+savings gear. Gear is still like the stuff I presented yesterday, all that, like we still need to get electrical gear bought quickly, but yeah, to your point, make the approval process. Well, what you you just made it not my problem anymore. But no, I mean, if we, if we also need to buy that to help you guys get ahead, we can also buy that as well. So just, let's just stay fluid as we're going through it, and we'll figure it out.
+
+Unknown Speaker  56:11
+Having something round up
+
+Unknown Speaker  56:18
+by it's gonna it's yes, yes, and
+
+Speaker 1  56:26
+we'll just Eric how we can add it to the 24th
+
+Ryan Hankins  56:35
+the way you guys have done the color coding. I think that's important, because when we get to, like, permitting, we're gonna have to be very careful, because we're showing everything on these drawings. So like the inspector, like, if we didn't color code this, he would be expecting, as part of us closing out our permit that that all this gear and blue is installed, unless they have that note on there.
+
+Unknown Speaker  57:00
+Yeah, and maybe
+
+Speaker 2  57:06
+gray it out throughout the whole set, we're going to go through and exercise with all the disciplines to make sure it's super clear that's like kind of some 100% moving forward, our team is really focused on to make sure it's super clear for the permitting office what they are actually permitting in each of these packages. So that is an exercise that is going to be
+
+Ryan Hankins  57:26
+on our side, great, and we can help as well. Yeah, we would love to, love to help with that.
+
+Unknown Speaker  57:33
+So, Mike, are there? Cory, are there otherwise, I
+
+Speaker 1  57:42
+think, yeah, there are a couple more, I think. So deleting the main tie in we we're going to get rid of that. So that's from an operational perspective. We don't want to do that delete main times which order arrangement.
+
+Speaker 4  57:57
+So when you say we're going to pull that from the correct, yes, oh, like
+
+Ryan Hankins  58:05
+we're gonna, we're gonna leave that in the scope, operational flexibility.
+
+Speaker 1  58:10
+Okay, item number 30, we've got review office area lighting package for fixture savings.
+
+Ryan Hankins  58:18
+I mean, just talking generally. I mean, when it comes to lighting package, how critical is the like, first off, like, what's the what's the lighting levels that you're looking for from a foot candle standpoint, now that we know how big these modules are, like, do we need more lights than what's shown or do we feel like we're confident with what's being designed within that warehouse area?
+
+Unknown Speaker  58:40
+We've got somebody doing that lighting design.
+
+Ryan Hankins  58:45
+So those things are bigger than I thought. And you know, there's going to be a lot of shadows potentially.
+
+Speaker 1  58:52
+Yeah, I think we were going to do just for this first phase is we're going to take care of a minimum foot candle requirement, and then, as the machine gets installed, task lighting, anything that needs to be illuminated greater than what we provided in the first phase is, is you guys are going to continue to add to it?
+
+Speaker 6  59:14
+Yeah, we're assuming 50 foot candles and all of the F occupancy area. So that's a labs R and D space. It's a 50 foot candle average
+
+Ryan Hankins  59:25
+at the floor. Yes. And are you open to us, like working with you on changing the fixture and all that kind of stuff, item?
+
+Speaker 4  59:33
+And I don't should let you guys page talk about this. But I mean, ideally, we have, depending on how many distribute, how many folks you're dealing with, packaging, lighting, pictures, we should have, we should have four, four manufacturers for each fixture, so you can get or three. So they, I don't know how you guys buy out fixtures, but so that when when they're packaged, there's not one fixture from a whole different dress. So you can get the best
+
+Ryan Hankins  1:00:14
+as long as we're open, because, like, you know, as long as we're open and we're not like set on a specific picture, we can drive value through the cost process to any
+
+Speaker 2  1:00:31
+particular I think it's great point. I think Jenner is being No, we got rid of most of the decorative pictures. They're pretty straightforward. The baffles are the only ones that have lit pictures in them that are, yeah, but, like, specialty items. But for the most part, it's pretty standard recess lighting, called lighting, you'll just want to be more intentional with.
+
+Speaker 8  1:00:51
+I mean, when we go to lighting suppliers, sometimes they'll be like, Hey, you got this, like, $1,200 picture, this one, that's good.
+
+Ryan Hankins  1:01:01
+You know, we also don't know trade offs, but
+
+Speaker 4  1:01:09
+be careful with this. And so Ben Susie was asking, how you guys buy out that is really important because and coordinated to to understand the trade offs, because there are ones that can appear to be as good as the next one, but they have all two drivers, or they're consistently under performers, and they're a lot less expensive, but they're also a headache, and So we're trying to hit more of it a mid level, not going after the highest, most expensive one, but not the bottom, unless you just got it cut and scrape, because they will cause you problems long term. But as Kristen was just saying, we have pulled out decorative and we are using recessed fixtures, but maybe putting them in an interesting layout, some things like that. So I think there'll be a lot of latitude, but I don't want to, I don't want to pull three different manufacturers for the same fixture, but maybe more have a basis of design. And then when they come and say, Hey, we have this alternate fixture. We think it's better value, great, as long as they provide us with the actual spec information and show us that it's hitting the CRI and the different things that we're looking for that fixture, you have specific
+
+Speaker 7  1:02:32
+fixtures that you just have to have for whatever reason that there are no substitutes. Identify those on on the schedule as no substitutes allowed. Okay, we do have buying power with Cooper and Lithonia, our major for us. We've also got buying power with some of the other guys, you know, the smaller people, but Cooper Litton, yeah, they own everything anyway, so great we can play in that sample pretty good pricing through our contacts for the light control, yes, parameters, systems, what is your baseline system? Black Box, one of the others, any of the others that are out there? Stevens, manufacturer for a baseline. And let's look at what's there integrate with either station. Horn with all your fixtures and for the whole phase one, phase two kind of also, so your maintenance people can
+
+Ryan Hankins  1:03:54
+feel it like the first question is like, do we just want occupancy sensors, or does there like more fancy lighting controls that you guys
+
+Speaker 4  1:04:00
+are looking for, really, it's really occupancy sensors. We do. We do have a fair number of ball box dimmers in the room, so maybe we can, maybe we can pull those out. We were trying to hit just the code requirements for the controls. And maybe in your board room. We have, I think we have a scene controller in your board room. The same controller can allow us to put on the schedule and just shut it off. Yeah, we have a network lighting control system so you can put the whole thing on schedule, but most of its occupancy sensor control. We don't have
+
+Unknown Speaker  1:04:44
+occupancy sensors in the R D space giving
+
+Conor Tighe  1:04:48
+I would also, I also would say, on the R D, like I know it's go with minimum and empty task lighting, I would just, I would just say, let's think about what is needed on the joist, because once that intermezzo goes on, it's more difficult to add.
+
+Unknown Speaker  1:05:10
+That's fair. So let's think
+
+Unknown Speaker  1:05:12
+about what is needed for your fit out without making it more difficult for the fit out
+
+Speaker 6  1:05:21
+operation. And everything for the fit out on the ground
+
+Speaker 8  1:05:30
+up, especially around the water tank, 110 feet up. Yeah, all right, so just keep that in mind, like do what we need to do on the joist, never touching again, right?
+
+Unknown Speaker  1:05:39
+Good. Point. Right? I think the
+
+Speaker 2  1:06:00
+task line is going to go on the catwalk pretty high up. Ask for the lighting, and it's not interior. But I know that we've talked about adding some, like landscape lighting for ways for people who are coming to the building at night. So that hasn't been included because we're just doing some sketches about it, now about it. But probably the same approach can happen where there's what, you know, there's a basis of design and then
+
+Ryan Hankins  1:06:27
+whatever, trust me when I say, I hate Value Engineering lighting, because it's just never works out the way that you want it to. So we're going to be over communicating throughout that process to make sure that we get it right down there.
+
+Speaker 6  1:06:42
+Dominic Yeah, just as a general comment on lighting levels and the book channel requirements within the R and D and tub space, we communicate with our lighting manufacturer or nicely lighting to calculate based on the 50 foot candles, pretty much everywhere throughout that space, but similar to the comment on the traffic areas, if pep knows areas that don't require that lighting output, thinking of the cub in particular. You know, if that can be reduced to 40 or 30 per candle average. I mean, we may be able to reduce the amount of lights in that space. So we kind of need direction from yes though to make that decision.
+
+Speaker 1  1:07:41
+Yeah, minimum, best practice for the cub. So okay, if, yeah, I think best practice or code requires something less than 50 foot Pat and candles definitely. Let's, let's reduce it. There's no code. Yeah, it's,
+
+Speaker 4  1:08:03
+I mean, so it's best practice, hands on, hands on your chief engineer. Sometimes, sometimes they want those spaces simply, you need off the floor and and then they want a lot, then they'll have 50 or 60 foot candles. But I think, I think for those type of back house mechanical rooms,
+
+Speaker 1  1:08:31
+what could we what could we tip it? Just so I'm not talking foot candles.
+
+Speaker 4  1:08:35
+Is, is, but it's tricky. There's so much big motor equipment that it's going to be very generally. So I'm going to recommend
+
+Speaker 6  1:08:45
+Yeah, no, I agree with that comment. I think it gets maybe trickier with like the storage areas, where we don't really know a lot about the future operations. So, yeah, the cup storage. Okay, all right, well, then we've designed it correctly.
+
+Speaker 1  1:09:13
+So one general comment that I'll make about the admin area. So if we're eliminating skylights, then we would have to make that with lighting, I'm assuming. So I think it's good for the nighttime.
+
+Speaker 4  1:09:29
+I think it's designed around and then we control, if we eliminate skylights, we've got, I think we've got some photo style controls around the skylights that we can.
+
+Speaker 1  1:09:47
+Okay, so I think this is something we can I would say de prioritize, not a urgent item. Lighting is one of the last things we're going to be buying out. So we need to save this for after everything else. What kind of information Ryan Erica, Mike, do you guys need from the design team? Do your take
+
+Ryan Hankins  1:10:18
+offs? I think that updated one line notations. It's helpful. I guess I didn't look at the colors, but now I'm, like, very thankful that it's there so we get that. But I think there's still a gray line, a gray gray area between what's underground and what we're just doing. And we like your approach of coming in and going straight up to the ceiling plenum. But I think you, you're going to let us know more about that.
+
+Speaker 4  1:10:49
+Yeah, Pacific fusion doesn't want anything on the floor. They need a big free circulation pathway. So we had switch boards there and those guy that's why we want to bring rigid steel. I the way. Not have any boxes.
+
+Ryan Hankins  1:11:08
+Where are the switchboard? Or where are these, these 2000 amp distribution boards going? Are they going to be up in the ceiling space? Okay? Makes sense.
+
+Speaker 4  1:11:25
+There's a lot of there's, there's power to the IMG, there's, there's power to lots of different these motion control device, the motion control have fig LOI, and then there's a whole series of servers that sit on top of there's 208, distribution, a lot of heavy for evil distribution up there. And that's all phase two. So we're
+
+Unknown Speaker  1:11:58
+trying to plan for a huge don't include or plan for the future. I designed a 400 ton crane. There's a
+
+Unknown Speaker  1:12:16
+couple cranes I put in there so we could do that.
+
+Speaker 7  1:12:19
+I just thought that was some of the equipment that was rolled in. Just
+
+Speaker 4  1:12:29
+thought that was some of the equipment, the operational equipment this, this facility is not short on lifting capability, yeah, the 400 ton phrase that'll do right?
+
+Speaker 4  1:12:50
+This is the one time I didn't have to worry about and then the need for 200% neutrals where we have harmonics, so our transformers that are identified as TK, the K stands for K rated that's to deal with from there's, there's some very, very big vfps in this facility. So there will be harmonics that we and there will be those will have filters on them right.
+
+Speaker 4  1:13:32
+Then we've got electronic equipment that will also need to be able to handle loading on the neutral. So I found a couple transformers that I don't think need to be K rated, and we'll change that, but we're going K rated transformers on the admin space for all the office stuff, and then K rated transformers on the sim does.
+
+Speaker 1  1:13:59
+So there's K rated transformers in the office, which we
+
+Unknown Speaker  1:14:04
+do you don't think you need I don't think so.
+
+Speaker 7  1:14:09
+Are you gonna provide a list of Okay? Rating four.
+
+Unknown Speaker  1:14:15
+It's K 13 in our spec.
+
+Speaker 1  1:14:19
+What is the, I don't know enough about this K reading to probably make that determination, but I guess what is just when you have, like
+
+Speaker 4  1:14:30
+right now, everything, everything create. Everything is a non sinusoidal load. So you see loading on the new you see this additive loading on the neutrals, as opposed to having it all cancel in a three phase system, the lights now are LED. Everything we deal with is computer. So is
+
+Speaker 1  1:14:53
+there an issue? So we won't be, I guess if, if we pull this is all around pulsing.
+
+Ryan Hankins  1:15:01
+No, I'm only seeing two of them in the lab space.
+
+Speaker 4  1:15:06
+Maybe I'm not. Yeah, they're in the we have them for the lab spaces, that admin space and the symbols, so we could take them out of the lab space. I don't think it's that critical I keep them in for the CMH. I don't know
+
+Speaker 6  1:15:31
+if this I don't think this necessarily falls under the electrical category, but I did turn to my thought about the FM local standards that there were a couple of comments that we need to design to. I don't know if those standards were listed anywhere along here. I assume we have to maintain that.
+
+Speaker 1  1:15:55
+Let's, let's, sorry, Dominic, let's, let's take, let's finish this conversation and then jump to Ed, I'll put it on the list. So I think the question is, we have the TK rated transformers in admin and cm Das, makes sense. We have a lot of sensitive equipment, and cm Das, even the long space probably makes sense to maintain the TK transformers there. You know, I don't fully understand it, but I'm curious, and want to pull and thread a little bit with admin to see it. That's an area we just,
+
+Speaker 4  1:16:35
+we just do it for office space, just because, just but people we do it for office space, but the loads in the office space may not, may not pose a risk to single nut having
+
+Speaker 1  1:16:54
+single how much money, if this is just like a $25,000
+
+Unknown Speaker  1:16:59
+I think that's what
+
+Conor Tighe  1:17:03
+we're talking Okay, we can move on. Do you need a welding outlet and dirty power? Just, I find that in these facilities, these guys will do welding. It's maybe an issue in design development, just making sure that There's a
+
+Unknown Speaker  1:17:27
+dirty power. We have
+
+Unknown Speaker  1:17:39
+dirty power, insert power.
+
+Speaker 3  1:17:40
+And then
+
+Speaker 4  1:17:48
+Dominic's question about AECOM flow holes the third one, it's typically that typically it impacts lightning protection generator.
+
+Speaker 6  1:18:05
+Yeah, it affects a lot, I mean, also just all of our assemblies, roof, wall,
+
+Unknown Speaker  1:18:13
+so right now, yeah, and I'll give a general stop
+
+Unknown Speaker  1:18:18
+light, not lightning, but light evening.
+
+Speaker 1  1:18:21
+Yeah, light to mean protection. So something we can talk with many about, I think right now, the general direction from our insurance brokers is, please design to these standards making it easier for us to get a policy in place when the time comes. So I don't, I would say for now we'll stick with FM requirements. Is something that can, maybe later on down the road, look at reducing, but we'll take it. Yeah, it may be,
+
+Speaker 4  1:18:56
+if your insurance folks will tell you, what are the heavy the most important ones. Where ones did you focus on?
+
+Speaker 1  1:19:07
+Yeah, it's a little tricky for us right now, because we have insurance broker representatives that are helping us shop around. I haven't selected one just yet, so unfortunately, they can't get very specific on some of these things. It's more of a blanket statement, cover yourself, just designed to the standard.
+
+Speaker 6  1:19:25
+Yeah, are they going to be reviewing, I assume they're going to be reviewing our plans and specs for that compliance,
+
+Speaker 1  1:19:34
+the insurance broker that we select, yes, when the time comes, we're just not
+
+Speaker 6  1:19:41
+there yet. Got you. I'm calling it out because it seems like and I think Jon brought this up with Jens and Hughes. They do do preliminary evaluations of the funds that from global standards, and like bringing compliance within our specs, might be worth a conversation with him, if we're still want to bring that into our scope.
+
+Unknown Speaker  1:20:10
+Sorry, I didn't catch that. Sorry. Can you say that one more time? What do we want to bring into
+
+Speaker 6  1:20:21
+our scope? The FM, global standards. I mean, this affects the specifications of our roof assemblies or wall assemblies, how we detail a curtain wall. I mean, this has a big ripple effect, I think, across the whole detailing of our building and Jens and Hughes. Jens and Hughes does do, like an evaluation of that, if we want to add that into their scope, intensive use scope to do a preliminary review to make sure that we're meeting your F and local standards so that it doesn't, because wouldn't want to happen is that we get through these plans we're assuming, Oh yeah, we meet with it, we submit it, and FM, Google comes back and says, Now these clips on your curtain wall don't comply. You need to redesign for these standards. Yep. So that's
+
+Speaker 1  1:21:10
+thanks for bringing that up. I was, I was making an assumption that we, we already have that covered. So if that you know, some of the comments that we've passed off to the design team. The overall direction is we should be designing to add them global, these piecemeal comments that we're getting from our insurance broker. Excuse to that as well. But if that, I guess, if that direction was not clear, and we need to get a better definition of what that means for
+
+Speaker 6  1:21:43
+Yeah, I think it would just be good to view it holistically with Jens and Houston.
+
+Unknown Speaker  1:21:48
+But yes, I agree Rebecca, I'm on
+
+Unknown Speaker  1:21:59
+it. It's happening now, right? Rebecca, do you want to add another meeting? No, okay. Chris, internally, we ask we can share
+
+Unknown Speaker  1:22:19
+with you internally have an FM Global, yeah.
+
+Ryan Hankins  1:22:23
+It's yeah. We can share it with you guys.
+
+Conor Tighe  1:22:29
+Doesn't mean they don't change Yeah. So it's just like, this is our history with
+
+Ryan Hankins  1:22:41
+what's that tag that has that
+
+Unknown Speaker  1:22:49
+Larry?
+
+Unknown Speaker  1:23:00
+Any other
+
+Unknown Speaker  1:23:07
+electrical items? 15, wow. What happened? Let's talk dollars. We time, yes,
+
+Speaker 1  1:23:23
+the small wins we have to celebrate. We won't know until a couple weeks how much all of this adds up to you. I like that one the best, Dominic.
+
+Ryan Hankins  1:23:40
+Stop sharing my screen every meeting we're in from now on, like you got to wear the pirate costume. I Yeah,
+
+Speaker 1  1:24:04
+okay, well, we've got everybody has access to the matrix. There's going to be some big hand offs happening at the end of next week, on the 17th, to allow Clayco to get some numbers by the 24th it sounds like we already have those breakout work session meetings scheduled. I saw next Thursday is there? I mean,
+
+Unknown Speaker  1:24:29
+a lot of days are just back to back, sorry.
+
+Speaker 1  1:24:36
+Like it's all good. This is really good. Yeah, anything we didn't talk about that. We should be there. I think we covered most of it,
+
+Speaker 2  1:24:45
+the underground stuff. Did you want to talk about the underground stuff? Do we have a utility, underground utilities, and any decisions that are needed to get us to that?
+
+Speaker 1  1:25:01
+Yeah, and I think we bake that into how we would so yes, there are aspects across MEP and structural. I think we identified that critical path, if it was underground and part of the 511 set last responsible moment. I think we're aiming basically to have those decisions by mid next week or end of next week, so the handoff between everyone is pretty tight. We can go back and review those, but yeah, we covered generally answering your question. There's there were specifics that we've created.
+
+Ryan Hankins  1:25:43
+Yeah, so as part of that underground package, we're talking about the 511 set. So we know that it's any piece of concrete that is at slab or below slab, all the rebar design associated with that, the waterproofing for the for the underground applications, we don't necessarily have to have the stuff on top of the slab, but anything below Ground, underground waste lines, underground water lines, underground electrical including from the cub. So with that, I don't know if you guys would have heat calcs or whatnot, or if you guys are expecting us to do those, but you know, as far as the design of the duck banks go, we'd expect that some of that was kind of figured out. So we can go get that stuff placed on order
+
+Speaker 4  1:26:42
+right now, I've just got them on two layers so we don't have to do the heat caps. But, oh, okay, tighten them up.
+
+Ryan Hankins  1:26:50
+Okay. Good deal the electrical or, sorry, the elevator design for the pits so we can pour those correctly the first time, and I'm just spit balling the water
+
+Unknown Speaker  1:27:13
+pipe. So you said, yeah, yeah, like because it'll come up on us, almost
+
+Ryan Hankins  1:27:20
+in meat. Like almost immediately, yeah. Oh, grounding. You also need the tilt design. It's conceptual tilt design. Well, how that affects the foundation? Yes, really, what we were trying to do is we're trying to buy a full concrete package, and so a conceptual tilt package to go with the underground will allow us to, like, Don't think too hard about it. We know what the thickness is. You're giving us a pounds per square foot on rebar or whatever, if you haven't designed that yet, so you need that. What I
+
+Unknown Speaker  1:28:05
+would say is, if we're extending the height of these
+
+Speaker 3  1:28:09
+tone walls, and it's going to affect the foundation, yep.
+
+Ryan Hankins  1:28:15
+I mean, I could, I could put a full list together, but, like we've kind of talked about, Yeah, items, pretty simple,
+
+Speaker 8  1:28:26
+it's underground, or it's electric steel.
+
+Unknown Speaker  1:28:40
+Your questions or it
+
+Speaker 6  1:28:58
+goes in the church, what would like to point out to the Clayco team, the leave out strategy that we were thinking about for the office area, or if you had given that any consideration,
+
+Speaker 2  1:29:11
+I'm sorry I wasn't listening to the beginning
+
+Speaker 6  1:29:15
+of that. Don I wasn't distracted by the Yeah, the leave out strategy that we had included, it was in the 50% set, but our thought was that the design for the foundation would need to be finalized with all the trenches that's everything in R and D, But that some areas, such as the CM dos and the areas that had migration sensitivity that needed a little further coordination, and the majority of the admin space that we can provide a leave valve in that area, continue to decide, but Just wanted to check with you if that is working with your schedule at all, or if you were really trying to have everything truly finalized by that point.
+
+Ryan Hankins  1:30:09
+No. I mean, like, if it's just slab leave outs and it's not in the R and D area, then we should be okay. Just be very clear, and you know, as it gets finalized over we'll call it when you have you'll have a finalized within, like, a couple weeks after or a month after, something
+
+Speaker 6  1:30:33
+plan would be to include the update and the 100% CD set.
+
+Ryan Hankins  1:30:39
+Okay, well, we'll look at that from a timing standpoint, but that should be for breaking ground in July. That should be okay, yeah, we'll just, we'll just track it as a exposure, and, you know, we'll both track it appropriately.
+
+Speaker 2  1:30:59
+I think the only thing there would be just anything that would affect, like the found the top foundation elevation, or anything that's in that slap, like, if there's depressions, or if we be an important figure slap, that sort of stuff, that would be the one thing that I would say needs to clearly be in the foundation package, though, in like, the areas that will pay to even If we don't know, yes, exactly, yeah, sorry. I mean, clearly, in the r, d space, yes, we've got that covered, but in these areas that we're leaving out, just like, if there's anything, yes, sorry, normal or like, we need to have an idea. And there might be some places where we depress the foundation another six inches to give us room, but we need to make sure that that's covered. So yeah, I guess I don't know how that works. So no
+
+Unknown Speaker  1:31:45
+sunken areas,
+
+Speaker 2  1:31:48
+yes, living room, yes, an isolated slab for vibration. So sometimes those are thicker to give you some additional mass, like where
+
+Speaker 6  1:32:13
+that might be. Do we need any isolated slabs in that area? They're not isolated, but they are floating. So they there is a, yeah, there's, there's floating slabs in the lab area.
+
+Ryan Hankins  1:32:27
+Yeah, that's, that's fine. We'll figure it out. We got, we got a little bit
+
+Speaker 2  1:32:31
+of time, so we just look. So we just need to make sure that we get at least enough coordinating to know what, you know, where the foundations are for the actual foundations package. I
+
+Unknown Speaker  1:32:55
+want to ask
+
+Unknown Speaker  1:33:12
+you, yes, that's for the foundation. Yes, that's
+
+Speaker 2  1:33:28
+if you want to have a breakup conversation, I don't know it's going to be, it'll have to be the following. It might have to be just like, yeah, just with Mark's schedule. But, I mean, but yes, I do want to have those conference mean, but yes, I do want to have those conversations for sure. So that means the following correct. That's why I'm, like, not crazy concerned. I do want to just make sure I want
+
+Speaker 6  1:34:01
+to talk about, is I want to understand his conservative estimates. What he was considering we're making those estimates and make sure that we ultimately develop
+
+Unknown Speaker  1:34:21
+that responsibility like need to make sure. Thank
+
+Unknown Speaker  1:34:36
+you. Yeah, she
+
+Speaker 9  1:34:50
+So Ryan, based on this week, what do you guys think about a break around date in July? Does that make sense? Or are we setting ourselves up for?
+
+Ryan Hankins  1:35:04
+I think, cautiously optimistic. I mean, once again, like, like, I haven't really seen a steel design. I can't really go to market until I have that secured. Like, we can't confirm it, but I'm cautiously optimistic that middle of July works like
+
+Speaker 9  1:35:23
+if all of these dates that we talked about over the last two days align the way we hope they will, right? Yeah, if I communicate Keith tomorrow, yeah, we would like to do a 715 break ground. What would that mean? And would that be? Would you want to do like that would be like our media break ground. Would you want to do something earlier than that, like start mobilizing on site earlier? Would I guess? How would you envision that going we would?
+
+Ryan Hankins  1:35:59
+It depends what this, what you guys think makes sense to show the city? May we can plan. I mean, I was thinking planning to mobilize in middle of July. But if, if we want to put on a big show, and we want the city to think we're out there doing all that stuff ahead of time, then we could do that, or if we want, like, the first day we have the site to be that day, it's totally up to you. I once again, until we really get that steel secured, it's going to be super hard for me to tell you one way or another.
+
+Speaker 9  1:36:33
+Okay, I think I'll hold that 715 date with Keith as, like the media break ground, and we can coordinate how we want to move in there before that and what we want to get staged. And then I'll confirm, because there's, I've heard a couple different rumors on schedule because of all the like politicians and stuff that we want, there they go on recess in August. So that may be a better month to actually do the media break ground, because we'll be able to get the attendees that we're looking for easier. So that may make sense. So if that, if he's we got to align that calendar first. So we're chasing a couple individuals trying to align to their calendar to make sure that they're that is our goal, Secretary of Energy, and certain people, they're really so all the dominoes will fall into place if we get the higher up people, all the other people will show up. They're trying to work at it. Yeah, so I'll communicate a 715 date to Keith, and if we need to make changes, it'll probably go to the right you
+
+Ryan Hankins  1:37:55
+know, the other thing, trying to be accommodating, if it's just like, we need to be out there and we need to be moving dirt, and we need to be like, that's fine, just know that there might be a cost associated with keeping our people, not put on a under
+
+Unknown Speaker  1:38:10
+a show, just for,
+
+Ryan Hankins  1:38:13
+okay, for schedule. But I will if I have to, yeah, because, like, the only way to keep those people when we start is to just keep paying them for like, like, the month they're sitting around, basically. So it's, it's totally up to you, but what you
+
+Unknown Speaker  1:38:29
+want to do just not ideal. Yeah, not ideal. I guess we have to go down that road.
+
+Ryan Hankins  1:38:39
+I think you understand the constraints that we're under?
+
+Speaker 9  1:38:42
+Yeah, I'll try to communicate that sometimes I don't know what's been communicated outside of Pacific fusion at that executive level. So if there's a different message that's been sent and a different date I must hit I'm going to hit it. We will figure it out. But ideally, you know, I don't, I don't want to do work just for fun, and I don't want a giant gap in construction, right?
+
+
+Transcribed by https://otter.ai

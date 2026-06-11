@@ -1,0 +1,248 @@
+Speaker 1  00:00
+Light went inside a concrete system, which is more,
+
+Speaker 2  00:03
+not so much just short term, but long term too, right? So at some point, right? If you have a TPO and has to be redone, you're probably redoing a lot of that spray on that deck, because it's going to probably pop off and come down, and then you just kind of eliminate that factor as well.
+
+Speaker 1  00:16
+Gotcha. So the pricing on the proposal, that there's two options. There was, if the joy star somehow considered a makeup with like a three six inch wall thickness, like top double angle and single angle, there's one price, and then the wall thickness of set angles are made up of a quarter inch. There's another price. You would still need to incorporate that into mass and into those red hatched areas on the primary members and secondary members.
+
+Ryan Hankins  00:45
+So like the deck, just so we're talking the same thing. So I understand, I understand the difference between these two prices. Can you guys see my screen? Yes, sir. So I can understand the difference between these just based on the thickness of how the joists are manufactured. Right, correct. Okay, so I get that part. This part, cementitious fireproofing with deck spray. So remember, in the R and D area, the tall, high bay area and the cub and then part of the Admin Building, mainly just the lab areas. They do want into messing. They only want cementitious where they only want cementitious in the true admin area, where I don't think we need a I don't think we need deck spray in there, based on what they gave us.
+
+Speaker 1  01:46
+So following the map and within the information with the long list of RFIs is that there is no testing to put into medicine on a TPO roof deck. So that's why the pricing and the drawings I presented with the bid should see magicians being sprayed in those red hatched areas as well on the deck itself. The green areas that were presented still had beams and applicable joist and columns in that area. So that's why it's labeled that way. And wanted to present the drawings just so you had an idea of how we came up with pricing and designated areas, and that's why the discussion for lightweight, insulated concrete is kind of being presented a little bit heavy. Is that if they wanted it to mess it on a metal roof deck, it can't be done. But that way you can have a clean roof deck, on a roof deck, and if somebody wanted to paint it for esthetic purposes they can do.
+
+Ryan Hankins  02:41
+So they're definitely less worried about esthetics, more function. And the reason why they don't want to do any cementitious within the R and D area is that when, when this reactor pulses, the whole building is going to shake. And they're pretty convinced that, I mean, they're doing one test a day, and they think that it's just going to be raining cementitious fire prevent.
+
+Speaker 2  03:14
+Yeah, no, we totally agree. So I think that was one of the main purpose why Adam tried to give you guys that alternate because, yeah, there is no UL testing to back up any into medicine on a deck that it's supporting a built up road system, lightweight concrete, right? And get a thickness that would achieve your hourly rating. Or you can go to this lightweight insulating system.
+
+Ryan Hankins  03:36
+Got it so basically, so what you're saying is like, Hey, we got to choose one of these two options, and then it's, it's either this one or it's this one. Like, these are, these are like one A, and there's like two A and 2b
+
+Speaker 1  04:00
+That's correct. You're looking at it correctly. Because with the semen tissues, if we put lightweight insulated concrete on, that's where the question of my RFIs came up with the UL design that was shown in the drawings. They showed like ULP 921, and that's classified as like a lightweight insulated concrete test for cement tissues. So in that instance, if you've got the light weights like concrete, we only have to do the beams and the joist with cementitious and said areas, no deck spray. And then our lightweight concrete division, I uploaded their proposal as well. They did have a lump sum, which you see on our proposal, but in their proposal, they did break out the areas for your view as well being the area, one, I believe, is a white there was a white zone area, I'll call it for the keynote so no fire proofing required. No we weren't sure you would need to, if you just follow the entire system, all the way across or halted. It just kind of rated areas, so they wanted to break it out that way for you guys. So, yeah, good.
+
+Speaker 3  05:06
+So that only so that doesn't include the area one from the fire protection diagram.
+
+Speaker 1  05:11
+Yes, that's correct. That one, that 1.9 does include areas one through four.
+
+Unknown Speaker  05:22
+I coverage. I did
+
+Speaker 1  05:25
+provide a little bit more information, I know, on a OneDrive for their brochure, since it was too large to send in an email and then on the building connected, I did provide another document they gave me as well
+
+Speaker 2  05:38
+for stuff in the past. But obviously, you know, into medicine on joist is kind of painful, not the best route to go. How much likeliness Do you think there would be to switch these over to a white flange beam? I think typically we see the scenarios, the cost savings that we're able to reduce, the schedule that we're able to reduce when we go to a white flange Ben is pretty significant when you're comparing it to a joist, and what the different costs are, I guess, from the steel standpoint.
+
+Ryan Hankins  06:09
+So give me, give me, like, a range of magnitude on that, like, how much? How much is this price being driven up by the joist?
+
+Speaker 2  06:20
+It really depends on what the steel size is with the wife land skills. I mean, I guess we can work through an exercise and make up some steel sizes
+
+Unknown Speaker  06:27
+that we may see at a roof, and kind of put something together based on that
+
+Speaker 2  06:33
+and show you what that cost would be by. Just yeah, I guess, before we did that, I wanted to get you guys input. If that's something that may be likely,
+
+Ryan Hankins  06:42
+I'm definitely I want to push, we're on the same team in terms of, like, pushing the right solution. The difficulty I'm going to have is, like, we're playing a little bit of a chicken before the egg. I'm going to go to the owner, like, here's how the conversation is going to go. Because I have to raise this to the owner, like, ASAP, but I'm going to say, hey, like, you're talking in the magnitude of $8 million for for fireproofing, and they're going to be like, holy shit, that's a lot of money. And I'm really like, I know. And they're like, what are our options? And we're going to be like, well, you're it's being driven by the fact that we have joist, and if we convert to beam, you know, that'll that'll probably be some good costs, or it might be some good cost savings for you. And then they're gonna say, Well, how much? And I'm gonna say, I honestly, until I have a design, I don't know, but, you know, I think it might be in the X percentage range of savings off of that 8 million Adam.
+
+Speaker 2  07:43
+Do you have enough info as far as in the plans where we can just make a structural takeoff on our own with certain sizes
+
+Speaker 1  07:52
+I can so I can use, utilize that same kind of direction I did with the joist with seven foot on Sanders and use a wide flange size instead. And then I can just grab a wide flange size from the chart that was provided where they had different listing of sizes and see what may fit appropriate in that area. I mean, the primaries were like either w 30s, and I assumed a weight of, I think 211, and I think there were some areas that may have had, like a W 20, 4w, 40, and I can gravitate something within that range as well.
+
+Ryan Hankins  08:29
+It Dave, Dave, this is good, Dave, but this also is not accurate.
+
+Speaker 3  08:36
+It's not accurate I agreed and not showing. And even the structural fans don't call out enough sizes and that tonnage calc that we had from the 50% would really need to be updated. But, I mean, yeah, I think we could do a best guess, but we do need structural input on
+
+Unknown Speaker  08:52
+these wide flange
+
+Unknown Speaker  08:54
+occurrence and how they're going to run.
+
+Speaker 2  08:56
+But I guess from a comparison standpoint, right? He provided you drawings with a layout, kind of what we anticipated in sizes. We can do the same with the wide flange, right? So when you're comparing a price to this one with the equal areas and whatnot, you can see your price variance from just a joist to a white flange, I guess. Give you a baseline part from, yeah.
+
+Ryan Hankins  09:17
+I mean, like, nobody's saying that we're holding any of these prices, but it's, I mean, our job right now is driving design to what the best solution for the project is, and so we just have to make sure we have data to back up some of those decisions that are being made, understanding that we only have the data that's in front of us. We don't have all the data. So clarification. Clarifications are important, and we welcome them, because we want to understand your pricing so we can be communicating it in the right way.
+
+Speaker 2  09:49
+No, perfect. Yeah, we kind of do the same thing with another drawing set of white flanges. You can kind of compare those two. It's going to be the same footprint, and we'll list the steel sites, all that stuff. You guys will have a good amount of information
+
+Ryan Hankins  10:01
+to make a comparison with. Okay, that's absolutely perfect. We really appreciate that.
+
+Speaker 1  10:07
+One question for you, and I know it's a small piece of the apple here. Is there any direction that you guys may have, or anything we need to ask regarding the spray acoustic insulation that the owner is going to be looking for right now, that 9.9 1000 square foot of deck spray is kind of following like two inches to achieve an NRC rating and then utilizing the most expensive color, this time black, without knowing what they were doing. There was no spec. Is there any direction or RFP, you'd like me to send your guys's way to push that off to the design team.
+
+Ryan Hankins  10:45
+Where's this? Where's this? Even at I guess I haven't, I've been so focused on everything else. Where's this scope happening?
+
+Speaker 1  10:54
+So it popped up on a revised bid form for building connected. And then they just listed 9.9k square foot spray, acoustical.
+
+Speaker 2  11:07
+So who knows where it's going. Justin, got that quantity, I guess.
+
+Ryan Hankins  11:11
+So I guess Dave,
+
+Speaker 3  11:15
+form together. Man, I'm jumping in Midway. I don't unless it's, unless it's this area, this hatch, I I don't know what else would be kind of that 10,000 square feet, but I don't That's That's not it. So I'm not sure. I'll double check the VC bid form, but
+
+Ryan Hankins  11:35
+I'm not sure what that the only area that would make sense to me, would be the admin area, but they, in my, in my opinion, they haven't really talked about that.
+
+Ryan Hankins  11:55
+Yeah, look at that. We saved 100 grand. Woo hoo. Okay, so the schedule, so if we go and I, first off, really appreciate the lightweight concrete durations you guys gave as well, because that kind of helps it. But like, what are we talking from a schedule standpoint, if we go to beams and if we go to a lightweight concrete, you're at eight months. What? What are my options there?
+
+Speaker 1  12:34
+So I provided eight months right now kind of as a base for our sense of things. With submitting, we can always accelerate it with additional crews if there's a certain period that or a window that you would need something done. So I mean, I can, if you guys want it quicker, like four months, five months, three months, I we can look at establishing additional crews into the proposal to go that route.
+
+Ryan Hankins  13:00
+But would that be additional cost, or is that just accelerating your hours and it's just
+
+Speaker 2  13:07
+to mobilize additional crews out there? Not a huge impact, but there'll be a slight adjustment.
+
+Ryan Hankins  13:14
+Does that mean we have to be completely out of those areas while you're working for those three months?
+
+Speaker 2  13:19
+I mean, that's a big factor, right? When we're spraying these intimate sense, we need these areas to be pretty much accessible with no other work going on in there, if not, you know, if we're tripping up over people working at those heights, right? I mean, it's hard to kind of get around some of that stuff. So preferences, they have it open for us to start rolling through there and get out of the way so people can follow in right behind,
+
+Ryan Hankins  13:41
+do is it better to spray on the ground before we go up with members?
+
+Speaker 2  13:49
+No, I think we start running into that. We almost need to start going into a different intervention material, which would be more expensive.
+
+Ryan Hankins  14:00
+And there's from a shop standpoint, that just adds time to getting out there. Does that offer any value you think, to having it shipped to your shop or you just think, no,
+
+Speaker 2  14:11
+not, right? Joyce, I definitely don't see that being a benefit. We obviously do a lot of shop work as well. I think a lot of things that get lost when people start pushing the shop applied aspect is you still got to go finish all those connections and block out areas, which is time consuming at a low production rate. So it's just something to keep in mind. It's something we can look at, material selection, how it is, is probably the best route is to do it in place.
+
+Ryan Hankins  14:40
+Okay? Because, I mean, if joist so to let you kind of understand kind of where we're at. So the mill, the steel mills, I'm sure you guys have probably heard from other projects, are a disaster right now. The shop, shop fab is a disaster on the steel side. And so we're trying to, we're basically, we just got awarded, like within the last couple of weeks, and we've been telling the structural designer, Thornton Thomas Ed, hey, you got to get your steel mill order done so we can go buy steel. And so I don't want to hold up anything. However, if we think it makes more sense to have the joist shipped to your shop. I think we've got more time on the joist like I think, I think we can buy joist, get it to your shop and get that sprayed before it actually gets installed. If that helps with your pricing or in your schedule. Versus, versus, you know, doing everything in your shop, yeah, I
+
+Speaker 2  15:44
+think with the joist itself, doing a shop application, I think you run into a lot of potential of that material cracking. I think there's the joists aren't, especially at those lengths, to have them trucked and erected and not have them have some kind of flex Tom, where you would start affecting the bonding of the material. Got it out there, and we got to do a bunch of repair. That kind of defeats the purpose, though.
+
+Ryan Hankins  16:12
+Yep, totally agreed.
+
+Ryan Hankins  16:22
+Okay, I'm thinking, I mean, if we do, let's say we do three months. Because I mean this, like, this is a total add to our schedule right now. Mean, if there's an, if there's an ability to expedite it, more than that, we would, we would welcome it, but it, let's, let's say we stick with the three months for a second. Could we do? Could we section off, like, if we're working inside of the when? So, when I say the R and D space, do you know what that means? It's really the high bay area.
+
+Speaker 1  16:58
+Yeah, that's area three mostly, or, if not all
+
+Ryan Hankins  17:01
+three, correct? Yeah, the whole, the whole thing for three, but there's the higher there's the heist, the high roof area, and there's a low row, low roof area within that roof three, that whole area is R and D. We would we still want to work in that area. My question is, is, if you're working three months, what does that look like between roof four, roof three and roof two? And can I be sectioning off half of the building? Could I be sectioning off half to be working in while you're working on the other side.
+
+Speaker 2  17:44
+Yeah, there's potential for that. We see a look at what those durations are with the amount of crews for that three month duration. Just make sure that we're not putting too many people in an area where we're not being productive.
+
+Ryan Hankins  17:55
+Totally agreed. So you so, I mean, we'd be working in the same area. Would you need, like, a temp wall up? Or can we just do like, a, like, a cloth, like, I'm making something up, but, like, what is a bird
+
+Speaker 2  18:09
+working in an area? We'll try to probably plastic it off. There's other work going around, just so we're keeping our stuff in a contained area and it's not getting over sprayed on the other stuff. That's kind of part of our scope anyways, just having that plastic divider in there and just keeping our scope away from someone else's okay?
+
+Ryan Hankins  18:28
+So you would probably be, we would, I think I would like some kind of a sequencing diagram of kind of how you'd propose to bite off the apple, so we can, we can see if we can marry that up with our sequencing plan. But it looks like we've got a little bit of a coordination effort. Hopefully we can turn that three months, you know, more into Not, not a minimal impact, but maybe a month or month and a half of total impact to our schedule on the critical path.
+
+Speaker 2  19:00
+And three of your critical path. What's that? It's three zone, three of your critical path. Or, I guess, really, what is the main area?
+
+Ryan Hankins  19:08
+Yeah, we're going. So the sequence right now is 324, or, I guess three. We look at two and one roof, one and two as the same. So it's three, just going across to finish out the low roof, and then going over to four. We really don't care, from a schedule standpoint, about two right now and one. So, I mean three and four are a critical path. We want to get in there as soon as possible to start laying pipe. We would probably have them. Mean, I did a Google data center with you guys once in Reno where we looked at putting hangers in first. I don't know if that's something you guys recommend or if we should lay off that, but would be open to talking about how that sequencing would work as well.
+
+Speaker 2  20:00
+Yeah. So for your cementitious area, definitely recommend getting all your clips and hangers in beforehand, just to eliminate the quantity of patching into medicine kind of gives you some flexibility, right? You can get in there and get some of that stuff put in, or you can come over with beam clamps over the internet and just clamp over it. So if you have any changes, you can just move the clamps around stuff like that. So I'm not sure what kind of attachments and equipment and whatever else is going to be hung up there, or whatever. So, but, I mean, it gives you a little bit more flexibility. Got it?
+
+Ryan Hankins  20:33
+Okay, yeah. Well, probably, my guess is beating clamps. But maybe if we're doing, you know, lightweight concrete. I don't know if we can do blue bangers in the deck, you know, those things that get cast in the concrete, but it's probably something just to work through. I just like to see, you kind of see where my head's going. I'd like to see what I can do to help expedite the schedule. And I understand it's not all just throwing more labor at it. It's how do we work together in the same area? Yeah,
+
+Speaker 2  21:14
+no, I think we've got an idea. Let us get through the comparison for the wife lane to kind of give you a baseline of savings and cost and schedule wise, and then put together some more sequencing and schedule info for this as well. Okay,
+
+Ryan Hankins  21:38
+good deal. Yeah, would love any any other help you guys think you guys can give to us to help sell this to the client on what the right thing to do is, we'll, we'll definitely take that. I mean, we are our proposals do made as far as our updated DD budget. It's due Friday. Just mean, this is one of the things that's just, I mean, granted, it's not our fault that this is happening. This is the client going to a type 1b Building, but it's going to stick out like a sore thumb. We're going to be talking about this a lot. So just know that the more information you can give us, the more we can spend this in a positive light, and we can really get this thing to keep going on track.
+
+Speaker 2  22:25
+Okay, yeah, not a problem in these buildings. I've been changing and people being like, what the hell
+
+Ryan Hankins  22:34
+work through it? Yeah. I mean, I was a little hesitant to just say, Hey, let's go with the semen, the the lightweight concrete. But obviously, after seeing everything now, I'm kind of like shit, we should really think about that. And if, if you're saying, if, if you're saying, throughout your sequencing discussions, that we can still do three months without lightweight concrete, we may end up going that route, but, oh, but then you said we, we can't. We still have to spray because, yeah, they're not going to want to spray.
+
+Speaker 2  23:10
+So, yeah, that's what we're running into. That's why we definitely just don't push it on to you. Just have that information out, because a lot of times we get in these clean areas, they get hung up on that aspect where there's going to have to still be fireproofing on those decks, and they don't realize it's going to be scary, or something that could flake off or break off, or talk about vibration or whatever else
+
+Ryan Hankins  23:35
+when they do these tests, and If the building theoretically was to it's, it's violent reactions that happened inside of this reactor. There's a pretty good chance that some of this stuff is going to crack, I'm guessing, right?
+
+Speaker 2  23:52
+Yeah, potentially, I guess. I mean, do we have any kind of information on what that looks like?
+
+Ryan Hankins  23:59
+I do, but I don't know how much I can really share.
+
+Speaker 2  24:04
+Want to throw out there to the manufacturer as well. Like, is kind of going in these facilities. I mean, hopefully the material is soft enough where it absorbs some of that, because some of the investments get really hard when they set up, and they're prone to cracking under, like flexing and other stuff like that, but that's your epoxies that are more pricey and more of a shop. Applied approach got it other solvents of water based materials are a little bit softer, right? So hopefully they have a little bit more forgiveness in them in that condition.
+
+Ryan Hankins  24:40
+So to give you the other thing is that the building the roof one and two is lateral load from roof three, because of how, how big they want these bays and column spacing. And so building one or roof one and two is taking on the lateral load. And so there will be a little bit of, I'm not saying it's microscopic, but it is give and take, you know what I mean,
+
+Speaker 2  25:10
+yeah, so there might be some vibration, yeah, travel down.
+
+Ryan Hankins  25:14
+Cementitious is exactly Okay, man, just, you know, that's just for context. But start thinking about that as you guys look through, you know, providing some more information any context you can give us help for the discussion would be appreciated.
+
+Speaker 2  25:31
+Yeah, these other stuff to help, like, alleviate some of the issues down the road from that with the cementitious bug, and then we're just talking about adding more costs and more scheduled days to put in like a laugh or mechanical bond stuff like that. I don't know if that'll be needed or not.
+
+Ryan Hankins  25:48
+I mean, what I would say is, let's at least give them the solution for them to say no to so that when something does happen later, we could say, hey, we gave you the option, you declined it. No, I liked it. Man, there's like, there's a little bit of a political game here, on top of trying to get this through the ringer. But yeah, whatever you guys can do to help us structure the conversations correctly and and I may even bring you in to talk through this. Yeah, not a problem. So,
+
+Unknown Speaker  26:29
+yeah, we got a couple of things to get back to you guys on there.
+
+Ryan Hankins  26:33
+Is it possible to get some of this stuff back this week? Still, there
+
+Unknown Speaker  26:39
+shouldn't be an issue, right? Adam,
+
+Speaker 1  26:41
+no, it shouldn't. I already have an idea what I'll do with the beams and go from there and just swapping some stuff out for that at least.
+
+Unknown Speaker  26:54
+Good deal, appreciate it and see what we can do to help.
+
+Ryan Hankins  27:00
+Sounds good. It's good to talk with you guys again. I know I have a I always call Chris shippy whenever I get some fun project, and this is definitely within the realm of a fun project. Anytime you
+
+Unknown Speaker  27:15
+call him, he just passes it on to me. Anyway. So I love it. I love it.
+
+Speaker 3  27:24
+Thank you guys. Appreciate it. Thank You
+
+
+Transcribed by https://otter.ai

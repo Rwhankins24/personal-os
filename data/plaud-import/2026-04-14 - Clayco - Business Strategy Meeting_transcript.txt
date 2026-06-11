@@ -1,0 +1,542 @@
+Unknown Speaker  00:01
+Okay for Barry,
+
+Unknown Speaker  00:39
+oh, yeah, time,
+
+Unknown Speaker  00:47
+yep, I really,
+
+Ryan Hankins  00:54
+I don't think I'm really seeing solar and really, yes, I know. I know what I know. I don't know what I know, what
+
+Unknown Speaker  01:22
+what else are you talking about? I was in the FDA when they Tom, did all the talking about parts of that Enterprise Park.
+
+Ryan Hankins  01:39
+Yeah, getting a lot out of it though.
+
+Unknown Speaker  02:04
+Apologize.
+
+Ryan Abbott  02:10
+I just want to kick off what we're doing for the rest of the afternoon. We're getting through a lot of the existing business where each one of those portions of our business are looking for their next opportunity and matching up with the outside world. It's also a really neat opportunity for you to hear about the things that the company's been doing right, things that you may not have experienced. Like sei is one I'm super excited for in a little bit here, because you're going to see the modern framework of that business and how it's working. We're going to see how we go here, but I think we're going to reserve our questions for the end. So let's plan on that for right now. To keep some good notes with things that you're curious about along the way, and let's get started with life science.
+
+Unknown Speaker  03:01
+Good afternoon, right after lunch.
+
+Speaker 1  03:02
+My name is Jon Rivero, for those who have not met me yet, I was not here during Aspen, but I like to think that I'm here because of aspen, so I wanted to do the rest of the team. Paul de Benny, Mark Hanson, Zac Brown, and who doesn't know, Jon science. And then we have worked with many other groups, and I want to, just before I continue about the rest of the team, I put most of the team that been working with us in the last few months. But I don't know if you all saw the welcome meeting for the astronauts. There was a lot of things they say, but there's one thing that stuck to me when Carolyn mentioned what is the crew, and something that I read in about Clayco, is if you want to go where we are proposing to be, we need to start working together, closer and trusting and how have accountability on each other. And that's something that we think we look forward to, that we already started doing, that we also go through that Clayco, which is really interesting, exciting, and having the experience of working in other companies, the potential that we have in this country, the culture is so just to start on this slide, we figured, how do we break into a life science market that they really know playful? It's a very hard market to be because most of our competitors, they've been around this 40 years so just to put in perspective, if we try to get into the data center market 20 years late, we have a disadvantage, and that's where we are right now. So how we break that out? We actually look into what is the pain points on the life science clients that none of our competitors are able to do, and it's really understanding the business and being able to deliver projects on time, on schedule, and I will say, 95% of the time, none of our competitors are able to do that. So we look into technology, we look into our processes, and we integrated everything in a way, utilizing the latest construction opportunities, using advanced work packages, and we created a system that we will love. Not going to talk about it today, but we love anybody interested on how we integrate the whole execution and our system to benefit our clients. Be happy to do that. The other thing is integrating the enterprise, which is what I just started talking we've been working with with all our groups in the enterprise, how we can collaborate, because we know for a fact, and we share this with you guys, that there's no way we can make our goals especially financially, or meeting our clients expectation if you don't work as an enterprise. So for those who don't know about what's coming up here is in the last 20 years after, especially after covid, they realized that all the active pharmaceutical ingredients have been manufactured outside the US. So we see a lot of API manufacturing facilities coming in, and Mark is going to share what that opportunity looks like, fill and finish facility. They do all these API they have to find alternative people that people so it's going to be all our facilities that are going to do in each portion. And there's a lot of new technology in the last five years. A lot of cell and gene therapy is taking those new advances and take it into small scale, to a different type of population. The key barrier, like I mentioned, is that onshoring of all this big manufacturing, but we see a lot of influence with that we didn't have before. The US dominant, I guess, leader in life sciences. And we see serious competition from China. They're getting ahead of us in some of the technology, which is for the first time ever, we see Indian companies getting to do things better, and South Korea trying to improve the process even better than any of our competitors in the US. We see a lot of the drug clusters that we haven't seen in 20 years. So the weight loss. GLP, one, is something that we actually work in several projects to support that. And there are being too much. I don't know how much you guys pull the cancer research, but a lot of states have pulled billions of dollars on research, putting a lot of companies from all over the world to do research here. A lot of these companies are coming up. So now this all year, now, a lot of new technologies and drugs coming out that we need to understand how it's going to go. So we haven't anticipated the need. Where we are right now, for those who don't know, we have several projects at Lindsay in Indiana. We have one small job at Memphis, and we're starting a new design build job in with me, or here in St Louis, my key competitors here, DPR has been the leader of licensing service providers for the last eight years as well,
+
+Speaker 1  08:07
+speed competitor. And again, they have a good culture, but I have good reputation within the mine to trust them so they actually clients go to them. And that's kind of something that we learned we had the big engineering companies Jacobson floor that had been doing this for 40 years. And there they go to companies Gebel. And then we have the engineering companies like CDE and IPS, who actually started trying to do construction, and they have failed many times trying to integrate construction into design, but they have very good engineering groups. And then the regular Turner. We have people here that come from there and so on. So the last thing I want to just share before I turn it to mark is what is going to take for us to win license. License. My experience been doing this for 35 years. Is relationship we know who are, who's responsible making a capital project go through. You need to be there early. If you're not there early and you just wait for the RFP, chances are you're not going to win, or you have to win by price, as that's not our business case, right? So face to face with the clients is crucial. Trust is what we aim to identify. We get clients the trust, then you will be the first one. And then most important thing for life science is Pep market for them to capture the market, because they have all these pharmaceuticals are competing for specific market. They have similar clothes. So whoever gets there first is going to capture the market, so the schedule is always a problem, and then for us to support that, we need to have in house technical expertise. And I know AJC and Jon is trying to bring that on, and we're looking for options to do that. We hiring key people bring that up, that create that trust, and then what are we all working right now is integrating this model. How do we can actually integrate and provide a solution that not only work for clients, but I think that we talked earlier how we can maximize our enterprise, if we can bring solutions that can really help clients and bring a value proposition, I will say, most likely that value proposition that we can bring can maximize our enterprise as well. So anyway, the last thing is, the very first thing they ask is, show me your team. You need to have a solid team, so we trust you to give you something so important. So that's my part.
+
+Ryan Abbott  10:45
+Real quick, just an overview. Shawn mentioned it earlier, but this is one of those markets that has a 10 year tailwind, right? If you sort of think of the technological adoption of being able to synthesize a brand new drug, do it all through compute and then bring it to market. Like this is an accelerator on something that's never been seen before. And if you think of, at the end personalized medicine, where something is specific to Alex or pat or Ryan, right, we're just on that step, you know, heading into that environment to where, like, what the science and technology that's going to go into this space? It's just extraordinary. So, like, 10 year tailwind. That's why we're going to spend a bunch of time talking about where all of this is going to
+
+Speaker 1  11:32
+take us. Just want to say thank you. What we do in life science is really exciting. What we're doing with milli board is a new way of providing the medicine people have affected by cancer. Billboard find out a way to actually transmit instead of just putting people on radiation or chemotherapy, they have a way now that they can actually have a transport they can take that chemotherapy to only the bad cells, the cancer cells and and that's going to let people actually be able go through this therapy, be cancer free. And it's a good technology that is new, is going to grow, and that's what we part of be helping people be able to get healthy faster. And I think it's something that faith so this graph here is pretty when we say the job is $9 billion this is where we actually say, where the enterprise complete. Yeah, construction is only 40% all the equipment process. And that's where CDC we want to call because we want to be able to capture that assumption engineering, it could be up to 12% depending on the type of process that we're going to work on. And then there's another portion on that is commissioning qualification of education, which is really in life science, what is important, and that's where we think we're putting a differentiator. We're looking into what is important for the clients, and it's at the end for them to be able to operate this facility, and that last portion of services is key for them to do that. And again, some of our clients, besides just a sample I mentioned, the GLP one, there's a lot of biosecurity working with working on this ADC campus for people. So it just give you a perspective of why we need to work together.
+
+Speaker 2  13:23
+All right, get in there. Mark, okay, so the announcements and news about biotech facilities come to the US control a lot of people. Well, in total, over the last year, they've announced 500 billion that is going to be coming into place over the next 10 years. Now that doesn't mean they're going to go build 500 $500 billion worth of work in the next 10 years. That's a inflated number for for show, but we think about 30% of that will come into place over the next 10 years. And these are some of the areas that that we're going to see those come into. When you look at life sciences and Clayco, we really think about three, three markets, biopharmaceuticals, which is like vaccines that you would put in your arm, pharmaceuticals, which is like pills you would take, and then med device, which we really don't see a ton of right now, and it's lower cost dollars. So the first two is where we're really focusing a lot of our energy, but the top five spend over the next 10 years going to be aseptic, fill, finish. So filling up files, that's going to be really key to the pipeline, actual pharmaceutical ingredients and peptides. There's a lot of regulation around peptides right now. So GLP, one is a peptide. There's a lot of health benefits, therapeutic proteins, antibody drug conjugates, which is what Jose mentioned, cell and gene therapy. So this is personalized medicine. So it takes your genes or your cells, customize it to you, and then you're given a vaccine for that product, and then packaging. So a lot of downstream you're going to see a lot of ASRS, cold storage. So we see that as a major trend. I assume everyone gets a slide deck. You kind of see where the spend is over the next 10 years. So what does that mean to Clayco Well, over the next 10 years, this is a graph showing the spend of the life sciences market so, and this really does not even count, like we think this is going to keep going, but this red line represents life sciences project demand over the next 10 years, and we think it peaks a little over 25 billion in one year. So by 23rd 2029 there's about 25 $26 billion worth of construction happening that year. This blue line represents capable contractor capacity. So doesn't mean an owner is not going to hire someone who's not capable, but the people can really do this really technical work. Is this blue line. And so right now, you know, Jose mentioned it, we're 20 years behind getting into the space, because really hard to break into this an opportunity, and I think we have the expertise to bring the right types of talent to fill that gap. Part of this five year exercise was doing a revenue forecast based on the enterprise. And so this red dotted line represents Clayco is market share of that market over the next 10 years. So right now, we're targeting 540, 5 million in sales this year. But 10 years from now, we're going to be we're going to be looking at $2 billion in sales every year for this market. So what is, what are the observations from this marketing this short fall will definitely invite non qualified contractors into the space so we can figure out how to increase that our market share and deliver well. Or we're going to be dealing a lot of clients who don't, you know, they're not satisfied.
+
+Speaker 3  16:42
+I'll cover at the very end. Let me cover just a brief statement of why life sciences helps the enterprise and what we see a lot of times. A lot of companies value it because it doesn't have the spikes and the drops. It's a very consistent revenue flow. So that's just a quick statement of where life sciences and how it fits in an organization. Helps in downturns and in the high turns. It may not be as high and spike as much, but it keeps us even. I'll just touch we already. I'll just let us look at these, the project opportunities. We obviously, we mentioned this a lot with the enterprise. We have to be fully integrated within the enterprise, so we're all working together as a team, and one of those could be clean room panels. And then we talked about personnel. We definitely need these personnel. And let's jump, because we're about at a timeline. And then these are next steps. Well, look at these. I'll let you look at these steps. We've talked about them. We got to get account managers. It's really in life sciences, if you go regional, that's very scary. I'm a poster child for that. You really want to go account managers more and managing key accounts and working with accounts and having the full project team involved. But let me just finish, and then the last one I'll put here is the North Carolina market growth. If you can watch this as a key indicator, if we're successful in North Carolina, you're typically successful around the nation. If you are, then that's going to be a concern. So you'll see major focus there, and with three last points I'll leave you with is we need to. First point is we need to swim in a blue ocean. Now, it's not like my triathlon days when I drown in a blue ocean. It is. It's a blue ocean strategy, and we have to be we can't just differentiate. We can't be incrementally better. We've got to be radically different. We got to be completely different. Think of every sinew and tear it apart in our proposals and everything we do to be great to what we do last is guy creation through client ready deliverables. I think all of us face that. We get a document to review and we have to fix it, then we review. So what we're talking about is making sure we're efficient at every level. Everyone feels like what they're doing is a client ready, deliverable, and last but not least, this gets into satisfaction for our teams, it's fanatical gratitude with a tenacious drive forward and the fanatical gratitude. Let's celebrate the wins, but that's all we tend to celebrate. Celebrate those little incremental wins along the way. Make sure the team understands that, otherwise, life sciences can become a bear for them and then. But you can't just be fanatically. Have fanatical gratitude. You got to have a tenacious drive forward. So we must, and I speak that very loudly is tenacious is key. You can't just drive forward. You got to have a tenacious drive, and want to make sure this happens. So that's all I have for that, and I appreciate you looking through our life sciences slides. John Zac Do you
+
+Ryan Abbott  19:30
+think you want to throw in there while the CSI comes up? Are you having fun? To keep it simple, just real
+
+Speaker 4  19:44
+quick, said it. We said it on a few different slides, in different ways. But the key takeaway I would give to this group, the life science type of projects has really evolved in the last couple of years. Used to be a lot of small and medium sized projects, and maybe just the occasional one or $2 billion jobs, it has flipped, you know, probably tied to the current administration and other reasons. It's now a lot of billion dollar jobs, and not as many small and medium sized jobs. My opinion, I would love to move to Clayco. I think Clayco is really well positioned to hit that curve and be a new player from a build perspective, I think it is going to be a hard is going to be harder for LJC because there are a smaller number of small and medium sized jobs, so just the size of Clayco and capabilities can find itself well, entering into construction. Do you think it's gonna be harder
+
+Speaker 3  20:38
+for us to I will say this, we're in a turning point year where, if you look at different groups that have started different markets, this is the year to do it. And we're very well set for that year. To your point, Jon, and I think, with success this year, and that's another key driver to watch that success this year from us. We must succeed, and then it's going to really lead us into great things.
+
+Unknown Speaker  20:58
+Okay, we're going to be in LDC.
+
+Speaker 5  21:03
+Is here. First of all, big thank you to Ryan to organize this afternoon theme of global accents across the Clayco universe. Finally, finally, Michael was out there. Jeez, I waited all day for that. Other people who thought, Who is this guy just got the chat GPT AWS, who is the funniest German born business leaders in Chicago? I promise my so. CSI drama here, two of the things CSI in Chicago. The question was, how should CSI grow in Chicago? Two of my favorite things, Chicago, best city in the country. Second, concrete. Why is concrete important? Concrete we can make a lot of money, as we'll show exactly without concrete, there's no stadium. Without stadium, there's no soccer. There's no soccer, there's no old cup in the summer. So just be clear. So we had, Anthony told me he had the best team. I think that's what I heard. Great team to work together. So how we look at the concrete market in Chicagoland, our kind of design field is probably 30,000,000,005% so it's 1.5 billion opportunity for CSI in Chicagoland. So it's a real opportunity. Historically, the team has kind of come in and out depending on projects. So we look at really, what do we need? We really believe we need a roughly $50 million ml baseline to build a consistent, global, future oriented business. We need just a one off. You need a strong pipeline that we can pitch CSI in alone and with Clark and as well. Al, sorry, we need to figure out at the beginning what are the smart projects that we can really make margin on. So more foundation based the great thing that Piper in Chicagoland is strong. I mean, with Conor, with Otto, Jason cop just joined, and even myself, we think we can get in any room we need in Illinois and Chicagoland. So I think the opportunities are big. We just have to think much more. When can we bring CSI in?
+
+Speaker 6  23:00
+And I would look at every, every one of those jobs. If that was St Louis, we would be on that job. So that's the mindset we got to give to Chicago. How do we get concrete strategies there? This is our best sales force sales plan that shows our region and where we're at in location. Shows that spot in the center is yellow. That's the area we're currently doing union work. So if you take a look back at this year, we did 470 million of that. 470 153 million of that was union that earned us a 12% fee, $18.6 million of profit on the jobs. That's 18 million reasons why we should be in Chicago. So speaking of unions, naturally, we would need to get signatory again with the carpenters, laborers and cement Masons. You know, we feel we could tear stuff out iron workers and operators. But naturally, the unions are kind of in the mode of trying to trap us right now, so we've got to be very cognizant of that. But we feel the Chicago land area would be pretty safe to that. As far as the competition, you know, the downtown competition, McCue, adjustable, global, you know, that's a three to five year play for us, getting into the loop. I mean, we're going to start looking at some of the outskirt type projects started like we started St Louis. You know, for the longest time we never did Clark 2005 in that area. We start with the heavier foundations, and we partner with companies like skirt oh and Martin and Olson to do the flat work until we get enough database of work to where we can start our own that's the hardest scope to get going. Yeah. So looking at some of the opportunities again, just to sell onto the existing product projects that are already going become a part of clayco's current pursuits, leveraging Chicago land networks for future CSI only opportunities. Again, that's down the road. Certainly we're going to get in again with Clayco that's built outside of Clayco, down the line and the gaps. The challenge once you get up there is the union agreements. Once you sign the union agreement, they're multi state. They weren't singular counties. So that's an area. The other thing we got to do on our concrete strategies. We got to be president. We got to have our leaders inside the office to collaborate with the team to sell the work as one company. Yeah. So this chart here is just kind of a revenue pipeline. So showing in 2027 again, starting somewhat small, with around 25 million in revenue, you know, anticipating the profits somewhere in the Seven 8% range, obviously, paying some tuition to get back in the market. Over a five year span, we're seeing that grow into a, you know, potentially, a $70 million market that's kind of our sweet spot right now. And obviously trying to bring up the margins to the 1010, to 12% range would be ideal. I'm going to cover the recommendations,
+
+Unknown Speaker  25:40
+do what we're doing in
+
+Speaker 6  25:40
+St Louis and start doing in Chicago. We need everybody in Chicago to have concrete strategies top of mind, just like St Louis. So every pursuit we're on, we need to do our due diligence and get the right leader up there that can sell and build work and team build. And one thing that we do have in our vans, we got one of our strongest superintendents that lives in normal Illinois, barrel Wacker. He runs the Rivian job in self perform. We're all support for the field leaders. We got that person. Another thing we can convince this group here to give us Jeff Gebel back. That would be great, too. That's the recommendations of the app. Next steps. Next step
+
+Speaker 5  26:17
+are very simple, and I think we have done it already last couple of weeks, a month, since we had this task force to sell CSI much more in I think Conor always does a great job with the go. No Go says, How can we think CSI and early on, Jermaine, I we talked this morning about some opportunities. You need a leader. Chicago, people, you need a face. It's the organization, but you need a face. Can be in the market. And last but not least, as well, longer term, are there other really kind of partnership companies maybe don't have an acquisition opportunity? These are the three steps can be agreed on. Anthony with the team. I love any feedback, any support. And Roberto asked me to ask if you have any World Cup tickets, reach out to him.
+
+Unknown Speaker  26:59
+And he got five minutes back. I
+
+Speaker 7  27:06
+that, yeah, Chris and I'll be happy to continue that training. Michael, you're funny.
+
+Speaker 7  27:21
+Position for sweating, Brendan, or Brendan is taught me. Took me to my first pickle ball experience to get lunch. I'm still recovering from that little out of breath, very sweaty, but you haven't tried the pickleball court slow. So with that, we will get started so our team where your photos were positioned well,
+
+Unknown Speaker  28:06
+stuff, and Scott
+
+Unknown Speaker  28:12
+Watkins also out of Greenville leader the
+
+Speaker 7  28:20
+of leader industrial. So wanted to hop into this. So really we took a deep dive on food and beverage. This is a space we've been working in for several years. Looking back at early 21 to 25 in recent history, we've done just between a billion and a half 1.8 billion in what we consider beverage work. So went back and really tried to define what is the food and beverage market for Clayco. What's that mean moving forward? So serviceable market in this space is really about $42 billion so Chris and I spent a lot of time talking about this. Of that 42 billion, we want to be intentional about what we chase. And really that's probably, you know, somewhere between eight and $15 billion of work we would actually want to pursue. So that's big capital intensive projects, green field
+
+Unknown Speaker  29:11
+or major brownfield renovations.
+
+Speaker 7  29:14
+From a Clayco standpoint, what that's not is smaller retools, automation, upgrades, etc, things that require large staffs, but it's smaller revenue, good margins, but we as Clayco are just not built for that. It is something that we want to talk about, maybe employment strategy to do some of that work, but just to get in from some of these larger capital intensive projects, you really have to have that resume. So it's a it's a little bit of a blind spot that it's hard to solve for. Of that attainable market, we really think that in the next three to five years, with the right resources, that we could really go out and capture a billion today. Now, with that said, we really need to work on some of the actions that we have online from the deck, get a good business plan together to actually go execute on that. So this is space that we really have to be intentional about what we do. It's easy to get bogged down in the various project types. Does that mean cold storage? Does it mean little client upgrades, etc? So we have to put together a business plan that really makes us intentional and make sure that we're flying craft properly. So market focus, food manufacturing, plant, protein beverage, frozen foods. A lot of the plants that you see on right fall in these buckets. The more complex the food and beverage project, the more likely we are to want to be involved with the ones that are broken up,
+
+Unknown Speaker  30:39
+that are Cory shells, and we're
+
+Speaker 7  30:41
+not able to apply Enterprise Services, we probably won't shy so drivers that's propelling
+
+Unknown Speaker  30:49
+that 4042, 3 billion is
+
+Speaker 7  30:51
+upgraded plant. So it's a lot of automation. Plants are just becoming outdated. They need to replace those facilities stronger demand
+
+Unknown Speaker  30:59
+for protein, compared
+
+Speaker 7  31:00
+foods, etc, all coming back to the US, and then also just utility upgrades. So competitive landscape, the big players in the space, Haskell, CRV, all in the
+
+Unknown Speaker  31:13
+several 100 million to billion.
+
+Speaker 8  31:20
+So just building upon what Austin said. So first of all, we all have an accent as well, more southern than Michael. So appreciate we think the current presence, as Austin said, over the last four or five years, we've achieved roughly $1.2 billion we're highly ranked on the ENR. We have a lot of, I would say, momentum in the industry. However, part of the challenge is, as Austin mentioned, a lot of the projects are small, so we have to find a, maybe a solution to help us penetrate on those smaller jobs, to stay plugged into the conversation, so that when the larger jobs that are more appetizing for the enterprise packing, we're not just a check in. We're actually in there with a relationship and able to drive success in winning a job. The cater for food and beverage is four to 6% annually between now and 2030 so that compound annual growth. We expect the market to continue moving in that direction. A lot of the activity is focused around protein, dairy, you know, some of the core markets where we're seeing large investment, but also some of the, I would say, private label, kind of emerging brands where, you know, the Pepsi's, the codes, the big names, are also doing projects, but they have long tenure of established relationships that are harder to break into. They typically have more difficult contracts with some of the, you know, emerging brands and grow to help them grow. It puts us in a position to be their long term captain's partner, you know, for many years to come. In addition to trying to navigate the difficult contracts with the ABN, maybe that's not but as an example, someone who's
+
+Speaker 9  33:02
+difficult and a good point there is, you know, we just made close to 15% margin on course, project, smaller project, and that that's kind of stepping stone for the much bigger market share they want to get to. So you can get good margin, especially with enterprise offering.
+
+Speaker 8  33:15
+And I think that's the key the one of the reasons this market is so appetizing, even though there's not larger projects is because the integrated model and how we convince them 10
+
+Ryan Abbott  33:30
+plus percent you see how we're appetizing into Food and
+
+Speaker 7  33:40
+Beverage, yeah. So really talking through opportunities, gaps and needs. So when we when we looked at this, it was really kind of two different buckets of two different strategies, one for Clayco and one for LJC. And really those can and should complement each other. So positioning Clayco talent for for servicing the emerging sub markets. That's a that's one that we can tackle jointly with Clayco LJC. But also really want you know some of these startup, smaller projects, they might not be a good fit, but as they grow, those projects will grow with them. And so we want to position the Clayco brand and enterprise recognition so figuring out a strategy to get LJC integrated with those people working on some of the projects that Clayco might not be able to service, developing a plan to get some partners in place that we could carry into those larger projects as well. And then, and then also, as Clayco, again, some of these projects are larger for startups, so we want to identify those people and start working with them. So we would talk a lot about this today, but really maximizing enterprise participation, we want to focus on the projects that we can get, you know, five plus services involved with. And when you step back and look at the food and beverage projects, most of them are design, build and can be delivered with. You know, great enterprise participation?
+
+Speaker 8  35:07
+Yeah, sure. So the annuity accounts are, you know, a lot of the engineering or LJC work in this space I would call is the feasibility work. It's helping the customer go in and evaluate, you know, does a project have a certain business case for, you know, production capacity expansion for asset integrity, for whatever the reason may be, but that's annuity repeat engineering fee that we can generate as an enterprise for many years to come. Some of the gaps I think we need to close to do that is we had some attrition over the last year in leadership roles on the Clayco side and on the LJC side, we're starting to kind of fill we have filled those, except for maybe the one on the Clayco side in the overall market leader role. We've kind of merged that with industrial thus far. But I think we have to put attention there. I think we have to hire SM es that can help us break into the difficult technical conversations. Protein is a great example of that. We had a nice opportunity this past year in the protein market, and we didn't check the box on technical expertise, I think is one of the biggest drivers for missing the boat on that one. So I think there's some key hires we probably need to make, and some some leadership appointments or items we need to make as well. We need to build a business plan, not be so shotgun approach, but maybe be more intentional on the clients we want to work with and how we how we enter those markets with them. We need to be more consistent overall, I think, is what the third bullet, second really indicates and then we need to be able to manage that work successfully all the way through execution, so that we're keeping our enterprise profit margins high. I think historically, we've had some some performance challenges.
+
+Speaker 9  36:55
+We've had some good projects, and we've had some tough projects. I think we're going to get back where we need to be there and really leveraging that experience that LJC has. I mean, that's where a lot of the brain trust and food beverage side is. So that really helps us develop that pipeline and get kind of get Clayco attached. You know, beyond the design versus a good sample, we're hoping we'll be able to do that, there's a lot of synergy between what we're doing, the design side and
+
+Speaker 8  37:20
+construction side. And if it's done right, like I said, there's a the integrated model is fit well for this industry. So it allows us to pull in the complex design. It allows us to pull in CSI Sei, there's a lot of milling, beverage installation. I think overall, it's an industry we should continue putting attention and
+
+Speaker 7  37:41
+then really it's kind of we put an opportunity to work at, but change our appetite for some of those smaller projects. Again, you know, we're not really built to do the five to 20, $30 million projects these days, but that's who you know these players are going to call when you know the 100, 200 $500 billion projects come up. So how do we, how do we strategize around deploying a dedicated team that does that, where we can be competitive service those clients to position us to the larger work? It also fits in the campus of that annuity work on the LJC side, if we can grow that business, where we keep that dedicated to infinity for most of the year, and they're positioned us to handle the larger price of the apple. We can see a lot of success there,
+
+Speaker 8  38:29
+and we've started to make momentum there already. Part of our strategy, from the LJC perspective, is to establish regional partnerships with other smaller general contractors that won't compete with Clayco as we move up the scale of projects, but can help us continue to service our customers on the like Austin, say, like less than $50 million
+
+Speaker 8  38:52
+So in closing, I think we've already hit most of these, but establish a P and L responsible vertically at the enterprise level, build that top 20 list. Work the list leverage relationships with not just the customers, but also the major Ed let them become an extension of your sales team. I think is a strategy that I've had success with in the past, and we should probably dive deeper into identify and hire to help us do that from a technical perspective, and then convert the feasibility studies into pull through work for the enterprise that leads to the advertising project that is the right value.
+
+Speaker 7  39:34
+And my thing is the biggest needle mover here would be investing in those technical SMEs people that can go sell the work, or do the work and really move the needle, like John cross has done phenomenal helping us move towards the Advanced Manufacturing projects. We need more of those bodies in the food and beverage space to really get a strong position. Thank more. Jon cross,
+
+Speaker 10  40:06
+I'm open to being cloned and appreciated. That's very nice of you. I was gonna get a compliment today.
+
+Unknown Speaker  40:15
+I guess we're holding questions. Okay, we got advanced manufacturing, aerospace.
+
+Speaker 11  40:26
+All right, let's get rolling. Good afternoon. Mike, Bob Rick, VP in industrial and
+
+Unknown Speaker  40:36
+I'm out of our Chicago.
+
+Ryan Hankins  40:42
+Mike, easy, angels. So just real quick,
+
+Speaker 11  40:45
+when we got together, we kind of looked back on the last two years. A lot of parts, moving parts and pieces to the economy. Doe money kind of went away with the administration change. So there's a lot of our projects obviously slid to the right, terminated for doing it. So going forward,
+
+Speaker 11  41:14
+but looking at the market going forward, and all the research that we did, we identified a stronger market for us in a rebound. So looking at the addressable market, we identified about 137 billion in opportunities. Then we kind of ran that through our funnel, okay, what clients, what works best for our enterprise, and kind of build that to a range of 1.5 to 2.6 so the definition and the focus areas, obviously, advanced materials, we're working with evac right now, not in South Carolina and other clients as well that staff talks about in automotive. Obviously, we have Rivian. We recently talked to BMW, and that was positive, and then really focused on robotic enabled factories going forward. Lucy done a lot of research on robotics. There's number of companies out there, but we're kind of whittling those down to ones that make sense for flight therapy, clean energy, manufacturing, obviously defense and then with all the autonomy going on in the world, we're really focusing on those clients as well. And there's, there's a lot of them. A lot of them are startups where we're kind of whittling down the list, trying to get some way to focus on which one to chase key drivers and trends. Obviously, we're showing a manufacturing we're getting an uptick in foreign direct investment as well. So that's good the national supply chain and maintenance for critical materials and rivers, we mentioned that earlier. And then obviously the fence, with everything going on in the world, we see a big update there as well. And then again, the uabs, the ULDs, we're seeing a lot of that as well. And then where do we play our current president or current presence, obviously, experience with government owned and contractor operated facilities that Scott will talk about automotive Rivian hanco mentioned BMW Advanced Materials again, with evac. We're talking with MP, obviously, group 14, and then USS the fence and aerospace between Blue Origin experience. We're going to leverage that with new clients. So open up more doors. And then we're strong industrial and heavy tech facility. And then
+
+Speaker 9  43:40
+Tyler, one thing on Rivian. And one of the things I'm really, really proud about is, you know, we're doing a full, basically a $2.5 billion automotive assembly plant. And for a company like Clayco that's not been in the automotive space all that long, I mean literally five years, maybe eight years, we're competing against companies that have been doing it for 5060, 80 years. And so that's a real kind of huge it's something to be proud of. As an organization, our ability to sell into sectors we want to be in, but we don't necessarily have the experience to be successful yet. So trying to figure out how to be scrappy and get there.
+
+Speaker 5  44:15
+Scott, can I just ask one question on defense? How important is a good relationship with the DOD to win project defenses.
+
+Speaker 9  44:22
+I think it's more important than it's ever been, because there's so many more opportunities now to get in. And I think with the current administration, there is an emphasis on, how can we
+
+Scott Watkins  44:35
+we start using this new technology as fast as possible? And so the traditional procurement method that they've always operated under successfully no longer works. It's too slow. So the fence innovation unit, DARPA, you know, obviously we've got exposure to both of those, which I think is a plus. But yeah, there's, there's, it's a, it's a whole paradigm shift, which is great. It's what's needed, because we as a government have been overpaying for the technology as
+
+Speaker 8  45:02
+well. I professional growth forecast for the models, and we're anticipating seven to 13% growth year over year through 2030 a lot of that investment, as Scott mentioned, is really defense related, trying to reshore some of that critical infrastructure that we need as a country. The DPA funded projects, as Scott mentioned, and really just backlog pressure from OEMs to allow us to achieve that supply chain independence. Here in the States, we were seeing that, as mentioned on the previous slide, wherever we got the ussn project that's active right now, Clarios, Clarios, we've got evac. We've got a call set up later this week with lithium America sports. So we're seeing a lot of activity. There continued momentum in maybe not batteries for electric vehicles, a portion of that but as well as bes just automation of plants in general, and how robotics is changing that you'll see on a slide or two, kind of some of our close outs for further attack in this market, or these markets, I should say, is an emphasis on our ability To drive robotics as a core
+
+Unknown Speaker  46:21
+talent Jesse. Talk about
+
+Speaker 9  46:22
+kind of strategic implications. So you know, what's really exciting about industrial space is we're building a facility that's going to produce something, it's a food, it's a widget, whatever it may be. And that's exciting. They're all different, unique challenges. So automation is really changing that. And so that's something that I think we have a lot of experience to come in leverage our expertise and expertise and push us into that space, much further leveraging, you know, the technology we have that resonates with with these clients. I don't know if you've read recently, but Tesla is actually they're stopping their s production and X production, which is pretty crazy when you think about up until this point. That's really what made Tesla. And so they're going into the future of robotics, autonomous vehicles, self driving, taxes, etc. And so that's kind of an indication of what's happening in the future, library tooling is happening, etc. So there's a lot of peripheral industries, like rare magnets. We just talked about other types of components that are around what we're doing in space. We can easily kind of use the experience we have to get into those other sectors. And really, there's a message that's always really resonated with our clients is that speed to market, you know, solving our clients most complex problems, that's something that we're going to continue to use successfully, you know, as we go into some of these newer opportunities. And then, with respect to kind of the A and E side of things, what do you think, Chris, as far as we're trying to bring in?
+
+Speaker 8  47:58
+Yeah, I think in terms of talent base, it's it's, again, similar to the food and beverage market. It's the technical expertise that can help us drive the conversation with the customer. We're construction led enterprise, but having a design first mindset on the complex projects, so that we're designing from the inside out, not just getting through the feasibility stage gates, but in the projects that you know prove financial health and objectivity for moving forward as a project, I think part of that is going to be hiring some SMEs, our simulation expertise, maybe, so that we can show the true kind of data driven difference between options on the A And e side. I think it's hiring or expanding upon our bench of process architecture, so that we're developing material and personnel flows that makes sense for not just what the feasibility of the construction looks like, but the long term operations and maintenance activities will take place in the space
+
+Speaker 9  48:59
+leveraging this partnership. So a good example recently is Blake Otto's, who has a clean room company. He's worked with SpaceX, and they basically asked him, like, hey, the companies we need to talk to about Terra fab, which is $200 billion plus capex semiconductor facility. And basically says, gave me three names, one of which was us, and we got a call that day. So making sure we've got good, strong relationships with the companies that are inside. You know, the business, or their business is critical. And then, you know, designing from the inside out, so the form of these facilities follow the function. So Jon cross plug again, you know, it's a life support system for for the process is generally what we're building. So, you know, more than ever. LJC has really been a good on ramp for getting into these facilities with these clients, and working together with that team has been very effective. And then we really have a good story now on the defense and critical infrastructure front. So with the Blue Origin, work that we've done, Goko facilities, government owned, contractor operated the Lockheed, with the world, blue origins, others have a lot of those facilities, and there's federal strings attached to working in those facilities. There's all kinds of kind of challenges now with the defense side that kind of creep into what we do, even though we're not a federal, federal contractor. But the other thing I'll add to you on your opportunities is, again, it goes back to that kind of portfolio we have. We're working in the space industry, quantum automotive industry, advanced technologies, fusion, etc. So really, the main opportunity is just keep on doing what we're doing, and start using what we have and what we've been successful at in the last five, eight years to really kind of sell our way to these
+
+Speaker 8  50:42
+other Yeah, I think Justin closing, you know, we touched on a couple of the key hires. One optional dimension, and it's listed here as shipyard SME. But really that's, that's SK skip, so sub carbon, sub, help me with the action on the
+
+Unknown Speaker  51:00
+steps? Yeah? Yeah.
+
+Speaker 8  51:04
+Compartmentalized information. Some expertise there. We need to maybe make defensive core offering, or robotics and core offering with some defense focused branding to further take over the market. We know all the OEMs. We know all the players. They know who we are, but we need to expand upon being top of mind the customer.
+
+Unknown Speaker  51:32
+I like the idea of a shipyard SME as well,
+
+Speaker 9  51:36
+but when you think about like robotics, I mean, it's fundamentally changing to design these facilities. Take, you know, a facility designed for 1000 people that's maybe going to have 200 people and more robots. You know, that fundamentally changes how that facility is. And then, you know, ways that you have to design for life safety that you used to think about before, like it's totally changed. So we're starting to see those projects now. I think Amazon robotics was one of the first big ones, and I think that's going to continue to grow. And so I think with all the expertise we have, we can probably come up with a pretty good, compelling, okay, to be an expert in that space. Yeah, I
+
+Speaker 8  52:14
+think we've done that a couple times recently on projects that, you know, a couple years ago, we probably wouldn't have been had much ability to even get on the business.
+
+Speaker 9  52:23
+Yeah, and to that point, so on defense, like the last thing is, we presented a lot to several defense companies now with our current portfolio. Most recently, probably was Lockheed, was kind of pure defense at the Joint Strike Fighter assembly facility, and they were blown away by our portfolio. So I don't think we necessarily need to do something like a paradigm shift, but it's just getting a few more folks with the right kind of experience, and you're targeting that marketing the right way.
+
+Conor Tighe  52:52
+I mean, Scott, when you zoom out, don't you sort
+
+Unknown Speaker  52:54
+of see that some of
+
+Conor Tighe  52:57
+our projects, you would call them national strategic initiatives that like we're doing things with DARPA like at Quantum. Is it just finding the right person that knows how to navigate DFAS and navigate some of the things that are particular to Lockheed Martin and Boeing? Yeah, and I think
+
+Speaker 9  53:19
+a lot of these companies have been working with contractors that have been there for contractors that have been there for 2030, years, so they're embedded, kind of to the bureaucracy that they have. But I think kind of the government's expectation now has permeated a lot of these companies. And so our message is not that, you know, it's the opposite of bureaucracy when we kind of tell them how we're pitching the project or how we would execute it. So I'm encouraged by that, because I think that's opening doors on some of these defense related deals that, hey, this company can go a whole lot faster than we've been going historically. So I think we're kind of unique in what our messaging is versus companies that have been in there awhile. We had Locky, for example, said, Look, we're tired of burns and Matt, you know, we're looking for somebody else.
+
+Unknown Speaker  54:15
+Awesome. John, anything you want to add?
+
+Speaker 10  54:18
+No, I was going to ask a question. You know, I've struggled to get in the defense you break into the defense market over the last couple years. Tried with, you know, submarine components and some other things, having some success with defense adjacent, things like the star Jenna. They're making isotopes for munitions and things like that at Paducah, you know, nuclear facility. What are your thoughts on how to get into the more defense centric market. You know, battleships, drones, submarine components. What do we need to do to breach that? I guess, just one
+
+Speaker 5  54:54
+crazy suggestion. I think we should do a learning trip to the eastern part of Ukraine, seriously learning
+
+Unknown Speaker  55:01
+what they're doing, because
+
+Unknown Speaker  55:03
+right now you can talk
+
+Unknown Speaker  55:05
+about that and how they produce, and
+
+Unknown Speaker  55:07
+then bring this back to operations, will be making no difference. Are you signing up for that?
+
+Speaker 10  55:13
+Follow you there, Mike, be right behind you.
+
+Speaker 9  55:22
+Qualities, quality is a big part of I think selling expenses, just like airspace, you can't something breaking the bar, it's not a good deal. Something breaks my plane, you know, or critical electronic really weave in that quality. Our expectation for designing and building a quality facility that really helps. Again, I think we got a lot of those tools marketing your
+
+Speaker 10  55:46
+message, yeah, I think so. Like, the defense adjacent stuff has not been that hard. Like, I mean, we see with a lot of our clients, switching from EV in the battery space to wearables and drone power and those sorts of things. It's bringing us into the defense space through a side door, right? But it's just, I
+
+Speaker 8  56:03
+think that's a pat to continue leveraging. Is that Go code government owned, contractor operated. We, you know, contractually working directly for government is difficult, but if we can continue focusing on the Norfolk Romans, the blue origins, the Lockheed in the world. I think that's our path in and to help us get there, I think we can continue to expand our OEM relationships, folks that are in there every day already, and continue to build those trust bridge, the trust bridge, so that they become an extension of our sales team. And they're, you know, they're evangelist, particularly
+
+Speaker 10  56:42
+I mean, I think it's been a very clear shift that you guys covered is, you know, all the, I'll say, all, a lot of the government spending for manufacturing projects the last few years have been doe, and now that's all shifted from DOD, DOE to Dow. And so finding a way for us to shift and follow that is important.
+
+Unknown Speaker  57:01
+Return profile on these different
+
+Unknown Speaker  57:04
+products and types within industrial does
+
+Unknown Speaker  57:06
+it follow the elevated risk of some of these? I mean, somebody sound
+
+Unknown Speaker  57:09
+like pretty risky project. You see a big
+
+Speaker 4  57:11
+return on the fee percentage when you do those, or is it about the same?
+
+Speaker 9  57:16
+We haven't really gotten quite far enough to say. My theory is it is more of a higher return like one of the things Lockheed wanted us to do to look at first was replace all of the chill water lines over the F 35
+
+Unknown Speaker  57:29
+production line in a
+
+Speaker 9  57:30
+building that's 70 years old. Obviously, we said no, but that is inherent with the risk and that type of deal. Most of them aren't like that, but if a shipyard is usually a higher risk profile. So I think, I think the margins are going to be there. And then you couple that with the lack of capacity that a lot of companies have right now that are our size, I think it will translate to higher fees in
+
+Speaker 10  57:53
+that space. It's like with anything. It depends on the scope, right? If, the more process, you know, scope, we take on these complex facilities, the higher the fee is going to be as well.
+
+Unknown Speaker  58:02
+And specifically Clayco, to get us to do it right, we're going to have to put a higher margin
+
+Conor Tighe  58:08
+on Justin. I think when you think of the other players in that market, they're all high margin contracts,
+
+Speaker 8  58:15
+and it's a much smaller field going after spec warehouses in comparison. So there's a lot smaller list of taking this contract, our chance of success after earning the badges,
+
+Ryan Abbott  58:35
+he's still thinking about the 90s million dollar widget. I'm rid of the chill bar line. Should we get all JC, up. You ready? It
+
+Ryan Hankins  58:48
+was pretty bad ass, yeah, but yeah, when they were showing us, like, what we had to do, I was like, and then like, Hey, could you repaint all the deck and joist? And I was like, nah about
+
+Speaker 12  59:06
+these emerging markets and growing markets. We on the design side, were challenged to review how we were organized to take place. So the old model, how we were previously organized, was mainly by discipline. So like we had the architects, we had the plumbers, we had the mechanical team, all kind of siloed into their discipline specific teams, which was good for like internal alignment and for technical depth, but whenever we start executing projects or working with our Clayco counterparts, it kind of revealed that siloed setup, and it made for difficult Collaboration. Collaboration was more powers, and so we decided to kind of reshuffle the deck and organize by market sectors now, the markets that we organized in or listed below in these alignment business units that are on the claycore side. And so this helps progress that integrated field that we as an enterprise want, want our clients to experience in all these market sectors are multidisciplinary by by design, and so by organizing it by these markets, they kind of set us up for better collaboration, better execution, more efficient design execution as we move forward. So as I said, the reason why we did this was leverage the power of the enterprise board. We want, want to align ourselves on the design side better with how it's organized on the Clayco side and on the enterprise side, so that as the construction business unit has a question for the design team. They have a point of contact. They have a organized team on the design side to go to and to develop and
+
+Speaker 13  1:01:24
+work with. So the biggest difference is we're we're basically focused around how our clients purchase from us, and so they're in the forefront, versus being organized by the disciplines. Is Zac mentioned. I think the other piece is we're so much more connected from a sales perspective, with Clayco and with CRG, and so we're really thinking about how we go to market, who goes first? How do we create opportunities for each other? And there's been a lot more connectedness and synergy than we've seen in the past. So I'd say that's probably the most positive projects like what you see on the right side of the screen, Al Ben 314, is another example. These are high rise residential opportunities where a developer sat for years and couldn't make a performer work until we stepped in. And I don't mean we LJC, I mean we the enterprise. We can make performers work with high rise Resi because we use Anna CSI, our design, our engineering, and then Clayco builds it. Now this, the one piece of these two projects in particular is they're in our core markets geographically. So these two happen to be in St Louis. We also do it very well in Phoenix, and are starting to do in Chicago. We have three different market typologies. This is probably the most challenging part about this realignment. If you look at the static markets, it was hard to come up with a word that seemed palatable there. These are markets where we don't want to grow. We are totally pulling back the reins because they aren't places where the enterprise wants to grow. That said we have subject matter expertise, we have architects, designers and engineers who are extraordinarily talented and passionate in those static markets, and so we're having to exercise extreme discipline in the opportunities that we pursue in those static markets. As an example, we're in q1 or we're starting q2 and we're already well surpassing our sales goals for 26 in the static markets, we kind of, candidly can't really help ourselves, so we're really having to cap because it eats up our capacity on the design and engineering side for the emerging and core markets. For those core markets, industrial and residential, they make up about 50% of our net fees for 26 the emerging markets make up about 27% the static markets 23 I would assume, if we fast forward to 27 we'll see the emerging markets coming up to a much higher percentage. Then there'll be, you know, four core markets with Compute and life science is accelerating faster than aviation, and hopefully we can hold steadfast in those static markets. This slide is basically our client in the middle. We always lead with the enterprise, even when Clayco isn't a part of the story. And I mean Clayco The builder. So if you're approaching a residential opportunity, we still bring in precon, and we still go after making the performer work, and really focus on our ability to design a building that's constructible. That's how we win. If Clayco chooses to participate or not, it doesn't really affect us. We're about 45% third party work at this point on the design and engineering side. 55% were partnered with Clayco or some other part of the enterprise, another important piece of our growth is these market these subject matter experts. It's been said in a couple of the other work groups prior to us. In order to go into those emerging markets like life sciences, like compute, we've had to go on a hiring screen. We're definitely taxing our recruiting department by going after subject matter experts, because we need people. I cannot mention you Jon, because we need subject matter experts like Jon cross or like a Chris Connelly to go in there and create the opportunity for the enterprise and be that tip of the sphere. So we're in there doing day to day work. We can pick up our pens or pencils much faster than the rest of the enterprise, we can stop and start. We're a lot more flexible and agile, and so we see ourselves as a secret weapon to the rest of the enterprise, also a little bit of a placeholder in some of these more steady markets, where maybe Clayco doesn't want to play today or for the next five, maybe even 10 years, but we still keep a toe in the water and have some opportunities in those market sectors.
+
+Speaker 14  1:05:48
+Thank you. There was one thing on that last slide that I think is important, the fully integrated approach. That's something that's been a core value of LJC for as long as it existed, because we're a part of Clayco, that's always there. But part of what's working now with this realignment is the focus on those targeted markets, and it's allowed our design build approach to be more focused on the projects that are right for us, that allow us to get the right fees, that also have those enterprise opportunities, as you've heard about. So that's really a piece that's working is that enhanced market alignment. Also having business unit leaders who are focused in these markets allows them to really have ownership over the team, the types of projects we're pursuing and how we pursue those, while holistically maintaining a one firm approach. And you could say that's a one enterprise approach, and really thinking like the enterprise as we move
+
+Unknown Speaker  1:06:42
+through our work.
+
+Speaker 14  1:06:45
+You've already heard some of this. In order to do that, we are really focused on building the future and tracking the right talent. There's two things there, there's there's subject matter experts that we've talked about, and they really have to be differentiators. They really have to be known to make an impact. But we also want to maintain our discipline knowledge and have the flexibility to adjust to the market and really provide creative problem solving overall. And I would say to everybody here, if you have a problem with your clients like whatever, that most challenging thing is ask somebody from LJC, and I think they can bring a new look at it. And we're really proud of that ability to help on enterprise projects, even if we're not involved. So again, we're looking for those highest performers. What we're finding them attracted to is culture. That's the culture of the enterprise, as we've heard and several from several other people today. But for us, that means design and engineering excellence. That means creative collaboration. We're really we love to bring people in and see what we do. Our clients love that too. So that's a real focus of how we're attracting that next generation of talent.
+
+Speaker 13  1:07:49
+This is my favorite slide. I'm sure Anthony's favorite slide, because there's green on it, not red. This is a q1 of 25 to a Q 26 comparison. It takes a minute to kind of grasp the big picture, but essentially, we have fewer prospects in our funnel, and we have a lot fewer key prospects, but we have more business under contract, and our back load has increased by $21 million which is quite substantial. We're being much more selective about who we pursue, how we qualify our potential clients, and we're basically practicing our Kraft only when we can differentiate or create an opportunity for some other business unit within the enterprise. So I think it's shocking how fast we've seen traction in this area. It's been hard culturally for us the go, no go process that we've adopted, very similar to Clayco. It's really hard to say no to your peers when they want to practice their craft on a project that just doesn't drive profitability for either that business unit or for the enterprise. It takes a ton of discipline, and I think it takes constant communication and helping everyone understand what the bigger picture is. And this is our team. AI helps us generate
+
+Unknown Speaker  1:09:18
+clever names for each one of them. Thank you for
+
+Unknown Speaker  1:09:22
+your time. That's i
+
+Speaker 15  1:09:44
+Okay, so we were asked by Ryan and Anthony to do a quick update on Sci so for those of you don't know, the acronyms, just Simpson exhibit innovations, I think that's a good first thing you know, and it's really just to focus on in house MEP offerings with turnkey solutions and with the long term goal of self perform as well on I'd say, what really inspired me sitting there just now was listening to all the teams I just presented, even with LJC in design and engineering. And you look at pharmaceutical Life Science compute in front of it, and you get manufacturing, and then the different pieces in there that is right for this market. That's exactly where the company is looking to go with the emerging markets and the core markets. And so again, I've been here three and a half months. I hear that presentation. Oh, that makes complete sense why Sei was created. So I'm learning on the fly as I sit here, but for those of you who aren't familiar with it, so it's a it's a focus on specialties. We don't want to be the commodity base where we're doing a lot of process piping, or, excuse me, a lot of system piping, off the shelf equipment. A lot of people are in networking, and that's not where we want to be. We want to create a system, an effort of moat, and when there's a moat, there's an opportunity for higher margins. And it also plays into what Clayco talks about with our clients all the time. We want to drive certainty. If these things are all important, you want to have someone on your side that you know understands quality, schedule, safety, and so if the Clayco Enterprise is driving into these markets, it's a great opportunity to say, where can we play in that market, get some additional margin from it? And so seems like a great idea back in 2024 when it started. And so what we're hoping to do here is kind of walk through the past a little bit where we are today and where we're going tomorrow. And so some completed, one completed project right now was the dynasty project. There's a photo on this right over there. Mill right in Module bike racks, and then run that lake
+
+Unknown Speaker  1:11:46
+always sets lucky goals. What was
+
+Speaker 15  1:11:49
+great to see is the earn revenue year 2024 on an earned revenue goal exceeded by 65%
+
+Unknown Speaker  1:11:55
+of approximately in
+
+Speaker 15  1:11:56
+2025 nearly two and a half times the earned revenue goal. So a lot opportunity came out. Some of the 2025 was based on Galaxy, which we're going to show you in a second. So this kind of shows you where the tip of the opportunity is, when you when we just got walk, walking through a whole bunch of different business.
+
+Speaker 16  1:12:17
+Thank you for the ones that don't know me. My name is Juan. Been with sei since the inception of sei 2024, so long history with Sei.
+
+Speaker 16  1:12:32
+So where we are today. So project wise, the active project that we have is in the galaxy. About the project a little bit, nearly 89% packages, like the houses the Cheever, all prefabricated Thomas kings and the assembly of generators. High level. What we've done, as you can imagine, we go from 2024, 8 million, $9 million of revenue, and we make a big jump to 232 million for pretty much a two year company, whole company. So that's a big jump. We have to adjust. We have to hire people. We have to work around the challenges, and certainly we have challenges along the way in the project, but as Adam mentioned, we will be working through that to learn that. It will be a post market meeting to talk about everything that we learned. But I think when we work through those challenges and we see the gross margin that we're bringing, it's more to go through those challenges and learn from it and apply those for future projects where we are today. So as far as our group we we have, we start. We started with a solid approach in our group. Right now, the group that we have has been established to be able to support the complex projects. On the MEP side, we have grown substantially from two people to 32 right now when we the group that we have has this extensive experience on self perform services. So that's what we can bring those value to the projects. And we continue to grow as we scale more into the self perform and prefabrication and modularization approach. Next step on companies keep growing and bringing those in house SMEs to the company. Where are we going? So the upcoming projects. We have project Byron NDA, SBN center 50 as well. So really looking to diversify portfolio through the different business units and plans to grow, we're starting to target some software from services specific to some of the upcoming projects. Because, I mean, some of the you guys that have talked to me in the past were pursuing a project. It is always a question of whether you are going to actually self perform, and we, we, we are getting gear up to start to self perform the portions of the scope in this upcoming project. What that helps is that value proposition that we want to bring to a table for our clients, and it's going to help us a lot. But besides that, also modular pre fabrication, we're actively right now working with LJC and Bret marking on modular electrical kits, some of the upcoming projects on meta, so we can bring that to a key solution. Same thing with life science as team, we've been visiting the clients and some of the pop shops, and how can we integrate? I think the key, the key where we're going, is not just self performing, but integration that we can drive the integration through self perform. And that's where clients are looking for, the turnkey solution, where we could go and tell a client, along with Clayco, that we can manage the specific complex scopes, and there will be a self performed component of it, and that's what we can deliver higher value proposition for clients. I was like working with LJC on design assist and market expansion, like I said, working with Life Science continue, working with the other business units to be able to capture more, more opportunities. So the future again, self perform, or have a team of SMEs. Actually a picture that you guys see on the right side is self performed, work that we did on 92 for dynasty. 2024, 2025, we did those big paragraph modules and set the setting of all the equipment. So we capture data. We capture information as we're also working through galaxy, and we're using all that information to be able to build the core values and the core approach that we need to be able to suffer for those lessons learned. So that's that's the that's the key of how we're using that existing information. And then and the next steps we're looking to support from some middle right scope. So we'll start with mill right, but it's slowly moving into the other scopes as piping and the future policy electrical as well. We are working. We're going to start using
+
+Speaker 16  1:17:30
+some relationship that we have with third party labor brokers, which we did, we did in the past dynasty. And we want to be very, very selective on the scope that we are going to sell perform. So it's pretty easy for Clayco and the owners to understand what we actually sell perform.
+
+Speaker 15  1:17:57
+So essentially, what we're looking at here is, is the initial financial plan performance of the company from 2024 up to 2026 and then, as you can see, as we go up into the right it's approximately 20% year over year. Increase of growth is what is we're conducting here. And you layer on the self perform piece, but it adds conservatively, because we really show it kind of starting as we move from 2027 into 2028 we do think we have opportunities now, but you're looking at an additional $30 million on top of that, or to be added to the bottom line from going all the way over here through those three years. So we do think that's a conservative approach in those three years. I think there's greater opportunity to do that, but you can see start to add that self perform component on there. It's going to add to the value. When we sell to clients, they're going to see it not just as US subbing to someone else. We're going to start performing ourselves as well. Capture more of it, control the certainty as well, and then add to the bottom line. Maintain the same.
+
+Unknown Speaker  1:19:13
+Thank you. Any questions,
+
+Speaker 2  1:19:16
+I bet one. But any plans to look at a back shop in the future for equipment. I mean, that's our business. That'd be a really attractive sales point.
+
+Speaker 15  1:19:25
+Yeah. I mean, when you look at all the software team self perform teams holistically, there's that kind of conversation where we can get some we already have. CSI has a warehouse and a shop. But how do we create that between CDC SCI Ventana even expanded, since they're moving to more than roof enclosures. You can see yourself become a manufacturer. The answer is yes. I think we're exploring all opportunities to get better control and find every day what are we going to do with this
+
+Ryan Abbott  1:19:59
+electrician thing? And seems like there's just an opportunity for piping racks, but tray being doing that in a modular fashion. So you're, you're offsetting onsite electrical, seems like you could ramp that up pretty quickly just planning this. Yeah, you're just talking
+
+Unknown Speaker  1:20:18
+about pre fabrication racking, where you come
+
+Unknown Speaker  1:20:22
+in and just connect, and also goes back to what you were saying.
+
+Speaker 16  1:20:27
+Maybe look some of the presentation, from manufacturing, food and beverage, life science, also the automation and control that's something that has to come some point, short term to be able to integrate all the systems. What clients are looking for. They want to find a good donkey solution for those specialty systems.
+
+Unknown Speaker  1:20:51
+Okay, Steve, should we get you started early?
+
+Unknown Speaker  1:20:54
+Sure that ever happened before? Let's go. Steve
+
+Unknown Speaker  1:21:00
+CDC, going after us, or you're covering it last of the acronym.
+
+Speaker 17  1:21:12
+Steve Schnur, CRG, which is the real estate development investment management arm of Clayco. Shawn Clark, you guys all saw Chris McKee is not here today myself. We were going to have a cool slide with pictures and a team name, but tiger team Frank was taken, so we came out of the Aspen, the Aspen meeting a few months ago with really four key initiatives, which I'll walk through, data center business lead new hires in Chicago. A lot of that was back filling from when we went through a tough time, sort of in 1819, and sort of rebalance the business. And one other new hire for our investment business, I'll talk about CFO discussion. We'll talk about that as well, and then long term portfolio management for our investors. So first and foremost, Rohit. We hired row hit everybody, third week. Alright, third week. So we wanted to hire someone to lead our data center development business. That's sort of a new entree for us. We're well versed in logistics and industrial got a great track record there. Our student housing group is very, very active. And then the enterprise and all the work we heard about today and been hearing about on the data center side has really led us into the development, the development side of data center business. So first initiative was the Higher, higher leader in that space, which we did. We're talking to a number of folks. Think Shawn and I are flying somewhere early next week, meet with someone. We've got a number of positions to sort of fill out that team. We've got some great conversations going on on a number of sites around the country. We also have some real good opportunities with some hyperscale or perhaps on the pre development side. So very excited about that. You can see our pipeline down. I guess maybe you can't from the back row, But Festus has been in the news a ton. For those of you here in this office know a lot about that. Kurt Oh Decatur in Illinois. Yorkville is a big project in outside of Chicago, we're working on we've got some sites in southwest, in Arizona, New Mexico, and then we've got a new opportunity in Indianapolis that we're working on. Lot of lot of opportunity in that space for us. Our second initiative coming out of that was, like I said, to backfill some spots and hire some new folks investor relations. You know, I mentioned the VA, we're Investment Management arm of the business as well. You know, we have a billion dollars today of investments that we're managing. We've got, we needed an investor relations person. We hired Julie fish late last year to oversee that we have about 780 individual investors in our funds today. When you do some of the overlap in the four different funds. It's probably about 600 actual people. Those are high net worth individuals, family office, groups like that. So that's a big job and something, something we
+
+Unknown Speaker  1:24:30
+need to fulfill. We backfill
+
+Unknown Speaker  1:24:32
+financial analysis role by a guy came over from logistic property company, I believe, and was
+
+Speaker 17  1:24:43
+development manager in Chicago. That was a position we have eliminated, sort of in the downturn in 1819, we finally back filled out with a lot of the work we have going on. Hire a young lady to join us, and then on the legal side, we had typically operated with three attorneys, one at one point, we've recently hired someone in Chicago, so really feel like we've upgraded the organization with some of them, some of the hires we made on the CRB side this one, please keep this somewhat confidential. Names up here. Apologize about that, but we're really looking at, look, we've got, we've got a CFO role in CRG that oversees, again, a lot of the fund management and some of our, some of our assets with with our projects, and then we've got sort of the development accounting side. And we're really looking at, you know, is there a way we can combine those two roles together. Now that we've got more scale, we've got some history there, so that's something Shawn and I continue to meet with folks on, so that'll be more to come on that long term portfolio management. This is a sort of the next evolution of our strategy. We've been a merchant developer throughout our history, so we've we've built projects, got them leased and harvested value by selling the asset, as we think about sort of the next wave. How can we keep some of those assets in house, bring in, bring investors to recapitalize those projects, perhaps stay in, earn asset management fees long term, and continue to manage the assets. You know we interesting fact, those of you in St Louis here know Jake McDonald, we oversee about a little little shy of 8 million feet today, 13 buildings and another 1.4 million square feet we third party managed so they do a great job with that business. But we think there's a lot more scale that can be had there. We really need to think about what product types we want to have in that bucket.
+
+Unknown Speaker  1:26:44
+That hopefully determines
+
+Ryan Abbott  1:26:47
+the strategy for that. So that is, Paul always switches out presentations, any questions,
+
+Speaker 18  1:26:56
+and anything in general about the Real Estate Group, maybe wasn't talked about there's
+
+Unknown Speaker  1:27:10
+any questions
+
+Speaker 18  1:27:21
+Nathan's defense, I think it was from someone no longer in the room.
+
+Speaker 17  1:27:31
+Yeah. Appreciate it. Thank you guys all say hi to rom Okay, can we get the CDC
+
+Ryan Abbott  1:27:42
+team? Team up here. Bret took the presentation, stepped in.
+
+Unknown Speaker  1:27:52
+Yeah, got a message, we should just double everything we have. Okay, how they work on
+
+Speaker 18  1:28:02
+speed? Up. Well, he's pulling that off. Just brief introduction, Bret Litton, and then grant Ferguson, who just started back in October, was really a key hire to really help us kind of augment the success that we were having in CDC, and make sure that we kind of complement the vision, and ultimately have the right person join the team to execute on what we think is a great opportunity in the overall business. So what we're going to do today is just take a little bit of a sliver of, I think what's important to give some context of where we came from, which will help shed some light on where we're at currently. Most importantly, which is why we're all here today, speaking about where we're going, and see if we can get some buzz and energy in here going into the brain, or vice versa. So perfect. So a little bit about, you know, where we came from. So historically, CDC was really only about 20, $25 million company. It was primarily commodity, commodity based products through the procurement online business. So you're talking paint, roofing division and stuff, nice, simple things, what we're doing at the time, and it was a great return on investment. But here at Clayco, we're always aspiring to do more. We really took some time back in 21 to take a deep dive into the business and see what CDC was truly good for. We kind of embarked on a strategic planning exercise. We work with Kevin Eichner, that Bob had mentioned, that's been helpful with us in a lot of different aspects of the business, and we really put together a great plan that we thought was set the stage for, as you can see, the evolution of CDC from commodity based to more of a technical buyer type arm of the business that kind of helped to round out the markets we were in. And I still remember, when that got finalized, almost everybody that was involved with that kind of came out and said, Ah, that felt great, but no one believed it could actually happen because of the so blue sky and its approach. Fast forward about six months later that year, all of a sudden, people started coming back in and saying, holy shit, I think this is possible, right? And it was not only do we execute on that vision, we were able to do it a year ahead of schedule and finish the five year plan before you really helped to set the stage for just toward growth. You looked at the scale the revenue from 21 and gross margins that went along with that, and primarily what drove that was the investment in the steel part of the business, and really lean in, at the time to a lot of industrial work that was
+
+Unknown Speaker  1:31:01
+going on in other aspects of the business.
+
+Speaker 18  1:31:03
+But we also started to invest a little bit later on in the cycle and the chemical electrical which had some great wins as well. But one of the things we noticed was right around this time, kind of flattened out before it jumped again. And that was similar to what we saw in the overall business that the industrial market started to slow down, and the compute market really started to skyrocket. It was really back in 23 we realized we had to reposition that business to be able to take full advantage of where the compute market was going. And I'd say since then, we'd be able to capitalize on that success. And some slides coming up that'll kind of demonstrate where we think the business. We couldn't have gotten there without having kind of those early adopters. I think back in the days you were some of the key people at that time that would help amazing cook. It was Alex, Joel, mind, Chad the bookies. Those were some of the key early people that really saw the opportunity bought into that it really helped to chart the path for others to see how it can work. And it's just an example of how the enterprise can actually pull together, leverage the talents that it has, and truly lean into an opportunity that presents itself. The last Fun fact, I'll kind of say, before I turn it over to Graham, about a little bit more about where we're going. Is CDC today is the most profitable part of our business. When you think about it in terms of profit per person, CDC does about million dollar profit per person in this company. I think everybody, as we look at executives would love to see those extra returns. Therefore, the reason why we shuffle the tax double everything we had, because we felt like there was more opportunity on there. So the real question is, how do we maintain that growth? How do we how do we lean in a little bit more, and what are some new things we're investing in? So five years from now, we look back and have a similar success story?
+
+Speaker 19  1:33:02
+Yeah, yes, the steel is obviously our most mature market. As you all know, some pretty interesting facts up here, 50,000 tons, I would really start to think about what happens when that number becomes 200,000 tons, right? Our buying power becomes just that much longer. This is a chart here too. So this is an ENR. So if we measure ourselves against the specialty contractors, we would sit at number seven on the list as it sits today. So pretty impressive stuff, what we're doing there in the steel. But obviously there's still sort of room to move one of the biggest complaints I've had from folks in the room is the paint quality and our steel rust, right? So for me, that's our calling card. And then we want to climb to the steering rusted steel in our building. So we are working with Shell Williams right now to get a steel paint speak, and get that done. The idea now is that I'll push it through our fabricators. As you all know, we buy a lot of paint, every gallon of paint we all know, fabricate.
+
+Unknown Speaker  1:34:20
+We all know, pretty lazy, so they'll just keep using that right? So we will sort
+
+Speaker 19  1:34:29
+of use that as well. This here is really the services of procurement. We touch a lot of areas and things at the moment, but not to scale. So one of the biggest things Bret asked me to do is really prepare the business for scale and make sure that we have the right process and the structure in place. So that's been a really important part of coming into the business and really starting to drive that through. So one of the things I'm really excited about is to manage all of this, you need really good data. So I'm super excited for Procore. I know it might be a little bit painful in the staff, but very grateful to Emily and her team, and I'm super excited.
+
+Unknown Speaker  1:35:12
+No pain in the start, right?
+
+Speaker 19  1:35:19
+So what's next for us, right? So obviously, expansion of our programs. There's definitely a theme in the room that there's a race to a billion dollars here. I pick up on that pretty quick. Our mechanical and electrical teams are they're really starting to ramp up now, and that chart that Bret showed previously, it took a couple of years for steel to start to grow, and we're now seeing that with the electrical mechanical so that's pretty exciting investments into our rental program. This is something I think you've all heard me sort of harp on about, that this has a ton of potential for us. I really think it's going to change the game and what we're doing out there, and it'll be a better service for you guys in the field too. This slide here really is about changing the culture of CDC. I think the problem with having good numbers is you start to kid yourself a little bit that you're really, really good. And I think it's fair to say that we're not right. We've got a lot of improvement to do. We've got a lot of stuff that we can be working on in our process and structure, and that's our big focus. Now you start to read through this, and this is what CDC will be of service to you guys, and the end result of this is a team full of doers and servant leadership, right? And that's what you know, CDC, that's our main focus for the business moving forward. So where are we going? This is, this is our race to a billion. And you can see, obviously, it's starting to really start to climb over the next few years. Here we start to just continue to sort of double our business. But again, we can't grow without your people. So that's a big focus for us. But we really can't grow without the folks in the room. We've had some really amazing support, you know, as CDC has started, and thank everyone for that. We continue to need your support to your ROM so please give me the feedback. Don't be shy to pick up the phone and let me know if you've got problems, because this is where we really want to drive the business. To Bret talked about the million dollars per person. I think the rental program really has the potential to drive our
+
+Speaker 18  1:37:42
+online more as well. Joke around about the raise to a billion. There's kind of what's turned out to be almost a friendly competition among the services, where felt like every year CDC was like, did we catch country strategy? Got close. God got them this year. And if you kind of imagine, like the horse racing games you could play like David busters, back and forth. But just as you kind of see those two kind of going neck and neck, trying to see next thing you know, who comes up from the rear, Sei sitting there saying, I can I could do better than I could do better than that. I bring that up just to conclude on the fact that I think that's what's exciting. I think that's a little bit of what a lot of the companies tap into. Because, you know, going back, ultimately, to what Mike was saying all project teams, you know, you're the CEO. You control your own destiny. If you're looking to run your business as CEO, you're going to look at these opportunities in order to leverage your returns, maximize what we can do for our clients, and then return have a great project at the end of the day that everybody on the team celebrates, and at the end of the day, that's the opportunity in front of us, and the last of the three letter acronym businesses that we're going to touch on here today. So which is always one of Bob's favorite things about the business is they all have three letter acronym so questions or
+
+Speaker 5  1:39:05
+I think global supply chain is getting more more complicated by the day, which is the electric gear. I think there's huge opportunity to be more like a thought part of our clients and prospects, we provide material that we can use the pitches and pursuits, and also for our clients. I don't have you thinking more about this, maybe doing a few things, but I think there's an opportunity,
+
+Speaker 18  1:39:24
+definitely an opportunity there actually use an example, going back to the covid days, some of the partnerships, relationships that CDC had on the state side allowed us to actually position the key partners that we could get, Joyce and Zac at the time, which would have Been minimum, six months, we can get it in two. So a lot no different than on the construction played right into partnerships, relationships, and be able to build on that and create an experience that everybody likes to work with us because one, we're knowledgeable. Two, and make their lives easier. Three, that turns into results around strategy that allows us to tee things up for clients in the way we get Ben as well as things we're talking about now, whether that's an electrical, mechanical or the same opportunities that existence, you know, I think having the right leaders, the right technical people, sets the stage to do that and even have some major clients kind of talking to us about rethinking how they go to the more procurement point of view on some of these
+
+Speaker 20  1:40:22
+products, just so you understand the scale of rental. Have you had a chance to forecast that out five years
+
+Unknown Speaker  1:40:30
+yet, an idea of how much program so
+
+Speaker 18  1:40:37
+from a projection point isn't here was a little bit of conservative, because we didn't quite have a full makeup on what that looks like. The reality is, by time you get the program going, because it does take time. We've got a few projects underway that John needs to be almost six months under construction before the rentals will start to pick up. So it's kind of a late 2627 what we do believe is, out here, 2829 30 we think these numbers could be 10 to $15 million higher than what This already shows, based on how that rental program
+
+Unknown Speaker  1:41:09
+could work, on top of what we already have here.
+
+Speaker 20  1:41:11
+So just starting at our rental rental program, that income
+
+Speaker 18  1:41:17
+this year, this year will be $2 million next year is next year should jump to, it could be 15 if we get a bunch of things
+
+Unknown Speaker  1:41:26
+real money.
+
+Speaker 18  1:41:30
+Yeah, the real thing is, and it's not like it's earth shattering. There's other companies have been doing, and Turner was one of the first to pepify mirrors in the market. But the idea is, you know, we have great access to a ton of mega jobs across the country and the United of the world. Sun belts, equipment shares are really the top three players. Are really buying for the opportunity to put one of their yards on our project site in order to have opportunity to have all subs rent from them, versus everybody, kind of going and renting from food they might have historically gone for us. There's advantage to that, because of logistics, and a lot of clients are looking at it from a sustainability point of view and control a little bit of the risk that we got out there. And because of that, you could generate returns from like, an appropriate discount value, no different than what we've normally done, as well as kind of handling some of the administrative stuff that happens when it comes to buildings and things like that. So with that, it could be actually quite a lucrative opportunity when you kind of get the fund back Partnering as an opportunity to leverage what's on the job.
+
+Ryan Abbott  1:42:45
+I think rural sites or aviation is a good example where you
+
+Unknown Speaker  1:42:48
+really want to control what equipment there.
+
+Speaker 6  1:42:52
+Yeah. So they'll have a service team on site, which is huge, too for maintenance. I mean, that's that's right. So right outside, they fix
+
+Speaker 18  1:42:59
+it there, they can have something else onsite. Also helps eliminate the traffic jam biggest in the early days of exploration. Talking with early a lot of souls will leave a lift at on the floor because they don't want to take it off or fear that someone else might rent it. So it helps to really free up a lot of the logistics and complexity when it comes to how busy.
+
+Conor Tighe  1:43:21
+It helps with your owner too, because, because at the end of the day, on change orders, you're charging your owner, you know, a week for a lift that they may have only used for a day, you're able to call in that lift. They come and pick it up, pick it up, and it's no longer job chargeable. So that's part of the pitch to the client. Instead of having pieces of equipment on your site that aren't being utilized, get them off the site. No longer charge chargeable. Get them on when you have to use them, and that's where the value is given. Keep it in the yard. Also, once it's in the yard, it's Sun belts or United straight once it's off site, it's chargeable. Which safer maintained?
+
+Unknown Speaker  1:44:08
+There's which projects are we doing this on
+
+Speaker 19  1:44:13
+that one identified at the moment. CLT, 17, Rivian, SBN, 750, so we have them identified right now, maybe just to give a sense of scale to your question, Anthony, So originally, our appropriate discount was like three to 5% we've renegotiated to 10 to 12 across all three. So they are climbing over themselves to be at the front of the line. That sort of gives you a bit of an indication too, of just kind of the
+
+Unknown Speaker  1:44:47
+how much money going for these guys too, maybe renting all the things.
+
+Unknown Speaker  1:44:54
+Yeah, there's a bigger play there once the JR
+
+Speaker 18  1:44:57
+side of things that Pat Tom, CDC, yeah,
+
+Unknown Speaker  1:45:09
+okay, I just want
+
+Speaker 21  1:45:11
+to make a comment, as long as we're talking about CDC version three, to talk about our procurement manual, which is currently being revised and updated much poorly in the room somewhere is Mike is working on that, and we expect to be circulating that soon. It's really important for anybody and everybody involved with procurement activities, for the company to adhere, not only to the processes that are set out in that procurement manual, but also to the company's policies against any type of pick backs, commissions, undisclosed fees from any suppliers that may be tempted to offer you a kingdom and a horse, because, you know, it's very risky to proceed along those lines. So, so I just think it's important to keep that in mind and take a look at that procurement manual and make that a part of the procedures for CDC and anybody involved in procurement. I procurement Carmen right before the break.
+
+Ryan Hankins  1:46:17
+So I mean growing, growing from 278, to 838, so I mean, is that just volume, or are you guys increasing some of the things you're buying? Like, you know, one thing I've talked to Jason about is, are we ever going to buy from the mill on steel? And then secondly, are we going to go be a service provider to somebody outside of Clayco?
+
+Speaker 18  1:46:38
+What does all that entail? Both items have been discussion points. The first is part of five year plan, but you do have to get on that one sharp and look at the top 10. You gotta be a little bit more of a heavy weight, right? So strategy in place to set the stage for that, and then that does open up the door for some of that opportunity to even lean left a little bit more for the reason we described. We also talked about outside third party, that is not part of the strategy. We believe that's something maybe, if you live five years, would be. And the reason is this, why would we take this outside of the company when there's still that much opportunity in the company to take advantage of so we're going to keep that secret sauce here for now and have a conversation four or five years. That's certainly something,
+
+Conor Tighe  1:47:21
+I think one of the challenges we've seen in selling with clients is when they when they think that there's too many layers still with CDC. So that's if CDC is buying from a supplier that's then going to manufacture. Is one of the one of the pitch points for CDC is that we have a direct relationship, and so just a sort of holistic comment whenever, whenever there's additional players within that supply chain, sort of waters down the value proposition. I know that. I think you guys are tackling that, but it's, it's just one of
+
+Speaker 18  1:47:56
+the headaches. Got permission from Carmen. Part of the reason I hired Grant was, if anybody didn't want to participate, he's got full authority to tackle, you know, confidence that everybody
+
+Unknown Speaker  1:48:19
+No, thank you. Everybody appreciate it keeping our
+
+Unknown Speaker  1:48:27
+break for 15 minutes or Yeah.
+
+
+Transcribed by https://otter.ai

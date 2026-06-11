@@ -1,0 +1,86 @@
+Speaker 1  00:00
+Diligently over the next hour to provide that hand off to the team. I'm hoping with size and quantity elimination, Ryan, we can throw a WAG at that.
+
+Ryan Hankins  00:15
+Okay, yeah. I mean, it'll be hard to throw a WAG, except for being super conservative in a short timeline. Yes, but we will. We'll do our best
+
+Speaker 1  00:28
+absolutely and totally aligned. I've asked the same of Astrid rounding down and being conservative is better than up like space.
+
+Ryan Hankins  00:40
+I mean, so give me, give me, like, an idea of what's going on. So is this like the set point? Is the set point for the chilled water? Is the set point for the air? Pretty, air.
+
+Speaker 2  00:53
+Okay, yeah. So we would be relaxing the the cooling set point from what it is now, which I think is like 74 roughly, maybe a little bit lower, up to 80 and then, so I think that that's ultimately what's going to drive the sizing of the unit. But we would also relax the winter set point down to 55 and then I think those units get smaller right now we have six serving that R and D space. I think maybe at that point we can consolidate some of them and reduce the quantity down to maybe four, maybe three. I have to see
+
+Speaker 3  01:37
+with that in mind, would it be safe to just so Ryan can start working on a wagon. Now just assume that we're going to go down one unit.
+
+Speaker 2  01:46
+Yeah, exactly. I think just we can assume that so right now we have three on each side, and I think that we can assume that we can consolidate the two units that are serving each low Bay, but that can be consolidated into one. And so that would bring us down to four units, two on each side.
+
+Speaker 1  02:11
+So why don't we do that? I think, ask for it to save if that's what your gut is telling you, and that's kind of the the floor conservative approach, I'm inclined to say, Okay, Ryan, tag, you're you're in, right? You're up. Let's figure out what those two units would cost from material and installation standpoint, and we'll just get on the spreadsheet. So any additional modeling or simulations or calculations that you would need to run, unless you're unless you feel like you're teetering on that one unit to two units asteroid, I would say your job is completed.
+
+Speaker 2  02:51
+Well, I think we would need the calf to understand how large those units are, unless Ryan, I mean, the most conservative thing would need to take. Let me just look at my unit. Numbers would be to like, take the current capacities, combine them, and if there's an off the shelf unit that can meet that combined capacity, hold that for now. And then I would rerun the model with a relaxed set points. Those capacities would get smaller, and maybe that should knock us down a unit size or two. So if we let's talk, I'm pulling up our plan so I can tell you, like which units would be, the ones that would be combined. We see.
+
+Ryan Hankins  03:42
+And I guess the VE ones would be the ones you did with the VE, right?
+
+Speaker 2  03:50
+Yeah, yeah. I'm assuming we're looking at our cues here. So the A choose five and six, one and two and five and six would be combined, one
+
+Unknown Speaker  04:05
+and two and five and six,
+
+Speaker 2  04:08
+which, right now those are, I mean, there's, yeah, we need to get the capacities down. I may, Mike, I don't know what you tell me, but I don't know that you're going to be able to get a packaged unit off the shelf that is like 85,000 cm. Yeah, we need to get the capacities down in order for this two pencil.
+
+Speaker 1  04:36
+Well, going back to your original statement, Astrid, so there's six units all sized at that lower capacity. Would the most conservative approach be to say, take the existing capacity of the six units, assuming they're all sized very similarly, and let's just go ahead and assume that those two are eliminated, leaving four not needing to do the extra work to combine capacities. And let's just figure out what the two the elimination of two out of six units would be. Is that the most conservative approach?
+
+Speaker 2  05:14
+I think I'm not sure, Brian, maybe you can opine on this, because it wouldn't just be like taking removing two of the existing units, because two of them would get a lot larger. And so the cost for that larger unit, like the cost per CFM for that larger unit, maybe may not scale linearly, like that. I'm not sure I
+
+Ryan Hankins  05:39
+I'm getting a little uncomfortable with giving a lot of deduct without putting more thought into this. Because, to your point, Astrid, yeah, like, if we're, if we're changing things holistically, like, we need to go get an updated quote on these units. I'm getting a little my spidey senses are going off that maybe we're, like, maybe we put a million dollars of deduct in there right now, just to say, hey, we'll figure it out. But I unless, unless we get more information, I think it's gonna be tough for me just to take a total wag at it. Yeah, and I'm trying to be responsible, right? Because, like, I mean at the end of the day, like, we're pricing these things like in record time, and I know that there's going to be some level of expectation. Knowing that even though we're saying these are Wags, even though we're saying these are rom like Keith, is still going to have somewhat of an expectation. And so managing, managing those expectations, I think, is important, and without having more discussion around this, and it sounds like Astrid even feeling a little bit, not that she's not confident, but she needs to really dig into the numbers a little bit more. I totally respect that. I just I don't think we're gonna find $5 million here. I think if we say hey, let's just bucket a million bucks right now, just to say hey, we're gonna find a way to reduce it if we raise those set points, I think that's reasonable. But let's before we start taking more money, let's really go figure it out.
+
+Speaker 1  07:09
+Yeah, so this conversation is exactly the high level conversation that basically, I'm hoping for, right? Let's do what's comfortable. I don't want to over exercise people. I don't want to over promise. So Ryan, if based on what, and I can't do this by myself, because I don't have, I don't have the Intel, or, you know, the foresight that you have, Ryan, but Ryan, if you feel comfortable based off what you've just heard that there's probably about a million dollars savings at the floor, then I will go ahead and put that number in there.
+
+Ryan Hankins  07:45
+Mean Astrid, as long as you're with going up to 70 versus or going up to 80 versus 72 if you think your equipment is getting smaller, generally speaking, 1 million would be like a 5% reduction in cost. I think that generally makes sense. But looking for some feedback from you
+
+Speaker 2  08:08
+as well, I think it will our equipment will get smaller. How much I can't say until I run the model, I could run the model relatively quickly. Again, in like 45 minutes, I could probably get you general understanding of how much these units could reduce. We might be able to make them more informed, able to make a more informed estimate.
+
+Speaker 4  08:38
+Let's run that model and Ryan, you do what you feel comfortable with, with pricing, either right now or after we give you some better information, but I think we can run that model. I mean, I say to do it right, we've got to do it right. And I know what Cory is trying to do. But I mean, is it more valuable to spend, to spend a little bit more time and get get a real number, or do you just need
+
+Ryan Hankins  09:15
+my conservative estimates? Because my big thing is, we're looking for WAGs. But what I'm doing on this would be a WAG on a WAG, like wag squared, versus just a wag.
+
+Speaker 4  09:30
+So that's where I'm coming from. Let's do some engineering. If you're doing let's engineer some of these wax and give us 45 minutes. You know there will be conservative is there'll be less electrical you know, if these there's going to be a reduced electrical cost associated with it's going to be smaller, and it's that that Could be some of the conservative isn't baked into it.
+
+Speaker 1  10:03
+Yep. Okay, I do need to drop a bill. Just a heads up. It looks like we canceled the OAC meeting, but the design meeting is still on the calendar.
+
+Speaker 5  10:20
+I think Rebecca put it back on. It's on. It should back up on my calendar.
+
+Speaker 1  10:25
+So, okay, I see the OEC meetings back on, but the design meeting should be canceled. So we've got, probably got a few folks on that
+
+Speaker 6  10:33
+call hop on and just let them know that we can cancel the meeting. Design meeting was canceled on my calendar. Okay, interesting.
+
+Speaker 4  10:42
+It's the OAC meeting still on today. Thanks. All right, that's on my calendar. Thanks, everyone. All right, thanks, thanks.
+
+Speaker 1  10:58
+Hey, Nick, could you just hang In for a little bit. I'm you i i I Shawn I Hi.
+
+
+Transcribed by https://otter.ai

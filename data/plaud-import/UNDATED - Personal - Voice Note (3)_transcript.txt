@@ -1,0 +1,1082 @@
+Unknown Speaker  00:00
+Bigger, so we have. I know how much you're familiar with the paper making process, but we have two paper mills in. I know by now we are building the third one, and there is room for another two at least.
+
+Unknown Speaker  00:27
+Yeah, I will show maybe a map show with our location. If you haven't seen that already, couple of things about us. Yeah, that would be great.
+
+Unknown Speaker  00:38
+Is this it? The five of us, it's six. Six. Okay, we have a small pair, so from I'm
+
+Unknown Speaker  00:45
+from, so I'm from BHM. We are an Austrian engineering company, and we work for Soft Lena since several years, or we since 2006 and four, and when Sophia is a tissue producer, one of the most important tissue producers in the meantime in the world, if we think that in USA, you are the fourth one, right? Both in the US, both in the US, and secondly,
+
+Unknown Speaker  01:17
+you second in Europe, but the
+
+Unknown Speaker  01:20
+moment, second, the first one is big, but so we worked for software since more or less 20 years, and when a software, and then did the step to come in the USA, then we followed the all day project in the USA. Hi,
+
+Unknown Speaker  01:44
+nice to meet you. Hi, Drew Ski from BHM. Steve, nice to meet you. Nice to meet you, Peter.
+
+Unknown Speaker  01:53
+Peter is one of the managing directors of BHM. I was just introducing and explaining our company. companies,
+
+Unknown Speaker  02:07
+I can I sit in for a little while on this one Hawkins, Ryan Agents, Steve Bruckel, Brian Abbotts, two Ryans, that makes it easy. I'm the site manager here for Arizona, so thank you,
+
+Unknown Speaker  02:26
+appreciate it. So we can show them we also have American International.
+
+Unknown Speaker  02:34
+Thank you, sir. Europeans,
+
+Unknown Speaker  02:42
+I I
+
+Unknown Speaker  02:43
+probably won't, maybe I'll stay the whole time. So, tissue industries is one
+
+Unknown Speaker  02:56
+of our core business. We, we have, we follow the software project here in the USA, and this is one of the new projects that on which we are working together with them. We will present the project that for which you are here. We are based in Austria, so we don't have in the USA, we are not licensed as an engineer of record, so these are also something that is important for you to understand and to clarify, which is the scope that you need then to undertake what we expect the contractor will undertake, but we will remain anyway part of the project, and we will act more or less as owner representative or engineer, and that is supporting the client in all the decisions.
+
+Unknown Speaker  03:51
+We worked with Sophie L since more than 20 years, so we did all the projects that since that time in Europe, we are lead consultant firm with all disciplines in house, all design disciplines in house as well. As Daria said, one of the core businesses is the pulp and paper industry. It's about, let's say, 70% of our revenue, and as well as power plants, we do thermal power plants, as well as fiber power plants, thermal power plants up to 200 megawatts, so industrial size power plants, so and so in in the year 2012 we were asked by Sofi Del if we could imagine to accompany them to the US market, and yeah, as a consultant, so we started from there, and then we did all the study of planet already. other new investments, we accompanied Sofidel, so we had a GC approach, CM approach, so different type of contracts where we follow the project, so we, we support, we support, and of course, all local folks with our know-how from this industry, and we let me say collaborate and with local designers of CM, and yeah, to optimize the project to make the best the best project we can have for our client, so that's target source, and yeah, that's that's our excellent when you say all disciplines, all engineering disciplines, all engineering disciplines, so we provide in Europe, we do the same in reality. What are the CM is doing in US? Yep, so this is our capabilities, but of course we are aware, and we worked not only in US, we were worldwide. We don't have branches everywhere, so we work always with local people, because you can only gain when you wing when you work with local people, because you cannot know all the codes, all the regulations, everything, also building or construction methods, so all of that is different everywhere, so and we provide just these pieces of services where we think that's beneficial for the project, and of course that every everyone in the project has these core competences and strengths to deliver them finally a good project, so you consider us like Kevin Wise. Yeah, it's like we will go into the details later, but the overall engineering will be your scope. We will provide you some very basic guidelines. We will show you some example of the deliverable. We will give you the scope. The engineering scope will be included in your. So, let me say, what is easy, much easier for than a local design firm or construction management firm, is that we can provide you already a lot of initial data, so a lot of questions you usually need to ask, we will pro, we will answer you already in the beginning, that's you know what you want, we know what they want, that's great, it's a great first time, exactly, so that that makes the difference, so because sometimes there are some specifics in a certain industry, if you don't know these specifics, you don't even ask the question, so we know this industry, we know the needs of our clients, so we can provide you all that, so that we don't forget anything, where later on we say, oops, we should have considered that in the design, so that we are here to make life easier, so that's the idea. Excellent,
+
+Ryan Abbott  08:24
+excellent. Is is there Sophia, United States, and that's a subsidiary of, yeah. Okay, if you
+
+Unknown Speaker  08:35
+go introduce yourself, you can. I can too. Flight about Sophia, so at least I can focus something. Sure, if you can just introduce yourself with your title and all. Do you have all
+
+Ryan Abbott  08:48
+three of us are located here in Phoenix, so we're part of, obviously, a large organization, but this is our regional hub. I'm the president of our regional office, and then I've got some national responsibilities, but my name is Ryan Abbott
+
+Unknown Speaker  09:05
+Steve Bruckel. I'm an associate project executive, so kind of lead anywhere from one to three projects. Generally, associate or project executive will kind of see from cradle to grave. The project be the main representative to work with the owners. Okay,
+
+Ryan Hankins  09:23
+then Ryan Hankins, project executive. I, I've been in the valley here for about 15 years, so working on projects of this scale, of, you know, of other industries, but all highly complex within the permitting structure, and making sure that projects are delivering on time.
+
+Unknown Speaker  09:49
+Anthony Bucarez, I'm the capital project director for Sophie LA America. I'm responsible for all the major and not so major investment in the US, I moved to the US in 2016 when we built our first green field in Ohio. I moved to Ohio. I still live in Ohio, in Columbus. At the beginning, I had to stay just for the duration of the project, but then both my wife and I, we like here, and also Softly, I have some pretty aggressive expansion planes, so it's been, it's been nice to stay here. Two slides, just two slides. I want to, I want to use the time to talk about the project. So, Sofi Dell is a tissue manufacturing company, so we make tissue paper, paper toilet paper, kitchen towel, lessons. We do not make pulp, we buy the pulp to the raw material, the it's a family-owned business was founded in 1966 by two families. Those two families still own 100% of the software. As we said before, we are number two in Europe, number four in North America, almost 10,000 employees, I think 4000 in the US last year we had 4.1 billion revenue, I believe around 50% was here in the US, so Sofi Del America is subsidiary of Sofidel. The headquarters is in Italy, but the American headquarter is in Horsham, Pennsylvania. In the US, we have. we are in 11 states. We came in 2012 we entered into the US market by an acquisition, so we bought a company called Celine that had the headquarters was in Hainsey, Florida. The acquisition went well, even though the first year they were tough, and then in 2016 we built our first green field in Circleville, Ohio, with a very large project of 1.8 million square feet, 1.8 million square foot. Before the end of that project, we already started another green field in Einola, Oklahoma, so the two projects, for some months, they were overlapping each other, similar size, yeah, single size, yes, maybe a little bit bigger. After that, we made a couple of acquisitions, so the paper making processes, you have to think about divided in two parts, the paper making, and what we call the converting. Paper making is where we build, we make the big jumbo hills out of the pulp, very energy intensive, not so many employees, lot of asset, very expensive asset. The converting is where we convert the big jamborees into the finished product that you find at the stores. We usually would prefer to have what we call integrated plants, so when we have the paper making and the converting at the same place, because the logistic just works much better, it's a very bulky product, it helps to drive it around. Yes, yes, so our Greenfield, Ohio, Oklahoma, they are integrated plants. After those two projects, we made a couple of acquisitions, especially in the last two years, we made very important acquisition one in Duluth, Minnesota, where we there was only the paper mill, and right now we are completing the converting, so we are integrating that location. Then we made a large acquisition, we bought clear water tissue, was a very big group that allowed us to double our size on our shot.
+
+Unknown Speaker  14:33
+And then we bought Royal Paper, and Royal Paper was this place, and the paper mill in Gila Bank, just south. Right now, we are so these.. we have two facilities here in Phoenix. One is the other one is on 51st 30% We do not own the buildings, we release them, so that's not how we like it. So our idea is to build new converting in the Makai area and consolidate over the two locations, the two Phoenix location, so that will be only converted, not paper, just because the paper released in Gila Beck, so it's very close. Yeah, come right up the aid. Yes, exactly. Yes, as you can see, I mean, our philosophy is to try to be close to the market. As I said before, in Europe we have much more location, more than 20 locations, but the hay use is smaller, because the population is more dense in Europe, but here we believe that we can drive more than what we are used to in Europe, because businesses are longer than in Europe, so
+
+Unknown Speaker  16:03
+So there are two for expansion projects as well.
+
+Unknown Speaker  16:08
+Yeah, right now one is Duluth. As I said, we are completing the expansion in Duluth, building a new convert in Oklahoma. I know that we are adding third paper mill plus an automatic warehouse, yeah. Ohio, we just built PM 3/3 paper, million Ohio. The, we believe we are in what we call the private label market, so where we make paper for somebody else, business to business. Yeah, that's our core business here in the US. We do not, but we have our own brand here, but it's not popular for sure. We cannot compete with the Giants brand here in the US, but the private label is growing fast, client-like Costco or making their own right, but they are not pepper makers, so they need somebody else to make them for them, so that we believe it's for the market share is going to increase over time, and I'm not too far if I say that even today we probably are not the biggest private label producer in the US.
+
+Ryan Hankins  17:38
+How big is your your Gila Bend facility, two pit wheels.
+
+Unknown Speaker  17:56
+The intended project we will show you later on will have in the first phase approximately 120 5 million square foot
+
+Ryan Hankins  18:18
+is part of your, as part of your conversion process, is it highly automated for you guys, or are you guys working on automating, or is it still a lot people-based?
+
+Unknown Speaker  18:31
+We have, we have people, we have people. What we automate is the material handling. I'm not sure how automated we'll be in phase one here, but we, for sure, we need to design the building for future full automation of the machine handling, the actual converting we have, of course, the machine, the actual process machine that does a lot I'd said, but you still need people
+
+Ryan Hankins  19:05
+for your, for your process on the actual machining. How do you typically contract that out? Is that typically with the building construction, or do you do that separate?
+
+Unknown Speaker  19:15
+Okay, so the building, the building contract usually develops the land if it's a green field, then we build the building plus the building utilities, so all the electrical MEP condition that is needed for the building, of course, processing might have some requirements like the cooling, for example, that would be part of the scope, but what is related strictly related to the process will be somebody else's scope.
+
+Unknown Speaker  19:56
+Then, in paper mill, the building is tailor made around the paper machine, so the interaction between building design and process design is way, way more than converted. But you can almost build a warehouse type building and feed in some line, of course, it's not exactly like that, because we design those buildings to best match our requirement, but it is not as critical as intake,
+
+Unknown Speaker  20:31
+and it's not, so it's not designed on different current needs, it's designed for a flexible use, because maybe in some years some of these converting lines can come from a different manufacturer, and they need to fit as well, so we have standard pay clearances, for example, so that where we know, okay, all type of different machines will fit into there whenever Sofi Del will decide to maybe to move machine from one location to the other, switch or buy new one, or whatever, that it still wouldn't fit to try to standardize as much as possible, and to provide flexibility. Yeah, at least in a certain range, and most of the loads are all ground map, so we, so we will show you later. What first of all, at the moment, is not a finalized site development plan, it's a conceptual master layout we have, and then also we'll show you some examples. Can you see what kind of initial data you can expect from our end to take them further to with your designers to detail design?
+
+Unknown Speaker  21:57
+Are you building out to full capacity for the beginning? Are you building with
+
+Unknown Speaker  22:01
+space? So, we,
+
+Unknown Speaker  22:06
+yes, yeah, production capacity, yes. But in the beginning, probably a portion of the future production building has another use at the moment. Yes, and so this is exactly also how we like it, so that we can adapt buildings quite easily later on for a different usage.
+
+Unknown Speaker  22:29
+Back to acquire me, the only load that we are going to hang on the building structure are cable trays, duct ducting for the dust removal system, and overhead planes. Yeah, we have already Training trains,
+
+Unknown Speaker  22:44
+so standard wise they are about eight metric tones tons low bearing capacity. That's standard load bearing capacity relief to capacity for these planes. So
+
+Ryan Hankins  23:00
+you said that you said that you guys don't like that you don't own the building on 51st Avenue, so in Buckeye you're gonna, you're gonna develop your own, you don't, okay, there's no developer involved or anything
+
+Unknown Speaker  23:23
+I know you'll talk more about timing and specifics, but in general, is it a big urgency to get into the space and get going as quickly as possible, or you have time in your current facilities,
+
+Unknown Speaker  23:36
+but we believe we are close, and the moment we sign the deal, you know, so together I think we should figure out between the day I think we hire you, the day that you are going to get drawings from BHM, how much time, how many months we should think about, we need to develop the design to a point where we can make background
+
+Unknown Speaker  24:08
+on how long it will take. Just as out of your experience, what you would envision how long it will take to construct this building. Do you guys have drawings that you could send us, can review. We will show you first, and then we're in the very beginning. Okay, very beginning. So we, we
+
+Unknown Speaker  24:27
+have it's not even a site development plan, it's a conceptual layout. We show you the conceptual layout and give you an idea of this square footage and the layout. Then after that, BHM is going to develop, we call the basic architectural design, and we will show you some examples of the drawings that you are going to get, and that will be your starting point basis
+
+Unknown Speaker  24:53
+of design. So, there will be finally will be this 40% architectural design, which I showing the, let me say, floor plans with there are all the doors already, location of doors is in room sizes, all of that is given. Also, minimum clearances, which need to be respected by process. Let me say the grid lines or the bay width we would recommend to keep or to be as close as possible to that and and of course also some sections some some are in there as well as you get some specifications about floor loads, or some some overview drawings showing which areas, which kind of loads where we probably require soup flat floor for AUBS, so such basic information we would already provide you, so that, as I said, a lot of questions you otherwise need to ask are already answered with these documents, which makes it easier to move faster with the detailed design, because it's already clear.
+
+Ryan Hankins  26:19
+Is BHM doing the process design as well. No, no. Okay. Is that just through the third party,
+
+Unknown Speaker  26:25
+the process design itself in the, in the, in the.. so the layouting of the lines, most present, you know, is done by your..
+
+Unknown Speaker  26:34
+yeah. We do not design the actual machine, we design the layout, how we want to install them in the convertible. The actual machine is designed by the OEL. Gotcha.
+
+Unknown Speaker  26:54
+Is there any vibration isolation requirements? No, we don't have that in paper making. That it's a good question, but we don't have paper making in this facility, so there otherwise we, we usually, when we come to paper making, so we have there a different approach when paper making is involved. BHM is providing also all the detail design in cooperation with a local engineering company, which finally this engineering company, which is licensed, will sign and seal our drawings as engineer record, so that happens when paper making work, where we have an extreme coordination between process engineering, and because we are used to that, which is otherwise really a pain for someone who is not doing that on a daily basis, especially for this industry, and that's the only thing where we usually provide detailed design. Otherwise, we don't do that. So, for us, doesn't make sense here in the US, because we are not licensed. We have also no branch here or subsidiary in the US, at least up till now.
+
+Ryan Abbott  28:04
+Does your converting facilities operate multiple shifts? Yes, 24/7 Yeah, yeah.
+
+Unknown Speaker  28:18
+How many people? How many employees between 17 and 15?
+
+Unknown Speaker  28:21
+We're at about, we're adding some right now, but I would say just maybe around 300 little bit more. Phase one, yeah, we can say that about the number of phase one, yeah, phase one will be, you know, 250 to 300 We have some redundancies with like maintenance teams and a few things that would probably make some small reduction, yeah, some other lines coming, though, too, so it's a bit of a mixed bag, but around 300 per shift, 300 total for the facility. Obviously, you've got an administrative staff there for a portion of that, but you know, depending on the number of operating lines, there's three to four people per line per shift, so
+
+Unknown Speaker  29:00
+we expect phase one in Bakkai between 250 and 300 right? Somewhere, and
+
+Unknown Speaker  29:04
+maybe food will drop 500 probably it could be, definitely number of operating converting lines. Yeah,
+
+Unknown Speaker  29:13
+and then for workforce facilities, it's just parking, like a canteen for breaks, just back home, just break room, but maybe we, well, I mean, if I don't, after
+
+Unknown Speaker  29:30
+your present, I don't know if you want to present first your company, then we can dive into the project, I Right, you
+
+Unknown Speaker  30:00
+want some water, water. Yeah,
+
+Unknown Speaker  30:14
+honey, what's going to do? That's okay. I got hyper on one. Thank you. Thank you so much.
+
+Unknown Speaker  30:21
+Thank you.
+
+Unknown Speaker  30:38
+Here you go. Oh, you know what they're talking about. Okay,
+
+Ryan Abbott  30:54
+it's saying you should open more PDFs up there on Windows. Yeah, I Yeah, perfect. This is a little, a little bit hard to see, but this, this number right here is our experience modification rating. Are you familiar with that? Yeah, this is best in class. We were super prideful of this, and then to give you a little, you know, context. I mean, it's 82% better than the average, but we've 80% of our projects have zero recordable incidents, so, so, but we operate under brands all across the country, many of the Fortune 500 brands, and we know that they're entrusting us with their reputation when we work for them, right. You can see our journey here. So, this is from 2020 down to 2025 to see that we've been, we've been steadily working on that. We do that through a number of different things, so one of the things that we do, it's in the state of Arizona, it's called a BPP certification, which is partnering with essentially with the Department of Labor, and they can come in and do inspections on our sites, on, you know, any given time, we prove to them that we are, we're adequately caring for our workforce, and then we can ask them for judgments or help along the way, where we've got a special condition or something going on, they come and help us work through those things, but just to kind of give you an idea, this is our total recordable incident rate, so this is in 2017 and then you can see over here it's at point nine. At the same time, we went from 7.2 million hours per year to this last year, we did 29 point 4 million hours, but we take a lot of pride in this, and I can talk about this forever, but we should probably keep going, Ryan. The lowest numbers, we take a lot of pride in that, and it's very integrated into the way that we design as well. So our design team designs things in a way that's constructible, to where we're not putting somebody at risk, and it's a mindset, you know, we always talk about safety first, but it's always the first slide, it's the
+
+Unknown Speaker  33:21
+first thing in our meetings, it's always safety first, everybody says safety first, but in the number is really impressive,
+
+Ryan Abbott  33:30
+yeah, we all take a lot of pride in that, we're about the same size in 4000 employees as your US operation, so we're, you know, roughly the same size organization, and then our annual revenue last year was 8.1 We're going to be just around 10 this year. That's the trajectory we're on. Will you share this presentation with us? Of course, you know to just give you, we talk about many things, but these are all of the things. It's a little blurry, but these are all the things we do. So, like, you were an integrated firm, so where we have clients, like I'll show you a corrugation facility we did, where we were the developer as well, and the reason that you know a client wants to do something off their books, or perhaps they purchased the land, and they want the whole building turnkey. We have the ability of doing that. So, this is the development piece. This is our design firm, and these are all the things they do. This is the construction portion, right? So, like you were saying, CMAR, or construction manager, we self-perform concrete. Okay, we also build mechanical skids and set equipment, so if that were part of the services you want us to set your equipment, we do that. This is a building envelope company, so probably for you insulated metal panels, something along those lines, but we also have the capability of doing your administrative space, like with a glass curtain wall or something along those lines, and then we procure many of the components for the job outside of going to a subcontract, so like your primary steel, the steel that was built for your gantry cranes, you know, like the rolled shapes that you want to not have on the critical path, we can buy those outside of early on in the project, so that they're ready when it's time to build. You'll notice that all of these things are on the critical path of the job, and that's because speed to market, something we really do well. Before I keep going, does that all make sense? Yes, and then obviously all of those things being aggregated together will get a lot of efficiencies by doing that. A lot of firms that do the construction part that you may be talking to, they don't have the design or the procurement services in house,
+
+Unknown Speaker  36:02
+do excuse me. One question, how many people you have? And you said you do all concrete works as self-performing. Yes, how many employees are here?
+
+Ryan Abbott  36:15
+We're just around 300 Our finishers travel, okay? So this is a great, so, so this is our real estate team. This is all local, yeah, yeah. This is the design team we've got here. This is the procurement team. This is the build team. There's our concrete strategies. This number can go up when we've got a large project in town, because we travel the finishers. Yeah, and then our glass company, they travel everywhere, yeah, they travel to do the work, but we have somebody here that specializes in estimating for the market. This is, this is a great diagram, right? So you're, you're kind of doing this part, right, and so we're coming in somewhere in here. We just like pointing out that a lot of the biggest decisions you can make around cost and schedule happen early, right? About 75% that's right. Yeah, so we agree, we very much agree. When we're brought on over here, there's very little to be done, because everything's been decided, but over here we can give you some using this FEL approach. Yeah,
+
+Unknown Speaker  37:26
+we learn over the past 30 years, the sooner we partner the better
+
+Unknown Speaker  37:34
+it is, and even if we provide that 40% design, you will see that I mean it's a snapshot of what we want, so we will build together. I mean, what, how we want to build things, because in every
+
+Unknown Speaker  37:49
+country, sometimes even region, or whatever you have, you say certain options you don't know when it comes to construction standards, standards, or more economic materials to do, maybe it's sometimes even a question of available suppliers for certain, so and these are things really where that's why we like to work with local folks, because they know how it works here. Also, to build, like let's say somehow in a desert is something different than to build somewhere else. Yes, and this you cannot know everything, and so that's why it's so important to and currently keep people involved. And recently, so many projects are driven by availability materials and long lead items to know those regionally. Also, relationship to trades and all of that is
+
+Ryan Abbott  38:42
+important, so these I know you've seen these, but these are two periodicals that sort of dominate, and you can see where we rank for each one of those. I mean, we, we, we obviously do a lot of this. This is our life's work, yeah. Yeah, these are some brands that we're working for currently on the right, and then the dots on the left are where we've, we're doing a project, and then these are a little blurry, but these stars are where we have offices, obviously, so we kind of match up very similar to your, your, your footprint in the headquarters. We are our headquarters is in Chicago, but we have an office in St. Louis, which is where most of our back of house services are. But you know, in our western hubs, Phoenix is our larger office, and then on the bottom here, these are all of the things that we, we operate in. Obviously, we put your project in this category. These are all of the projects that we've been doing here for the last couple of years. So, it's about $5.7 billion sent since 2021 it's about 20 million square feet, to give you an idea, and we've got, we've had 62 individual contracts, some of my favorites in here, I know that it's a little, little tricky to see, but these are these are large scale industrial projects over here in the West Valley, and you can see the same thing over here in the East Valley, so a lot of manufacturing and a lot of compute, you know, date, you know, large scale, diverse scale data centers, this is three, this, this one's not ours, but these are three high rise towers that we're finishing, so when you fly in and out, you can see these from the runway when you're landing, and then ASML is a really great one to point out up here, that's that's obviously for the Dutch company that from the Novoons that builds big tools, we've explained some. Yes, very expensive tools. We've been doing some work up at TSMC plants in the US, ASML. They have their aggregating here in the United States, so they're bringing over the components and they're putting them all together, and training facilities for obviously TSMC integrators and Intel, yes, it's the only tools that get to fly around on airplanes. I mean, yeah, so lots of things to talk about. This is some food and beverage work of ours here, so you can see some of the silos, but that's for Nestle, so that's their open-up facility, which has an ASRS in it, you know, so you can kind of get an idea of the portfolio here, some highly technical work. So we're, we're well, well adept at what you're talking about. You build the ASRS as well, or not? Yes, we do. In fact, we do quite a bit of that across the country, like we just finished one of the country's largest ones for handcuffed tires in Tennessee, but you don't provide, we don't provide the technology, but we will ex also the x the material or that comes from the it comes from a supplier and then we build it and then we build the super flat floors, and all of the, yeah, I think, unless there's questions. I mean, this kind of gives you a great idea. If you wanted to see some of our work, we'd be happy to take you, you know. So, if we wanted to put on a hard hat and go and look at a project, you could kind of get an idea of our safety culture of how we do work, how we plan our work logistically. Would it wouldn't be hard to do, and I'll say on the industrial
+
+Unknown Speaker  42:50
+side, we do quite a bit of larger buildings. I mean, we've got 3 million plus square foot buildings in the Phoenix area and across the country, we've done
+
+Unknown Speaker  43:00
+25 plus through it, oh Bull expansion in Glendale, which one are you involved in the Red Bull expansion in Glendale?
+
+Ryan Abbott  43:10
+We, we pursued that project, but we did not work on that project. Okay. Yeah. Mark Anthony Brewery in Glendale, we've done several projects, yeah, but would be happy to take you on a tour if you'd like to see some, a couple of things we talked about, that you know, the this community is super important to us, you'll, you'll see us both in our, how we're working with high schools in terms of engaging their students to come into our industry, so as you're thinking future workforce and stuff, we have a program called CCDI, and we do a lot of recruiting for the whole industry out of young, young when women and men that are, you know, interested or at least curious about what we do. We spend a lot of time providing thought leadership in the environmental space, and so projects that reduce water usage on our projects that recycle water, like we're doing with several of the semiconductor projects. Fall in, you'll see us, you know, really being taking a leadership role in, like, really the brand and awareness of what our clients like to do and how they want to participate. But yeah, I was obviously much more we could talk about there, but the last thing I guess I'll put out here, and then you should hear from these guys, is that when it comes to like really leading, like AWS, as a good example, as a client of ours, and we've been using alternative concrete mix designs with them, they would like to reduce their carbon, so they want to sequester carbon in the concrete. Since we're using a lot of alternatives for cement in their mix designs, they've actually hired us to do some experiments with them, where we've poured some slabs, so we've gone through and cored and tested for strength, and really, you know, help them come up with their standard on what their baseline is going to be for carbon sequestration, and then what their facilities are expected to deliver on. We've got a project that we're building right now with Amazon in California that we actually are using mass timber for the office component with the project, and then we're
+
+Unknown Speaker  45:39
+doing a traditional tilt for the is it co-up, that's right, yeah.
+
+Ryan Abbott  45:46
+And it came out of British Columbia, but it's a really pretty space, and acoustic too. It's really, but you know, as you sort of to line up, we're very good at taking your program and figuring out how to be of help in our design and implementation,
+
+Unknown Speaker  46:07
+so we talked a little bit earlier about the overall enterprise, and this kind of dives into each section a little bit more. So this is the design and engineering is LJC group, so as Ryan mentioned, there's a handful of designers who sit here locally, and then we also have St. Louis and Chicago, a couple of their offices. So we do architecture engineering, we do pretty full scope of engineering. Civil generally is a local civil that we partner with, but it's
+
+Unknown Speaker  46:36
+engaging also external companies. If you need to, let me say, increase capacity, are these permanent? So, let me
+
+Unknown Speaker  46:46
+say, more partners, you involve there, you collaborate over the same people, or pick always new, if you, if you need to. Let me say, increase your, your capacity. Yeah, it always depends on the right fit for the project. I mean, in some cases we're doing the full spectrum of engineering, in some cases we're bringing in a specialized engineer if it's right for the client. And then all of our enterprise groups, aside from the procurement group, also work for other outside companies. So our concrete company works for other general contractors, or LJC design team works for other developers and builders as well, so it's, it's roughly about 40 to 50% of their work is outside work,
+
+Unknown Speaker  47:29
+so but you can pull together, so just as a question, for example, you know, when we say all the design is in your hands, of course, till we get then permits, and that we can do breaking the ground as quickly as possible, so the question is, so if a lot of your designers are engaged in other projects, you have the possibility to find an accurate design team, of course, which can do the job in a reasonable time, so that this won't become a bottleneck, exactly, you know, because it's an advantage to have your own designers, but can also be a disadvantage if you say, okay, I do the job one by one, so sorry, it takes a little bit longer, because we want to completely do the job by ourselves as a designer, or the decision is driven then by the by the timeline of the project, because we experience such situation where that the design work of the CM self perform became the bottleneck of the
+
+Ryan Abbott  48:40
+project. Yep, we, the speed is super important to us, as it is to you, and so we'll find the right players to go on the field to make sure we deliver. Okay, we do have 450 designers in the organization, and we will pull off of wherever we need to to get it
+
+Unknown Speaker  49:00
+done. Us, yes, all you US, yes, all US-based.
+
+Ryan Hankins  49:06
+We, we even have people in our office here in Phoenix. I think we look through numbers, but if you walk through our office today, you'd see we have a full, you know, design library. We have, you know, 25 to 30 architects, engineers in the office right now that would work on your
+
+Unknown Speaker  49:20
+project administration, but don't get me wrong, so we are not questioning your capabilities at all. Yeah, let's say if you have a lot of jobs with a lot of design, so that let me say the timeline of the project has a higher priority than let me say to continuously provide workload for your design team, because this could become bottleneck. Yep, yeah, yeah,
+
+Unknown Speaker  49:48
+very much have an internal mindset of the job as the boss, right?
+
+Unknown Speaker  49:51
+Just as an open discussion about that, because we experienced that once, and we said if, if they would have engaged in an external one in addition to
+
+Ryan Abbott  50:02
+support them, we would have saved several weeks, yeah, to hopefully give you some comfort. That map that we put up, showing the valley, about half of that we did the structural design on, because we didn't have availability, and so we went and outsourced it, and we've got several firms we work with, really. None of that, we did civil. We partnered on the civil front. Several of those jobs we partnered for the clean room, dry rooms, you know. So it's, yeah, we're very, yeah, we're very easy to work
+
+Unknown Speaker  50:35
+with. Yeah, not at all questions. It's
+
+Unknown Speaker  50:40
+a good conversation to have, though. Just to have an open discussion when it comes to permitting, so the permitting is that something you perform in house or yes,
+
+Unknown Speaker  50:55
+because there is another point where local relationship is really the key to have, let me say, a fast track project. We, we, we
+
+Ryan Abbott  51:10
+take those relationships very seriously, or make sure that we're very responsive to the municipalities.
+
+Unknown Speaker  51:18
+Okay, yeah. In fact, I submitted a building permit this morning before coming here, so that's part of the process that we do, and then the other piece is our technical assurance group, we call TAG, and they are basically to their name, their technical assurance, so they're in-house specialists who are looking through plans, who are making sure that their constructability is there, making sure that there's execution that follows along with that.
+
+Ryan Abbott  51:43
+Peter, most of them are engineers by education, and they want to move from the production side to being like mentors, teachers, you know. So, they'll bring their expertise, and they'll kind of bring that back and say, here's some things we can do better with this submittal, here's a different product that may do something you know in a different way, but they've, they've kind of come out of that moment of working on, you know, 10 or 12 things, and they're out on a project with a project team working through
+
+Unknown Speaker  52:13
+it's a very good approach. I think it's a big part of our education. Yeah, for sure, because you need also, do you need to transfer your know-how to the next generation, that's right. Otherwise, all your experts will disappear with retirement. If you want to know something, read a book or a digital library, but not everything can be transferred like that. As Ryan mentioned, we have the mechanical, we call it SEI group, who, depending again, for the right fit for the project, they're doing sometimes they're doing prefab,
+
+Unknown Speaker  52:48
+they're doing pipe racking, they're doing installation pieces. This tends to be more on the process side when we're doing part of that work. Also, includes the BIM engineering and all the piece that comes into the front end engineering piece with mechanical and electrical, and we'll give this to you. There's a lot of detail in here, so
+
+Unknown Speaker  53:09
+we'll run. Of course, we have looked up your website. Okay, but it's pretty great if we can have that for sure.
+
+Unknown Speaker  53:18
+Concrete Strategies is our in-house procure self-perform concrete group, they have been doing tilt concrete for that's kind of a specialty for a long time, structural tilt concrete. Here's another example of where you know we don't utilize them on our high-rise projects, because that's not what they specialize in. So we use an outside concrete group because they're the right fit there, and again, concrete strategies works for other general contractors, so we're always kind of aware where the market is, and you know they need to compete for jobs as well. It's not just handed over, so they're a great resource to have in house, especially as part of the design build process. We get them involved in the in the sequencing and constructability very early on, talking to them about lead times for materials and sequencing and timing, so schedule, they're a big part of how we put together the design build projects. The procurement group, this, as Ryan alluded to, is very critical for managing schedule, managing critical path. These, I mean, these days there are electric procurement, there's steel procurement that starts well before design is complete, you know. Even early on, we break a lot of these larger, complex projects into early grading packages, into early civil packages. You know, it's a very much a staged, sequenced start. It's not just, okay, we have the design done, let's go build it. So, the earlier we can get started on these things and take those risk items off the critical schedule path is really critical for the job in
+
+Ryan Hankins  54:47
+the, in the, you know, going back to what we were talking about earlier, you know, critical path, that's what we're focused on, and so we look at every single item on this list, I mean, even going down to the steel, you know, right now we're seeing a crazy influx of orders on steel between the data center construction going on in the US, going between, you know, like there's TSMC has many more phases that are upcoming, and so we can get you in line without going to necessarily a full scale, so having a full design done, going to subcontractors, doing all that stuff, we can help provide a solution to get you in line, so then you tie all these different things we've talked about in the last several, in the last several minutes. So, pre-construction technology and QA QC, these are really the three things that kind of tie all those services together. So, for a pre-construction. It's how do we provide, you know, cost and schedule certainty to you, you know, throughout the design phase, and as we get into construction, how do we make sure that we're really making good design decisions, so that we can make sure we're still hitting on your, your schedule and cost goals technology wise. And I think this is one thing that's really scaled as, as the enterprise of Clayco has scaled, it's kind of the glue that kind of holds everything together, right? I mean, we're going out in the field and capturing real data of what's actually happening on a daily basis, and we're measuring it against what we've planned. It's taking drone flights and making sure that you know everybody has access to every part of the site at any given time, if you have meetings with investors or meetings with your board, and you need things from us from a technology perspective, we have probably the leading bleeding edge, leading edge of of of technology within the construction arena.
+
+Ryan Abbott  56:38
+The thing that I would like operations love interacting with that, so that before you go and actually put something in place, the required clearance is the dude just doing a walk through of the virtual environment, so that you can make changes in real time before we go and push it out to the market. It's probably been a really powerful item, if you've got mezzanines, like making sure that those are going to work for your installer, so you can send over that and make sure that they've got enough to get around it. Yeah, so pretty, pretty powerful tool. We shouldn't have, like, I thought it was, or this didn't work, or it didn't fit, like that's what we're working really hard to work out, which is even the OEMs equipment can get modeled in that space to make sure we integrate the design, that's right, that's right.
+
+Ryan Hankins  57:30
+And lastly, QA QC, we've talked about tag, but the one thing I think I wanted to add there was from a warranty perspective, they are very helpful because they will tell us upfront what products could be used, and which ones we're using, which ones could be used, and what the potential risk associated with using this material versus this material from a warranty standpoint. So we can have those conversations up front. You guys can talk to your maintenance personnel and see what makes sense from a budget perspective. We've talked about precon a little bit, but basically this ties together all of the decisions that we made during the design effort, so whether it's budget validation, it's construction schedule, all these things that happen on the front end are part of the Clayco preconstruction process, and our belief is that the more resources, the more high-level, experienced, brightest people we can bring in during pre-construction, the better we can set up the job up, and the better we can build momentum heading into actual construction. One thing we wanted to share with you, just from a - we'll call this a creative type approach is more of a progressive GMP methodology. We know, depending on your schedule requirements and where your designs at, sounds like some of those things are still being worked out. One thing we could do is work through with you a progressive GMP methodology, where we start with civil set and we lock that in from a cost perspective, and as the different disciplines start getting locked in from a design perspective, we then add that into the GMP.
+
+Unknown Speaker  59:08
+Yeah, we do that, the design build integrated process, right? You're not waiting until design is complete before you're getting cost feedback and schedule feedback.
+
+Unknown Speaker  59:18
+Yes, but we also need the reliable budget. Yes,
+
+Ryan Hankins  59:24
+and that's what our pre-construction process will help you with, in addition to the progressive GMP process.
+
+Unknown Speaker  59:35
+So, here's as we get into some of these relevant experiences and other projects we've worked on. Obviously, this one hits from a paper goods manufacturing standpoint, P and G. This was about 600,000 square feet of manufacturing and 400 of distribution. We worked on a number of their sites across the US, both manufacturing and distribution site. Yeah,
+
+Unknown Speaker  59:56
+these, these below were more distribution, and that one obviously is paper manufacturing. Yeah, because the
+
+Unknown Speaker  1:00:02
+somewhere, but not here. They lock the door on you as soon as you get them.
+
+Unknown Speaker  1:00:17
+Yes, this is the one that was mentioned, where we were also the part of the development team, because they wanted kind of a more turnkey solution, corrugated box plant up in the Washington area.
+
+Unknown Speaker  1:00:35
+Yeah, I know they were, did they end up building that second facility? We were talking,
+
+Ryan Abbott  1:00:40
+they didn't expand as far as I saw, they were still working on how they were going to do that, and then they got acquired. Now they are acquired by Smurf, and they quote West Coast. Yeah, so yeah, I think what they did was they said, okay, where can we get one on one and be more than two, and they bought, they acquired this facility, but yeah, there's a corrugation facility up in that area, yeah, yeah, just outside of the Columbia County.
+
+Ryan Hankins  1:01:10
+So these next couple we didn't know coming into this cut into this conversation that this was mainly conversion, but basically some, yeah, we'll call it some some adjacencies that are similar to the process battery separators, you know, they get placed on coils and are rolling sheet goods, and then get processed the same way, really the paper gets gets cut down, similar to that iso board manufacturing plant, so it gets, you know, built into parent roles as well, and then cut down as well as just roofing, just general roofing goods, very similar, so a lot of, so if you look at it, you know, our capabilities from a complex utility standpoint, our experience from a large scale advanced manufacturing type processes very familiar with us, and coordinating as well with the process side.
+
+Unknown Speaker  1:02:09
+We, of course, as I said, we looked up your website. We let me say collected some information, otherwise we wouldn't talk about that, so we are not watching capabilities for large scale projects, so that's fine. Yeah, generally
+
+Unknown Speaker  1:02:33
+done quite a bit. Amazon work, 95 million plus square feet. We're doing another million plus square feet locally here in the coming future, so it's been a lot of all sorts of different types for Amazon, from just the distribution to the ASRs, to the, you know, the multi-story three to five, so pretty big,
+
+Ryan Hankins  1:02:55
+that's a big number, 95 million square
+
+Unknown Speaker  1:02:57
+foot, and now we, you can't take pictures, but they're highly automated. Yeah,
+
+Unknown Speaker  1:03:06
+yeah. And if you've ever worked with Amazon, everything is, you know, they want it yesterday. We know that there you go. So, you know, you know they want it yesterday. So, everything varies, schedule, critical path driven, which are great examples,
+
+Ryan Abbott  1:03:25
+so so we're doing work right now at TSMC, so that's large scale complex, that's the facility we talked about earlier, and then and then the all of the white in the right images or facilities of ours that we've done in the last two and a half years, so just trying to give you the mindset. What is your role for the PSMC? What's our role? We're providing for the MEP systems, the integration, so all of the vibration isolation, so we're not doing the core shell, but getting the MEP system into the building, and then building all of the supporting infrastructure, which is, it's fascinating to remove parts of brand new slabs, but that's how they, they're, you know, they're moving pretty quickly from a technology standpoint, and the industrial side is a mixture of, you know, just the shell all the way through to the full ti build out inside, depending on the client. The
+
+Unknown Speaker  1:04:30
+MDP does include also the big cooling tower, so
+
+Ryan Abbott  1:04:33
+that's it's not our contract, we're inside of the fat, so we're inside of the clean space, and then up on top of the clean space. Yeah,
+
+Ryan Hankins  1:04:42
+then here's Acid Recovery System Two, is one of our.. then here's just three examples. We, we didn't know how deep you guys wanted to go. It sounds like you guys have a good idea of us by now, but just to give you a little overview on three, we'll call it case studies. So, QTS Phoenix, we did four buildings on that campus, for a total of 168 megawatts of critical power infrastructure. It's roughly about a billion dollars in contract value, so roughly 25 million work in place. We had 2000 trades people on the job site every day that we were responsible for. At the peak we had 1800 pieces of owner equipment that came onsite that we had to coordinate and make sure that everything was was delivered correctly, not damaged, got put into its right place, installed, and actually working correctly, and we had 2021 turnovers within 30 months, power means it means like the IT server loads that you actually plug in, that's what that means.
+
+Unknown Speaker  1:05:49
+You had like redundant, oh yeah, yeah. So
+
+Ryan Abbott  1:05:52
+it's they call it five nines of reliability, so it's 99.999% up. So when the substation, if power is disrupted in the substation, each one of these cells can generate power on its own. How it's got a generator with rapid deploy Cooper switches,
+
+Ryan Hankins  1:06:13
+and it's not just one, it's like there's like there's like 30 generators that are two and a half megawatts out there. Yes, sir. So, I mean, as you guys can see, you know, a lot of variables that get thrown at us from owners, we are able to react quickly, integrate into our plan, and figure out a way to still help you meet your goals. Like an example on Stack, in the lower left-hand corner, was they actually changed their design from a standard, we'll call it traditional data center deployment, to liquid cooled, which is one of the most recent integrations into the data center industry, first of kind for them. We went ahead, implemented it into the design, it was a 30% contract value increase, we went ahead and accommodated the original schedule just, just fine.
+
+Ryan Abbott  1:07:08
+Yes, yes. So air cooled chillers up on the roof, and then instead of taking all of that chilled water to a fan wall, it goes straight to an overhead rack, and then there's a quick connect to the deployed to the rack. The tricky part, though, is if something leaks, getting the water back out. So we had to go back and install trough trains and sump pumps and all of that fun stuff. We spent 20 years, but the public requirement went up by change. Yes.
+
+Ryan Hankins  1:07:41
+Oh, yeah, we're at, yeah, 231 megawatts over, I think that's 800,000 or 500,000 square feet versus QTS, which was 168 megawatts over, I want to say was a million square feet. So that's how much more compute they can do in that building now too. Oh, yeah. yeah, so that one was 32 turnovers over 35 months. So, when you think about, like, if you start getting behind schedule, like, you can't catch up, and so dealing with AW, or dealing with the confidential client, dealing with our development team, and making sure we're staying ahead of the curve is, is very important, and we're used to working under that kind of pressure. Last one, so this one was a confidential project for a Consumer Products manufacturer project, Dynasty, over in the West Valley. Food Glade cleanliness, it was coffee creamer, lots of utilities, about 15 different utility systems, between gasses, steam, clean steam, CDA, instrument air, all the different chilled water systems, process systems, and then about 36,000 linear feet of high purity piping, so
+
+Unknown Speaker  1:08:55
+piping example where we use our mechanical self-proportion to do a lot of the pipe rack events, but
+
+Unknown Speaker  1:09:03
+Who designed that? We did. You did, yeah.
+
+Unknown Speaker  1:09:09
+We got, we, we got the process. You got to be an ID. Yep. Yes. And then we developed
+
+Ryan Abbott  1:09:14
+the model, and we created those in racks that were about 60 foot long in several cases, and about 12 feet wide, and then shipped them in and brought them into the facility on rollers, put them in place, and then did all of the welding to connect
+
+Unknown Speaker  1:09:31
+was pre-assembled. Yep. Okay. One
+
+Ryan Hankins  1:09:36
+other thing to note here is that in all these instances, like from break ground to first turnover QTS was nine months, stack was six months, and then dynasty was five months, and so we're letting the owners basically get in and understanding that producing value is of utmost importance. We're working around temporary commissioning of utilities and whatnot to make sure you guys can still operate.
+
+Ryan Abbott  1:10:01
+You also do the electrical installation. We have the ability of doing that, and we would probably partner in many cases, depending on the scale and speed of we
+
+Ryan Abbott  1:10:18
+put up why we're the right choice here, but you've heard us say these things, the regional expertise and the resources that you have here, including those relationships that you have with the municipalities and the frankly the trade partners and supply chain that you'll need to deliver on, right, the infrastructure that we're talking about in the integrated design in house with procurement, so procurement leads the design, not the other way around, right? The pre-construction, which is cost and schedule certainty that we're talking through, and then I, you know, if all of the things that you'll hear about us, our clients, if you were to ask them, would say they figure out how to get us into our facility and up and running in an unbelievably short schedule, and that's very important to us, right? So we're not having to explain to the board why we're not producing, so we like, I like I mentioned earlier, this is what we do for a living, and we take a lot of pride in it.
+
+Unknown Speaker  1:11:23
+Thanks a lot. Any questions or more to come?
+
+Unknown Speaker  1:11:33
+I think at the moment we will present the project, but then, of course, we will talk about how you believe this project will be best managed. A little bit of our previous experience, we came to the US, and we were used to Lam Sound. Our first two major dreams were contracted at the Lump Sun. Not sure how much money we wasted by that it's not very popular in the US. We are shifting toward CMM risk. Let's see, I'm not sure what is the right nomenclature, the name somebody called Design Build, some other CMI race, we will discuss later. I want, I want your opinion. How you believe this will be the best way to handle this
+
+Unknown Speaker  1:12:35
+project. So, first of all, I will show some picture about the how it looks inside, so that you understand what we are producing, how it looks, the material, and what we need to move inside the facility. As Antonio explained at the beginning, this produce the For use arriving from another facility in Gambia, Gambrillia are this one that you see here in the picture, and they're the ones that will be stored in one of the main buildings that is called Jambouria storage. Normally, these are stored in two jamboree on top of each other, and they are moved with so the height of the jamboree is 2.8 meters, so we are 5.6 meters having two jamborees of the diameter is approximately 2.5 meters.
+
+Unknown Speaker  1:13:40
+You get along, you get along with the metric, or I'm Canadian, so it'll make sense to me.
+
+Unknown Speaker  1:13:46
+He's like, finally someone common sense about so the jam marine is about nine feet tall, diar meter is in the range of seven feet, because it needs to fit in the trailer. Otherwise, if we would have it from an integrated side, it would be 10 feet in diameter, because that's, of course, more efficient, less changes of wonder, and so this is the product will be will be wrapped with a stretch film, as you can see here, and and transported to from the paper manufacturing site to the converting site, in this case, so, so when you do a combined facility, I mean, that's straight, that's 20% more efficient, right there, right, plus that you're removing transportation, so it's not hard to make a value case, but, but to build the paper, maybe you need, I mean the requirements are much, much higher, a lot of water, power,
+
+Unknown Speaker  1:15:06
+gas, yes, so easy to find the labor location, you need the location requirements, yeah, not easy to find all at once,
+
+Unknown Speaker  1:15:17
+yeah, so starting from this blamoriala, then the material needs to be prepared in order to arrive to the finished product, so and this is happening in the converting facility, so this is one of the features related to converting, so the big converting facility with a several line, and it's actually what we are going to construct on our plot. Some other picture of the converting area is Liebman. You see that it is a jamboree that here we are at the beginning of the converting line, where we have the jamboree that is that is placed on some stance, so from one from one one layer is applied on different layer, and at the end is cut in several formats. Yes,
+
+Unknown Speaker  1:16:19
+so the converting building has several bays and you can think about each bay is
+
+Unknown Speaker  1:16:27
+one production, so there are different machines, so these what you can see here is road lines, road converting lines, they have different sections, they start where the jump royal arrives, they start with the ambient section. This is what we can see here. That's the beginning of the line. After that, after that is the converting machine itself, but in the end of the converting, there is the lock saw, which is like cutting the roll, which has already the diameter of a kitchen towel roll or toilet paper roll, is cutting this lock into the right sizes, and then it is there is a diverter, and then it goes into the packaging line, and after packaging line you have then the pelletizer and spectra, and then the product moves on pallets into finished product storage automatically or by fork track, depending what they do. We will explain you what is in here in a moment. So this is a is typically so you can see in the packaging light, for example,
+
+Unknown Speaker  1:17:48
+and these are different structural shapes. These are from different jobs. Yeah, they are from you. Yeah, maybe some from us, some from Europe.
+
+Unknown Speaker  1:17:57
+Yeah, but we will, we will show you them. Okay, just to give you a little bit of understanding what's going on in these buildings,
+
+Unknown Speaker  1:18:10
+another overview of the converting facility on the bizarre sample of a finished product that needs to be stored and then shipped, so I will move now on the concept of our facility. Will you guys send us this after
+
+Unknown Speaker  1:18:32
+you will get these concept layout? It's still under development. It's not frozen yet. We're still working on that, but yeah, because again you need to provide us a proposal, probably it's better to get this one than nothing, yeah,
+
+Unknown Speaker  1:18:53
+so the plot has was mentioned as still not being purchased, but likely it will be finalized soon, and if we look, how it is organized, we have an entrance outside of the fence. We have a truck parking area.
+
+Ryan Hankins  1:19:11
+Do we know? Do we know the actual location of
+
+Unknown Speaker  1:19:14
+this? Yeah, so this is Tarna Road going Tarna Road, is it
+
+Unknown Speaker  1:19:22
+the yeah, so this is this is in Buckeye, just off of the 85 to the west, and we're not totally locked in on this, but this is our site that we're very close
+
+Unknown Speaker  1:19:39
+to the rail, the railroad track, you see, you're familiar with, like, the polymers.
+
+Unknown Speaker  1:19:52
+Sorry, trucks enter the site with the jamboree. They will arrive to the this area where we have the loading docks, and this is the first big department jamborea storage. So it's where this jamboree will be stored before entering in the converted area. Actually, this is jamboree storage plus auxiliary material storage, and it will be all located in this area,
+
+Unknown Speaker  1:20:23
+all the raw materials for packaging lines and pellets, and so on, will be stored in
+
+Unknown Speaker  1:20:30
+there. Then the big jamboree will be taken with forklift and will be moved in the converting air. We have two converting. This is converting one, and this is converting two. Each converting has a technical annex. This is the technical annex for converting one, and this is for converting two. In the technical annex, we have all other auxiliary areas where we have electrical dust removal equipment and other equipment, is
+
+Unknown Speaker  1:21:10
+it all single level or is there mezzanine? No, there is all single level,
+
+Unknown Speaker  1:21:19
+electric knob, and offices, offices for sure is two levels,
+
+Unknown Speaker  1:21:29
+and the so the production line, the production direction is the one that you see here with this arrow, so the jump area will be will be placed in this location, and then define the finished product,
+
+Unknown Speaker  1:21:43
+so we have 1414 lines for each converting hole, 14 base, the bay width is roughly 70 feet,
+
+Unknown Speaker  1:21:57
+the finished product will be then moved in the highway storage in this area where we will be stored and then when it's ready to acquire to be shipped will be taken out of the highway storage moved in this dispatch area trucks will be loaded and then will be decided as other some additional areas we mentioned already, the office design, the workshop that is for the moment is indicated more or less 5000 square meter south of converting one all around the facility, we have internal road, we have this is the parking for the employee, we have a pump house, a trailer parking area, and some pond for the potential water, or less is the full development, so consisting of phase one and phase two. In at the beginning we will just construct part of this of this full development and the phase one most likely, most likely part of the phase one that we are going to construct is this, so in the Jambouria storage we will just construct part of it, then it will be started, then it should make sense to have it then also extended to complete out to this area, because minimum we think that it will be 40,000 square meters, so it is not, it's not that big the area that will will remain. So let's see if then finally we decided to construct the complete Jamboree storage. What for sure we will not construct is the high base storage, because at the beginning the concept is that we will build one converting building with 14 lines, this one that you see indicated in red, and the future converting two will be used during the phase one has finished product storage, so when the product are ready, will not be stored in the highway storage, but will be stored in the future converting to, and in this, these areas at this in this first stage is called finished product storage, so you see that here
+
+Unknown Speaker  1:24:41
+you just asking, have you followed this model before? Yes. Okay, so we'll show you later on some
+
+Ryan Abbott  1:24:49
+pictures where you can see that, honestly, the only an outsider's perspective, right? But it's you now need to build the high bay before you could go, so it just takes longer to get to your second production,
+
+Unknown Speaker  1:25:06
+so to liberate this space you have to build this. Yeah, correct, that's correct. But that's in the development, can be seen when we reach full capacity, converting one, because then also, of course, you need to build some paper making capacity to also complete the working tool line, so it's predictable when we need to take action, then to build fine or to construct this highway storage, and anyhow the highway storage is it's a self supporting the automated storage with a rack, yeah, and also the envelope, the shell is provided by the by the OEM. Okay, so it would be just the foundation slab, which would be done by the construction company, and then it's a one package where basically from top of snap of rate they start to install the rack, all the siding and all that kind of so, and also all the stack cranes inside everything is one one system is one box we buy that, but this box and the technology is depending on the
+
+Unknown Speaker  1:26:28
+OEM, so what is still to be to be finally decided is the location of the dispatch area in phase one, because in phase one, as we said, that the finished product storage will be stored here in this area, and we think that anyway, we are going to build the dispatch, the one that you see in this area, more or less, as it is expected to be required for the phase three. So the finished product storage, the finished product will be moved in this area, and then loaded on the tracks in this area. Other option would be to have the dispatch area north to the future converting two areas, so that
+
+Unknown Speaker  1:27:10
+the finished product are moved here in the dispatch and then loaded on the trucks, and then the trucks will be disturbed.
+
+Unknown Speaker  1:27:17
+In this case, we will not build this dispatch area during the phase one, but it will be less constructed in phase two,
+
+Unknown Speaker  1:27:24
+but still it requires then from the sequencing before we can start the operation conversion to we need them to to
+
+Unknown Speaker  1:27:36
+rebuild the current dispatch or the temporary dispatch to become a portion of the tactical clinics, plus the additional technic lines for the north, and there is also we need them to have them dispatch and the highway storage ready before we can do this exercise. In reality, you gain
+
+Unknown Speaker  1:28:00
+the this decision will be made by
+
+Unknown Speaker  1:28:08
+the thought is so from the internal logistic this works better because you have to dispatch close to the Finnish brother, where you avoid this long, it works better for you, for the operation, and for phase
+
+Unknown Speaker  1:28:24
+one. If of phase one, the problem is that here we have seen in Enola, where we show that this, we cannot build this as big as we actually need, so the space that might be a problem. So,
+
+Unknown Speaker  1:28:39
+the staging is the staging is the topic there because otherwise you would need, so this is this about 75 feet now in depth, and it should be most likely should be 100 feet,
+
+Unknown Speaker  1:28:56
+and the other problem is that we are very, very limited with trailer park here you can build
+
+Unknown Speaker  1:29:06
+spaces, and the other side, the other solution with the dispatch. Here, of course, you build the final dispatch better, you don't waste any money, but in future, when we build the high bay warehouse, it might be a little bit tricky, the interface between the existing dispatch and highway
+
+Unknown Speaker  1:29:27
+house. Theoretically, we know how this could work, but let me say the tricky thing is that this wall has so many openings, which you cannot predict in phase one, as long as you have not purchased the storage. Yeah, so, but
+
+Unknown Speaker  1:29:41
+there is the, we have some ideas that we would like to eliminate to discuss with you about that as well
+
+Unknown Speaker  1:29:55
+experience with integrating expansion of facilities and tying in new spaces to old
+
+Unknown Speaker  1:30:00
+spaces, so maybe we can also show you some pictures of one more question, so you are you planning the site in the water reten
+
+Unknown Speaker  1:30:08
+The one one more question, so are you, are you planning the site in the water retention and every the civil side for the complete phase two? Are you hiding? If you
+
+Unknown Speaker  1:30:21
+see, we are building a watch, the 90% of the makes sense to just go ahead and
+
+Unknown Speaker  1:30:29
+grade to be on the contractor site, and in reality we build about, as Tommy said, 90% already of the footprint in phase one. So, yeah, it makes sense to have the parking requirements and everything.
+
+Unknown Speaker  1:30:44
+I don't know, but the water, storm water, I mean, we need to consider lots of fusions, and to
+
+Unknown Speaker  1:30:51
+have the future expansion place for more parking, or whatever. Yeah,
+
+Unknown Speaker  1:30:54
+we show you some pictures from another facility. Looks
+
+Unknown Speaker  1:31:10
+like facility we did in Oklahoma, close to Tulsa. So exactly here you see the, the, this is the border between paper making to the right side and converting facility to the left side, so in reality, when you have still the sketch in mind from before, so we have here Jamboree storage, we have here converting one with offices and technical annex, and we have here in the, in the rear, we have exactly this change product storage, where at the moment we have the expansion, where we do a third paper mill highway storage, exactly the same step steps as we intend to do here in future we do at the moment in Okra. I'll show you some other pictures. So basically I think this one, so you can see here is the solution. This one we have the loading docks and everything, so in this case, in our case, would be to the north towards the railroad. We have this temporary dispatch area, which is, let me say, the width is not reality enough for the staging of the finished product, and we have some here some trailer parkings, so and of course the problem is in reality if the phase two will happen in a few years, all of that, what you do here is a waste of money.
+
+Unknown Speaker  1:32:56
+Yeah, so the idea is to do it, to do it probably different, but this is something we need to discuss, then with the CM on board, and there, then the design team, so the options, because this is needs to be a firewall between the dispatch, so we think it needs to be built or constructed in the phase two, so means in phase one, probably we just put 9p two inches thickness there, leave it there, and then we from there, from the rear, from the highway storage side, we do a tilt up or whatever with all the openings then in there when we know them, and then having it like a clamping wall or something like that, and so, and then we just do the cut outs in the imp panel, and we can keep the dispatch in operation also during construction, that's the idea, because then we spend this money only once, but it also would be, I think, it would be very complicated, we cannot define this wall now, that's mission impossible, so it would be like, say, looking into the crystal ball and making the best guess, but most likely that would be one, but it is exactly how it looks like. What you see here is this facility is about, so the finished product storage here, the conventional, we call it conventional block storage is about 400 I think it's about four 420,000 square feet. The converting itself as well, the one we intend to build here is at least two base wider, so we talk here, I think more close to I think it's close to 500,000 square feet for the finished product storage as well, 500,000 for converting, plus another, the 40 440,000 square feet for the for the jump rope storage, and including raw materials, plastic for workshop, plus we are roughly in the range between 1.41 point 5 million square feet for phase one here in Barca. What we intend to do. Yeah, then maybe some. I hope I find that picture. Just a moment, so this one. Yes, here you see converting one, if you want, and converting two on the construction. So, in this case, these are not tilt-up walls, these are paneled from Fab Con precast, also built as clamping walls, as you can see during construction, they are all braced later on, they are connected to the steel structure with a fusible link. How they called it, so when there would be a fire, so when the steel structure goes down, they, it won't tear down the wall as well. So then we have here the corridor in between the two. So this corridor has the main purpose when both phases are are fully developed is is for egress in reality, because otherwise we would have some egress issues, so one side is is rated as a fire barrier, the other side really has a firewall for us is important as well. First of all, because the finished product storage during phase one, when phase one is completed, has also a higher fire load, so we want to separate storage from production areas, because each of these converting lines is also quite expensive, and we don't want to have a loss of production, and also critically is, of course, the wall, and that's why it's a double wall with a corridor. First, provide egress. Second, also, let me say that most likely also beyond any code request, but it's crucial for software that we protect the production towards the jump real storage, because the jump real storage has also extreme high fire load. You can only work in there, so if you, if you talk, looking, look up FM guidance, so I think it's data sheet, is it 821 or is it vice versa, 21 eight, so they, it's, it's about storing job reels, and it's RP one paper, so it's so it's the worst thing you can have in paper, because it has a lot of volume, a lot of air in there, and so this is really crucial to provide good fire protection towards the production facility.
+
+Ryan Abbott  1:38:25
+Do you have fire expert in house? Are you having house? Yeah, we but we partly often, yeah. So one thing that, like, Phoenix is dealing with right now is what to do is batteries. It's also a very critical thing, and it's, it's not something they've decided on. I mean, it's like a root, so you, you have to get an interpretation, and then figure out how you can get to those hours of coverage by even adding extra water, but yeah, I very much will partner with the good
+
+Unknown Speaker  1:39:01
+Jensen. Jensen Hughes is who I was thinking of. Yeah, so I think it depends. Sometimes also we applied for certain areas or facilities. We applied NFPA instead of FM, also because we didn't find solutions on one or the other side of these guidances, so we have to go to really have having some smart people on board to do the right interpretation, also with it, where regarding dress and so on, because you know the production lines are running in in this project here that sounds north in converting one and north south converting to so you cannot let me say escape in west east direction that doesn't work because the lines go through so and all of that that seems to be considered then finally to find the right fire protection strategy so but this everything, what you can see here, which is done in precious panels, can be done in tilt up as well. Most likely, you would do that from the inside, because the corridor does not provide space.
+
+Ryan Hankins  1:40:21
+So, you did mention something that a lot of owners.. it sounds like you guys are ahead of it on the insurance side. If you guys do you have your insurance strategy all figured out that will affect the ability for us to do
+
+Unknown Speaker  1:40:35
+three drivers for the fire protection strategy? Okay, driver number one, of course, is the fireplace, number one, number two, the requirement of your insurance carrier is probably beside that, but you, you have these drivers, and beside that, what is most important is the risk assessment from the owner, because beside all, let me say the topics you can insure, and of course, without any discussion, that you're able to rescue people. One thing is you cannot insure, and this is not being able to provide your product to the client. If you, if you lose a production facility, in you are probably not able to let me say to it's too far, so you'll probably get the competitor then into your business, and to get to get your customer back is maybe a difficult thing, so at least you know if we talk about the storage, you can easily let me say live with a 10 solution, even you will find very quickly something, of course, you lose production, and it's a different story. Okay, so these are the drivers, so some of the decisions you will see, or what we will discuss together, then in, let me say, in the project provided we will select you, is is for sure all these, all these aspects to find the right level of fire protection, of course, complying with code, but most likely in some areas we will have some requirements in the racking system.
+
+Ryan Abbott  1:42:44
+Yeah, this is one of those examples where the market has changed. Precast was very competitive. competitive way of going and creating a shell, now with a lot of the free cast getting absorbed by data centers. Yeah, now the price of the price is very high and the weight is very long.
+
+Unknown Speaker  1:43:02
+Yes, we experience that, even if for certain areas, and it's not very common in US, but that's something where the standard we wanted to keep is for the paper manufacturing building precast is unbeatable, durable, more durable than then steel, and maintenance costs are much lower when you also look a little bit on life cycle cost, because you have massive corrosion issues on the long run in the steel buildings, where you, where you take the manufacturing, yeah, and yeah, but as you also hear from our answer, there we need your expertise, your knowledge about the market to choose right materials, right solutions. Can we show such an example of the drawings that we, yes, of course, we can I You have also some of them, so this is what we call that's one of the one converting facility, so the basic design will will what we will provide the CM company, we will provide to the CM company is has this level of detail, so more or less you have so door schedule door position sizes of doors, sizes of rooms, top of finished floor, and so clearance, you have all of that, all in Imperial. Yes, of course, we design in Imperial since a long time. So only the conceptual of the concept, because it was intended for internal use, we had the metric, otherwise everything is imperial. We designed I It also, for the paper making, when we do detail design, we do and do structural analysis. We follow American codes, so that's dust removal room, for example. So, this is that's technically, for example, holds electric room, so all of that is in here, and at least does the
+
+Ryan Abbott  1:45:37
+electrical get distributed out into, yeah,
+
+Unknown Speaker  1:45:41
+as I mentioned before, you have been here, the bay width is 70 feet, is the standard wave we have, and you can see here, then the areas where we have the overhead crane with the runway beam up to here, then of course in some areas we, we, we do not install the runway beam because we don't need at the moment, because it's depending on the layout of the different lines, but of course to be discussed, maybe it makes sense at least as we consider the load everywhere, because it will provide flexibility in future to add runway beams, where if you change the layout of the lines, that you are able to have the frame where you need it, yeah, that's the level of detail you can expect there, and you maybe can show the others, I haven't, I don't have them open, yeah, so also beside this architectural 40% design we will provide you some, some door schedule, some preliminary ones, we will provide you, we will provide you flow loads, we will also show you which areas even not now needed, because most likely we will start lots with a lot of automation, maybe yes, maybe not, but this is something we can decide. So the areas where we need probably to have a super flat floor for AGV traffic, not for sure, not in all areas, also that we consider the right joint profile in areas where we will operate with the AGVs, because we know already that other profiles do not work, because the axle load is so enormous that it destroys every kind of grouting, and the salt joint itself, even if you use a rigid filler, does not work, because it starts to break, and so this co-silus profile is something which finally we ended up with this solution, because it provides it's the right quality, and we can avoid all these issues because you pour it directly, you pour against it in the when you pull the slab, you don't have any grout
+
+Unknown Speaker  1:48:23
+from an electrical capacity standpoint. Do you plan for automation or look for flexibility to increase in future
+
+Unknown Speaker  1:48:30
+doesn't really change a lot from the electrical, I mean, we are.. what do you mean? Like, are you adding a lot of chargers? You're adding a lot of.. yeah, but that's not.. that does not have a good change up. Phase one, we believe we'd be okay with seven eight megawatt food without 1012 meg. megawatts, that's what we are applying into APS. Okay,
+
+Unknown Speaker  1:48:56
+so also that we will foresee already. So, what we will also do some concept design for site civil, so showing where we, we would suggest, we will edit this suggestion. we would suggest to have built the main infinity routes onsite, for example, also for the future, the dark planes, so that they are already there, so that we already identify what makes sense to build already in phase one, not to tear up all the roads when it's finished, and figuring out is not enough, so all of that happened, you know very well, I think, so then you're looking for to avoid that, yeah, these are some typical details, yeah, they may, because of the canal and the rail placement, want you to bring on offsite storm as well, yeah, in those calculations, yeah, and also, then there is the topic with the floodplain. We have, we are in the floodplain in the southwest corner. So we propose to build a dam to protect the area. So it's just a guess at the moment, we think. So that is about seven feet high we are already good, then yeah, so some ideas about what we like to make very easy, so that we have some sheet drainage cross direction of all the circulation road directly into a ditch, and from there we drain into the ground, maybe we need to have some welds to require the coat. We don't know the details, but we know that it will be required, so that's then not our job out there. There's a lot of sand and gravel. Yeah, it drains quite well, drains well, not everywhere, because, yeah, there was farms for a while, but then with then also there it seems in the neighborhood that the upper soils, they have a certain risk of swelling, that's also topic. There it seems to be we need at least for light structure still for slap on rate, so that we don't get cracks in there, so all of these things, so that's a, that's another thing to consider. Certainly, for phase one, phase two, is if you're going to have scrapers in there, have them bring that all of those soils out and bring them back together, so they settle together. Yeah, yeah, so these are all things to be to be discussed and to be developed together, so we see as latest point when, when the CM is selected, that of course we are part of the team as a let me say representatives of the owner and advisor with our experience, as you say, best results are achieved when, when we pull together all the expertise from from everyone, and then optimize this is exactly what we are looking for.
+
+Ryan Hankins  1:52:29
+Do you have a geotech by any chance
+
+Unknown Speaker  1:52:33
+part of the due diligence? We are going to not us, but he's going to provide some geo tech. I'm sure we went to, we decided to develop the build. We need to make our own geotech, maybe much more based on the locate the layout of our,
+
+Unknown Speaker  1:52:53
+and we, and we pull in also our, our experts for a second opinion, just
+
+Unknown Speaker  1:53:00
+you, you do geodes, no, you, but you part in some money, we partner, we always bring, yeah,
+
+Ryan Abbott  1:53:05
+and then we usually have them do the material testing, do and that way you don't end up with that finger pointing right, you don't end up with any finger pointing that way, no, yeah,
+
+Unknown Speaker  1:53:21
+they would be the first thing that we will do, one audience, yeah,
+
+Unknown Speaker  1:53:26
+so as soon as we have a more or less frozen site development plan, which will be done from our end, so if that's frozen and approved by the, let me say, by the sea level of salt without, then I think it's time to send out the inquiry for getting some bits for the for the soil investigation, excellent, very exciting, and of course then also to have a drone survey, so I think that should be accurate enough, so I don't know if we need to go into the field and do maybe some, I don't know, some checking from that, so I don't know. It's currently is already, is there already a seed on there, or nothing? So, is it agricultural land, and
+
+Unknown Speaker  1:54:26
+it's fed from the canal, it's water from the canal. So, let's see,
+
+Unknown Speaker  1:54:33
+yeah, there's canal, there's canal, and there's still ag on the very south in the like flood zone area, they're still growing crop right now, and it looked like it was beer corn or something like that right now, and then there's the cotton gin, and then most of the rest of the property is the lay down yard for the cotton gin, which is pretty empty, and just, you know, clearly it's been worked and leveled, but it's just level flat dirt,
+
+Unknown Speaker  1:54:59
+but it means also that I think that the drones away won't only drones away won't deliver accurate results for the telephone, I think. needs to be a mix, yeah. So the
+
+Unknown Speaker  1:55:13
+building area will be pretty good, but that south area is canals and farmland things that we take, which is where mostly the parking
+
+Unknown Speaker  1:55:22
+and but still things which look flat. It's if you look at 100 acres or more, yeah, say it's flat, can deviate some, yeah, a lot to the other, maybe it looks flat,
+
+Unknown Speaker  1:55:43
+there's some obvious slope from from the rail, so there's also to do
+
+Ryan Hankins  1:55:46
+then the mass balance, and so on, and to define the level of the working platform, the path, so that these are things we need to figure out first. Okay, very good. What do you think the next, like, what is like your steps for procurement, and your next like, what do you think the next steps are coming out of this meeting? Is there action items we need
+
+Unknown Speaker  1:56:17
+because the next action is that you need to prepare post area
+
+Unknown Speaker  1:56:22
+we want to collect. Are
+
+Unknown Speaker  1:56:29
+you talking to a large group, a small group, have a medium?
+
+Unknown Speaker  1:56:34
+We have more than two, less than 10. So, yeah, we need to let's discuss together how you believe your performance should be GDC
+
+Ryan Abbott  1:56:57
+plus fee general condition plus fee. We see that quite often, right? So it gives you something that you can go back and say, hey, here's how, here's how the service is put together usually a schedule as well, so that we can kind of show you what we think it'll take in time. Yes, here, here we often see as part of it at least qualifications, so that was you're talking to the C suite, like, there's some of the work that we've seen them put in place, would be part of the selection, and then, like, an organization chart, so you get to see some names of people, I mean, that those are things that I think we're used to seeing very much. I imagine the fee,
+
+Unknown Speaker  1:57:49
+the fee includes the insurance, right, SDI, general liability, which the risk will be on us, and then your overhead thing, yes,
+
+Unknown Speaker  1:58:02
+yeah, and then you can also, how you deal with pre-construction,
+
+Unknown Speaker  1:58:07
+what is left, yeah, what we want to understand. What's your typical approach for precon reconstruction and general conditions? If you see more often, like an ensemble, you include that in the field, we're comfortable doing it either direction. Best is if you come up with your standards of units. Yeah, I think we will prefer that thing first.
+
+Ryan Abbott  1:58:33
+We see, we see a lot of gamesmanship on the pre-construction, you know, as we go out there and see results where somebody will go, like, oh, well, they were only $150,000 something, you know what I mean? Yes, and we try and be just very candid about like what we think the effort should be and what it'll take. Yes, if that makes sense. We're happy to invest on the front end, but like we do think that boy, if you can't make back $150,000 in my funny example, in process and save that much value, like you shouldn't be doing that for your business, right? Yeah, yeah. So we, we tend to actually put in what we think the efforts going to take, and the staff that we would like to put on it, as opposed to play game on. So that's probably one thing that, yeah, you'll see
+
+Unknown Speaker  1:59:27
+what we, what we could see, as well, is so you have, so you have multiple packages with a GMP. Is that your saddle approach, or your
+
+Ryan Abbott  1:59:37
+that's a fast approach, like that's so you can get started while you're finishing the permit. You don't have to do it all at once, but you get the work going, just just like
+
+Unknown Speaker  1:59:47
+curiosity. So you solve it out, would select the CM, let's say shortly, and after we would hand over 40% design, so would you consider as realistic that we could break ground in Q 27 Yes, we will. Looking at this and having all these experts here, what do you think? How long it takes to do the building from start breaking ground till building is ready for commission for phase phase one, phase one, for roughly 1.5 million square foot part of it is going to be the steel complexity, I think, inside the structure with the cranes,
+
+Unknown Speaker  2:00:39
+and not just a typical 55 foot bay shell, it's
+
+Unknown Speaker  2:00:44
+usually, let me say, to explain a little bit, so except so all these buildings we consider what we call warehouse type buildings, including the converting, because it's so in the last projects we had steel structure, joint skirts, metal deck, IP siding, and in this, in this case, will be tilt action instead of free cast wall panels. so that's pretty, should be pretty common, so maybe, of course, so the columns were where we have the cranes, they will be, of course, mass more massive than the standard columns, but you have there just column brackets on each side where you consider the loads of the overhead crane down the rest above the runway beam is standard structure with a span of roughly 70 feet. Can I ask another question on your 40% set? Will you know where your runs for electrical and things need to go. No, we don't know, but we, we can let me say we can make some best guess. Well, most likely the rough one more for the 40% It's complicated. Well, I think we will develop that together, so while you are in the detail, yes,
+
+Ryan Abbott  2:02:17
+yeah, so I'll step out and say there are components,
+
+Unknown Speaker  2:02:21
+especially in your electrical capacities, that you need to procure early, so ahead of your break ground, yes, yes, but that, I mean, the power with size gear transform well ahead. Yeah, I thought you were discussing the cable trace layout.
+
+Ryan Abbott  2:02:44
+No, no, I am. I am, if I'm just trying to think through it's a very nuanced question, so we have projects where we've had 10 months, 11 months to where the integrator was starting in the building, the building was not completely powered and finished. Yeah, no, no, yeah, we will be ready at the very beginning to purchase to give you the spec to purchase. Okay, so like your gate funding could go and procure the equipment at a time, while we're permitting
+
+Unknown Speaker  2:03:15
+formal speech here, that something which we
+
+Unknown Speaker  2:03:18
+can purchase those by you, so work together, you can spec those equipment based on our apply, and you can get early funding release for long way, and then
+
+Ryan Abbott  2:03:31
+steel shapes is the other one. Just thinking through the gantry, and you know, the load bearing structure. Those
+
+Unknown Speaker  2:03:36
+would you want? You would want to procure for the when we, when we started, when we developed the budget, and the first, the first budget, the first scale, that would be very important to highlight which are the items that we need to purchase ahead of time, and what is the capex?
+
+Ryan Abbott  2:04:02
+I mean, I'm, I'm gaging the stack project as the example, so those powered core shells were 10 and a half months, and then we just, we offset the two buildings, so it's the same square footage as you're talking about. We just offset the same building, so we could crew tie, you know. Foundation crew went to foundation crew, walk crew went to walk crew, so there was six weeks between the buildings, but the integrator could come into the first one in less than a year,
+
+Ryan Hankins  2:04:31
+and I mean, I'm looking at this, this drawing right here, and I'm seeing there's two halls, right, and I'm like, I feel like this is a pretty simple turnover, one hall, get the integrator started in the one hall, and then move to the second hall, maybe, maybe you know, two months
+
+Unknown Speaker  2:04:51
+later, and also keep in
+
+Ryan Abbott  2:04:53
+mind that that's going to be no integrator for phase one. Fair. Yes, this is going to be your lay down here.
+
+Unknown Speaker  2:05:03
+Fair. Also, I mean the lines, I mean those two won't be actually those three won't be too much far away, one from the other. Each one, when we build the first line from the moment we set the installation until we make product, it won't be very long. It would be maybe six weeks, so six weeks, yeah, kind of one of these lines doesn't take very long to be installed during the commissioning, you are already producing products at that point, you need area to store, so we need raw material to make our test and commission of the one line, only one line doesn't take long, but does require storage for the raw material and storage for the finished product. So, at the end, it should come together almost at the same time.
+
+Ryan Hankins  2:06:01
+So, six weeks is that from you start, you start installing to you are like your quality controls done, and you've, you've got everything fine-tuned exactly, and you're starting to spit out toilet paper. Six weeks, okay? UL listings all done, all that kind of stuff. If you guys need it, you UL underwriting laboratory. Yeah, okay. So that kind of changes the mean, Ryan. I kind of changed the calculus a little bit from my perspective, because I'm like, so the now I'd like to understand more about, like, is the is the CDA like compressed air required, because six weeks is pretty quick, so we need electrical to basically be done, and we need CDA to basically
+
+Unknown Speaker  2:06:48
+be done, yeah, we need, I mean, during those six weeks we are also completing the dust removal, the compressor, the electrical for the process. Okay, that would take a little bit more than six weeks. Okay, but yeah, six weeks is like you have everything ready and we set the equipment exactly six weeks and get it going, so we would have, we would be hooking it up to air power dust. Are we
+
+Unknown Speaker  2:07:15
+bringing connections to panels or we leaving
+
+Unknown Speaker  2:07:20
+it? Everything is process related, it won't be up to you. Everything is processed, so we're just giving the pathway. Pathway, what do you mean, like, are we bringing down to a disconnect? We are, you are, so let me say, so we will come here with the 12 for seven kb line, and then we will need to distribute internally, so we have, we show we have several, maybe three four location where we step down from 12 four seven to 480 and we will do that. Maybe. Okay, so for example, for converting one, most likely there will be a room here with a minimum voltage gear, 234 transformer to 3000 kva, and that would be your limit, so the transforming distribution will be out, so you will, you will deliver supply the transformers, and then from there you will pick only what is needed by the building lights. Okay, but we set our own compressor. We set our own compressor. Yes, we build our own compressed air loom. Okay. process cable trade to be asked. You will install cable trade for your for the lights,
+
+Ryan Hankins  2:08:59
+and so do those do the do the contractors that are installing those compressed air loop do they need to be in before that six weeks starts? Okay, that's
+
+Unknown Speaker  2:09:08
+what they will work together with you. Yeah, there will be some coordination, of course, but it will be during, I mean, of course, we like to have the building subs, we say substantially completed, so close, painted, dried, of course. You might have some, I don't know, you might be hanging on some lights, maybe installing some receptacles at that point, but the majority of the activities must be done.
+
+Ryan Hankins  2:09:37
+So, understanding how all those overlaps happen is going to help us with being able to get you, we'll call it the best possible schedule, just because then we can understand how that plays into our permitting strategy, for example, because we have to get sign-offs from the permitting authority as part of the inspections, we have to make sure that everything is, you know, almost like a TCO, so to speak.
+
+Ryan Abbott  2:10:02
+In, yeah, let me give you Buckeye real quick. We have had sites in Buckeye that we had to rebuild six feet of the earth, you know, so we had to roll in with scrapers. That was like a month-long activity, you know. You moved all of the dirt over to one side of the site, and then you brought it back over, re-compacted it, and built it out for differential development. That just comes out of your geotech report, so that's sort of a big caveat, just kind of letting you know that that would include the pond surface ponds, all of that, so it's about a month long process, which is one of the reasons we like to permit that separately, that you can get out there and get the utilities onto the site, you can deal with that. The other thing that we've done out there is use the irrigation district to wet the in the recompacting to get it optimal. We did have to truck a whole bunch of water, which was great. So that's that's a big plus for out there, is they often want you to do some improvements, but they'll let you use the water. We're gonna have to move a couple of canals of theirs, anyways, but there's plenty of water, like around the crimper right now. Yeah, they'll, they'll have you put in a really, really nice trapezoidal irrigation ditch. It'll look great, but so that, that's some, that's sort of that first. It could go less, it could be more, but there's a month long process than that, but you know, to have like a powered core shell from permitted documents with early procurement, like we've got several examples, 10 and a half, 11 months, right out there. I mean, we could book over and show you one, yeah,
+
+Unknown Speaker  2:11:48
+that's about what we're looking at. We're doing 1,000,002 square feet in about that, and that's with some build out into
+
+Unknown Speaker  2:11:55
+that TCO that we got was only related to the building, so we have at least so far we have never had to include the process in the permit, never. So we build the building and inspectors for the PCO. They come and check everything is building related. They don't even care. I'm not sure if in Amazon is different. They don't look at the process electrical, nothing, not really nothing. We don't need to provide any loan to inspect for the PTO. They'll
+
+Ryan Abbott  2:12:33
+have you, they'll have you want to permit your process,
+
+Ryan Hankins  2:12:39
+like where I saw it on, like a couple projects, was like, so if our scope ends here, right, like electrically, for example, and like your process lines are here, for each process line, if there's like one electrical panel that serves each of those equipment, like, they'll want to perp, they'll want us well. First off, they're going to want to see your whole process drawings is to be permitted, but the inspector, he understands that this is engineered equipment, so there's a lip, there's a limitation on like what they can actually truly go see and understand, but they're at the very least, they're going to want to see the infrastructure that comes from this room and how it connects to this equipment, and then, and then, for fire life safety, they'll want to just see the final exiting criteria, visibility
+
+Ryan Abbott  2:13:23
+for signage and alarm for strobe, so they know your people could get out, and then if they need to reconfigure any of the fire sprinkler based on anything that's been installed, correct, like vertical racks or something else that would block, that might
+
+Unknown Speaker  2:13:38
+change a little bit our approach. I mean, it's kind of frequently much simpler. Yeah, so, but I don't know, just we could probably decide to include in your scope the electrical of each line, because again each line will have a panel next line, so up to that panel. Yeah, that's what they want to see. So maybe that we can decide it can be part of your scope,
+
+Unknown Speaker  2:14:07
+similar to what we do in other projects where there's processor conveying, where we're bringing it to a panel location, and then
+
+Ryan Hankins  2:14:13
+compressed air, same thing, like it's they, there's going to be an inspection on the compressed airline, and if there's, if there's a valve, and if there's a drop in a valve that connects directly to your equipment, then you know that's what they care about,
+
+Ryan Abbott  2:14:28
+and it's not being blocked in some way that somebody that's operating equipment could
+
+Unknown Speaker  2:14:32
+get to the disconnect. Yeah, all these lines have some bread there, and power, that's it. Pretty straightforward. Yeah,
+
+Ryan Abbott  2:14:42
+yeah, I don't want to make it sound like it's just part of what you say. Did you say a time I didn't? I missed it, 10 and a half, 11 months, and then I'm just the variability that I'm, you know, the caveat is early procurement. Sure, we don't have that on the critical path, and the geotech, what those results are, and how much earth work there is on the front end makes sense. But everything else, like we've got several examples in the West Valley that we could walk you through to show you kind of what 10 and a half, 11 months feels like. Yeah, super exciting. Yeah, the the process permitting is not a huge deal, it's just something you've got to address with fire life safety. Yes, but
+
+Unknown Speaker  2:15:28
+also we need to, we need to start early, because we usually, we believe we have kind of some black, some more time to develop this part, but if we want to include your scope and we
+
+Ryan Abbott  2:15:38
+want to develop this and we do, we need to start sooner than what we typically do. The only other thing I can think of, Ryan, that we've had is they've had us add some lighting, you know, where, like, the equipment created a shade, and they wanted to see through the whole exiting corridor. I mean, it wasn't like a big deal, but it was, it was some things that, that's all I can think of, that has come up.
+
+Ryan Hankins  2:16:03
+Mean, the one thing, so to your point, depending on the process, and it looks like your process is fairly open, but I've seen a smoke study be required before, just based on the density of all the equipment that's there, and how people can actually physically get out of the building. So, depending, I mean, I'd have to look at it with more like the process layout, but that's something that we can help you with as well.
+
+Unknown Speaker  2:16:27
+We have walkways that go over the lines, okay, perfect. Yeah, I don't anticipate we would have any significant. Our CEO complains we build too much space for them,
+
+Unknown Speaker  2:16:41
+we can fit at least
+
+Unknown Speaker  2:16:47
+double, but usually with these corridors on Sweden, will have any worse issues, and clearance we have in there, because there you can also make a simulation, how long it takes till smoke comes down to the area that it will be to a height that it will be intact, in fact to for you, press, what is typically your clear height in there? So I think we have you had this section open some measure 29 feet. Are you sure it's been working?
+
+Ryan Abbott  2:17:36
+You know, the only other thing in your Oklahoma pictures was how much makeup air are you putting back, like I.. so it's
+
+Unknown Speaker  2:17:44
+so now it's my, my knowledge, my knowledge about how to tell you that in Ontario ends, so it's about between about 40,000 cubic meter per line, where we let me say extract air with the dust removal system, of course, depending on season we recirculate most of it, but in a worst-case scenario, if you really let me say discharge 100% air from the dust removal system to the outside, you need to replace it by 100% so 40,000 cubic meters per line multiply site probability
+
+Unknown Speaker  2:18:31
+23,500 cfm one
+
+Ryan Abbott  2:18:40
+other nerdy, but just super quick. How dry, like I was thinking of how humid it could be in Oklahoma, like, how dry does it need to be conditioned? No, we don't. We actually have swamp coolers on our current process. Okay, so, so that's not an issue. Are we doing air conditioning or what? I think here it makes sense.
+
+Unknown Speaker  2:19:08
+Yeah, for sure, we have swamp coolers now, which are tolerable in the summer, but yeah, we would do ACAC preferred method. I mean, an AC with no
+
+Unknown Speaker  2:19:18
+issue with process. Topic is topic here is in the topic. Here is converting dust. Yeah, dust is an issue when these also needs to be considered when designing the AC system, especially also when you recirculate air from the dust removal, which is not the scope of the building, because it's a piece of equipment, but it interacts, of course, so it's the dust removal system interacts with us by makeup. The air that we exhaust together with the dirt should be made up by the punic, and it operates a little positive in pressure, so that you're well, it means you're providing a little more makeup than you're going to provide
+
+Unknown Speaker  2:20:13
+a little bit more positive, yes, but at the same time you also need to design the AC in a way not to use too much HP, so try to recirculate as much as possible from the inside, yeah, and because it's a task environment, and we need to find together, right solution to do that.
+
+Unknown Speaker  2:20:33
+Oh, it's usually so you have filters, depending on what type of dust move system you use, could be a wet scrubber dry back filter or drum filters. So, for example, in dry back or drum filters, you with different quality filters you can come down probably to one ppm, something like that. You still, in reality, when you recirculate, you accumulate to accumulate. So this is this means, of course, is a collection of maintenance and cleaning sequence on one hand, because we cannot avoid as long as these systems are not fully encased, and the worst part is the startup line, the unwinding area, even if you have there, and there, you create also these massive air flow. You abstract here there directly where the paper is unwinded from the jamboree, but there, of course, you generate most of the tasks, of course. Then more paper contains soft paper, contains usually a lot of soft fiber, soft fiber means short fiber, means modest, and so we usually create free air flows that supply air comes from the from the end of the line towards the unwinding area to blow the air in this direction, because if you do it the other way around, you distribute, and here we know also in the US, of course, that you are not using duct work because it's too expensive, because let me say, in the idle world, we would load the supplier from the bottom at a low speed towards the start at the start of the line, but that doesn't work from the economical point of view, not not here in the US standard used in other projects, standard RPUs test flow fluid and the air in the right direction, in the right direction, but of course, what we should reward, we don't recirculate the air, we should find a way to recirculate it in a way that we
+
+Unknown Speaker  2:23:05
+really reduce the dust content as much as possible, and are able to recirculate most of the already cooled down air back into cool, instead of just blowing up. Let me see, cooling down all the supply from outside with 100 to the Fahrenheit, or whatever you have during summer that is not very economic to do it this way, but it's tricky because they're having fun, it's still something which is not completely solved by or is not solved by the let me say the manufacturer of these farm mining stands because the best would be to have an encased environment, and then you could dramatically reduce the air flow, but it for the operation, all the solutions so far provided they are such an obstruction and take down efficiency when changing the jumbo rails that no one wants to buy their solutions at the moment.
+
+Unknown Speaker  2:24:10
+Yeah, then you're right, fire protection, and a bunch of other, yeah, so like they're right now. Currently, we're just blowing swamp coolers down, a lot of outside air, and they work okay. But we really, for the environment, air conditioning is the way to go, and I think to your point, like figuring out how to recapture that dust collection air that's already been cooled and cleaned would be
+
+Unknown Speaker  2:24:32
+so we would, so you, you have basically it's also something to be discussed.
+
+Unknown Speaker  2:24:41
+I think that that would be a little bit too challenging for me. So, for me, dust removal, the air from the dust remover should go outside would be just enough if we can resist to the air from inside the building because it's already cooled down that air you just receive but even if you have the dust remover you still have dust in the building, so I would consider the dust removal exhaust as a negative pure negative get rid of it, just exhaust, yeah, makes sense, and then try to design the AC in a way that we can recirculate the rest of the air that is not exhausted by the destined window as much as possible. The
+
+Ryan Abbott  2:25:36
+only thing we could look at is like a desktop wheel or something along those lines for energy recovery, but even then it's one of those things that the payback is six or seven makes sense, it's six or seven years, not one year, you know. Yeah, it's just pre-cooling, it's just pre-cooling the loop inside of, yeah. Okay,
+
+Unknown Speaker  2:26:10
+we lots to think through, but super exciting, and so timing wise, on your end for your next steps and process, how long it takes will shed goings the layout, the
+
+Ryan Abbott  2:26:29
+limiter the layout, like a couple weeks, just make sure we're thinking, yeah, two weeks, yeah, I, yeah, and if you're asking for the things we talked about, I mean, not, yeah, you know, not difficult, we just want to make sure we're giving it its consideration. We want to make sure two
+
+Unknown Speaker  2:26:55
+weeks somehow in these ranges of pay for you're able to prepare proposal based on let to say, but on this preliminary master plan, of course. Then I'm expecting what we receive your proposal. We will see how you structure the proposal. We will have some other meeting, maybe virtual. I'm not sure if it's needed another one in person. We will see it then, maybe a revision of that. I don't know if we can have the CM on board by end of life, I think it's workable for me.
+
+Ryan Abbott  2:27:38
+And then, when.. how long is your due diligence on the land? When do you guys
+
+Unknown Speaker  2:27:49
+talk? You remember 220 days.
+
+Unknown Speaker  2:27:53
+I don't remember. We didn't talk about specifically when he was out.
+
+Unknown Speaker  2:28:00
+We might have you on board, let's say, before we
+
+Unknown Speaker  2:28:09
+somewhere in the between beginning and end of July, yeah, and
+
+Unknown Speaker  2:28:16
+then we would assume that we would receive the 40% set to start at what point
+
+Unknown Speaker  2:28:27
+for who, for you, but that's not I think so. Most likely that we have finalized everything. It will take, I think, end of July for sure, end of July, middle of August, final everything. But then we can prioritize which one to deliver first, so that you have some somewhere to start, somewhere to start. Let's say somewhere in end of July, beginning August, you should have put same design, maybe on some sections and specification, and so on, but it would be an end robust, and for the last pieces, but for sure we can, we can do it in a way so that it fits to how you need to, and you have a specific
+
+Unknown Speaker  2:29:20
+great round break ground date or completion date that you're trying to fit within parameters of, or just we have some
+
+Unknown Speaker  2:29:27
+ideas, I mean, q1 27 yeah, Q and it's three months, so I can be generally much q1 is when we believe it is doable. We also believe that between groundbreaking and completion, I think around 12 months,
+
+Unknown Speaker  2:29:50
+I think, but again, this is when you come up to do all the permitting and all that, and all the, let me say, the things we cannot predict now, so how committed the authorities will be, how quickly we get permits, so if there are some changes on the market that we need to consider, or maybe face lead times we didn't expect for certain materials or components, all of that, but then let me say, when we come to this point, but currently, so as a very rough idea, Q 27 breaking round roughly 12 months later.
+
+Unknown Speaker  2:30:43
+Yeah, we find it also, of course, comes down to your early financial commitment ability, right, whether you need more cost certainty before you're willing to make those permit commitments or the 08 procurement commitments, or
+
+Unknown Speaker  2:30:56
+if you're buying the land, so we have to do something, you cannot decide not to do anything, but I mean, in my opinion, once we hire the CN, the very first time should be preparing an accurate budget and accurate schedule, open the schedule of value, and the moment we have a budget, a trustable budget, we already will work internally to provide the farm to fund enough for the overall product. and then there is anything that needs to be provided ahead of time because of the lead time at that point. If the budget has been
+
+Ryan Hankins  2:31:39
+approved, when are you going to get your one in that process? Does your process manufacturer be onboarded?
+
+Unknown Speaker  2:31:49
+Typically we we, I mean, during the design, I don't know how much, so you receive, let's say, the 40% beginning of August between that time and your design completion, how much would be other people months, probably, so somewhere in those small models, I will say August, end of August, we should have the process of more to give you some input for you to develop the design.
+
+Unknown Speaker  2:32:23
+Good deal, that helps in your internal approval decision process, as we get things going. If you are your overall budget approved, is it very quick, or is everything going back to a board decision? It goes to the board meeting, the CEO bank. Yeah, that, of course, helps. Yeah, we don't have so many things
+
+Unknown Speaker  2:32:45
+from all our customers. We have a lot, maybe you can see that then on our website we have a lot of customers, so I can say that Southfield is really very, very fast taking decisions. Also, from, let me say, from from the idea till startup is very fast, sometimes too
+
+Unknown Speaker  2:33:08
+fast. At least, I was your mind. Yeah,
+
+Unknown Speaker  2:33:18
+maybe that was also show us how, because this, it's called like an open book approach, and there are some aspects of this approach that we as companies still do not digest very well. Yeah, I know. I know everybody's saying you treat our money like it's yours. It's really hard to swallow. It's still our money. Instead, when we close the lump sum, we know for sure how you are going to treat the lump sum, because that's your money. Every dollar you save goes into your pocket. We see that commitment on you when it's open work. I mean, it's a little bit harder to believe for us, also because the more we spend, the more you earn, so I want to see how you track the expand capex towards the baseline. How you typically show that you're buying, what is your
+
+Unknown Speaker  2:34:23
+motivation to not to spend less, so to have let me say the best result for the client,
+
+Unknown Speaker  2:34:34
+yeah, fiscal responsibilities, we could do, you like shared savings, is that so that depend what based I mean saving calculated statute of where so I think that if you say initial budget 100 million, just throw a number. I don't think that if we go end up to 96 million, are you talking about that 4 million? Yeah, or you're talking about contingency that we decide together to build, and we do not use by the end of the project, but it's two different savings there. Yeah, so you're saying
+
+Ryan Abbott  2:35:23
+like production savings, or you spent less GCS or GRS or something like that is the first one, and the second one is we put dollars there to be safe, that wouldn't be savings, you didn't use it. Yeah, exactly. I obviously everybody's like different, right? And I'd be fine with either arrangement. I just was trying to think of a way that you could see to answer, and again,
+
+Unknown Speaker  2:35:54
+we know that we have done not many projects with this approach, but for us, once we have GMP, it's incidentally, GMP is done right, so again, back to 100 million budget, at the beginning of the project is 1 million, and then once we build out the packages at some point, we together decide that we can go into a GMP of 96 That point, the 4 million, I mean it's ours, because you are committing to a 96 GMP, anything saves below
+
+Ryan Abbott  2:36:32
+96 that's your money, but if inside that 96 we have a contingency, we have a contingency, we need to decide together what to do with the leftover in the contingency. Yeah, okay, okay, let me think about a little bit. Yeah, you know, the big win for us is we turn around and do another project together. Oh, that's understandable.
+
+Ryan Hankins  2:37:01
+The other thing is, for the open book, we can put together some slides to help with our technical response that helps explain the process, and how it works, and what, what allowances, you know, we, we, we have, we have a lot of detail, we can give it depends on how much detail you want,
+
+Unknown Speaker  2:37:18
+it should be understandable for us, for example, the contingency, what is covered, absolutely, so if change in soil conditions, unexpected change, because you just do yellow on the sides, just boring, some borings, and then the soil shows them where you do the mass earthworks in certain areas, some issues that discovered by contingency is something different when you say okay, so does it really cover risk or only what is the conversion? Thank you as well. Yeah, take care. So, just that we understand, yeah, how your approach is, and what you consider to be part of contingency and what is then really extra, so what we've done so
+
+Unknown Speaker  2:38:14
+far is just an example, so we in the current project we are bidding out as we develop the design packages, we bid out and we bid out, and then we let's say, I don't know, the electrical or the structural steel cost x, and then the CM just applies the fee, insurance fee, the overhead fee, the margin plus the contingency, and the contingency is put aside at some point during this process, once probably the 70 80% to be decided together, of the bid out is completed, they will feel comfortable to enter into the GMP. At that point, we will have built a certain amount of contingency. We might not have used any of that, or maybe some. At that point, when we enter into the GMP. We should decide what we will do at the end with the leftover. I like that. Yeah, but the motivation, I mean, you should show us how motivated you are to go from the 100 million budget to the 96 GMP, so that for me, with our money, for us, it's important that you show us the commitment to actually save as much as you can, even though it means that you are less, but in the big picture, whatever
+
+Unknown Speaker  2:39:41
+million dollars is not worth the effort, rather that the job go well, that's exactly right.
+
+Ryan Abbott  2:39:48
+Yes, yeah, we, we obviously work in a number of these parameters, and I would say every client we have is a little unique in how they look and want to go about this. We, we, what, what also I love is that you're going to be the same partners at the end versus just not procuring the job. Yeah, you know what I mean, because we get into bifurcated companies where they have a procurement team, the procurement team does their thing, and then they disappear, you know, that's not the game. Yeah, yeah, but I, yeah, I obviously we can work within all of that. I think that the really interesting part that I would put out there, for you know, like the way to think about these budgets, is is there certain things that we're going to be able to control, like in the United States, tariffs is not one of them right now, so like how do we want to cover, you know, if something changes, or you know, the Supreme Court finds that they're invalid, but then section 200 or 300 gets rolled up, you know what I mean? Like, those are certain things that I think we should just talk about exactly, and come up, and in my opinion, again, we cannot do anything, but for example, would be good for me the moment you build the budget. Just point it out, yeah. So this budget does not include any allowance for this, and you list the potential rates that can drive up the budget. I'll give you, I'll give you another interesting one for us, I ever everyone's got a different perspective on built-in risk insurance, and so we've got clients that are like that's insurance to cover a flood, like the canal fails, you know what I mean, and we expect that we've also got other clients that go like, well, we want a $500,000 deductible, right, and the job, and I think those are the subjects that we just need to talk through, that we will manage it. Yeah, we are more like the second client, first one, yeah, but, but these things are like, you know, just how somebody thinks about conversation and have upfront, so that I mean
+
+Unknown Speaker  2:42:10
+the best thing for all of us to avoid surprises.
+
+Ryan Abbott  2:42:15
+You got it, got it. Where we get misaligned, where somebody goes like, hey, we've got this builder's risk event, and they're like, well, I don't have it, and you're like, well, that's super scary, because the contract says you have it, you know. Yeah, so there's those. We just want to make sure that, yeah, we have those up front. Is there anything else? You know, the Phoenix market has been, he's been going through a pretty good boom. So, like, the best that you can communicate about when things are going to happen and how many people it's going to require the better response you'll get from the marketplace, you know, electrical, and you know, some of the other trades. Certainly, I mean, there's there's the data center world, and then there's a lot of other stuff, and if some of your product starts to blend over to the data center world, you can get into some long lead issues. That's where the design can help in some cases, where you help kind of keep things
+
+Unknown Speaker  2:43:10
+away from the issues that we know that could be pitfalls in the future, but I think again, there's a lot of big projects happening in the Phoenix area, between TSMC and Intel, and we've run into this issue with projects, is how do you get sub trade partners who are driving past these big projects to go to your project and are not just going to that one, so we put a lot of focus on the facilities, the construction facilities, and the environment of the workforce, and that has an impact we see with getting the right trade partners and getting the right people to build fast track schedules, because it makes it different,
+
+Ryan Abbott  2:43:47
+so that's a great example, like we'll put facilities in, so the crews could have a nice lunch in the shade with maybe swamp coolers in the in the tent. You go, well, that I'm spending money on that. We're saying we're getting, we're getting a workforce that wants to be here, which is super helpful, right? Yeah, it's like
+
+Unknown Speaker  2:44:13
+I think there was the same in Ohio when Intel started there. That's exactly what happens,
+
+Ryan Abbott  2:44:20
+exactly. Yeah, yeah, that's exactly what happens.
+
+Unknown Speaker  2:44:24
+Yeah, and we've got one at either end, the north end itself. So, yeah, sure, sure.
+
+Ryan Abbott  2:44:34
+Well, the work looks amazing. It looks, it looks fun. It's also super neat that you guys work like this as a team, yeah, on multiple projects. Yes, and yes, and again, in the last one, two and a half, two projects, we also started working with you again, so soon, so I think it's, I think that's the best approach.
+
+Unknown Speaker  2:44:59
+Yeah, it's great to bring that shared experience from the past projects that are similar type, obviously different location, but you've got to learn a lot of learned knowledge to carry forward, which helps smooth things.
+
+Ryan Abbott  2:45:10
+Yeah, we've, we've been in this room, not this room, but a room like this before, where you had just met, you know. And then you're like, okay, you know, like we're gonna figure this out together. Yeah.
+
+Ryan Hankins  2:45:22
+What, what lessons learned do you guys have from the other projects for us, that just that stuff that you guys have experienced, that you're like, oh, I hope we don't do that again.
+
+Unknown Speaker  2:45:31
+Well, I mean, I have.. when we use this new approach, CM, let's call it CM approach. I personally, we are seeing.. we probably underestimated the design time. That's why Peter mentioned the capability you have, the design team, so we, we believed we could be faster, but then we realized that the engineering was kind of holding us up a little bit, so we need to be sure that we have that clear in mind at the beginning, how long the engineering is going to take, long lead time, we have some, we have some surprises, so we should try to avoid that mistake again, maybe take some risks, buy something, even if we're not 100% sure, maybe build some margin if we don't know exactly how much megawatt. Okay, let's buy half megawatt more. That should be sure that we are going to get that piece of equipment on time. And the third one, we shouldn't try to force you technical solution. What works here is different, what works in Ohio, in Oklahoma, Minnesota, so one show you what was done there, but it should be done as if the best way, how to do it here, and this is, you know, much better, so when you see our 40% is done, we want your info to make this as easily buildable as possible, and any past contractor pain points or specific issues like that you had with your past GCS, or things that you would like to see done better
+
+Unknown Speaker  2:47:30
+communication or it comes down to the people also on site, and for sure there is the possibility that you look at the result of the trade in the end and say it does not comply, redo it, or whatever, which in the end is a pain for everyone, we also would lose time, so it's better than you say if you continuously keep an eye on the performance and the quality they are providing, so you can more or less stop them right from the beginning if they do something stupid,
+
+Unknown Speaker  2:48:04
+just to be open sometimes, and this might be more true for lump sum type of contract than open book, but sometimes we felt that the general contractor, or the CM, was teaming up more with the subcontractors that the client, because I know we know that photo is important, the subcontractor want to work with you, so you again sometime we might feel that you are too nice with them at the expense of the quality, so maybe you close one eye, sometimes two eyes, so it's not in the quiet interest, because we are not the expert, you are, so when they build the reinforcement for his lab, how accurate you are checking the rebars. Yeah, it's you. Yeah, we have, we're gonna have somebody on site from our team, but again, it's one person against, yeah, 100 point 5 million square foot, so we want you to be our eyes, even if that means fighting. Let me say fighting, please understand me with the subcontractor. We need from you the assurance that you are doing our research first, and then the other one, do not be afraid to tell us if something is not going well. Release sometimes either it's us that we need to figure it out, and sometimes that's too late, or maybe you tell us when it's really too late. Open conversation, meaning potential risks that you see in the future, we need to be open, even if that means admitting some mistakes from your side, doesn't matter, it's much better. Yeah, otherwise exactly. If you, if you pray for the best, I mean, you can be likely, but you cannot.
+
+Unknown Speaker  2:50:11
+But I think it's obvious, you know, wherever construction takes place is in reality is producing a prototype under open sky. Yep, so that's what it is, definitely. And that everything works 100% smooth is very unlikely, but it's not the topic that something can happen, it's the way how you deal with it and how you communicate with that, so for sure it's not our style to sue someone or whatever, so is to sit together and to find an attacking solution, and say, okay, how can we do it in a different way? Can we do this? So, is we are all engineers when we set
+
+Unknown Speaker  2:51:01
+the contract, we put the contract in a drawer, and we really forget. I mean, if we need to say by contract, generally we are starting a conversation we don't want to have, so contract is done at the beginning, we sign it and lock it away,
+
+Unknown Speaker  2:51:20
+focus on how we get this project done, and if things happen to, and that's why it's important to communicate very open from from all ends. Okay, something happened. How can we resolve the best way? And it's to resolve it is a technical focus, not another one. Your engineering focus, how to do it
+
+Unknown Speaker  2:51:48
+very much the right approach for, you know, unique, complex, larger projects. Yeah, not just building a box. It's not the same box that we built 50 times. Everything is unique, everything is. There's
+
+Unknown Speaker  2:51:58
+always even if you have different people in the project, and you have the same project drawing wise, you would have the same design. Everything you have different people in the project is a different project, and a different point in time, yeah, exactly, is a different project, but I think the best is to have a very open communication, not, and sometimes tend also to discuss if something cannot be, let me say we don't have accurate information, but we need to go ahead of them to sit together and say, okay, we have the experience together, so let's do a best guess, and that's then the decision of the project teams, say we do it this way, yeah, and we had very often such situations where we had say, okay, let's do it this way, and we always figured out, finally, so only not to take the decision, that's the worst thing you can do, maybe make wrong decisions, but if you don't take a decision, for sure it goes wrong, yeah, yep, so that's what it is, so that's the way, how I love it, very good. This is a
+
+Ryan Abbott  2:53:14
+change of subject. Have you ever heard of Bill Bryson? He's an author. Yes, like a travel human body. He's a very famous author. Yeah, so he spent half of his adult life in the United Kingdom, and then half of it in the United States. It's very, he's very funny. I would be curious, like, if you've had similar realizations now living in Ohio, like just like he's just common, he's like commenting on like being an American. He's like, this is funny, you know? You don't want to know right now. Maybe
+
+Unknown Speaker  2:54:07
+living in the US is quite different than living from Italy, for sure. We are very different,
+
+Unknown Speaker  2:54:19
+for sure. As you say, and you say it right, so it comes down in normally talking. It's quite different to live in Europe, he's telling, right? It's different than in Italy or Austria, so because there is not this, let me say these mentalities, European mentality doesn't, so there is, or you come from the north, or from the center, or you come from the south
+
+Unknown Speaker  2:54:46
+books written by Italian author, like Italians, yeah, like they lived in the US for several years, and then they wrote the same type of book that did, and again, I, it's funny, but I think overall life in general in the US is not to say that, but it's easier, meaning it's more predictable. Yeah, let's say in Italy, especially not really, but in Italy is not as predictable. So, if you to follow the steps that you're supposed to follow, the outcome is not as guaranteed, like here is not 100% guaranteed, for sure, is more guaranteed than Italy. That's the biggest difference for me. Yeah, the biggest.
+
+Ryan Abbott  2:55:43
+He was one of the first authors that I read, and I was like, oh, that's funny, you know what I mean, like, like, our, you know, the things that we sort of take for granted, like he sort of points out, like he's, I mean, one of his things is on the cereal aisle on the story, he's like, this is absurd, like, like, how could this be, you know, yeah, coming from Canada, the US is just like more extremes, forget it, 10 times the population. It's like there's the
+
+Unknown Speaker  2:56:11
+wealth goes way up here and the poor goes way down here. Canada's much more kind of middle
+
+Unknown Speaker  2:56:15
+band, but you see that in everything from the technology to the ease, the convenience of like it's getting crazy now, especially with the Amazon drone deliveries, and like I mean, it's the I don't know, it's I can, I can, I can do probably hundreds of examples, but I don't know, we are maybe this is Ohio, not Arizona, but we are driving, for example, on a three lane highway, and you find all three lanes occupied by three cars driving at the same speed, I mean, I'm amazed. How is that possible? Why you don't just let me go? Because I pointed out to my colleagues that they say, yeah, but I should be free to drive how I want, where I want. Yes, but you are not letting me
+
+Unknown Speaker  2:57:19
+regulation, you know, so if there is no traffic on the right lane, you're not overtaking, you are obliged to drive on the right most,
+
+Unknown Speaker  2:57:30
+sometimes even the US, there is that rule, but it's like an unwritten role.
+
+Unknown Speaker  2:57:36
+For example, what is also funny for us when you're driving, for example, that the traffic lights are on the other side of the crossing of the intersection. So, in Europe, the traffic lights, so you stop, but the traffic light is stop light line, and you're not in the intersection, you know. Here is different when you, as a European, when you stop and you realize you're already middle of the crossing, you know. These are things, you know, it's a design behavior, even if I think it's the better solution here, because in Europe you don't see the traffic lights, you then you need for the traffic turning left, you need to have an additional traffic light on the opposite of the rope, because you cannot see above, so it's much better this way, so there are a lot of things either way around, which you have there. Let me say a really interesting..
+
+Unknown Speaker  2:58:37
+let's say, I mean, I can be handled, but you walk into a restaurant and there are, I mean, almost all the tables empty, and they ask you, you have a reservation. No, that's a good one. Once we really, the girl, she said, 'No, no, without reservation we cannot accept. It was really, so we went out. We called. We want to make a reservation. Okay. Yes. Where were you coming? I don't know, maybe a couple of minutes. Okay, I know we walked in. You have an exhibition, like she didn't know. Yes, we do have an exhibition. Yeah, please come in.
+
+Ryan Abbott  2:59:28
+But again, I know, I know that story is true. No, I no, I could totally.
+
+Unknown Speaker  2:59:39
+What is also.. let me see, sometimes you want to change the table, and they do not let you, because there is this strange dynamics between the server and it's not your fault
+
+Unknown Speaker  3:00:00
+in most cases that there are no shops in the city center, that's for European, also something totally out of range, you know that you need to take a car and to drive to some mall in the suburb or whatever to buy pencils, you know, whatever, because there is no, no shop in the downtown, that's something which is also strange, of course, when you are in New York, is like, is very European, of course. How it is, because there you have shops everywhere. Yeah, but when you leave, then the East Coast and go more to the center, as like Columbus, even there they tried to pull more people in, also to live in the center again. So they did a lot of things there, but it's, it's totally strange use sometimes. You, in the evening, you go to downtown, yeah, and it's a ghost town because everybody went home. So that's it, is strange, you know. And for sure the opposite, if you come to Europe for you, yeah, but so all the also that about 10 at night there is no one on the road anymore in the city center, that's that's strange for us, yeah, it is
+
+Ryan Abbott  3:01:23
+making a big conversion, even even Phoenix is making that conversion, where people live downtown now, and then you have to give them something to eat and to do, and they need to have a place to go shopping, but many places, like you're talking about in the Midwest and in the West, are like you go to work downtown and then you leave, yeah, which is such a strange, yeah, at least for us, it's strange, you know, it's strange, it's, it's strange, yeah.
+
+Unknown Speaker  3:01:50
+So, but traveling a lot, you experience a lot of different than for, for myself, some, some, some strange experiences, where I say, how can it work, you know? But, but I traveled a lot, and so you, in every country, you can learn something.
+
+Unknown Speaker  3:02:13
+Yes, but they say there are the, but again, much. For example, you, how business in the US treat the customers is top level. So, I mean, I remember the first time, I think, was messy, we bought some clothes, and we wanted to exchange them in Italy. If you buy something, your money are gone. The best you can get is a credit you should spend there in debt in that shop. So, here we just went back, me and my wife saying, so we, what's the problem? Yeah, this is, we will give you the money back on your credit card, that's it. So easy, so yeah, so easy. If you try to do that in Italy, you can get that.
+
+Unknown Speaker  3:03:04
+Another example, for example, especially when we talk about construction and design. Our example is to apply for an environmental permit. If you do a project like we did in Oklahoma, interns in Oklahoma, applying for an environmental permit, you would have no chance in Germany or Austria to get it with less than 24 months periods for the for the for the permitting, yeah, so
+
+Unknown Speaker  3:03:34
+from the date when they notify you that the documentation is complete, the application is complete until you get the permit, will be in the range of two years. Oh my gosh, I mean, you guess exactly this is what I say as well. You cannot commit to it. I mean, you just have to wait until you get the permit before you move here. Almost everywhere, I'm not sure about the West Coast, but everywhere else you can take the risk and kick off the project, even before you get the permit, because you know that it's gonna go there exactly. It's a very business-friendly in Germany, you know. It is
+
+Unknown Speaker  3:04:13
+a combined permit, which was in the beginning was the thought how to that you combine everything in one permit and one application process is a very good one, because otherwise you get the permit from this authority, and this was in contradiction with the permit from the other authority, so you have all the water permits, everything was is in one permit, so it's one application with all the different disciplines, from environmental, water, and whatever you can think about is in construction permit is in there, so the idea was to pull all the, let me say, all the authorities together and force them also to give some consistent conditions, so to allow you to construct in a way that you know, okay, if I construct this way, I comply with the regulations, and I'm good. So, totally the opposite came out finally. It's a mess. It's really, cannot, cannot believe it. In many, in many countries in Europe, you, you are not able to build some facilities anymore, because also the environmental permit gives the, let me say, give certain rights for, for complaints, yeah, even for private groups, even if they are 1000 miles in distance, because they go for vacation there for for two weeks in Italy.
+
+Unknown Speaker  3:05:46
+Let's say you want to build a house, Italy's, I mean, you have to really pray that during the excavation you don't find any archeological, that is actually very common in Italy, find some kind of archeological
+
+Unknown Speaker  3:06:03
+artifact, but Germany is really, is even so that again so that's we are really getting jealous when we come here and see how quickly permits are done here. We like
+
+Ryan Abbott  3:06:23
+that the there are places that we are having a big debate and wrestle with, like, California is one California for sure. Yeah, yeah, but like I like your Idaho facility, I mean, like the West is still a place you go to get,
+
+Unknown Speaker  3:06:45
+yeah, but the West, or the West region is kind of different, yes, yeah, yeah, Oregon, Washington, Idaho, yes, you got it in coastal,
+
+Ryan Abbott  3:06:58
+yeah, you got it, everyone, this local says not my backyard,
+
+Unknown Speaker  3:07:07
+but that's the same in European guys, telling not in my backyard they are becoming more and more, so everything is fine, but not here somewhere else. They want the tissue paper, but they don't want,
+
+Ryan Abbott  3:07:25
+yeah, quite a, quite a bit. I grew up in a military family, and so we lived all over the place, like we, but mostly near the coast, like we might. I have a brother was born in the Philippines, as an example. We just kind of moved every two years, but so I've seen a lot of the world. But I love traveling to Europe. We actually drove most of Spain last time we were there, because we wanted to get a sense of, you know, the Romans coming down and more architecture coming up, and you know, all of the, you know, ins and outs, but yeah, but it is a very, to me, it kind of like trying to understand, like, where somebody's coming from, and the way that they're feeling, you know, yeah, I'm not saying it's simple here, that's..
+
+Unknown Speaker  3:08:13
+I'm not, I'm not.. that's part of the fun, right? Yeah, differences.. one thing is, if you're a tourist, another thing, if you totally.. a
+
+Ryan Abbott  3:08:28
+couple of weeks, two, three weeks. Okay, yeah. And you've got lots of people helping you, exactly right, like when you're like, okay, I gotta get the water on the
+
+Unknown Speaker  3:08:41
+bureaucracy of different animals, yeah.
+
+Unknown Speaker  3:08:46
+For sure, bureaucracy in Europe is really killing, because now everything is driven all the problems from the EU, and it seems that there are a lot of people that they're quite bored about their job, and they think about to create new things no one needs, really, no one needs, and this is this is really unbelievable. And every day, every every year, they create new ideas, new directives where the national, the national governments, they have to create the laws complying with these directives, and so that we create just as an example, maybe to finalize that in the year 2000 millennium in Germany, there were, so we are from Austria, but Germany talked the same language, we have different mentality because we talk the same language, so they had about about 2000 regulations regarding construction. Now, in 2025 we have 10 times more, so it's 20,000 regulations. The problem starts there, even that the officers at the authorities, they even do not know how to interpret this law anymore. So, what are you doing when you are an officer, being liable when you approve something, but you don't even understand what, how you need to interpret the law to to approve something or not, and if you approve something and it's wrong, it doesn't comply with the law, because it's written in such a complex way that it does not even understand it, and people being, you know, practicing that since more than 20 years. So, what happens? You take no decision. Yeah, yeah. So, and this is stretching all of that, and then it's taken to the next to the upper authority, and so on till then some, some experts are coming, and finally telling, okay, this can be approved, and it takes time, you cannot imagine, so killing everything and creating an environment which is so toxic for industry, because you know as an investor you want to be sure that if I comply with some regulations that I finally will get the permit for my project in a reasonable time. Yes, and all of that is not given anymore, even with some fundings for renewable energy, so one year it's there, then they say that that is valid for the next 10 years, the year after they just cancel it without any explanation, so How can you invest in such an environment
+
+Ryan Hankins  3:11:49
+that explains the two years, that's crazy.
+
+Unknown Speaker  3:11:54
+We're also starting to see some of that here with the administration too, where they tell you one thing, and then either the political value shift, and then all of a sudden your 10 year program is gone, or they give it a year and then it's gone in three months. Like, how do you make a big long term commitment financially? the last 10
+
+Unknown Speaker  3:12:12
+years, US have been changing quite a lot than before,
+
+Ryan Abbott  3:12:20
+and super uncomfortable, but at least we let you know there are also other places where it's not so much better than, yeah, I'll finish on this very funny story. So last summer, my family and I went to Africa, we climbed Kilimanjaro, and every hut that I saw had Starlink on it. Yeah, and I was, I was thinking, like, the world just got more complicated for these folks, yeah. Of course, like cell phones and Starlink, Starlink and cell phones, and they're going to be trading on a world economy, they're going to be investing on borrowing, and it's upward social mobility, but at the same time, I'm like, life just got a lot more complicated than your house,
+
+Unknown Speaker  3:13:10
+you know. no, no, it's in general the world is complicated,
+
+Unknown Speaker  3:13:21
+so but it's just, you know, sometimes you just think
+
+Unknown Speaker  3:13:25
+about your own country and say bad police and bureaucracy, then you go somewhere else, and you see they have other problems.
+
+Unknown Speaker  3:13:49
+so
+
+Unknown Speaker  3:13:50
+it's not getting easier, for sure. So we think that also technology sometimes make the job easier, but finally you bring, you need to take it down to the question: does it really provide, is it does it provide more profit, is it more efficient, or is it just a gadget? Yeah, and we know, for example, biggest companies having several 10,000 employees, they started to write their minutes of meetings again just by work. Yeah, yeah, so they kicked out a lot of all these fancy stuff, where you get everything together, because finally the problem is like when you collect data. So, the question is, what are you going to do with this data? So, otherwise, it just creates a lot of work for someone, but if the output does not provide any benefit, because nobody's looking at it, what it's good for, and these are the things you know we, I think we need to sometimes, it's good just to go into distance, look at it, and to say yeah, is it really the right approach?
+
+Unknown Speaker  3:15:06
+Yeah, let's see, that's not my very good. Yes.
+
+
+Transcribed by https://otter.ai

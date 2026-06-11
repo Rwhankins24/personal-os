@@ -1,0 +1,770 @@
+Unknown Speaker  00:03
+He's jumping on, who are we missing? A few people.
+
+Speaker 1  00:24
+Okay, I found the lounge taking over the nice, comfortable couch, so I won't turn on my camera. Don't want to make people jealous of my comfortable situation. But thanks everybody for joining the call mark. We're going to let you in on a little secret as not to so to give you full context on what's going on, you know, this is something that we we just started working through with Rebecca page and the Clayco team yesterday. We so this is something that we just want to keep close to the chest for now, because we don't want people to get distracted. This is going to come from Pacific fusion leadership as far as direction, but we need to find cost reduction, the cost of this project, you know, quite frankly, because of a lot of specific fusion requirements, has caused significant increase in numbers, and we really need to look at the minimum requirement. So I'm working with Jeremy right now and the rest of the team to understand what we can do. Mark, there are two items that we're hoping we can get your And Frank's high level guest, Mitchell on. Let me share my screen with you.
+
+Unknown Speaker  02:02
+Let's see window. Here.
+
+Speaker 1  02:14
+It is, okay. Can you guys see my spreadsheet.
+
+Unknown Speaker  02:26
+Okay, let me try that again.
+
+Speaker 1  02:39
+Okay, so long story short, Mark has been on this roller coaster. So Mark has actually been on this roller coaster with us, the longest out of any of the design partners. So we really got to give Thorn time study a round of applause for for rolling with the punches here. So Marc, we are looking at, we're really challenging our settlement criteria requirements, and really, in order to do that, we'd like to quantify, we'd like to throw some super high level understanding on, hey, what would happen if we relaxed our settlement criteria from three eighths of an inch to an inch and a half? That's something for us to approve, but we'd like to work with Clayco and you to understand, how do we price this and quantify it? How much steel do we save, how much cubic yards of concrete do we save? Is there a way we could talk through that in this call?
+
+Speaker 2  03:46
+Yeah, we can try first. Sorry, were there two? Do you want to go over both of them, just to kind of put out there what the ideas are, and then we can talk about the each one?
+
+Speaker 1  04:00
+Yeah, yeah, absolutely. So a lot of these are the ones that I highlighted for us. Are sr 10 and SR 23 basically, if we, if we made an assumption that the 800,000 pounds only needed to be applied to baby, where the 400 ton frame is A and BC would be reduced to 200,000 pounds. And then, actually, there's another one here that we just thought about guys, I think there's an opportunity to just eliminate the 75 ton bridge cranes altogether. I have the material cost here shown three point we would say 3.5 and material cost and install. But I'm hoping we can also get an understanding of what the structural and civil concrete, steel,
+
+Ryan Hankins  05:03
+yeah, Craig says he's in the waiting room. Is there somebody can let him in? I don't think I see the waiting room.
+
+Speaker 1  05:13
+I didn't see a waiting room. Yeah, I don't see anyone in the waiting room. Um, let me see if I can add him, Craig straight. Okay, so I'm sending him an email now. Okay. It might
+
+Speaker 2  05:33
+be helpful if Craig's joining for us to almost work through these backwards work up the list here. So 75 ton bridge crane. Are you guys looking for answers right now on this call, or do you want us to send you back? Hey, these are the columns and beams that you could take out to kind of identify what that cost would be.
+
+Speaker 1  05:57
+I would love to be, yeah, I would like to be able to do as much as we can on this call today, being that Nick and I have a conversation with our leadership this same time tomorrow. So you know, there is time to work on this, but I'd like to see what we can tackle on this call.
+
+Ryan Hankins  06:18
+Yeah. I mean, Cory, let me think about this in different ways. So we know that there might be something with geo peers, right? Geo peers is like 2 million bucks. We'll call it for the total scope. Not all of that is within the R and D space, but there is a component of that mark. Do you think that in relation to settlement, there is a there is a concrete component that is thinned up, whether it's the mats or whether it's the tunnel walls.
+
+Speaker 2  06:50
+Yeah, I would think maybe a little bit of both, but not, not a significant amount. So like, your six foot mat goes down to five or something, and your walls go from four to three, something on that range, because the loads are still heavy, right? So, and we're still needing some of them for flexure. So what about maybe there's maybe four and a half instead of six. Maybe that's a better answer, but that's probably about the right spot.
+
+Ryan Hankins  07:18
+Okay, so they'll go down basically about a foot, foot and a half somewhere in there. Yeah, the walls would stay four feet. They go down to three to three. Okay, so Cory, we could work through quantifying what that, that reduction in in cubic yardages, okay?
+
+Speaker 1  07:45
+Is that for? I'm assuming that's for this one and a half.
+
+Speaker 2  07:51
+Yeah, I kind of went all the way to the end, and I think there'd be some level of proration in between.
+
+Unknown Speaker  08:00
+That's a good way to look at it.
+
+Ryan Hankins  08:02
+Yep. And then Craig, I think you just joined but, and I there's a lot that I think you haven't been caught up on yet, but one and a half to go to one and a half inches, how would that, sorry, one and a half inches of settlement instead of the three eighths, would that have a effect on your cost?
+
+Speaker 3  08:27
+The short of it is, is not really, really that our peer spacing is about as wide as we can really feel comfortable with and what really happens by relaxing. That is, it changes whether you need to preload. So it's kind of when that line is drawn in the sand, you know, to get to the three eighths, we said, hey, we need to get all the load on this slab, you know, on on all these foundations, to be able to draw that proverbial line and sand of when we're starting to measure that differential settlement. If we relax that criteria, then that would loosen that same criteria. So I don't know that it necessarily save money on the geo peer scope, but based on our conversations and some of the you know, cost associated with potentially pre loading this stuff if the equipment itself isn't available, I think that's where you could save some money. I will add that we got, we did get the CPT data. The more detailed CPT data, I don't know if we want to go over that. It's, it's good news, in short, that we've, preliminarily, we just got it late last night, and we've tried to run the calc on it so that we could try to have some information for this call. And the short is, we're, we're getting closer to to one inch than an inch and a half in that same, you know, loading situation, because the soils were stiffer than the boring showed, which is kind of what we were hoping the CPT information would show us so, and we're still evaluating that. So, I mean, we'll put together a detailed settlement map and and if that adjusts any any spring information, we'll get that over to the team.
+
+Speaker 1  10:26
+Okay, okay, so it sounds like there's really, even if we do relax the settlement criteria, there's this facing with the geo peers is as as wide as we're comfortably willing to push them at this point. So it's really just a reduction and in concrete with structural
+
+Speaker 3  10:53
+and potentially, and I don't want to interject for Ryan and his team, but I think the pre loading discussion was kind of a challenging one, because I'm not sure when the Pacific fusion equipment was going to be available versus when Clayco, you know, needs to turn over the facility. And so there's some discussion about potentially pre loading artificially, not with the finished equipment, but artificially with, you know, potentially, you know, tanks and water, or some, you know, temporary tanks, not the finished tank. And so I think that's where there could be some simplifying that would have some cost savings. Now, whether that's in the budget or not in the budget right now, I have no idea but, but I think that would simplify some of that risk.
+
+Speaker 1  11:43
+Okay, yeah, I know that we yeah, we still need to have an in depth conversation about how we preload that. And I think Ryan, we are carrying a an allocation that will want to hold on to. I think, I think the overarching need is we just want to get the settlement out as soon as possible before we start installing. So we're carrying that allocation, I think for now, it's a good idea just to keep that and not really mess with that number until we we figure out what the new direction is. Okay? So I think, Ryan, you have everything that you need for sr 10, you've got some good numbers here to just throw a WAG at it. Okay, let's move on to the next one. So Mark, you know we hit you guys with the 800,000 pound transporter load across the majority of the R and D space. If we reduce that to just pay B and Bay A and B, C only needed to be 200,000 pounds. How does that impact?
+
+Speaker 2  13:00
+Does that also mean that, Frank, you have to help me with the name of the thing, the
+
+Unknown Speaker  13:07
+full chamber.
+
+Speaker 2  13:08
+Lift, the full chamber. Lift, yeah, there we go. Does that also only stick into
+
+Speaker 1  13:16
+me? Sorry, yeah, I think I am answering your question mark. But the 800,000 pounds is the full chamber lift, and that would only stay in B it would not be located to ARS, yes,
+
+Speaker 2  13:31
+okay, got it understood. So let's see. We could announce a slab a little bit in those outer two bays. Okay? I can't remember what we showed it to me. I think we showed it as 1012 I think we showed it as 12 in the middle, and it could go down to 10 on the A and C base. And then I think the bigger impact would be the reduction in the trench covers, we'd be able to take some, we actually reduce the trench walls a little bit, and we could reduce the trench covers. Those are probably actually the two bigger aspects.
+
+Speaker 1  14:21
+So I think for now, the way we're looking at this mark is and that sounds great. Well, we'll iterate. But the way we're looking at this is actually completely eliminating the trenches.
+
+Unknown Speaker  14:33
+What I was saving, you can't save it twice.
+
+Speaker 3  14:39
+Can someone help me with what's Bay A, B and C? Because I'm seeing a and b up in the cup, so maybe I'm not looking at the right grid spacing or something. Yeah, let me
+
+Speaker 1  14:54
+share the scope production Blue Beam sessions. Let me because
+
+Speaker 3  15:02
+there is a is a possibility there could be some savings on eliminating geo peers in those bays, if, if not needed. But that would be a question for you know, geo Matt on, because 2000 pounds is still a decent size point load. So I'm not sure what geo Matt would say. And then also Ryan, I don't know if you guys have had a chance to evaluate the overex solution versus the geo peer solution, like, as an example in the cub area, if you've had a chance to say, okay, is overex cheaper or geo peers cheaper? Because if you appears cheaper than that, that's a moot point. I guess with you guys
+
+Ryan Hankins  15:44
+doing so much work out there, it made more sense to keep you guys out there.
+
+Speaker 3  15:49
+Okay, then the change in the loading, we're already kind of at max spacing on our first lab peers in the the lab area and in the R and D area, so I don't know that lowering that load would change our peer spacing.
+
+Speaker 1  16:10
+So Craig, just to kind of distract a little bit and go, go back to your original question, the way we're looking at bay A, B and C. So Bay A is, I'm not sure if I have a right or wrong, but Bay A is the 75 ton bridge crane. Bay B is the 400 ton bridge crane where the water tank sits. A C is this other Green Bay where the 75 ton bridge crane sits. So that's the way we're kind of looking at the R and D space being split up.
+
+Speaker 3  16:48
+Okay, would would this potential, the option, have any effect on the lab area? Because that was one of the areas that that point load was going to be going into the lab area, would that have any effect on that area?
+
+Speaker 1  17:05
+So we, yeah, the, I think the That's right. So we would eliminate the previous lab loading requirements and just say that the full chamber lift would stick to this center, Bay B, and not encumber anything in the lab. Does that answer your question?
+
+Unknown Speaker  17:33
+It wouldn't go there at all.
+
+Speaker 3  17:34
+Or it would be the reduced load, because there was a number. There was a 200,000 pound versus an 800,000 pound, it wouldn't go there at all, or it would be the lighter load like it wanted.
+
+Speaker 1  17:47
+So it would not the 800 pound, I'll ask Jeremy to clarify, but the 800 pound, 800,000 pound load, would not go into the lab. Basically, we would find a place for all of the operations that would have occurred in the lab or in the outer base. We we would do them in this center Bay. Yeah. So eliminating that 800 pounds, 800,000 pound load altogether in the lab, it wouldn't be reduced. But however, the A and C phase would be reduced to 200,000 pounds,
+
+Speaker 4  18:30
+and Cory the transporter would never go into the lab space. Then as well.
+
+Speaker 1  18:36
+Greg, I'm going to clarify that. Let me clarify that, and what I'll do is yeah, what I'll do is, I'll just follow up with you in a couple minutes after
+
+Speaker 2  18:48
+this call. I think if it doesn't go in there, you could take you could reduce the slab thickness in there as well, because we had increased it to 10 or something, so they could go back down to six
+
+Speaker 1  19:05
+got you so if transporter does not go into the lab, can be reduced back to six inches. I will get that confirmation. You know what for? For now, let's just say yes. Guys, let's say yes, because I think what we're really doing is trying to the envelope, right? Yeah, exactly, yeah. So I'll give you guys, I'll give Clayco direction that yes or no, the transporter will not go into lab. Yes, we can reduce it back to the original slab depth, which sounds like it was six inches.
+
+Ryan Hankins  19:52
+Yeah, and we don't need,
+
+Speaker 4  19:55
+I think that would also then eliminate the D for the geo Pierce below the slab on grid in that lab area.
+
+Speaker 3  20:05
+Yeah. Then it would just be a cost exercise for Ryan. It wouldn't be necessary. It'd be a cost exercise for Clayco on whether the over x or the geops are cheaper, whichever is more cost effective. But it would not be required. That's true. I
+
+Speaker 1  20:27
+Okay, all right, Ryan, do you feel like you have enough information for sr 23
+
+Ryan Hankins  20:38
+Yeah, to put WAGs together. Yes, to put wagon together. We should be all right,
+
+Speaker 1  20:45
+okay, all right, you guys can still see my screen. I cannot.
+
+Speaker 1  21:02
+All right, making good time moving along here. Okay, so eliminating the 275, 10 bridge crane, so we're saving about 3.5 in material costs, that includes the crane rail and installation for the two cranes. I'm curious to understand how much, how much steel we could save. Is there an easy way to pull up the like Mills, Frank and Mark and just do a quick tonnage ad that we can hand over to Ryan and team?
+
+Speaker 4  21:35
+Yeah, I think we can. You're looking for a tonnage value, right? I think we can pull it, pull out a calc for that with the 75 ton steel.
+
+Speaker 2  21:48
+Yeah, I think we would just need maybe, like, an hour or something. It might be easier for us just do it after this call and send it to you. I know you're wanting everything done kind of in this but okay, let's just say, and we'll just take out those specific members. I don't think that there would be that much difference in, like, foundations and whatnot, for those particular green or columns, excuse me so. But we'll take a thought on that. But I don't think that significant of a change.
+
+Speaker 1  22:28
+If I had to press you, because we have five minutes left and we don't have anything else to talk about, if I just had to press you to, like, throw a number out there, and yes, of course, like, you know, maybe
+
+Speaker 2  22:41
+we can just do, how big are the beams Frank, and we can multiply by the length of the building times four, and how tall are the How big are the columns? Ben.
+
+Unknown Speaker  22:55
+Mark, you just
+
+Unknown Speaker  22:57
+let me. Let me do that math
+
+Speaker 3  23:00
+real quick. Mark, did I hear you say you didn't think that would change those footing sizes much?
+
+Speaker 2  23:07
+I don't think significantly. I mean the ones on the interior, so the ones that are surrounding baby with a 400 ton crane are governed by the 400 ton crane, and see very little impact from the 75 ton trains in it. The, you know, I had those somewhere, actually the footings on the perimeter so on Grid Lines H and B, they could go down just a little bit, I guess. I think we previously had them at a different size and then got the crane load updated correctly and cost them up.
+
+Unknown Speaker  23:57
+So let me see a couple
+
+Speaker 3  23:58
+of geo peers underneath those footings. Is going to move the needle, but there would be a slight savings by the reduced
+
+Speaker 4  24:06
+live load take down for the crane columns, the runway girders and the bracing beam For the 75 ton cranes, that adds up to 750 tons.
+
+Speaker 2  24:27
+And then I would say for the foundations, we currently have them as 16 by 16. On that perimeter we could go down to 15 by 15. So that's, that's all the footings in the r, d space on lines B and H,
+
+Ryan Hankins  24:50
+yes, what
+
+Speaker 1  24:56
+is? What is what are we carrying? Are we? Are we carrying? Like, 6300 for 1065,
+
+Ryan Hankins  25:12
+those are primarily those, yeah, I would say, Let's carry the six. Let's do the 65 because I'm trying to remember where the plate girders are. Where are those big plate girders? Are they on the same they're under the 400 ton. Okay, so those are going to be more like 60 that's going to be probably a little bit higher than 65 I'd say 6250 just to be true, because these are a little bit easier than the bigger ones.
+
+Unknown Speaker  25:52
+So I think the only other thing, it's a good cost. We Yeah, no, this was great. This was Jeremy's idea.
+
+Speaker 1  26:00
+And the only other thing that we need would be the cubic yards on the concrete for the footings
+
+Speaker 3  26:11
+that, if you just want to hang tight, I can do that math real quick.
+
+Unknown Speaker  26:15
+How thick are those three
+
+Unknown Speaker  26:17
+and a half feet? So you've got
+
+Speaker 3  26:21
+16 by 16 by you said, 42
+
+Unknown Speaker  26:25
+inches thick. Yeah. How many are there? 16 of them. Hold on, nope,
+
+Unknown Speaker  26:33
+12, and
+
+Speaker 3  26:35
+then our replacement is going to be, you said, 15 foot by 15, and still the same, 42
+
+Unknown Speaker  26:41
+Yeah, that's correct.
+
+Speaker 3  26:44
+Cubic feet. You're gonna save about 48 cubic yards. Ryan, what are you about 600 bucks, the cubic yard structure, or something like that. So hold on a second.
+
+Ryan Hankins  26:56
+Unclear, because I look at these drawings, I don't see a dedicated, dedicated footing.
+
+Speaker 3  27:10
+It's the footings Ryan along grid line H, then grid line b1, 23456, those would just go from 16 by 16 to 15 by 15.
+
+Ryan Hankins  27:27
+Okay, so basically, it's a combined footer, and it would get smaller. But we, you're not, you're not deleting all the concrete. You're just deleting a portion of
+
+Unknown Speaker  27:37
+concrete. I just,
+
+Speaker 3  27:38
+I we all the time footing sizes, because our increased bearing capacity saves concrete. So I have a spreadsheet that does it for me.
+
+Ryan Hankins  27:46
+We're gonna, we're gonna have to hire you to be full time. Now, what
+
+Unknown Speaker  27:52
+do you what do you use for structural concrete? Ryan,
+
+Ryan Hankins  28:01
+Give me. Give me a minute. Because I can't remember if we stick form those or if those were, give me, give me a minute. Yeah, I gotta. I'll get back with you guys on
+
+Speaker 3  28:16
+that concrete savings if you want to plug it in there. Courtney, the yardage is about 48 yards. So that's times, whatever,
+
+Unknown Speaker  28:27
+dollars, yeah, I'm gonna put a place. Oh, it's only, it's
+
+Ryan Hankins  28:34
+only 48 yards. Yeah, go ahead. It's only 30 grand. All right, that's fine. Yeah, I was thinking it was 48 and that's when I was
+
+Unknown Speaker  28:45
+No, it's only 48
+
+Ryan Hankins  28:47
+okay, I'm good. That's fine. Scared me.
+
+Unknown Speaker  28:56
+It's like 625, the
+
+Ryan Hankins  28:58
+yard, Ryan, that's fine, yeah, whatever.
+
+Speaker 5  29:03
+Okay. Courtney, can we go back to SR six and seven? I just want to make sure we're clear on on that scope so Ryan can potentially price it for us and what that means to all the underground work. So basically, right? If I'm understanding correct Cory, we would eliminate all trenches. It's including this would include the 30 inch water line, correct? Yeah, we're going to
+
+Speaker 1  29:35
+go to an extreme on this. That's correct. So, you know, basically, if we eliminated all of the pits and the
+
+Speaker 1  29:51
+covers for those pits. So yes, but that is, where is that? Yeah, so that's as our seven, right now this, I'm just carrying the Trend number.
+
+Speaker 5  30:09
+This would save quite a bit of concrete, right? And Earth work.
+
+Ryan Hankins  30:15
+Yeah, that's, that's, that's correct. I don't have the value sitting here today, right now.
+
+Speaker 5  30:24
+Yeah, no, I just just, I just wanted to make sure you understood what that scope meant so you can quantify it.
+
+Ryan Hankins  30:30
+Yeah, the only one that's not going to save Earth work is going to be the big mi TL pits, because we're already digging down. But I agree that the waterproofing and the concrete is going to be removed.
+
+Speaker 1  30:51
+And then for the middle mile pits, basically what we're doing. And I provided it. I provided some additional detail, just so you don't have to do fire flow calculations and volume calculations. Ryan, let me go back to the blue bean session here. I imagine a French drain, this very small, profile French drain around the perimeter of the my volt, my module, stack, and then an outdoor, underground secondary containment tank is going to be much more cost effective than forming up this trench and then having to come in and either like, there's a cold, I don't know if there's a cold join between all these peers, and any kind of base planes that need to be cast. in place or embedded for the modules receive them, seems very intricate at this point. So I'm just saying a price, a foot and a half wide by two foot deep French drain with an underground secondary containment take. I would say that's at the existing volume of these two pits combined. So let me just clarify that volume of secondary Yeah. Hi,
+
+Unknown Speaker  32:37
+does that make sense? Ryan,
+
+Ryan Hankins  32:39
+that makes sense. We're gonna do our best on this one. I think this, yeah, I think this one's going to be tough to be, like, the level of confidence on this one's probably going to be a little bit less than, okay, that's fine. Yeah, it's a WAG, yep, which we all know what a WAG is, right? Yeah. Okay. I
+
+Speaker 1  33:07
+Some are somewhere in between a WAG and a ROM.
+
+Speaker 1  33:21
+That's funny, okay, go back to the spreadsheet here.
+
+Ryan Hankins  33:26
+Do we have to go to that other call? Or are we going to do the call here?
+
+Speaker 1  33:30
+Well, I think we can release. I don't think everybody needs to be a part of that call. So yeah, Mark and Frank. Mark and Frank, did you want to take a little bit more time to figure out the shell tonnage, or is this thing? Are you fairly confident this is the handoff,
+
+Speaker 4  33:49
+yeah, for the 75 ton train. That's, that's, I'm pretty confident that's the amount.
+
+Speaker 1  33:55
+Okay, yeah, so mark and Frank, I you know, I think we everything we needed from you. Super productive. Appreciate it. I think, yeah, Ryan, just a call with the Clayco folks, so why don't we just jump on the other line? Okay, good deal
+
+Unknown Speaker  34:11
+related. Thank you, Craig.
+
+Ryan Hankins  34:15
+I think, I think if you do what we talked about in this call, I think that's what we that's all we Need for me.
+
+Unknown Speaker  34:22
+Okay, sounds Good. Thanks, guys. Thanks you.
+
+Unknown Speaker  35:13
+Happy is it Tuesday? Yeah, happy Tuesday.
+
+Ryan Hankins  35:21
+Happy Tuesday. No, I wanted to make sure Cory that we because the most the team that's actually running some of these number down, numbers down, are on this call. So I just wanted to make sure we were getting them involved in the conversation.
+
+Speaker 1  35:39
+Yeah. Gotcha okay. Yeah.
+
+Speaker 1  35:50
+Talk through any kind of clarifying comments. So these numbers, Ryan and Lulu and Erica, I I just pulled together. They definitely do need to be checked, but I try to put some comments in here, and I highlighted the ones that are yellow as kind of like a signal, like, hey, check my math. The ones that are not highlighted yellow are coming directly from Clayco based on, you know, ve and plus delta exercises.
+
+Ryan Hankins  36:22
+All right, let's, let's start from the top. Okay, so 250 kW, so you're going from 400 to 250 or is this 602 I think it's 600 right?
+
+Speaker 6  36:37
+600 going, Oh, it's 400 Yeah, I think on the highlight, it says 600 to 400 then 200 and a later date.
+
+Speaker 1  36:49
+Okay, maybe the 600 was picked up in the 50% CDs and not in the 100% so Lilly, I believe
+
+Speaker 7  37:01
+you the doc says 200 kilowatts. So we choose it 200 or 250
+
+Speaker 1  37:07
+Oh, I will change that now, so there's no confusion. Let's, let's go to 250 so we're reducing from 400 to 250 Oh, yeah, the doc says, defer 200 but I edit it SR one edit produce backup generator to 250 Yeah.
+
+Ryan Hankins  37:37
+Somebody have a turn signal on?
+
+Unknown Speaker  37:42
+Yeah? My bad. I'm fire good.
+
+Ryan Hankins  37:47
+So I'm looking up right now to see if I can figure out how much that generator is. Just so we can get this done. Labor,
+
+Speaker 1  38:03
+factory, room, yeah. And by the way, for what it's worth, I'd like you guys. I know we provided you guys some information. I'd like you guys to completely ignore the 100 and $80 million number. That number does not make sense, and that's not the number that we actually started off with. I think let's just prioritize trying to come up with some WAGs for the discussion that Nick and I are going to have tomorrow, but in the background within the coming days, I think it would be very wise for Nick and James to get with the Clayco folks and open up the books to understand the old Heinz number, what was price and where that came from. But that, you know, that can be de prioritized for another time. But one 180 pretend that number was never thrown out there. That's a much lower number that nobody needs to shoot for. 180 I think we're just going to focus on trying to reduce this as much as possible, okay,
+
+Ryan Hankins  39:13
+I think the oh, There it is. It's right there. Oh, my gosh. Oh. Generator. There we go. So material wise, it's for a 600 KW. It's 330,000 so we're going, let's just cut. Let's say it's 200k let's say it's 200k
+
+Unknown Speaker  39:52
+for cutting, or it's the new number.
+
+Ryan Hankins  39:56
+It's a rev, it's a minus 200,000
+
+Unknown Speaker  40:01
+okay, it's minus 200,000 Gotcha?
+
+Ryan Hankins  40:04
+Okay? So no. So the whole Yeah, the whole number is 200,000 There you go, Yep,
+
+Speaker 1  40:11
+okay, gotcha. Okay as our four, the cub one, two and three that you find over by the West 4540 foot door. That's about 800 sorry, eight, 8200 square feet. I highlighted that in the blue beam sessions. It's just that. It's just a chunk. We could defer that with a pre fabricated will be in a later date. I threw $500 a square foot. That basically includes slab steel ti but I don't know if that's high low. I just put that in there.
+
+Ryan Hankins  41:00
+It's really high. Let's, let's, let's plug 175 there's going to be some heavier still in there.
+
+Unknown Speaker  41:13
+Okay, that includes concrete and steel.
+
+Ryan Hankins  41:16
+I want to go back. And I want to go back and verify that, because I think, Dave, you're doing the you're currently evaluating the the admin area Cory shell number. Let's also look at the cub as well as a separate breakout so we can get that accurate. So yeah, keep that yellow for right now.
+
+Speaker 1  41:42
+I think my little pits to French drain. That's just a, probably an outside of this call exercise, yep. Okay, eliminate Mitchell, cool down pits and covers. So it's the only thing I'm carrying right now, is the 10 million in covers.
+
+Speaker 7  42:03
+So we should have some additional concrete, obviously, with the pits and the slab raising up. So yeah, I am kind of working through some of these right now, so should be able to lock down a solid number for shortly. Got you great.
+
+Speaker 1  42:19
+Okay, and same thing going to an extreme here, just eliminating all utility trenches and covers. So the four point since six was just for the covers. So I imagine similar days, sweater wire proofing and concrete reduction as well.
+
+Speaker 7  42:34
+Correct? I do have a quick question on the my volt pits that we kind of jumped over SR five. So I guess, a little bit of background. What's the intent with the elimination of that
+
+Speaker 1  42:51
+defer scope? So this is something we either have to figure out how we build up. So this gives us floor back. So we would either defer this in the future, where we would build a, you know, I would say, like a small building on the inside to replace what would have been a pit.
+
+Speaker 7  43:17
+So foundations and other items that will reduce would come with that option as well. Correct, that's right. Thank you.
+
+Speaker 1  43:34
+But bearing in mind that, and I don't know that you were on the previous call, Dave, but that center Bay is still maintaining that 800,000 pound transport or load. Okay, so the loading criteria for that center Bay remains at 800,000 pounds. Yeah. I don't know how much we can reduce the foundation because of that, but yeah, okay to move on to number eight, yep.
+
+Ryan Hankins  44:07
+So to brand escape, yeah, this one, I was just saying the one foot increase at all Matt slabs. Let's just plug that in there, because a lot of that was, It's about 730,000
+
+Ryan Hankins  44:25
+that was because of the crazy requirements.
+
+Speaker 1  44:47
+Eliminate HVAC cooling and insulation for the R and D space. So any HVAC equipment serving air changes to the R and D space does not need to be cooled, and therefore the space does not need to have insulation. So if there's a way, we can just figure out what that reduction in HVAC equipment performance criteria would be, and I'm assuming, does
+
+Ryan Hankins  45:18
+this mean that we're not doing any HVAC at all, pretty much,
+
+Speaker 1  45:24
+other than air change, it's just not cool.
+
+Ryan Hankins  45:28
+Yeah, that's where I'm confused then, because I would need some input from Astrid, probably on what that would mean. Because I mean, like, I could tell you what the full HVAC number is, but I don't know how much it sounds like. We want to take out a lot. We could put a target in there, but unless I get something from Astrid, it's going to be tough to get accurate on what we're looking for. Gotcha,
+
+Speaker 1  45:59
+let's see. I'm wondering if we could have kind of a we can have a brief conversation with her, either after this call to see if we can get a hold of her, or set some time up with her tomorrow morning to talk through that. But basically the keeping the high base base at, you know, 73 degrees, all year round is no longer a requirement.
+
+Unknown Speaker  46:34
+So it's basically would just be, hey, Courtney,
+
+Speaker 7  46:44
+this is Bill. I'm working from my phone at the moment. I'm happy to set up that conversation with ASRS.
+
+Speaker 1  46:53
+Perfect. Thank you, Bill. Appreciate that. Yeah, yeah, yeah, I would say, Yeah. Please keep Brian in the loop. If I can't make it, I'll try to attend. But if I can't make it, then I don't need to be there. But at minimum, I think Ryan and Astra should talk. Okay, thank you. All right.
+
+Unknown Speaker  47:19
+Settlement criteria, I think we've got our productions. Just need to throw a number to it.
+
+Ryan Hankins  47:27
+Yeah, Dave, did that make sense when I was messaging you? It does, yep.
+
+Speaker 1  47:35
+Okay, I'm saying revert back to type 2b construction, instead of type 1b construction, where leadership understands that future h1 and h2 occupancies are only limited to 7000 square feet. What I did here Ryan and Dave was I basically took the plus delta of the intimacy paint jumping to that 1b category 7.5 we were, we agreed that we would use cementitious so I'm assuming there's an additional like, if we, if we price To be from the start in the 50%
+
+Ryan Hankins  48:26
+Yeah, they do we just save the whole seven and a half
+
+Speaker 7  48:32
+million? Do we go if we refer to to be, yeah, let me, let me dive into that a little bit more. See what's going to be actually required,
+
+Ryan Hankins  48:44
+because I can't remember if we had to include something else, or if it was purely just seven and a half million dollars of of the whatever cost into messenger, okay, but it's, it's, I mean, it's a big number, though, to your
+
+Speaker 1  49:12
+point, yeah, sounds good, yeah, all I did was just combine the plus delta and the VE exercise with the assumption that to be was already priced in at 50% ed or the RFP, right?
+
+Speaker 8  49:32
+Okay, I just want to, I'll just throw in there. I don't think that at the 50% DD, when we had the to be construction, we didn't show the occupancy separation requirements. So I think that won't be the biggest thing. But just so you all, y'all are aware that wasn't shown yet at 50% DDS, but it is required, if we go back to to be can you
+
+Ryan Hankins  49:53
+explain that a little bit more about what we need to include then? Yeah, yes, I sure can. Give me one second. You're good.
+
+Speaker 8  50:12
+Oh my gosh. Rebecca just turned to the Okay. Type Two a Here we go. I'll just Can I share my screen for one second? Cory, yeah, okay. Oh, wait.
+
+Speaker 8  50:33
+So I just pulled up, oopsie, okay. Can you all see that? Yeah, so I've just pulled up. This is from our from Jens and Hughes, so I won't be able to explain it as well as they could. But, and there's cross that we've crossed out some of the options. So essentially, we have this special, industrialized use option. That's what we're following. That's what's allowing us to have the 110 foot roof height in the high bay area. But in order to have that, the whole building is not considered a special industrialized SiO. So for type 2b we would need to have separation. I think it's a two hour separation around the admin space, which, again, we don't know what is going to have. Oh, here he has this key three hour fire barrier admin. So he's also assuming that would happen at the cub. There's a chance that we wouldn't need it at the cub. So that's still a kind of a conversation that we would need to have with the City of Albuquerque to really fine tune what's, what's the final requirement, and the understanding of the special lives industrial use.
+
+Ryan Hankins  51:53
+So it's just a two hour rated wall.
+
+Speaker 8  51:56
+It's a three hour so it's a three hour barrier there, and then, yeah, we're showing one hour barriers at some of the other spaces inside.
+
+Speaker 9  52:05
+But can you just send this to can you send this to Ryan as well, and Ryan and team this document?
+
+Speaker 8  52:13
+Becca, yeah, I can send you this whole document. It kind of gives the all of the options for all the different I'll email it to you.
+
+Ryan Hankins  52:20
+Ryan, okay, yeah, Dave and Lilly, we just need to quantify that and put it as an ad with our deductive all the fireproofing. Yeah, I'll set that right now. Thank you. Applause.
+
+Speaker 1  53:05
+It seems like there were two options there. So if we go back to to be we would just want to isolate admin and based on I can turn my blue beam session, but we'll get to it further down on the list, and basically chopping off 50% of admin and lab. So it's really just that small, 14,000 square foot admin piece that would be left for the new proposed admin space. Does that make sense? Ryan, I'm just, I'm trying to give you guys better direction. I'm like, Wait, are we pricing the litter. Are we pricing the new, new proposed? Yeah. Space, all right, eliminating all performance codings. I'm just double checking my math. Yeah.
+
+Ryan Hankins  54:00
+Lulu, can you I think the number was 3.7 million within the estimate. Can you confirm that?
+
+Speaker 6  54:09
+But the thing is, the high performance is not only in the R and D. Do we want to take out otter area or just the R and D area?
+
+Speaker 1  54:18
+Yes, all the other areas, R and D and lab Yes, and convert all of them to polish concrete, yes please,
+
+Ryan Hankins  54:31
+and we'll just put, like a $5 square foot allowance, like a cheaper kind of grit polished concrete, unless the group thinks otherwise.
+
+Ryan Hankins  54:51
+The old concrete not polished. Sealed, okay? Semantics, yeah, sealed is even cheaper than polish, so if we want to go with sealed, we can do
+
+Ryan Hankins  55:08
+I like it. Bill, okay, if the architect said it, I'm good with it. All right, so Lulu was it 3757, or three, seven,
+
+Speaker 6  55:25
+high performance coding we carried, yeah, we actually have 4.2 million.
+
+Ryan Hankins  55:31
+Okay, so 4.2
+
+Unknown Speaker  55:34
+and it's $20 per square foot,
+
+Ryan Hankins  55:38
+so divided by 20 times 151, 75, so the new number is like 400k and so if we do, it's like a deductive 3.8 basically, cool.
+
+Unknown Speaker  55:56
+Got it all right? I'm just going to highlight this one white.
+
+Speaker 1  56:02
+Okay, as our 14 eliminate admin and lab space. So I think it's let me just swap over to Blue Beam.
+
+Unknown Speaker  56:25
+There we go, right.
+
+Speaker 1  56:36
+Yeah, so basically, we don't need laser preheat. This is just dead face. We don't have anything planned for so what we're proposing is eliminating basically 50% of the admin lab program, almost column line 10 to 12. So we would eliminate the entire area in red. We would maintain the blue area for admin only. Admin would become just a warm shell with a reflective ceiling plan. We wouldn't build out conference. It rooms. We want to, we want to build out a cafeteria or anything. This would just be, yes, it would. It would be for future and deferred.
+
+Ryan Hankins  57:21
+Yeah, so Dave, I think you're working on this still. You probably need a little bit more time, if I had to guess,
+
+Speaker 7  57:29
+yeah, I'm working on steel, concrete. We got to pull together the finishes, kind of all that.
+
+Ryan Hankins  57:34
+But the finishes, finishes is done so, and the way that you have it shown is you have one item in SR 14. I don't know what that 13 million. What's that 13 million?
+
+Speaker 1  57:51
+So this was my creative takeoff. I just you guys. Are you guys? Supersede any of my math. I just wanted to throw in place holders, as I was trying to figure this out myself. So I basically took 21,000 square feet from the admin space, and there's about 19,000 square feet in lab, and I applied 500 total for admin, and then 150 for lab. Again, Ryan, this may be high, but
+
+Ryan Hankins  58:31
+you guys are so what's difference between 14 and 16? Like, how do we break up those? Are they part of the same item?
+
+Speaker 1  58:41
+Oh, gotcha, yeah. So eliminate. This is eliminating, so just removing the scope that I just shared in blue beam, and then admin, instead of having all of the nice finishes with the conference rooms and the carpet, this would just be a warm shell with a reflective ceiling plan, or maybe not even a reflective ceiling plan, this is just a warm shell with sealed concrete.
+
+Speaker 8  59:09
+So it'll just be sealed concrete, open to deck, open to the structure above. Thank you.
+
+Speaker 1  59:15
+Rebecca, yes, open to deck. So, but that is only for the remainder, only for the remaining 14k square foot, right? So if, if you guys included any kind of TI build out, yep, dollar per square footage, let's just eliminate that for the 14k square feet.
+
+Speaker 6  59:45
+So So as our 15 and 16 happen at the same time, right? The red and the blue area is like one condition, correct?
+
+Speaker 1  59:55
+Yeah, the way this is actually written is not where we have to pick in. Well, this is an a la carte where everything can be combined, right? Right? So unlike the VE opportunities, where it's like, well, if you select three, you can't select five and six. Basically, the way I pulled this together is, is a la carte and can be combined as one. I don't know if I made that mortgage.
+
+Ryan Hankins  1:00:29
+Yeah, I mean, like, super high level for a minute. I think that 13 four, I think that's probably about 10 million until, until Dave tells us otherwise. 13 four for sr, 14, go ahead and plug 10 million right now, for the for the for the moment. Oh, 10 million. Yeah, just 10 million. Okay, gotcha. And then I
+
+Ryan Hankins  1:01:07
+and then sr 16. So what's the remaining square footage?
+
+Speaker 1  1:01:17
+About 14,000 I'd have to double check that, but I think it's about 14,000 think overall it was like 35,000 square feet, and we're eliminating 2021, one second, I've got the
+
+Unknown Speaker  1:01:36
+that's right Around 14,000 square feet.
+
+Ryan Hankins  1:01:39
+Okay, so 14,000 times it's probably times 75 bucks foot. So that's about a million bucks. Okay, so go ahead and delete the 8.5 million. It's yeah. It's just for Yeah. There you go, perfect. And keep that yellow until Lulu says, otherwise. Okay,
+
+Speaker 1  1:02:19
+eliminating the northern portion of the equipment pit, I'm going to swap back over to Blue Beam. Let me know if you can't see my screen, because I can't see what you guys can see,
+
+Ryan Hankins  1:02:30
+we're able to see it, okay.
+
+Unknown Speaker  1:02:33
+So
+
+Speaker 1  1:02:35
+as our 17 was highlighted in red, we would just get rid of it, so any access to below grade would come from, you know, back of house using this one lift.
+
+Ryan Hankins  1:02:52
+So, Dave, we don't want to remove any topping slab or the mat at the at grade, but the mat below grade in the walls we would want to
+
+Speaker 1  1:03:14
+get rid of going to apologize to Nick Supra, but we are. We need to find pocket change so going to remove the asphalt in the parking lot. It'll just be a dirt lot. We will remove the showcase mezzanine, which was about $659,000 removing the security fence around the perimeter. All of this would just be that would be deferred. I got that from the plus delta ve exercise, but let me know. If that's not correct, maybe I should just
+
+Ryan Hankins  1:03:53
+so we don't want to have any any security around the perimeter. It'll be deferred. That's right. Yeah. So Lulu, what do we think that value was from? For gates, there's gates and fence.
+
+Speaker 6  1:04:09
+Yeah, we are. We're deducting the fans from the 100% DD, right now the 50% DD,
+
+Speaker 1  1:04:20
+I would say, I would say it's a combined effort of
+
+Ryan Hankins  1:04:28
+both, well and it's, it's actually from the value engineered version of the 100% DD, so we've already taken a million dollars out of the fencing number.
+
+Speaker 6  1:04:42
+Okay, so you're taking out the eight foot montage from 50% from 100%
+
+Ryan Hankins  1:04:53
+what was the total value of fencing?
+
+Unknown Speaker  1:04:57
+It's around like 1.5
+
+Ryan Hankins  1:05:00
+so then if we removed 1 million, then we have 500 left, so 443 would be roughly about accurate, yeah,
+
+Speaker 1  1:05:13
+yeah, this was we saw that with the plus. Yeah, go ahead.
+
+Ryan Hankins  1:05:21
+Sorry, Lilly, you seem, yeah. Seem like you don't know.
+
+Speaker 6  1:05:28
+I agree. I think it's a little more than that. Okay. I think we can plug like 550 there for the funds.
+
+Unknown Speaker  1:05:42
+Would you you want me to do that now? 550 Yeah,
+
+Ryan Hankins  1:05:48
+so you're dealing with really honest estimators. Courtney, we give you every dollar back.
+
+Speaker 1  1:05:55
+Appreciate it. SR 21 I'm working through, working through some makeup air requirements. We have a makeup air unit for the CDA compressors. It is the largest unit on that a two schedule. It's 115,000 CFM. That is simply because of the amount of exhaust air the CDA equipment requires, and we have that is going to be exhausted in one way or another anyway. Long Story Short, I'm talking through this with Astrid and how we can basically just use louvers instead of a CDA makeup air unit. Only close those livers during the winter time, so we don't freeze anything, and we dump the heat back to the space during the winter time, and those livers open up during the summertime. So I guess what I'm saying is that still needs to be worked through, but I think there's an opportunity to significantly reduce the CDA RTU, if not eliminate it. So I think for now, let's go ahead and just throw a line like, what was the price of the CDA RTU and let me know if you need a equipment tag on that.
+
+Unknown Speaker  1:07:20
+Yeah, we will, but if we eliminate it, okay, let me. Let me get that for you right now.
+
+Ryan Hankins  1:07:25
+Then I am not going to be able to get that at this exact moment, but I can get it for you in the near future. Okay,
+
+Speaker 1  1:07:53
+mechanical. This is the voltage. Go. It, yeah, so Anu 18, this guy right here, you guys can still see my screen, I'm assuming. Oh, I did not mean to do that.
+
+Ryan Hankins  1:08:16
+Okay, how many money
+
+Ryan Hankins  1:08:24
+we need, yeah, the ve really kind of screws this up. We got to do some dissection.
+
+Speaker 1  1:08:34
+Yeah, well, the air source heat pumps are different than the age use, and like the heating hot water loop and the chilled water loop, I'm hoping this is, this is independent, what you're saying, Ryan, but I think this is independent.
+
+Ryan Hankins  1:08:49
+Well, I know. I just like when you're playing around with numbers and quoted values on the equipment. I just want to make sure that we're not Robin, you know we're we're talking about the updated numbers. Yep,
+
+Speaker 1  1:09:10
+because, again, maybe this is something where we end up deferring the scope, right? So if we know the cost of this au unit, maybe we just bring it in at another time to one two years down the road, right? So I'm gonna say pF, eliminated or deferred. Yeah, okay, this is not something, so this is a finance thing. I see 800,000 pound transporter on slab. So this is what we talked about with Marc, where the 800,000 pounds would only remain in baby the center Bay, the outer bays, the East and West Bay is Bay eight, and see where the 75 ton crane currently is would only have a loading criteria of 200,000 pounds. So Marc was able to give us some design impacts where the slabs would be thinned out in the outer two bays from 12 inches to 10 inches.
+
+Ryan Hankins  1:10:23
+Me and I just did a quick take off of that, Dave, we're like 37,000 square feet. We need to go from a 12 to a 10. We're only talking like, what, like a buck 52 bucks a foot or something. Yeah. So you probably got 50 something 1000 there for the lab with regards to the geo peer proposal, I'm trying to see what that value is. I'm not finding it at my fingertips.
+
+Ryan Hankins  1:11:06
+Lulu, do you have the bit of Al Can you pull open geo pier tab?
+
+Unknown Speaker  1:11:23
+Yeah, I have it open. What are You looking for? I'm coming over. I hungry,
+
+Ryan Hankins  1:12:46
+Lulu, did you give the update that we need to go get that breakout?
+
+Speaker 6  1:12:51
+No, I didn't. I was muted. I'm gonna reach out to Jr Pierle to get the breakout for that area. Okay,
+
+Speaker 1  1:13:01
+okay, and then eliminate concrete at loading docks either, I guess what would be cheapest? He would just replace with dirt.
+
+Unknown Speaker  1:13:10
+It would be cheaper than do an asphalt or anything else.
+
+Ryan Hankins  1:13:15
+But, I mean, like, I don't know if you can do dirt, though,
+
+Speaker 8  1:13:19
+yeah, I don't think you can. Might be worth just double checking with bhi but my guess is that you could, you would have to do a base course, minimally. Okay, we'll just say, like our same as what you're doing in the park, in the parking lot, as opposed to asphalt. Yeah, but yeah, might be worth double checking that with you time.
+
+Ryan Hankins  1:13:51
+And you're talking about that entire South Side. How you talking about? Show you guys.
+
+Speaker 1  1:14:16
+So it looks like we have concrete right there. Let's see. Let me remove Can I remove this?
+
+Ryan Hankins  1:14:24
+No, you uploaded it with it in it.
+
+Speaker 1  1:14:28
+I guess I can't, I guess I'm not really sure where the concrete is. I think I made an assumption that was all along the loading dock doors, including the roll up doors. I think it is because I see some black lines here. So yes, I believe it is. Or this red boxes.
+
+Unknown Speaker  1:14:45
+I'll double check. I know,
+
+Speaker 7  1:14:47
+on the last land in Houston, the C 1011, CD has a sections where it shows it as concrete. I don't think that's all concrete, so take a look here, but I'll double check.
+
+Ryan Hankins  1:15:02
+We'll, we'll get back. We need to get back to on that one sounds like, but it's not. We're not talking about a million bucks. Yeah, all right, not gonna like Cory. I'm impressed by the bottom figure. I'm impressed with all of us.
+
+Speaker 1  1:15:30
+It takes a village. Yeah, it's, I mean, it's okay, it's kind of the right thing to do. I know it's coming at a very awkward time, but Nick and I are working on, you know, it is what it is we we know there's going to be impacts downstream. So, yeah, thank you guys, if you can, if you can work, to just throw any number before 12 noon tomorrow that will really sell set up the conversation Nick and I have with Keith for success. We'll report back to you on the outcome of that meeting. I don't know that we're going to be making decisions right then and there, but just a heads up, we'll figure out next steps. Wednesday. Wednesday afternoon, yeah, we'll go ahead. Or bill go ahead.
+
+Speaker 7  1:16:31
+Rebecca, to kind of put more meat on the bone here,
+
+Speaker 8  1:16:39
+around that. Yeah, I just wanted to know, do you what? Yeah, what you want to do about it?
+
+Speaker 1  1:16:47
+Yeah, so I think for now, Rebecca, we're still going to hold off on the foundation permit. I'm giving myself until Wednesday, Thursday to to understand how we communicate this out to the city and the design team, and I need the extra days just to talk with leadership, to figure out what that direction is. So I would say for now, what we can do is communicate to the city and say, You know what, we decided to hold back the foundation package for a few days because we'll be transparent with them. We'll just say, Hey, we're taking a second look at costs, and we're needing to reduce. I'm happy to convey that message, Rebecca, to them so they're not want
+
+Speaker 8  1:17:33
+to still hold the meeting and just give that. It'll be a short meeting, and we can maybe just give that. Because I think the other thing we were going to potentially talk about was the approach for mechanical which sounds like we that's wrapped up in all of this. So it doesn't really make sense to bring that up at this point. I would think, well,
+
+Speaker 1  1:17:51
+good point. I think we, I think we do need to set the agenda for tomorrow. So the agenda for tomorrow is, you guys didn't see a foundation package, because we're holding that back. And I'll get into the details of as to why. Number two, we absolutely so it's more efficient, and it saves quite a bit of money to to use natural gas or to use we're going to do that no matter what. Right there's a lot of savings there. I have a conversation with New Mexico natural gas company on Friday. We just want to make them aware that this is coming, so we're starting that now and making sure that we can get that into our offsite package for quarter and everything. So those are the two main items outside that. Rebecca, I'll think on it, but yeah, it'll be a relatively short meeting. I think it's good to keep the report with them. They're probably wondering why we didn't submit on on Monday. So, yeah, yeah, I
+
+Speaker 8  1:18:48
+think that's good to give them an update. So yeah, I'll, we'll just attend, and it sounds like you're going to be doing a lot of the talking, and I can chime in if needed, needed, but sounds good, I can send out an email just saying that we're going to do a schedule update and mechanical approach update.
+
+Speaker 9  1:19:07
+Real quick, and Rebecca and Bill chime in here. Is there? So some of these changes will be a DFT, Change Review, change, is there any schedule applications or we get there, when we get there, we
+
+Speaker 1  1:19:19
+get there when we get there, exactly. Wait. It's going to impact entitlements. This is going to impact design schedule. This is going to impact design is going to impact design fees. This may impact construction, right?
+
+Speaker 9  1:19:32
+And it's also our schedule, dates and in the contract and a lot of things. So just overall, and we're on board, we'll continue to support, just flagging it for you.
+
+Speaker 1  1:19:46
+Get for you. Looks like I need to admit you're in the waiting room. Oh, it's okay. So
+
+Speaker 7  1:20:01
+with these, with these items, but we're gonna throw them and trying to get you as much as much as we can before midday tomorrow looks like we have access through ACC. So we'll just kind of throw COSM here and having one centralized place
+
+Speaker 1  1:20:15
+and you guys have access to blue beam as well.
+
+Speaker 7  1:20:19
+Yes, I saw Yeah, I was trying to send me the email with the blue beam session studio, so should be able to get access to that as
+
+Speaker 1  1:20:28
+well, right? Okay, all right. Well, thank you guys. Really appreciate it. If there's an opportunity save $60 million you know, or even $50 million it's something we got to do so for sure, okay, thanks all. Thank you. Thank you. I.
+
+
+Transcribed by https://otter.ai

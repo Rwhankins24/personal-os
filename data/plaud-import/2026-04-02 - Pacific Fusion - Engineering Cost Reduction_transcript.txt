@@ -1,0 +1,350 @@
+Unknown Speaker  00:00
+I thank you for joining us.
+
+Speaker 1  00:13
+Trenches too. Thank you, Morgan. In terms of our agenda today. Courtney, do you have items that you want to kick into right away?
+
+Unknown Speaker  00:30
+Okay, we can hear
+
+Speaker 1  00:36
+you, but there's some background noise. I don't know if we're picking up your laptop speaker or your or your mic from your headset. I don't know if they're one in the same or different.
+
+Speaker 2  00:51
+I'll go on Yes, there were a couple things. One of the things we want to talk about is not beginning of this meeting. I just wanted to get into asteroid, the air compressor at HVAC that serves the air compressors. Jeremy, I noticed that that wire was 15,000 CMH. Just wanted to walk through some of the things that might be driving the pool, those only thing on my list, um, Jeremy Jordan, anything you guys want to bring up, And Chad, I
+
+Speaker 3  01:40
+think that was the large one. We are going through the list that was shared, I think, last Friday, for the open items from Meyr, plus that Rebecca shared. So we're anticipating having that back to you guys tomorrow, just finding it up with a few other team members.
+
+Speaker 1  02:01
+That's great. Thank you. Jon, was there any questions on our questions that you wanted to clarify?
+
+Speaker 3  02:10
+One of the ones we just went over was the had to do with the electrical load assumptions. I'm trying to find it right now. Give me one second the demand factors, I think the big question we had on that one was the demand factors that are listed was that based, did you guys coordinate that with the kind of, I don't want to say this might not be a correct way to phrase it, but the time of use that Jeremy put together, he kind of had the hour by hour operations of when this equipment be online, right?
+
+Unknown Speaker  02:43
+Let me, let's look at
+
+Unknown Speaker  02:47
+that. I believe.
+
+Speaker 1  02:51
+Yeah, yeah, thank you. Some of it is, it's based on that, but it's then it's adding maybe more additional information on top of it. So it's based on the time of use, plus, you know, especially things like this, and does the servers, you know, there's a rated there's a rated capacity, and then there's a anticipated load based on just processing equipment. So it's it's a little bit of a there's a little bit of art and science. Here it is based on your operational. It's based on the operational when equipment is going to be operating based on the time of use spreadsheet that Jeremy put together. But then there's additional equipment. There's some additional equipment diversity put on top of it. Sure equipment running on VFDs may not always be at 100% anything that has a server name and name plate for server equipment will likely run lower the nameplate rating, you know, just typical diversity factors. And we don't have, we don't have years of experience looking at loads, at real loads, versus nameplate loads for some of this equipment. So we're trying to work together to make sure we're not over designing.
+
+Speaker 3  04:38
+Sure. I think the big comment from Jeremy, and Jeremy speak up you're on the call. You could probably speak to this better than I can. But I think the general concern, or general comment was, as long as this has been coordinated with that time of use, kind of thing, I think we should be good on this understanding your comment after is there are certain pieces of equipment you don't actually have inside them to how it operates or right how it's loaded, right?
+
+Speaker 1  05:04
+But we originally had the Cuban, yeah, we originally had the cub and backyard equipment, and at 65% and based on the time of use, we we bump that up. We've also bumped up some of the R and D equipment. Things are running more continuously than we had originally assumed. And so that was, that was really helpful. There's things like, there's when you get into the lab and and the laboratory, and I'll call it the maker spaces, the fabrication type spaces, you know, there are tools that are going to be used a lot more intermittently, and that was where the time of use matrix that Jeremy provided maybe wasn't as definitive, Perhaps. So we're trying to come together with and Jeremy. I didn't mean to discredit that at all, but it's just it's a hard thing to predict.
+
+Speaker 4  06:09
+No absolutely. How many is a very rough estimate at this point. I did go through and take a look at that, at my file, and added in the building loads that were provided in the 100% Ed drawings. Okay, great, and it does still fit within the 10 megawatt.
+
+Speaker 1  06:31
+Yeah. So we're, we're in agreement on the big picture, on the big, big picture. That's, that's good and, and I guess, you know, I think in your response, you could say, you it's almost probably not fair for us to ask you to confirm this, but you can, you can come back and say, as long as these match up with Jeremy's time of use matrix, or, that's almost okay, sorry, not good enough to do that on the fly. That's, that's, that's a fact so great, and, and, or, you know, for the, for the target fat, the the workshop and lab areas that will continue to review and look at it. Let's, let's look at some of the biggest equipment in there, see how frequently it will be used. And we can make, we can make a good engineering decision there.
+
+Speaker 3  07:38
+So, yeah, there's specific equipment you're needing insight on operation. We can definitely look into that too,
+
+Speaker 1  07:45
+if you provide a list, yeah, let's we'll identify the ones that are the move the needle, the largest ones, and ask more specific questions about those.
+
+Speaker 3  08:01
+Other than that, like I said, I think we plan on having this back to you tomorrow. I think certain things are not going to get clear, because we don't have a better understanding ourselves on our end, but we'll try our best going through this again, because I believe there's another item on here, and we maybe don't need to spend time on it, but on the shell water line items you guys have, we're working through that, but I don't think we're going to have a yay or nay exactly on all this equipment is good on all this equipment is good on the colder water, and here are the impacts to heat loading, right? I don't think we're gonna have that tomorrow. We'll try our best, but I sent that out and I haven't received comments back yet, so
+
+Speaker 5  08:55
+Okay, yeah, and we can also help facilitate the discussion with the manufacturers, if you all want to loop this in, I imagine ultimately that they're going to need to, we're going to need to get more specific with them at some point. We just want to make sure how this impacts our system. Basically, we want to understand if there's a piece of equipment that's expected to have a larger temperature rise than we're currently designing our system for, we want to be able to assess the impact on The current system design. So even having, like a contact at the manufacturer, the opportunity to kind of call somebody and talk through potential implications would be helpful, just to that we can directionally understand where we stand with some of these larger pieces of equipment. And then this line item above is tracking the pieces of equipment that we currently understand are water cooled. And we just want to make sure that we're providing points of connection where you all need them. I would say these two are the most critical for us, because they impact things down like system design and equipment. I haven't
+
+Speaker 3  10:37
+received a response on this specific cell asking for people to confirm. So we'll get this over to you Friday or tomorrow, I guess.
+
+Speaker 5  10:48
+Okay, great. Do we want to move to the question you all have on the CDA compressors? Sure. I think what exactly is the question here, basically like, what's driving the sizing of that unit?
+
+Speaker 2  11:11
+Yeah, what has for the kind of seminars we have for CDE? I guess, how are we doing? We have, is it just Ada and Litton or
+
+Speaker 5  11:28
+no, it's actually coming from the exhaust rate of the of the units themselves. And I can give me a moment, I think I can pull up that the cut sheet that I'm referencing here should be able to pull that up. But basically, it seems like every unit has roughly 20,000 CFM. I of exhaust, and so we need to make up that air. So that's what's driving the air flow value, the 115 and then the load that we're picking up on that unit is basically, we're just trying to bring that outdoor air to room temperature to make it like neutral to the space. And so in particular, I think In cooling mode, that means we're bringing during our peak cooling condition, that's 95 degrees outdoors, we're bringing that down to 80, but in the winter, when the outdoor temperature is 19, we're trying to get that up to 50, which is a much larger temperature rise, and so that's what's driving some of the load on that unit. That's why that unit is so large. Yeah, I
+
+Speaker 4  12:54
+wanted to chat about that and see if we could get creative. Since when I came across that unit, size 624, amps, pretty considerable electrical load that on my spreadsheet, when I updated it, I actually didn't include that line item to fit within the 10 megawatts. We do have some overhead still available, but the compressors themselves can operate with hotter air, so we might not necessarily need to cool it down before it gets into the building. And then they also can operate with colder air. I thought I saw somewhere down to 40 F, okay.
+
+Speaker 5  13:37
+So, so basically, what will happen, though, if we bring in, let's say we just, we don't condition it at all, and we just bring in 95 degree air. Effectively, the load of that air is going to be seen by the cub unit, which is trying to keep the cub overall at 80. So it's the load will be picked up one way or the other, whether it's by this unit or the cub unit, unless, unless you're open to raising the set point of the cub,
+
+Speaker 4  14:17
+we could a little bit, but probably not too much, or start having issues.
+
+Speaker 5  14:23
+And then right now, in the winter, I'm assuming just 50. I think, I think we're assuming 50 or 55 something like that, in the cup space, the cub storage we have at your higher control criteria that the cub, we're treating as already like a back house mechanical space
+
+Speaker 4  14:43
+there, would we be able to recirculate that air from the heat the compressors?
+
+Speaker 5  14:50
+I don't think that we want to, because I so this information is not available here, but from the research that I've done, I think that the CSM, the air coming out of this unit, I think, is going to be quite hot, like over 100 degrees, potentially hot. So if you recirculate that, that's hotter than outdoor air at that point. So you're you're actually increasing the load on your unit?
+
+Speaker 4  15:21
+Yes, I was thinking about using a some kind of variable damper to pull in some of the waste heat, rejected heat, to eat the incoming air, reduce our heating loads in the winter.
+
+Speaker 5  15:34
+Yeah, yeah. So in the winter, what would be great to do would be to have some kind of like heat recovery coil in the exhaust stream. And I so if we bring that exhaust, instead of just exhausting straight at the LOI, if we bring that back to the unit, we can have a heat recovery coil at the unit that transfers energy between the makeup and the exhaust, and we are looking into unit selections for that right now, because that that would be, that would recover a lot of heat in the winter time in particular. And I don't, I don't think it's really that much more ducting. It just means, instead of ducting straight out to that southern wall, we'd have to, like, manifold these things together and then bring them back up to the unit on the roof. Yeah, but this is also where we would like, ideally to have a contact with the manufacturer just to make sure that they're okay with us, like manifolding all of this together and so that we understand the duck sizing criteria and things like that. Because I do think that they have some there's a certain amount of fan power that these compressors have innately, if we're bringing this exhaust back to the unit, then that will basically be, I think we'll have a return fan in our unit to help help move the air along and get it up to the roof. But it does beg the question. I mean, we're thinking about this now, because we know that this is coming, but this equipment is intended to be installed in phase two. Right, correct. Okay, so, yeah, I think, I think we want to think through the design. The unit will will get installed as part of phase one. So we need to have that properly sized and SPECT but ultimately, I think, like all of this dust work to the units is going to get installed later, we would just drop a main down and bring it to we could bring it to the general area where you plan to install this equipment. But like the terminations to the compressors would be part of phase two, I think, yeah, exactly. All right, so I'm not doing a way of reducing the overall what's driving the fan power right is the overall air flow. I don't see a way of reducing that without changing the sizing of the compressors that you all have selected.
+
+Speaker 4  18:27
+Yeah, I don't know if there are any other thoughts on how we could supply that quantity of air without having this large HVAC unit.
+
+Speaker 5  18:40
+We can, we, we could do like a Lou ver and only use it when the temperature is above a certain when outdoor temperature is above a certain temperature. We just we want to make sure. We want to make sure that we're heating that air before it comes into the space in particular, but that would add some blueberry area, I think that I cut somebody off there. Somebody was going to speak up,
+
+Speaker 6  19:09
+yeah, I was going to say, we've seen some Luber solutions. But sometimes, sometimes it's a question of, because you're, you're basically blowing cold air on the compressors right to to make sure that they don't overheat, right?
+
+Speaker 5  19:26
+And so, yeah, and to Jeremy's point, that cool air doesn't actually need to be that cold, and right now, it's just room neutral air, which is going to be 80 degrees in the summer.
+
+Speaker 6  19:38
+Yeah, have you? So what we've seen also is, are you able to use those louvers to actually cool the rest of the room? I've seen some efficiencies that way, but I've also seen, I've seen Lou verse, But the challenge there, I think, is the ambient air outside during parts of the year, and whether, whether you be able to achieve the cooling that is necessary through a Lou ver system.
+
+Speaker 6  20:09
+We're doing it on a similar build here in Chicago. I may go over to that design team and see whether we have a different solution. Obviously, the environment is different.
+
+Speaker 5  20:22
+Well, actually, I think that would be an interesting case study, because Chicago gets really cold as well. And really what I'm concerned about is like, how do you heat all of that air if you're bringing it in through a looper? There's no nice solution for that, which is why we have a unit. And if we have a unit that's going to do heating, we might as well use it to do cooling as well and get rid of get rid of the
+
+Speaker 1  20:44
+LOI, the old school solution was a really, and I don't know if the energy code even allows for this, but is a gas fired duct induct heater. So you have a louver, a duct, a gas fired heater.
+
+Speaker 5  20:58
+Yeah, it's just, it's a lot, it's a lot of load, and we have a heating plant, and so it feels like inefficiency not to put it all to put the load on the plant,
+
+Speaker 1  21:12
+you're not upsizing the plant any for the load. It's just the air movement that's causing the additional load.
+
+Speaker 5  21:20
+Yeah, we're not upsizing the plant, because the plant size is being driven right now by the cooling load.
+
+Speaker 6  21:29
+Okay, yeah. I mean, send us the installation data sheet and the design. Let me, let me bounce it off a couple of people, because I have a different team that's working on similar thing.
+
+Speaker 5  21:42
+Okay, yeah, that'd be great. I can share this. I mean, I just, I have a very simple spreadsheet here that's summarizing the the exhaust load. I can share that with you, and specific fusion you all can share the latest compressor unit data sheet. I
+
+Speaker 1  22:12
+and then Courtney, did I lose? She's on. The next is Courtney. Jump off, maybe. Oh, that no, there's Cory. You jumped up in to the Cindy Brady position from some other position. You had a question on. We have two. We have two. 600 amp feeds. No, you said four, six.
+
+Speaker 2  22:41
+Yeah. Let me show my screen. This is actually coming from Marty. And as we do, kind of a double thing. For some reason, I thought there was two 600 panels in that room. There are,
+
+Speaker 1  22:55
+there are, okay, there's not four, though, right? Well, it's there are two section panels because of the number of circuit breakers in the 600 amp feed takes two conduits. So it's two 600 amp panels, but the but, but in a single we can get up to, so we have two 600 amp panels we could go to one panel. We we've fed the we've had the sim does room from two services, sort of in an AB configuration. We were told you don't need that AB configuration. So we could, we could go with one panel, 112 100 panel, we'd still have four conduits going through the wall, but we could do that as well.
+
+Speaker 2  23:49
+So I think two questions, I'm not super worried about any configuration. So just clarifying, here we have the LSC and dash on a there are two panels, and each one of those plan on 120, 208, so this combined system here is correct,
+
+Speaker 1  24:15
+yeah. And then we had that the ol which is optional. That's, that is the standby power panel, which is a separate panel that we're bringing to the room. Gotcha.
+
+Speaker 7  24:32
+Okay. So, yeah, go ahead. Oh, sorry. So Susie just, I thought I'd misheard. So, like, one a is just a, like, it's section, but it's one 600 amp panel, and then 1b is, it's two panels, but, like, it's 600 amps in that service, and then 1b is also 600 amps.
+
+Speaker 1  24:59
+Correct, correct. Correct. And I think we were just over 400 AWS, we can just make sure we've got the sizing correct. But I know we're sensitive to cost, but I think because we're we're providing 208 single pole breakers. Each, each receptacle takes up two breakers, you know, two pole spaces. So we fill up panels pretty quickly.
+
+Speaker 2  25:29
+Adam, do you see any so there's total like outside of the oil panel. Between the two panels, we have 2400 amps. CZ, Adam, are we? I have not first?
+
+Unknown Speaker  25:43
+No, we have 12. We have 1200
+
+Unknown Speaker  25:46
+Yeah, that's why I was confirming, yeah, 1200 at 208.
+
+Unknown Speaker  25:49
+Full, yes, Okay, gotcha
+
+Speaker 7  25:54
+so, so yeah, like, even though it's a double, it's more, just because it's a space thing with the breakers. Not like that's not like two panels next to each other. It's essentially one panel, right?
+
+Speaker 2  26:08
+It's one panel. I think what Marty is saying as well as we've got to two lines coming up today. So from Marty's perspective, what kind of ways are this easy to spec for the to the line. Is it? Why buying a 208 at 600 or
+
+Speaker 7  26:34
+Marty would need to power filters if we go with two 600 amp panels? Because I think the biggest they do are like, I think they have 600 amp filters on their side
+
+Speaker 2  26:50
+At what voltage does. If it's 600 208 so each one of these lines, or I found their attitude would be 208 at September.
+
+Speaker 1  27:03
+So essentially, it's 300 Yeah. So each line, each line, it's a parallel feed that gives us the 600 amps. So each line is is 300 amps. Each conduit is carrying 300 amps. Thank you for that. No problem. I just
+
+Speaker 7  27:30
+so Cory, then Marty would need four sets. Then it sounds like of the 300 amp filters.
+
+Speaker 2  27:38
+Yeah, is what it sounds like. I'm what it sounds like. That makes sense to each one of these.
+
+Speaker 1  27:51
+Yeah. So you can see that we have to make 600 amps. It's two sets of three inch conduit. With each conduit has four, 350, MCM conductors inside, plus the ground.
+
+Speaker 7  28:10
+Courtney. I can check the, I mean, you're going to talk to Marty, but forget how many filters he called out, but I'll check on it.
+
+Speaker 2  28:21
+Okay? Yeah, I'm gonna, if he sent us an email to his responding to some of his questions, that was the other thing I do actually chat with this group about, is just to review the comments that I said the body and Nick for being the Al page. So this is
+
+Speaker 2  29:02
+your suggestion. Bulkhead was actually Pacific fusion scope, something for us to coordinate with ETs would put on the asteroid. Smells Another things that we took through sketch to help pull together a proposal for ETS. I think we're all aware that this structural team is actually going to extend the mezzanine above so we can attach the Al threading directly to this expenditure. After they brought this up in a previous meeting I don't have in the first three years, sometimes watching it from Marty, I imagine supply returnations For now, I don't know if there's a good placeholder that that you can make an assumption about, like specific i Okay,
+
+Speaker 5  30:05
+yeah, thank you for flagging that we can use a placeholder for now. We can also maybe, depending on what that value ends up being, we can maybe potentially oversize that trunk a little bit to mitigate the impact.
+
+Speaker 2  30:22
+Okay, if you do end up oversight of it, let us know, because, right, they have to fit Adam. Actually showed it to the ED. I'm not familiar with grave guards, but it's basically looks like it's an insert Adam. Feel free to jump in and describe it. You probably can better than I can, but like this, yeah, it almost
+
+Speaker 7  30:43
+looks like an air filter, but I'm hoping that linger will be able to, like, provide dimension so that you guys can see what that pressure drop would be. But they have, like, different versions, but it basically sits in the path of the air flow.
+
+Speaker 5  31:02
+Yeah, okay, yeah. It would be good to understand if there's any, like, maximum size, I guess, penetration, that they can effectively protect,
+
+Speaker 2  31:17
+yeah, but I'll go ahead and ask that question. That's if you do end up over salads in the main deck, we will, we will just move to get a bigger society name card.
+
+Speaker 2  31:41
+I don't know if you would do something like static breathing and create a bigger comment in the room I'm not so much for or were you talking about oversizing the plastic?
+
+Speaker 5  32:00
+Because, go ahead. Yeah, sorry, Courtney, I'm like catching 75% of what you're saying. But my thought was, if for whatever reason, the pressure drop is unreasonable, I'm not too worried about it, because it's a short run to the unit. But if it was very large, what we could do is maybe make the we don't have it's a compact space. We really don't have a lot of room to play with. But we could either make the duct whiter or a little bit taller, and what that would do is reduce the velocity of the air flowing through the duct, and that should reduce the pressure drop as well, understanding that you would just have a bigger waveguard in there.
+
+Speaker 7  32:42
+I sent Cory. She can kind of forward it along, but I found the data sheet on there, on their wave guides for the air filters, and it shows pressure drop, typical pressure drops in the data sheet.
+
+Speaker 5  32:56
+Okay, yeah, excellent. If you could email that to me, or even just like, drop a screenshot in the chat I can save that.
+
+Speaker 5  33:17
+Susie, were you going to add to that?
+
+Speaker 1  33:21
+I was, I was just gonna try to translate the Courtney for you, but you heard. You understand.
+
+Speaker 2  33:32
+Thank you, Astrid and Susie. Hopefully you guys understand what I'm saying. Right now, I would like to, if you can't maybe I'm going to hop on my phone.
+
+Speaker 1  33:43
+No, we can understand. Yeah, it's, it's otter.
+
+Speaker 2  33:49
+I would like to go. I plan on setting the beat me agenda by end of day Friday, end of day Monday and and sending that out to the group in preparation for a very productive discussion on the night. So I think everybody has access to these spreadsheets that I shared yesterday. Pull that up. Did you guys have any access issues? I know there was a few.
+
+Ryan Hankins  34:30
+No Courtney, we're good now, and I've actually been in there.
+
+Speaker 2  34:36
+Great, great. Okay, perfect. So meyr's quest team wanting to get so basically passing this effort, this initiative, with trying to find $10 million in reduction across the facility. And so right now, what we're doing is just spit following ideas based on what you guys think we can do to pull cost out of this project while still maintaining scope. I wanted to pick your guys's brain about what what you thought we could do to sharpen our pencils and have that discussion
+
+Speaker 1  35:21
+that Courtney, we were filling our stuff out for by noon tomorrow. That's sort of what we're working on. But we can, we can talk through some of our thinking and and we can get some, get some feedback. I think we were all planning on spending some time focusing and pulling that together by for tomorrow at noon. So we're a little, maybe a little flat footed right now, but we can come up with some items.
+
+Speaker 2  35:52
+Yeah, I don't want to put you guys on the spot. If this is a hey, let us internally discuss, and we'll make sure, and thereby, Tom and totally fine. I just wanted to give deserves an announcement.
+
+Speaker 1  36:09
+No we can. And we saw, we saw some of the things that were Rebecca sent through some some things that Clayco had put together more general terms.
+
+Speaker 8  36:21
+I'm so sorry. I didn't. I mean, Cory didn't tell me to do that, but I did take some screenshots from Clayco proposal to let people just know. These are kind of some of the original thoughts, just to get there so they could start responding.
+
+Speaker 1  36:36
+That's helpful. And you know, we've got some things, I don't know. We've got a number of things that we can include in here. I think some of them, you know, sometimes reductions on reductions on MVP side, have reductions on mechanical side, sometimes have impacts on electrical so we were going to come together and put it, put a combined list down here. But if you want us to start, start picking up some ideas, we can give you some right now.
+
+Speaker 2  37:14
+Yeah, I mean, we've got 15 minutes up to you guys happy to give you the time to act or discuss internally, or if you've got them, kind of on the tip of your tongue, also happy to take it down my way up to Susie.
+
+Speaker 1  37:31
+You know, some of ours are smaller, but, you know, they add up. But we can, we can talk about, you know, some of the materials we've got, some of them are program. We've got rigid steel conduit and the as a requirement for the r, d space. I'm wondering if we can move the needle on some of that, the grounding, the grounding system may not be that big of a cost item overall, but wondering if we could do some ground treatment that would, you know, alleviate the 30 foot ground rods. If there was anything inexpensive we could do from a treatment standpoint, that would have killed two birds with one stone and help the grounding system, we're going to be looking well, maybe a different style grounding, whether it has a chemical, chemical type of grounding system or a treatment to increase the increase the conductivity of the soil, and if there's any benefit there,
+
+Speaker 2  38:48
+yeah, Dan Thorn. I don't know much about this, but Dan Jon glasses and mentioned that there was, there was something called self lubricating brown drive, and I imagine that's all intended to increase the conductivity. The overall cost of this rounding system, based off the previous price where it was more dense, I think we made it out previously Sue is anywhere from six to $800,000
+
+Speaker 1  39:17
+that's that's a lot for grounding systems. Yeah. But you know, that's a lot of our granting system. It's a close to a factor of 10 more than we see on the normal building. But yeah. But so there is some money there. We'll start to add some of our items up here. I don't want to just throw out onesie twosie items until we can, you know, together there.
+
+Ryan Hankins  39:45
+You know, Cory, one thing I was thinking about was, sometimes we get on these types of projects, we globally look at specifications for material types. And I think Susie, you were kind of alluding to that a little bit. Is there a way to separate the two areas, from a specification standpoint, even the cub like, Can we do a different spec? Because it doesn't necessarily need to be to the same stature as as the r, d space. And I think it's just a global comment. But I think from electrical, mechanical insulation, you know, whatever we think we want to talk about, I think it applies to everything.
+
+Speaker 1  40:23
+Ryan, yeah, I think we intended to, very much so, because I wasn't going to require rigid steel in spaces, but didn't need them. So I think it's a good point, and I think we should think about, think about how we can do that effectively. On the MEP side,
+
+Speaker 5  40:51
+yeah, I think mechanically, there's also a couple of things on the hydronic side that I don't know if they recount as property ease because we're exploring them as a part of our regular design process. But I'm not sure what Clayco Originally I don't know if he's done any any pricing exercises, or if you've just maybe reviewed our prior sets to get a general sense of the scope, but we're planning on eliminating that fluid cooler system, if we're able to pend in confirmation from the manufacturers that all of your equipment will be happier, or will be happy enough with the chill the water temperatures. So that would eliminate fluid cooler associated heat exchanger, pumps, additional piping. The plant would get a little bit bigger and the pipe sizes would I'm actually not sure if we're triggering a pipe size change there, but it should be overall cost savings. And the other thing that we are exploring is, right now we have primary secondary loops, and basically our what that means is we have, like an outdoor glycol loop for free protection, and then we have a heat exchanger, and then we have an indoor loop that's water which is more efficient at transferring energy at your quals. We're considering potentially getting rid of that heat exchanger and making the entire blue glide call, because we're kind of thinking through potential operations that are expected for the r&d space. The fact that there are several large rolling doors leading into that space means that it might be challenging to control temperature in that space. We also have our air hailing units up on the roof. So previously, we were planning on specking out like a larger air hailing unit enclosure to allow the piping connections to come up within the unit without without glycol or freeze protection. So that would simplify that detail, because we could just run glycol piping up to the roof. So I think that that is something we're very much exploring as a part of design, but I think it's effectively a ve it eliminates those large heat exchangers i years and and a set of pumps.
+
+Speaker 6  43:25
+Hey, Ryan, did Ryan and Erica the Do you have an inside I mean, I guess holistically, like you start removing pumps and and piping, even if you have to increase pipe size, that's that's going to be reduction cost, pipe size increases cost, but not as much as pumps and removing heat exchangers and systems. Yeah.
+
+Ryan Hankins  43:48
+And I mean, that's, mean, the fact that we're talking about this is great, because up there, I had an item earmarked towards the top of the list, that's, there's a potential to save roughly, you know, eight and a half million dollars, or something like that. I forget what the actual number is, but basically looking at the holistic mechanical hydronic system, as well as some of the chilled water, and just seeing how we can reduce it so that would be, that would be a step in the right direction towards achieving some pretty decent savings. Yeah, we and the reason why that item and I probably need to change the title, but it says gas fired, RT use, is because when we were looking at the drawings, it looked like those. It looked like the cooling system. Holistically, was mainly focused around the RT use, but if it's if it's serving more, we just couldn't see that. And so we could look at changing the label of that item too.
+
+Speaker 5  44:56
+Yeah. Originally our design was RT use. RT use px for cooling and gas fired, but basically, as we started understanding the load coming from specific fusion equipment and the water cooling requirements, we realized that we would effectively need a chill water system to serve that equipment, at which point we might as well just have that also provide the cooling capacity for the building itself and allow you to spec, you know, slightly cheaper air hailing units with just chills water quals. So that was the evolution of the design. You know, that said, if, if you think there's some savings there, we can work with you to get sizing to price that, but we would want to, you know, make sure that we accurately price the you would probably still have a choice water system. It would just be smaller, and then you'd have more expensive art to use, so you need to count up all those pluses and minuses.
+
+Ryan Hankins  46:09
+Yeah, and I think you're pulling on a good thread between removing the fluid coolers on the roof and removing some of the heat exchanger pumps, the interconnecting piping. And then, if you have two loops, I think we're pulling on a good thread. I think we just got to see where it goes, and if there's additional opportunities along the way, let's, let's look at those as well.
+
+Speaker 1  46:35
+Yeah, definitely. We got six more minutes left, and we will. We also want to talk about, you know, the electrical equipment and the selection of what we're right now. We right now. We've got four pad meta transformers that are feeding four or 5000 amp services. And if you know, if dry type transform, we don't have the indoor space for dry type transformers. But if there's another solution, from a cost standpoint, we were, we were picking what we thought were the most cost effective to go with, but I think we can. We'd be happy to get your input.
+
+Ryan Hankins  47:25
+Yeah, and I mean, that was one of the things I flagged in our meeting the other day with Cory and Paige Stan tech. But I mean, under, if we walk through the one line, understand some of the redundancy requirements needed at each level, we can start kind of like from our side, reverse engineering and seeing what equipment is available and what's cheaper, and start to feed you guys cost information fairly quickly. But in order to do that, I think, I think it's a good use of time in the meeting next week, but start to understand what those options look like, so we can go hit the market and get you guys quick feedback.
+
+Speaker 1  48:05
+That sounds good. The system is not set up for redundancy. Really. It's based on load. There is, there's, there is some, some availability for redundancy when not all equipment is running. We've got the main time, main breakers for that, for maintenance, but you have to reduce the load to do that. So we'll walk through the one line diagram and and definitely, if there's areas that we can streamline, we will, we will happily do so absolutely.
+
+Ryan Hankins  48:44
+Yeah, the one, the one thing we talked about was maybe looking at reducing the the voltage immediately down to 480 versus having those four separate transformers. I think it's something worth, worth exploring. On our side, if it's something that the design team is open to looking at, or if we think it's a
+
+Speaker 1  49:03
+good idea that the utility won't give us 480 we're too big of a load. We originally started with a 424, 80 volt services from the utility, but they won't they, I think coryne, do you remember what their load limitation was? I think it was, it's pretty it was pretty low. So we had to take power from PNM at 12 KV. So that's where we got that's why we have the four. That's why we have the step down transformers. Makes sense. All
+
+Speaker 1  49:44
+right, well, Courtney will populate that this afternoon
+
+Unknown Speaker  49:50
+and tomorrow. All right. Nice meeting you guys. Welcome to the team. We're really excited that you're on board.
+
+Ryan Hankins  50:05
+Yeah, one thing that I'm offering is just and I put it in the structural email I sent earlier. But mean, we're here to help. So as you guys come to a crossroads and decision making on you know, cost versus different options you guys are looking at like, just pick up the phone and feel free to give me a call. We'll be happy to run things down and support you guys as needed in addition to these meetings.
+
+Speaker 1  50:28
+So thank you. That's gonna be very helpful. Appreciate that. All right. Thanks, all and Adam sent the information, we'll pull that down. Thank you for the static pressure for the filters.
+
+Speaker 5  50:50
+Yeah. One quick note, we are running at a higher velocity than the maximum velocity shown in that table, so we'll either need extended data, or we'll need to understand whether there's some kind of velocity limit to how fast it can go in that name, because we've sized it as per standard duct sizing criteria. But if we need to be below certain threshold for the shielding, that will increase the size of the duct a bit.
+
+Speaker 1  51:24
+Pastor, what are you supplying it? 1000 feet.
+
+Unknown Speaker  51:29
+We're at 1500 in our
+
+Unknown Speaker  51:30
+main Okay, okay,
+
+Unknown Speaker  51:37
+which is where we're crossing the threshold of the CM.
+
+Ryan Hankins  51:41
+Das, Cam, basically done.
+
+Speaker 1  51:43
+Okay? Cassie, who's gonna reach out to ETF language? Should we do that?
+
+Speaker 2  51:53
+I'm sending a follow up email now where I've asked for that information. Note updates here regarding the wave card attributes, great, thanks. I'm asking them, but yeah, feel free to leave it back up.
+
+Unknown Speaker  52:10
+Thanks, Greg. Thank you. Bye. Now. Thank you, everyone. Thanks, Jim. Thank.
+
+
+Transcribed by https://otter.ai

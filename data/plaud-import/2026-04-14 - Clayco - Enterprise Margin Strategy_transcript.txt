@@ -1,0 +1,641 @@
+Unknown Speaker  00:03
+All right, everybody say
+
+Speaker 1  00:16
+we made up for the 15 minute late stars. Yeah. So we just talked about better people, faster, hiring magic writers, more of them. Now we want to talk about, how do we channel all of the resources in that town and focus on driving enterprises? So we've got a couple segments. We're going to work through enterprise margin education and initiatives, making sure that our team fully understand what it means to be one of enterprise we're going to talk about, how do we make efficiency improvements through the workflow and subcontract process. We're going to talk about some key KPIs on the Financial Planning and Analysis section. We'll walk through change orders and efficiency and marginal discussion. So going to hand it over to the first group to walk us through the first topic for this segment.
+
+Speaker 2  01:20
+Good morning. We are the task force for enterprise margins, education and initiatives, introductions. I'm Andrew Howe, Director of Operations in LJC,
+
+Unknown Speaker  01:31
+Ryan Carson, Senior Director of cost management, Clayco.
+
+Speaker 2  01:39
+Our goal is to reinvigorate the enterprise mindset to not only measure success by how many companies are included on a project, but shift the focus to a shared responsibility of protecting the enterprise margin while keeping the fees inside the enterprise wherever possible. So we took a three prong approach to this. The first is education and onboarding. So Drew had a good question a little bit ago. We are working with the new hire orientation team and the digital marketing team to build on their existing content, incorporate how we are working together companies working together to drive better outcomes. And also, we're developing a video that's going to highlight this matrix of services that we have here, as well as highlight some of the projects where we're having success, collaborate, collaborating across enterprise for higher profit. The second is we're pushing a message of early collaboration, bringing in enterprise partners at the beginning of a pursuit to align on the responsibilities, the roles and the scope, so that we set the project up for success, so the market leaders that understand this matrix of services will be able to leverage the integrated enterprise as a competitive advantage. And then the last one here, we needed a way to reinforce accountability. So we've updated the risk reserve summary to list the enterprise profit alongside the Clayco profit, to shift the focus from individual company performance to the enterprise overall performance, so that will allow us to consistently track results and reinforce the right behaviors across all the projects.
+
+Speaker 3  03:19
+So yeah, I think an important thing here is, is really creating a mindset of the enterprise, which has always been there, right? But Tom that he's point earlier that he showed in that example. And we'll show some as well. You know, there's more this. If you were a Clayco PM, or project director. You were kind of working towards your 4% fee, or your 5% fee, whatever he was, or if it was a North Point job, as far as somewhat being a successful project leader, the new mindset here, what we really want people to think is that that project director, whoever that job, is responsible for the enterprise project as well, right? They're engaged. They understand. They have visibility into it. So getting into some of the new tracking, reporting stuff that we've been working with Brian, Steve on as well, is really, you know what I start at the bottom and kind of flip
+
+Ryan Abbott  04:17
+up, starting, starting
+
+Speaker 3  04:19
+from the go, no go, right? That we're all doing now, when we look at our project and really thinking about that, setting the expectation for the enterprise right from the very beginning, you know, from the sales and executive teams to look at that, where can we engage CSI, where can we engage CDC, Sei, right? What? What can this project look like, from the very conceptual, you know, point of it, from getting an RFP or going pursuing a client, and then sitting down and going through our executive reviews, which we've all kind of gotten accustomed to through precon everything as well, right? But again, focusing more on, okay, what did we say in the go? No go. Now, what are we actually seeing in the executive review, right? There being a little bit of accountability there. Did we just make all this up on the go?
+
+Ryan Abbott  04:59
+No go. Well, you're going to get caught kind of in
+
+Speaker 3  05:01
+that executive review, right? So getting people in that mindset of starting to think, Okay, we need to pull all this thinking to the left, not when you're going to buy out the job, right? I mean, so then getting into your book enterprise, so we sit down, do the profit plan and everything, and bring operations into the cost team, into it again, having those benchmarks prior go, no, go to the executive review, and what we kind of plan on for the jobs, and then what we're booking, you know, as the actual fee for the enterprise going into the job. And the plan is set up and being handed over to the operations team to then go execute, right? So again, so there's buy in from the operation team. They understand what's been sold, what's going back to, like Andrew was saying, engaging people like Barclay and his team and Jason Ridgeway and the field team, or, you know, the MEP procurement team within CDC, early on in the plan, right from the from the inception point of getting, trying to get the job. But then some of the tools that Brian go over the next slide here are really getting into, you know, the updating, you know the risk reserve, you know the monthly PCL meetings, and having some visibility into that. So that's been a little tough in the past. Again, Anthony mentioned this earlier, is we might have talked about at the beginning of the job, but then it kind of turned into a black hole for the project. You never really knew how CSI was tracking or CDC was tracking your LJC was tracking. So we ended up with a great enterprise, maybe approach at the beginning, but then very siloed for the project. We're trying to break down all those barriers and really focus on one team, right? So we've been through the leadership thing we started doing every other Monday. One team approach was our first topic, because that's really what makes the enterprise successful when we look at it as one team. What? It's not us first dill, it's not CSI. Is just a sub to us or a partner, and how are we
+
+Unknown Speaker  06:52
+utilizing that? Right? So I'll
+
+Speaker 3  06:55
+let Ryan speak for the next slide we get into some of the new tracking tools
+
+Speaker 4  06:58
+to Phil shows. Yes, thank you. So a lot of you are very familiar with this view. This is the, basically the Clayco view that we're looking at currently. So once that project is one and we're nearing the construction phase, we're going to begin tracking the project finances on our risk reserve sheet, and then we are going to be reporting on on these on a monthly basis, and then reporting back to the business and the PCLs on monthly basis as well. So getting ahead of myself here. But what we want to do now is click the Clayco forecasting process is not going to change. We're still going to be looking at the active projects once a month. We're still going to be looking at the best case, most likely worst case scenario. We're going to be focused on the important things to us, like what our anticipated most likely be is variance from previous assumed recovery for change orders that we talk about a lot, and our over under Billing. But what we start to to look at going forward is the enterprise fee as well, and incorporate that into our review process. So if we go to the next slide, what you can see here is we are going to introduce a couple new things that we're going to look at. So we talked about the Fiat point of sale. So we've got a Clayco Fiat point of sale, and we've also got a most likely, or, I'm sorry, enterprise be at the point of sale as well. So as Nathan mentioned, we're going to work with the the enterprise companies, and we're going to also get the report reporting back from the enterprise company and what their most likely fee scenarios are. So basically, what we want to promote is our project teams have full transparency into what the entire enterprise will be making and promising back to the Keiko enterprise. So you can see we've got our Fiat point of sale. Now we're also going to be tracking that most likely likely variance from Fiat point of sale, and we'll have some some notes along the way to explain some of those major variances as we look at those throughout the project. Behind the scenes, we'll have all the details as well. So we're going to bucketize that profit. So we're going to understand what the most likely profit should be for each company, or promise should be for each company, as well as what they're tracking to. And on the Clayco side, we're going to track things in the buckets as well. So what our base fee is, what our fee on rates are, what our fee on SDI insurance, etc, are as well. So we'll have all those details behind the scenes that we can access at any time to really dig into the details and understand what went right and what did not go to plan for the project along the way. So with that, I'll turn it over to Joel for some real life examples. Yeah. So these are
+
+Speaker 5  09:38
+examples of closed projects, kind of from the different business units we have. I mean, you can see, since I've been here in the last 11 years, it's always been taught just to have the compounding fee, right? That's how we make our business, and that's how, ultimately, we succeed as an organization. So you can see, like in the industrial group, you have a 5.7% Clayco fee, but then you add in, you know, another 4% that's real money that comes into place to compute the same size, you know, slightly less margins on this one project. And then, if you look at like residential, residential is a good example. They use a lot of the services. Sometimes the jobs can be tough. So the services, ultimately are the ones providing the ultimate fee. Yeah, that's right, that's not my design, but, but, but what it does show us together, you know that we can, you know we can have be successful. Ready? Keep the LJC working to keep us in the market. Ben Tom does a great job in those market sectors, and we're able to continue to grow. And then, you know, kind of in the life sciences group, same thing. It's just as these compounding fees, you know, it helps the overall project. And this is kind of, this is, again, this is the past jobs, like we said, this is where we want to go, right? This is ultimately the approach that the enterprise is looking for. This is galaxy. And these are actuals and a best case scenario. So you can see, on a $1 billion job, we currently have 11% fee, right? So that's $103 million so in this one job alone, that's three times the fee of the four jobs that we just looked at in the last second, right? And a lot of times we think Clayco is bringing in the fee, and the different subsidiaries are just kind of there for support. But if you look, Sei is over one and a half times the amount of fee that's bringing into that job. And so together, as we do, you know, as we compound these, and you continue to work through the fee structure, you know, this is the target, this is the model, right? This is the accountability for the go, no go. And what we want to do is we're tracking the most likely situation. We'll have a best case and we'll have a worst case, but we want to create accountability and transparency amongst the entire enterprise to be able to perform for the fee and maximize our margins and our value. So you know, as you go from the go, no go process, and continue to work your way through, there is going to be accountability steps from amongst the organization, like if you think you are trying to sell the job, and you tell Anthony and Ryan You're going to have CSI for 15% you're going to have LJC for for 20% or their high markup fees. But then when you need to go sell the job at the executed rate, you guys cut those. There's going to be target points point to that. And then when we get to the operation side and things get contracted, we're going to have the we're going to add that meeting, the first cost report, meeting that takes it from sales and operations to make sure there's transparency in what we're doing, to allow for the operations team to be able to perform and and be able to sell and make the money that was originally sold. Because, as you've heard, our resources, our people, are the hard part. So if we're trying to sell jobs, we'd say it's going to be a 10% fee, but then we go and then we cut CSI number, and then we cut LJC number, and it ends up being, just say, a 5% fee. We have to put our staff there. Different decisions would have been made at the time. So we're creating an accountability metrics to be able to do it next steps. So I think is as part of the part of the cost reviews, the PCLs, we already have, you've already seen an enterprise fee value there that's already started getting some conversation to it. We're working with the finance group Bret and his team to try to get this information into a, you know, into the system to make it seamless. Right now, Ryan Kelsey did great job deploying all the go no goes to be able to mock up what we were doing and kind of give us the examples we had to work through it. So we're trying to automate that, and that way it's easy for all teams.
+
+Unknown Speaker  13:49
+We're going to start
+
+Speaker 5  13:50
+holding that meeting to point of sale to operations. That's going to be something you'll start seeing as the first cost review meeting, probably roll it into the structure of the contract that we currently have, and then, as needed, when we report on a monthly basis, if we see the most likely dropping, it's going to give all our leadership opportunities to target. Where do we have if CSI all of a sudden reports a million dollars less? How did that happen? Why did that happen? Get the project leadership group together to be able to have those conversations.
+
+Speaker 3  14:25
+And I think even more, you know, again, obviously help with the problems that come up, but also open our eyes to the opportunities that come up. Right sometimes, LJC gets left out of things when they change orders and additional design work. So again, putting that, that enterprise mindset at the forefront of our project team so that they're not forgetting to talk with CSI, talk with CDC, talk with LJC, if there's maybe an owner change happening and it keeps that profit.
+
+Speaker 1  14:54
+Questions? Yeah, great job, guys. We're going to open up to questions just before we do that. A couple points, I think, just to amplify from what the team just walked through. Obviously, all these topics today are very important. This one is very important. These are the types of things that move companies from good to great, and we want to be in that great space. If you could go back a couple slides, you know, one more, actually, one two more right there. So, you know, this process and driving that visibility and transparency, it's not to, like, get anybody, it's not to, yes, it's the whole accountability and drive accountability, but it's really driving discipline and how we make decisions as a company, we do have severely constrained resources. That gap. We're going to Mike and I talked we're going to put a visual just really so everybody can see the magnitude of the staffing constraints and when we live in a world where opportunities right now are in abundance for us, so when we do say yes to opportunities, we need to make sure that we're saying that we're saying yes for the right reason, because it's driving that enterprise value. We're back to the opening remarks, the decisions that we make, are they driving the best value for the enterprise? This is really to help facilitate that. There's one thing that's not on here, but that e to be for the enterprise is also now populated in our PCL sales sheets too, because we have to make those decisions and put plans together at the end of year for the next year. So October, November, time frame this room takes part in building the business plan for the different market sectors. Well, as those plans get executed and new opportunities come in, we need to make sure we're looking at each individual opportunity and its value to the enterprise to determine, does that go into the plan, or does it not? How do we all as a company? One, understand this and make sure the teams that are operating and executing the build understand it. But two, everybody's aligned with that philosophy that given this market, then not just this market, just, you know, operating a business to drive great returns for the enterprise means we have to say yes to the right opportunities and no sometimes the opportunities that aren't the best fit for the entire organization. So with that, we're going to take a few minutes just to do some in session questions. So if anybody has questions in this specific topic,
+
+Speaker 6  17:46
+this is a great kind of quantitative analysis. Are we all? I have two parts. One, yes. We also have kind of, like the political evaluation in the go, no, go to like, let's say it's a whatever point 6% fee or whatever it makes sense to percent. Be aware, it makes sense, because we want to control that site. No one's easy coming. You know when we're coming now, we want stability in that region. Is that also a qualitative aspect?
+
+Anthony Johnson  18:13
+Yeah, think back to our earlier definition of what this is, enterprise market. Think back to our earlier definition of enterprise value. It's the margin, it's the people, it's
+
+Unknown Speaker  18:24
+it's all those things.
+
+Unknown Speaker  18:30
+Yep, we can come back other questions.
+
+Unknown Speaker  18:32
+Kurt, yeah, is there any visibility to the project teams to that?
+
+Speaker 7  18:36
+PCL, so project managers, the engineers, do they see the financials?
+
+Speaker 5  18:42
+Not really. Yes, we started showing so some some projects have started showing meta. We did an enterprise profit plan, similar to what you saw in the galaxy. We showed the team right that way they have visibility into LJC, CSI SCI to be able to do that. I'd say the project team and project leaders have that ability to look at it and do it, and then it's as we disseminate it down to the team, we have the ability to
+
+Speaker 8  19:10
+show that. And one of the topics tomorrow will be about sharing the big picture from the pillars with different parts of the team, so at world tours or monthly meetings sharing at a high level of cost for the superintendents to have some
+
+Unknown Speaker  19:27
+visibility, and I think that
+
+Speaker 9  19:28
+it would be really powerful for these guys to be able to look at that and look at the
+
+Speaker 10  19:32
+opportunities and some of the risks to that eventual fee, and understand Why
+
+Unknown Speaker  19:39
+it's teaching people just
+
+Unknown Speaker  19:41
+to sit for business. Yeah, ultimate
+
+Unknown Speaker  19:43
+goal is the project
+
+Unknown Speaker  19:44
+team out running a job understands that like,
+
+Speaker 5  19:52
+yeah, and don't just go after we had problems, as they were, we missed it for a little buying schedule. It's still in the back of your head. Hey, is this really going to impact us? It? Does it impact this number, or is it just politics of, you know, a subcontractor not performing or something? How do we make it work?
+
+Speaker 6  20:07
+I remember my question. So the this was obviously a huge project for us, with this allocation of scope two, did you guys like, let's say galaxy was new today. We had the GO TO GO meeting coming up. How did you guys know that the owner was going to approve SCI for that? So
+
+Speaker 11  20:30
+during the go down, pre negotiated, so maximizing self performance part of our strategy from day one. So that was probably one of the
+
+Unknown Speaker  20:38
+first terms we outlined us to sit against. So that has to be very clearly stated.
+
+Speaker 6  20:45
+We can't just assume, like, oh, we think, I mean, usually we can obviously approve CSI synthesis in any market, but for a little bit, I don't know what that scope, half a
+
+Speaker 11  20:59
+billion dollars, yeah, we have to go through a similar market analysis, whether it's historical price data or, like, getting a competitive number. Again, that's what's kind of outlined in the prime agreement language.
+
+Conor Tighe  21:11
+Yeah, we've, we've, we've seen success like Rivian lamart like to where we're writing in the deals that we're able to use self performance, as long as we can show the market competition at the subject level, right? That's just another approach, getting it into the deal, because the best way is to get it into the sale, into the contract. We got a second bite of the apple at the GMP. But it's, it's to really take it off the street, put it in the put it in the deal and not mark it. You know, Sei against multiple other mechanical subcontractor bidders. I think the key.
+
+Speaker 12  21:51
+Well, talking from an sei perspective, sometimes, if we're able to get engaged before they go to go, approval is key, because someone could be thinking that there is $20 million opportunity for sei on this project, but without actually talking to Sei, getting sei engaged, that 20 million could have been a 50 or could have been just $2 million opportunity. So that's a great
+
+Speaker 1  22:14
+point, because we do, from time to time, senior executive use we'll have you talk to Sei when we talk to CSI, sometimes that answer is no, and we need to make sure we're driving those conversations right at the beginning, during that go no go process, so that we can formulate the best, the best idea of what this project is
+
+Unknown Speaker  22:35
+going to look like. In that case, one like we pushed them to emoz
+
+Speaker 13  22:39
+or electrical houses, which actually I was able to do because
+
+Unknown Speaker  22:43
+of how early we were involved in the process.
+
+Speaker 12  22:45
+And it's not just the financial it's the value proposition, because if we get engaged early on, then we can bring stability, value engineering that could bring that point that you were making. How do we position sei or subsidiaries to have a key differentiator approach to do any of that, unless we're
+
+Speaker 1  23:02
+driving value to the customer. I want to just maybe link this also because you heard Bob talk about his three funding principles, the
+
+Speaker 1  23:20
+best and brightest, following gold in the middle, and then being selective about where you apply your craft, really, this enterprise value, this key component of that is line with being selective
+
+Unknown Speaker  23:34
+about where we apply aircraft.
+
+Speaker 1  23:36
+There's more to it. There's a huge qualitative aspect of it. Do we enjoy the experience? Does the customer pay on time? Are they a good, credit worthy customer? You know, how do our teams live and survive through we don't want to battle every day, right? We also want to create great opportunities for our teams to grow those and a lot of others are part of that enterprise value, but it definitely aligns very well with being selected. This is really what this whole concept is about here, making sure we're doing that other questions. If not, we'll move on to next. I think
+
+Speaker 14  24:13
+just just one thing, speaking to the galaxy project, those numbers could actually like it was very eye opening, going into that project, and then having Anthony call me and say, hey, the visions got to be on the enterprise. And I know Jason and I have had conversations. I've had conversations with others, but we've got to be very intentional with this project to make sure we don't miss the lessons learned. And that's making sure we're doing post mortems, we actually learn because, because you actually do when you start talking about the owner. Because a lot of you folks know, like we didn't go after this next phase of galaxy, because of where we're at with probe, we were not really able to do that. We had to make the business decision staff came up in El Paso. So when that happened, you see a shift in the approval of change orders, and that shift of, hey, you brought these guys on board, and you get a higher scrutiny towards our our enterprise. So being strategic in the way that you present things, and the way that you sell things, you know, is not just at the front end, but it's all the way through the whole duration of the job. But we've got to be very intentional about making sure we learn from the lessons learned on Galaxy and put those on our
+
+Speaker 15  25:28
+future project. I'll just piggyback on that to that conversation of lessons learned. It's not it's not just the deals, like if you go two slides back, I love seeing the check, or maybe a couple more, where the check boxes are, where we engage, the self perform teams is even to the point what was just kind of said the construction, it's the approach, design, build, design, assist. There's a ton of subject manager experts that we're just not they're down the hall, and we're not utilizing them to go after the deal and how we can structure it, and that way there's an education to the enterprise team so they know how to pitch it that app value add, but even more so during the job, because that's right, that's when it's dynamic and the project going so when a change condition comes up, is invite those people to the table to be a partner to the solution. Like, how do we strategically go after this and package it to the client? Because once you go to the client, you can't recreate your story. And so how do we partner together doing those change conditions? Because it's one thing to do with this here. Absolutely, it's a whole nother thing. When change orders come up, how are we putting ourselves together to position as partners? And I think that that's a mind shift that has to continue to be
+
+Anthony Johnson  26:38
+focused on more. I just want to add one thing to the underscore the point you were making there, Adam, I want to make sure everybody heard it. You saw the margin enterprise margin that we've been working towards on Galaxy, incredibly successful job. No different on stack, incredibly high margin there too. But it's not all about the bottom right hand corner. What it is about is the right projects, and on those right projects, then, you know, maximizing our value proposition, maximizing value we can therefore create. We have had the discipline as a company to say, even though the margin is actually higher on the Galaxy projects, higher on the stack projects, we've been intentional about saying, we're really going to do probably 90% direct for end users and 10% for developers, even though, even though the margin is higher on the developers it, you know, so that's and that's because, you know, when you think about, like to Ryan's points, the customer, the you know, Who the actual owner is who our contracts with. Although it's a lower margin, there's still very successful projects. There's still ample opportunity to leverage our services. So it's really about finding the right opportunities, and then, you know, maximizing the UC enterprise on those right opportunities, not just maximizing UC enterprise.
+
+Unknown Speaker  27:59
+Great points, Great job, guys. I
+
+Speaker 16  28:29
+Good morning. My name is Roberto or Tito, depending on the conversation and the setting, you know, we're, we're gonna talk. This is our team here.
+
+Unknown Speaker  28:47
+We have Sam talent,
+
+Unknown Speaker  28:49
+Adam Whitley, Bret
+
+Unknown Speaker  28:50
+Harmon, over there, and
+
+Speaker 16  28:53
+we have a couple of other people. I couldn't join them. We're going to talk about, like our co worker, Daniel said, a pretty professional and accurate level of corporate bullshit, or you call it, we were focusing on, how can we just improve the process to get subcontract change orders and the workflow, just to make sure we can make that faster and more efficient for A successful project? So we divided in two different which is the speed of subcontract for the precon education process, and also the workflow when it comes down to subcontracts, we change orders. But funny that we met several weeks. Every other week we were meeting and every time we went on a tangent and we were just talking about how people is so important, how's their biggest asset? So we have a little bit of information at the end that we're going to share with the team. Daniel, we'll skip. We'll go pretty fast. But okay, so yes,
+
+Unknown Speaker  30:03
+I think Jacob Moore was kind of working on our
+
+Speaker 17  30:07
+process, but he's on vacation this week, so we wanted to make a hand back miss this to get our free quals done faster. What we saw was a couple of things pre quals were taking 90 days. I will say there's some noise in this data, because early, you know, we were kind of 50 on renewal. We were not closing them out. So if someone wasn't responding to us or giving us the information back, we just let it sit forever. Now, after about three weeks, we put a $1 and say, if you want to convince a contract, someone's going to come for an loaf. So some of this is just taking out the renewals that never did get closed out. But we have taken a lot of steps to both improve our internal processes, to go from kind of, you know, 15 days down to just a couple of days turn around time, as well as working with the subs more effectively. It was highlighted some things that Ryan Abbott and team did out in Arizona, and we're getting ready to extend that we think will continue to help maintain two or three week turn around time on on our free quals, and be able to get commitments out the door. Roberto talked a little bit about we've also pulled up the free fall by getting things done earlier in the process. Did it really help? So that when you guys are ready to go in the field, you can just start cutting contracts, and that you don't have to worry about, oh, now I got to go back because I thought I was going to get the contract. You know, not, not concrete strategies, and they were not financially wherewithal, no, those types of stuff that, if you know there's going to be a problem, it benefits everyone to get that problem identified early so you can work around it, versus, well, they're already out on the job site. Now we got to get them, give them a contract anyway, so that's really what we're trying to avoid long term. So what have we done? We put trade tap in place, totally utilize it. That has been a step
+
+Unknown Speaker  31:55
+in the right direction
+
+Speaker 17  31:58
+from first verify, and I think we'll probably maintain trade tax on hold. We'll always look at what core, core solutions and other things we can leverage for right now, the plan is not to move away from trade tasks. You talked about Deb Nichols and Phoenix. I think that's really helped with that office, having someone dedicated to stay on top of getting the responses back, really pushing and driving our subcontractor to be to be responsive. We're going to add Emory out of Chicago. She's going to kind of cover, they're going to split the country, but he's getting ready to start here in the next couple of weeks, old time on the free fall team coming out of mission critical, to help drive that part of the process, to really take some of that work off of the operation. Feel teams to have someone locally saying, who's not giving us the answers. We need to get that pushed through third party. You know, you think outsourcing India, doing a lot of these things, will help it up 24 hour cycles. We were finding we were going to, we're doing so much rework, we ended up bringing that in house as part of that, we think not only is it improved speed, it's given us better visit the speed, it's given us better visibility and more insight, and it's actually helped with Jacob talks to more of the CFOs, of our subcontractors, nie Elizabeth, and it's because now we're part of the process. It actually helps us with the renewals, because, hey, just give me that updated financial I can get you guys really push through the process more quickly, and having those relationships, I think, has really helped. So there's been a benefit other than just kind of bringing in the house is really engaging, better, engaging more quickly, escalating and then just kind of tightening down. That's what I talked about. We're not letting you sit open. People don't want to respond. That's fine. They get $1 if they want a contract, they'll let you go to an LOI. I'm slowly having the award. What kind of benefit to try to get that pushed through next slide. So what are we doing? We talked about adding Emory, you know, I think getting the safety reviewer, you know, safety kind of sat outside of our pre qual, kind of the Jacobson operations team. We kind of brought that in, into kind of the same group, so we can better leverage. If Michael starts to fall behind, we can kind of leverage some of the rest of the financial team to help speed him up, to really keep things moving a little bit more quickly. And then we talked about expectation, 85% bidders up front. I think operations teams across the board have really done a great job getting that earlier and earlier in the process and bringing us in if I know I have three or four people, I want to bid a certain package. Let's get them all through pre quals. Let's find out who hasn't been free quals, and let's get that group started in the process. So I think that's really helped us enhance not only the speed, but also the quality of what we're going in free fall.
+
+Speaker 10  34:36
+I'll jump in. Kind of add one more thing here. We take a step back. We always kind of look internally, but also externally. How are we? How are we doing against our peers and ultimately, what's this experience? Last couple years together, I think two things with progression that we've seen, it's been very insightful
+
+Speaker 18  35:01
+for me and for others, having JV partners, you get a sense of run into it, right? And one of the things we learned is we have a memory of how it
+
+Speaker 10  35:11
+used to be, but not necessarily, but self reflection how well we are now. A good indication is when partners reach out to you and say, Hey, would you mind walking us through how you do this is better than how we are doing it at least. Opportunities and actually discussions around how much we were willing to share, because there's a value to that. And same with our trade partners. Got a lot of feedback while there's always room for improvement. You think about that experience again, we would prefer them to work with us as Clayco versus our competition, and this is just an area that continue to highlight how an experience starts to play into a broader experience. We want to create partners to have. So those are a couple of, I say, recent developments. The last six months or so, we've gotten really good feedback on how this is actually done more but actually to impact the people that we work with in the industry
+
+Speaker 17  36:02
+and the pro core workflows, I think, will make sure there's some connection between this is a sub precon for the lesson commitment go through. So it's going to become even more and more important to make sure we're doing this earlier. Slow it down fully.
+
+Unknown Speaker  36:16
+Final Pro for the record, Justin said Pro,
+
+Speaker 19  36:21
+cool before I do go back to right like we're being very selective on where we apply our craft. And so making this, removing the friction of this process, anybody ever been involved with it for 90 days, was definitely a big thing years ago. It's definitely gotten significantly better, and the data back that up. But really Resi to make sure that whether we're chasing something against somebody else or we're just trying to be, you know, selective in who we're partnering with, making sure that's easy for them. So this is on the subcontract process. So this is kind of our starting point, the three main topics that we wanted to hit on. So kind of signature authority and limits of authority, and what that looks like, dollar threshold for approvals, kind of what that flows into, really just how we make sure that our staff is empowered on that. I think that as we get, you know, larger on these projects, teams become larger, and those aspects of those become more important. You know, we're no longer talking million dollars, 10s of millions of dollars. These are now getting into the hundreds of millions of dollars, or even in the billions, for the subcontract agreements, wanting to still make sure that Clayco has always been a very flat organization. That's really what's made us so nimble and made us
+
+Unknown Speaker  37:49
+the culture that we are
+
+Speaker 19  37:51
+trying to make sure we layer in the approvals that we need without becoming your travel company that we see some of our competitors are are,
+
+Speaker 14  38:03
+yeah, so talking about that next steps for recommendations, that single Final Project authority approach, if you kind of look at the graph over onto the right, like, where's that prime target, it's not always that project director that's just been hired that's new to the organization, right? We've talked about the value of having the history of Clayco, so you've got Clayco experience, knowledge of the actual job. So you want somebody there, boots on the ground, that's that's integrated into the job, and then industry experience, and that's how you identify that single funnel project.
+
+Speaker 19  38:41
+Yeah, I think with this, like we spent a lot of time talking about this, it's really, how do we get much of those decisions back to the right people within the project no longer trying to get something into a workflow and go into somebody's desk that may not be familiar with the conditions out there, and obviously you saw some of the earlier charts of like who we have and the tenure here, and all those different kind of qualifications. These things are really important to make sure that it's not somebody that we've just hired, it's not somebody that's not familiar with the project, it's not somebody that doesn't have time. It really has to be a combination of all those having that single project authority really makes that person, you know, fully their own boss, right? The CEO of the project, it's no longer, well, yeah, somebody else is going to look at that. Yeah, somebody else is going to look at that, right? You read some of these books on, like bystander effect, or any of those other kind of similar things, it's easy to look at something say, well, somebody else is going to be taking care of that, so I'm not responsible for it, really bringing that ownership back.
+
+Speaker 14  39:49
+So when you look at it over on the left, you see the current process for issuing sub contracts done in two to five days. So we've got the multi step, and everybody's familiar with the pm web approach. And then what this approach does, if you look over on the right hand side of the screen, basically you're getting your pre quals done, as we spoke to the first presentation early, getting it pre premiums prior to and then the concurrent process where when we bring that authority to the job site level and to the subject matter experts, and we're actually able to concurrently do insurance and the issuing of the subcontract and the approvals of the subcontract at the same time,
+
+Speaker 19  40:36
+and with as constrained as the market is Right now, I know this may look like, Hey, you're saving 10 days, or you're saving minor time, but it is absolutely imperative to start saving that, because it's buying down our risk within the project. From the enterprise standpoint, I mean, we've tried to negotiate work in New Mexico with people and can't find them. They continue to back out because they're getting other work and other projects. So they feel like, Hey, this is a minor savings. Is really from a risk standpoint, and buying that down mask.
+
+Speaker 14  41:13
+And then here current process, you see the less than $25,000 the team can issue that internal change order in one to two hours, 25 and 250k it's got to get the ops exec approval, which usually that takes one to two days. And when it's over the 250k margin, it goes to the COO proposed process for issuing subcontract change orders. Over on the right, the team can issue the internal change orders in one to two hours, and then we would establish $1 amount vessel based on that sfpa, and where they can approve, approve it. Since they're there on site, they can make that approval now, obviously there's a responsibility matrix that goes with that, and it's going to have to be based on the project teams build. And we spent a lot of time Roberto talking about that and what that looks like, because it's not always the most in your personal job.
+
+Speaker 16  42:07
+Yeah. I mean, we were talking maybe certain products is a product director that is the one that has the tenure, that has the cross tracking record to do that. Sometimes the product manager that has that, you know, with some call from the product director, and that will just relieve some of the ops executive to be able to spend more time on projects where you don't have that expertise, and that's where they need to focus on and do that. So hopefully some product will have it, not every project that's kind of what we're proposing.
+
+Speaker 19  42:37
+And I think, you know, saving this time helps with really, everything that we do. I'm sure Mike's feeding it into everybody, going on time, going on time, payment on time, and the rest of what that flows into, yes, this is, you know, looks at it from the Clayco aspect, but this flows into all of our, I know, talking Pat and it's like, hey, we need this change order, and we're going through the same process, even with internal companies, but having that time reduction not only helps the enterprise, helps everybody in the enterprise, not just Clayco or self performance.
+
+Unknown Speaker  43:16
+Mike. You want to think about this one.
+
+Speaker 19  43:22
+It's this is kind of our last slide, you know, it was kind of our central theme is, everything we talked through is, you know, how do we we continue to get more people in as we continue to get larger projects continue to kind of what other somebody else talked about early, kind of almost silo people into a specific role. How do we continue to make sure that, you know, our top performers have the opportunities that they need, to make sure we can retain them and then obviously give them kind of that authority to continue to go and execute, to give them those opportunities, you know, kind of hit on one of the top, you know, some objective type, you know, metrics that we can use on that. Because don't want, you know, there to be people's opinions on people. We want there to be metrics in the back to back those up, and then kind of on the bottom right, it's, you know, it doesn't have to be strictly compensation doesn't have to be, you know, any one portion, but really just kind of some bullet points that you're talking to, whether it's expanded limits of authority for those top performers, whether it's increased visibility with some of the leadership group, you know, for a lot of people within this We'll say top performer type criteria, having that visibility and time with leadership almost just as valuable as anything else right, making sure that their efforts are beating and that kind of helps to go into retaining that top count on
+
+Speaker 1  44:59
+anything else open up to questions again. Just some observations from my perspective. Sam, you mentioned a comment that actually John Bob and wherever you're at, you mentioned you and I were talking during the break this concept of CEO of a project. Really look at the size of our jobs. That's exactly what this is. A lot of our team members and Johnson leaders are running businesses. They're running the equivalent of a company on these projects. You think about the Johnson $10 million company. I really like the chart that you had on the left side, kind of what we're doing now, versus the right side, the previous slide that you just went past. But can you imagine one person signing off every subcontractor change order over 250k maybe in the billion dollar company that works in a $10 billion company? Those are the types of things that we just need to move make sure we're putting smart decision making on what that looks like standardizing maybe for the top 80, 90% of projects that one size fits all, but then back on stack liner with a separate delegated authority that Mike myself Carmen worked on make sure that that team could work efficiently and not have to get bogged down by some of the process that we have. So, you know, this is, I think, really important work to make us efficient as a company, and also put trust where trust belongs, which are the people we trust to build these projects in the site meets with some guardrails and guide posts so that we're all doing questions for Bruce.
+
+Speaker 20  46:39
+I'll just interject one comment that whole concept about the business of the business, if we want to change the face of the organization, leaders need to be leaders. I'm just going to continue to emphasize that, because that's where this will become material. Right now, there are people that we would say should be in those spots at sfba, but I will tell you, they do not know the subcontract agreement. So they're making decisions about subcontracts, a half a billion dollar subcontract, and we are negotiating away the no delay for delay damages.
+
+Mike Pierle  47:18
+That's an untenable position to be at. So just to give perspective, we have all sizes, shapes and forms. So the whole reinforcement of the business, of the business, coaching, training is critical in order to define that
+
+Speaker 19  47:36
+SFP, no doubt, and I think that's why we didn't just look at it as one single role, right? Like, there are people that have different knowledge and backgrounds. If you were just saying this is going to be the office manager for the project, it would not work. It has to be a combination of looking at that person as a whole. And, you know, maybe there's certain times or there's not a person that fits that role. Has to go refer back to, you know, Anthony and Mike or something in that situation. But there are a lot of projects that have incredible pool of talent here that there are people that can fill in that role, and it's those that need to
+
+Unknown Speaker  48:13
+look at awesome. Chris hook us, yeah, Carmen, can you show
+
+Speaker 21  48:19
+that slide where you showed the reduction in time. That one, that one, yes. So we wanted to go from seven days to one day. It's the other slide. Yeah, that one. So I think that's a fine goal, and it's terrific, but just keep in mind that you know, when you before you issue a sub contract or change order, you need to have an owner change order flowing down to that subcontractor, that would be ideal, otherwise you're creating a gap. So those two things, realistically are going to be tied together. So again, to Mike's point leadership, to follow through on getting those owner change orders so that you can timely get change orders out to subcontractors. And if that is a problem because there are disputes or there are disputes or there are issues that are being worked through, that's what subcontractor change directives are for. So you can still issue a change directive, keep the process moving, pending resolution of whether or not that owner change order is going to be issued.
+
+Unknown Speaker  49:13
+Good point. I saw two more items, just for the sake of time. We'll Pat
+
+Speaker 7  49:18
+and then Conor. You guys actually can issue change orders of concrete? The answer is, no. I will say, just in general, roughly about 10% of our revenue comes from change orders. I know nobody likes change, but I mean, that is a big piece of our revenue, especially this year, 800 million, $80 million is going to come from change so obviously, the quicker we can get this, the sooner we can get bills. You know, typically, the owners are holding our money for 6090, days after we bill. If we don't get a change order in order to bill, it just compounds that problem.
+
+Speaker 1  49:55
+So we've got a specific section change orders after the business we're coming up too.
+
+Unknown Speaker  50:01
+That's part of that is just,
+
+Conor Tighe  50:07
+I would say, like, top three risks that I've seen in my career is slow procurement, right? And so it's just critical and making sure that we get out of the project from that I'm a GMP, and we procure the job efficiently, accurately, fully, right? With qualified, yeah, buy out. Because it's what I've seen, is like, if you don't have that procurement, you then have pricing that you guarantee to a client, and you no longer have a health price with the subs. So one of the things I think Clayco has really succeeded at is having accountability on the job with its procurement. But one of the things I think we've struggled at is if you look at that graph, you'll see that you have the building connected preconstruction side at the top, but then the concurrence with the operations, if we don't have alignment between pre construction and operations, there's been a lot of breakdown there. And I think it's just an improvement thing that that
+
+Unknown Speaker  51:14
+Colt is going to talk about that in the world class. I will talk about it in world class. Great job, guys. Tom Lance,
+
+Speaker 22  51:31
+all right. Hi everyone. I'm Tom lancy, we had a pretty robust
+
+Unknown Speaker  51:38
+group here
+
+Speaker 22  51:39
+to upgrade FBA. The current state of the land is, by the time we post the books, we're 20 days in the following month, and by time we forecast, we're halfway through the month that we're recording. So our goal is to speed that up. It starts with everyone in this room. To speed that up. It starts out actually, out in the field. So the project team, we really spent a ton of time, over a month, diving into the depths of like all of our FDA processes for all the six figures, including Clayco, which are processes that my team owns as well. So I won't belabor what we've uncovered, but we're all at different levels of maturity relative to where we're at at PNA, to comparing ourselves to the world. Our opportunity is really around process efficiencies. There's three pillars here. Established our budget and department needs, people, schools and services. Anthony really challenged us to take that on last year. So we added Patrick Hardin into LJC, we've added two more experienced FDA hires in the last two months. There's gonna be people's pools, services, KPI development, and we had a really exciting meeting with LJC last week that were there KPIs. There's foundational KPIs to drive in your business, but there's a ton of the other KPIs that we want to expand on and then create a strategy for data those that you don't know it. The Business Intelligence Analyst with the data analysts started reporting that Kim a late last fall.
+
+Unknown Speaker  53:17
+They were, they were embedded within it.
+
+Speaker 22  53:21
+They were trying to do a lot of work, doing everything that came their way. I think in consolidating that, we've really been able to focus their efforts on where they can make the most impact. So these are pillars and themes for what's going to drive our change. What fpna does is, you know, we'll do our budget, we'll do our strategic planning, we'll do variance analysis. We spend about half our time looking backwards right now, we want to spend a lot more time looking forward. Our business has changed dramatically. Galaxy and stack are as large as our PML was about three or four years ago, right? And those jobs that go in 24 months, we used to be able to do a forecast in a nine month period, because we could sell a job, put in place and complete it within a calendar year. And that does not happen anymore. Our campuses have nine buildings that go out. They start in phases over 36 months, where we also want to go near real time data. I think we made some really great improvements on that. It's accelerating fast with what we're seeing in AI. We want to be predicting versus predicting, detecting risks relative to our forecasts. We want to be a finance strategic partners with everyone in the field. So you have your AWS team, you have your project managers, but we want to be down in the trenches with you as well, and identifying, you know, areas at risk that we can see in Cory, like schedule two projections. So where we want to go, you know, right now, those of you that know a little bit about FP and a we do about 12 forecasts a year, and then we do a huge budget process in the fall, you would hear the typical language would be like a seven plus five forecast, seven months actual and five months of projections. You know, as I mentioned, our problem is that we have jobs going out 24 months. So why are you stopping at 12? Why are you stopping at seven plus five? Why are you going out 18 to 24 months? And what does that look like?
+
+Speaker 1  55:34
+By the way, that's that's a very good thing. The projects going longer, the backlog increasing, reinforces the discipline of decision making. We're not in the situation when we got to sell for that current year like we're four or five years ago. So while these are challenges from a forecasting perspective, there are huge benefits
+
+Speaker 22  55:55
+to an enterprise perspective. Yeah, our backlog is twice the size of our actual revenue just two years ago. So what we want to do, instead of doing these deep dives on a monthly basis and trying to pick up the phone and call specific project teams, is really work with teams that are having issues on meeting their projections. So before deep forecasts each year on the quarters, we imagine that frees up about six acres per year. But that doesn't mean we're just not going to do anything. It means working close with the cost team, working close with our project teams, doing the margin analysis that was presented earlier today. Those are the areas that we think we can make the biggest impact. We're also working really closely with other finance functions today and helping them improve their cash flow so defining where we want to go. You know, good. I would say we are good today. We have a really great visibility into our risking opportunities for the entire year. We have a really good feel for what our backlog projections are. I think the organization's gotten even better on predicting where their job stands from a profitability perspective, where we want to go, obviously, is updating this forecast cadence, standardizing our KPIs across the business, really, for the executive team, there's Sanders about how we run each and every business that are applicable, that we need to have our pulse on every day. And can we get that information? And then world class is leveraging AI. So I don't know how many people in here gotten to use claw is just one tool. For me, it's probably the first actual tangible product that's come out that's really accelerating the way we work in finance. It's pretty incredible what it can do for us. And I would say that partnership with the data engineering team, bringing the data so the way that process flow works. You take a business subject matter expert work with your data engineering team in four hours, you could be automating a report that you might have to run and analyze and throw into a ticket. The past pretty incredible. But one critical piece that I think we all need to know, especially as we transition into pro core, is, you know, the AI that we're going to put on top of our data and finance is only as good as the foundation that we need it. So underneath it, so discipline to our expectations of the data we get out of the project teams, the frequency that they record, all those things would be absolutely critical. So when we put AI on top of it, we have consistent information to look at. This kind of explains a little bit of our current flow that we've been working through. So is where all our data is housed. We want to get all our data in this real quick. We've kind of put a knowledge there on top of it that helps your AI agent interpret it. So that's this MCP protocol. You could go and look at what that look up, what that means, but it was open source code to help connect claw, or any, really, any future AI agent, to our our dad. And then in here we're creating agents. So we'll have Ben, which really hooks across our income statements and filing sheets. It's taking great steps forward and automating our cash flow forecast, improving our reporting on accounts receivable to the project teams. I think the frequency of that tremendously. If we could improve cash flow by a week, we make a really substantial impact on our P and L and running great jobs. So this is this is where we're headed. This is where things sit today for us, which we've made a ton of great progress. We've been working really closely with Joe Rahn and Mike Perley on initiative on getting project health information out the door. So I think the honest execs have probably all seen that
+
+Unknown Speaker  1:00:28
+working through
+
+Speaker 22  1:00:30
+where do all of our change orders status and stand and providing visibility to all the project teams better margin analysis. So there's a prototype app where we've been able to take what all the work that the costing does, instead of comparing that month over month. That's so much information in there, but getting it in a point where we can analyze it, you know, trending basis is super important, and also get the context of what's changed. And then labor utilization, I get asked all the time about specific areas of the business that are utilized or underutilized. Are we getting the right mix of people out on the workforce? And this one actually we can use in a chat form today where you can specifically inquire of it and give your answer at your fingertips. It goes all the way down to resumes. So every bit of information that Clayco is collected are also available in this agent. So as you're thinking about designing your project, who the right people are and continue with Clayco, and then implementation. So, you know, phase one, getting AWS CRM, we as an organization, need the CRM, CRM to be our source of truth for sales and future sales. Here today, it's managed by Kelsey. Is my source of truth. The information ultimately gets reflective in CRM, but Kelsey Upchurch works with each and every one of you in this room our KPI framework, like said, we're all at different levels of maturity in that standardizing what we need to provide the executive teams and Tom Business LJC will be different than what Clayco is, but how we go about doing it people's hands when you save your eyes, Cadence shift. So like I said, going from the seven plus five concept to, you know, real quarterly deep dive and monthly signaling and power nodes. So getting the buyout buy in from this team to say, let's, let's start piloting that in the near future. Immediately. Phase three would be a tool selection today, our forecast largely Excel. There's a lot of data that powers them, but it sits in Excel. So is there a tool? That we can build or buy from enterprise wide? Once we get the foundation,
+
+Speaker 22  1:03:13
+there'll be other decisions in there as well, Power BI versus Tableau, or the AI tools that come out that Clark is really great at visualizations. ChatGPT has its strengths, and Tableau probably exists in some way, shape or form in the future as well. Dashboarding, we'll follow that once we get all this information, good stuff, everyone's fingertips, and then you're really building up AI right here on top of all this information, once we know it's aI right here.
+
+Speaker 13  1:03:48
+On top of all this really great, high quality,
+
+Anthony Johnson  1:03:57
+just one comment too, I wanted to mention, like, I think the, I think it was Elizabeth that brought it up when we were in asked them, like the comment that kind of started. The first thought with this was the speed by which we're able to get information and and the accuracy and things like that too. So that's really been, I think, the foundation of a lot of products that are being developed, too, is giving you the tools to get business unit leaders, subsidiary leaders, project leaders, information faster. You know, having the subject matter expertise from
+
+Speaker 22  1:04:36
+your teams participating in that is what's really accelerated us. So, yeah, accelerated? And I
+
+Speaker 23  1:04:45
+don't know if this is a brilliant question, but these quals at your level, of taking it down to more the project level, I could see your definition, use directions, doing those valve changes. Ultimately reporting. Is there opportunity? Are we thinking about target
+
+Speaker 22  1:05:22
+level? Think it has great agent capabilities, and that seems to be accelerating every day. I'm using it as an agent to solve things that I do day to day, run them in the background, wait till the day, about half an hour to sit down and do it. Variance analysis, just comparing it is
+
+Unknown Speaker  1:05:53
+chipping off the little things,
+
+Unknown Speaker  1:05:56
+things that we have to do every day. How about
+
+Unknown Speaker  1:05:59
+the collections Tom and where you're going to utilize that without
+
+Speaker 22  1:06:03
+the project? Yeah, you know, Rebecca's team asked to run a AR agent by the project and critical leader
+
+Unknown Speaker  1:06:10
+people throughout the organization.
+
+Speaker 22  1:06:22
+Maybe the organization. Maybe they do it every week. We're able to do it as frequently as you want. It's pretty incredible how you know it goes from aging to email output in five minutes, and it can give a summarization ball.
+
+Unknown Speaker  1:06:42
+A summarization what
+
+Speaker 17  1:06:44
+changed period over period. And we want to automate, once we collect it automatically sends out
+
+Speaker 8  1:06:50
+a notification to project team. So kind of really tried to close that loop again, as automated as possible, down to the project level.
+
+Unknown Speaker  1:06:59
+So Brandon's here with us. Brandon, anything to add? Question. Chad,
+
+Unknown Speaker  1:07:10
+GPT, my general take is, you know, it should be, you're kind of like, I
+
+Speaker 11  1:07:17
+think it's something that, whether it's ChatGPT or quals, you know, everyone across the enterprise should be using, and any of the benefits are here or something like, we haven't. We have a change order tool, but pretty much, if you have problems, you can identify, you know, you can go out and solve a lot of those yourself with AI. But then also we can build, and we'll get into that more tomorrow. Specific tools that can solve things got a lot of steps
+
+Mike Pierle  1:07:54
+on some projects. The question, is this going to help solve the administrative side of project management, Exchange Management. There are the tools that we have in place. Is mentioned by Bret. But as far as the physical push we're going to we're going to rely on the agents that will be coming his book board. I mean that will so if we do have things properly set up, developing the information appropriately in the for the moment. Yes, in theory, on a change order, boom, everything goes out the door, rather than more of a manual process, which it is right now. So conceptually, that is the direction we would like to go. But it also requires teams to have the information ready to go. It's about getting the data in the right spots the first time,
+
+Unknown Speaker  1:08:57
+other questions or
+
+Speaker 24  1:08:59
+comments, what? Say the same thing. I was actually going to load a question up for Tom. Let him put it out there. But the the consistent, the consistency, like the data, when you get data, if it's consistent, it's real easy to digest and do something with when it's not consistent. And we've got one person doing it this way, one person doing it that way, and one team do it this way, one team doing it that way, that data is really hard for AI to digest. Yeah. So when, when you're in, in your in your one bit, just take that one little side step to get one a half a day faster, or a minute faster, or whatever, think to yourself, Okay, I'm also the person that wants all of these things at my fingertips, and when you take that side step, you just lost your data. So you just lost the consistency of the data all the things that. And if everybody's doing that again, you don't have any good data for AI to teach us what we need to
+
+Speaker 20  1:09:59
+so that's when we get into the conversation people confusing bureaucracy with standardization and process. Let's not get that confused. Bureaucracy is about speeding it up, all four trying to pull steps out, simplify, but getting the data right is this stuff does us no good or marginalized in what it is producing. Is it's interesting when we do produce reports. One great thing that always comes out is, well, that's that's wrong. Well, all you can do is look at yourself, because it's your data, it's your project team's data that's sourcing raw so, so we have to look ourselves in the face, in the mirror all the time and make certain we're understanding the integrity of the information going in drives quality of the end products coming out.
+
+Conor Tighe  1:10:56
+I have you sorry? Have you? Have you thought of like a data agent, like it's an auditor agent, data is that something that is on?
+
+Ryan Abbott  1:11:08
+Yeah, if nothing else, just a through date, like this was accurate on at this point in time, so that when you're reviewing it all, you can help with some of those asynchronized moments. Because I we talk a lot about that, like, oh, that's only through last week, or that got updated on Tuesday or and I think having some you know, output that says, here's what we've done to line up the analytics, or this is as close as we're going to get for right now will help us as we go through this journey.
+
+Speaker 24  1:11:42
+So as we've been setting up dashboards, we've been doing that, we've been setting information tabs on the side, so you can go over there and hover over it and it'll tell you whether it's live data coming in every hour. I mean, all the way down to like this is PM, web data. This updates every hour. The last time it updated was 1152, in the and then, you know, this is last month's forecast from month of March. You want all that from measure up standpoint, all that's being documented from a data standpoint, what
+
+Anthony Johnson  1:12:19
+about from the subsidiary CSI or LJC or sei like, like, do you feel like we're getting the tools in place that you all need to be able to make the decisions you need to make when you need to make them? What What else is missing? Or, from CSI
+
+Speaker 25  1:12:35
+perspective, yes, we have all that we're working well with the teams to understand what that information is to get it real time, not only the job level,
+
+Unknown Speaker  1:12:43
+but also at the business level.
+
+Speaker 25  1:12:45
+We've been making pretty good strides over the past couple years doing that LJC side, we're we're still working through that. I mean, it's gotten a little bit better, but you still have a ways to go
+
+Unknown Speaker  1:12:55
+by our optimization of,
+
+Unknown Speaker  1:12:57
+you know, the tools that we use so
+
+Unknown Speaker  1:12:59
+but we're getting there slowly.
+
+Speaker 12  1:13:01
+I would just on Sei, we're working with, you know, Tousley with CSI, to be able to implement some of those tools that are in use.
+
+Ryan Abbott  1:13:11
+Not, yeah, not just there is still a spot in between all of the businesses where part of the business is rendering an opinion one direction and somewhere else, they said, Oh, we're going to recover that. Or so we've got multiple
+
+Anthony Johnson  1:13:24
+opinions and same space, Yep, yeah, I think that. And there still is ample opportunity for one of the leading indicator type things, like Tom was mentioning, versus the
+
+Speaker 15  1:13:35
+arrears beta, Anthony, I was gonna say, I agree. I think to grants comment, but how do we put it together? Yeah, because I'd say there's isolation between that information, and how do we share it as a collective, that between the self perform teams and the enterprise? I don't think that's soft.
+
+Unknown Speaker  1:13:52
+Yeah. Okay, well, I'm afraid to see what's in Tom, here we Go.
+
+Unknown Speaker  1:14:12
+Awesome. So this is the team that's been organized.
+
+Speaker 15  1:14:20
+Huh. So this is the team that's been working on it. I was newly introduced to it, but so this is the team you have collective here. So to set the stage, why this matters, and there's been some really good conversation right before this kind of leads to itself. But Mike is there's a process in our blog. So it's one thing to say, Hey, we got to create a process. It's another that the process created, and then you look back and it's a little disappointing that we're not following it. So I'd say this is a lot about risk. Talking about the risk that comes with change orders as they come up, not only from the enterprise, but when you start introducing the self perform teams, you're just doubling that risk if it's not fall well, we're not following a process, the change management process that exists, and the difficulty we all know with change orders, as time goes on, it just gets more difficult. The story changes, the information changes. The people that you were working with from the owner's rep may change, and so it's just the problem exacerbates itself when you talk about change orders, if they're not handled timely and if we're not following our process, it also takes that alignment piece. We've been talking about that quite a bit. When the change comes, we shouldn't separate each other. We should come together and make sure we're forming the right strategy. And then the last thing is, when this doesn't go right, it not only impacts the time for the change you're going to start impacting the schedule. It was brought up about the procurement by Conor, but there's procurement things that come up during changes, right? Something gets added procurement piece, and if that change order isn't process timely, now you're going to impact the schedule as well. So there's so many different pieces as it relates to the change order, but the team was really focused on demonstrating the impact. It's a call to action to say we need to go back. This is a really good process that was created. We need to figure out why we're not following it, and then from leadership, we need to get those metrics and score cards in place to make sure that we are evaluating ourselves. Are we following it? Are we processing the change orders timely? And if there's a hold up, why isn't it? Where's the road blocking?
+
+Speaker 26  1:16:24
+That where is the wind? Yeah. So this slide talks with the intent of this slide, a little the intent of this slide, a little bit to talk about identify what causes change order. What happens to cause a change order? So design the moment, obviously, honestly, what makes it interesting, what makes it so valuable to our clients, is this first one, but it's also such a big risk that we have, and that's design, development and drawing provisions. So tons of our projects get started with an early works package contract, or might just be a portion of the contract that's been submitted to us. So as we continue through the project, we're pricing drawings and changes and go a lot of times we're working through those drawings and changes before you even the change on an issue. So there's a risk there that we got to definitely keep an eye on a lot of these.
+
+Speaker 27  1:17:14
+A lot of these also have to do with field condition, site conflicts, weather obviously being probably the biggest, biggest one there. We were actually just discussing another job, not a Clark job, where we have, you know, almost 30 weather, weather delays that I put it have been put in through the course of the job that just haven't been turned into the owner yet. So again, very simple, but it doesn't always get executed. Other things like other trade interferences, unforeseen conditions on site, those
+
+Unknown Speaker  1:17:38
+also affect it, schedule acceleration.
+
+Speaker 27  1:17:41
+I mean, Jason kind of mentioned being able to maintain those, those, you know, very high pace schedules, you know, more than any other places at least I've ever worked, we have a really unique ability here to do amazing things in a very short amount of time. But we have to
+
+Speaker 26  1:17:54
+realize the risk that comes with that. And typically, there are going to be changes or additional resources that are going to be needed to actually execute that. TNM, general labor is another big change order potential projects. So whether it's scope gap on projects that we're filling in for or whether it's general labor working the JR services that tends to be a generator of change orders almost every project that we have when we can overcome design, development, drawing divisions, field conditions or site conflicts, that you know there's potential for extended general conditions, and I think we've gotten better as an organization of trying to send those potential risks, risks of extended journal conditions ahead of them actually happening, so that the team can start to see what the potential is If we can't bring the project back in under schedule.
+
+Ryan Abbott  1:18:45
+Can I add one other to this? I just sorry for doing this, but technological change is going to drive more in the future. Right as our jobs are more technical and longer, we should expect to see way more change in our projects.
+
+Speaker 26  1:19:00
+We're absolutely seeing that. Yeah, and we've seen that, I would say, as we've gotten into the campus work that goes the work continues to be building after building. We've definitely seen that. And that's where that risk of as the design development and drawing positions come out, and we're actually doing that work and putting it in place before we may have the change order in place we're agreed upon. That's a risk. So what's ironic, like you said earlier, about that is the same thing that makes it super valuable to clients also, yeah.
+
+Speaker 7  1:19:30
+So this next slide here, it's kind of a snapshot in time, just showing the exposure, mainly of the subsidiary. So as you can see, this was about a month ago. We had like 61 million in pending change orders. 41 and a half million that at risk. So what does the at risk mean? It means that the work has already been completed. We're losing our leverage with the owners. We don't have written change directives. We did a little homework to Clayco, since 2023 had $5.6 billion with the B and owner change orders staggering. About 12% of that was rejected, 694 million. So somewhat a function of these larger projects. But you know, we're certain that some of that work was probably put in place, and the subsidiaries most likely spend some of that money. So obviously, the goal of the task force is to enhance the change directives and make sure we're following not only with downstream with the subs, but upstream with the owners as well.
+
+Speaker 21  1:20:32
+Okay, hi everybody. I'm Carmen Hernandez, general counsel for Clayco. I work with a lot of you on change orders. I like to say that there's three things in life that are guaranteed, death taxes and change change orders. So we've we've seen the numbers, and they can be quite staggering. So you know what leads to the problems with change orders? It'll be because you want a great relationship. The project team wants a great relationship with the owner team on site. Want to be nice, and you don't want to give them a change order that is box number one, that happens all the time. And we have to get away from that. And we have to deflect and say, it's not me, it's the contract. I have to give this to you within a certain time frame. Maybe we can work through it. Maybe it can go away and create a change order law that we can work through delayed or inconsistent backup, you know, submitting change orders without the right backup and not following up in a timely manner. And sometimes I see some of that, and I I, quite frankly, agree with the owner, yeah, I wouldn't pay that either. The backup isn't there performing work without the approval processes. That kind of relates the same thing here. Basically, just gotta take a chance for a relationship, but that comes at a cost and creates a high risk and misalignment, sometimes between just a lack of communication, because one of the biggest challenges about change orders is spotting the change. Sometimes a change is obvious. Sometimes it's not, and so the challenge is also to be aware and alert for when change happens. So I'd like to say that Clayco has one of the best safety cultures in the industry, the best number one you talk about safety all the time, every day, constantly. We need to be talking about change culture, change management culture. We need to be best in class in change management culture, the way we communicate with transparency, timeliness, quickly, and we need to set meetings where we talk about change and at the project team level, it should be happening weekly, where a part of the OAC meeting should be dedicated to change. What changed this week? What are the potential changes we see coming down the line? What needs to be in a change order? An OCR, a co R to be submitted to the owner and so and communicating regularly with executives to spot those especially big changes, executive level, mandatory monthly directive alignment meetings. I think this is really talking about aligning with the leadership of our affiliates, because Pat at CSI has a lot of exposure on a project, and so the project team leaders need to be meeting with the CSI team leaders in order to coordinate what the changes are and the challenges after that.
+
+Speaker 26  1:23:03
+One can I say something happens. It happens only when the stuff hits the van. So if we could get that to happen more proactively, right? I think that's the biggest thing we see.
+
+Speaker 21  1:23:14
+Is so worse that can happen is you have a regularly scheduled change review meeting and there's no change to be discussed. Well, I'll agree there's no change to be discussed. Either that or you all missed it, right? But at least that would be a fast meeting, right? Just like we manage safety calls, we need to manage change. Obviously, no written approvals. You got to get the NTPs out. If you're asking CSI, SCI LJC to proceed, there should be an NTP, and there should be an NTP from the owner that matches or change directive. I'd love to see more trainings. I'd love to see us talking more regularly about change management culture and following all the great forms and procedures that are recommended because they are best in class. I wrote them myself, standard inclusion for submitting change orders reservations of rights so important, you know, sometimes you don't know the price of something, and the owner wants to give you the change order, but they want to close the door on that price changing. And you can't do that yet. And so we may have, and we, we're always going to be around to help you to prepare the right reservations of rights language, because something may yet still be developed. Um, that's and the change directives, this is the owner doesn't want to give a change order. We have to have the discipline to say we can't do the work unless you deliver a change directive. And the change directive is not going to have a price on it. It's just going to say, proceed, and we will reserve the fight for later. And that's okay. You can have a change directed log. I think Conor was involved in the wills tower project. How big was that change directive log? It was 106
+
+Conor Tighe  1:24:49
+notices of delay impact plus, wasn't it around 35 million of outstanding change orders.
+
+Speaker 21  1:24:56
+There was a log. Every single thing Brian was involved in that one to us. There was a log, and you work through all the notices were sent on time, where we lose leverage is if no notice was ever sent. If we had done that work, we would have been screwed on the changes. We want to prevent that. So again, the work should be done. We should we need to have the discipline across our culture, across the change management culture to say, we will do the work. We just need to change directive. And a change directive owner doesn't obligate you to pay us. It just says you're directing us to do the work, and we'll figure it out, and we'll work on a change directive blog. And we, and a lot of our contracts, have what we call a change directive bank where you can owner, you can issue $5 million a month and change directive, but then when you hit that 5 million, you can't issue any more change directors unless you convert those change directors into change orders. And that's how it got managed. Scott did that very effectively on SK. SK, raise your hand,
+
+Speaker 21  1:25:59
+and it was a great tool. I think that if we together collectively work in this direction, it will be very effective to reduce the risk. And then I think this one is obviously the same thing we've been talking about. Think about this, the interest only if you have $34 million Justin, $34 million million dollars in change orders at 7% that's a lot of money. That's $200,000 a month that we're losing because we have too many changes out there that haven't been converted to be paid online. So I think the last point, I think, is super important, the discipline to stop the work, to say, get me the change directive and continue to work without disruption. And I think that puts everybody in a good place. And it's good for the owner. It identifies the logs on the issues that need to be resolved, and then to meet regularly with the client, of course, to work through those change directors. A lot of times it's communication. Ryan Abbott's great at that. Ryan Abbott just sits there. Of Fort. Wayne is still working through that one, but he's doing a great job with my walking through all the information that they need to get in order to solve the changes without it escalating over to my desk, which is what I would prefer. Thanks to all of you got that keep it off my desk.
+
+Speaker 7  1:27:16
+Carmen, one thing I'll say too is we, as a subsidiary, need to build the trust with the project teams in order to make sure we know what's accurate and we can stand behind while we're turning in. We've been really working hard over that for the past couple years. But that trust component is very key to get everybody working together and not against each other when the change condition happens.
+
+Speaker 26  1:27:35
+And I can tell you, there's a there's a real apprehension to provide us that change director for some reason, right?
+
+Speaker 21  1:27:41
+We need to just educate the owner. This helps you
+
+Speaker 26  1:27:44
+almost work, coaching our folks to say, Give us here's a change. Here's a copy of what the director looks like. Here's what send us this so that we can proceed the work. We're going to do the work, and we're going
+
+Speaker 21  1:27:56
+to work on resolving it with you. We're going to be regularly with you. Amy. Amy did a great job on QTS. Lots of changes on QTS. Yeah, great job.
+
+Unknown Speaker  1:28:06
+Does this? Does this include CRG? Yes, let's
+
+Speaker 13  1:28:16
+work it through. We just got to educate them on the importance of it. Yeah. And
+
+Speaker 15  1:28:27
+point is that as we try to use everyone to focus on what Clayco talking about the enterprise and the integrated services as one, which is absolutely true and so but it shouldn't, no one should take offense when one of the integrated services is sending a delay notice or an impact notice. They're doing you exactly what they should. Don't take offense to it. Don't take it personal. They're preserving your rights, because we know that the enterprise is going to be scrutinized even more by the client, because it happens to be an integrated delivery from from CSI. So welcome it. Don't don't fight against it. Your partner is doing the job for you. At the end of the day, it can always go away, but if we don't send the notices. And so what I've been telling the self perform teams is if you don't get asked for it, then it's your job to point it up, because there's 50 other subs that that enterprise team is looking at. So we have to follow this process. Cross our T's, dot our i's, and hopefully that moves the tide with everybody else. But it's sucks because it's not comfortable where you're getting a change notice. It feels
+
+Speaker 21  1:29:30
+but that's no see. I want to get away from that. We love change. We have to embrace change, manage change. We make money on change. Pat pointed out how much money we make on change. We love change. It increases our margins, but what we need to do is get comfortable with change, selling the change, explaining the change, documenting and being timely about it, and more importantly, working together in the enterprise, communicating with each other on how to explain the change to the owner and get them comfortable.
+
+Conor Tighe  1:29:58
+So one of the things that you didn't have up there that I find is really impactful for changes is getting bubbled drawings. So LJC, bubble drawings from designers with a design narrative. When that process falls apart, there's so much noise that's happening within the projects, no documentation that the changes aren't picked up. You're now doing work at risk. You're not even aware of it, and we're way behind, right?
+
+Speaker 1  1:30:27
+That's missing a change. And so good, good clarification number one, and all the submissions, we're not responsible for, unclouded changes.
+
+Conor Tighe  1:30:39
+It's, it's, it's, but getting, like, in the integrated design build, when we talk about, we're in our own shop, like trying to get those bubbles, and I don't mean bubble the entire freaking I mean bubble the change, right?
+
+Speaker 1  1:30:52
+That's what the when you have that clarification, expect to receive the whole sheet.
+
+Unknown Speaker  1:30:59
+Exactly that.
+
+Conor Tighe  1:31:01
+That doesn't work, but that speeds up this entire process. And it's all about getting cash in hand and moving through issues. You can't do it if you have a lot of projects.
+
+Speaker 24  1:31:11
+I think there's an opportunity that we miss once in a while. There's a cost to developing what that change order is. I think LJC lose that a little bit once in a while, you know, we might work for two weeks develop drawings, the price and the notice of snow. Well, there's no change work, so we don't get paid for that. So there's some teams here that do a great job of making sure we get covered. But I just want to create an awareness there's a cost to pursuing that change order.
+
+Speaker 21  1:31:39
+I would agree with you. Thank you for saying that there are some people in this room I've called someone who are very excellent managing change. We just need more consistency. We need more consistency across the board. And I think that's part of the trainings that this task force is recommending that we have more through the discussions about change, trainings about change and try to elevate everybody's game to the to the level where we know that some of you already
+
+Anthony Johnson  1:32:00
+and that's an opportunity dance for like you to be coordinating with the project manager on drew this thing like five times the six iteration. We've got to figure out how to make up for all the due diligence work that we've done on this collaboration.
+
+Conor Tighe  1:32:15
+Jeff Kennedy was great at that, yeah. So he's like a person with that.
+
+Speaker 1  1:32:22
+I just real quick on that comment, ideally, if we're getting a change directive from the client and it requires us, under a design build a contract to take engineering or design action, we need to get approval to do that and spend that money. So soon as we see those things, we should be going back to the client saying, in order to get this, we have to do this initial work, authorize it, so then we can proceed and get some drawings that we can take out to our trade partners and get fully priced. That's the best scenario.
+
+Speaker 23  1:32:52
+And something we did on hand Kurt, that worked pretty well in that scenario, the owner says, hey, I want to change this, this and this, we would get a design cost to do that from LJC, tag it with a ROM and get approval on the design cost first, and then that. There's kind of an
+
+Unknown Speaker  1:33:09
+intermediate step we use on
+
+Speaker 9  1:33:10
+design build jobs. I think timing comes into play too with the revision go out thing, because typically that doesn't happen until after a formal issue for bid or issue for construction set. So if we're trying to buy out packages early, maybe before that happens in the background, it's hard to go back and capture that change from the true issue of drawings, hopefully grants
+
+Unknown Speaker  1:33:33
+going to tell us tomorrow that AI is going
+
+Mike Pierle  1:33:39
+to figure all that narrative cloud. There should be a document management process defined it's in the absence of having full signed documents understanding words still work along with sketches. So it's all if it's all going into the model which it all is, it should all be easily extracted and be able to deliver it in a nice package. So it is critical to drive efficiency.
+
+Ryan Abbott  1:34:08
+One thing for the task force that I I would love to know is how much of our time the associated schedule delay is tied up in change management, where we have unprocessed change that's leading to some of the metrics that we've got in our enterprise schedule, because I think it's a significant amount of it.
+
+Unknown Speaker  1:34:27
+It's very significant,
+
+Ryan Abbott  1:34:29
+but I think we should track that operations.
+
+Mike Pierle  1:34:32
+Looked at all the projects schedules, and if you look at
+
+Speaker 20  1:34:37
+maybe miss a little bit, but 24 projects are delayed. 92% of those projects are delays caused by client changes. And if you look at the work hours that are going into, consume and recover price, all the work effort that goes in, that's significant. It's similar to like Project minor. You look at Project minor, you get the massive deal, okay, it's a developed GMP. It started at 550 million, and it's going to mature to 10 and a half billion. Okay, it's going through a lot of iterations. We've got to be thinking that preconstruction team is going to last until September. That's all overhead. Many of our jobs in previous life, we just, we went naked on that and we just kind of absorbed it. So we've got to be thinking about maturity, the types, the complexity of the deals, so that when those deals are in formation, we know that we're going to have an extended, I don't know. Jon, what do you have 10 people still working in precon, one minor,
+
+Speaker 5  1:35:48
+they're billable. As we continue to expand on that is their way to not treat that as a change. So we're not like 4060, like, is there a way, like we look at this task group to help? I think, I think as we wait for change order from you guys, sometimes your Pm just builds up, how do we get you that money sooner, just when it's in our GC and JR so we have
+
+Speaker 26  1:36:13
+control of it? That's a great question. And I think that was part of our initiative to have the site sports development of that entity of concrete strategies, so that we could not make it part of the project, but have it as a separate contract. So the billing and the parallel that is treated separately instead of within the project. So to your point, the tickets, everything that gets sent to you guys for backup is, you know, maybe second bill, if you will, to running the project. But that's,
+
+Speaker 20  1:36:38
+I think it's Joe. I come in, and I cannot resist to find a bid package for site services. Let them get to the 8090, percentile. What I see operations wise, we will not do that. So we don't know where the end is. We have never even asked them for a total proposal. And so what we do is we just change order it up on a monthly basis, a quarterly basis, that's death by 1000 blows. Stop it. In the precon, there's a bid package called Jr works, define it, put a scope with it. Just like we buy the electrician,
+
+Mike Pierle  1:37:21
+they can price it, and they'll qualify it accordingly. Treat it as a scope of work. We choose not to do that because it's general trade, whatever. So that would be a big part Joel to help stop the death by 1000 blows change orders, month over month, as well as it would give them a level of certainty to how to staff it, as well as how to finance it and plan for the work in the cost be
+
+Speaker 15  1:37:51
+qualified well, because with the schedule movements, it just becomes a risk point if it's not sure, well, not true. Schedule definition,
+
+Speaker 17  1:38:16
+I think that clarity is important, not just on the types of services, but even when there's change orders. You know, we have clients in the room with CRG, right? So they need to know that this change is coming. For that transparency, they have to go manage their capital and the people that pay for the transparency around what's in the scope and what are the changes that are coming, just as important all the way bad eight. Bad news doesn't age well.
+
+Speaker 12  1:38:40
+And I think another important part of the change management process is not just working the change orders with the owner, but also with our trade partners. Because I've seen cases where there is a $5 million change order, we sign up for that change order with the trade partner and the owner, but the trade partner doesn't add enough resources to be able to support that change order, and that change order becomes a delay on the schedule that we're responsible for just because we're taking on more work, but we didn't work today. What is the right execution strategy and approach for the trade partner to be able to support this change order, which in that case, means adding more resources. So I think that's something else that we need to we need to account for when I agree with that 110%
+
+Speaker 21  1:39:25
+flowing change down to the responsible phrase tied to
+
+Speaker 15  1:39:28
+that very important I think, to your point a little bit too. And as I mentioned earlier, say your jobs $50 million and then it slowly grows into 100 million. Had you known that, you would have doubled your staff. And what happens, inevitably, is that staff that was managing the 50 million manages 100 million, and then the job delays the scope that they were supposed to do. They get in trouble for possessive so it's really you need to make sure that you understand your point is, if the change is significant enough, you have to have enough foresight to go this is, I have to add a team to do this. I mean, not just can be handled in my existing GC Jr. I have to be able to focus on my contractor work that you asked me to do, and then I have to be able to focus on like change work. And so I'm going to really approach it as a new job, because you shouldn't mix the two if it becomes substantial.
+
+Unknown Speaker  1:40:14
+So there's plus contingency,
+
+Conor Tighe  1:40:18
+plus contingency and impact charges. I will tell you, there is a tipping point to where you have loss of efficiency. You have a lot of other things that are going on change. Like this is like a four hour module when I've changed, trained it in the past. Like there is so much air on this dog. How do we train the actual frontline staff, because I'll be honest, they're the ones who are in the best position to mitigate the impacts of change, to process the paperwork, to make sure the capital is moving. How do we train the PMs senior PMs in that way?
+
+Speaker 21  1:41:02
+Yeah. Great, excellent change management manual. We need to socialize it more, talk about it more, and have more formal, frequent trainings, just like we have a lot of safety toolbox talks, right? Or safety updates, or we talk about safety all the time. We need to be doing that in change management and change management training, okay? And also,
+
+Unknown Speaker  1:41:22
+management and change management training, okay? Three minutes to lunch.
+
+Unknown Speaker  1:41:27
+Who Wants to Be a person who's
+
+Unknown Speaker  1:41:28
+asking the last question? I think
+
+Speaker 26  1:41:30
+part of what you're to answer your question is getting the level of the ops execs to drop down more often and before there's fire.
+
+Unknown Speaker  1:41:38
+I think they're too high.
+
+Speaker 26  1:41:40
+That's that's the thing, like, maybe this training is the right way. But it just seems to me like it sometimes takes that level to push through some things. Maybe that's lack of training at the pm and senior pm level, but sometimes it seems like it lays there a long time before it gets
+
+Unknown Speaker  1:41:54
+any attention from the next level. I think part
+
+Speaker 15  1:41:57
+of it is like you're talking about your rate of or loss of productivity claims, those get very difficult. You got if you haven't been through one hard to see one when it's coming, or how to document it, I think some of your comment is train the PMS or that job level leader to go, Okay, I've recognized this. I know what it looks like. Now I'm going to go get somebody involved. Yeah. So that's part of the training is to know when you your past, your ski tips, and to reach out for someone, because often the project management team wants to go, I have to solve this on my own. That's a giant mistake. Definitely document in front of it. Take all the steps, but know when you need to elevate this up and ask for help and what that looks like. So I think that would address because we're never going to train people on every aspect, and they're going to forget half of everything they learned in there, but hopefully they know, like I recognize it, I know who to
+
+Conor Tighe  1:42:45
+call this. This is something that every pm does every day. So it's, it's like thinking, Who is the person that is front line, that's, that's, I think, who you ultimately have to target, right? We have a lot of new PMS, you know, a lot of
+
+Speaker 21  1:43:00
+new teams, a lot of new people cycling through that's why the training is so important.
+
+Speaker 28  1:43:07
+Jason, I was just gonna say on the contract, if you can get the terms in, like Scott had, where you've got a cap, change order, amount or change directive for number one, it protects the owner from himself, and if you can make sure they understand that, that it's and two, it forces them to make decisions. Yeah, pretty
+
+Speaker 21  1:43:31
+much all our front contracts have a change directive cap, and they won't have a change order cap, because that's a mutually agreed change order.
+
+Speaker 28  1:43:36
+So the subs now with the size of these jobs, if they know that they're going to sign up for a job where they're not going to end up with 10% of their contract value being hanging out and change orders because they know it has to get resolved to get going, the owner is going to benefit from that. Will benefit from that as well. So I don't know if we have standard language
+
+Speaker 1  1:43:56
+that we're putting in test question that there's not one in the contract.
+
+Conor Tighe  1:44:03
+What do we do with it? Yeah, like it's, it's one of the nine governance there.
+
+Speaker 21  1:44:11
+So it goes to a rare exception that it's not which can happen.
+
+Unknown Speaker  1:44:15
+But let's go ahead lunch. Good job, guys, there's one shot.
+
+
+Transcribed by https://otter.ai

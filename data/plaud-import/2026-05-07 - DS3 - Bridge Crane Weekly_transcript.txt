@@ -1,0 +1,575 @@
+Unknown Speaker  00:00
+You Well, if I send it
+
+Unknown Speaker  00:39
+to everybody, But
+
+Unknown Speaker  00:41
+when they send it to you, oh,
+
+Unknown Speaker  00:46
+Sorry, Hello, good morning.
+
+Speaker 1  01:01
+Courtney, I've got Zac banks joining me here. He's another pm here, he's actually going to be taking over on this particular project.
+
+Unknown Speaker  01:11
+Great. Nice to meet you, Zac.
+
+Unknown Speaker  01:15
+Nice to meet you guys as well.
+
+Speaker 1  01:17
+Don't worry, you're not getting rid of me right away. I'll be around and always available if he or you guys obviously going through him need something. No worries. Okay, sounds good.
+
+Speaker 2  01:28
+Matt, looking sharp there. James, yeah, I've never seen you in video or in person, so I can't make a comment other than that about your appearance. The most notable thing about me is beard, and that's about it's like radio. You know, you never see him, just a beard. That's it, and it's great. It. That's great. Wow.
+
+Unknown Speaker  02:11
+Before virtual meetings were
+
+Speaker 3  02:13
+a thing in the early 2010 there was a lot of talking on the phone, and I would say comment, which was like, Oh, you're much smaller than I pictured. I guess I took that as a compliment.
+
+Speaker 4  02:30
+I am decidedly not smaller.
+
+Unknown Speaker  02:32
+So there's advantages to being big. What's going on, guys? You Yeah,
+
+Speaker 2  02:56
+okay, or Matthew, did you receive the list of questions?
+
+Speaker 1  03:01
+I did, and I forwarded a few of them on to our colleagues over in Finland, stuff like the hook forging. Want to make sure I think we are going to make a change there. There's one that might be a little bit more useful for you guys. So on the GA you have the drawing that shows 125 we actually have a drawing for 120 which comes standard with that voice. So I'll be sending both those drawings when I have them. There's a few things that you mentioned on there that are actually on the drawing, for example, like the hook approach, how far the hook can move along the bridge for both main and AUX, that's actually on the drawing itself. So it shows end approaches. I pull up
+
+Speaker 4  03:46
+drawing because everything closed on my computer, decided to update just a second. I do
+
+Speaker 1  04:06
+you have a copy in front of you right now? James at the GA
+
+Speaker 3  04:15
+what's the are we going to go through the list? Or do you want to review the drawings? I think probably the more productive thing would be to go through the list. So Okay, sounds good. I think the whole intention of this meeting is to get answers so we can improve the GA drawings as soon as possible. Matt, I know you guys are eager to kick off engineering, so my recommendation is, let's start with the list. Let's share that. Let's identify the answers that we can I'll go ahead and share the GA drawings when the time comes, but I think,
+
+Speaker 1  04:52
+okay, so we know, if you can see, I don't know if you see the drawing, or do you see the email? Now it's pull
+
+Unknown Speaker  05:05
+up the email. We'll go through it too. We can check off okay.
+
+Speaker 1  05:10
+So what are you seeing on your screen
+
+Unknown Speaker  05:14
+right now? Initial, GA, drive, elevation,
+
+Speaker 1  05:20
+supposed to hear right here, but okay, for some reason, it's not showing that me reshare and I can
+
+Speaker 1  05:41
+better. Yep. Okay, so this item is actually shown on the GA it has underneath the drawings. In the top right left corner, you have both views of the hooks that distance from the end. Is shown for both the main and auxiliary hooks in both directions.
+
+Speaker 5  06:06
+Yeah, I think we needed it still for the smaller cranes. I think
+
+Speaker 1  06:13
+drawings, the drawings for both of the what you're calling is A and C cranes. That's request currently pending with schedules and drawings from our other group the other pm over there, which I think was, may have been on vacation, but I should have those to you. I'm hoping before tomorrow, if not the first of next week, sounds great. And then hopefully that checks his first one off. If you guys can see that the crane hook, it does show on the drawing, on the GA what the relative dimensions of the current hook block hook is. But as I said, that one we we think we want to switch to a different one, so a hook forging number 100 what I'm going to do is send both drawings to you from our Finland team. They're going to give me those drawings, and I'm going to forward them to you so you guys have all of the relevant size documentation for the hook, the center pin connection for you to do your blood the hook device, that'll be on that detail as well. It's currently on the GA I wouldn't expect it to change much, but those those dimensions are there.
+
+Speaker 5  07:29
+And then place is that like a next week thing too?
+
+Speaker 1  07:33
+No, it shouldn't be. It may well be in my inbox tomorrow morning. So if as soon as I get it, I can send it to you. It's their standard drawings. So those are standard forgings. So it's just a question of finding someone to actually go get them for me. If I've got someone in Houston that happens to have them, and you'll get them all the faster. So I don't know what dim is provided, but aren't confirmed. I don't I don't know what that comment refers to.
+
+Speaker 5  08:05
+Could you help me out? We just said on the drawing like exactly mentions to be confirmed?
+
+Speaker 1  08:10
+Probably right. I know there's a couple of them that we're still waiting on, so like, the overhead, obstruction, height, that kind of thing that's a part of the approval process on the GA so we want to make sure that our operational envelope is good. We don't have anything protruding further down from the roof above the runway that would impede the crane or cause a contact issue, things like fire suppression or ducting, or any other piping, fans, that kind of thing.
+
+Unknown Speaker  08:43
+So I don't know if your team is working on whatever.
+
+Speaker 3  08:48
+Yeah, we're basically, we're taking the operating envelope that you have with this GA drawing, and we're ensuring that that meets our requirements. So that's something that our design team is doing.
+
+Speaker 1  08:59
+Okay? So adapting to what we're gonna have as the confirmed GA that's another way to do that too. So no worries. See supply adapter from the bottom of the duplex hooks to assist with smaller load lifts. So could you explain that, I'm assuming you mean on the 400 and that you want us to provide something that runs utilizes the pin location for the below the hook, so the center pin between the two hooks, yep,
+
+Unknown Speaker  09:31
+okay, and you're looking for something in particular, as far as,
+
+Speaker 5  09:41
+yeah, something that's ideally we can attach a smaller shackle to, like if we had a lift where we wanted the lift fixture to come to a single point, instead of two things over each of the hooks, like the duplex hook horns or whatever. Because getting a shackle that would go through that. I don't know if it's a four inch hole large, it'd be nice just to have an adapter that you could then put a smaller shack launches is kind of like an odd request. But just was just curious if this is something you guys could recommend or have or yeah,
+
+Speaker 1  10:19
+there's obviously something you can engineer for that. So there's a couple of considerations that you would want to answer. One, what's the capacity that additional lift? Are you looking for the full capacity of the crane? If so, that's rather more substantial. That's more of an engineering piece, 20% max, yes. In that case, if you're just talking about like an off rack thing. The closest thing you would get would be a shackle, or close, depending on how part of the country you're in and the drilling factor there is, usually when you've got a shackle that shape like this, the distance between here and here needs to be able to go up over the bottom of that casting, the forging for the hook. So it's going to have to be of a certain size anyway, to have that distance be great enough to get between there.
+
+Speaker 5  11:09
+You're hoping for something more custom, so that way it wouldn't take as much room as a shackle
+
+Speaker 1  11:14
+would, yeah. The other consideration there was be, if you go the custom, then you appropriately fit that pin hole design, as opposed to non matching diameters. So the diamond your pin wouldn't match, and you'd end up with sort of an egg shape on the bottom of your hole. Not ideal for any lifting solutions, particularly when you go to do your your big lift with that below the hook device. You want that pin to hit the sides of that hole. So in that regard, what we would need to do is have a confirmation on the casting. So the forging, that diameter, is something that is going to have to work with you, or below the hook device. And then we will have a conversation about precisely what it is you want to achieve with that additional below the hook device, adapter, let's say, but it's going to have the same pin, it's going to have the same connection type, but it's just going to look very different when you get to the bottom of the forging. So there be an additional weldment or ring or something that you can slide the appropriate amount of shackles and ringing to it. So it's basically just an adapter.
+
+Speaker 5  12:18
+Okay, great. Yeah, we're getting you more info on the capacity and
+
+Speaker 3  12:24
+whatever all those details, is that something that gives this GAA approval, or is this something that we can
+
+Speaker 6  12:29
+work in the background? So it was just a question to ask to make sure that it's something that's possible before we approve it. Okay, so it will engage in GAA approval. I mean, I think, I think the answer right there just showed that it would be possible. Okay, no, it should not be drugs.
+
+Speaker 1  12:45
+Therefore it shouldn't be the drugs. Yeah, I think it's important to talk about. But the short answer is, No, we can adapt to it, assuming that everybody understands. If it has to be an engineered solution, just engineer to it exactly.
+
+Unknown Speaker  12:58
+Yep, great.
+
+Speaker 1  13:02
+Okay, the resolution you power rotation, the 400 ton hoist is the minimal radial index, the power to kind of cheese. So do you mean the actual degrees of rotation that you're talking about? Is that what you're
+
+Unknown Speaker  13:20
+asking, how small we rotate, the smallest angle we can rotate.
+
+Speaker 1  13:30
+Do you mean how finite the adjustment is? So, like, how sensitive did the rotation is? Oh, okay, that's I'll clarify that question with Finland. So what, what that usually is dictated by is inverter and speed and gearing of the motor. So those are early calculations we definitely want to include with the bottom block calculations right now. So do you have some you want us to adjust to? I can tell you that it's slow, but everybody's definition of slow is different, so you have a speed that you want to match. Bear in mind that this also has a lot to do with the width of the below the hook device that you're talking about. So the hook itself, we can give you a calculation if you want to share any information or a drawing on the below the hook device. We can obviously do the math to sort that out of what what the outer limit of that speed is going to look like.
+
+Speaker 6  14:34
+But I think information just on what the hook can do right now is a great place to start.
+
+Speaker 1  14:39
+Okay, I've got some general information from our design team that we can share specific to what we're designing right now on the hook, and if there needs to be some adjustment there, we can start that conversation with them. That can be, that shouldn't impede the confirmation of the general assembly drawing. That's going to be some nuance. Most of the General Assembly. She's going to be it's we have we have speeds of motor and hoisting. We have the operational envelope. We have its relative lift height. And it's physical constraints, as on the runway. The majority of the rest of it is like the rotation on that bottom block shouldn't impede improving that. That's nuanced. We're talking about what we need to adjust to. I hope that answered that question, or at least put it on hold for right now.
+
+Speaker 5  15:36
+Yeah, we do have some teams that are designing to it, though, so we would just like the general info soon as possible. But yeah, sounds good with a nine.
+
+Speaker 1  15:43
+I'll make the request from our finished team and see if we can get the specific block and speed information about that to you guys. So maybe there's a standalone drawing that lists the speeds and rotation speed capabilities, how much we can dial it down, dial it up, that kind of thing. That'd be perfect. Thanks. Okay, the main swivel capabilities on other hoists manual, yes, yes, those are not static. The hook itself rotates, if that's the question, okay, cool, right?
+
+Speaker 5  16:18
+That's the only difference. What's that? It does not have rotation.
+
+Speaker 1  16:22
+You'd have to rotate. Oh, it is not power rotation. It is strictly manual on a very nice and smooth bearing. But that's it. It doesn't does the crane already include center gravity contingency? Oh, so that's going to be on most of the wheel loading calculations and everything, I'm assuming, is mostly for your building details and release for steel and all of that, all of those calculations when it comes to the wheel loading, I should have, soon, I've got an appointment with My engineer talk about it this afternoon, or what the final
+
+Unknown Speaker  17:05
+wheel loading caps are.
+
+Speaker 1  17:06
+But the short answer is yes, it takes into account all of the different parameters for loading of that crane. So when we are giving you the Kipps. The max wheel loading on the Kipps. It is at its most extreme portion, liable to have the greatest impact onto the structure, meaning it all the way to one side. It completely Max wheel load on the structure. That's what you're going to be experiencing. So I don't know if that's the I think the full answer,
+
+Speaker 6  17:45
+I think the question was, more of, you know, when we're lifting something with this crane, so, like, basically, if you took, let's say we did lift lifts 400 tons, which we won't but like, what would be the max speed that that could move? Because you obviously there's a good like, center of gravity, contingency and dynamic amplification factors when you're lifting something and then moving it, like, does that already account in that load, that capacity that you're giving us, the 400 ton? Is there like a max speed associated with that? Or should we assume some factors when we're going to lift something with the crane. Does that make sense?
+
+Speaker 1  18:26
+So if I take your question correctly, you want to know whether the crane has any intelligent feedback, or when you're loading it heavy, it's going to set certain speeds.
+
+Speaker 3  18:40
+I think the question is, what is the scenario that achieves 144 kids? Like, how? How is that voice loaded? What are we assuming for the 400 or the auxiliary portion hoist, and where is it positioned? So the maximum wheel
+
+Speaker 1  18:56
+loading that you're going to get on that structure that's loaded for 144 kids. Is all full capacity pick all the way on one side.
+
+Speaker 3  19:09
+Is there an acceleration that is part of that scenario? Or is that just a static assumption, assuming there is 1g or like, 1.2 5g any sort of like lateral G. I think the
+
+Speaker 1  19:24
+best way for me to answer this is going to be to give you the wheel loading calculations that show its relative position and its lateral inputs. So we have course diagrams and drawings that will give you that information. And it's situational, so meaning you're not going to get one chart that shows here's the maximum load it's going to be. Here's where we're loading off of this side of the crane. Here's where we're loading off of this side of the crane, in the middle of the crane at capacity, when it's moving all of these things. To answer the questions from earlier, yes, because we have anti sway, the crane is going to limit its movement. In so far as when you ask it to go faster, it's going to do that. It's also going to take into account that it needs to mitigate any sway, and so it will automatically slow and adjust the load for when you hit stop, it's not going to start just bit and then have that load swinging. It's going to decelerate and mitigate that movement.
+
+Speaker 5  20:34
+God bless you. Sways just for the 410, voice, right,
+
+Speaker 1  20:38
+correct, yeah. And the reason for that is the auxiliary hoist would still be looking down relative into the same position as the main hoist, and it would be trying to catch up with it's the other block and vice versa. So you don't want competing vision on that, competing anti sway capability. And I'm assuming this is an assumption of grant you that you would want that on the 400 ton main lift, as opposed to the auxiliary way to pick for sure. No worries. Okay, so I hope that answered that question, and that kind of goes in with the velocity, acceleration, stop. All of these things are controlled. We have maximum speeds, ramp ups, ramp downs. And there's some fine tuning that we can definitely talk about, especially when it comes to proofing. And we're doing the commissioning of the crane, so there's a certain amount of feedback that you can put in now, we'll go ahead and have it be a part of the programming for acceleration, deceleration, these type of speeds you want to say at the lowest possible speed.
+
+Speaker 3  21:51
+Yeah. So Matthew, I think next steps for this want to dig into some of those parameters so you guys understand those assumptions. So I think once we get that count package, we can review that. And is Is this something that you want to check over before you improve the drawings, or is this something that we can tweak and for any reason, if we need to tweak something, is this something we can work on with you after the fact?
+
+Speaker 1  22:19
+Yeah, the only, the only caveat there would be the low speed, anything that's adjustable in between there. So if you want a lower speed than what is listed on the GA it's still possible. But for the majority, this is just the working limits of the equipment, right? Okay, that would be the only thing if you're looking for higher speed or lower speed. We want to define those before the equipment's been approved. That's a part of the approval process.
+
+Speaker 3  22:49
+The lower speed I'm looking at the main voice data. That lower speed is 4.95 feet a minute, I think, point nine, feet per minute, and then at some point speed, the traverse speed, is that the maximum, or is that a minimum?
+
+Speaker 4  23:09
+The 4.5 that's the should be the minimum. I've seen 4.9 but that's fine, okay, 4.9 Okay, I can't see it, because if I go to change it, then your view goes away. That's pretty slow. Minimum speed, 400 times. Momentum is a thing. Oh, totally Yeah.
+
+Speaker 1  23:33
+The actual down tends to be the tricky bit, making sure everything goes nice and slow on the way down.
+
+Speaker 5  23:41
+Yes, yeah, yeah, a lot of health there.
+
+Speaker 3  23:51
+Okay, all right. So sounds like you guys what I'm trying to do just keep an inventory of like when things are needed to get this. Alex is four. The 400 is on the curve. Pat, so I'm super interested in understanding what we need to do is to get it approved. Would you like to review the calculations first before my what I'm what I'm hearing from Matt is the minimum is what it is may find her just finished outside of those parameters. So in other words, this should NOT gate GA and Google. I just wanted to make that statement and see if you guys are okay with that.
+
+Speaker 6  24:27
+I think it's just about how we design, fix sharing, and how we weight the crane and how fast we move it, and that's kind of the lowest speed that we can go. And then we're going to work with it, which is important information to know for being able to
+
+Unknown Speaker  24:44
+work with it. Okay, that sounds good.
+
+Speaker 1  24:47
+In an effort to just draw a line underneath that one, what I'll do is I'll double check with our electrical engineers, because typically what we have is the ability to adjust via the VFD, so you have the equipment the way it's designed to operate, but you also have a lower limit when we can adjust the Hertz going to the motors. That means that we can lower it down lower but operationally speaking, that's what you're seeing on the GA so I can get a more clarified answer, especially if you send me an email. We have this one that's working. If you guys develop a different understanding or a more nuanced question, just send that to me. Sometimes asking a question in a different way tends to help clarify that on both ends. So to send it to me, I'll send it on but it'll also be checking,
+
+Unknown Speaker  25:35
+like the more important ones, the step resolution. I don't know if I've heard the answer for that
+
+Unknown Speaker  25:44
+one yet for The Christ
+
+Unknown Speaker  25:51
+whatnot, a
+
+Speaker 7  25:59
+step resolution, the minimum step, minimum movement, we could make
+
+Unknown Speaker  26:06
+sure, yeah. So even with each movement,
+
+Unknown Speaker  26:11
+I was in the lateral direction, I think, though five millimeters don't look elicit enough.
+
+Speaker 1  26:14
+Tom, okay, yeah, if necessary, we can get a clarifying document on that, because it sounds like we're talking very nuanced movements. And so everything I'm I'm hearing is, I expected, very fine tuned when it comes to movements. So we want to make sure that what our lower tolerances are and what the minimum amount of movement smart speed, as far as the movement or impulse, so meaning, you know, bump, the traverse on the trolley. How far is the minimum distance there? It's going to sound like a copy, but I'll explain. It does depend. And what it depends on is what we're setting our ramp up limits for, what that first speed is set for. So you can have a ramp up for first speed. First speed can be a bare minimum of millimeters, and you can set that ramp up speed one second to 60 seconds. And so if by the time you're holding it down five seconds to combine it's only gone up to one to 2% of the operating speed of the machine. I would be surprised if you could discern movement by the naked eye. So there is a lot of difference that you can have variable to how you're plugging in and timing those inputs, ramp up, ramp down. Let me see if I can get a better picture drawn around that idea and make everybody happy with
+
+Unknown Speaker  27:41
+the levels of that variability, that's helpful.
+
+Speaker 3  27:45
+Thank you. Just find my curiosity. Where am I seeing? Where this five millimeter
+
+Speaker 2  27:57
+formalize, formalize what you just said, Matthew, in our purchase,
+
+Unknown Speaker  28:03
+in your in your purchase,
+
+Speaker 2  28:06
+what's a good way to formalize what you just communicated, as far as the movement in the purchase document, Kelsey said it was our previous one, but not in the one we were looking at. But what's a good way to make sure we're we're getting what you just described from the item. So what I
+
+Speaker 1  28:23
+what I just heard was you saying that it was in a previous version of the asshole, like the documentation for for what you guys purchased off of
+
+Speaker 4  28:30
+but it's not in the current one. It's much smaller. The current
+
+Speaker 6  28:35
+one is just the GA drawing, and it's not explicitly stated on the general assembly drawing. That's what we're kind of looking at right now. We'll just need to go on a general
+
+Unknown Speaker  28:44
+assembly drawing if it's just setting
+
+Speaker 1  28:47
+Okay, James, to your question, probably the most effective way would be to formalize that with the document that specifically states operational speeds. Now that may mean and likely little to go back through what was priced, promised, equipment that was specified, that kind of thing. But I would recommend the best thing to do would be have a standalone document that has engineering input on there, so that we know exactly what, not just the operational speed constraints, but what their
+
+Speaker 3  29:18
+sensitivity is. I think that's the I think that's very wise, because then there's a clear understanding of what we're getting written in people's personal notes is Justin one document that's been memorialized.
+
+Speaker 1  29:30
+Thank you, Matt, no worries. I think it's better not to have that on the GA to have a standalone document for its relative importance
+
+Speaker 2  29:41
+is extremely important. Questions are probably leading to. Is they may be in some of the in the proposal somewhere, but somewhat of a boilerplate of all the pertinent info. So we can just listen to this as a source of truth without having to scroll through the 30 pages, essentially. But let's get the reading board stuff written down into one pager. And this is probably one of the most important things to the assembly process of the system.
+
+Speaker 1  30:05
+Sure, and what we can do, and I'll work with Zac on this, is we'll get a document, submit a list to you, and we can amend that to include not just the GA not just the single lines, later documents for operational full electrical those will be as built. So that'll be after, usually 30 days after the crane has been installed and commissioned, we have a review of everything or anything that's been changed, so you get full one. But for working right now, as we're going through, having that on the document submit a list and having a standalone document created onto that list that states, speeds and capabilities, let's say right, for lack of a more romanticized name, would be a good document to have, not just in the documents in the list, but a standalone and that way we can track it from that it also would show a revision date, so when it was communicated whether it was approved, whether it's a document that Even requires approval, simply for information only.
+
+Unknown Speaker  31:02
+You're not really going to inform or have a say in what type of conductor bar we use
+
+Speaker 3  31:10
+to is this something that we can so I just want to make sure that we're getting kind of the minimum requirements and not asking for too much more for the sake of time, knowing that the bridge crane is on critical path. Is this something that we can pull together within the next couple of days, at least, for the 400 ton bridge crane eating of speeds, right?
+
+Speaker 1  31:32
+I would think, depending upon who's available, I should be able to get you the meat potatoes of what you're asking for my first part to mid next week. Okay, is that simple or do we need to wake some people up?
+
+Speaker 3  31:49
+I think we should. This is critical. Pat Matthew like this. This is the last thing that gets installed. And to be probably a little bit more candid, there is an unknown preloading conversation that may cause some hiccups in the schedule. We really this. This is probably the most important aspect of our building right now. If we wake people up and get this done within literally, the next couple days and Friday, Monday latest, that's going to help things out a lot.
+
+Speaker 1  32:22
+Okay, let Zac and I tackle this one with the various assets that we have, we still have tomorrow, so it's good we're having this on Thursday. We can craft an email and get that, potentially an early meeting scheduled with whoever is available, not on vacation in Finland, but someone should have this information, and we'll endeavor to get that as fast as we can.
+
+Speaker 3  32:47
+We've got about a half an hour left. I think we should save probably 10 minutes just at the end of the meeting, just so let's reaffirm like, what are we trying to achieve to get out the door to Pacific Asian by Monday latest, but we want to go through the remainder of these items.
+
+Unknown Speaker  33:05
+Sure. Thanks, Matt.
+
+Speaker 1  33:10
+Do the hoist? Have a load cell? Yes, readouts, I believe so. Apologize. We got a few things in my head right now. I have to look to see whether that was a part of the the assault. I believe read out indicator was a part of it. The answer to your question is yes, they all have load cells, which it's an internal load cell, so it's not like a standard brick that you'll see on the outside is sometimes when it's an add on, it's integral to the machine. So short answer, yes. Long answer, believe so. But I will double check and make a confirmation, yeah,
+
+Unknown Speaker  33:53
+it's on all of the lines, AWS,
+
+Speaker 1  33:58
+names, the majority of what I don't have, as far as clarity, would be the other two. So I'll get both of those. And as far as answers, just to clarify that is something that you want,
+
+Speaker 5  34:09
+yes, okay, yeah. And then my phone question is, where is the readout? Is it mounted on the pendant, or is it on a wall somewhere?
+
+Speaker 1  34:17
+Or you can have a wall mount. Sometimes it's mounted on the crane. Sometimes it's mounted on the face of one of the girders. Sometimes it's mounted on the underside. Usually depends on how high up it is, whether you actually see that binoculars, right? So the readout fits big. You know, there's a whole lot of this going on, yeah. So I would recommend that one of the better places to put it is on the wall. But that kind of comes into inputs that have to go out, go through a series of anyways and everything, and make its way to there's also potential for wireless, but I'll double check.
+
+Speaker 4  34:59
+Okay. Thank you. What's
+
+Speaker 5  35:05
+that? There's also a question about position readout, like x, y, if that's a thing specifically for the 400 ton
+
+Speaker 1  35:14
+hoist, do you mean, is there a visible indication of where it is located on the runway?
+
+Unknown Speaker  35:20
+Yeah, runway and bridge.
+
+Speaker 4  35:23
+So you really burn X, Y, yeah, okay,
+
+Speaker 1  35:28
+the machine knows where it is. You're looking for a readout so that somebody else could see that. Yeah, I'll check I run into that one outside of a fully automated warehouse management style, and that's in a completely different animal. But let me see if we can maybe borrow some design from that. See if we can achieve that. It might be helpful if we're trying to integrate both of those things. So yeah, for instance, there's a screen somewhere that puts that positional and load information on it on a single screen. So that means we've got a series of inputs that are coming from the machine, and then you can route that information to a screen somewhere. That might be one possible
+
+Speaker 5  36:14
+solution, okay, that would be sweet. And then also, leading off of this, I think we had asked previously for, like, a set of position that we want to come back to, and then the crane knows to get back to that point is that in our
+
+Speaker 1  36:31
+Yes, that's targeting. And what that does is it will go back to it's a relative position that it was before the tolerance is usually within two inches. Okay, so, but that changes based on height and some other constraints, like with the loading device and that kind of thing. So things being able to block will go back to within two inches of its set location for targeting. What that won't do is automatically lower the hoist with whatever device down into like if you were picking something up trying to thread a needle. As far as I'm aware, that's not part of that capability. It's a specific locational, not an operation, if that makes sense, yeah, yeah, so, but yes, that is returning back to a relative location, say, like over your mixing chamber, or whatever it is that would be, it would get it back close, very close. Yeah. Cables wound around the drum affected position tolerance when we descend 30 feet, the ropes and voice drum distributed around the center tolerance for lateral shafts all going down. Do you explain that a bit to me, yeah,
+
+Speaker 5  38:02
+this crane likely has, like, the cables. So when the cable unwinds 80 feet or whatever, it's wound in a way that, like the hook won't shift as the barrel is unwound. Right, like the cables on the barrel are properly centered, they probably expand and contract as the barrel rotates,
+
+Speaker 4  38:18
+yeah, instead of feeding shifts. So you're wondering about the spread of the cables, and
+
+Speaker 5  38:22
+just to confirm that, like the hook won't be many inches off from where it starts, as it decides
+
+Speaker 1  38:31
+on an indoor application, you're not accounting for wins. You're on what should be a very level and stable runway, and the machine itself is going to be so you're going to have very near
+
+Unknown Speaker  38:50
+true vertical lift.
+
+Unknown Speaker  38:52
+Is there a tolerance to that?
+
+Speaker 1  38:55
+There is, yeah, so there again. I don't want to say it depends, because it sounds like a cop out, but depends on if you have the below the hook device. But in general, that hook is going to descend. If you're setting, say, a target location, it's going to remember where it is in relative position of the hoist, how far down it's the hoist is, where it is laterally. So the trolley and the bridge.
+
+Speaker 7  39:26
+Sorry, I'm thinking, Laura, we go to we manually move it into position and we pick something up vertically. Is there a tolerance for how much that hook can move? Strictly move, making a vertical move.
+
+Speaker 1  39:42
+I I'm not sure. So I'm going to try to answer a question I think you asked the it has load centering, so you won't side load the crane. So like, for instance, if you're picking something up here, but the true center of lift is here. It's going, as you go up and you put weight on it, it's going to find its way to the center.
+
+Speaker 5  40:06
+Yeah, we need more, like if we have a 30 foot tall pin and a 30 foot tall hole, and we have to pull the pin out without touching the hole, so as we traverse 30 feet straight up, we don't expect that hook to move at all laterally, based on the cable unwinding or whatever.
+
+Speaker 1  40:23
+So that's what's known as true vertical lift. I'll double check to make sure on this particular hoist model, because that's a very specific characteristic,
+
+Speaker 4  40:36
+because it has a lot of different mechanical considerations, as you both just pointed out, that's
+
+Speaker 3  40:45
+a specialty feature. Is it called true vertical lift? Is that a specialty feature?
+
+Speaker 1  40:49
+That it's not true vertical lift is more like an academic terminology. It's not a like, a like, like, target positioning. We would have like, when you see it on the hassle, it's more of a conceptual thing. So there are certain types of hoists that what they're alluding to is it has to be there's a zero tolerance for side to side as that cable makes its way through its progression on the drum. Usually, this is achieved by what's known as a fleeting shift. So the last position is it leaves the crane. It's in the exact same static position it will always be in as it leaves. So no matter where it goes on the hoist, it comes back to this position right there. It's like the heel of my hand as it's going back and forth, it's going down that I'll double check to make sure that the reading on this whether or not that's the case, you don't necessarily have to have that arrangement in order to be true vertical lifts, but that's something we definitely want to double check
+
+Unknown Speaker  41:53
+on very soon. I'm crazy for asking. No, it's an excellent question. We love it. No, it's very
+
+Speaker 1  42:02
+specific, and that's the kind of thing that's very important, right? It looks it sounds nuanced to somebody else, but it's a very big deal when it comes to the type of equipment and the way you're setting it up. So we'll have this, because it's early conversations, way better to happen later. Yeah.
+
+Unknown Speaker  42:19
+Totally Great. Thank you.
+
+Speaker 1  42:23
+Sure. Let's see the make sure the closer the hook is east side of the building.
+
+Speaker 6  42:31
+I don't know what that's on us. I mean, I think, I think we're just basically you. We want to make sure that the orientation at which this crane is installed in the building.
+
+Speaker 1  42:44
+Is the order of the hoist versus the main versus the AWS? Yes, exactly, yeah, exactly. Okay, yeah. Because you're, you're, you're four hundreds, operationally constricted when the hoist is on that far side, right? Got you that's
+
+Unknown Speaker  42:59
+very common. I've said you won't want those located
+
+Unknown Speaker  43:02
+like, we convert a lot.
+
+Unknown Speaker  43:02
+One, put together a diagram and email it out,
+
+Speaker 1  43:07
+yeah, and make sure I did get onto my engineer about this. There's not a compass on that GA drawing, because you're trying to get it out really fast and start normal checks, but put a compass rose on there for us, so we know which orientation it is and well, that way it cuts out the middle of us coming back and you guys say, No, it's east, blah, blah, blah. So if you do that, and we'll set the orientation of the hoists that way, we can close the loop on that conversation. What do we want for A and C cranes to open again? I'm not real sure what the question
+
+Speaker 7  43:44
+there is asking. One is the previous question, which orientation are the main and AWS?
+
+Speaker 1  43:51
+Perfect. Same story there. As soon as we get you the general assembly. So the schedules for those you guys can mark them up as you see fit. Verify soft stop location for harpstop? Yes, there is a an electronic soft stop, heart stop, generally can be said to that. It depends on, I'm not trying to use that word exhaustively, but we don't want to contact the stops. So there's going to be an appropriate amount of slow down before you get to the end stop, right before it completely cuts out. There's going to be a slow down so that we don't end up potentially contacting or getting close and then having any sort of sway. We have anti sway built in. So it's going to do a lot of that mitigation on its own, a part of the traditional process going to necessarily slow it down at the end. So even if you're not moving very fast, your operation in that direction is going to be slow. You're not going to be allowed within, say, five feet of the end. It's going to curtail that
+
+Speaker 6  45:00
+necessarily, that's fine. Should we still assume that even at that slow speed, it can reach about an inch? Or should we be assuming something like six inches? Okay, okay, one inch is still then we can reach that point. It just will take a
+
+Speaker 1  45:15
+little bit longer. Okay, great. We should be able to do that again. A lot of sort of fine tuning we get later in general, it's a good, good distance. There crane access points. So on that one question. So initially, James, we had our conversation that we had put on each of the hoists, on each one of the catwalks. There's a gate in the middle that you could get to the man lift. Yeah, and we've had some discussions about what the best way to actually be able to get on the machine is. So currently, the E chain, so the power feed power cables are on what we would normally call the g2 girder. It's called g2 because the other one's g1 g1 is where the electrical and the catwalk is. We're putting the E chain, the power cable, on the g2, side of things, so that on the we're done with this list, I'll show you the G here real quick. Might be easier.
+
+Unknown Speaker  46:20
+So many different sharing platforms. Okay?
+
+Speaker 1  46:33
+We are seeing these gates here. Let me know if you can see them. Okay, so we have these gates here that were originally intended for access via man lift between the girders. However, I would make a recommendation, since we're doing the E chain on this g2 side. So this cable tray that you see here, that's all the power cable information cable that you're going to have. You're going to have, and we have a trolley access now, there is a way that we could leave these in the middle that you could still access via man lift or and this is another possibility. We simply have an access to get on g1 via man lift if you can't get to it say, like on the corner of the building, as we had discussed, once you're on this main catwalk, you can access these trolleys, because there is no obstruction from that E chain to be able to climb up this trolley access ladder and have A gate here, here, here, so that you could access the trolley. This is purely a preference from your point. It doesn't have any functional difference, and it's mostly just what you would want for ease of operation.
+
+Speaker 7  47:56
+Does that add any additional clearance requirements above the crane?
+
+Speaker 1  48:01
+Above the crane. No, I mean, so what we're what we're looking at here is, though you can't see it on that other side this, this waste is substantial as far as its height goes. So you can see the relative difference. Even a man standing there is not really going to come above this. So there's no cage, there's no additional ladder, there's no gate that is necessary to facilitate being able to get these are already equipped for foot traffic, and we're merely loading from this ladder onto the crane itself. Suit your technician or whoever will climb up this ladder, walk across this girder and be able to open a gate here, here to get onto the trolley. Personally, I don't think you're going to go wrong if you have both.
+
+Unknown Speaker  49:02
+Looks good. Yeah. So you can do both,
+
+Speaker 1  49:07
+and that basically gives you many different options, which isn't a bad thing when you're talking about crane access. So unless you give me another direction, what I'm going to
+
+Speaker 2  49:20
+say is, both if, besides included.
+
+Unknown Speaker  49:24
+Okay, so any other questions, I guess I can go back to that list, but you won't see it. Let me see one
+
+Unknown Speaker  49:42
+question we had. I don't know who's on that email
+
+Speaker 6  49:45
+list, but the power provided on the clock that was the last question, very well done.
+
+Unknown Speaker  49:54
+So that would be via a able reel, and I think we have a specification of this nice
+
+Speaker 1  50:04
+that was given to us a little bit. But I don't know much about your requirements for the below the hook device. I'm assuming that's what you're asking for. Is what power is being provided in order to operate your below the hook device?
+
+Speaker 7  50:20
+Okay, I didn't know if you had a standard power specification that was provided, or if we could over specify something, usually, in a
+
+Speaker 1  50:30
+specialized case like yours, it's going to be a specification that we adhere to, not that we state and is adhered to, since we don't know the manufacturer or anything indeed, particular about that, it's going to be a specification that you're going to need to state to us on what its operational requirements are. Insights on the hook forging some say and obviously, but the power requirements, the rotation requirements, the speed we got some of that information, James was able to facilitate the meeting that we kind of passed a little bit of that back and forth. But if you have specific needs, this would be the best time to go ahead and give them to us. That way we can tailor the machine to something you already know you're going to need.
+
+Speaker 7  51:22
+So we're still designing the equipment, and we don't know the exact requirements. So I try and turn the question a little bit around and say, what could you provide there? I'm assuming it's going to be 480 so we don't have another transformer up top, which is fine, but how much current could be provided at that hook.
+
+Speaker 1  51:43
+So there's going to be a specification that's on the single lines as a provision for that already. So that's based on the information we've already got. My recommendation would be to we continue on so we don't impede any of the single lines, the production and the engineering right now, and that should be called out on the single line drawings. What we'll do is you guys, we'll make a point of emphasis, of highlighting whatever that is, either it's efficiency or it's fine, and then we'll work from that. But please will have a basis for what was already designed to what integrates and works with the trolley already and the bottom block, and we'll just go from there. Okay, I
+
+Speaker 7  52:20
+don't think I've seen that single line diagram yet. Nope, neither I'm working on it. So, yeah, I think it's okay. I just need to, we need to know what it is and make sure that it's efficient. I mean, I don't know what you typically provide there 30 amps to 480, or 50?
+
+Speaker 1  52:45
+Yeah, it's such a varied constraint that it's usually very specialized. You have everything from magnet controllers, vacuum lifters. There's such a gamut the answer say, you know, could you provide it? Yes, without knowing any more information. Yes, it's how and what impact that has on the project and everything. So we knew we were going to do it when we started. We just don't know what that looks like yet, so we'll go ahead with what we've got engineered, and then we'll get that to you, hopefully within the next few days, and we can, we can get a resolution on that pretty quick.
+
+Unknown Speaker  53:26
+Sounds good. Thank you. I hope so.
+
+Speaker 3  53:29
+Courtney, James, what else you got? It was a last remaining of the comments. What I like to do is just get a quick, Crystal, clear understanding of what's coming latest Monday, because Monday, what we want to do is approve the GA drawings after we review. To kick you guys off with engineering, can we just go down that really quick as a group? And I think somebody should be taking notes. I'm happy to
+
+Unknown Speaker  53:55
+notice that there was
+
+Speaker 4  53:57
+a change in language there latest Monday. I believe you were the first one to say that I'm doing as best I can
+
+Unknown Speaker  54:05
+to get it to you. Latest all coming later today,
+
+Speaker 3  54:14
+we got to target something Matthew, because just this is the main thing we're kind of pushing on. Totally understand you're gonna do the best you can do. Just keep us in a form.
+
+Unknown Speaker  54:23
+Let's, let's go through,
+
+Speaker 3  54:26
+folks, let's just go through. I did add updates to the slide deck that we were all looking at. So sure, something there, you know? And I actually think the most effective thing anyway, okay, let's go down the list. What are the items that we're going to have in hand, latest Monday or targeting latest Monday?
+
+Speaker 1  54:55
+I gotta give it to you guys a try every time. So what we're working on right now is finishing up the single lines. And what I'm going to attempt to get to you as fast as possible is that operational the speed capabilities, and it's the variabilities that we can have. So what the operational speeds and inputs actually can give you, right? So speed versus it's slow nuance. If you're looking for a header, we're doing
+
+Unknown Speaker  55:35
+speeds and capabilities chart. About that
+
+Speaker 3  55:38
+speed and capabilities chart, okay? And that's going to provide us information for the hoist, the vertical direction, the transverse direction and the lateral direction, correct,
+
+Unknown Speaker  55:51
+all three directions. Okay, perfect, all motions.
+
+Speaker 1  55:53
+Yes. Out there that I don't know if I'll be able to get immediately is the rotating of the hook right? Some of that's dependent, but it's based on the information that we currently have. So if that engineer is done, I should be able to get that to you that we can amend it to that document. That's good, yeah.
+
+Speaker 3  56:18
+So get three, three items here the fourth one is that
+
+Speaker 3  56:28
+a question or yeah, just asking for input from the group. We got single line diagram, speed variation chart showing all three directions. Rotational resolution of the hook is a separate line item, income.
+
+Speaker 1  56:44
+There's the power cable capabilities, but that's again, settled by the CMH line initially, and we can deal with that, okay?
+
+Speaker 3  56:51
+And that's not necessarily needed for GA approval, something that we can correct, yeah,
+
+Speaker 6  57:00
+load cell readouts, I don't know if that's like a quarter after
+
+Unknown Speaker  57:07
+load cell readouts,
+
+Unknown Speaker  57:09
+flexibility, positional and load readout right?
+
+Unknown Speaker  57:15
+Yeah, and then also the
+
+Speaker 4  57:18
+coaching drawings. Were ones that I was going to try to get to as well. Yeah. To get to as well, yeah.
+
+Speaker 6  57:25
+The biggest one is the near vertical lift.
+
+Unknown Speaker  57:32
+Vertical lift, yeah. The limitations on that. Most of the
+
+Speaker 1  57:42
+question, there is based on some of the features that you guys have that interacts with the hoist and how mechanically it's but how it can also be electronically mitigated. That's a long way of saying whether or not the machine will adjust to not having been mechanically set up for true vertical lift, but will actually functionally operate for true vertical lift. So that's, that's the avenue I'm going to be looking at with the engineer to try to get an actual answer. I
+
+Speaker 4  58:19
+hope that made sense. Bottom line is, you don't care how it does it, that it does it, yeah.
+
+Speaker 3  58:32
+So I think in the A to C agency crane,
+
+Unknown Speaker  58:40
+big area. You call it vacation Matt, and he gets back doing something.
+
+Speaker 1  58:55
+Okay, I spent most of my vacation days volunteering for various things. You know, it's, it's on feedback. I guess I get to go to West Texas soon and put roof on disadvantaged kids camp. So on a roof, I don't know about that. I think God's made me about as tall as I'm willing to get off the ground.
+
+Speaker 3  59:16
+So, okay, sounds good. We've got one minute left. I'm just gonna repeat so there's no questions. Really want to get this thing approved by Monday. So for the 400 ton crane, operational speed and variability, speed variation chart, three directions, rotational resolution of the hook load cell readouts, methodology of true vertical lift, as long as we know that it can do it. And then for cranes, the 75 time crane, crane pic area, send us in an email, but these are the things that Matt We're targeting for Monday. Please let us know if they're happy Monday.
+
+Speaker 1  1:00:00
+No worries. And I'm sure Zac will keep me honest on all that stuff too. So no worries. Discussions with you, take care.
+
+Speaker 8  1:00:11
+I got an email or a call from the US Department of Labor. They want no so it's nothing bad. They're doing a so they're doing a case study. They sent over, basically, they sent me some information on box building, and they want to know what the general the GC, GRS and.
+
+
+Transcribed by https://otter.ai

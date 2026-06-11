@@ -1,0 +1,335 @@
+Speaker 1  00:00
+Tackle today. Sorry. WTI call. Yeah, I'm hoping to talk about the settlement. Oh, okay, so
+
+Speaker 2  00:09
+I'm in clayco's office. Yeah, because we had, we had another meeting at two o'clock, so I just came early.
+
+Unknown Speaker  00:15
+Yeah, we're hoping to talk about the settlements and confirm whether we were on board with, on track with that.
+
+Speaker 1  00:22
+For geotechnical Matt, we'd like to get some information from you in terms of lateral pressures on walls due to surface loads, surcharge loading. Those are frank anything else that we need.
+
+Speaker 3  00:42
+That's it from us. Okay, thanks, Mark, Matt, I'll hop over to you. What are some of the things that you need out of this meeting?
+
+Speaker 4  00:55
+I think we think the last meeting, we got kind of our marching orders, because the geo peers we're going to be in every two they're going to be everywhere, except for the slab on grade and where Craig. Are we talking about?
+
+Speaker 2  01:11
+Now, as far as say that again, any additional places, or where are you up here in total,
+
+Unknown Speaker  01:17
+where your not going
+
+Speaker 2  01:19
+to be? I guess the only place that they're not going to be is in the office, slab on grade, for sure. And we were going to provide a add alternate for the cub, and then Clayco is just going to look at those numbers and schedule and, you know, see what was the most cost effective. So I think if you provided an over x requirement for the slab on grade for the cub that would allow them to do that analysis.
+
+Speaker 4  01:47
+Got it okay. So I think we were good there. And then the only other questions I had were about contracting for, you know, the testing during construction, with any answer to an email on that,
+
+Unknown Speaker  01:59
+if there was
+
+Unknown Speaker  02:01
+how that was going to be contracted,
+
+Speaker 3  02:06
+likely through Pacific fusion directly, but we'll, we'll let Nick handle that question.
+
+Ryan Hankins  02:13
+Usually the best from our standpoint too, because it's not a conflict of interest.
+
+Speaker 3  02:19
+Yeah, that, yeah, in our scope, Matt, so that that's something that Nick will manage.
+
+Ryan Hankins  02:33
+Okay? Clayco, yeah, so I'll say that like, I'm going to kind of defer to Craig here, but we, we just want to make sure that Craig has, that we have line of sight to what Craig needs, and making sure we're we're pushing forward with all those things by the eighth or the 11th so that you can start your design but and then Also the settlement conversation we had last week. I know we had talked about settlement a little bit. We went ahead and we kind of broke the topic open on Friday, but I don't know if we want to spend the whole meeting today talking about that, but would like to at least get in everybody's minds as we move forward. I
+
+Speaker 3  03:24
+Okay, and Craig, I'll hop over to you. What are you looking at getting out of this meeting?
+
+Speaker 2  03:29
+So obviously, Mark and his team, we have the same need, right? We need to understand the settlement criteria so that ultimately, you know, Mark and his team can complete their design, which will allow us to start ours. And that kind of is a domino effect of his team being able to hit the May 8 date, so that we can hit the ground running, Like Ryan said on the 11th. So that's super critical. The other thing that kind of fell off the radar that we said we would help our design and optimize our design, was getting some CPT testing, some additional CPT testing. I'm fine coordinating that. I don't know if it makes sense for us to get that done, for Clayco to get that done, for Matt and his team to do it under their contract. I think it's going to be added scope no matter who does it, I just don't want it to get fallen off the radar, that it's something that would help us optimize our design and geo lines in Albuquerque is usually pretty good about being able to do that relatively timely. So that was the only other item that I wanted to get that on somebody's quote, unquote, to do list so that that could get done. And I'm fine taking it if that's what we want to do.
+
+Unknown Speaker  04:47
+Then Craig, what is CPT testing?
+
+Speaker 2  04:49
+Well, cone, cone, pentrometer test. It's basically in lieu of normal borings. Or you basically drill a hole and pull that sample the soil up to sample it. This is driving down a cone penetrometer that measures basically how stiff the soil is. Matt could speak more intelligently than I could about it, but it gives more accurate information for sandy soils. Borings tend to be not quite as active. They're really good in cohesive clay soils, which are the upper portion, but the deeper portion turned to sand. And so getting some better information about settlement for the deeper soil might help our analysis.
+
+Speaker 3  05:34
+Got you So, Matt, once we get this contract bind up, I know you've already completed, I think, roughly four different, I guess four samples to the depth of 30 feet. I'm assuming this is this test will not be sufficient to provide the level of stiffness criteria that WGI needs, or, yeah.
+
+Speaker 4  05:58
+I mean, we've already, yeah. I mean, the CPT testing has a specialized three we don't do it. Our New Mexico offices don't have CPT equipment, so everybody uses a company that Craig referred to, called geo lines in New Mexico to do it. And so, yeah, we'd have to add, if we want to take it under our contract, we would have to add that to our
+
+Speaker 5  06:19
+school, I guess. So. Gotcha, okay,
+
+Speaker 3  06:23
+sounds good? Well, I have it as a line item here. You know, likely, Craig, we will. We'll place it under your contract. Let's talk through that a little bit more.
+
+Speaker 2  06:37
+Okay, I'm just gonna say, Keep it moving. I can just get a quote from Geo lines, because, as Matt said, they're really the only person in New Mexico that does it. So let me just get the quote from them and who contracts and how we put that together. Let's just get the numbers and information so we can keep it moving. I'll take that action item perfect.
+
+Speaker 3  06:56
+Definitely appreciate it. Craig, any other items other than the CPT
+
+Unknown Speaker  07:01
+testing. I don't, I
+
+Speaker 2  07:02
+don't think this is really necessarily the appropriate group, but I do there was some discussion about potentially our contract being assigned to Clayco, and I don't know that we necessarily want to Bob this meeting down, but I just don't want that to kind of lose, fall off the radar that we just
+
+Ryan Hankins  07:18
+as far as we're concerned, and I've talked to Bill hue about a couple times, but we're okay with that. We just want everything to be like we want the design criteria, we want the settlement criteria, everything to be static, so that we can, you know, it's relying on a basis of design. And so I think we're working towards that, and frankly, we can't contract with them today anyway, because we don't have a contract. But once we do get a contract, we're okay with, with with contracting directly to Craig, okay, so
+
+Speaker 3  07:55
+just sounds great, and that would, that would likely be our preference preference as well, Craig, just to have you go directly with with Clayco,
+
+Speaker 2  08:05
+and that's fine. We have a contract with page right now, and it's perfectly fine for that to either get assigned or, you know, cancel a new contract. All I asked to fill is just that we don't get left in the cold where we're in between not having a contract. I want that one to stay in place until we get old with Clayco or, you know, just so that we're all on the same page. Obviously, we're doing, you know, all this effort, and just want to make sure that we don't get one contract canceled before the hook was in place.
+
+Ryan Hankins  08:31
+The one other thing that I don't think we mentioned, I don't think you mentioned, was the hourglass versus the I
+
+Speaker 2  08:37
+beam, yeah, I think, yeah. I think Marc can probably get to that. I think that's from my perspective. That's the really meat potatoes of hopefully this call is getting some clarification on the settlement criteria, both location and location, amount and timing. You know, when does that start? What is the benchmark? Can we do some loading? And I think that's probably the most important topic of this call. I think,
+
+Speaker 3  09:03
+yeah, yeah, I'd agree with that. Okay, before we get there, just one last thing from Pacific Fusion's point of view. So we had a conversation with the city and the rest of the design team, Craig, I'm sure you're well aware of this, our whole intent. So So Clayco is probably on this more than I am. But we just want to make sure that the team stays mobilized in the field and when we can get these deferred submittals approved, reviewed, to keep you know the Clayco team moving. It looks like we've we've got a good buffer of about four weeks or so, we're going to be submitting that foundation package on 511 we'll have a deferred submittal. We already talked with the City of Albuquerque. They're completely fine with the deferred design. That would take about two to three weeks. We're looking at a latest of June 1 to get that difference the middle end and reviewed with the team. You know, the hope is we get that approved by the end of June. So this is more just kind of FYI information. Do you think your team needs closer, kind of to the two weeks, or the three weeks to get that design completed.
+
+Speaker 2  10:27
+Part of it will depend on the answers to some of the questions today, because we've done a lot of work based on a set of assumptions, and if we end up moving forward with those assumptions, then I think we've done a lot of the heavy lifting. If those assumptions change a little bit, then I think we're going to need a bit more time. Now. I will say some of that can happen between now and the 11, because we can start doing some of that, that con, that calculations behind the scene. I think the short answer is, we really should plan for the three weeks, and if we do better than we're in better shape. I don't, I don't want to plan for two and then we're, you know, a day or two late or something.
+
+Speaker 3  11:01
+Yeah, that's fair. Okay, well, that was just more FYI information. I think we're lined up. Well, let's go back to the top, to your point, Craig, the meat and potatoes of this discussion is to talk about settlement, whether we're tracking and how we're going to load up that slab. So Mark, I'll hand it off to you.
+
+Unknown Speaker  11:25
+Okay, let me Sorry.
+
+Speaker 1  11:35
+Okay, everybody should see that now. So these are the latest Hanson settlement values. These are based off of the current soil modules we've gotten from WGI, ranging from 34 to 14 roughly the results. Let's see if I put everything go way to the end. These are the ones where we have included self weight, superimposed deadlift, live load and fluid load. So as if nothing is taken out and our total settlements are in the neighborhood of one and three quarters inches. I can't quite get this to show the title, and have a nice scale, and we have some areas that are fairly lightly loaded, and this will become the heart of the question in these other areas. So lightly loaded in these areas, so the differential is roughly one three quarter inches. But I don't think that this ever really applies, because all this self weight is included in this as well. What I think is little bit more appropriate is this one, which is superimposed dead load, five load and fluid load. So this is the one that's a little bit more we're going to cast the foundations, and then as soon as the foundations are cast, everything after that is included in the settlement criteria. And here we're, you know, one and a quarter at the worst point here, under the tank. And then if you look at the actual portions by the IMG hanister sports and everything else, this is all fairly similarly colored, so the differential deflection isn't significant in those areas, but these portions would be supporting some of the pulse RFP, which are very low, you know, like 10th of an inch, something like that settlement. So the differential is notable and is significant.
+
+Speaker 6  13:40
+Big Question Mark, why did you say that you don't think the self weight is important?
+
+Speaker 1  13:46
+Because the self weight is going to be like the foundation though, the concrete weight, and that's going to be in place before you guys start setting anything. And so you're going to true up the elevations on top of that so and then the next option we have is, if we were able to preload some portions of it, this one, we get the overall summits down to point seven inches in the corners. Here, again, differential is reasonable, but we still have sections where we have some areas where you're supporting the Pulsar tubes that are low, low settlement, I guess, so that was why there was a question about the support of these pulsar tubes that kind of cut across the corner here, and whether we're able to, I guess, find a way to get those connected once some of the settlement has occurred in the system. So I guess our big question is, is there a way that we can put a lot of the load in place and then true up those elevations so that we can get the three eighths inch settlement criteria to occur after about the load has already been applied on the soils.
+
+Speaker 6  15:05
+Yeah. So Organa, you emailed me and asked me that question. And originally I said that yes, we wanted the whole think it was the blue versus the red line that you drew, basically to meet the three eights. I've dug into it more pushing the team on the PF side to critically think about it. I think there might be a path forward, but I think a few extra questions that I wanted to ask. So I think originally we said that this settlement was non elastic, so we're basically saying that we can wait, we can load this up, wait a week, and it'll do all the settling that it's going to do for the rest of time and and that's basically what I've gathered from when I've asked questions. I just want to triple confirm that that's actually the case that we're not going to see settling over many or more years to come, because that's gonna that's a critical part of how we design things like the pulse tube supports to make sure that there's enough flexibility in the design and don't don't break things. So that's my question number one that I want to confirm
+
+Speaker 2  16:13
+with everyone. Yes, that's an accurate assumption or an accurate statement. To further more, the inelastic part means that when you take the loading back off, it's not going to it's not going to come back either. So it's two fold. One, the settlement will occur relatively quickly, and also, it won't come back when it's unloaded. In other words, you take the water out of the tank that map foundation is not going to raise back up. So there's two parts of that question.
+
+Speaker 3  16:41
+When you say relatively quickly Craig, to echo his point, you're what you're agreeing that it's going to happen in a matter of weeks, not correct
+
+Unknown Speaker  16:50
+one to two weeks, yep, okay,
+
+Speaker 6  16:57
+so one or two and then, yeah, it's not elastic, so it's not going to bounce back in any way. And then we're really sure there's not going to be, like, over four or five years more settling. I know I'm asking again a little bit,
+
+Speaker 2  17:16
+No, there's not going to be that kind of settlement would be called creep. And there the soil conditions wouldn't constitute there will be any Creek. So now we don't anticipate there'll be any settlement.
+
+Speaker 1  17:28
+Okay with that. Can I ask a weird question, sort of related to that, if there was a shock, like an earthquake or something like that, do we have any settlement? That would be induced by that? I think
+
+Unknown Speaker  17:44
+I know the answer, but I want to make sure, I mean, there shouldn't be
+
+Speaker 2  17:51
+much because there's no water. And so you know what you're referring to is liquefaction, which is, for lack of a better word, quick sand. When you have sand and you have water and you vibrate, it loses its bearing capacity. We don't have that here. Does it mean that if you had an earthquake, you couldn't get some consolidation of dry sand? Yeah, that's possible. So I can't say that that's that, that risk is zero. It's really, really low, because there's not groundwater.
+
+Speaker 6  18:22
+Okay. I guess one question on the soil modulus was much lower on this report than the previous report can do. Can then someone just explain briefly why?
+
+Speaker 2  18:34
+So soil modulus is a factor of the load and deflection. And so you can be capable of a certain modulus, and then when you actually get the real loads and the real deflections, then you get the resulting modulus. And so it is the iterative process of what you know we said that we were going to need to do, and like Marc has explained in some of his emails, we've cut we've got convergence. I mean, we we did our calculations ahead of time, and we got an anticipated settlement. We gave some starting modular, modular, I guess, the plural of modulus module. I to Mark and his team, and then they did their analysis, and then we got actual defections and loads. And then we re ran those the module I and gave that back, and then we got convergence relatively quickly, actually, and our settlement models are showing very, very similar numbers between Marc so I think I don't, because those numbers are lower. The settlement numbers, the amount of settlement are exactly where we had calculated them, you know, a couple of months ago, within, you know, a quarter of an inch. So we're really right where we thought we were going to be. It's just that iterative process is what that takes. So like when you've got a slab on grade that doesn't deflect much, we still have module I for that, that are, you know, in the 100, you know, that are, like those other numbers we had talked about previously, and that's the starting point. But then once we, you know, once you have a lot of deflection, the modulus goes down.
+
+Speaker 1  20:15
+So echo, just to kind of point that out, on this diagram, was from WDI, and it's their analysis, which is just the soil side of the equation, more or less. And the values that are on here, 1.5 1.6 inches, vice versa. If you compare those to, sorry, I forgot which one this was.
+
+Unknown Speaker  20:40
+Skl, live look that's without dead load.
+
+Speaker 1  20:44
+This one, those should apply to this one, and the values are pretty much pretty spot on. We're 1.26 and this one there at one point or one point. Yeah, pretty close. Needless to say, so that was what we were kind of talking about when we say convergence. It's that the two analyzes that we've done show some results. So
+
+Speaker 6  21:13
+kind of, maybe I don't have a field question, but I guess, how should we be thinking about the concrete creeper shrinkage, and how it might play into, like, overall settlement of the plane itself. Yeah, the
+
+Speaker 1  21:32
+main switch to different image. So the concrete portion of that, in terms of the concrete portion of that shouldn't play into it too much in terms of foundations, we've accounted for that in this analysis. So there wouldn't be any additional from that. And it's more or less just from cracking of the foundation a little bit, which reduces the stiffness of it. And we've accounted for that aspect. That aspect of it shortening would apply, kind of like to the vertical walls. And based on the height and the size and the stress, vertical axial stresses in those, those would be quite minor. And then in terms of the deflection of, per se, the top slab, that would be the one that would be a little bit more prone to creep. And I will say we're still making sure that we've kind of gotten captured that and gotten that right, but we, in this latest set, we did provide deflections of the top slab. So this would be, like the deflection of the kind of the ring around the edge, right? Yep.
+
+Speaker 6  22:40
+So yes, okay, and that's that was considered for the concrete creep and shrinkage was considered from short term and long term.
+
+Speaker 1  22:49
+Yeah, we're still making sure we got the long term right. We took a shot at long term in this so we might have some some slight adjustments to it, but the first initial pass has been taken on that, yes, okay, and that
+
+Speaker 6  23:02
+was considered just, just review what you said, that's considered as part of the value that you're showing in this report. Yes, okay, great, sweet. Thank you. Okay, I guess I think in the report, we highlighted the differential settling for the whole area, I can kind of look in at the like grade and see what the two are. But do you think we could get the real values as well for just the like the T section that you showed me?
+
+Speaker 1  23:33
+Yeah, no, we can go for like the I shape and give me what those values are. So pick some kind of critical points along the essentially, I and give you those values.
+
+Speaker 6  23:45
+Yeah, that'd be great. Yeah. Because I think with the answers, I'll take the answers to the questions, that answers you have all given me back to the team, but I think probably a path forward for us to design into the pulse tube supports where we're connecting the poles to let everything settle. We connect the poles tube to the tank side, connect the module side, and then we make sure that the supports are adjusting for any more settlement that we see in the area that isn't
+
+Speaker 1  24:15
+as loaded, sure. Okay, sounds good, yeah, but we'll clean up and put some points on those diagrams.
+
+Speaker 6  24:22
+And points on those diagrams. Okay, great. Have any other questions, but I think those are all weird questions that I had.
+
+Ryan Hankins  24:35
+Yeah, we did talk about that Friday. I don't want to open the can of worms again from Friday Courtney, but the sequencing of how we pour the floor, and the sequencing of the settlement and the sequencing of the preloading, I don't think we have enough time in this meeting to talk about that. But just for Craig's benefit, we've already went, we've already broken the egg on that, so it's just something needs to be worked through over time. Perfect, because, I mean, that's that's going to play into what echo saying, where the differential settlement, I think we'll be able to take care of most of that through sequencing, okay, as long as, as long as the settlement, as long as we agree, and someone comes over and blesses it that, you know, the settlement is done, then we should be able to get there. Okay, awesome,
+
+Speaker 6  25:26
+yeah, and as long as the you meet that three eighths inch in the eye area, basically, that's because that's what the our systems are just being able to design to. There are some stiff structures that can't handle more than that. So, okay, okay. Thank you. Yeah, Mark, let me know when you have those write offs and you send it over, and I'll share it with the PFT.
+
+Ryan Hankins  25:55
+Sounds fine. Quick, dumb question, so I know, like on this, on the steel side, Mark, we've been talking about this big honkin, 800,000 pound thing. What is it called? It's a, it's a, it's got wheels. It's, oh, the transporter, transporter thing. How much of this conversation is affected by taking that, that constraint, and putting it over the whole slab. Nothing. It's not related, yeah,
+
+Speaker 1  26:26
+it's not really capable of driving into this area, okay,
+
+Speaker 2  26:34
+yeah, as you say, from our perspective, it factors into our solution for slab support, which also now kind of rolls into the lab, which we're going to pick up, but it doesn't have any real effect on this, on
+
+Ryan Hankins  26:46
+this, okay, perfect.
+
+Speaker 2  26:49
+The crane. We still need to keep that in mind, which we've talked about quite a bit, but the crane is a little bit different story, because those foundations are integral to this area. You do need to keep that in mind.
+
+Speaker 3  27:10
+Yeah, I definitely think there needs to be another meeting with just with sequencing. I think we need to break that out and figure out how it works, works with the schedule, knowing when that birch crane comes in. So we'll take that as an action and break that out.
+
+Speaker 2  27:26
+Yeah, because I was just gonna, I was just the conversation that I was having with with Ryan last week was from a sequencing perspective, again, not to open the can of worms, but you obviously can't load the slab until it's poured. But once it's poured and loaded, then it's going to start deflecting, and now you are start negatively affecting floor flatness. And so it's this chicken and egg conversation a little bit. And so I think that is probably a longer, you know, separate discussion.
+
+Speaker 3  27:57
+Yeah, we were mark and I'm sorry, Ryan and I were talking through that a little bit on Friday. Yeah, we definitely need to talk through it.
+
+Unknown Speaker  28:06
+Yeah, perfect.
+
+Speaker 3  28:09
+Well, I know I want to be consider of everyone's time knowing that we're looking scheduled 30 minutes. Who has a hard stop? Does everyone need to jump? Or Can folks stay on echo? I'm not sure, maybe some of these other items you could probably drop if you wanted to, but I think the rest of the team, Mark, Frank, Ryan, Craig, Matt, you guys are good to stay on for another 20 minutes or so. Yeah. Okay. Appreciate it. Thank you. Echo. Thanks. Michael, All right, next on list here. So, Marc, you had a question about lateral pressures on walls due to surcharge?
+
+Speaker 1  28:51
+Yeah, we're recognizing that for the pits, the vaults, excuse me, the vital cool down vaults, even the trenches and then the equipment pit, normally called the vault. If we're driving these transporters anywhere close to those buildings, we're getting some pretty high loads right on the surface, right immediately adjacent to it. So we wanted to confirm the soil surcharge load that would be due to that, due to the surcharge load is that? Is that just a magic number, or is that something that you guys would need to look at? What kind of information would you need from us to, yeah, if you can get us
+
+Speaker 4  29:30
+the vehicle, the loading, the vehicle loading, and then what?
+
+Speaker 1  29:36
+What proximity to the wall is critical, because these transporters are kind of long in one direction, so there'll be a series of wheels. So how many of those wheels do you need now?
+
+Speaker 4  29:47
+Yeah, probably it kind of depends on the depth of the ball, and then also the load year to name itself, as to how the influence is going to be on on the wall. So maybe if there were some cross sections that you could send us, which I think we may have. We may have just send us the cross sections, and then also the loading diagram we can, we can calculate it from there, Frank,
+
+Unknown Speaker  30:18
+it looks like spring,
+
+Unknown Speaker  30:26
+no, Can't hear you.
+
+Unknown Speaker  30:41
+No, we can't hear you, Frank.
+
+Speaker 1  30:48
+All right, we'll send you a message or an email with what that loading is, but it's a whole bunch of wheel loads, and Frank is back. No, I
+
+Speaker 4  31:05
+I kind of saw my screen, but yeah, it
+
+Speaker 1  31:09
+wasn't any message. And then if you, if you have any questions about it, we can connect over from,
+
+Speaker 3  31:21
+okay, let's see next on the list, Matt, think we've cleared up geo peers will be everywhere except the office. Slap on grade. We're providing an adult for the central utility building. Any additional questions or clarifications you need there?
+
+Speaker 5  31:42
+No, I don't. If need be alcohol.
+
+Speaker 2  31:47
+One quick thing, one quick thing on that, just to put a bow on that. The the map that we saw for the where that wheel loading could be isn't the entire lab, but I kind of feel like it makes sense for us to just do beer geo beers in the whole lab and not try to parse out that little piece. I just want to make sure we're all on the same page that that's the right approach. I assume, Mark, maybe you can speak for Frank, that you guys are designing that slab to be uniform in the lab area, right?
+
+Speaker 1  32:22
+You're not. Yeah, let me quickly, sorry, it took me a bit to find the diagram I was looking for. Let me share this real quick. I think I know what you're talking about.
+
+Speaker 1  32:37
+You're talking about. There's this white section in here. I can't point on that screen, this white section here that's kind of technically omitted, right? Exactly? We, we think that the the whole area down here should just be all the same and similar.
+
+Speaker 2  32:53
+That would be my I think that's the right approach. I just want to make sure it was on same page for that. So, Yep, perfect. I agree.
+
+Speaker 3  33:10
+Let's see, Matt, if you wouldn't mind kind of getting ahead of the testing proposal, feel free to pull something together and send that to Nick and myself. Assumption at this point is we'll take it on directly, okay,
+
+Speaker 4  33:26
+and just so I'm clear that there's only you guys are only at the foundation, structurally above above ground, like the
+
+Unknown Speaker  33:39
+shield up walls or anything like that.
+
+Speaker 4  33:42
+Oh, for as far as testing goes, no, as far as the as far as the design, at this point,
+
+Speaker 3  33:49
+will be submitting the core and shell, June 15.
+
+Speaker 4  33:53
+Okay, so it'll be pretty high level estimate, but I'll give it, I'll give it to you, and then find it as a drawing paper.
+
+Speaker 3  34:03
+Fine. We've got plenty time. Well, what we'd like to do just reconcile with the number that we're holding, and we'll just work through it. Okay, the BJ, so just coming back to it, yes, please, Craig, go ahead and send us proposal. Or actually, you're going with Clayco. Well, well, our preference is to have you go with Clayco.
+
+Speaker 2  34:37
+Oh, for as far as for our contract, okay, yeah, because I'm also going to get a quote from Geo lines for the CPT. So two different kind of contractual things, but yeah, on it, yes.
+
+Speaker 3  34:48
+Okay, gotcha. Okay, so that's and we're just trying to figure out who's going to hold this geo line.
+
+Speaker 2  34:56
+Yeah, contract and we're, it doesn't we're fine doing it. It makes to me, let's just get the quote from Geo lines and timing, and then we'll figure it out. I mean, Zac is great over geo line, so I don't think it'll he'll really care one way or another, either I'm actually sending a message right now. I'd say, Craig, if
+
+Speaker 5  35:13
+you're if you're okay with it, I would say, you just keep it because it's
+
+Speaker 4  35:16
+specific to your design. And so then perfect. That keeps us from having to add time to it and do all that, you know, perfectly, perfect. Okay,
+
+Speaker 3  35:35
+I think that's it. It covers the list we went over in the beginning. Was there anything else we wanted to talk through
+
+Speaker 1  35:51
+that's from my side, but Matt Frank typed his message into the chat, if you didn't happen to see that. So he's just referencing an email from 422 so if you take a look at that, us know if you have any questions,
+
+Speaker 4  36:06
+that'd be great. Well, Frank, I was out all last week. I'm only halfway through my as Mills from last week.
+
+Unknown Speaker  36:15
+Yeah, yep, okay, thanks.
+
+Speaker 3  36:21
+Okay, all right. Well, if there isn't anything else just running down the actions here. So Mike Mark, you're gonna go ahead and mark up the actual settlement values along the PF profile. Mark, you'll also send out cross sections to Matt to better understand surcharge loading scenarios already done. Actually, awesome. Crossing it at all, Matt, you will go ahead and send a testing proposal to myself and Nick and Craig is already on getting a proposal started with your line. Okay. Well, easy peasy. Hi, Rebecca, you made it.
+
+Speaker 7  37:05
+Yeah, apologies that I was running late. It's been just a hot mess over here with the IT migration.
+
+Speaker 3  37:11
+No worries, no worries. Okay, well, rush out if you guys need anything, appreciate it. Thank you. Thanks, guys, thanks.
+
+Speaker 2  37:28
+Easy peasy. Easy peasy. Sounds like they're going back to where we started, which is the eye shape.
+
+
+Transcribed by https://otter.ai

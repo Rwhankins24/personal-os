@@ -1,0 +1,614 @@
+Speaker 1  00:00
+Question, so we had the be two, which was the Helix micro bars,
+
+Speaker 2  00:08
+the V E 03 A central plants swapped to natural gas or to use. Question, does that
+
+Speaker 3  00:16
+also include the glycol, the elimination of the rollers, those are separate. Okay, those are separate.
+
+Unknown Speaker  00:24
+Do you mind zooming in again? How did I do that? Control controls roll. There you go.
+
+Speaker 2  00:34
+Okay. High performance coatings, not including the trenches or pits. This is, this is all
+
+Ryan Hankins  00:43
+ve we took off the top of our estimate first. This is before we got this. We're not even in scope reduction yet.
+
+Speaker 2  00:50
+Yeah, reducing the extents of the entry, so that's the blue band, but we talked about reducing that, the McNichols roof screening perf panels to be deck and then the removing the McNichols at the exterior stair screening
+
+Speaker 4  01:09
+I know I'm behind are these all in order of what the be log is they should be yes is there I'm just looking at what I think I'm understanding but there's like the fleet I think this would be a small amount of money, but the fleets back 120 mil roofing going down to 60 or 80 mil. Did that happen? That happened.
+
+Ryan Hankins  01:30
+We did get a number,
+
+Speaker 2  01:33
+but didn't. So, what? There was items that happened between the 50% and the 100% So, this is from 100% moving forward, so that the E was accepted, and we can go back and join and show without,
+
+Speaker 1  01:49
+you guys are understanding. I was just trying to make sure I understood that. Yeah, it sounds good. So, just, yeah, there are some.. I mean, we should have started back in the beginning
+
+Speaker 2  01:58
+for that. Don't worry about all right. right, using the different imp panel in lieu of the King Span, removing the basketball court,
+
+Unknown Speaker  02:15
+Geo Peers, switching that to foundations at the lab and office Removing the landscape canopy,
+
+Speaker 1  02:27
+but keeping there is, if you look at this, there is, there's still a small canopy. Yes, so adding shape back, there's 2400 square feet for the, yeah,
+
+Unknown Speaker  02:42
+so that's what makes up that that
+
+Speaker 2  02:54
+one, Ryan. Why we're going through this, we make a note for me to go back to BD 14 and make sure that's not double depth in the scope reduction, yeah. Which one is that? That was the EOT years. It's Geo Peers Foundation Slides, because I know I added that, and I like, we're taking it out here, and I want to take it optimized.
+
+Ryan Hankins  03:14
+Fair, yeah, you see what I'm saying. This does not affect that. It's, it's okay. Yeah, it's fine, all
+
+Speaker 2  03:24
+right. De 22 is eliminating the fluid coolers and the pumps and piping at the plant, reduce and eliminate insulation on duct work in the conditioned areas, and then the reduction in the light lighting package in the office area, and then also reducing, changing out the lighting package for the rest of the building, so that's just swapping out,
+
+Ryan Hankins  03:58
+yeah, remember these are fully loaded, so they are all a little bit bigger than, yeah, you're just not going to get the calculator
+
+Unknown Speaker  04:05
+at the bottom, yeah, it's already calculated in here.
+
+Unknown Speaker  04:09
+Tile and wall finishes in the bathroom, limiting the tile, eliminating the remaining skylights, removing the architectural wood slats, little mountain,
+
+Unknown Speaker  04:24
+removing the outdoor, the exterior amenity space, and removing the shade structure,
+
+Speaker 2  04:33
+that shade space, removing the benches, the built-in benches, removing the backdrop panels, table chairs, and benches.
+
+Unknown Speaker  04:44
+This is the switch of the fireproofing strategy
+
+Ryan Hankins  04:48
+to go from intumescent to spray.
+
+Unknown Speaker  04:54
+This is deferring the phase to one line scope for the electrical money we're saving
+
+Unknown Speaker  05:04
+electric reheat for the office. Delete the RTU for the fire pump room. Delete the RTU. All right, did I read that? Is that a double up? No. 24 and 25 no.
+
+Unknown Speaker  05:22
+that is that.
+
+Speaker 2  05:25
+Okay, let me make a note on this, and double check on your list. Do you have the PE list? Because what is number 25 on our B list, our original one? Do you have that? Oh, yeah. Sorry. Yeah, I'm talking to you. is
+
+Unknown Speaker  05:46
+an additional BB. So, are we reduced that we'll beating two or two?
+
+Ryan Hankins  05:52
+Hold on, I think this is the HU 18. If I had to guess, which one is this after after 2425
+
+Ryan Hankins  06:09
+goes up? I love it. Sorry, after 25 after 24 Oh, thanks. Appreciate it.
+
+Speaker 3  06:19
+Delete our two. Do you?
+
+Ryan Hankins  06:25
+So, what I'm seeing, the one before that was electric reheat. You've already got that. So, this is primarily a duplicate, in my opinion.
+
+Speaker 2  06:40
+So, should I make these not applicable, both of them? No, just one of them. Just one of them.
+
+Ryan Hankins  06:45
+Yeah, I do think that both of these, the last two, the reheat and the RTU pump room, I think Astrid is still questioning the viability of those.
+
+Unknown Speaker  07:00
+So, we shoot Putnam as undecided yet. Well, no, the fire
+
+Unknown Speaker  07:03
+fire pump from RTU. She's, she's good. Yeah, we accepted that. The reheat coils, but it's..
+
+Speaker 3  07:12
+I don't know if we can completely eliminate the RTU. It's a.. it's just minimum ventilation at this point. Are we having a new day or anything? No, no, like that. We should double check with her.
+
+Speaker 2  07:33
+We have her tomorrow, correct? We do, okay? So we can go. I want to go through this with her as well, and I'll sort them by mechanical, so we can just go through, make sure we're all in alignment.
+
+Unknown Speaker  07:42
+Okay? Are we missing one? Then are we missing the grooved couplings for piping?
+
+Ryan Hankins  07:54
+We 24 We did not price that one. Men think we said it was only in exposed spaces, or was it? Was it chased areas, but there wasn't chases
+
+Ryan Hankins  08:16
+grooved only in accessible spaces, basically. basically everywhere, yeah. But we've deleted so much pipe, you know, and I mean, like, yeah, we've deleted a crap load of pipe, of course, part of these vees, like you're not gonna.. it's not gonna be a huge number, but you need to
+
+Speaker 5  08:45
+plug something groove on the fire protection, so you can use groove on fire protection.
+
+Speaker 3  08:55
+You could.. we can, so we can throw it in as an item. It doesn't need to be done in this first, so we're in a good spot. There's going to be some little Lucy leaf items that we will tidy up in the background. Let's just throw it on the list, is like something we've got to look into. Yep, yeah, but we're I would consider where we are substantially complete. This is good enough to report out to our leadership items. We just
+
+Speaker 5  09:22
+have those on and then there was Rebecca just brought up the fleece back, so that was so that one is
+
+Ryan Hankins  09:33
+not in this list. We, when we submitted our pricing, the roofer gave us a deduct of like 50 grand, and I was like, what are you talking about. So, you went back to them. You can save five to six bucks a foot on the roofing right now. This, the spec shows fully adhered, which we do agree is a better installation, but you know, if you do mechanically fastened, that is a five to six buck reduction in costs on the roofing.
+
+Speaker 3  10:02
+Okay, gotcha. So that's about what 2 million bucks. Let's do that. Let's hang it in there. Okay, yeah, it's definitely.. I would say yay. Is that based on like
+
+Ryan Hankins  10:16
+it's literally just like the amount of labor to like to like, you know, put all the glue down and put it all on, versus just like shooting with screws,
+
+Unknown Speaker  10:27
+and Ryan didn't incorporate that between the two estimates. I thought, I just want to make
+
+Ryan Hankins  10:32
+sure we did not know, because I was, that was the one thing that was like, really, we need to get this, maybe it's still in the pending. It's probably not there because I didn't want to bring it up because we still didn't have it, but we just got it. We just got it like the other day. Okay, is that based on the 60 mill, 80 mil? It's based on 60 mil.
+
+Speaker 1  10:57
+I'll message her, so we have that for tomorrow morning when we go through this. Yeah, so
+
+Ryan Hankins  11:08
+Right, it is. I don't know what your guys' opinions are mechanically fasted.
+
+Speaker 1  11:12
+Yeah, I just think it opens you up to potential issues in the future, which it sounds like is not the biggest concern for them right now, but I know Jeremy had mentioned, like, yeah, I don't know if there's leaks happening in the future. I don't know, sometimes you get big bubbling areas where then it's starting to lift up. It depends on that. We do have pretty high parapets, so maybe that's protecting it from that kind of like suction, that those are like the big things that I've seen.
+
+Unknown Speaker  11:48
+Did we, what about the, where do you remember the black hole blue?
+
+Speaker 3  11:54
+The primary, yeah, that one, that one's in there, it's SR. Sorry, it's be 23
+
+Ryan Hankins  12:12
+That one is missing from this list. Okay, yeah, I need to find out. Yeah, numbers are different. Numbers are different on the back end.
+
+Speaker 3  12:30
+It's so, yeah, Erica, the way there's two loops, yeah, there's a glycol primary loop and there's a water secondary loop that serves as a fusion equipment. We're eliminating that water secondary loop altogether, and it's just a single black hole loop. We have that price, we do.
+
+Ryan Hankins  12:51
+It should be in the list that, okay, you guys have.
+
+Speaker 2  12:58
+Then we have the fencing change, which this is just taking the fence from 10 foot to eight foot, and then there's a scope reduction to get rid of nuts down below, so that one through 26 is all the ve items that we had put together with our 100% What about
+
+Ryan Hankins  13:20
+the fluid pullers, is that that's that's up there, fluid coolers,
+
+Unknown Speaker  13:30
+yeah, eliminate fluid coolers, that one you said,
+
+Unknown Speaker  13:39
+yeah, it's up at the top right there.
+
+Speaker 1  14:01
+Give me one second, I'll get on with it. Maybe here she's got a numbering, and then she lost the numbering. Sorry, don't want to choose something specific. Yeah, we lose the number. Nope, that wasn't the new. I'll get there, I It might, Bill, if you mute yourself.
+
+Speaker 4  14:31
+If you mute yourself, then I can do the room audio on mine, I
+
+Speaker 3  14:50
+Okay, and so mezzanine has been pushed to scope production, correct, plumbing fixtures just opening that up to a lighter spec, we don't really..
+
+Ryan Hankins  15:07
+there's.. there's not many fixtures, but we can look at it. I mean, it's like 20 grand, yeah, especially with the fact that we removed in the office, removed all the, a lot of, you know, frills and whatnot. Yeah, like it's, and so
+
+Speaker 3  15:29
+is that scope production, like the limitation of locker room, is that all like in scope production now? Yes, yeah,
+
+Unknown Speaker  15:41
+okay. So now we're into the scope reduction.
+
+Speaker 3  15:43
+So, really quick, do we have an all-in number just for the E? Just kind of curious based on no, it
+
+Speaker 1  15:49
+clumps it all together with the scope reduction, but I can pull it out into a spreadsheet and calculate
+
+Ryan Hankins  15:56
+it roughly. It's like 30 million.
+
+Speaker 2  15:57
+Yeah, yeah, yeah, it was about 30 million, and then another 30 some change on the scope reduction,
+
+Unknown Speaker  16:09
+so we have SR one, reduce the backup generator, SR two, eliminate the club cub isolation,
+
+Speaker 2  16:21
+SR three return, this is yours, so this is not calculating into our cost right now, but in there just as a tracking on the owner side, that's why it has a question mark, it's not in the budget, so
+
+Speaker 6  16:35
+the question marks are not included until comments on the question mark,
+
+Speaker 2  16:39
+yeah, so they're not included, but I thought it's on the list. We can put it here, and then pull in owners of the things that you're tracking on your side. And then eliminate club one, club 123, square footage, and defer to 2028
+
+Unknown Speaker  16:57
+Eliminates that MITL cool down pits and covers eliminate utility trenches and cover covers SR seven
+
+Speaker 2  17:08
+SR eight the floor finish and floor flatness across the R&D space that's reducing that foot of concrete. Why did we put this as question mark? Relax the settlement criterias, because we were working on this. It's still pending. Yeah, we were working on that, right? And I
+
+Ryan Hankins  17:37
+think I have to.. that was.. we ended up.. well, no, we, that was what we landed on. It was, remember, we talked about the one foot instead of the one and a half yesterday. Okay, so we've got one foot reduction in the mat slab for just the tank. If you want to do that to the img, we can add that in as well, and then the walls of the equipment pit, we reduced that by one foot.
+
+Speaker 7  18:04
+Yeah, so that's all we're expecting to save from settlement criteria. It's a lot of risk doing here. Yeah, yeah,
+
+Speaker 2  18:20
+yeah. Okay, so the door, that all looks good. Okay, so
+
+Speaker 3  18:25
+it does. I think that the big difference between what I'm seeing is I was holding about, I think going back from one to V, what I'm seeing is we never priced in fire proofing,
+
+Ryan Hankins  18:46
+originally at 50% the first ever estimate we didn't correct, so that was a seven and a half million dollar ad, we reduced three point something in our ve, and then here I'm not seeing the cost show up, Erica, but it should also, it should be another 4 million,
+
+Speaker 4  19:10
+or is it bringing so the ve ended up being an ad because it wasn't originally accounted for in the to be so in the,
+
+Ryan Hankins  19:21
+in the 100% DD estimate we produced two weeks ago, three weeks ago, whenever that was, we priced intumescent, and that was a seven and a half million dollar ad versus the RFP estimate, we gave two VE options, one was to go from intumescent to spray applied, that was three point something, and then we gave this other option, which is basically removing all spray to go back to to be,
+
+Ryan Hankins  19:55
+yeah, I mean, I think it's, yeah, the two numbers should equal, we had 7.5 total in intumescent, the deduct should equal about 7.3 because we need firewalls to be installed, and so we carry 200 grand. Yeah, just 200 grand for some firewalls. All
+
+Speaker 2  20:18
+right, eliminate all the performance coatings. This is to get rid of the rest of them, and put in sealed concrete
+
+Unknown Speaker  20:27
+if you priced it based on sealed or college,
+
+Speaker 1  20:33
+and then eliminate the admin and lab square footage from column line 10 to 12,
+
+Ryan Hankins  20:39
+and what we did in here was we added the 1.4 million for the brace frame modification. Yeah, how did you deal with the bathrooms in the square foot?
+
+Speaker 1  20:51
+So it's like you're removing that square footage. Do you just have a like all of the bathrooms from that area and the fire riser room and electrical room will have you over together?
+
+Ryan Hankins  21:00
+So great question. Broad brush approach, so what we did is like in this, it just for the 40,000 square feet that this is affecting, we're just ripping the building away. Yeah, okay. For the space that's that's remaining, you still have roughly like 190 bucks a foot. What we did for like the interiors, what we did is in the next item, the admin warm shell, we reduced it like another 90 bucks a foot, so you've got money in there, but it's gonna look like what their San Leandro office looks like, yeah.
+
+Speaker 1  21:47
+so I just was, you guys couldn't figure that out, I just thought it's the same number of bathrooms, but in that a much smaller footage, I thought bathrooms were probably a more expensive thing within that, so you're taking the same number of bathrooms, so you got 190 square foot over the whole office, that number of bathrooms. Now you have that third of the space, but I don't want to take money away from this. I'm just.. that was just my.. you, the way you guys are doing it, you are confident.
+
+Ryan Hankins  22:18
+It's.. it's a broad brush approach. We think we have enough money in there to figure money to
+
+Unknown Speaker  22:24
+build out the bathrooms that you need for code and all that in that space,
+
+Speaker 1  22:33
+all the same number of bathrooms, because the main indicator for plumbing is from the R and D space, not from the admin space, so we have to have the same number of bathrooms that we would have had. It's not, we're not just providing bathrooms for that space, we're providing the entire bathrooms for the building. Got it? Okay, so that's
+
+Ryan Hankins  22:49
+now I'm understanding.
+
+Unknown Speaker  22:50
+Yeah, have to move into the small space now. So we may want
+
+Unknown Speaker  22:58
+to re-evaluate, because I was like, oh, we're gonna cut all those people, we don't need that. Okay, so that's why we have this great conversation. Okay, so let me double check.
+
+Speaker 4  23:07
+I mean, there we might lose one or two pictures, but we're not going to lose like a game roster.
+
+Speaker 8  23:14
+Yeah, all right. Let me circle back to SR 14 again. You said you guys lumped in the 1.3 million or whatever for moving the braces horizontally. I think that's a sub option, right? Like they could move the walls to align with the braces,
+
+Speaker 3  23:37
+I think, right? Yes, true. But I think for realistic scenario, right now I'm getting feedback from Pacific Fusion facility integration team saying that, like, it makes the space essentially unusable. So I'm comfortable carrying another earlier conversations or speaking more to this point, but based on what we're going to get pushed back on, I'm comfortable carrying this as the new baseline, being that it works with the
+
+Ryan Hankins  24:07
+program. Yeah, I mean, from like we're changing, I still think that, like, by doing this, there's still some structural things that maybe we're going to find out during detailing. I think it's like a, we'll call it a design development allowance, plus
+
+Speaker 8  24:25
+the teams being aware of the cost of that, but we think structurally is a dumb decision, moving the races is a dumb decision, just it's not recommended structurally, we don't agree with it. We don't really want to do it, so I would like the team to be aware of that decision, the cost of it, right? If you guys say, 'Here's my 1.3 million, I want to do it, that's great, but if it gets lost in here and you're like, 'Oh, great, fine,
+
+Ryan Hankins  24:53
+then fair, because we don't really want to do it either. If
+
+Speaker 1  24:59
+you could do it to your point, I can make it like a 13.8 I like that count. Okay, I'm going to make that.
+
+Unknown Speaker  25:08
+I'm going to break that out. I
+
+Ryan Hankins  25:10
+forgot about that detail already.
+
+Unknown Speaker  25:12
+I want somebody to walk in with a 1.3 million
+
+Ryan Hankins  25:18
+14 A, okay. a just name it lateral loaded brace adjustment
+
+Unknown Speaker  25:41
+dumb decision Okay,
+
+Speaker 8  25:52
+what is the technical rationale behind? So what we really need is stiffness on that line, so like there's a critical criteria for how much the crane rail can move in a certain direction, and so every time we put in an extra lean for an extra movement in that kind of load path chain, it just, it becomes more inefficient, it just keeps adding up, so that's one part of it. If we were truly in a seismic world, we have moderate seismic, so it's not too big a deal, but it was still like a little more, and it was still seismic. There would be some higher implications in terms of every time we shift the lateral system, we basically have a penalty where we increase the loads. I don't think that we actually like, we don't quite hit that threshold here, where that matters, where it throws it over what would be a wind load, or something like that, like the wind load is still governing, but on the side of the side we aren't hitting that penalty, we're just windows still governing, so we're not seeing it as an implication, so the biggest driver is we have stiffness criteria, and every time we add a leakage to that stiffness criteria reduces that, so it means that we have more steel, and
+
+Speaker 4  27:06
+just so that I'm understanding, you're talking about offsetting it from
+
+Ryan Hankins  27:17
+the line. Yeah, I just don't want them to see a final number,
+
+Speaker 8  27:24
+but then shifting it horizontally east west is kind of putting some of that right right next door, but right now if we have to shift it east west, it's better to have that bay to shift it east west, but that's if you you were right, you had it open. We just went right back,
+
+Ryan Hankins  27:56
+so go. Is it a meteor? It's scope reduction, do I'll
+
+Speaker 2  28:22
+just change it quick, and then we'll clean it up. What's the number two eight? James, one of the things rule one
+
+Unknown Speaker  28:39
+is trying to be the key terms instead.
+
+Ryan Hankins  28:42
+I think around 37 all right, all. It all right,
+
+Unknown Speaker  29:06
+we talked about the con, but I'm going to add 14 a eliminate asphalt in the parking lot.
+
+Speaker 2  29:14
+I still have some work to do on that one, so that one's going to change a little bit. Eliminate the showcase mezzanine, eliminate the remaining security fencing, and then eliminating the air handler unit 18.
+
+Ryan Hankins  29:38
+We don't really know what's going back. Yes, but if it's simple numbers and they're not like huge, then we probably have that covered in that cost. If it's, you know, like a fan wall, like in a data center, it's like this big honking thing that needs steel, it's going to be more expensive.
+
+Speaker 3  30:01
+Okay, make sure we fully understand it when I understand who listens. We need to spend some time getting the CDA and press reserve wall and cut, so that it can use that
+
+Speaker 9  30:15
+wall as a Google right now, where they're located. Yeah, okay, do all right.
+
+Unknown Speaker  30:25
+Transporter is on hold for now.
+
+Unknown Speaker  30:27
+Yep, there is, however,
+
+Speaker 2  30:35
+yeah. Oh, well, there's two. There is two, so I showed 23 was approved, and 23.5 was not.
+
+Speaker 3  30:50
+So 23 is basically 23 is not approved. 23 is in the R&D space, limiting the transporter load by like 50%
+
+Speaker 5  31:04
+that's probably not going to be approved, but 23.5 is approved. We will only maintain the transporter
+
+Speaker 3  31:14
+in the R&D space. Okay, so previous to this exercise, Mark, I think it was going to the lab,
+
+Ryan Hankins  31:22
+we had to add geop peers, that's the reason why that number, that 319 is different than the 55 that you've seen in the past, is because we added the 200 grand for the geo peers, but we rehearsed these, yeah, I think we did,
+
+Speaker 1  31:38
+we had them right, and then when you and I were in there in our luncheons to curb reverse. It's probably my fault. It's all right. You were probably hungry. That's right. That's right.
+
+Speaker 2  31:50
+Okay. 24 concrete at the loading dock with base course, not a big savings. The bridge crane, we did not approve that one yet.
+
+Ryan Hankins  32:03
+We used Mark's 135 ton number from earlier,
+
+Unknown Speaker  32:21
+1.14 point one four is after less structural scale that includes the
+
+Unknown Speaker  32:31
+concrete will actually
+
+Ryan Hankins  32:36
+become lesser, yeah, we don't want to get it mixed up on our side, because this includes calculators, so we don't want to include all that in here, because it just, it muddies the water. Yeah, yeah,
+
+Speaker 7  32:53
+1.1 and I don't want to back out the taxes, fees, and all that. What would be a good percentage to use.
+
+Unknown Speaker  33:02
+Oh, I could just take it out. No, I'm just
+
+Speaker 7  33:05
+curious, like if I'm looking at it, I want to quick quickly back it out for whatever reason.
+
+Ryan Hankins  33:12
+7% tax or 7.6%
+
+Unknown Speaker  33:15
+Here you go. The base cost is $975,000
+
+Speaker 2  33:20
+and then it's adding all the item mark of them, so I can give you the total percentage of all of those, we're including
+
+Unknown Speaker  33:29
+insurance SDI fees and gross receipts.
+
+Speaker 1  33:34
+Yep, so it's got OSIP SDI gross receipts and
+
+Speaker 9  33:39
+then overhead profit I It, thank
+
+Speaker 2  33:55
+you. No problem. Yeah, and I need to give you and Courtney both access to this. I'll do that.
+
+Speaker 1  34:07
+We were on there. We go, okay. SR 32
+
+Speaker 2  34:15
+and 33 are those removing the doors that we looked at on the PDF, and if I could still get a copy of that, that would be great, just so I can make sure Liliu has the right ones accounted for Oh,
+
+Speaker 2  34:56
+do Two long days, like everyone gets angry. I'm hoping everybody makes it to their flight. Okay, the next one is the remove the breakers and bus duck, and with the ties between the 5008 busses, I need to fix this building. I apologize for this. Then we did not approve nothing with this crane, 75 ton crane.
+
+Speaker 3  35:32
+So this is approved. We just have to get them carried into $100,000 number, but
+
+Speaker 2  35:41
+yeah, that's right. It's on your side, so I can add that in there and tag it as an owner cost, and then we can report that out, so you can keep that. Yeah, let's see. Eliminate the north portion of the equipment pit decline
+
+Speaker 1  35:58
+declines, and then we also put in your placeholders for SR 26 and 27 but those aren't reflected in these costs right now, and then the last one we added, and Dave went in and also added it onto your Excel spreadsheet, so we're in alignment, this is the structural steel ad that we got today, so that's okay.
+
+Speaker 2  36:24
+Sorry, I know he was like somebody deleted it. You were in their buildings in there, and I'm like, we're all like moving,
+
+Speaker 1  36:35
+and you can take it out. We just wanted to make sure, like, he added it back in. We're adding it. He's stubborn. stubborn, yeah, we want to make sure we're calculating that before we reduce it, like you want to be at the correct level,
+
+Speaker 2  36:56
+so that's included, so when you go back to the overall I Overall, right now we're at with that addition of the 5 million, we're at 219,000 million, 219 million. I wish we'd be done. So overall, with what's currently been approved, not pending, not owner-indicted.
+
+Unknown Speaker  37:23
+We're at 219 correct? Is that okay? James, overview. You're in the hot seat now. Finally,
+
+Unknown Speaker  37:36
+what are you thinking about? How we incorporate? Yeah, so with this new number, orders are 219
+
+Speaker 1  37:52
+and that includes all scope reduction, except for the so this would be at scenario two.
+
+Unknown Speaker  38:02
+This is scenario two.
+
+Speaker 2  38:07
+Yes, scenario one. And then if we go to the 1b and the other one, we would make that scenario two.
+
+Ryan Hankins  38:13
+No, remember this doesn't include contingency. It doesn't, so there's a couple different things here. One, there's none of your contingency, there's none of our contingency. What you carry at a GMP level, somewhere between three to 5% and where we're currently at in design, knowing that we're likely going to have design revisions, I highly recommend that we do carry some contingency. We just cut like 30, 40% of the project I think the number
+
+Speaker 9  38:44
+that we're also carrying through your hardcocks
+
+Speaker 3  38:53
+with that separate bucket for owner, but if it's 219 doesn't carry owner
+
+Ryan Hankins  38:57
+contingency, let's add that in it. Well, we have to add our contingency into
+
+Speaker 3  39:03
+no, what I'm saying is, don't worry about when our contingency like this is this is
+
+Ryan Hankins  39:15
+apples to apples of this number right here, the 190 to 200 construction cost excluding contingency, this is apples to apples to this number, the one you gave us.
+
+Unknown Speaker  39:31
+So the 10% is other contingency,
+
+Speaker 7  39:34
+it's both overall, it's overall, but the assumption is that 10 would be splitting out five feet by the camera.
+
+Unknown Speaker  39:41
+oh, understood.
+
+Ryan Hankins  39:44
+Okay, that's more of a GM, that's more of a GMP type approach, though. I do think it's, it's wise for us to carry an extra 5% design contingency while we're getting this over the heart, okay? Just for any as design design progress. Yeah, we just made some serious changes, effectively with this. We're going back to DD. Yeah, we'd almost recommend 10, but I think we have a pretty good handle on kind of where things are going. Yeah, so I think five is probably appropriate when you guys bid this out, no, we clarified that it should be,
+
+Speaker 3  40:29
+should be something that we should talk about. Yeah, that makes sense. Yeah, so if we're looking at 10% those numbers up there with an additional 5% that's probably that is that, because we're looking at the high end, it's about $30 million in contingency, that's definitely more than
+
+Unknown Speaker  40:49
+what we're getting 20, yeah, we've got that 20,
+
+Ryan Hankins  40:54
+we'll work through that. I was just saying that, so you understood, like the overall picture.
+
+Unknown Speaker  41:00
+so put it in
+
+Speaker 6  41:07
+what I, it gets our total project about 281 so yeah, I just using whatever's in here, so using that to 219
+
+Speaker 7  41:19
+that 219 includes taxes, fees, and all of that. I just want to make sure
+
+Speaker 6  41:25
+you're not getting double count that. No, no. I basically, what I did is what we were holding in our total project budget was the 100% DD estimate. So I took this, I removed the VE numbers because that was included with what you gave us 400% I folded in the scope reduction. It's about $39 million removed. That $39 million that's calculated from this, would include the markups, right? So, gross receipts, your profit, so that's an all-in. Yeah, your 281 also includes whatever contingency we're holding. I'm just going to do my
+
+Ryan Hankins  42:08
+See, wow, that's impressive.
+
+Speaker 5  42:19
+You are hired. We need help. Okay, so good.
+
+Unknown Speaker  42:55
+It shows that we all use Gemini, which we don't, but
+
+Speaker 5  43:06
+okay, so what would be what would be
+
+Speaker 3  43:11
+super helpful tomorrow is if we could break out VE versus spoke production, and then having that option two scenario.
+
+Unknown Speaker  43:22
+Well, yes, having that option two scenario, which is just going to be just the struct one,
+
+Unknown Speaker  43:33
+so that's that's about the two material possible,
+
+Speaker 2  43:41
+so just so I'm clear, so we have on the on scenario two, we have the bridge crane, 400 to 300 tons, right, and then fire protection, and then the revert back
+
+Speaker 1  43:56
+to to be, which is just under 4 million, so I'll put those in, tag them as scenario two, and that would be in addition to scenario, so one plus two. Okay, and you're doing your, you know, about the three hour situation, just that happened. Yeah, so I got to see, we need to look at that, we need to make sure that they
+
+Speaker 9  44:18
+are estimating that's appropriate today, okay?
+
+Speaker 2  44:22
+Yeah. so there's a few things that we need to, like, revise on this whole process, but it won't change. Well, it
+
+Unknown Speaker  44:33
+looks like scenario two, it's max savings of $7 million roughly like,
+
+Speaker 3  44:40
+because what we're not including is under furnished, we have a tae that we can revert back to, which would
+
+Speaker 6  44:47
+save, okay, so that's 4 million owner, so only 7 million from Clayco, yeah, that doesn't include their markup, so yeah,
+
+Speaker 3  45:02
+we'll We'll put it together, yeah. I think it would be super helpful for the breakout of BE versus scope production, what those two buckets are.
+
+Unknown Speaker  45:12
+And then sounds like everything is
+
+Speaker 3  45:20
+driving. I think tomorrow is going to be a very easy day. It's just going to be a handful of conversation.
+
+Speaker 1  45:29
+Yeah, he.. well, I scheduled it for 10am tomorrow, so got it done. So, and I sent out that meeting,
+
+Speaker 2  45:40
+and I forwarded it to my team, so if there's a specific time tomorrow that we want Lulu and Dave to jump on, and you know, walk through any questions that you may have on this. Lulu is much more proficient at 20 than I am. She's like, she's faster
+
+Unknown Speaker  45:57
+earlier, or what are people, because we have what time does everybody have to leave? What time do people want to flight? I have a 5o'clock flight. Perfect. Okay, so if we start at 10, then we're starting right with it.
+
+Speaker 8  46:10
+Conversation that I don't even.. I've been following those lead a little bit. I'm actually gonna go home tonight. Oh, you're. so I So
+
+Ryan Hankins  46:23
+I'm going to Twin Falls, Idaho, so there's not many flights that go there.
+
+Speaker 6  46:28
+Erica, what would be helpful is if you guys just put B in the name, we can filter. I downloaded a report, like I mean, I downloaded it to Excel and I think this is a live link file to join, so as you update, I might be able to just refresh, but that would be badass if something actually..
+
+Speaker 2  46:51
+this book was pretty good. You can do it with some systems. Yeah, I.. I'm not the one who usually presents this stuff, so I'm like an old lady trying to show you how to do this, like watching somebody else just go to college, and I'm sure that's what
+
+Speaker 6  47:12
+you guys were teaching to each other. We were so talking about you in Slack, that's an old lady program. I love Slack, especially to see.
+
+
+Transcribed by https://otter.ai

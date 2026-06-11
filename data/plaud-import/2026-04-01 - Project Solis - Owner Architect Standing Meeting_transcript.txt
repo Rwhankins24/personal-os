@@ -1,0 +1,581 @@
+Unknown Speaker  00:00
+I mean, our company in Austin,
+
+Ryan Hankins  00:05
+okay, yeah, all right, we've, I think I pretty much know, I've seen everybody's name, I think, on this call, and I think I've gotten a brief introduction. So I think, I think we're good.
+
+Speaker 1  00:19
+Okay, perfect. So Courtney, I I have a couple of things, but I can also hand it over to you if you want to
+
+Speaker 2  00:26
+start, yeah, just three items that I wanted to Chad about. So just quickly go over the design decision risk log. Just make sure that you're tracking decisions that are forthcoming for some of these permit packages, would like to talk next steps with our early civil site permit package, what we can anticipate when we can anticipate that comment letter and Start pulling together our ve agenda for the night? Okay? Early package.
+
+Speaker 1  01:07
+Okay, great, and then yeah, we'll kind of talk at the end. So that sounds good. Go ahead and share my screen. Oh, sorry. I had something in my mind. And then when you talked, I said, you go first. But I didn't. I now what I was gonna say went out of my head, so hopefully that comes back. It'll float back in there. It's okay. Happens to me all the time, it'll flow back in there. Do you have preliminary pricing to help aid our veer
+
+Speaker 2  01:52
+Rebecca, no, yeah, for us to help pull that ve list together, seeing the prelim pricing is always helpful in that
+
+Speaker 1  02:02
+definitely it for the for the design team, as they're trying to pull items and flag items. So I don't know if that's possible to get sorry,
+
+Speaker 3  02:13
+I can share something with you guys. Rebecca, we've been kind of tracking it and looking at the large cost drivers in there, so we have kind of a histogram, if you will, of you know where those heavy hitters are so happy to share a link with the team, and that way you guys have that information. I think it's primarily MEP stuff. HVAC was a big one, Ryan, you probably know more off the top of your head which were, which were the ones or which ones have the most chance to impact the bottom line, really, absolutely.
+
+Ryan Hankins  02:46
+Oh, sorry, Courtney, you think you're gonna you're on mute, though,
+
+Unknown Speaker  02:52
+wait, Courtney, you're up, you're muted.
+
+Speaker 2  02:56
+Thank you. Sorry. Sorry to jump in there. I was just interpreting something for Jen. I think what Jen is asking for is more specific to the admin interiors and finishes, not necessarily all of the VE opportunities and over operations. So maybe Nick You and I can get together, if needed, with Clayco and just peel off some of those interior costs associated with the overall budget.
+
+Speaker 1  03:22
+Okay, okay. And yeah, I think it could be helpful for the whole team to see whatever you want to share with them. Courtney and Nick, you guys make the decision, because Jen's asking about the interiors piece, but the rest you've asked for input from the rest of the design team as well. So that could be a helpful tool as they're trying to come up with their list. So whatever you feel comfortable sharing, that's great. And yeah, that would be helpful to give more specifically,
+
+Speaker 2  03:46
+absolutely, all of the VE opportunities and pricing associated with exercise with Clayco is available for everyone.
+
+Speaker 1  03:55
+Okay, perfect. Yeah, okay, so we'll look for that. And then my other comment about that be agenda, and I think you guys probably saw that I sent out an email invitation for a meeting on Friday. I just mark wanted to kind of touch base about what we were asking for Friday. Maybe you want to explain it, or I'm happy to explain as well.
+
+Speaker 4  04:19
+Yeah, no, sorry, thanks for arranging that. So on our side, we have a little bit of a scheduling issue. And Frank and I won't be able to attend on April 9, we're both out of the office, so Theresa Curtis, from our office, will be attending. Fingers crossed. I think I haven't confirmed with her yet, but I think she will be so we were hoping to have a conversation on Friday, so that first we could kind of go through some of the introductions, and then we could start to maybe think about what those structural P ease would be, so that when we come we'll have a little bit we'll be able to get the knowledge from Frank and I before we go on our PTO. That was kind of the reason for the ask. No
+
+Speaker 2  05:02
+problem. I think we can. We can do that, and we know Theresa from previous, previous kick off calls, yeah, exactly, yeah, yeah. We can definitely, I think, pull something together. Okay, sounds good. Rebecca, did she want to take that meeting invitation? Or do you want me to take it? I actually already
+
+Speaker 1  05:21
+sent the meeting invitation. I included Ryan, Chris and Conor from the Clayco side. I don't know if that was the correct three and and then you and Nick Courtney, and then the so I sent it out. It's for Friday, and if that time doesn't work, just let me know. I think there were a couple of different time slots that were worked for both Thornton Tomasetti and me.
+
+Ryan Hankins  05:46
+I accepted it. I'm good for that time.
+
+Speaker 1  05:49
+So, okay, yeah, so just let me know that's perfect. Nick and Courtney, Thank you, Ryan. I appreciate it. Okay, I will go ahead and share the design decision log, and we can kind of talk about some of the items that have come up. I'm happy to go through more of it. I was scanning through it today, so we did do a snapshot as part of the 100% DD deliverable. But we've continued to add add add to it. And yeah, I really would like to get things closed off, but it there's a lot of items, so it's, Oh, what am I saying? What? What does that say? I'm sorry, yeah. Rebecca, yeah. Just in general, just, I just don't want to leave you out of anything. So okay, so I guess we'll just start at the bottom and move our way up, because that might be an easier way to do it. So we've added in this these items that we covered this week with our life safety conversation Courtney so about the FiO requirements, what? What construction type or how, or separations, separated occupancies. So that's one that we'll be talking about next week. I think you are coordinating with Jeremy to figure out what might make most sense for having the most flexibility for the facility, the fire rise room. This is actually closed. I just haven't finished filling it out, but you let us know that it was okay to okay to include fire riser room, yes, in laser area. Oh, no. Okay, so that one is going to be closed, which is exciting. The egress through the r, d space. That's another item that will will be talking through and figuring out how you guys want to you at Pacific future want to handle that for future phases, adding doors or adding a corridor, or, or, or what you want to do. So facade, maintenance and cleaning approach, I know that.
+
+Speaker 2  08:22
+Yeah, quick question. Rebecca, on the egressing piece, the request is we need to you guys are suggesting that we do make modifications to the core shell package for future egressing requirements in machine install, because it's going to have an implement on the existing design. So we need to find alternative ways to egress in the Cory shell package and not kick the can down the road. That's right, yeah,
+
+Speaker 1  08:51
+because we're, what we're concerned about is with those large openings, if you're the options are essentially adding a way to egress through those rooms, or adding a corridor, either in the R and D side or in the laser room side, in both of those seem like terrible options for how you're going to actually be using the space. And so we want to make sure that you can do something that's not going to be just like detrimental to you. All understood.
+
+Speaker 2  09:19
+And I guess the this topic is completely independent from construction type, correct?
+
+Speaker 1  09:27
+Yeah, these are two separate. These are completely independent. The only thing that is not independent is in the conversation about construction type, where we're looking at creating a fire barrier, potentially between like area one or area two and area three. If you were having a fire barrier, there would be considerations for how we treat either that corridor or those doors. Okay, so they're independent. If you go with type one a or type 1b then if you have to have a fire barrier, that we need to have some further conversation.
+
+Speaker 2  10:00
+Sounds good, and I'm reminded of this, I'm going to see if Jesse sent that PowerPoint
+
+Speaker 1  10:08
+last night. Okay, I sent you the updated version he had added in that that H information about allowable areas, and I sent that to you. Yeah, last night. Thank you. You're welcome. This was yesterday, 331 okay. Okay, keep going. So last week we had brought up the facade maintenance and cleaning approach and what, what you all were wanting to do? So Frank and Mark have met with their team. We're going to have just like me and Frank, I think, and somebody from their team are going to have a conversation to just figure out what would be like a rule of thumb of how to approach it, if you want to, so that you could plan for that and give us the go ahead or not, so that we're going to get you information about it, but we need to meet at the end of this week safety showers. I'm thinking that we didn't get the final information on that. I need to look back at my email. It sounded like from Jordan. I don't think that there's an intention to have safety showers, but that was one piece that I
+
+Speaker 2  11:24
+need to continue. We won't plan for that as part of core and shell. And if we do need to add something in the future, we'll have kind of a Hess self contained solution, the water, yes, no infrastructure needed in Cory shell, okay,
+
+Unknown Speaker  11:44
+no, yeah, no drainage.
+
+Speaker 1  11:47
+That's correct. Oopsie drain edge for safety showers or eye washes. Correct Tim
+
+Unknown Speaker  12:02
+as part of,
+
+Speaker 1  12:21
+okay, great. Okay. I think you all have been working through I'm going to kind of skip over the Meyr plus ones, because they're they're not here, and you all have been working through these items. So I need to get some updates from them. I'll maybe send, send them an email to see if they can, if they cannot, do some of these, we had brought up this conversation, is this what you're hoping to do? I mean, those are the main items we've added, Courtney, and we're now back at items that we've talked about before, and I'm happy to keep going through the list. I don't know if this is of value to anyone or no.
+
+Speaker 2  13:05
+I mean, the idea would be, let's in each OAC meeting, let's just prioritize the items that you guys need, need decisions on, and we'll make sure we run those down. So if, if, if we've got this first cohort underway for some of the upcoming permit. Says, Great. We'll continue to use this document. But I think in future OAC meetings, if we just want to focus on, like, the priority decisions, yeah, just to make sure that Nick and I are focusing on the right things. And I think
+
+Speaker 1  13:39
+that's what those ones that we've covered at the end are the ones that have come up, and I think are the most critical. And there are others that I would like to just close out, just for the sake of not having things outstanding. But this is one that I flagged today. There were some questions that came in from our life safety from fire protection. Sorry about confirm that the IMG tanks are empty when moved and no my volt fluid is being transported to labs in large quantities. These are inputs needed for fire protection and confirm chemicals and quantities being used in lab areas. So this is one I just wanted to flag for you to see if you can get us some some inputs on that, and if you need more backup information, we can, we can work with our protection
+
+Speaker 5  14:29
+to get you that the answer to that is yes, we can confirm that, and yes, We will get a list of chemicals and qualities. I
+
+Speaker 5  14:48
+I'll put it over here. When we say labs, we're talking about the non r, d space rooms, right, correct.
+
+Speaker 6  14:55
+That's correct. Yeah. It would also be good to know your methods of storage if you're putting them in cabinets. Or, yeah, what chemicals?
+
+Speaker 5  15:06
+Yeah, yeah, we'll have the proper chemical storage Absolutely, yep.
+
+Speaker 2  15:11
+Justin, do you have a list that's already created, or is this something that we have to inventory and get from? Whoops, and we'll likely
+
+Speaker 5  15:19
+not have it until we move in. So this is gonna be well after Cory shell is complete, so we won't have that
+
+Unknown Speaker  15:24
+information for the fire protection.
+
+Speaker 5  15:29
+No, do they need that for us to build the building?
+
+Speaker 2  15:33
+Yeah, Justin, this is this information plays into
+
+Speaker 5  15:37
+we can put our list together. It's gonna change a lot, but, yeah, we can. We can put a preliminary list together, knowing that, you know, there'll be additional chemicals at some point in the future, and then we'll have to update
+
+Speaker 1  15:47
+it, just to give the help clarify Justin, what we're trying to do in this log too is we want to know, and we want you all to confirm what we are designing this building to, because we know there's a lot that are things that are going to change, And that's kind of the name of the game, like, it's all just water. We're like, walking on water, and so
+
+Speaker 2  16:08
+sorry, we want to lock it in. Yeah, I'm going to jump in here. So Rebecca, yes, we can this. I know this ties into the construction type and anticipating how this facility is going to be used. I will chase that down with Jeremy and Justin, and we'll make sure that we apply the appropriate construction type based off of future hazardous materials and potentially age of occupancy. So that's something that I you know, Jeremy and I need to sit down and have a more detailed conversation about machine installing future epics. But yes, we can get you this when, when do you need it by?
+
+Speaker 1  16:47
+So that's it. That's the problem. And I maybe will go back to that. I kind of want to let me go back to one thing and just just highlight it. So this was the item that I brought up a few weeks ago, and just said that it was on your radar. We were really wanting to lock, lock in what we're designing to to meet these the schedule and so and just hear me out, because I'm not trying to be difficult. I really am not trying to be difficult. I know that I come across that way sometimes. So we've, we we've asked for major design inputs by March 27 and I added a little amendment here of how I think we're going to be able to approach these inputs that are coming. We know that we're still waiting on inputs, and there's things that are changing. So it's not that we we know you all are working and getting them to us as quickly as you can. Things are changing, but we and our team are needing to move towards getting this documented. And so what I am, what I what we can do is that design inputs that are received after last Friday, we're going to review them as an AE team, and we're going to determine what can be incorporated into the permit set that is based on the schedule you have and what we need to address as a change order, so then that becomes a conversation with Ryan and Chris, of like, how they're gonna so I think that's how we can handle it. So get it to us as quickly as possible. We'll review it, and if we can get it incorporated, we will get it incorporated. And if we can't, then we'll have that conversation. So our intention will be to get things incorporated. But we really do need to hold you to this 327, date for what we're going to be held to of the information you had provided by that point. So we will try our best. We will work together with our team and get things incorporated as best as we can. But if it's like, Hey, this is not going to get incorporated throughout the set at this time, it's not going to be permitted. We're going to have to address it after we submit this, because at a certain point we have to just start working to get these documents, these documents in place so we can submit for
+
+Speaker 2  18:48
+permit understood. Rebecca, yeah, so the direction now is the Michael information. So from a chemical and hazmat standpoint, this first phase, it's, it's, it's the my bolt information that I believe you guys have had since last year. Let me know if you don't have that, but the volume and SDS sheet, I believe you do have that, let me know if that's not the case.
+
+Speaker 1  19:15
+So now what we are we are designing just to the my bolt correct?
+
+Speaker 2  19:20
+There is a separate discussion where I can help guide you guys based on future use and Jeremy scope of work and ownership of the facility, what we should classify the construction type of this facility to make it easier on operations in the future. So that's an internal discussion where we will feed you guys the construction type based off of some of those height limitations, area limitations, sprinkler limitations. We're definitely going to have to pull Clayco into that, because there's some fire proofing considerations that may significantly impact things. You know, we'll, I'm pulling that together. We'll probably have some of that as part of a ve opportunity, but that's a direction that will give to your team, Rebecca, and it sounds like we need to make that decision by end of next week.
+
+Speaker 1  20:11
+Yeah, that's the main thing, I think, because there really is so much documentation left to do in order to get us to these permit sets. And so I it's not that we don't understand what's happening. We understand what you all are doing, and we want to be able to support you in that and and in order to support you and actually meeting the big permit set goal, I think we might have to push off some of these things that are coming later and later. So that's that's kind of the that's where we're at. So sounds good. I got that jotted down that we
+
+Speaker 6  20:45
+go ahead. Tom, could I just one comment on the chemical quantities for Justin? This comes up on a lot of projects, you know, you may not know, and the reason that we care a lot about this is because it does have significant impacts to where you can place the storage areas in your building. So if later down the road you come and you realize, oh, I have something that exceeds my maqu in this position of the building, whether it's a certain amount of egress distance that you can put that, I mean,
+
+Speaker 2  21:21
+you already know I've lived it the hard way many times, so I tell you, so your pain totally understand we're going to work to get you a construction type based on all of our future considerations by the end of next week.
+
+Speaker 1  21:34
+But yes, yes, definitely. Well, and I feel like Dom's point is, it's not our pain, it's your future. That's what we're trying to help you avoid. Because I don't think it will be jumping, because we're going to go based
+
+Speaker 5  21:45
+on this definitely understood, and there'll be associated costs as well. So yeah, fully heard Donna and Rebecca. Yeah. Appreciate that. That guidance. Thank you.
+
+Speaker 1  21:54
+All right, cool, cool, cool. So I think that's the those are the main ones that I had flagged for today. I know there's, yeah, additional information coming. Mark, if there's any, oh, he's not. He turns his camera off, so I don't know if he's right there. But anyone else? Mike, Mark DOM Kristen, any anything that you need to get in front you need Courtney and Nick to and Justin to give some input on this is a good time to bring it up.
+
+Speaker 4  22:27
+From our side. I think we have the direction that we need immediately. So nothing outstanding right now.
+
+Speaker 2  22:35
+Yeah, from interiors, we have our presentation tomorrow, so that should wrap things up.
+
+Unknown Speaker  22:40
+Nice. Yeah, I think it's just that
+
+Unknown Speaker  22:49
+the end. Thank you. That's great. Okay, go ahead.
+
+Speaker 6  22:54
+Dom, in regards to the construction type, I think there's just a lot of nuance in how that can be handled. So once we get the direction from that Courtney, you definitely want to sit down with Clayco, because there's obvious cost impacts and design considerations about how we treat the building and what gets into Mesa, what gets chip I'm especially thinking of the office. There's areas where there's cross bracing that can get very tricky. So it's just going to have to be a very detailed conversation, area by area, about how we best handle that, because I it's not, unfortunately, it's not as simple, straightforward, without significant cost impact. So I just want to kind of walk in step with Clayco and how we handle that, and I know that Kristen this thing about the office, and I don't think it's as simple as this area gets shipped, this area gets into mess, and I think we're going to have to take it as a case by case basis, like coming through the building, and I have thoughts and ideas, but just want to work with them and staff when we're looking at that.
+
+Speaker 1  24:16
+Thanks. Okay, so I think that's that those are the main items that I wanted to cover in the design decision log today. So I think, why don't we move over to the early package and Courtney, just to let you know that maybe some of this will become clear in in our conversation at the end of this meeting, where we kind of walk through the schedule proposals that I have. Okay, so I know that you all submitted, and Mike, you can correct me if I'm wrong, and just jump in at any point. But you all submitted last Thursday, the 26 to hydrology for the review of the early grading.
+
+Speaker 6  25:09
+Yes, yeah, and we have not heard back yet, but I know that they're close. We actually called them ahead of the submission to let them know that it was coming, and they're the hydrology team there at the city has been
+
+Unknown Speaker  25:25
+pretty quick in order to be able to provide
+
+Unknown Speaker  25:27
+a response so we could check with them again today, but I would anticipate we'd get something before the end of the week and approval.
+
+Speaker 2  25:34
+Oh, great. That's exciting. Okay, yeah, wonderful. Okay, so Nick and Clayco, we can, we can break around next month.
+
+Ryan Hankins  25:42
+There we go. Perfect. That's a bad joke.
+
+Speaker 2  25:47
+Gentle, gentle hazing early on into the project. But no, that's good news. Mike, thank you.
+
+Speaker 1  25:53
+I feel like after after Ryan yesterday, he should be able to
+
+Ryan Hankins  25:56
+handle all the jokes. That's right. I'm just the new guy, so you guys can use me as a country bag for the first few weeks.
+
+Speaker 1  26:06
+No, that doesn't seem fair. Okay. Well, that's great news. Thanks, Mike. That's, that's awesome. Okay, so Courtney, if there's not, if you don't have anything else, I might move over and let people stay or leave however they want to, to talk you through the schedule. If that sounds good, I think Ryan and Chris, it would probably be good to get your input as well, if that's desirable for you guys.
+
+Speaker 2  26:38
+But do we need folks to set the start setting the VE agenda. Or is that?
+
+Speaker 1  26:44
+Oh, my, Courtney, yes, that was the third item on here. Yeah. Let's talk. Let's go to ve agenda, and then we'll move on. Yep. So I sent you and Nick, kind of very rough. Just this is how the disciplines might align, but I think that's going to have to shift significantly based on what the actual items are that we might cover. So our team hasn't had a chance to pull
+
+Unknown Speaker  27:12
+Rebecca, could you share?
+
+Speaker 1  27:14
+I Yeah, thank you. I mean, it's, it's such a rough What's your judgment, but you can, you can give it to me if you want. Yeah, no.
+
+Speaker 2  27:24
+The idea is, let's, let's start to memorialize something. I know we have the log that was just posted for the rest of the consultant so Clayco, for your information, we, about an hour ago, just got off of our design coordination call. We've asked the team to provide ve opportunities. So the idea would be, in this meeting, we start to specify what ve Topics we need to discuss and get to, you know, get to a point where we understand our options, can price those options and make a decision fairly quickly, knowing some of those decisions may or may not impact, permit schedule all of the VE opportunities from the sub consultant. So outside of you guys Clayco, we can definitely memorialize what you guys have already described to us. We've requested those be in by noon on Friday. To add to this agenda, an idea would be, we give you guys plenty of time to understand some of the topics. So we're all kind of coming prepared to this work session with the intention to price things out and move quickly on decisions. So before we get into this agenda and maybe itemizing some of these things out and maybe Rebecca, what I'll do is just start inputting this into the spreadsheet we created. I'd like to get an understanding from the Clayco folks. What is your process on the back end, when we when we discuss our options, available, what and how are you guys going to take that information? How long do you need to digest that information, to really put a schedule estimate or a cost implication on that to help Mike and I determine which way we need to go, how much time downstream Do you guys need to, if we can get you everything in this
+
+Ryan Hankins  29:25
+so I'll start. I'll start by saying, typically, and I don't think we really have a full understanding of what the goal of the VE effort is. And I say that in a way where, like, hey, we like, as we go into this meeting next week, like, hey, we need to save $20 million like, or else this project doesn't go or we need to go show value to our our our investors as a fiduciary responsibility, or whatever it may be that helps us give us context on how we need to make sure that we're delivering The outputs. Secondly, when it comes to getting us information and what you get back, you know, obviously, the more design and more sketches type things you give us, the more locked in we can get on cost, as far, you know, within, you know, plus or minus 50% if you don't really have much, you know, more of, like, a plus or minus 20% if we have, like, some design information to go off of. But how that gets delivered, you know, it's going to depend on how quickly you need it. So if we need, if we need information within a couple days, yeah, we'll be able to do it. But once again, it just goes into how, how dialed in, the costs are going to be okay, understood,
+
+Speaker 2  30:46
+yeah, and thank you for bringing that up. I think I'll do a better job defining the attention of this workshop at a high level mission statement, we we really want to drive to find $10 million in reduction across the overall, across the site, whatever that can be, right? So that'll that'll be kind of minimum. That'll be our mission statement. We know there's probably opportunities above and beyond on that, but that's the floor. So I'll spend some time, when we send out the agenda, I'll spend some time defining what we're doing with the intention or results of the meeting needs to be to set you, you guys, Clayco, up for success, to be able to turn around things quickly and help
+
+Unknown Speaker  31:31
+the overall team make a decision.
+
+Ryan Hankins  31:32
+And to be clear, does that $10 million like if we do, we need to walk out of that meeting next week knowing that we have $10 million or are we walking out of that meeting with a clear plan of how we're going to get to $10 million and then we need to go execute that outside of that meeting?
+
+Speaker 2  31:47
+Yeah, I think it's going to be a little bit of both. To be honest. There's going to be some items that we need to talk deeper on. We need to go folks are going to have to go back to the drawing board, and there's going to be some obvious low hanging fruit that we can just make decisions on in the meeting. So I'm going to give a generic answer of hybrid approach. And what I will say is I'll just spend a bit more time when we send out the invitation, really defining what everyone's role is and how we can come to the meeting prepared and what the intention of each each item, what we're trying to achieve, what the intention or result should be at the end of that discussion on four nine, okay, I
+
+Ryan Hankins  32:33
+don't want to cut it. I think Dominic had a question, but I have one more afternoon.
+
+Speaker 6  32:39
+Yeah, for that family and savings, I'm assuming that is across the whole project, like a million dollars savings doesn't count if it's deferred to phase two. So if we take out, we have to find savings under the right performance. We can't just items and say you're going to take care of that $10 million later, we have to find ways that are true value engineering.
+
+Speaker 2  33:10
+We currently have a budget forecast from from Clayco, right at the 50% design document. So we have a forecast. You know, ultimately, yes, it needs to be actualized in scope one or phase one. So it can't be something that would love to give Jeremy credit for this and machine install, right? But he'll run his own ve exercise when he picks up phase two of this. But it needs to be a part of scope, one that we're documenting today, because
+
+Speaker 1  33:53
+so and just this is a question, just for you all, but I mean, I think typically in ve workshops that I've been a part of, yeah, we've given some input. I wouldn't be the person coming up with the agenda. It would be the contractor and owner. So I just want to see, is that what your intention is, or are you thinking that we'll be coming up with the list?
+
+Speaker 2  34:16
+Oh, gotcha. Yeah. So Rebecca, if this is an appropriate time, I can go ahead and just share my screen. Yeah, go ahead. Let me be opportunities. I just There we go. I'm just going to work off of my desktop version. Let's start populating this. Because, you know, ultimately this will this will be the agenda that I send out early next week. And maybe what we should do is, let's start off with clayco's ve opportunities. Um, and let's just take two minutes to describe them. I think the intention of this effort is, let's populate this as much as possible with ideas, and in the background, I can do the follow up to determine, you know, some of these other attributes associated with this. So Ryan, let's just go down the list. You know, we've, yeah, we've already reviewed some of these.
+
+Ryan Hankins  35:29
+Yeah, yeah. I mean, and like I said during the interview, like, you know, there's a couple items that are, like, here's where we think the opportunity is overall, and there's a sliding scale between that depending on how much we cut and how much we don't. So for example, like natural gas fired RT use instead of dx cooling. Do we think it's a good idea, necessarily, to cut all of that? Probably not. But, you know, is there a discussion there? Sure, and we're saying that there's money there, if money needs to be found, to the tune of roughly about, you know, $10 million and so that would kind of be like our high band, knowing that, you know that that may play into, you know, one to one to 5 million, maybe one to 6 million, depending on what the design team and Pacific fusion choose to go with.
+
+Speaker 2  36:18
+Yep, that makes sense. So what I'll do in the background is I'll start populating this Okay, so what is it going to take for us to make this determination, to figure out, Is this a good idea for the project? Do we have time to implement this? Is this going to kick us back into entitlements? So I've got a bunch of questions that I won't spend too much time on, just for consideration of keeping it concise, but you know, we did not consider any natural gas on this site, so if this kicks us back into entitlements, we've just got to weigh the pros and cons of what this means for the overall project,
+
+Ryan Hankins  36:57
+understood and the
+
+Speaker 1  37:01
+additional services. I mean, I think that the additional services for the design side is not going to be the thing that pushes you over, but just for the redesign efforts, just to keep that in mind,
+
+Speaker 2  37:15
+yeah, okay, let's go on to item number two,
+
+Ryan Hankins  37:20
+staying on the HVAC train side. So there was equipment specs were listed for custom HVAC equipment and not saying that's a bad idea. There's plenty of reasons to do that. But if, if it's, you know, if it's acceptable to the team to save some money, maybe remove some of the bells and whistles, we could go to a more standard, off the shelf item that would save to the tune of, you know, we'll call it two and a half to three and a half million dollars. And that's, that's a decision for, you know, design as well as maintenance, because it potentially require more maintenance. And then, you know, obviously Pacific fusion side.
+
+Speaker 2  38:08
+Yeah, yeah, there's a delicate balance there. I don't I never working for a vertically integrated company in the past. I know how the design and construction team can kind of strip strip away what would be really great for the ops team in the future, only to cost more money in the future. So it's just a delicate balance to determine what is bare minimum. And to your point, Ryan, what's you know, what's fancy stuff that's not really needed to ensure proper operation of facility. Yeah,
+
+Ryan Hankins  38:48
+and then the other large bucket would be simplifying the electrical one line design, once again, not saying what's there isn't the correct design. But if you have to save money, there are ways to save money with within the electrical side. So I think it's just something like, what I'd like to do for like, you know, the electrical line is like understanding your redundancy requirements, because, like, we haven't gone through that, understanding what your goals are from the electrical side, and then seeing if there's ways we can show you maybe how certain things are less expensive, whether through feeder lengths, whether through coming in with a higher voltage, and instead of having four transformers going down to 480 just having a single One going down to 480 and then having smaller gear, like there's, there's a different bunch of different ways we can slice it. I think we just need more identification to what the goals are. So we can recommend some some more, some more finite items. But we said there's roughly between three to $8 million in savings there that we thought would be appropriate.
+
+Ryan Hankins  40:10
+There was a spec for fleece back 120 mill roofing, and we said that it was about a million dollar savings to go to 60 mill roofing. So basically, just a more standard roofing.
+
+Unknown Speaker  40:33
+There's about it, you said a 1.5 million.
+
+Ryan Hankins  40:36
+That one's, I think, a million bucks million. Okay, got you once again, it goes to your maintenance versus, you know, it's a better product with the fleece back, thicker products. But you know, if you guys want to defer some to maintenance, yes, you can get, you can get that million bucks out.
+
+Unknown Speaker  40:54
+Okay, I'm gonna spell fleece, fleece background,
+
+Ryan Hankins  41:00
+due to so
+
+Ryan Hankins  41:13
+those were the four main ones that I think we came with. I can have more available by Friday at noon. But you know, those were the four main sliders that we thought would be, you know, more of a sliding scale of where we thought the buffer would be.
+
+Unknown Speaker  41:29
+Okay, yeah, perfect.
+
+Speaker 2  41:38
+Great. So let's maybe move on to Rebecca the architectural team. We're just going to spit ball on here. I've got a couple days to do this, and I'm putting a lot of folks on the spot.
+
+Unknown Speaker  41:48
+But just off the cuff, what are some thoughts?
+
+Speaker 1  41:55
+Yeah, I mean, I think you all are already using your baseline as the tilt up in all construction. So that's, that's already part of the base, correct?
+
+Ryan Hankins  42:12
+I don't know if, and I'm I'm certain there was a reason why there was one foot 10 thick panels. I'm guessing it was more of interference, potentially, but you know to go to, you can go to a more standard thickness panel, but no. That also depends on engineering, and if that's able to be done,
+
+Unknown Speaker  42:35
+I think, for the building envelope.
+
+Speaker 6  42:43
+So it, yeah, Ryan, it started as a 16 inch panel when it was just till and then it became a sandwich panel. And so when it became a sandwich panel, it added two inches of insulation, and then that four inch exterior white. So the structural core of it is only 16 inches, but the finish of that four inches could likely be reduced, you know, so that could be maybe go down to three inches. We have to look at our detailing, but I typically see anywhere from like three to four inches on that exterior, wide for sandwich panels.
+
+Speaker 2  43:22
+The exterior finish is, I guess, is the insulation exposed, and this is why we're finishing the panel. Or what is, what is the finish for?
+
+Speaker 6  43:33
+So, the, so, in a sandwich panel, you have, like, the main structural life, right? That's the main support, and then you have the thin or the continuous insulation in between. And then you have an exterior wides, which is just the finishing concrete, and that can vary in thickness. It doesn't like four inches is probably a bit overkill, so I could see us coming down on that design. However, this is also deferred engineering, so there were some assumptions made on our part on that. So yeah, Ryan, I imagine we'd have to, you know, talk with whoever is doing the engineering on that to find that Rebecca, unless you had, did you have a few? No, I don't have
+
+Unknown Speaker  44:25
+things on the top of my head.
+
+Speaker 6  44:26
+So we and Ryan, I don't know if this was caught. I didn't what set Did you price off of? Did you price off 50% DD, or do you price off 100% DD,
+
+Ryan Hankins  44:41
+50% DD, okay,
+
+Speaker 6  44:46
+I don't know if you caught this. So this is probably a cost add. Unfortunately, I thought that if we had High Performance Coatings called out throughout the majority of the facility, those High Performance Coatings can be brought down. I know we called out epoxy, but later we refined that with Sherwin Williams. Tom more of a high traffic coding. We assumed high performance coding everywhere, but the areas that get that high performance coding could be reduced depending on where Pacific fusion is bringing their heavy, loaded equipment. So right now, it's kind of shown in the full R and D and full lab area, but thinking that area can be reduced if we have a better understanding of Pacific Fusion's intent, of how they're planning on occupying that space.
+
+Speaker 2  45:46
+Maybe we should first ask Ryan, did we so?
+
+Ryan Hankins  45:53
+So what we did was we captured, we did not capture epoxy at the slab areas, because it wasn't shown. What we did do was we did put at all the tunnels and all the underground we have waterproofing on the outside. Typically, not always a great idea to do waterproofing the outside as well. You kind of trap moisture potentially between there. But we can talk about the overall waterproofing strategy, along with the coatings and right size, it to the correct budget, although I typically don't like
+
+Speaker 2  46:28
+to you know there, there are certainly scope items in there that don't come until later on in 100% or 50% CDs. So as part of this exercise, how do we want to allocate pricing that was originally, you know, set, I guess, in this initial forecast, to make sure it gets added to the budget that Nick and I are managing so So Ryan, we can deal with that and maybe a separate meeting, but good to just kind of bring it up as a FYI and Something we should, we should add to the overall baseline, or forecasted baseline, absolutely.
+
+Ryan Hankins  47:07
+And those are all things that we can alongside this effort we can just be making sure that we're capturing.
+
+Speaker 2  47:14
+I know you guys have that super fancy software. Great time to start, start utilizing that. Okay, well, Dominic, what else comes top of mind?
+
+Speaker 6  47:34
+We could look at reducing the extents of the entry. I
+
+Speaker 6  47:45
+there's a section of it that we were looking at that opens up into the office and we were discussing internally, if that made the most sense, with our space planning, there's basically we may be able to reduce that window coverage by about 20 feet, okay? And that's the entry in the canopy, right? Dominic, yeah, the entry canopy that looks it's on the north end of the building. I
+
+Speaker 6  48:29
+Okay, great. Going from I know MC Nichols is kind of like the Mercedes of the purple. Perforated panels so we could look at a alternative to those Nichols product going up on the roof screen and the enclosure for the stair.
+
+Unknown Speaker  49:01
+Okay, gotcha, yeah, something more generic, okay, were those priced? Were those conveyed in the 50%
+
+Unknown Speaker  49:11
+yes, they were.
+
+Ryan Hankins  49:13
+Yeah, we've got, I think it's above the it's between the high roof and the low roof. Within that mean the R and D section there's, there's a imp panels there, and then you've also got imp for those screen walls. So, yeah,
+
+Speaker 6  49:33
+I think this is separate. This. This is a roof. This is a roof screening element that's going on the cup.
+
+Unknown Speaker  49:41
+Yeah, to screen the mechanical equipment.
+
+Ryan Hankins  49:43
+Oh, gotcha. Gotcha, yes,
+
+Speaker 2  49:47
+yeah, the perforated metal. But Ryan, you do bring up a good point. Any, anything we can do with the imp panels above in the center Bay?
+
+Ryan Hankins  50:01
+Yeah? Well, we could look at some materials and just see if that they're that they're acceptable to the design team, as well as the local CC and ARS or whatever the development standards are. I don't know if there are any development standards, but something we should probably just look at.
+
+Speaker 2  50:23
+They are vague. We do have to go the master development standards for Mesa Del Sol. They do have some their Architectural Review Committee does need to approve them? Yeah, maybe this is just something we kind of pull the thread on and see if it's we can find something cheaper than what's currently spec,
+
+Speaker 1  50:52
+I think, yeah, if it's in the same like esthetic, if it's a similar esthetic, then it will fit within what's been approved by Mesa Del Sol and City of Albuquerque, and if not that, we would need to have a conversation with them.
+
+Unknown Speaker  51:10
+What about
+
+Speaker 6  51:18
+somebody had a really great idea of getting rid of a basketball court. I think there's a great de option, right? We got $50,000
+
+Unknown Speaker  51:29
+probably not 10 million
+
+Unknown Speaker  51:35
+credit for that. Okay,
+
+Ryan Hankins  51:37
+what about it's
+
+Unknown Speaker  51:39
+already your decision.
+
+Ryan Hankins  51:40
+Have we looked at geo peers and what that potentially does to the foundation sizes in the other building, and by the other building, I mean the the not R and D building, because, yeah, because I think those foundations, I think we're 15 by something, they were pretty big. Just, I was thinking the geo peers might help with reducing those.
+
+Speaker 4  52:05
+Yeah, no, that's correct. We were kind of going down that path anyway, to be honest. But yeah, there's some savings there.
+
+Unknown Speaker  52:12
+So okay, perfect. Yeah.
+
+Speaker 4  52:14
+I mean, I think you're right. If you get them out to start doing work, you might as well have them do the other parts. They'll be much less dense, so it'll go faster and cheaper, but you can reduce those foundations so And
+
+Speaker 2  52:28
+while we're on that topic, I know we have four minutes left during this out there, because I know it worked with multi Family and single family. Residential, maybe not for industrial, helix as opposed to so helix metal fibers, as opposed to rebar in some of the maybe the admin, admin slab area. Again, don't know if it's a proper application for industrial, but and if I need to take a step back and describe a little bit what helix metal fibers is happy to do that as well. Yeah, please do. Okay, so helix metal fibers, they're a company out of Michigan. I think folks are familiar with kind of the plastic fibers, that's really intended for shrinkage of a slab, but metal fibers are, if it's the right, I guess, zone and criteria, these metal fibers can actually displace the majority of the rebar, so that the savings is in the labor that you don't have to utilize Tying rebar, tying and placing rebar. It doesn't completely eliminate the rebar. It just reduces kind of labor associated with that. I'll send you guys a brochure. I used it on another project I worked on, but it's literally a thin metal wire. It looks like a bobby pin and it's twisted. You basically dose the metal fibers at the batch plant. And again, it's, you know, the reduction is really not having the guys in the field tie the rebar. So don't know if anyone here has ever used it. If it's an opportunity, maybe we can look into it.
+
+Ryan Hankins  54:16
+We've used something similar, not, not the probably exact product, but I think we're familiar with we can talk with our concrete guy and get some information on
+
+Speaker 2  54:27
+it, okay, yeah, I don't think it would be appropriate for the R D space, but maybe the admin space
+
+Speaker 4  54:35
+actually connect all The rebar anyway in the R D space. So, but But yeah, it could be for the slabs. I would think maybe in the office lab.
+
+Ryan Hankins  54:46
+So Courtney, just because we have one minute left, I just wanted to make sure Nick was asking me about an agenda for next week. And there's really for us. There's a couple different priorities for the meeting. One is the VE which I know is your guys priority, and we're focused on that. The second is, since we're all getting a since we're all getting together in a room, like creating alignment, I think between like, I mean, we're getting involved in something that you guys are already very ingrained in. So as far as, like, understanding and reviewing your design schedule, looking at some of the things we talked about in our interview, which is like our design purchasing coordination schedule that helps the design team understand what we need and what we need to support our schedule, talking through the permitting timelines and schedules reviews you just brought up the Mesa Del Sol, would like to talk through that and see how that affects construction, talking through, maybe in a smaller group, revised logistics plan. Nick, what we talked about yesterday, and talking about the temp power, talking through sequencing, meaning not what we talked about during the interview, but like Cory shell turnover, what that really means, what you guys really need, or what we think we need to plan for which areas of the building are needed and which timelines clean room, like when you actually need those live and then some of the handshakes and hand offs. As we start looking at scope delineations, we have a stab of what we think that might look like, and then taking all those things, I know I'm talking a lot here, so I'm almost through it, syncing up all those things and making sure we come back with a construction schedule that takes all those discussions that are Reality, and making sure we're putting those into a executable plan, and then talking through our risk log, making sure we leave in alignment on an overall risk log, and not just ARS, but also page Stantec, Pacific fusion, making sure we take all of your items and that we're kind of the gatekeeper for all of that Moving forward, and then having a big picture discussion about critical design items and talking through what cost feedback and schedule feedback you guys need to support decision making. So in all those are things that just while we're in the same room, we might as well just talk through as well to get best value out of the meeting. But we understand that VE is the primary, the primary focus.
+
+Speaker 3  57:24
+Were you hoping? Were you hoping to do this on Wednesday afternoon? Is that the plan and then ve on, or just all in the same
+
+Ryan Hankins  57:34
+Thursday meeting? I didn't really understand what the VE what the VE meeting was until we kind of went through it today. It sounds like it's a full day ve session, so we may need to extend to a second full day potentially. And if it's just an afternoon and that's all we can make it, that's probably fine too. But I would, I would definitely think walking out of our meeting on Thursday with, like, you know us more, in lock step with kind of what you guys have been working on, and making sure that we're all kind of reading off the same sheet of music, I think would be really powerful, just to make sure that we're we're making sure that we're supporting you guys in the way you guys need
+
+Speaker 1  58:22
+to be, is there a way to to bulk up whatever is happening on Wednesday, to cover, to have that be a longer time period to cover some of that? And I mean, it sounds
+
+Speaker 2  58:35
+like the Wednesday meeting really is what you're describing, right? And should be the kickoff in the Wednesday meeting to get you guys up to speed. So it sounds like you have a great agenda for Wednesday, unless there was another intention for Wednesday. And by the way, I have San Leandro booked for both days. We can make those meetings as long as they need
+
+Ryan Hankins  58:55
+to be. That's perfect. And yeah, I think it is kind of a kick off, and we're happy to run that, that that session that day. And so whatever, you know, I think there's going to be different owners of different parts, like, when we get through the design, you know, Rebecca and your team, you guys will probably walk through your design schedule. We'll probably talk through our, you know, purchasing coordination schedule of what we need from you guys. And then, you know, so on and so forth, so.
+
+Unknown Speaker  59:20
+And I just wanted to add, oh, sorry, go ahead.
+
+Speaker 3  59:24
+I was gonna say, so we want to plan on a Wednesday full day kick off and a Thursday full day ve workshop. Is that That's what we're looking at right now?
+
+Speaker 2  59:33
+Yes, yeah. Think those are critical.
+
+Speaker 1  59:38
+Yeah. I just wanted to kind of throw in there that, because you, you all are running this ve workshop, and that's good. And I think the original idea that we had in proposing that this be the final day that we have, that we wanted to set up a meeting with Clayco, is that we want to get anything that is going to affect any of that early underground utilities and foundation package locked in, and that we have an understanding of how we're moving forward and what the schedule needs to look like for that package, because we are on an incredibly tight timeline for it. So that's that's kind of a separate goal. That's not what you just said, Ryan, and it's not what you said, Courtney, but that's what our goal was in proposing this as being the time that we meet. So I just want to make sure that that is that we come out with like we're locked. I mean, 100% locked, and hopefully we have all of the information that we know before, like any information we can have before that that's good, but we need to not have any any shifting after that point for that schedule, or you can tell us, Ryan, that you don't that we don't have to do it until June, and then we'll be fine.
+
+Ryan Hankins  1:00:48
+Yeah. I Yeah. I think so this is good. The fact that we're having all these discussions, that means that we're all kind of seeing what kind of best value we can get out of next week. I do think that it makes sense to have a full, a full second day. I just think there's too many critical things the design team needs. We're, you know, as we've been on board now for like, a week, a week and a half, like, I think we need to really get up to speed. That's why, Nick, when I reached out saying, hey, you know, let's move it from the 15th to the back, back to the eighth. I think if we moved it any further out, I think we'd start to all kind of feel like we're behind. So no, I think it's the right time, and I think having two full days dedicated is great so we can get everybody their answers. Brian, could you
+
+Speaker 2  1:01:35
+just it sounds like you're reading off a list here. I'd like to get that agenda set and it sounds like this Wednesday, maybe at the tail end of this, we we also talk a little bit about that foundation package. It's a little bit of a separate topic on the VE so I think it's more appropriate for maybe the Wednesday meeting, but we should get you any kind of documents or supplemental information to prepare you guys to have that conversation. So Mark and team, can you know, submit on May 8, I'm sorry, May 11. May 11. I don't know why I keep saying eight, but
+
+Speaker 1  1:02:13
+it's 50% CD deadline. So that's why. Yep, yep, yep.
+
+Speaker 2  1:02:19
+Well, I know. I know we're running fast guys. We're bringing everybody into the fold here. And you know, we're hitting the ground running, but we'll, we'll take as much time as the Clayco folks need to get you guys up to speed. I think Rebecca, between you and I, let's, let's work with the design team to get those opportunities into the spreadsheet by end of this week. So we come prepared on on the ninth and then Bill, just a heads up. I want to give you, I want to just kind of have a sidebar with you offline. So I'll probably give you a call later today. Sounds good.
+
+Speaker 1  1:03:01
+And Courtney, we didn't get to talk about the schedule, which I really would like to talk about with you. So I got another meeting right now. I have another meeting that I need to go to for door hardware. I think you're also on that meeting, so I want to make sure we do the door hardware. But yeah, I would like to talk about it. So maybe on Friday or sometime tomorrow, we can have a time to go through it.
+
+Speaker 2  1:03:29
+Yeah, anytime after 130 on Friday.
+
+Speaker 1  1:03:32
+Okay, I'll put something on your calendar. Then great. And I don't know, Ryan, I don't know what you want to do. You can, you can include Clayco or or not, however you want that to go.
+
+Speaker 2  1:03:43
+Okay, I will include them. Yeah, we'll include Nick and Clayco, yeah.
+
+Speaker 1  1:03:47
+Sounds good. Yeah. All right, sounds good. I'll put that on your calendar. Then thank you.
+
+Unknown Speaker  1:03:51
+All thanks everyone.
+
+Ryan Hankins  1:03:54
+Thanks guys, Nick, I'm gonna send you what I just talked through.
+
+Speaker 3  1:03:59
+Okay, perfect. Yeah, I think that that sounds great to me. So I'll also, yeah, once you send that, I'll shoot out an invite to everybody, make sure everybody at least has it on their calendar, and I'll start booking my travel. Now. Thing I already booked my flight, but I'll move it a day early. It's Albuquerque. There's like, one direct flight to Oakland a day. It's a pain in the ass. Otherwise, it's like a six hour travel time to make it like an hour and a half flight.
+
+Ryan Hankins  1:04:30
+It's ridiculous. So like, you might as well almost drive there.
+
+Speaker 3  1:04:34
+No No for real. It's bad. The joys of living in a fly over state. But yeah, I think that sounds like a good idea. And yeah, we'll just knock it out. I think having, if we're going to travel already, we might as well make it useful and get get as much out of it as we can.
+
+Ryan Hankins  1:04:51
+Yep, okay, perfect.
+
+Speaker 3  1:04:56
+Any any luck with the LOA getting out of legal?
+
+Ryan Hankins  1:05:00
+Yes, I do have it. You'll have that today. Sorry, I It's been in my inbox and I've been in meetings last couple hours, but you'll get it back.
+
+Speaker 3  1:05:08
+No worries. Yeah, totally get it so, yeah, shoot that over to me when you have a second, and I'll make sure we're we're all good with it, and try to get it out for signature here in the next day or so, unless there's any changes from previous I don't know if you've had a chance to look at it.
+
+Ryan Hankins  1:05:24
+Yeah, I looked at it. It didn't look like there was much. Made it seem like we accepted a lot of the things. I think there's just maybe a point or two left to discuss.
+
+Speaker 3  1:05:34
+Okay, yeah, we'll take a look at it. Do you think it would be beneficial to just have a phone call and talk talk those things through, or, I think just handle that through email.
+
+Ryan Hankins  1:05:44
+I think if, when you send it back to Cox Castle, if they have additional comments, then, yeah, I think we should just get a quick call with Conor myself and Cox castle, and we'll get it knocked out.
+
+Speaker 3  1:05:57
+Okay, sounds perfect. So, yeah, once you get that, I'll get it over to Tyler and we'll we'll see where it goes, and hopefully get it back to you right away.
+
+Ryan Hankins  1:06:05
+Okay, I did have one more thing.
+
+Ryan Hankins  1:06:16
+For some reason I'm struggling to think of it now. I yeah, I'll, I'll think of it, and I'll let you know,
+
+Speaker 3  1:06:31
+yeah, I think the only, the only other, like, question I keep getting asked where we need to kind of nail down is our ground breaking, just to understand, like when, when it's the best time to do it. We had given you a June date before, but I think you're trying to, you're putting your schedule together, and it looks like there could be potentially a gap in construction with the with the steel arrival on site. So yeah, I'll, I'll take your your advice on when we should hold it on the June date is, is not something that we publicized outside of, you know, Pacific fusion. So we're not driving it to any external milestones or investor related items with that June ground break. So if it makes more sense to push it to July, I think, you know, that would be fine. I think we're more looking at the, you know, the completion date, right? If we can, if that doesn't affect critical path, and push the whole project out, I think we'd be good, you know, pushing groundbreaking to a later date, but I'll wait until you've, you've had enough time to put a realistic schedule together.
+
+Ryan Hankins  1:07:46
+I mean, the biggest, the biggest concern I have at this moment in regards to the schedule is just like, and I think I told you this yesterday, but like, we can't we? Like, with steel being our most critical timeline, I think, for this project, and we can't go buy it yet, because we don't even know, like, what we're actually going to buy. Like, we need to start procurement on that pretty quickly so we can get in line. Okay? And I think that until we understand what sizes of steel we need, until we understand like, having, like, a real mill order set, it's going to be tough for us to necessarily tell you exactly when we can break ground, because those mills, I don't know if you saw our what we showed you in our presentation, but like, yeah, I
+
+Unknown Speaker  1:08:35
+pulled up new course roll schedule too.
+
+Ryan Hankins  1:08:37
+So it's brutal, scary, yes, and so I just, I want to make sure that we're going eyes wide open, like until I get the information to go by, I can't tell you a realistic date on when that steals going to arrive.
+
+Speaker 3  1:08:51
+Okay, I think some of those, I like items like this, that's going to drive schedule. I think we should put on the be agenda as something we need to block out of there confidently, you know, with the plan of how we're going to get there, when we'll have that information at least, to make that decision, and you know, because ultimately that's going to drive our whole schedule is still so let's, you know, let's make that a goal going into that meeting, and I'll make sure our our team knows I was also going to try to get, I haven't got a hold of them yet. I'm going to try to get our Geo tech there and the geo peer designer in this, in these calls as well for next week, because I think they'll they obviously played some role in how our foundation system is finally going to work. And I think you're, you're right, from what Marc has mentioned, he believes there's opportunity there to reduce footing sizes and maybe even the thickness of the Matt's lab with the geo peers, because I think we're going to get a higher soil bearing capacity than we originally thought. So some opportunities there. And I think, yeah, we can take it from there, but I'll try to try to make sure they're involved in that, at least virtually, to provide some input.
+
+Ryan Hankins  1:10:09
+Perfect. I did remember the last thing we had, our meeting with Mindy yesterday. Okay, how did that go? I I've we that was our first time meeting her, but she seemed a little close to the chest on things, okay, but we're a tough cookie. Okay, I was really looking for your insight to see if that was the case, or if that was her all the time, or if that was just that meeting.
+
+Speaker 3  1:10:36
+No, that's Justin Mindy. So yeah, she's, she's, she's tough, but if you guys are not getting what you need, let me know, and I can, I can have her.
+
+Ryan Hankins  1:10:49
+No, I wouldn't say that word. We had some follow ups, so we're gonna send her a bunch of information. I'll just make sure you're copied on it, and we just have a couple questions that we we just would like to be have answered. And so one actually, Jacob sent it. I don't know if you were actually copied on that, so I'll forward it to you, just so you're in the loop.
+
+Speaker 3  1:11:11
+Okay, yeah, that'd be great, yeah. And then too, I can pull James into the conversation, maybe into Mindy, if it helps.
+
+Ryan Hankins  1:11:19
+Was on the call,
+
+Speaker 3  1:11:21
+okay, but Yeah, he'll get steam rolled by Mindy. That's his boss.
+
+Ryan Hankins  1:11:24
+Yeah, that's that was very evident. Okay, we're
+
+Speaker 3  1:11:32
+both to get to know her. But like, yeah, she will beat you up if you're not careful.
+
+Ryan Hankins  1:11:39
+Okay, good. Now I know how to now I know how to act around her. Got it?
+
+Speaker 3  1:11:45
+Yeah, she's, she's, yeah, definitely personality to contend with, but she's very sharp. She knows her stuff. But yeah, she's, she's not gonna show her cards for her. She's good deal, but, but if we need, if we need to. We can, we can pull Keith into the meeting and get you what you need regardless. So, okay, good deal. Yeah, anything else, yeah, just hit me up. I'll be around the afternoon. This afternoon. Will do
+
+Ryan Hankins  1:12:14
+Cool, good talking you use. Well, thanks, Nick. All right, later.
+
+
+Transcribed by https://otter.ai

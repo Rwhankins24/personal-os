@@ -1,0 +1,434 @@
+Speaker 1  00:00
+The downloading diagram as well. So meta, need to review that on my end. So ball and quarters us for this one for the buttress, for the settlement, I don't have any updates for you on this one. Sounds like I
+
+Speaker 2  00:23
+think I got an email from Mark on settlement. I let me just hold that up. I had some questions. It looked like the document had it was a heat map. It wasn't as clear as last one where we got to like it pointed out where the differential settling was for those but looked like we might need to do something about the pulse tube carriage holders. I don't know we're calling those pulse tube supports, because those were not apart. I don't think it met the three eighths inch differential settlement requirement. Does that sound right to you?
+
+Speaker 1  01:13
+I'm not sure, to be honest, like I've been caught up to what was said last week. So I need to get caught up on that. Did you already ask the question, or is that something? Okay?
+
+Speaker 2  01:28
+No, I sent it to Cory, just to it was the geo peer.
+
+Unknown Speaker  01:37
+Sorry, I'm pulling up right now.
+
+Unknown Speaker  01:40
+Me too. I sent yesterday, so I
+
+Unknown Speaker  01:51
+didn't ask questions.
+
+Speaker 2  01:53
+Supports, yeah, I don't know if you have it and if you want to pull it up, but I'm pulling it up right now, at the moment, that's okay. Why don't I take a second to do that? Tom
+
+Unknown Speaker  02:24
+to see
+
+Unknown Speaker  02:32
+showing up. Really small. There we go.
+
+Speaker 2  02:35
+Okay, yeah, so I think last time we kind of pointed out the differential settling. I'm trying to interpret this. Basically, this is what Marcus made question about this. So the pulse tubes, are you against my cursor? Can you
+
+Speaker 1  02:57
+see if I can get fancy with it? Oh, I thought, where's my skin? Sketch tool? Maybe down.
+
+Speaker 2  03:16
+Basically, the pulse tubes are at an angle, and this looks like it's kind of teed off like on these my fingers. It's good. It goes like this. So it's got the modules, and then the chamber, the pulse tubes go like this. Pulse tube supports are part of the green part of this diagram where I was trying to, I didn't know what the units were, this is so but the units on the bar below it says, like the yellow is 360 I'm assuming that's not inches.
+
+Speaker 1  03:56
+Yeah, not, yeah, not sure what that means, but it should be based on the kind of based on the snip there, you know, the actual report is that unit inches. Imagine there might be a yes on the scale, and there might be a, you know, times 10, you know, to the three, some factor there that's not being shown in this.
+
+Speaker 2  04:28
+I'm assuming what this diagram is showing me is the max settling the point seven one, which I think would be point seven inches, and that would maybe match this, like this color. I'm trying to zoom in, because that's all I have at my disposal, this purplish color at the end. Sorry, Frank gets to color and so, yeah, I guess. But we don't have it. Doesn't call it differential settlement, so I just be curious, and I can go through and do the math. But if you guys have know what the green to the red is, so we can look to see if it's gonna prompt for the pulse tubes and account for that.
+
+Speaker 1  05:10
+Ryan, it's diagonal, basically, from, from the there, yeah, to the, you know, from the very end img module to the water. Yeah, exactly, yeah, precisely.
+
+Speaker 2  05:26
+But, I mean, yeah, I guess I I know you haven't looked at this yet, but at some point, I think it would be good to kind of talk through this and see if there's any other other findings, because my last questions to mark were about whether we need to accommodate for deflection, or, like, thinking of the tank like, like shrinking of the height of the basement, like, if the settlement from the water tank on the top level is like, more than the settlement from the actual basement, because the loading on the top is more. I was just curious if we needed to, like, account for that. It sounds like this modeling includes both of those loadings combined where originally it was them separate. So I think that's what we're talking about here. But I just kind of wanted to talk through that so I understood it properly.
+
+Speaker 1  06:17
+This one looks like this is the elevated slab that spans over the vault below. So this would be right, like deflection of the slab, right?
+
+Speaker 2  06:31
+And then we're assuming less of a deflection of the bottom slab is what I would think
+
+Speaker 1  06:38
+the bottom slab right, the bottom slab settlement would account for the loads from the upper slab right? So it's, it's the upper slab is deflecting, but then also its support is, is settling due to the load above. So I think I understand what your concern is here, is that there's kind of a combined, combined, combine, like, yeah.
+
+Speaker 2  07:05
+And I'm assuming, like, I guess I'm saying, I'm assuming this top one, the rate of settlement on the top one's gonna be more than the bottom one. If I had just, I know that the load is transferred to the bottom one, but it's, it's like a cave, right? So, like, there's not much loading in the center part of it. So I would just be curious to know what that looks like, right? So anyways, that's that's the latest I've seen on settlement. So maybe I'll just compile a few questions and send them to you and mark for you guys to digest that.
+
+Speaker 3  07:41
+Okay, sorry on the settlement. I think it'd be good to have a conversation with Western WGI. If we get Craig on a call with some folks from pF and us and Paige are standing that'd be very helpful. There are some things that we need to discuss to finalize. Great,
+
+Speaker 1  08:12
+okay, weekend with settlement. Yes, sorry for the church covers. I believe we sent out a sketch in the last week or over the weekend with our finalized steel designs for the utility trench and for the vault. And so what we're focused now on is sizing the foundation wall details, so the size of that lip at the top of the wall, and then also the thickness of the wall, I think, you know, with the foundation submission coming up, that's kind of the more hot item, and then some of the Steel detail, and we can figure that out later.
+
+Speaker 1  09:05
+And again, just to reiterate, all of those trench cover sizes were for the DTA transporter based on our conversations with them, that sounds good for the diagnostics bridge. We sent out a sketch yesterday or over the weekend. Pull it up here. Mark was super busy. Yeah, what we looked at was supporting the center of the bridge, utilizing the counting room below it. And in order to achieve that, we needed to actually, we wanted to propose growing the footprint of the counting room. So previously it looked like it was about 20 foot wide. We'd like to make it 22 and a half wide, so that it can accommodate the supports. We're also going to need a post at the end of the bridge, just kind of, you know, with between the between the tubes and any equipment that's there. And then we'll also need a couple of columns at the other end, along good line seven, at the interface between the lab and the RFP space. Hopefully outside of that, you know, this red travel path,
+
+Ryan Hankins  10:41
+we want this. Yeah, yeah. I think I,
+
+Speaker 2  10:45
+I given the okay on those two columns being as thick as the I think you already have, like, structural columns that poke out a certain amount. So as long as those columns are shallower than that, that are or the same same thickness, that's totally fine
+
+Speaker 1  11:06
+the crane columns, right? So just kind of stay within that zone, right?
+
+Speaker 2  11:11
+Yeah, yep, and then yeah, I ran the counting room increase by the team, and they're totally okay with this. So we're good to go and assume that I you said that there are other columns that you wanted to drop. Is it possible to get, like, a simple model of those locations so I can drop them in and just take, take a look at what we're thinking the utility bridge might look like right now?
+
+Speaker 1  11:39
+Yeah, take a stab and Mike correct me if I'm wrong, to just throw a model of post in there for now, just in terms of showing the proposed location.
+
+Speaker 4  11:52
+Yeah, we could do that. If you're asking for, like, framing of what the bridge is going to be. We have that kind of a rough sense, but I'd be a little bit reluctant to kind of start modeling that in unless there's some reason to do so.
+
+Speaker 2  12:08
+No, just just to want to confirm where you're thinking of dropping things, so that we make sure that past the clear, the clearing areas that we have that's good for you guys to go on the foundation stuff. Yeah, we
+
+Unknown Speaker  12:22
+can do the columns. That's good, yep, or the post.
+
+Unknown Speaker  12:26
+Okay, great, thanks.
+
+Unknown Speaker  12:32
+Good. Let me just Jon note on the side. I
+
+Speaker 1  12:44
+Okay, this item looks like it's closed.
+
+Unknown Speaker  12:56
+Yep, I think we're good, cool.
+
+Speaker 2  12:59
+I think the vibration stuff we've talked about extensively in other meetings, yeah, I think we're good to close that one or leave it for now, but we need to talk about
+
+Speaker 1  13:10
+it today, right? Yeah, we're, you know, working on the isolation. Yeah, update we have there.
+
+Unknown Speaker  13:21
+Great. And then,
+
+Speaker 1  13:24
+Michael, yeah. Michael, cool covers. This isn't was included as part of the same sketch that we sent with the typical utility trench cover.
+
+Speaker 1  13:40
+Those guys here again. I know we talked, you know, with Jeremy about what this lip might look like, but that's something I think we need to further refine after the foundation submission, I do recall that, you know we had talked about he had mentioned, you know, what kind of he was imagining for this lip, and I asked if he could share a sketch of it, just so that we might, you know, make sure that I was interpreting correctly. So I don't know if that was still, you know, work in progress that he had any, you know, but requirements for what this lip needed to be in order to not have that clear line of sight.
+
+Speaker 2  14:30
+I will follow up with him, but I think what you have here meets those requirements, right? Okay, I guess question for you and Mark, do you want me to start now modeling in these lifts for the trenches in the minor cool downs. I probably will, anyways, just to, just because it's helpful for us to model business. We know where what the real geometry looks like, but I guess I'm, do we feel comfortable enough for me to start base lining all of this from the sketch,
+
+Speaker 1  15:02
+I think for the, I don't know if this internal lip, that doesn't really matter to us at this point, whether you model or not, for the for the lip at the top of the foundation. Well, though we still need to work out and design what this length is, which is the the actual amount of steel bearing on the concrete. That's something that we're trying to, you know? We're trying to see what this minimum dimension needs to be, okay,
+
+Speaker 2  15:34
+still being designed. Okay, so the open item for the Michael, cool down, tren cover, longest name in the world. The thickness of that is still being determined, but the thickness of the other trench covers looks pretty good, and I can start base lining those ones, correct.
+
+Speaker 1  15:54
+Yeah, for both trench covers, the thickness of the cover itself is good, and you can baseline off of that. It's the width of this lip at the top of the wall, as you see this, this blue dimension here. This is the remaining item that we need to design for both of them, for both of them. And then I think we understood from previous call that this, you know, this total lip has to be minimum 12 inches. So that's right.
+
+Speaker 2  16:29
+I think one note on that, it looks like the this drawing sent over still has the wrong clear height on it. It's off of the 100% DD feedback, we gave
+
+Unknown Speaker  16:44
+30 feet to the bottom of
+
+Speaker 2  16:47
+the No, no, sorry, sorry that that's correct for the trench covers change the other trench, the utility trench. Utility trench, specifically the water the trench where the water line comes in.
+
+Unknown Speaker  17:03
+This needs to be eight feet, correct?
+
+Unknown Speaker  17:05
+I think it's, I wish you should check my note on the 100%
+
+Speaker 2  17:11
+DD drawing set. I wrote it there just to be sure it's either eight foot or it's either it might be eight foot one inch. I can't remember my head, okay.
+
+Speaker 1  17:22
+I will double check I have that note. I think
+
+Speaker 3  17:26
+we're not basically the trench geometry off the sketch, only the cover.
+
+Unknown Speaker  17:29
+So that's fine. I just makes sense. Oh, okay, cool. Good to know.
+
+Speaker 2  17:41
+Okay, I will get back to you on the section view C of the Michael. Cool down lit and make sure that Jeremy approves that. Oh,
+
+Speaker 1  18:04
+so I just got some notes to myself. No worries, talking and Note taking is hard at same time.
+
+Speaker 2  18:13
+Okay, cool tank pedestal Anchorage. Frank, I think we talked a little bit about that during our meeting this morning, but I think getting getting feedback from you all that the concrete pedestal overhang, concrete overhang for the pedestal is sufficient, is really important to us to make sure that we're moving in the right direction. So I want to make sure we get an estimate of that well before the submission 511, submission date, just so we all feel good about that.
+
+Speaker 1  18:47
+Yeah, like I said, I need to check in with our team on that. Haven't had a chance to do that since our conversation. But no worries. Yeah, we'll get you some feedback.
+
+Unknown Speaker  18:59
+Okay, great. Appreciate it. The water tank moved a
+
+Speaker 1  19:05
+constructability call with Clayco was related to the location of the pipe relative to the map foundation.
+
+Unknown Speaker  19:15
+Yep, it was so basically where we're at right now is
+
+Speaker 2  19:23
+Mark had asked us to move the Fill if we could move the tank fill line for cast in place, to be below the six foot foundation. Basically, we can. We can just given the okay, so the water fill line goes is cast in place, and then it goes into that deep, eight foot trench, we can get it just below the leg, like line to line below the six foot Foundation, and still have it go into that trench. But it's really close. And so I was wondering if we need, if we can get more guidance on, I'm assuming you don't want line to line on the bottom of the foundation and where the pipe is assuming we need something in between those two. I don't know what that is, and I just want to know, should we baseline having that pipe be below the six foot, assuming that we might have to, like, bring the trench down a little bit to account for some padding or things like that, between the foundation and the pipe. Or do we want to baseline moving the pipe somewhere in between that six in the middle or of the six foot pad, or wherever? I can't remember what Marc said the sweet spot was, but that's where this is at. And so I'm just looking kind of for guidance from you all on which direction we should go.
+
+Ryan Hankins  20:42
+The I don't Is that for is that for Clayco? Sorry, I think, I think I kind of wanted
+
+Speaker 2  20:50
+Thorn Tom said he's first take on it, and then if it needs to be a constructability conversation that we want to put it below the foundation, then I'd want clayco's input on that.
+
+Speaker 1  21:04
+I think that makes sense. Just go to the plan. As you know, the pipe kind of comes in, makes that turn right. And you know this, I don't know why this trench ended here. But his trench obviously needs to extend all the way up to the mat.
+
+Unknown Speaker  21:25
+It doesn't, it's cast in place
+
+Speaker 1  21:26
+starting at that low. So they so the eight feet, actually, you guys, you're measuring it up to, up to here. I mean, I'm wondering if, yeah, if, if, you know, there's a short segment of the trench here that may just be slightly deeper Well, I mean, we continue the slope up to eight feet, and then
+
+Speaker 2  21:51
+transition if we need to. The other option is that, is that we, is that it, it slopes down, and then, when it's within the cast in place part, there's a Ben and Ben, it's deeper. We can do that. I just need to take that back to my engineer, to who's the engineer, Morgan, who's doing that analysis on the water flow side of things, to make that that's okay, but we can. I'd rather not, but I'm just looking for kind of guidance on one here, because it will impact foundation if we need to increase that tren step a little bit.
+
+Ryan Hankins  22:35
+Where? Where's the exit? Is that circle with the accident? Is that the exact location that the pipe needs to go to, yep. That makes it difficult, because basically, what my thought was is, if there's a mean, from a constructability perspective, I'm guessing that the outline of that square is kind of like the pad. Is that the pad?
+
+Speaker 1  23:00
+Okay, yeah, that the water tank is, you know, roughly centered on on that right?
+
+Ryan Hankins  23:06
+So before I just heard that that circle in the axis where it needs to go, my my preliminary thought was, let's get it into the tunnel as soon as possible, before we get over to that pad. Just because, I mean, we've kind of been flirting around with this for a couple weeks, but our major concern is that even if we don't have it leak today, just casting it in concrete, you will have a risk, ultimately, until the day you decommission this entire building of that leaking and then getting back in there and maintaining it, or fixing it, or trying to get it back and hooked up. Is whenever that ends up happening, whether it's day one or it's day 100 is going to be a really big deal, man, it's going to be you guys are not going to be happy when that day happens. And so there's really two options. One is either that location gets moved, or we designed some type of a temp, not temporary, some type of a removable, I'm going to say contraption, for lack of a better word, to be able to get in there later and go fix it. And I don't know either. I don't think either is the right approach. I'm just it's you are opening yourself to risk if you're just going to cast a water pipe and slab, whether it's today or two years, and that risk is going to be very painful if it does happen.
+
+Speaker 2  24:48
+Yeah, yeah. I, I ultimately am not the one who made the cast in place decision, but I would like to just get guidance, I think, with the design as is, to see if what we can where we need to. I think there's, there's things we can do like I think we need to do all that we can right now to make sure that the foundation package can go out accurately. And I think that's my, my number one focus right now.
+
+Ryan Hankins  25:23
+And from that perspective, I agree. I think we can probably kick the can down the road a little bit, but I was just mainly bringing up where we eventually need to go. But yeah, I think for the foundation package, I agree that we could, we could just put whatever in there and identify it as an open item,
+
+Speaker 1  25:43
+is the constructability concern in general, just with any sort of pipe that's passed and buried below a foundation element, no,
+
+Ryan Hankins  25:55
+it's specific to this very specific instance of there's, there's a lot of things here, but one, it's a huge tank. Two, we know there's going to be settlement. Three, there's six feet of concrete. And so whether it's below or it's within, to me, it doesn't really matter, because either way to access it, you have to jack hammer, right? Which is a disruption the facility. And then for, I mean, actually getting access, like, if you actually do all those things, then how do you bandage everything back up and make it a working facility again, right?
+
+Speaker 1  26:40
+In an in an ideal world, if you were to do this, would would your preference be to just have the pipe above the Mac foundation?
+
+Ryan Hankins  26:50
+I mean, if there's a way to bring this whole thing above slab, I think that would be probably better for Pacific fusion in the long run, and from an installation standpoint, right?
+
+Speaker 1  27:06
+I don't know if there's a way to get it above the slab, as in, above the ground floor level, but I'm just thinking in, you know, my, I know when this topic first came up, my, my first thought was maybe we'd have to drop the matt foundation locally around this location, kind of, and bring it under the pipe, keep the pipe high, but then that would, you know, require the water tank. You'd still need something bridging over the width of the trench to support the load of the water tank.
+
+Ryan Hankins  27:43
+Above, is the water tank uniform load? Or is it point? Is there some specific type of point load? It's a
+
+Speaker 1  27:53
+uniform load in the within the surface area of the tank, for the for the weight of the water and the steel plate on the on the bottom of the tank, and then there's a very large line load around the shell up tank,
+
+Ryan Hankins  28:12
+and outside of the box. Thought is, can we, can we route it inside of the tank? Is that a dumb idea? Sorry, like if it has to get to a specific point in the tank, or is there a way to to bring it above grade and route it into the tank, like you would any of the other pipes that are going into the tank, and then route it where it needs to? There is no, there's no,
+
+Speaker 2  28:39
+you mean, like on the outside of the tank, yeah, there's no space. There are. The whole tank is, was cheese,
+
+Speaker 1  28:48
+okay, yeah, yeah. And you have all the pulse pipes in the way as well, right close to the ground level.
+
+Unknown Speaker  29:01
+That's That's what I mean by the whole thing is just cheese. Is that there's 156
+
+Ryan Hankins  29:06
+massive holes all the way around. I mean, so to your point, Echo, we could probably kick the can on this just for the sake of keeping the call going. But I think this is something that we need to keep open.
+
+Speaker 2  29:19
+I think what I what I meant by kicking the can was mostly like, there's something I think we can say today where it's either we need to, if we want to have space for the pipe to drop below the six foot grade, we should probably increase the depth of the trench to help it, or tell by like Morgan that we need to be able to bend it. Give me a few days for him to be able to do the analysis, that it's okay for him to do that. But that's kind of what I want to wrap up before they do the foundation package on 511 right? Because you wouldn't want to have to go back and increase the depth of the trench again.
+
+Ryan Hankins  30:03
+Just remember that we're not going to be pouring that trench until and this is why I'm saying kick the can a little bit, because we are not going to actually pour that slab or the trench, we'll call it.
+
+Speaker 2  30:22
+I regardless of when it happens, we have our own internal design reviews we need to meet as well.
+
+Unknown Speaker  30:27
+Got it right,
+
+Speaker 2  30:29
+like PF has. We have to design things too, and we have to release things, and they have to figure out all, like, all of the routing and these trenches and all that side of things. So just want to copy out that as well
+
+Ryan Hankins  30:40
+understood, okay, sometimes I forget that
+
+Speaker 2  30:44
+there's more going on, there's there's the whole machine side of things too. Yeah. Anyways, I'm happy to, I don't know, like, Is the answer that? Like, if I pulled the dimension out of the hat and said it would be okay if the top of the pipe was a foot below the slab. That would be like, Yeah, we could probably work with that. And then I can say, okay, that's Option A, which would mean that we'd have to increase the depth of that trench by a foot. Or Option B is that the water pipe goes from that trench drops down in the section before it reaches the six foot slab, and then, and then goes to the foot below the six foot slab. I'll bring that information to Morgan say, hey, if we did this, would that totally break your sizing of things? He'll do the analysis say whether or not is that kind of those. The two options is that we want to go with,
+
+Speaker 5  31:46
+go ahead. I'm really hoping I'm not complicating this matter and trying to understand the history of this, but remind me Frank and echo. What was the reason why we didn't extend the trench and went to the cast in method here,
+
+Speaker 2  32:11
+because of all the pulse tube supports that are going to have massive, like a loads on top of the open trench is what? Because we wouldn't have access to it anyways. We weren't going to have access to anyways, because the pulse to the pulse tube, like, if something happened, like you would, it would take forever to get in there and do maintenance.
+
+Speaker 5  32:32
+Is there a world where we extend part of the equipment pit as partial access to this pipe.
+
+Speaker 2  32:47
+You have to be very careful about that for other reasons, like radiation gotcha otherwise. So the any of the axis holds the places to the equipment that needs to be really intentionally designed. And also, you know, we'd have to look at, you're putting more holes underneath all the slab where we're looking at really tight like settlement requirements. So I just want to be careful about putting more tunnels.
+
+Speaker 5  33:18
+Yeah, yeah. And, I mean, as far as radiation, you this portion of the tank is over an opening into that area. So it seems like the mixing of the water and the radiation component is already done. From that standpoint,
+
+Speaker 2  33:41
+I am more worried. I'm imagining. What you're saying is that you would then have a tunnel, like you're connecting the equipment, pit tunnel to the other tunnel, and that's a problem.
+
+Speaker 5  33:51
+No, I'm I'm saying extending the architecture of the tunnel, partial access. Because the concern is this cast in element, right and accessing you want a continuous slab above that area, or where we're currently showing that line. So what if, rather than accessing it from above, we create a method to access it from below, through the equipment pit, or that what we were previously calling the tunnel. Do you follow me? Ryan, yeah,
+
+Ryan Hankins  34:29
+I think I see what you're saying. Let's put an L, like reaching from outside of the cavern, not, not there. Well, I think he I think that's for getting the utility into that pit. And then we're talking about some, yeah, yeah, somewhere.
+
+Speaker 5  34:45
+It's somewhere in that zone. And of course, this would be equipment access only, so we're not considering this an occupied area. But I think what I don't know Frank is, like the depth and height. What? What do you exactly?
+
+Speaker 2  35:05
+Are you accessing? Other than just the pipe, there's no valves that are going to be in part of the cast in place. So what do you actually,
+
+Speaker 5  35:13
+we're create? We're basically creating a trench below the slab. But you wouldn't, you? Would it? Think of it as like an upside down trench. Rather than accessing it from above the slab, you're accessing it from going into the tunnel, and that way, you don't have a casting element below the slab you have. We're extending the architecture underneath to create that access to where we're no longer working about leaking that. But there does risk that contamination, if there is a failure, that it would leak into that basement area. So there could be a containment issue there, wherever the failure occurs. But that could be lesser than it failing below the slab and creating settlement issues that were, no matter what, the failure of the pipe is going to hurt, I'm just thinking like, how can we resolve this access issue? And apologies from complicating the issue? Architects are known to do that, but Brian trying to
+
+Unknown Speaker  36:20
+share a screen right now,
+
+Unknown Speaker  36:22
+I see, I see that. I think that's fine.
+
+Speaker 2  36:24
+I think it's just a separate issue from the issue that I was trying to solve. And I don't think we've actually solved the issue that I've brought up. I I'm also like to be clear the the location at which that fill location at which that fill location is that's based off of requirements for concrete thickness, we can bring that closer in if that makes it that whatever that cavern area smaller, because the closer in that fill line is, the better for us, but I don't know. I feel like we're opening a can of worms two weeks or three weeks before we have foundation. Do? I'm happy to continue this conversation, but I also need to really clock down the other part of the conversation, which I feel like we haven't I want to go back to my options A and B. Is that the two options that we have right now that would that would need to happen, regardless of whether we add a tunnel in for access.
+
+Speaker 1  37:35
+Actor, could you reiterate just what those two options were? Sorry, yeah, yeah. Option, option A is that
+
+Speaker 2  37:43
+we bring the fill to below the six foot slab. I account for a foot. Mind you, this is my engineering judgment. I don't know. I have no idea, a foot between the bottom of the slab and where the top of the pipe is. And then that means we have to increase the depth of the trench where it connects to also by a foot. That's option A. Option B is that I asked Morgan whether the fill line can slope out after it's out of the trench, but before it reaches the six foot slab. It also goes a foot below the six foot slab. And we're good. That's the absolute option B analysis
+
+Speaker 1  38:33
+for option B. That slope you say, if the fill line can slope down, starting from the end of the stretch,
+
+Speaker 2  38:43
+yes, but and then before it reaches the six foot slab, so that it gets to the point where it's aids a slope. I don't know the distance of that is. It's probably seven meters, eight meters, basically it's a slope down a foot in eight meters.
+
+Ryan Hankins  38:58
+I mean, my opinion is that sloping a pipe with and then that pipe end up being in concrete eventually, is probably a bad installation. It probably, I agree, it probably needs to be, you know, vertical completely and more like a sleeve application.
+
+Speaker 2  39:16
+I don't think we can do any vertical alterations of this pipe, I can ask Morgan that. But if I can get guidance on where I should put, like, how much space I should put it, and if we can move the trench down another foot, that would be great.
+
+Ryan Hankins  39:36
+The other thing here is that we're making this decision without Meyr Plus, and I feel like they need to weigh in on this as well, given it's their pipe that's going to be cast, I guess,
+
+Speaker 2  39:51
+but I don't, I don't. I wasn't aware that this was their pipe, but I'm cheap on that. Sounds like we're not gonna make a decision. I'm gonna email a few folks, and try to get a decision on this. We can move on to the next topic. But I would really like this to be resolved before 511
+
+Speaker 6  40:11
+and echo, just so that I can understand when you're saying like a foot below is that like a placeholder for what it will actually need to be after some amount of study and engineering happens, yes, like, I have zero
+
+Unknown Speaker  40:24
+clue I have. I'm asking.
+
+Speaker 6  40:26
+You're asking, got it? Got it got I just want to make sure I understood that. Okay, yeah, great.
+
+Speaker 2  40:34
+I I'm throwing a number out so that I can try to get traction around a number. So if someone sees a crazy number, like a foot, and they're like, No, it has to be three feet. They can actually call it out to something,
+
+Speaker 6  40:45
+right, right, right, right. Okay, great. Thank you. But this
+
+Speaker 2  40:48
+needs be figured out before we finalize. Cory shell,
+
+Speaker 1  40:57
+Rebecca, I think, you know, I feel like Echo and Ryan, they have two different concerns. And you guys correct me if I'm misinterpreting that echo is concerned about the depth of the pipe, you know, as it relates to PF design for the for the trench and their other components, Ryan's concern has been just the idea of having this pipe below the mat in general, is perhaps of that idea from a constructability standpoint, is that summary kind of accurate? Guys?
+
+Ryan Hankins  41:32
+Yeah. I mean, my my thought is that there is that the two items are connected. But if we want to make one decision today, that's fine. We should make it.
+
+Speaker 6  41:47
+Well, I don't know that we can make it, but I do think, I don't know that this is meyr's pluses. It's, it's not, it's, I think it's specific fusions pipe. But to Ryan's point, in terms of, like, our vertical clash detection with where utilities are running in the development of the package, I do agree that we need to make sure that we're getting the buy in from the full team who's going to be affected by the Foundation package, not just structural and so, yeah, that includes specific fusion. But I think we probably also want to get, like, Courtney's input as well, because, yeah, you guys all, I mean, there's like, all these different I
+
+Speaker 2  42:29
+talked to Courtney about it today. I did okay, so she's aware. I think we're both just looking for guidance.
+
+Speaker 6  42:36
+Guidance. Okay, so that's, that's good to know. Okay, I'm glad that I understand how that you're looking for guidance. I mean, I'm certainly not the person to give it, but I at least understand more of the question. And I can
+
+Speaker 2  42:47
+do like I said. I can have Morgan do the analysis on our side to see if, if we we don't want to, I guess, like
+
+Unknown Speaker  42:53
+my, like my honest take is,
+
+Speaker 2  42:55
+I feel like we should just drop the trench depth afoot to give us that space. And can't matter, like, no matter what decision we do, and we should do it like we could do it now. So before we do the package, but I won't, I won't push that right now and then I will have Morgan. I'm gonna, I'm gonna assume that options A and B that I've outlined are the two options. Ryan, I agree they're like, set there could like, they're connected, but I think you can make the first decision, like the first decision without an add on the next one, on how to think about access. So I'm going to go ahead with options A and B, and try to run that down with Morgan, and I'll get back options other items real quick. Frank, I think the only big one is the
+
+Speaker 2  43:42
+slap loading one is most concerned about
+
+Unknown Speaker  43:46
+just wondering where we're at on that.
+
+Speaker 1  43:49
+Yeah, but the slab loading, we need to update our load diagram here to this is the markup for it to include. You know this area, this shaded area represents the area where there's going to be the wheel and point loading on the slug. So that stated area needs to, you know, include these areas, which are the those are the mile reefer, the laser and the IMG service. That's what I understood from our discussion a couple of weeks ago.
+
+Unknown Speaker  44:31
+Yeah, yeah. And I think the
+
+Speaker 2  44:33
+only other thing too is, you know, I think on like in November, when we first gave the slab loading, we'd also given a spec on the diagnostics room as well. And I just want to make sure that that is also being met.
+
+Speaker 1  44:48
+Isn't that the full I guess is the full chamber. Lift here, load, so it's part of so this is really the ground floor wheel and point loading diagram. So the wheel loading just not split the screen here. The wheel loading is really the transporter loading, right? And we're going to get rid of the heated transporter and show the DTA transporter. And then there's also this full chamber lift, stationary fixture, right? Which we understood was, you know, the 850,000 pound load on eight two by two foot supports, right? So this is that loading as well that I calculated 184 PSI for
+
+Unknown Speaker  45:43
+I calculated a slightly
+
+Speaker 2  45:45
+higher pressure for the diagnostics room.
+
+Speaker 6  45:51
+Can I show you my screen? Yep. So this is what it's sent in November.
+
+Speaker 2  46:06
+This diagram should look familiar, but basically, yeah, this is 184 this was the I updated this one into it January, one. So yeah, this is 184 psi, all throughout here, this area here, this is when I had given the actually, let me just go to this one here. Can I see this? Oh, no, wait, let me where's the other one here? Let me actually stop sharing. Real quick. I will present the other because we revised it in I believe it was,
+
+Unknown Speaker  46:56
+sorry so many of These,
+
+Unknown Speaker  47:01
+our black slides, I sent back and forth.
+
+Speaker 2  47:13
+I sent over like diagrams and of how big these things were and the weights for them. Shoot, where is that? Cory did some nice organizing, but it means that I don't
+
+Unknown Speaker  47:34
+remember where things are. This is from the 1217, update. So we had
+
+Speaker 1  47:45
+the 184 psi, and then I diagnostic, well this has given us 30 psi,
+
+Unknown Speaker  47:57
+which is why I didn't provide a separate Litton. I.
+
+
+Transcribed by https://otter.ai

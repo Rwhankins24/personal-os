@@ -348,7 +348,7 @@ async function main() {
 
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
   console.log('  IMPORT COMPLETE')
-  console.log(`  Files found:   ${files.length}`)
+  console.log(`  Files found:   ${txtFiles.length}`)
   console.log(`  Inserted:      ${inserted}`)
   console.log(`  Updated:       ${updated}`)
   console.log(`  Skipped:       ${skipped}`)
