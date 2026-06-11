@@ -1170,6 +1170,16 @@ Return ONLY valid JSON. Empty arrays fine.
   "decisions_made": [{"decision": "exactly what was decided", "decided_by": "name or group", "all_parties": ["name1", "name2"], "implications": "why this matters", "attribution_confidence": "high|medium|low"}],
   "pending_decisions": [{"decision": "what needs to be decided", "blocking": "what this blocks", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "decision_maker": "who decides"}],
   "risk_signals": [{"signal": "specific risk observed", "type": "escalation|silence|scope|legal|relationship|schedule|financial", "severity": "high|medium|low", "involves_key_contact": true, "involves_active_project": true, "evidence": "what in transcript shows this"}],
+  "ryan_action_items": [
+    {
+      "INSTRUCTIONS_READ_CAREFULLY": "Extract EVERY task or action item that Ryan Hankins owns. Cast wide: (1) Explicit — assigned by name to Ryan or Ryan Hankins. (2) First-person — ANY: I'll send / I'll get back / I'll follow up / I'll review / I'll check / I'll confirm / I'll loop in / I'll reach out / let me... / I need to... / I should... / I can take that / I'll handle / I'll own. (3) Implicit — Ryan discussing something he owns where a next step is clear. (4) Carry-forward from action_items_raw above if assigned to Ryan. If in doubt include it. Missed item >> false positive.",
+      "title": "clear plain-English action item",
+      "due_date": "YYYY-MM-DD or null",
+      "urgency": "critical|high|medium|low",
+      "attribution_confidence": "high|medium|low",
+      "attribution_basis": "exact quote or signal showing this is Ryan's item"
+    }
+  ],
   "verbal_commitments_ryan": [{"title": "what Ryan committed to", "made_to": "person name", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "commitment_type": "hard|soft|conditional", "attribution_confidence": "high|medium|low", "attribution_basis": "why attributed to Ryan"}],
   "verbal_commitments_others": [{"title": "what they committed to", "committed_by_name": "name", "committed_by_email": "email or null", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high|medium|low"}],
   "others_action_items": [{"title": "what they need to do", "assigned_to_name": "name", "assigned_to_email": "email or null", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high|medium|low", "attribution_basis": "how we know this was assigned to them"}],

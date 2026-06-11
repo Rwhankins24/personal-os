@@ -2950,6 +2950,34 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
               }
             }
 
+            // Ryan's action items → tasks table
+            for (const item of (intel.ryan_action_items || [])) {
+              const taskText = item.title || item.task_text || item.task
+              if (!taskText) continue
+              if ((item.attribution_confidence || 'medium') === 'low') continue
+              const { data: existingTask } = await supabase
+                .from('tasks')
+                .select('id')
+                .ilike('title', taskText.slice(0, 80))
+                .eq('status', 'active')
+                .maybeSingle()
+
+              if (!existingTask) {
+                await supabase.from('tasks').insert({
+                  title:           taskText,
+                  urgency:         item.urgency || 'medium',
+                  due_date:        item.due_date || null,
+                  status:          'active',
+                  type:            'action',
+                  source_type:     'ai_otter',
+                  meeting_note_id: meeting.id,
+                  ai_enriched:     true,
+                  context:         item.attribution_basis || null,
+                })
+                results.tasks_created = (results.tasks_created || 0) + 1
+              }
+            }
+
             // Ryan's verbal commitments
             for (const c of (intel.verbal_commitments_ryan || [])) {
               const { data: existing } = await supabase

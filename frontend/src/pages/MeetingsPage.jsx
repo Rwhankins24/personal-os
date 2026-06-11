@@ -279,59 +279,65 @@ export default function MeetingsPage() {
           return (
             <div
               key={meeting.id}
-              className={`bg-white border rounded-2xl p-4 transition-colors ${
+              className={`bg-white border rounded-2xl transition-colors ${
                 isSelected ? 'border-blue-300 bg-blue-50/30' : 'border-[#e5e5e3]'
               }`}
             >
-              {/* Title row */}
-              <div className="flex items-start gap-2">
+              {/* Main clickable area */}
+              <div
+                className="p-4 cursor-pointer"
+                onClick={() => navigate(`/meeting/${meeting.id}`)}
+              >
+                {/* Top row: checkbox + title + project */}
+                <div className="flex items-start gap-3">
+                  {/* Checkbox — stop propagation so it doesn't nav */}
+                  <button
+                    onClick={e => { e.stopPropagation(); toggleSelect(meeting.id) }}
+                    className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                      isSelected
+                        ? 'bg-blue-500 border-blue-500'
+                        : 'border-[#d0d0cc] hover:border-blue-400'
+                    }`}
+                  >
+                    {isSelected && (
+                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 12 12">
+                        <path d="M10 3L5 8.5 2 5.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                      </svg>
+                    )}
+                  </button>
 
-                {/* Checkbox */}
-                <button
-                  onClick={() => toggleSelect(meeting.id)}
-                  className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
-                    isSelected
-                      ? 'bg-blue-500 border-blue-500'
-                      : 'border-[#d0d0cc] hover:border-blue-400'
-                  }`}
-                >
-                  {isSelected && (
-                    <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 12 12">
-                      <path d="M10 3L5 8.5 2 5.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                    </svg>
-                  )}
-                </button>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-[#1a1a18] leading-snug group-hover:text-blue-700">
+                      {meeting.title || 'Untitled Meeting'}
+                    </p>
 
-                <div
-                  className="flex-1 min-w-0 cursor-pointer"
-                  onClick={() => navigate(`/meeting/${meeting.id}`)}
-                >
-                  <p className="text-sm font-semibold text-[#1a1a18] leading-snug hover:text-blue-700 transition-colors">
-                    {meeting.title || 'Untitled Meeting'}
-                  </p>
-                  <div className="flex items-center gap-2 mt-1 flex-wrap">
-                    {date && (
-                      <span className="text-xs text-[#6b6b67]">
-                        {dayjs(date).format('MMM D, YYYY')}
-                      </span>
-                    )}
-                    {dur && (
-                      <span className="text-xs text-[#9b9b97]">⏱ {dur}</span>
-                    )}
-                    <span className="text-xs text-[#9b9b97]">{src.icon} {src.label}</span>
-                    {hasTranscript && (
-                      <span className="text-xs bg-green-50 text-green-700 px-1.5 py-0.5 rounded">transcript</span>
-                    )}
-                    {meeting.intelligence_extracted && (
-                      <span className="text-xs bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded">analyzed</span>
-                    )}
+                    {/* Meta row */}
+                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                      {date && (
+                        <span className="text-xs text-[#6b6b67] font-medium">
+                          {dayjs(date).format('MMM D')}
+                        </span>
+                      )}
+                      {dur && (
+                        <span className="text-xs text-[#9b9b97]">· {dur}</span>
+                      )}
+                      {(meeting.participants || []).length > 0 && (
+                        <span className="text-xs text-[#9b9b97]">
+                          · {meeting.participants.length} attendee{meeting.participants.length !== 1 ? 's' : ''}
+                        </span>
+                      )}
+                      {meeting.intelligence_extracted && (
+                        <span className="text-[10px] bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded font-medium">analyzed</span>
+                      )}
+                      {hasTranscript && !meeting.intelligence_extracted && (
+                        <span className="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 rounded font-medium">transcript</span>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Project badge / assign button */}
-                <div className="flex-shrink-0">
-                  {isEditing ? (
-                    <div className="flex flex-col gap-1 items-end">
+                  {/* Project badge / assign button — stop propagation */}
+                  <div className="flex-shrink-0" onClick={e => e.stopPropagation()}>
+                    {isEditing ? (
                       <select
                         autoFocus
                         defaultValue={meeting.project_id || ''}
@@ -340,68 +346,42 @@ export default function MeetingsPage() {
                             openCreateProject(meeting.id)
                             return
                           }
-                          update.mutate({
-                            id:   meeting.id,
-                            data: { project_id: e.target.value || null },
-                          })
+                          update.mutate({ id: meeting.id, data: { project_id: e.target.value || null } })
                         }}
-                        onBlur={e => {
-                          if (e.target.value !== '__new__') setEditing(null)
-                        }}
-                        className="text-xs border border-blue-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white max-w-[160px]"
+                        onBlur={e => { if (e.target.value !== '__new__') setEditing(null) }}
+                        className="text-xs border border-blue-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400 bg-white max-w-[140px]"
                       >
                         <option value="">No project</option>
                         {activeProjects.map(p => (
                           <option key={p.id} value={p.id}>{p.name}</option>
                         ))}
-                        <option value="__new__">＋ Create new project…</option>
+                        <option value="__new__">＋ Create new…</option>
                       </select>
-                    </div>
-                  ) : project ? (
-                    <button
-                      onClick={() => setEditing(meeting.id)}
-                      className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium max-w-[160px] truncate"
-                    >
-                      {project.name}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => setEditing(meeting.id)}
-                      className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-1 rounded-lg hover:bg-amber-100 transition-colors whitespace-nowrap"
-                    >
-                      + Assign project
-                    </button>
-                  )}
+                    ) : project ? (
+                      <button
+                        onClick={() => setEditing(meeting.id)}
+                        className="text-[11px] bg-blue-50 text-blue-700 px-2 py-1 rounded-lg hover:bg-blue-100 transition-colors font-medium max-w-[130px] truncate block"
+                      >
+                        {project.name}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setEditing(meeting.id)}
+                        className="text-[11px] text-[#9b9b97] border border-dashed border-[#d0d0cc] px-2 py-1 rounded-lg hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-colors whitespace-nowrap"
+                      >
+                        + project
+                      </button>
+                    )}
+                  </div>
                 </div>
+
+                {/* Summary — only show if intelligence extracted (real AI summary, not raw transcript) */}
+                {meeting.intelligence_extracted && (meeting.summary || meeting.short_summary) && (
+                  <p className="text-xs text-[#6b6b67] mt-2.5 ml-7 leading-relaxed line-clamp-2">
+                    {meeting.summary || meeting.short_summary}
+                  </p>
+                )}
               </div>
-
-              {/* Summary or transcript preview */}
-              {(meeting.summary || meeting.short_summary || meeting.full_transcript || meeting.raw_transcript) && (
-                <p className="text-xs text-[#6b6b67] mt-2 line-clamp-3 leading-relaxed ml-6">
-                  {meeting.summary || meeting.short_summary ||
-                    (meeting.full_transcript || meeting.raw_transcript || '').slice(0, 300)}
-                </p>
-              )}
-
-              {/* Participants */}
-              {(meeting.participants || []).length > 0 && (
-                <p className="text-xs text-[#9b9b97] mt-1.5 ml-6">
-                  {meeting.participants.slice(0, 5).join(', ')}
-                  {meeting.participants.length > 5 && ` +${meeting.participants.length - 5} more`}
-                </p>
-              )}
-
-              {/* Event link */}
-              {meeting.intelligence_extracted && meeting.event_id && (
-                <div className="ml-6 mt-2 pt-2 border-t border-gray-50">
-                  <button
-                    onClick={() => navigate(`/event/${meeting.event_id}`)}
-                    className="text-xs text-blue-600 hover:underline"
-                  >
-                    📅 View event
-                  </button>
-                </div>
-              )}
             </div>
           )
         })}
