@@ -977,12 +977,15 @@ Respond with just the sentence, no quotes, no JSON.`
             const meetingStartMs = new Date(startTime).getTime()
             const phoenixDate = new Date(startTime).toLocaleDateString('en-CA', { timeZone: 'America/Phoenix' })
 
-            // Pull all events for the Phoenix-local day
+            // Pull all events for the Phoenix-local day — use explicit Phoenix offset
+            // to avoid UTC midnight vs local midnight mismatch
+            const dayStart2 = new Date(`${phoenixDate}T00:00:00-07:00`).toISOString()
+            const dayEnd2   = new Date(`${phoenixDate}T23:59:59-07:00`).toISOString()
             const { data: dayEvents } = await supabase
               .from('events')
               .select('id, title, start_time, end_time, attendees')
-              .gte('start_time', `${phoenixDate}T00:00:00Z`)
-              .lte('start_time', `${phoenixDate}T23:59:59Z`)
+              .gte('start_time', dayStart2)
+              .lte('start_time', dayEnd2)
 
             // Stage 1: find all time-proximity candidates (within ±120 min)
             const candidates = (dayEvents || [])
@@ -1103,6 +1106,126 @@ Respond with JSON only:
     console.log(`  ⚠ Plaud load error: ${err.message}`)
   }
 
+  // ── STEP 2.44: Re-match existing unlinked Plaud meetings to calendar ─────
+  // The insert-time matching (Step 2.4) only runs for NEW meetings in today's
+  // Plaud report. This step catches meetings already in the DB that never got
+  // matched — e.g. backfill imports from before matching logic existed, or cases
+  // where the calendar event wasn't available at insert time.
+  console.log('Step 2.44: Re-matching unlinked Plaud meetings to calendar events...')
+  try {
+    const { data: unlinkedMeetings } = await supabase
+      .from('meeting_notes')
+      .select('id, title, start_time, participants, raw_transcript, full_transcript, summary, short_summary')
+      .eq('source', 'plaud')
+      .is('event_id', null)
+      .not('start_time', 'is', null)
+      .limit(100)
+
+    let relinked = 0
+    for (const mn of (unlinkedMeetings || [])) {
+      try {
+        const startMs = new Date(mn.start_time).getTime()
+        // Phoenix date for this meeting
+        const phoenixDate = new Date(mn.start_time).toLocaleDateString('en-CA', { timeZone: 'America/Phoenix' })
+        // Query a 2-day window to handle timezone edge cases (midnight Phoenix = 7am UTC)
+        const dayStart = new Date(`${phoenixDate}T00:00:00-07:00`).toISOString()
+        const dayEnd   = new Date(`${phoenixDate}T23:59:59-07:00`).toISOString()
+
+        const { data: dayEvents } = await supabase
+          .from('events')
+          .select('id, title, start_time, end_time, attendees')
+          .gte('start_time', dayStart)
+          .lte('start_time', dayEnd)
+
+        if (!dayEvents?.length) continue
+
+        const candidates = dayEvents
+          .map(evt => ({
+            evt,
+            diffMin: Math.abs(startMs - new Date(evt.start_time).getTime()) / 60000
+          }))
+          .filter(c => c.diffMin <= 120)
+          .sort((a, b) => a.diffMin - b.diffMin)
+
+        if (!candidates.length) continue
+
+        const recordingContent = (mn.raw_transcript || mn.full_transcript || mn.summary || mn.short_summary || '').slice(0, 2000)
+        const recordingParticipants = (mn.participants || []).join(', ') || 'unknown'
+
+        const candidateDescriptions = candidates.slice(0, 4).map((c, i) =>
+          `Option ${i + 1}: "${c.evt.title}" at ${new Date(c.evt.start_time).toLocaleTimeString('en-US', { timeZone: 'America/Phoenix', hour: '2-digit', minute: '2-digit' })} (${Math.round(c.diffMin)} min away) — attendees: ${(c.evt.attendees || []).slice(0, 6).join(', ') || 'unknown'}`
+        ).join('\n')
+
+        const verifyPrompt = `You are matching a Plaud audio recording to a calendar event.
+
+RECORDING:
+- Title: "${mn.title || 'Untitled'}"
+- Date: ${phoenixDate} (Phoenix time)
+- Participants: ${recordingParticipants}
+- Content excerpt:
+${recordingContent || '(no content available)'}
+
+CALENDAR EVENTS THAT DAY (within 2 hours):
+${candidateDescriptions}
+
+TASK: Determine which calendar event this recording belongs to, or if none match.
+
+Key rules:
+- A 2-person phone call should NOT match a large group meeting (OAC, pre-con, all-hands)
+- If recording content mentions attendees, project topics, or agenda items from a specific event, that's a strong match
+- If NO event clearly matches, return "none"
+
+Respond with JSON only:
+{
+  "match": "1" | "2" | "3" | "4" | "none",
+  "confidence": "high" | "medium" | "low",
+  "reason": "one sentence"
+}`
+
+        const haikuClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+        const matchMsg = await haikuClient.messages.create({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 150,
+          messages: [{ role: 'user', content: verifyPrompt }]
+        })
+
+        let verdict
+        try {
+          const raw = (matchMsg.content[0]?.text || '').trim()
+          const jsonMatch = raw.match(/\{[\s\S]*\}/)
+          verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+        } catch { verdict = null }
+
+        if (verdict && verdict.match !== 'none' && verdict.confidence !== 'low') {
+          const matchIdx = parseInt(verdict.match) - 1
+          const matched = candidates[matchIdx]?.evt
+          if (matched) {
+            const evtAttendees = (matched.attendees || [])
+            const mergedParticipants = [...new Set([...(mn.participants || []), ...evtAttendees])]
+
+            await supabase
+              .from('meeting_notes')
+              .update({ event_id: matched.id, event_title: matched.title, participants: mergedParticipants })
+              .eq('id', mn.id)
+
+            await supabase
+              .from('events')
+              .update({ meeting_note_id: mn.id, has_recording: true })
+              .eq('id', matched.id)
+
+            console.log(`  ✓ Re-linked "${mn.title}" → "${matched.title}" (${verdict.confidence}: ${verdict.reason})`)
+            relinked++
+          }
+        }
+      } catch (innerErr) {
+        console.log(`  ⚠ Re-match error for "${mn.title}": ${innerErr.message}`)
+      }
+    }
+    console.log(`  ✓ Step 2.44 complete: ${relinked} meetings re-linked to calendar events`)
+  } catch (err) {
+    console.log(`  ⚠ Step 2.44 error: ${err.message}`)
+  }
+
   // ── STEP 2.45: Backfill participants for Plaud meetings with empty roster ──
   // Runs before intelligence extraction — catches meetings inserted on prior days
   // that had no calendar match at insert time, or were inserted before today's
@@ -1121,12 +1244,15 @@ Respond with JSON only:
         const meetingDate = mn.start_time?.split('T')[0]
         if (!meetingDate) continue
 
-        // Pull calendar events for that meeting's date
+        // Pull calendar events for that meeting's date — use Phoenix-aware boundaries
+        // Phoenix is UTC-7, so midnight Phoenix = 07:00 UTC. Use explicit offsets.
+        const dayStart = new Date(`${meetingDate}T00:00:00-07:00`).toISOString()
+        const dayEnd   = new Date(`${meetingDate}T23:59:59-07:00`).toISOString()
         const { data: calEvents } = await supabase
           .from('events')
           .select('title, start_time, attendees')
-          .gte('start_time', `${meetingDate}T00:00:00Z`)
-          .lte('start_time', `${meetingDate}T23:59:59Z`)
+          .gte('start_time', dayStart)
+          .lte('start_time', dayEnd)
           .not('attendees', 'is', null)
 
         const mnKeywords = (mn.title || '')
@@ -1832,6 +1958,29 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   }
 
   // ── STEP 3.6: Auto-create contacts (with deduplication) ────────
+  // ── Name normalization helper ─────────────────────────────────────────────
+  // Cleans up Outlook display name formats before storing on contacts
+  function normalizeDisplayName(rawName) {
+    if (!rawName) return rawName
+    let name = rawName.trim()
+
+    // "Last, First" → "First Last"
+    if (/^[^,]+,\s*[^,]+$/.test(name)) {
+      const parts = name.split(',').map(p => p.trim())
+      name = `${parts[1]} ${parts[0]}`
+    }
+
+    // Title-case if ALL CAPS or all lowercase (e.g. "TAYLOR BISCHOFF" → "Taylor Bischoff")
+    if (name === name.toUpperCase() || name === name.toLowerCase()) {
+      name = name.replace(/\b\w/g, c => c.toUpperCase())
+    }
+
+    // Remove trailing/leading junk: extra spaces, quotes
+    name = name.replace(/^["']+|["']+$/g, '').trim()
+
+    return name
+  }
+
   console.log('Step 3.6: Updating contacts...')
   for (const email of (activeEmails || [])) {
     try {
@@ -1919,7 +2068,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         : null
 
       await supabase.from('contacts').insert({
-        name: email.from_name,
+        name: normalizeDisplayName(email.from_name),
         email: email.from_address,
         company: company,
         last_contact_date: today,
@@ -2154,7 +2303,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     for (const [email, name] of toCreate) {
       const { error } = await supabase
         .from('contacts')
-        .insert({ email, name, source: 'email', enriched: false })
+        .insert({ email, name: normalizeDisplayName(name), source: 'email', enriched: false })
       if (!error) autoCreated++
     }
     console.log(`  ✓ Auto-created ${autoCreated} contacts from email senders + participants`)
@@ -2182,6 +2331,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
     )
     .not('email', 'is', null)
+    .order('last_contact_date', { ascending: false, nullsFirst: false })
     .limit(250)
 
   for (const contact of (contactsToEnrich || [])) {
@@ -2213,19 +2363,9 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         }
       }
 
-      // Source 2: Threads they participated in — sig in quoted replies
-      const { data: participantThreads } = await supabase
-        .from('emails')
-        .select('full_thread_content, sent_body, body_preview')
-        .contains('thread_participants', [contact.email])
-        .not('full_thread_content', 'is', null)
-        .order('received_at', { ascending: false })
-        .limit(3)
-
-      for (const e of (participantThreads || [])) {
-        if (e.full_thread_content) contentParts.push(e.full_thread_content.slice(-2500))
-        if (e.sent_body)           contentParts.push(e.sent_body.slice(-1500))
-      }
+      // Source 2 REMOVED: participant threads caused cross-contamination — other people's
+      // signatures in the same thread were being attributed to this contact. Source 1
+      // (emails sent FROM this contact) is authoritative and sufficient.
 
       // Source 3: Meeting transcripts — introductions often contain title/company
       // Look for the contact's name in recent Plaud recordings
@@ -2280,6 +2420,28 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
 
       // Build updates — never overwrite existing good data
       const updates = {}
+
+      // Name: update if signature reveals a clearer full name
+      // Handles: "B. Taylor" → "Taylor Bischoff", "Bischoff, Taylor" → "Taylor Bischoff",
+      //          partial/initial names, or any single-word name
+      if (extracted.name && extracted.name !== contact.name) {
+        const currentName = contact.name || ''
+        const extractedName = extracted.name.trim()
+        const isCurrentIncomplete = (
+          currentName.includes(',') ||           // "Last, First" reversed format
+          /^[A-Z]\.\s/.test(currentName) ||      // starts with initial like "B. Taylor"
+          !currentName.includes(' ') ||           // single word (no last name)
+          currentName.split(' ').some(p => p.length === 1 || (p.length === 2 && p.endsWith('.'))) // has initials
+        )
+        const isExtractedFullName = (
+          extractedName.includes(' ') &&          // has first + last
+          !extractedName.includes(',') &&         // not reversed
+          extractedName.split(' ').every(p => p.length > 1) // no single-char parts
+        )
+        if (isCurrentIncomplete && isExtractedFullName) {
+          updates.name = extractedName
+        }
+      }
 
       // Title: set if empty
       if (extracted.title && !contact.title) {

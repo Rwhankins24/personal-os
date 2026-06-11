@@ -832,35 +832,41 @@ async function extractContactFromSignature(emailContent, fromName, fromEmail) {
       max_tokens: 400,
       messages: [{
         role: 'user',
-        content: `You are extracting contact details from email content. The signature block ALWAYS appears at the END of each email message. You are being given the bottom portion of email threads where signatures live.
+        content: `You are extracting contact details from the email signature of ONE SPECIFIC PERSON.
 
-Look for:
-- Phone numbers in ANY format: (555) 123-4567 | 555.123.4567 | +1 555 123 4567 | M: 555-123-4567 | C: 555-123-4567 | mobile 555... | Direct: 555...
-- Job titles: anything after their name like "Vice President" "Project Manager" "Senior Engineer" "Director of..." "Principal" "Executive"
-- Company names: usually on their own line, often after their title
-- Email addresses in the signature (may differ from sending address)
-- LinkedIn URLs: linkedin.com/in/...
-- Physical addresses: street, city, state, zip — often last line of signature
+TARGET PERSON: ${fromName} (${fromEmail})
 
-From: ${fromName} (${fromEmail})
+CRITICAL RULES:
+- You are ONLY extracting information from ${fromName}'s OWN signature block
+- Email threads contain signatures from MULTIPLE people — IGNORE all signatures that do NOT belong to ${fromName}
+- A signature belongs to ${fromName} if it appears directly under their name, OR if it's in an email sent FROM ${fromEmail}
+- If you see a company name, phone number, or title that belongs to someone OTHER than ${fromName}, IGNORE IT completely
+- When in doubt about whether information belongs to ${fromName}, return null for that field
 
-EMAIL CONTENT (bottom portion where signatures appear):
+Look for ${fromName}'s OWN signature block containing:
+- Phone numbers labeled: M: / C: / Mobile: / Cell: / Direct: / Office: / Tel: in any format
+- Job title: text appearing under their name like "Vice President", "Project Manager", "Director of..."
+- Company name: usually on its own line under their title
+- LinkedIn: linkedin.com/in/... URL
+- Physical address: street, city, state, zip
+
+EMAIL CONTENT (contains ${fromName}'s emails and possibly others — only extract ${fromName}'s own info):
 ${emailContent.slice(-5000)}
 
-Return JSON only — null for anything not found:
+Return JSON only — null for anything not found or not clearly belonging to ${fromName}:
 {
   "name": "full name if found clearer than '${fromName}' or null",
-  "title": "exact job title from signature or null",
-  "company": "company name or null",
-  "phone_mobile": "cell/mobile number in original format or null",
-  "phone_office": "office/direct/work number in original format or null",
-  "linkedin": "full linkedin URL or null",
-  "address": "full address string or null",
+  "title": "exact job title from ${fromName}'s signature or null",
+  "company": "company from ${fromName}'s signature or null",
+  "phone_mobile": "cell/mobile number from ${fromName}'s signature or null",
+  "phone_office": "office/direct number from ${fromName}'s signature or null",
+  "linkedin": "full linkedin URL from ${fromName}'s signature or null",
+  "address": "full address from ${fromName}'s signature or null",
   "confidence": "high|medium|low"
 }
-high = found explicit signature with 3+ fields
-medium = found 1-2 fields clearly
-low = no signature found
+high = found ${fromName}'s explicit signature with 3+ fields
+medium = found 1-2 fields clearly from ${fromName}'s signature
+low = no clear signature found for ${fromName}, or info is ambiguous
 Return ONLY the JSON object.`
       }]
     })
