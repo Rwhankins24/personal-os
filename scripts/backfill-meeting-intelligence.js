@@ -59,25 +59,36 @@ async function main() {
   console.log('=== Backfill: Meeting Intelligence Extraction ===')
   console.log(`Date: ${today}`)
 
-  // Fetch ALL unprocessed meetings with transcripts — no limit
+  // Fetch ALL unprocessed meetings — filter transcripts in loop to avoid Supabase OR syntax issues
   const { data: meetings, error } = await supabase
     .from('meeting_notes')
     .select('*')
     .eq('intelligence_extracted', false)
-    .or('full_transcript.not.is.null,raw_transcript.not.is.null')
     .order('start_time', { ascending: false })
 
   if (error) { console.error('DB error:', error.message); process.exit(1) }
   if (!meetings?.length) { console.log('✓ No meetings to process — all up to date.'); process.exit(0) }
 
-  console.log(`Found ${meetings.length} meetings to process\n`)
+  console.log(`Found ${meetings.length} meetings total\n`)
 
   let processed = 0
   let skipped   = 0
+  let noTranscript = 0
   let failed    = 0
 
   for (const meeting of meetings) {
     const label = `"${meeting.title || 'Untitled'}" (${meeting.start_time?.split('T')[0] || 'no date'})`
+
+    // Check transcript presence here instead of in query
+    const transcript = meeting.full_transcript || meeting.raw_transcript || ''
+    if (transcript.trim().length < 100) {
+      console.log(`  — No transcript: ${label} [${transcript.length} chars]`)
+      // Mark done so we don't retry endlessly — genuinely no content
+      await supabase.from('meeting_notes').update({ intelligence_extracted: true }).eq('id', meeting.id)
+      noTranscript++
+      continue
+    }
+
     try {
       // Skip all-hands / company-wide meetings (too noisy for intelligence)
       const isAllHands = /all.?hands|town.?hall|company.?wide|all.?staff/i.test(meeting.title || '')
@@ -258,10 +269,11 @@ async function main() {
   }
 
   console.log(`\n=== Complete ===`)
-  console.log(`  Processed: ${processed}`)
-  console.log(`  Skipped:   ${skipped}`)
-  console.log(`  Failed:    ${failed}`)
-  console.log(`  Total:     ${meetings.length}`)
+  console.log(`  Processed:      ${processed}`)
+  console.log(`  No transcript:  ${noTranscript}`)
+  console.log(`  Skipped:        ${skipped}`)
+  console.log(`  Failed:         ${failed}`)
+  console.log(`  Total:          ${meetings.length}`)
 }
 
 main().catch(err => {

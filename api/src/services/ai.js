@@ -980,7 +980,10 @@ Return ONLY valid JSON. Empty arrays fine.
     const text = message.content[0].text
     const clean = text.replace(/```json|```/g, '').trim()
     return JSON.parse(clean)
-  } catch {
+  } catch (parseErr) {
+    const text = message?.content?.[0]?.text || ''
+    console.error(`extractIntelligenceFromTranscript JSON parse error: ${parseErr.message}`)
+    console.error(`Raw response (first 300 chars): ${text.slice(0, 300)}`)
     return null
   }
 }
