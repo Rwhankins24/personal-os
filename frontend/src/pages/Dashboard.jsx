@@ -1750,6 +1750,12 @@ export default function Dashboard() {
               Contacts
             </Link>
             <Link
+              to="/meetings"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Meetings
+            </Link>
+            <Link
               to="/knowledge"
               className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-1.5"
             >
