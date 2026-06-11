@@ -103,7 +103,11 @@ async function upsertMeeting(meeting) {
     })),
   ]
 
+  // otter_id has a NOT NULL constraint — use gmail_message_id with plaud_ prefix
+  const otterId = `plaud_${meeting.gmail_message_id || meeting.id || Date.now()}`
+
   const payload = {
+    otter_id:              otterId,
     title:                 meeting.title || 'Untitled',
     meeting_date:          meeting.date  || null,
     source:                'plaud',
