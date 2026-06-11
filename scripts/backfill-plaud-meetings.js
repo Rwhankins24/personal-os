@@ -84,18 +84,35 @@ async function downloadFile(filename) {
 
 // ── Upsert a single meeting into meeting_notes via the API ────────────────────
 async function upsertMeeting(meeting) {
+  // Normalize action items into action_items_raw format (matches nightly job schema)
+  const allItems = [
+    ...(meeting.ryan_action_items || []).map(i => ({
+      task_text:     i.task || i,
+      assignee_name: 'Ryan',
+      source:        'ryan_items'
+    })),
+    ...(meeting.others_action_items || []).map(i => ({
+      task_text:     i.task || i,
+      assignee_name: i.assignee || 'Unknown',
+      source:        'others_items'
+    })),
+    ...(meeting.unattributed_action_items || []).map(i => ({
+      task_text:     i.task || i,
+      assignee_name: null,
+      source:        'unattributed'
+    })),
+  ]
+
   const payload = {
     title:                 meeting.title || 'Untitled',
     meeting_date:          meeting.date  || null,
     source:                'plaud',
+    short_summary:         meeting.summary || meeting.email_body_raw || '',
     summary:               meeting.summary || meeting.email_body_raw || '',
-    action_items: [
-      ...(meeting.ryan_action_items         || []),
-      ...(meeting.others_action_items       || []),
-      ...(meeting.unattributed_action_items || []),
-    ],
+    action_items_raw:      allItems,
     participants:          meeting.participants       || [],
     raw_transcript:        meeting.transcript_text   || '',
+    full_transcript:       meeting.transcript_text   || '',
     external_id:           meeting.gmail_message_id  || meeting.id || null,
     has_transcript:        meeting.has_transcript    || false,
     transcript_word_count: meeting.transcript_word_count || 0,
