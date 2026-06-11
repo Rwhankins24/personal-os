@@ -296,6 +296,140 @@ async function main() {
     errors: []
   }
 
+  // ── SHARED DEDUP HELPERS ────────────────────────────────────────
+  // These are used by Steps 1.5, 2.6, 4, 5, and 5.45 so they live
+  // at the top of main() rather than being re-declared each step.
+
+  const STOP_WORDS = new Set([
+    'the','and','for','with','from','this','that','have','will','been',
+    'more','week','next','last','meet','call','zoom','team','follow',
+    'review','update','send','check','please','need','about','over',
+    'fwd','reply','into','your','their','also','make','sure','task',
+    'action','item','items','regarding','re','fw','asap','today'
+  ])
+
+  function taskTokens(title) {
+    return (title || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(/\s+/)
+      .filter(w => w.length > 2 && !STOP_WORDS.has(w))
+  }
+
+  function jaccard(setA, setB) {
+    if (!setA.length || !setB.length) return 0
+    const a = new Set(setA), b = new Set(setB)
+    let intersection = 0
+    for (const w of a) if (b.has(w)) intersection++
+    return intersection / (a.size + b.size - intersection)
+  }
+
+  /**
+   * semanticMatchCheck
+   * Given a candidate title (and optional person email / project filter),
+   * pull open records from `tableName`, compute Jaccard overlap, and for
+   * pairs >= 0.55 call Haiku to get a confidence-scored duplicate verdict.
+   *
+   * Returns { match: existingRecord|null, confidence: number, bestTitle: string|null }
+   *
+   * @param {string}      candidateTitle
+   * @param {string|null} candidatePersonEmail  — used only for others_commitments (committed_by_email filter)
+   * @param {string}      tableName             — 'tasks' or 'others_commitments'
+   * @param {string|null} projectId             — if provided, prefer same-project records
+   */
+  async function semanticMatchCheck(candidateTitle, candidatePersonEmail, tableName, projectId) {
+    try {
+      const candidateTokens = taskTokens(candidateTitle)
+      if (candidateTokens.length < 2) return { match: null, confidence: 0, bestTitle: null }
+
+      // Build query for open records
+      let query = supabase
+        .from(tableName)
+        .select('id, title' + (tableName === 'others_commitments' ? ', committed_by_email' : '') + ', project_id')
+        .eq('status', 'open')
+
+      if (candidatePersonEmail && tableName === 'others_commitments') {
+        query = query.eq('committed_by_email', candidatePersonEmail)
+      }
+
+      if (projectId) {
+        // Pull same-project + unlinked records, limit 50
+        const { data: projectRecs } = await query.eq('project_id', projectId).limit(50)
+        const { data: unlinkedRecs } = await supabase
+          .from(tableName)
+          .select('id, title' + (tableName === 'others_commitments' ? ', committed_by_email' : '') + ', project_id')
+          .eq('status', 'open')
+          .is('project_id', null)
+          .limit(25)
+        var candidates = [...(projectRecs || []), ...(unlinkedRecs || [])]
+      } else {
+        const { data: recs } = await query.limit(50)
+        var candidates = recs || []
+      }
+
+      // Find best Jaccard match
+      let bestMatch = null
+      let bestScore = 0
+      for (const rec of candidates) {
+        const score = jaccard(candidateTokens, taskTokens(rec.title))
+        if (score >= 0.55 && score > bestScore) {
+          bestScore = score
+          bestMatch = rec
+        }
+      }
+
+      if (!bestMatch) return { match: null, confidence: 0, bestTitle: null }
+
+      // Call Haiku for semantic confirmation with confidence score
+      const haikuSMC = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const smcPrompt = `Two ${tableName === 'tasks' ? 'tasks' : 'commitments'} from Ryan's personal OS:
+
+Item A (candidate, not yet saved): "${candidateTitle}"
+
+Item B (existing record): "${bestMatch.title}"
+
+Are these the same underlying action item (just phrased differently), or genuinely distinct?
+
+If they ARE the same: pick the best title (clearest, most specific), and identify which is the "winner" to keep (A or B).
+
+Respond ONLY with valid JSON:
+{
+  "is_duplicate": true,
+  "confidence": 82,
+  "winner": "A",
+  "best_title": "The clearest, most complete phrasing",
+  "reason": "one sentence why they are the same"
+}
+
+The "confidence" field must be an integer 0-100 representing how certain you are they describe the same action.`
+
+      const smcMsg = await haikuSMC.messages.create({
+        model:      'claude-haiku-4-5-20251001',
+        max_tokens: 200,
+        messages:   [{ role: 'user', content: smcPrompt }]
+      })
+
+      const raw = (smcMsg.content[0]?.text || '').trim()
+      let verdict
+      try {
+        const jsonMatch = raw.match(/\{[\s\S]*\}/)
+        verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
+      } catch { return { match: null, confidence: 0, bestTitle: null } }
+
+      if (!verdict?.is_duplicate) return { match: null, confidence: 0, bestTitle: null }
+
+      const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
+      return {
+        match:      bestMatch,
+        confidence,
+        bestTitle:  verdict.best_title || null
+      }
+    } catch (smcErr) {
+      console.log(`  semanticMatchCheck error (non-fatal): ${smcErr.message}`)
+      return { match: null, confidence: 0, bestTitle: null }
+    }
+  }
+
   // ── STEP 1: Bootstrap and hygiene ──────────────────────────────
   console.log('Step 1: Bootstrap and hygiene...')
   try {
@@ -452,30 +586,8 @@ async function main() {
       console.log('  No open tasks to dedup')
     } else {
 
-      // ── Token overlap helpers ────────────────────────────────────
-      const STOP_WORDS = new Set([
-        'the','and','for','with','from','this','that','have','will','been',
-        'more','week','next','last','meet','call','zoom','team','follow',
-        'review','update','send','check','please','need','about','over',
-        'fwd','reply','into','your','their','also','make','sure','task',
-        'action','item','items','regarding','re','fw','asap','today'
-      ])
-
-      function taskTokens(title) {
-        return (title || '')
-          .toLowerCase()
-          .replace(/[^a-z0-9\s]/g, '')
-          .split(/\s+/)
-          .filter(w => w.length > 2 && !STOP_WORDS.has(w))
-      }
-
-      function jaccard(setA, setB) {
-        if (!setA.length || !setB.length) return 0
-        const a = new Set(setA), b = new Set(setB)
-        let intersection = 0
-        for (const w of a) if (b.has(w)) intersection++
-        return intersection / (a.size + b.size - intersection)
-      }
+      // ── Token overlap helpers (STOP_WORDS / taskTokens / jaccard
+      //    are now declared at the top of main() — shared scope)
 
       // Pre-compute tokens for all tasks
       const tokenMap = new Map(allOpenTasks.map(t => [t.id, taskTokens(t.title)]))
@@ -534,10 +646,13 @@ If they ARE the same: pick the best title (clearest, most specific), and identif
 Respond ONLY with valid JSON:
 {
   "is_duplicate": true,
+  "confidence": 82,
   "winner": "A",
   "best_title": "The clearest, most complete phrasing of the task",
   "reason": "one sentence why they are the same"
-}`
+}
+
+The "confidence" field must be an integer 0-100 representing how certain you are they describe the same action.`
 
           const msg = await haikuDedup.messages.create({
             model:      'claude-haiku-4-5-20251001',
@@ -554,6 +669,11 @@ Respond ONLY with valid JSON:
 
           if (!verdict?.is_duplicate) continue
 
+          const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
+
+          // Confidence < 50: skip entirely
+          if (confidence < 50) continue
+
           // Determine winner and loser
           const winner = verdict.winner === 'A' ? a : b
           const loser  = verdict.winner === 'A' ? b : a
@@ -561,40 +681,76 @@ Respond ONLY with valid JSON:
           // Never delete manual tasks
           if (loser.source_type === 'manual') continue
 
-          // ── Smart merge: fill winner's gaps from loser ──────────
-          const patch = {}
-          if (!winner.due_date   && loser.due_date)   patch.due_date   = loser.due_date
-          if (!winner.project_id && loser.project_id) patch.project_id = loser.project_id
-          if (!winner.context    && (loser.context || loser.ai_context)) {
-            patch.context = loser.context || loser.ai_context
-          }
-          if (!winner.urgency && loser.urgency)       patch.urgency    = loser.urgency
-          if (verdict.best_title && verdict.best_title !== winner.title) {
-            patch.title = verdict.best_title
-          }
+          if (confidence >= 75) {
+            // ── HIGH confidence: smart merge + delete loser ───────────
+            const patch = {}
+            if (!winner.due_date   && loser.due_date)   patch.due_date   = loser.due_date
+            if (!winner.project_id && loser.project_id) patch.project_id = loser.project_id
+            if (!winner.context    && (loser.context || loser.ai_context)) {
+              patch.context = loser.context || loser.ai_context
+            }
+            if (!winner.urgency && loser.urgency)       patch.urgency    = loser.urgency
+            if (verdict.best_title && verdict.best_title !== winner.title) {
+              patch.title = verdict.best_title
+            }
 
-          // Merge cross_references: carry loser's source as a cross-ref on winner
-          const existingRefs = winner.cross_references || []
-          const alreadyRef   = existingRefs.some(r => r.source_label === loser.source_label)
-          if (!alreadyRef && (loser.source_label || loser.source_type)) {
-            patch.cross_references = [
-              ...existingRefs,
-              {
-                source_type:  loser.source_type  || 'ai_email',
-                source_label: loser.source_label || loser.title,
-                merged_from:  loser.id,
-                date:         today
-              }
-            ]
-          }
+            // Merge cross_references: carry loser's source as a cross-ref on winner
+            const existingRefs = winner.cross_references || []
+            const alreadyRef   = existingRefs.some(r => r.source_label === loser.source_label)
+            if (!alreadyRef && (loser.source_label || loser.source_type)) {
+              patch.cross_references = [
+                ...existingRefs,
+                {
+                  source_type:  loser.source_type  || 'ai_email',
+                  source_label: loser.source_label || loser.title,
+                  merged_from:  loser.id,
+                  date:         today
+                }
+              ]
+            }
 
-          if (Object.keys(patch).length > 0) {
-            await supabase.from('tasks').update(patch).eq('id', winner.id)
-          }
+            if (Object.keys(patch).length > 0) {
+              await supabase.from('tasks').update(patch).eq('id', winner.id)
+            }
 
-          toDelete.set(loser.id, winner.id)
-          merged++
-          console.log(`  Merged: "${loser.title}" → "${verdict.best_title || winner.title}"`)
+            // Write work_item_sources row so the loser's source is preserved on the winner
+            try {
+              await supabase.from('work_item_sources').insert({
+                work_item_id:   winner.id,
+                work_item_type: 'task',
+                source_type:    loser.source_type  || 'unknown',
+                source_id:      loser.source_id    || null,
+                source_label:   loser.source_label || loser.title,
+                excerpt:        loser.title,
+                confidence:     'merged',
+              })
+            } catch (_) {}
+
+            toDelete.set(loser.id, winner.id)
+            merged++
+            console.log(`  Merged (conf=${confidence}): "${loser.title}" → "${verdict.best_title || winner.title}"`)
+
+          } else {
+            // ── MEDIUM confidence (50-74): flag for review, both survive ─
+            try {
+              await supabase
+                .from('tasks')
+                .update({
+                  potential_duplicate_of: winner.id,
+                  duplicate_confidence:   confidence
+                })
+                .eq('id', loser.id)
+
+              await logAIQuestion(
+                `Two tasks look like the same thing — merge or keep separate? Task A: "${winner.title}" Task B: "${loser.title}"`,
+                `Confidence: ${confidence}%. Reason: ${verdict.reason || 'semantic overlap detected'}`,
+                'binary'
+              )
+              console.log(`  Flagged (conf=${confidence}): "${loser.title}" may duplicate "${winner.title}"`)
+            } catch (flagErr) {
+              console.log(`  Flag error: ${flagErr.message}`)
+            }
+          }
 
         } catch (pairErr) {
           console.log(`  Pair check error: ${pairErr.message}`)
@@ -2227,57 +2383,207 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter'
 
         if (isRyan) {
-            const { data: existing } = await supabase
+            // Level 1: exact title match
+            const { data: exactTask } = await supabase
               .from('tasks')
               .select('id')
               .eq('title', item.task_text)
               .eq('status', 'open')
               .maybeSingle()
 
-            if (!existing) {
-              await supabase.from('tasks').insert({
-                title:            item.task_text,
-                context:          `Action item from: ${meeting.title || 'Meeting'}`,
-                status:           'open',
-                source:           meetingSource,
-                source_type:      meetingSourceType,
-                source_label:     meeting.title || 'Meeting',
-                source_date:      today,
-                ai_enriched:      true,
-                source_confidence: 0.9,
-                project_id:       projectId || null
-              })
-              results.otter_tasks_created++
+            if (exactTask) {
+              // Exact match — add source row pointing to existing task
+              try {
+                await supabase.from('work_item_sources').insert({
+                  work_item_id:   exactTask.id,
+                  work_item_type: 'task',
+                  source_type:    meetingSourceType,
+                  source_id:      meeting.id,
+                  source_label:   meeting.title || 'Meeting',
+                  excerpt:        item.task_text.slice(0, 500),
+                  confidence:     'high',
+                })
+              } catch (_) {}
+            } else {
+              // Level 2: semantic dedup check (cap at 30 per step)
+              const smcResult = await semanticMatchCheck(
+                item.task_text,
+                null,
+                'tasks',
+                projectId || null
+              )
+
+              if (smcResult.match && smcResult.confidence >= 75) {
+                // High confidence match — add source row to existing task, skip insert
+                try {
+                  await supabase.from('work_item_sources').insert({
+                    work_item_id:   smcResult.match.id,
+                    work_item_type: 'task',
+                    source_type:    meetingSourceType,
+                    source_id:      meeting.id,
+                    source_label:   meeting.title || 'Meeting',
+                    excerpt:        item.task_text.slice(0, 500),
+                    confidence:     'high',
+                  })
+                } catch (_) {}
+                console.log(`  Dedup (conf=${smcResult.confidence}): skipped "${item.task_text}" → existing "${smcResult.match.title}"`)
+              } else {
+                // Insert new task
+                const insertPatch = {
+                  title:            item.task_text,
+                  context:          `Action item from: ${meeting.title || 'Meeting'}`,
+                  status:           'open',
+                  source:           meetingSource,
+                  source_type:      meetingSourceType,
+                  source_label:     meeting.title || 'Meeting',
+                  source_date:      today,
+                  ai_enriched:      true,
+                  source_confidence: 0.9,
+                  project_id:       projectId || null
+                }
+
+                if (smcResult.match && smcResult.confidence >= 50) {
+                  // Medium confidence — flag as potential duplicate
+                  insertPatch.potential_duplicate_of = smcResult.match.id
+                  insertPatch.duplicate_confidence   = smcResult.confidence
+                }
+
+                const { data: newTask } = await supabase
+                  .from('tasks')
+                  .insert(insertPatch)
+                  .select('id')
+                  .maybeSingle()
+
+                results.otter_tasks_created++
+
+                if (smcResult.match && smcResult.confidence >= 50) {
+                  await logAIQuestion(
+                    `Two tasks look like the same thing — merge or keep separate? Task A: "${smcResult.match.title}" Task B: "${item.task_text}"`,
+                    `Confidence: ${smcResult.confidence}%. Source: ${meeting.title || 'Meeting'}`,
+                    'binary'
+                  )
+                }
+
+                // Write source row for the new task
+                if (newTask?.id) {
+                  try {
+                    await supabase.from('work_item_sources').insert({
+                      work_item_id:   newTask.id,
+                      work_item_type: 'task',
+                      source_type:    meetingSourceType,
+                      source_id:      meeting.id,
+                      source_label:   meeting.title || 'Meeting',
+                      excerpt:        item.task_text.slice(0, 500),
+                      confidence:     'high',
+                    })
+                  } catch (_) {}
+                }
+              }
             }
           } else {
-            const { data: existing } = await supabase
+            // Level 1: exact title match for others_commitments
+            const { data: exactCommitment } = await supabase
               .from('others_commitments')
               .select('id')
               .eq('title', item.task_text)
               .eq('status', 'open')
               .maybeSingle()
 
-            if (!existing) {
+            if (exactCommitment) {
+              // Exact match — add source row
+              try {
+                await supabase.from('work_item_sources').insert({
+                  work_item_id:   exactCommitment.id,
+                  work_item_type: 'commitment',
+                  source_type:    meetingSourceType,
+                  source_id:      meeting.id,
+                  source_label:   meeting.title || 'Meeting',
+                  excerpt:        item.task_text.slice(0, 500),
+                  confidence:     'high',
+                })
+              } catch (_) {}
+            } else {
               const { data: contact } = await supabase
                 .from('contacts')
                 .select('id, email')
                 .ilike('name', `%${item.assignee_name}%`)
                 .maybeSingle()
 
-              await supabase.from('others_commitments').insert({
-                committed_by_name:  item.assignee_name,
-                committed_by_email: item.assignee_email || contact?.email || null,
-                title:        item.task_text,
-                context:      `Action item from meeting: ${meeting.title || 'Meeting'}`,
-                source_type:  meetingSourceType,
-                source_id:    meeting.id,
-                source_label: meeting.title || 'Meeting',
-                status:       'open',
-                project_id:   projectId || null,
-                urgency:      'medium',
-                delivery_type: 'general'
-              })
-              results.otter_others_created++
+              const assigneeEmail = item.assignee_email || contact?.email || null
+
+              // Level 2: semantic dedup check for same person
+              const smcResult = await semanticMatchCheck(
+                item.task_text,
+                assigneeEmail,
+                'others_commitments',
+                projectId || null
+              )
+
+              if (smcResult.match && smcResult.confidence >= 75) {
+                // High confidence — add source row to existing commitment
+                try {
+                  await supabase.from('work_item_sources').insert({
+                    work_item_id:   smcResult.match.id,
+                    work_item_type: 'commitment',
+                    source_type:    meetingSourceType,
+                    source_id:      meeting.id,
+                    source_label:   meeting.title || 'Meeting',
+                    excerpt:        item.task_text.slice(0, 500),
+                    confidence:     'high',
+                  })
+                } catch (_) {}
+                console.log(`  Dedup (conf=${smcResult.confidence}): skipped commitment "${item.task_text}" → existing "${smcResult.match.title}"`)
+              } else {
+                const insertPatch = {
+                  committed_by_name:  item.assignee_name,
+                  committed_by_email: assigneeEmail,
+                  title:        item.task_text,
+                  context:      `Action item from meeting: ${meeting.title || 'Meeting'}`,
+                  source_type:  meetingSourceType,
+                  source_id:    meeting.id,
+                  source_label: meeting.title || 'Meeting',
+                  status:       'open',
+                  project_id:   projectId || null,
+                  urgency:      'medium',
+                  delivery_type: 'general'
+                }
+
+                if (smcResult.match && smcResult.confidence >= 50) {
+                  insertPatch.potential_duplicate_of = smcResult.match.id
+                  insertPatch.duplicate_confidence   = smcResult.confidence
+                }
+
+                const { data: newCommitment } = await supabase
+                  .from('others_commitments')
+                  .insert(insertPatch)
+                  .select('id')
+                  .maybeSingle()
+
+                results.otter_others_created++
+
+                if (smcResult.match && smcResult.confidence >= 50) {
+                  await logAIQuestion(
+                    `Two commitments look like the same thing — merge or keep separate? Commitment A: "${smcResult.match.title}" Commitment B: "${item.task_text}"`,
+                    `Confidence: ${smcResult.confidence}%. Person: ${item.assignee_name || 'unknown'}. Source: ${meeting.title || 'Meeting'}`,
+                    'binary'
+                  )
+                }
+
+                // Write source row for the new commitment
+                if (newCommitment?.id) {
+                  try {
+                    await supabase.from('work_item_sources').insert({
+                      work_item_id:   newCommitment.id,
+                      work_item_type: 'commitment',
+                      source_type:    meetingSourceType,
+                      source_id:      meeting.id,
+                      source_label:   meeting.title || 'Meeting',
+                      excerpt:        item.task_text.slice(0, 500),
+                      confidence:     'high',
+                    })
+                  } catch (_) {}
+                }
+              }
             }
           }
         }
@@ -2665,7 +2971,7 @@ Be direct and specific. No fluff.`
         if (!existing) {
           const projectId = await findProjectByKeywords(email.thread_subject)
 
-          await supabase.from('tasks').insert({
+          const { data: newEmailTask } = await supabase.from('tasks').insert({
             ...task,
             status: 'open',
             source: 'email',
@@ -2676,8 +2982,22 @@ Be direct and specific. No fluff.`
             ai_enriched: true,
             source_confidence: 0.85,
             project_id: projectId || null
-          })
+          }).select('id').single()
           results.tasks_created++
+
+          if (newEmailTask?.id) {
+            try {
+              await supabase.from('work_item_sources').insert({
+                work_item_id:   newEmailTask.id,
+                work_item_type: 'task',
+                source_type:    'ai_email',
+                source_id:      email.id,
+                source_label:   email.thread_subject,
+                excerpt:        task.title,
+                confidence:     'high',
+              })
+            } catch (_) {}
+          }
         } else if (existing.source_type && existing.source_type !== 'ai_email') {
           // CHANGE 5: Cross-source enrichment — same task seen from a different source
           // Patch cross_references on existing item instead of silently skipping
@@ -2899,7 +3219,7 @@ Be direct and specific. No fluff.`
         if (!existing) {
           const projectId = await findProjectByKeywords(email.thread_subject)
 
-          await supabase.from('others_commitments').insert({
+          const { data: newCommitment } = await supabase.from('others_commitments').insert({
             committed_by_name: c.committed_by_name,
             committed_by_email: c.committed_by_email,
             title: c.title,
@@ -2914,8 +3234,22 @@ Be direct and specific. No fluff.`
             status: 'open',
             project_id: projectId || null,
             delivery_type: c.delivery_type || 'general'
-          })
+          }).select('id').single()
           results.others_commitments_extracted++
+
+          if (newCommitment?.id) {
+            try {
+              await supabase.from('work_item_sources').insert({
+                work_item_id:   newCommitment.id,
+                work_item_type: 'commitment',
+                source_type:    'ai_email',
+                source_id:      email.id,
+                source_label:   email.thread_subject,
+                excerpt:        c.title,
+                confidence:     'high',
+              })
+            } catch (_) {}
+          }
         } else if (existing && existing.source_type && existing.source_type !== 'ai_email' && !c.ai_suggests_complete) {
           // CHANGE 5: Cross-source enrichment for others_commitments
           try {

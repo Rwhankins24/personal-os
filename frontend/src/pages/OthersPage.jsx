@@ -432,6 +432,16 @@ export default function OthersPage() {
         )}
       </div>
 
+      {/* Potential duplicates review section */}
+      {!isLoading && (
+        <div className="max-w-2xl mx-auto px-4 pb-4">
+          <OthersDuplicatesSection
+            allItems={items || []}
+            update={update}
+          />
+        </div>
+      )}
+
       <BulkActionBar
         selectedIds={selectedIds}
         contacts={contacts}
@@ -446,6 +456,173 @@ function isInternal(email) {
   if (!email) return false
   const domain = email.toLowerCase().split('@')[1] || ''
   return domain === 'claycorp.com' || domain === 'ljc.com'
+}
+
+// ── Potential Duplicates Section (Others) ─────────────────────────
+function OthersDuplicatesSection({ allItems, update }) {
+  const [open, setOpen] = useState(false)
+  const [collapsedPersons, setCollapsedPersons] = useState({})
+
+  // Items flagged as potential duplicates
+  const flagged = (allItems || []).filter(c => c.potential_duplicate_of && c.status !== 'archived')
+
+  // Build pairs: flagged item + canonical
+  const pairs = flagged.map(loser => {
+    const winner = (allItems || []).find(c => c.id === loser.potential_duplicate_of)
+    return { loser, winner }
+  }).filter(p => p.winner)
+
+  if (pairs.length === 0) return null
+
+  // Group by person
+  const byPerson = {}
+  for (const pair of pairs) {
+    const name = pair.loser.committed_by_name || pair.winner?.committed_by_name || 'Unknown'
+    if (!byPerson[name]) byPerson[name] = []
+    byPerson[name].push(pair)
+  }
+
+  const handleMerge = (loser) => {
+    update.mutate({
+      id: loser.id,
+      updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+    })
+  }
+
+  const handleKeepSeparate = (loser) => {
+    update.mutate({
+      id: loser.id,
+      updates: { potential_duplicate_of: null, duplicate_confidence: null }
+    })
+  }
+
+  const handleResolveAllForPerson = (personPairs) => {
+    for (const { loser } of personPairs) {
+      update.mutate({
+        id: loser.id,
+        updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+      })
+    }
+  }
+
+  const handleResolveAll = () => {
+    for (const { loser } of pairs) {
+      update.mutate({
+        id: loser.id,
+        updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+      })
+    }
+  }
+
+  const togglePersonCollapse = (name) => {
+    setCollapsedPersons(prev => ({ ...prev, [name]: !prev[name] }))
+  }
+
+  return (
+    <div className="bg-white border border-amber-200 rounded-2xl overflow-hidden">
+      {/* Header */}
+      <button
+        className="w-full flex items-center gap-2 px-4 py-3 bg-amber-50 text-left hover:bg-amber-100 transition-colors"
+        onClick={() => setOpen(v => !v)}
+      >
+        <span className="text-sm font-semibold text-amber-800 flex-1">
+          ⚠️ Potential Duplicates ({pairs.length})
+        </span>
+        <span className="text-xs text-amber-600">{open ? '▲ Collapse' : '▼ Expand'}</span>
+      </button>
+
+      {open && (
+        <div className="px-4 py-3 space-y-4">
+          {/* Global resolve all */}
+          <div className="flex justify-end">
+            <button
+              onClick={handleResolveAll}
+              className="text-xs px-3 py-1.5 rounded-lg bg-amber-600 text-white font-medium hover:bg-amber-700 transition-colors"
+            >
+              Resolve all (merge all)
+            </button>
+          </div>
+
+          {/* Per-person groups */}
+          {Object.entries(byPerson).map(([personName, personPairs]) => {
+            const initials = getInitials(personName)
+            const personCollapsed = collapsedPersons[personName]
+
+            return (
+              <div key={personName} className="border border-amber-100 rounded-xl overflow-hidden">
+                {/* Person header */}
+                <div className="flex items-center gap-2 px-3 py-2 bg-amber-50/60 border-b border-amber-100">
+                  <div className="w-6 h-6 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+                    {initials}
+                  </div>
+                  <span className="text-sm font-semibold text-[#1a1a18] flex-1">{personName}</span>
+                  <button
+                    onClick={() => handleResolveAllForPerson(personPairs)}
+                    className="text-[10px] px-2 py-0.5 rounded bg-green-600 text-white font-medium hover:bg-green-700 transition-colors mr-1"
+                  >
+                    Resolve all for {personName.split(' ')[0]}
+                  </button>
+                  <button
+                    onClick={() => togglePersonCollapse(personName)}
+                    className="text-xs text-amber-600"
+                  >
+                    {personCollapsed ? '▼' : '▲'}
+                  </button>
+                </div>
+
+                {!personCollapsed && (
+                  <div className="divide-y divide-amber-50">
+                    {personPairs.map(({ loser, winner }) => (
+                      <div key={loser.id} className="p-3 space-y-2">
+                        {/* Pair side by side */}
+                        <div className="flex gap-2 items-start">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] font-semibold text-[#9b9b97] uppercase mb-0.5">Keep</p>
+                            <p className="text-sm font-medium text-[#1a1a18] leading-snug">{winner.title}</p>
+                            {winner.source_label && (
+                              <p className="text-xs text-[#9b9b97] truncate mt-0.5">↳ {winner.source_label}</p>
+                            )}
+                          </div>
+                          <div className="flex-shrink-0 flex flex-col items-center justify-center px-2">
+                            <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap">
+                              {loser.duplicate_confidence != null ? `${loser.duplicate_confidence}%` : '?'}
+                            </span>
+                            <span className="text-[10px] text-[#9b9b97] mt-0.5">conf</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[10px] font-semibold text-[#9b9b97] uppercase mb-0.5">Maybe dup</p>
+                            <p className="text-sm font-medium text-[#6b6b67] leading-snug line-through">{loser.title}</p>
+                            {loser.source_label && (
+                              <p className="text-xs text-[#9b9b97] truncate mt-0.5">↳ {loser.source_label}</p>
+                            )}
+                          </div>
+                        </div>
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleMerge(loser)}
+                            className="text-xs px-3 py-1 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition-colors flex-1"
+                          >
+                            Merge (keep canonical)
+                          </button>
+                          <button
+                            onClick={() => handleKeepSeparate(loser)}
+                            className="text-xs px-3 py-1 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-100 transition-colors"
+                          >
+                            Keep separate
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
 }
 
 function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect }) {

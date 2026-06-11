@@ -5,6 +5,133 @@ import dayjs from 'dayjs'
 import { getTasks, updateTask } from '../lib/api'
 import InlineEdit from '../components/InlineEdit'
 
+// ── Potential Duplicates Section ──────────────────────────────────
+function PotentialDuplicatesSection({ allTasks, update }) {
+  const [open, setOpen] = useState(false)
+  const qc = useQueryClient()
+
+  // Items flagged as potential duplicates (have potential_duplicate_of set)
+  const flagged = (allTasks || []).filter(t => t.potential_duplicate_of && t.status !== 'archived')
+
+  // Build pairs: flagged item + the item it points to
+  const pairs = flagged.map(loser => {
+    const winner = (allTasks || []).find(t => t.id === loser.potential_duplicate_of)
+    return { loser, winner }
+  }).filter(p => p.winner)
+
+  if (pairs.length === 0) return null
+
+  // Group by project
+  const grouped = {}
+  for (const pair of pairs) {
+    const key = pair.loser.project_id || pair.winner?.project_id || '__none__'
+    if (!grouped[key]) grouped[key] = []
+    grouped[key].push(pair)
+  }
+
+  const handleMerge = (loser, winner) => {
+    // Archive the loser (the flagged item), clear its duplicate flags
+    update.mutate({
+      id: loser.id,
+      updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+    })
+  }
+
+  const handleKeepSeparate = (loser) => {
+    update.mutate({
+      id: loser.id,
+      updates: { potential_duplicate_of: null, duplicate_confidence: null }
+    })
+  }
+
+  const handleResolveAll = () => {
+    for (const { loser } of pairs) {
+      update.mutate({
+        id: loser.id,
+        updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null }
+      })
+    }
+  }
+
+  return (
+    <div className="bg-white border border-amber-200 rounded-2xl overflow-hidden">
+      {/* Header */}
+      <button
+        className="w-full flex items-center gap-2 px-4 py-3 bg-amber-50 text-left hover:bg-amber-100 transition-colors"
+        onClick={() => setOpen(v => !v)}
+      >
+        <span className="text-sm font-semibold text-amber-800 flex-1">
+          ⚠️ Potential Duplicates ({pairs.length})
+        </span>
+        <span className="text-xs text-amber-600">{open ? '▲ Collapse' : '▼ Expand'}</span>
+      </button>
+
+      {open && (
+        <div className="px-4 py-3 space-y-4">
+          <div className="flex justify-end">
+            <button
+              onClick={handleResolveAll}
+              className="text-xs px-3 py-1.5 rounded-lg bg-amber-600 text-white font-medium hover:bg-amber-700 transition-colors"
+            >
+              Resolve all (merge all)
+            </button>
+          </div>
+
+          {Object.entries(grouped).map(([projectKey, groupPairs]) => (
+            <div key={projectKey} className="space-y-2">
+              {projectKey !== '__none__' && (
+                <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide">Project</p>
+              )}
+              {groupPairs.map(({ loser, winner }) => (
+                <div key={loser.id} className="border border-amber-100 rounded-xl p-3 bg-amber-50/30">
+                  {/* Pair titles side by side */}
+                  <div className="flex gap-2 items-start mb-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] font-semibold text-[#9b9b97] uppercase mb-0.5">Keep</p>
+                      <p className="text-sm font-medium text-[#1a1a18] leading-snug">{winner.title}</p>
+                      {winner.source_label && (
+                        <p className="text-xs text-[#9b9b97] truncate mt-0.5">↳ {winner.source_label}</p>
+                      )}
+                    </div>
+                    <div className="flex-shrink-0 flex flex-col items-center justify-center px-2">
+                      <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap">
+                        {loser.duplicate_confidence != null ? `${loser.duplicate_confidence}%` : '?'}
+                      </span>
+                      <span className="text-[10px] text-[#9b9b97] mt-0.5">conf</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] font-semibold text-[#9b9b97] uppercase mb-0.5">Maybe dup</p>
+                      <p className="text-sm font-medium text-[#6b6b67] leading-snug line-through">{loser.title}</p>
+                      {loser.source_label && (
+                        <p className="text-xs text-[#9b9b97] truncate mt-0.5">↳ {loser.source_label}</p>
+                      )}
+                    </div>
+                  </div>
+                  {/* Actions */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleMerge(loser, winner)}
+                      className="text-xs px-3 py-1 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition-colors flex-1"
+                    >
+                      Merge (keep "{winner.title.slice(0, 25)}{winner.title.length > 25 ? '…' : ''}")
+                    </button>
+                    <button
+                      onClick={() => handleKeepSeparate(loser)}
+                      className="text-xs px-3 py-1 rounded-lg border border-[#e5e5e3] text-[#6b6b67] hover:bg-gray-100 transition-colors"
+                    >
+                      Keep separate
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const URGENCY_COLOR = {
   critical: 'bg-red-500',
   high:     'bg-orange-400',
@@ -154,7 +281,7 @@ export default function TasksPage() {
           <p className="text-sm text-gray-400 text-center py-8">No tasks match this filter</p>
         ) : (
           <div className="bg-white border border-[#e5e5e3] rounded-2xl divide-y divide-[#f0f0ee]">
-            {sorted.map(task => {
+            {sorted.filter(t => t.status !== 'archived').map(task => {
               const expanded = expandedId === task.id
               const overdue = task.due_date && dayjs(task.due_date).isBefore(dayjs(), 'day') && !isDone(task)
               const done = isDone(task)
@@ -246,6 +373,14 @@ export default function TasksPage() {
               )
             })}
           </div>
+        )}
+
+        {/* Potential duplicates review section */}
+        {!isLoading && (
+          <PotentialDuplicatesSection
+            allTasks={tasks || []}
+            update={update}
+          />
         )}
       </div>
     </div>
