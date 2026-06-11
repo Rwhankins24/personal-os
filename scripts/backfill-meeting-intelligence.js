@@ -124,10 +124,10 @@ async function main() {
       )
 
       if (!intel) {
-        // Mark done even if no intel — prevents infinite retry
-        await supabase.from('meeting_notes').update({ intelligence_extracted: true }).eq('id', meeting.id)
-        console.log(`    ✓ No intelligence extracted (transcript may be too short)`)
-        skipped++
+        // Only mark done if transcript is genuinely short — not on API/parse failures
+        // Parse failures will retry on next run automatically
+        console.log(`    ✗ Extraction returned null — will retry on next run`)
+        failed++
         continue
       }
 

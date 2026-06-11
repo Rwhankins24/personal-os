@@ -925,7 +925,7 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 4000,
+      max_tokens: 16000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
