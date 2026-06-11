@@ -12,11 +12,14 @@
 // Progress is saved per-meeting — safe to interrupt and re-run.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../api/.env') })
+const path    = require('path')
+const API_DIR = path.join(__dirname, '../api')
 
-const { createClient } = require('@supabase/supabase-js')
-const aiService        = require('../api/src/services/ai')
+// Resolve all modules from api/node_modules since that's where they're installed
+require(path.join(API_DIR, 'node_modules/dotenv')).config({ path: path.join(API_DIR, '.env') })
+
+const { createClient } = require(path.join(API_DIR, 'node_modules/@supabase/supabase-js'))
+const aiService        = require(path.join(API_DIR, 'src/services/ai'))
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
