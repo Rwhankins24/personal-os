@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getOthersCommitments, updateOthersCommitment, getContacts } from '../lib/api'
+import { getOthersCommitments, updateOthersCommitment, getContacts, createTask } from '../lib/api'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -117,38 +117,49 @@ function getInitials(name) {
 }
 
 // ── Bulk action bar ────────────────────────────────────────────
-function BulkActionBar({ selectedIds, contacts, onReassign, onCancel }) {
+function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onCancel, promoting }) {
   const [open, setOpen] = useState(false)
 
   if (selectedIds.size === 0) return null
 
   return (
     <div className="fixed bottom-14 left-0 right-0 z-20 px-4 pb-2">
-      <div className="max-w-2xl mx-auto bg-[#1a1a18] text-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-lg">
-        <span className="text-sm font-medium flex-1">{selectedIds.size} item{selectedIds.size !== 1 ? 's' : ''} selected</span>
-        <div className="relative">
+      <div className="max-w-2xl mx-auto bg-[#1a1a18] text-white rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg flex-wrap">
+        <span className="text-sm font-medium flex-shrink-0">{selectedIds.size} selected</span>
+        <div className="flex items-center gap-2 ml-auto flex-wrap">
+          {/* Promote to my tasks */}
           <button
-            onClick={() => setOpen(v => !v)}
-            className="text-sm bg-white text-[#1a1a18] px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+            onClick={onPromoteToMyTasks}
+            disabled={promoting}
+            className="text-sm bg-blue-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-blue-600 transition-colors disabled:opacity-50 whitespace-nowrap"
           >
-            Reassign {selectedIds.size} →
+            {promoting ? 'Adding…' : `→ My tasks (${selectedIds.size})`}
           </button>
-          {open && (
-            <div className="absolute bottom-full mb-2 right-0 w-64 bg-white rounded-xl shadow-xl border border-[#e5e5e3] p-2 z-30">
-              <ReassignDropdown
-                contacts={contacts}
-                onSelect={(person) => { onReassign(person); setOpen(false) }}
-                onClose={() => setOpen(false)}
-              />
-            </div>
-          )}
+          {/* Reassign */}
+          <div className="relative">
+            <button
+              onClick={() => setOpen(v => !v)}
+              className="text-sm bg-white text-[#1a1a18] px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+            >
+              Reassign →
+            </button>
+            {open && (
+              <div className="absolute bottom-full mb-2 right-0 w-64 bg-white rounded-xl shadow-xl border border-[#e5e5e3] p-2 z-30">
+                <ReassignDropdown
+                  contacts={contacts}
+                  onSelect={(person) => { onReassign(person); setOpen(false) }}
+                  onClose={() => setOpen(false)}
+                />
+              </div>
+            )}
+          </div>
+          <button
+            onClick={onCancel}
+            className="text-sm text-gray-400 hover:text-white transition-colors px-1"
+          >
+            ✕
+          </button>
         </div>
-        <button
-          onClick={onCancel}
-          className="text-sm text-gray-400 hover:text-white transition-colors"
-        >
-          Cancel
-        </button>
       </div>
     </div>
   )
@@ -162,6 +173,8 @@ export default function OthersPage() {
   const [sortBy, setSortBy] = useState('person')
   const [selectMode, setSelectMode] = useState(false)
   const [selectedIds, setSelectedIds] = useState(new Set())
+  const [promoting, setPromoting] = useState(false)
+  const [promotedIds, setPromotedIds] = useState(new Set())
 
   const { data: items, isLoading } = useQuery({
     queryKey: ['others-commitments'],
@@ -213,6 +226,48 @@ export default function OthersPage() {
     })
     setSelectedIds(new Set())
     setSelectMode(false)
+  }
+
+  const handleBulkPromoteToMyTasks = async () => {
+    if (promoting) return
+    setPromoting(true)
+    const allItems = items || []
+    const toPromote = allItems.filter(c => selectedIds.has(c.id) && !promotedIds.has(c.id))
+    for (const c of toPromote) {
+      try {
+        await createTask({
+          title:        c.title,
+          context:      `Promoted from Others: originally assigned to ${c.committed_by_name || 'unknown'}`,
+          urgency:      c.urgency || 'medium',
+          due_date:     c.due_date || null,
+          status:       'open',
+          source:       'manual',
+          source_label: c.source_label || 'Others',
+          project_id:   c.project_id || null,
+        })
+        setPromotedIds(prev => new Set([...prev, c.id]))
+      } catch (_) { /* keep going */ }
+    }
+    setPromoting(false)
+    setSelectedIds(new Set())
+    setSelectMode(false)
+  }
+
+  const handleSinglePromoteToMyTask = async (c) => {
+    if (promotedIds.has(c.id)) return
+    try {
+      await createTask({
+        title:        c.title,
+        context:      `Promoted from Others: originally assigned to ${c.committed_by_name || 'unknown'}`,
+        urgency:      c.urgency || 'medium',
+        due_date:     c.due_date || null,
+        status:       'open',
+        source:       'manual',
+        source_label: c.source_label || 'Others',
+        project_id:   c.project_id || null,
+      })
+      setPromotedIds(prev => new Set([...prev, c.id]))
+    } catch (_) {}
   }
 
   const today = dayjs()
@@ -374,6 +429,8 @@ export default function OthersPage() {
                   selectMode={selectMode}
                   selected={selectedIds.has(c.id)}
                   onToggleSelect={() => toggleItemSelect(c.id)}
+                  promoted={promotedIds.has(c.id)}
+                  onPromote={() => handleSinglePromoteToMyTask(c)}
                 />
               )
             })}
@@ -421,6 +478,8 @@ export default function OthersPage() {
                           selectMode={selectMode}
                           selected={selectedIds.has(c.id)}
                           onToggleSelect={() => toggleItemSelect(c.id)}
+                          promoted={promotedIds.has(c.id)}
+                          onPromote={() => handleSinglePromoteToMyTask(c)}
                         />
                       )
                     })}
@@ -446,7 +505,9 @@ export default function OthersPage() {
         selectedIds={selectedIds}
         contacts={contacts}
         onReassign={handleBulkReassign}
+        onPromoteToMyTasks={handleBulkPromoteToMyTasks}
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
+        promoting={promoting}
       />
     </div>
   )
@@ -645,7 +706,7 @@ function OthersDuplicatesSection({ allItems, update }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote }) {
   const [reassigning, setReassigning] = useState(false)
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
@@ -783,6 +844,20 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
               ↓
             </button>
           )}
+
+          {/* Promote to my tasks */}
+          <button
+            onClick={e => { e.stopPropagation(); onPromote && onPromote() }}
+            disabled={promoted}
+            className={`h-7 px-2 rounded-full border flex items-center justify-center text-[10px] font-medium transition-all whitespace-nowrap ${
+              promoted
+                ? 'border-green-300 text-green-600 bg-green-50'
+                : 'border-[#e5e5e3] text-[#6b6b67] hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50'
+            }`}
+            title="Add to my tasks"
+          >
+            {promoted ? '✓ Mine' : '→ Me'}
+          </button>
         </div>
       </div>
     </div>
