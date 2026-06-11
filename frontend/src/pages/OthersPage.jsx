@@ -603,7 +603,7 @@ function OthersDuplicatesSection({ allItems, update }) {
                             onClick={() => handleMerge(loser)}
                             className="text-xs px-3 py-1 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition-colors flex-1"
                           >
-                            Merge (keep canonical)
+                            Merge (keep "{winner.title.slice(0, 28)}{winner.title.length > 28 ? '…' : ''}")
                           </button>
                           <button
                             onClick={() => handleKeepSeparate(loser)}
