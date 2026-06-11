@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getMeetingNote, updateMeetingNote, getProjects } from '../lib/api'
+import { getMeetingNote, updateMeetingNote, getProjects, createTask } from '../lib/api'
 
 const URGENCY_COLOR = {
   critical: 'bg-red-50 text-red-700 border-red-200',
@@ -11,19 +11,22 @@ const URGENCY_COLOR = {
   low:      'bg-gray-50 text-gray-600 border-gray-200',
 }
 
-function Section({ title, count, color = '#1B2A4A', children, defaultOpen = true }) {
+function Section({ title, count, color = '#1B2A4A', children, defaultOpen = true, action }) {
   const [open, setOpen] = useState(defaultOpen)
   if (!count) return null
   return (
     <div className="mb-4">
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="flex items-center gap-2 w-full text-left mb-2"
-      >
-        <span className="text-xs font-bold uppercase tracking-widest" style={{ color }}>{title}</span>
-        <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full font-medium">{count}</span>
-        <span className="text-xs text-gray-400 ml-auto">{open ? '▲' : '▼'}</span>
-      </button>
+      <div className="flex items-center gap-2 mb-2">
+        <button
+          onClick={() => setOpen(o => !o)}
+          className="flex items-center gap-2 flex-1 text-left"
+        >
+          <span className="text-xs font-bold uppercase tracking-widest" style={{ color }}>{title}</span>
+          <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-full font-medium">{count}</span>
+          <span className="text-xs text-gray-400 ml-auto">{open ? '▲' : '▼'}</span>
+        </button>
+        {action && <div className="flex-shrink-0">{action}</div>}
+      </div>
       {open && children}
     </div>
   )
@@ -43,6 +46,7 @@ export default function MeetingDetail() {
   const qc        = useQueryClient()
   const [editingNotes, setEditingNotes] = useState(false)
   const [notesDraft,   setNotesDraft]   = useState('')
+  const [promoted,     setPromoted]     = useState(new Set()) // ids promoted to my tasks
 
   const { data: meeting, isLoading } = useQuery({
     queryKey: ['meeting', id],
@@ -64,6 +68,33 @@ export default function MeetingDetail() {
   const saveNotes = () => {
     update.mutate({ user_notes: notesDraft })
     setEditingNotes(false)
+  }
+
+  const promoteToMyTask = async (item, sourceLabel) => {
+    const key = item.id || item.title
+    if (promoted.has(key)) return
+    await createTask({
+      title:       item.title,
+      context:     `From meeting: ${meeting.title || 'Meeting'}${item.person_name ? ` (originally assigned to ${item.person_name})` : ''}`,
+      urgency:     item.urgency || 'medium',
+      due_date:    item.due_date || null,
+      status:      'open',
+      source:      'manual',
+      source_label: sourceLabel || meeting.title,
+      project_id:  meeting.project_id || null,
+      meeting_note_id: meeting.id,
+    })
+    setPromoted(prev => new Set([...prev, key]))
+  }
+
+  const promoteAll = async (items, transform) => {
+    for (const item of (items || [])) {
+      const mapped = transform ? transform(item) : item
+      const key = item.id || item.title
+      if (!promoted.has(key)) {
+        await promoteToMyTask(mapped, meeting.title)
+      }
+    }
   }
 
   if (isLoading) return (
@@ -208,14 +239,44 @@ export default function MeetingDetail() {
             </Section>
 
             {/* Others' Commitments */}
-            <Section title="Others' Action Items" count={meeting._others_commitments?.length} color="#5a3a8a">
-              <IntelCard items={meeting._others_commitments || []} renderItem={(c, i) => (
-                <div key={i} className="text-xs border border-purple-100 bg-purple-50 rounded-lg px-3 py-2">
-                  <span className="font-semibold text-purple-800">{c.person_name}: </span>
-                  <span className="text-purple-900">{c.title}</span>
-                  {c.due_date && <span className="ml-2 text-purple-600">due {c.due_date}</span>}
-                </div>
-              )} />
+            <Section
+              title="Others' Action Items"
+              count={meeting._others_commitments?.length}
+              color="#5a3a8a"
+              action={
+                (meeting._others_commitments?.length > 1) && (
+                  <button
+                    onClick={() => promoteAll(meeting._others_commitments)}
+                    className="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded font-medium hover:bg-purple-100 transition-colors whitespace-nowrap"
+                  >
+                    Promote all → My tasks
+                  </button>
+                )
+              }
+            >
+              <IntelCard items={meeting._others_commitments || []} renderItem={(c, i) => {
+                const key = c.id || c.title
+                const done = promoted.has(key)
+                return (
+                  <div key={i} className="text-xs border border-purple-100 bg-purple-50 rounded-lg px-3 py-2 flex items-start gap-2">
+                    <div className="flex-1">
+                      <span className="font-semibold text-purple-800">{c.person_name}: </span>
+                      <span className="text-purple-900">{c.title}</span>
+                      {c.due_date && <span className="ml-2 text-purple-600">due {c.due_date}</span>}
+                    </div>
+                    <button
+                      onClick={() => promoteToMyTask(c, meeting.title)}
+                      className={`flex-shrink-0 text-xs px-2 py-0.5 rounded font-medium transition-colors ${
+                        done
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-white text-purple-700 border border-purple-200 hover:bg-purple-100'
+                      }`}
+                    >
+                      {done ? '✓ Added' : '→ My tasks'}
+                    </button>
+                  </div>
+                )
+              }} />
             </Section>
 
             {/* Decisions Made */}
@@ -230,13 +291,41 @@ export default function MeetingDetail() {
             </Section>
 
             {/* Pending Decisions */}
-            <Section title="Pending Decisions" count={meeting._pending_decisions?.length} color="#8a5a1a">
-              <IntelCard items={meeting._pending_decisions || []} renderItem={(d, i) => (
-                <div key={i} className={`text-xs border rounded-lg px-3 py-2 ${URGENCY_COLOR[d.urgency] || URGENCY_COLOR.medium}`}>
-                  <p className="font-medium">{d.title}</p>
-                  {d.context && <p className="mt-0.5 opacity-70">{d.context}</p>}
-                </div>
-              )} />
+            <Section
+              title="Pending Decisions"
+              count={meeting._pending_decisions?.length}
+              color="#8a5a1a"
+              action={
+                (meeting._pending_decisions?.length > 1) && (
+                  <button
+                    onClick={() => promoteAll(meeting._pending_decisions, d => ({ ...d, title: `Decide: ${d.title}` }))}
+                    className="text-[10px] bg-orange-50 text-orange-700 border border-orange-200 px-2 py-0.5 rounded font-medium hover:bg-orange-100 transition-colors whitespace-nowrap"
+                  >
+                    Promote all → My tasks
+                  </button>
+                )
+              }
+            >
+              <IntelCard items={meeting._pending_decisions || []} renderItem={(d, i) => {
+                const key = d.id || d.title
+                const done = promoted.has(key)
+                return (
+                  <div key={i} className={`text-xs border rounded-lg px-3 py-2 flex items-start gap-2 ${URGENCY_COLOR[d.urgency] || URGENCY_COLOR.medium}`}>
+                    <div className="flex-1">
+                      <p className="font-medium">{d.title}</p>
+                      {d.context && <p className="mt-0.5 opacity-70">{d.context}</p>}
+                    </div>
+                    <button
+                      onClick={() => promoteToMyTask({ ...d, title: `Decide: ${d.title}` }, meeting.title)}
+                      className={`flex-shrink-0 text-xs px-2 py-0.5 rounded font-medium border transition-colors ${
+                        done ? 'bg-green-100 text-green-700 border-green-200' : 'bg-white/60 hover:bg-white border-current'
+                      }`}
+                    >
+                      {done ? '✓ Added' : '→ My tasks'}
+                    </button>
+                  </div>
+                )
+              }} />
             </Section>
 
             {/* Risks */}
