@@ -3020,7 +3020,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                 .from('others_commitments')
                 .select('id')
                 .ilike('title', title.slice(0, 60))
-                .eq('status', 'pending')
+                .in('status', ['open', 'pending'])
                 .maybeSingle()
 
               if (!existing) {
@@ -3032,20 +3032,21 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   : { data: null }
 
                 await supabase.from('others_commitments').insert({
-                  person_name:   personName,
-                  person_email:  personEmail || contact?.email || null,
-                  contact_id:    contact?.id || null,
-                  title:         title,
-                  context:       `From meeting: ${meeting.title}`,
-                  due_date:      c.due_date || null,
-                  urgency:       c.urgency || 'medium',
-                  source:        meetingSource,
-                  source_type:   meetingSourceType,
-                  source_id:     meeting.id,
-                  source_label:  meeting.title,
-                  project_id:    projectId || null,
-                  status:        'pending',
-                  ai_extracted:  true,
+                  person_name:     personName,
+                  person_email:    personEmail || contact?.email || null,
+                  contact_id:      contact?.id || null,
+                  title:           title,
+                  context:         `From meeting: ${meeting.title}`,
+                  due_date:        c.due_date || null,
+                  urgency:         c.urgency || 'medium',
+                  source:          meetingSource,
+                  source_type:     meetingSourceType,
+                  source_id:       meeting.id,
+                  source_label:    meeting.title,
+                  source_date:     meeting.start_time?.split('T')[0] || today,
+                  project_id:      projectId || null,
+                  meeting_note_id: meeting.id,
+                  status:          'open',
                 })
                 results.otter_others_created++
               }

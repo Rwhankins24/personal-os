@@ -234,7 +234,7 @@ async function main() {
           const { data: existing } = await supabase
             .from('others_commitments').select('id')
             .ilike('title', title.slice(0, 60))
-            .eq('status', 'pending').maybeSingle()
+            .in('status', ['open', 'pending']).maybeSingle()
 
           if (!existing) {
             await supabase.from('others_commitments').insert({
@@ -244,14 +244,13 @@ async function main() {
               contact_id:      contact?.id || null,
               due_date:        item.due_date || null,
               urgency:         item.urgency || 'medium',
-              status:          'pending',
+              status:          'open',
               source:          meeting.source || 'plaud',
               source_label:    meeting.title || 'Meeting',
               source_date:     meeting.start_time?.split('T')[0] || today,
               project_id:      projectId || null,
               meeting_note_id: meeting.id,
               context:         `Assigned in meeting: ${meeting.title || 'Meeting'}`,
-              ai_extracted:    true,
             })
             othersCount++
           }
