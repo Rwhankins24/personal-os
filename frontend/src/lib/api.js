@@ -54,6 +54,7 @@ export const deleteContact  = (id) => api.delete(`/api/contacts?id=${id}`).then(
 
 // ── Meeting Notes ─────────────────────────────────────────────
 export const getMeetingNotes   = ()         => api.get('/api/meeting-notes').then(r => r.data)
+export const getMeetingNote    = (id)       => api.get(`/api/meeting-notes?id=${id}`).then(r => r.data)
 export const updateMeetingNote = (id, data) => api.patch(`/api/meeting-notes?id=${id}`, data).then(r => r.data)
 
 // ── Captures ──────────────────────────────────────────────────

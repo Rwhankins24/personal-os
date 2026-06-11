@@ -302,8 +302,11 @@ export default function MeetingsPage() {
                   )}
                 </button>
 
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#1a1a18] leading-snug">
+                <div
+                  className="flex-1 min-w-0 cursor-pointer"
+                  onClick={() => navigate(`/meeting/${meeting.id}`)}
+                >
+                  <p className="text-sm font-semibold text-[#1a1a18] leading-snug hover:text-blue-700 transition-colors">
                     {meeting.title || 'Untitled Meeting'}
                   </p>
                   <div className="flex items-center gap-2 mt-1 flex-wrap">

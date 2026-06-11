@@ -1424,7 +1424,13 @@ Respond with JSON only:
         email.full_thread_content || email.body_preview || ''
       )
 
-      const summary = await aiService.summarizeThread(email)
+      // Pre-fetch project context if email is linked to a project
+      const emailProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
+      const projectContext = emailProjectId
+        ? await aiService.buildProjectContext(emailProjectId)
+        : ''
+
+      const summary = await aiService.summarizeThread(email, projectContext)
 
       await supabase
         .from('emails')
@@ -1510,7 +1516,11 @@ Respond with JSON only:
   for (const email of (activeEmails || [])) {
     try {
       const threadHistory = await getThreadHistory(email)
-      const intel = await aiService.extractIntelligence(email, threadHistory, meetingContext)
+      const intelProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
+      const intelProjectContext = intelProjectId
+        ? await aiService.buildProjectContext(intelProjectId)
+        : ''
+      const intel = await aiService.extractIntelligence(email, threadHistory, meetingContext, intelProjectContext)
 
       let projectId = email.project_id ||
         await findProjectByKeywords(email.thread_subject)

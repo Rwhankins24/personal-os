@@ -90,6 +90,49 @@ async function buildRyanContext() {
       ctx += '\n\n'
     }
 
+    // Pull recent meeting summaries — gives AI context about what was discussed
+    const { data: recentMeetings } = await supabase
+      .from('meeting_notes')
+      .select('title, summary, meeting_date, start_time, project_id')
+      .eq('intelligence_extracted', true)
+      .not('summary', 'is', null)
+      .order('meeting_date', { ascending: false })
+      .limit(25)
+
+    // Pull open pending decisions
+    const { data: openDecisions } = await supabase
+      .from('pending_decisions')
+      .select('title, context, project_id, urgency')
+      .eq('status', 'open')
+      .order('created_at', { ascending: false })
+      .limit(20)
+
+    // Pull projects map for linking meeting/decision context
+    const projectMap = {}
+    for (const p of (projects || [])) projectMap[p.id] = p.name
+
+    if (recentMeetings?.length) {
+      ctx += 'RECENT MEETING INTELLIGENCE (summaries from recorded meetings):\n'
+      ctx += recentMeetings.map(m => {
+        const date = (m.meeting_date || m.start_time || '').split('T')[0]
+        const proj = m.project_id && projectMap[m.project_id] ? ` [${projectMap[m.project_id]}]` : ''
+        const summary = (m.summary || '').slice(0, 200)
+        return `- ${date}${proj} — "${m.title}": ${summary}`
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
+    if (openDecisions?.length) {
+      ctx += 'OPEN PENDING DECISIONS (require resolution):\n'
+      ctx += openDecisions.map(d => {
+        const proj = d.project_id && projectMap[d.project_id] ? ` [${projectMap[d.project_id]}]` : ''
+        const urgency = d.urgency ? ` [${d.urgency.toUpperCase()}]` : ''
+        const context = d.context ? ` — ${d.context.slice(0, 120)}` : ''
+        return `- ${d.title}${proj}${urgency}${context}`
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
     // Pull Ryan's answers to AI questions — this is the knowledge accumulation loop.
     // Every answer Ryan types becomes permanent context that shapes all future AI calls.
     const { data: answeredQs } = await supabase
@@ -125,6 +168,168 @@ async function buildRyanContext() {
 async function warmContext() {
   _cachedContext = null // force fresh build
   return buildRyanContext()
+}
+
+// ─── BUILD PROJECT CONTEXT
+// Deep, project-scoped intelligence bundle.
+// Call before any AI operation that relates to a specific project:
+// email summarization, task extraction, meeting analysis, chat queries.
+// Pulls meetings, decisions, risks, others' commitments, email history.
+async function buildProjectContext(projectId) {
+  if (!projectId) return ''
+
+  try {
+    const [
+      { data: project },
+      { data: meetings },
+      { data: decisions },
+      { data: othersCommitments },
+      { data: recentEmails },
+      { data: projectIntel },
+      { data: projectContacts },
+    ] = await Promise.all([
+      supabase
+        .from('projects')
+        .select('name, status, phase, description')
+        .eq('id', projectId)
+        .single(),
+
+      supabase
+        .from('meeting_notes')
+        .select('title, summary, meeting_date, start_time, user_notes')
+        .eq('project_id', projectId)
+        .eq('intelligence_extracted', true)
+        .not('summary', 'is', null)
+        .order('meeting_date', { ascending: false })
+        .limit(12),
+
+      supabase
+        .from('pending_decisions')
+        .select('title, context, urgency, created_at')
+        .eq('project_id', projectId)
+        .eq('status', 'open')
+        .order('created_at', { ascending: false })
+        .limit(15),
+
+      supabase
+        .from('others_commitments')
+        .select('title, assigned_to_name, due_date, urgency, status')
+        .eq('project_id', projectId)
+        .eq('status', 'open')
+        .order('created_at', { ascending: false })
+        .limit(15),
+
+      supabase
+        .from('emails')
+        .select('thread_subject, ai_summary, from_name, received_at')
+        .eq('project_id', projectId)
+        .not('ai_summary', 'is', null)
+        .order('received_at', { ascending: false })
+        .limit(8),
+
+      supabase
+        .from('projects')
+        .select('intelligence_notes, risk_signals, key_facts')
+        .eq('id', projectId)
+        .single(),
+
+      supabase
+        .from('contacts')
+        .select('name, role, company, relationship_tier')
+        .eq('project_id', projectId)
+        .order('last_contact_date', { ascending: false })
+        .limit(10),
+    ])
+
+    if (!project) return ''
+
+    let ctx = `\n\n── PROJECT CONTEXT: ${project.name} ──`
+    if (project.phase) ctx += ` [${project.phase}]`
+    if (project.description) ctx += `\n${project.description.slice(0, 150)}`
+    ctx += '\n'
+
+    if (meetings?.length) {
+      ctx += '\nMEETING HISTORY (most recent first):\n'
+      ctx += meetings.map(m => {
+        const date = (m.meeting_date || m.start_time || '').split('T')[0]
+        let line = `  [${date}] ${m.title}: ${(m.summary || '').slice(0, 200)}`
+        if (m.user_notes) line += `\n    → Ryan's notes: ${m.user_notes.slice(0, 150)}`
+        return line
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    if (decisions?.length) {
+      ctx += '\nOPEN DECISIONS REQUIRING RESOLUTION:\n'
+      ctx += decisions.map(d => {
+        const urgency = d.urgency ? ` [${d.urgency.toUpperCase()}]` : ''
+        const context = d.context ? ` — ${d.context.slice(0, 120)}` : ''
+        return `  - ${d.title}${urgency}${context}`
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    if (othersCommitments?.length) {
+      ctx += '\nOPEN COMMITMENTS FROM OTHERS:\n'
+      ctx += othersCommitments.map(c => {
+        const who = c.assigned_to_name || 'Unknown'
+        const due = c.due_date ? ` (due ${c.due_date})` : ''
+        return `  - ${who}: ${c.title}${due}`
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    if (recentEmails?.length) {
+      ctx += '\nRECENT EMAIL THREADS:\n'
+      ctx += recentEmails.map(e => {
+        const date = (e.received_at || '').split('T')[0]
+        return `  [${date}] ${e.thread_subject} (${e.from_name}): ${(e.ai_summary || '').slice(0, 150)}`
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    // Key risks from accumulated project intelligence
+    const riskSignals = projectIntel?.risk_signals || []
+    if (riskSignals.length) {
+      ctx += '\nKNOWN RISK SIGNALS:\n'
+      ctx += riskSignals.slice(0, 10).map(r => {
+        const severity = r.severity ? ` [${r.severity.toUpperCase()}]` : ''
+        return `  - ${r.signal || r.fact || JSON.stringify(r)}${severity}`
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    // Key facts / intelligence notes accumulated on the project
+    const keyFacts = projectIntel?.key_facts || []
+    if (keyFacts.length) {
+      ctx += '\nACCUMULATED PROJECT INTELLIGENCE:\n'
+      ctx += keyFacts.slice(0, 8).map(f => {
+        const fact = f.fact || f.signal || JSON.stringify(f)
+        const by = f.stated_by ? ` (${f.stated_by})` : ''
+        return `  - ${fact}${by}`
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    if (projectContacts?.length) {
+      ctx += '\nKEY CONTACTS ON THIS PROJECT:\n'
+      ctx += projectContacts.map(c => {
+        let line = `  - ${c.name}`
+        if (c.role) line += `, ${c.role}`
+        if (c.company) line += ` @ ${c.company}`
+        if (c.relationship_tier) line += ` [${c.relationship_tier}]`
+        return line
+      }).join('\n')
+      ctx += '\n'
+    }
+
+    ctx += '── END PROJECT CONTEXT ──\n'
+    return ctx
+
+  } catch (err) {
+    console.log(`[ai.js] Project context build failed for ${projectId}: ${err.message}`)
+    return ''
+  }
 }
 
 // ─── Exponential backoff for API rate limits
@@ -167,7 +372,7 @@ function formatThreadHistoryForAI(history) {
 // ─── SUMMARIZE THREAD
 // Forces specificity — this summary becomes
 // the permanent memory of this thread
-async function summarizeThread(email) {
+async function summarizeThread(email, projectContext = '') {
   const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
@@ -181,7 +386,7 @@ async function summarizeThread(email) {
       max_tokens: 600,
       messages: [{
         role: 'user',
-        content: `${RYAN_CONTEXT}
+        content: `${RYAN_CONTEXT}${projectContext}
 
 Summarize this email thread for future AI reference. This summary becomes the permanent memory of this thread. Future AI runs read this summary — not the original email. Accuracy and specificity are critical.
 
@@ -219,7 +424,7 @@ Return only the summary. No preamble.`
 
 // ─── EXTRACT INTELLIGENCE
 // Extracts all 10 categories of intelligence
-async function extractIntelligence(email, threadHistory = [], meetingContext = '') {
+async function extractIntelligence(email, threadHistory = [], meetingContext = '', projectContext = '') {
   const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
@@ -237,9 +442,9 @@ async function extractIntelligence(email, threadHistory = [], meetingContext = '
       max_tokens: 1500,
       messages: [{
         role: 'user',
-        content: `${RYAN_CONTEXT}
+        content: `${RYAN_CONTEXT}${projectContext}
 
-Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved. Use meeting context to connect email threads to verbal discussions — flag when an email is a follow-up to a meeting commitment or contradicts something said in a meeting.
+Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved. Use meeting context to connect email threads to verbal discussions — flag when an email is a follow-up to a meeting commitment or contradicts something said in a meeting. Use project context to cross-reference against known decisions, open commitments, and risks for this project.
 
 Thread: ${email.thread_subject || email.subject}
 From: ${email.from_name}
@@ -1045,6 +1250,7 @@ Set ai_suggests_complete true only if there is clear evidence the item was compl
 
 module.exports = {
   buildRyanContext,
+  buildProjectContext,
   warmContext,
   withRetry,
   formatThreadHistoryForAI,

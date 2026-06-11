@@ -17,6 +17,7 @@ import ChatPage        from './pages/ChatPage'
 import KnowledgePage   from './pages/KnowledgePage'
 import DecisionsPage  from './pages/DecisionsPage'
 import MeetingsPage   from './pages/MeetingsPage'
+import MeetingDetail  from './pages/MeetingDetail'
 import ChatWidget      from './components/ChatWidget'
 import CaptureButton   from './components/CaptureButton'
 
@@ -123,6 +124,7 @@ export default function App() {
             <Route path="/knowledge"        element={<KnowledgePage />} />
             <Route path="/decisions"        element={<DecisionsPage />} />
             <Route path="/meetings"         element={<MeetingsPage />} />
+            <Route path="/meeting/:id"      element={<MeetingDetail />} />
           </Routes>
           <ChatWidget />
           <CaptureButton />
