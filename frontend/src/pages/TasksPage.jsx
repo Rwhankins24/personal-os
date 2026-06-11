@@ -187,7 +187,13 @@ export default function TasksPage() {
                         <p className="text-xs text-[#6b6b67] mt-0.5 line-clamp-2 leading-snug">{task.context}</p>
                       )}
                       {task.source_label && (
-                        <p className="text-xs text-[#9b9b97] mt-0.5 truncate">↳ {task.source_label}</p>
+                        <p className="text-xs text-[#9b9b97] mt-0.5 truncate">
+                          {task.source_type === 'ai_otter' || task.source_type === 'plaud' || task.source_type === 'ai_plaud'
+                            ? `🎙 ${task.source_label}`
+                            : task.source_type === 'ai_email'
+                            ? `📧 ${task.source_label}`
+                            : `↳ ${task.source_label}`}
+                        </p>
                       )}
                     </div>
 

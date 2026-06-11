@@ -221,7 +221,21 @@ export default function TaskDetail() {
 
               {/* Source label */}
               {task.source_label && (
-                <p className="text-xs text-[#9b9b97] mt-3">Source: {task.source_label}</p>
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <p className="text-xs text-[#6b6b67] uppercase tracking-wide mb-1">Source</p>
+                  <p className="text-sm text-[#1a1a18]">
+                    {task.source_type === 'ai_otter' || task.source_type === 'plaud' || task.source_type === 'ai_plaud'
+                      ? `🎙 ${task.source_label}`
+                      : task.source_type === 'ai_email'
+                      ? `📧 ${task.source_label}`
+                      : task.source_type === 'manual'
+                      ? null
+                      : `↳ ${task.source_label}`}
+                  </p>
+                  {task.source_date && (
+                    <p className="text-xs text-[#9b9b97] mt-0.5">{task.source_date}</p>
+                  )}
+                </div>
               )}
 
               {/* Action buttons */}
