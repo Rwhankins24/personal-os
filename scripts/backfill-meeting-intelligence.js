@@ -131,12 +131,13 @@ async function main() {
         continuity_context: intel.continuity_context || null,
       }
 
-      // Set a better summary if AI produced one and we don't have one yet
-      if (intel.executive_summary && !meeting.summary) {
-        meetingUpdate.summary = intel.executive_summary
+      // Save comprehensive narrative summary from meeting_outcome
+      const narrativeSummary = intel.meeting_outcome?.summary
+      if (narrativeSummary && !meeting.summary) {
+        meetingUpdate.summary = narrativeSummary
       }
-      if (intel.executive_summary && (!meeting.short_summary || meeting.short_summary.length < 50)) {
-        meetingUpdate.short_summary = intel.executive_summary.slice(0, 200)
+      if (narrativeSummary && (!meeting.short_summary || meeting.short_summary.length < 100)) {
+        meetingUpdate.short_summary = narrativeSummary.slice(0, 300)
       }
 
       await supabase.from('meeting_notes').update(meetingUpdate).eq('id', meeting.id)
@@ -183,15 +184,16 @@ async function main() {
             .from('tasks').select('id').eq('title', taskText).eq('status', 'open').maybeSingle()
           if (!existing) {
             await supabase.from('tasks').insert({
-              title:        taskText,
-              context:      `From meeting: ${meeting.title || 'Meeting'}`,
-              status:       'open',
-              source:       meeting.source || 'plaud',
-              source_type:  meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter',
-              source_label: meeting.title || 'Meeting',
-              source_date:  meeting.start_time?.split('T')[0] || today,
-              project_id:   projectId || null,
-              ai_enriched:  true,
+              title:           taskText,
+              context:         `From meeting: ${meeting.title || 'Meeting'}`,
+              status:          'open',
+              source:          meeting.source || 'plaud',
+              source_type:     meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter',
+              source_label:    meeting.title || 'Meeting',
+              source_date:     meeting.start_time?.split('T')[0] || today,
+              project_id:      projectId || null,
+              meeting_note_id: meeting.id,
+              ai_enriched:     true,
             })
             ryanTaskCount++
           }
@@ -225,19 +227,20 @@ async function main() {
 
           if (!existing) {
             await supabase.from('others_commitments').insert({
-              title:              title,
-              person_name:        name,
-              person_email:       item.assigned_to_email || item.committed_by_email || contact?.email || null,
-              contact_id:         contact?.id || null,
-              due_date:           item.due_date || null,
-              urgency:            item.urgency || 'medium',
-              status:             'pending',
-              source:             meeting.source || 'plaud',
-              source_label:       meeting.title || 'Meeting',
-              source_date:        meeting.start_time?.split('T')[0] || today,
-              project_id:         projectId || null,
-              context:            `Assigned in meeting: ${meeting.title || 'Meeting'}`,
-              ai_extracted:       true,
+              title:           title,
+              person_name:     name,
+              person_email:    item.assigned_to_email || item.committed_by_email || contact?.email || null,
+              contact_id:      contact?.id || null,
+              due_date:        item.due_date || null,
+              urgency:         item.urgency || 'medium',
+              status:          'pending',
+              source:          meeting.source || 'plaud',
+              source_label:    meeting.title || 'Meeting',
+              source_date:     meeting.start_time?.split('T')[0] || today,
+              project_id:      projectId || null,
+              meeting_note_id: meeting.id,
+              context:         `Assigned in meeting: ${meeting.title || 'Meeting'}`,
+              ai_extracted:    true,
             })
             othersCount++
           }

@@ -97,19 +97,41 @@ async function findProjectByKeywords(text) {
 
   const textLower = text.toLowerCase()
 
-  for (const project of projects) {
-    const nameParts = project.name.toLowerCase().split(' ')
-    const keywords = [
-      project.name.toLowerCase(),
-      ...nameParts,
-      ...(project.keywords || []).map(k => k.toLowerCase())
-    ].filter(k => k && k.length > 2)
+  let bestMatch = null
+  let bestScore = 0
 
-    if (keywords.some(k => textLower.includes(k))) {
+  for (const project of projects) {
+    const projectNameLower = project.name.toLowerCase()
+
+    // Tier 1: exact project name match — highest confidence
+    if (textLower.includes(projectNameLower)) {
       return project.id
     }
+
+    // Tier 2: score based on keyword matches — require 2+ meaningful hits
+    // Single common words (construction, building, project) are excluded
+    const COMMON_WORDS = new Set([
+      'construction', 'building', 'project', 'meeting', 'update',
+      'call', 'oac', 'weekly', 'review', 'status', 'schedule', 'general'
+    ])
+    const keywords = [
+      ...projectNameLower.split(' ').filter(k => k.length > 3 && !COMMON_WORDS.has(k)),
+      ...(project.keywords || []).map(k => k.toLowerCase()).filter(k => k.length > 3 && !COMMON_WORDS.has(k))
+    ]
+
+    const matchCount = keywords.filter(k => textLower.includes(k)).length
+
+    // Require at least 2 keyword matches, or 1 if it's a long specific keyword (>7 chars)
+    const longKeywordMatch = keywords.some(k => k.length > 7 && textLower.includes(k))
+    const qualifies = matchCount >= 2 || (matchCount >= 1 && longKeywordMatch)
+
+    if (qualifies && matchCount > bestScore) {
+      bestScore = matchCount
+      bestMatch = project.id
+    }
   }
-  return null
+
+  return bestMatch
 }
 
 // ─── LOG AI QUESTION
@@ -3083,14 +3105,22 @@ Be direct and specific. No fluff.`
           console.log(`  ⚠ Continuity context error for ${meeting.title}: ${continuityErr.message}`)
         }
 
-        // Mark meeting as processed
+        // Mark meeting as processed — save summary and outcome fields
+        const meetingFinalUpdate = {
+          intelligence_extracted: true,
+          commitments_extracted:  true,
+          extraction_date:        today,
+        }
+        // Save narrative summary from meeting_outcome (the comprehensive one)
+        if (intel?.meeting_outcome?.summary && !meeting.summary) {
+          meetingFinalUpdate.summary = intel.meeting_outcome.summary
+        }
+        if (intel?.meeting_outcome?.summary && (!meeting.short_summary || meeting.short_summary.length < 100)) {
+          meetingFinalUpdate.short_summary = intel.meeting_outcome.summary.slice(0, 300)
+        }
         await supabase
           .from('meeting_notes')
-          .update({
-            intelligence_extracted: true,
-            commitments_extracted:  true,
-            extraction_date:        today
-          })
+          .update(meetingFinalUpdate)
           .eq('id', meeting.id)
 
         results.otter_meetings_processed++
