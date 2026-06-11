@@ -66,88 +66,89 @@ module.exports = async (req, res) => {
       if (req.query.merge_from) {
         const winnerId = id
         const loserId  = req.query.merge_from
+        console.log(`[merge] winner=${winnerId} loser=${loserId}`)
+
         if (!winnerId || !loserId || winnerId === loserId) {
           return res.status(400).json({ error: 'merge_from and id must be different non-null project ids' })
         }
 
         // 1. Load both projects
-        const [{ data: winner, error: we }, { data: loser, error: le }] = await Promise.all([
-          supabase.from('projects').select('*').eq('id', winnerId).single(),
-          supabase.from('projects').select('*').eq('id', loserId).single(),
-        ])
-        if (we) return res.status(404).json({ error: `Winner project not found: ${we.message}` })
-        if (le) return res.status(404).json({ error: `Loser project not found: ${le.message}` })
+        const { data: winner, error: we } = await supabase
+          .from('projects').select('*').eq('id', winnerId).single()
+        if (we) {
+          console.error('[merge] winner load failed:', we.message)
+          return res.status(404).json({ error: `Winner not found: ${we.message}` })
+        }
 
-        // 2. Merge JSONB arrays (dedupe by JSON string)
+        const { data: loser, error: le } = await supabase
+          .from('projects').select('*').eq('id', loserId).single()
+        if (le) {
+          console.error('[merge] loser load failed:', le.message)
+          return res.status(404).json({ error: `Loser not found: ${le.message}` })
+        }
+        console.log(`[merge] loaded winner="${winner.name}" loser="${loser.name}"`)
+
+        // 2. Merge JSONB arrays safely
+        const safeArray = (v) => Array.isArray(v) ? v : []
         const mergeArrays = (a, b) => {
-          const combined = [...(a || []), ...(b || [])]
+          const combined = [...safeArray(a), ...safeArray(b)]
           const seen = new Set()
           return combined.filter(item => {
-            const key = JSON.stringify(item)
-            if (seen.has(key)) return false
-            seen.add(key)
-            return true
+            try {
+              const key = JSON.stringify(item)
+              if (seen.has(key)) return false
+              seen.add(key)
+              return true
+            } catch (_) { return true }
           })
         }
 
-        const mergedIntel    = mergeArrays(winner.intelligence_notes, loser.intelligence_notes)
-        const mergedDecisions = mergeArrays(winner.decisions_made,     loser.decisions_made)
-        const mergedRisks    = mergeArrays(winner.risk_signals,        loser.risk_signals)
-        const mergedKeyFacts = mergeArrays(winner.key_facts,           loser.key_facts)
+        // 3. Re-point related records (only tables confirmed to have project_id)
+        const tables = ['tasks', 'emails', 'meeting_notes', 'others_commitments',
+                        'commitments', 'events', 'pending_decisions', 'decisions']
+        const repointResults = {}
+        for (const table of tables) {
+          const { error: re, count } = await supabase
+            .from(table)
+            .update({ project_id: winnerId })
+            .eq('project_id', loserId)
+            .select('id', { count: 'exact', head: true })
+          repointResults[table] = re ? `error: ${re.message}` : `ok (${count ?? '?'} rows)`
+          if (re) console.warn(`[merge] repoint ${table}: ${re.message}`)
+        }
+        console.log('[merge] repoint results:', repointResults)
 
-        // 3. Re-point all related records from loser → winner
-        const tables = [
-          'tasks', 'emails', 'meeting_notes', 'others_commitments',
-          'commitments', 'contacts', 'events', 'pending_decisions',
-          'decisions', 'captures', 'knowledge',
-        ]
-        const repoints = tables.map(table =>
-          supabase.from(table).update({ project_id: winnerId }).eq('project_id', loserId)
-        )
-        await Promise.allSettled(repoints)
-
-        // 4. Merge winner keywords
-        const winnerKw = winner.keywords || []
-        const loserKw  = loser.keywords  || []
-        const mergedKw = [...new Set([...winnerKw, ...loserKw])]
-
-        // 5. Update winner with merged data + fill gaps from loser if winner is missing
-        // Only write columns confirmed to exist — avoid writing non-existent columns
-        const enriched = {
-          intelligence_notes: mergedIntel,
-          decisions_made:     mergedDecisions,
-          risk_signals:       mergedRisks,
-          key_facts:          mergedKeyFacts,
+        // 4. Update winner — only JSONB arrays + keywords (safest possible set)
+        const mergedKw = [...new Set([...(winner.keywords || []), ...(loser.keywords || [])])]
+        const winnerUpdate = {
+          intelligence_notes: mergeArrays(winner.intelligence_notes, loser.intelligence_notes),
+          decisions_made:     mergeArrays(winner.decisions_made,     loser.decisions_made),
+          risk_signals:       mergeArrays(winner.risk_signals,       loser.risk_signals),
+          key_facts:          mergeArrays(winner.key_facts,          loser.key_facts),
           keywords:           mergedKw,
-          updated_at:         new Date().toISOString(),
         }
-        // Fill gaps only for columns we know exist (confirmed by ProjectCard + migrations)
-        const fillGap = (col) => {
-          if (!winner[col] && loser[col]) enriched[col] = loser[col]
-        }
-        ;['description', 'client', 'location', 'contract_value', 'current_phase',
-          'delivery_method', 'contract_type', 'type', 'decision_date',
-          'win_probability', 'key_risk', 'est_value'].forEach(fillGap)
+        console.log('[merge] updating winner with keys:', Object.keys(winnerUpdate))
+
         const { data: updated, error: ue } = await supabase
-          .from('projects').update(enriched).eq('id', winnerId).select().single()
+          .from('projects').update(winnerUpdate).eq('id', winnerId).select().single()
         if (ue) {
-          console.error('Merge winner update failed:', ue)
-          console.error('Enriched payload keys:', Object.keys(enriched))
-          return res.status(500).json({ error: `Failed to update winner: ${ue.message}`, detail: ue.details, hint: ue.hint })
+          console.error('[merge] winner update failed:', JSON.stringify(ue))
+          return res.status(500).json({
+            step: 'winner_update',
+            error: ue.message,
+            detail: ue.details,
+            hint: ue.hint,
+            code: ue.code,
+          })
         }
 
-        // 6. Archive loser
-        await supabase.from('projects').update({
-          status:     'archived',
-          updated_at: new Date().toISOString(),
-        }).eq('id', loserId)
+        // 5. Archive loser
+        const { error: ae } = await supabase
+          .from('projects').update({ status: 'archived' }).eq('id', loserId)
+        if (ae) console.warn('[merge] archive loser failed:', ae.message)
 
-        return res.json({
-          merged: true,
-          winner: updated,
-          loser_id: loserId,
-          repointed: tables,
-        })
+        console.log('[merge] complete')
+        return res.json({ merged: true, winner: updated, loser_id: loserId, repointed: repointResults })
       }
 
       // Regular PATCH
