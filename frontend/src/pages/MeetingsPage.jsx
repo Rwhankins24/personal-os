@@ -201,7 +201,15 @@ export default function MeetingsPage() {
       <div className="sticky top-0 z-10 bg-white border-b border-[#e5e5e3] px-4 py-3">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-between mb-3">
-            <h1 className="text-lg font-semibold text-[#1a1a18]">Meetings</h1>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate('/')}
+                className="text-[#6b6b67] hover:text-[#1a1a18] transition-colors"
+              >
+                ←
+              </button>
+              <h1 className="text-lg font-semibold text-[#1a1a18]">Meetings</h1>
+            </div>
             <div className="flex items-center gap-2">
               {selected.size > 0 ? (
                 <>
