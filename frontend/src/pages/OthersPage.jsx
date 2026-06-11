@@ -6,7 +6,8 @@ import { getOthersCommitments, updateOthersCommitment, getContacts, createTask }
 
 function isSpeaker(name) {
   if (!name) return true
-  return /^speaker\s*\d+$/i.test(name.trim()) || name.trim().toLowerCase() === 'unknown'
+  const n = name.trim()
+  return /^speaker\s*\d+\s*[-–]?\s*$/i.test(n) || n.toLowerCase() === 'unknown'
 }
 
 // ── Inline reassign typeahead ──────────────────────────────────
