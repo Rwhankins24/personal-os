@@ -109,3 +109,17 @@ export const extractKnowledgeDoc = (formData) =>
   api.post('/api/knowledge?action=extract', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then(r => r.data)
+
+// ── Topic Intelligence Pods ───────────────────────────────────
+export const getTopicPods      = (status = 'active') => api.get(`/api/topic-pods?status=${status}`).then(r => r.data)
+export const getTopicPod       = (id) => api.get(`/api/topic-pods/${id}`).then(r => r.data)
+export const createTopicPod    = (data) => api.post('/api/topic-pods', data).then(r => r.data)
+export const updateTopicPod    = (id, data) => api.patch(`/api/topic-pods?id=${id}`, data).then(r => r.data)
+export const deleteTopicPod    = (id) => api.delete(`/api/topic-pods?id=${id}`).then(r => r.data)
+export const getPodContent     = (id) => api.get(`/api/topic-pods/${id}/content`).then(r => r.data)
+export const addPodText        = (id, data) => api.post(`/api/topic-pods/${id}/content`, data).then(r => r.data)
+export const addPodFile        = (id, formData) => api.post(`/api/topic-pods/${id}/content`, formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+}).then(r => r.data)
+export const deletePodContent  = (podId, contentId) => api.delete(`/api/topic-pods/${podId}/content/${contentId}`).then(r => r.data)
+export const synthesizePod     = (id) => api.post(`/api/topic-pods/${id}/synthesize`).then(r => r.data)

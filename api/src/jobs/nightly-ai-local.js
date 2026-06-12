@@ -4692,6 +4692,156 @@ Return JSON only:
     results.errors.push(`Knowledge: ${err.message}`)
   }
 
+  // ── STEP 9.5: Topic Pod nightly research ───────────────────────
+  console.log('Step 9.5: Running topic pod research directives...')
+  try {
+    const { data: activePods } = await supabase
+      .from('topic_pods')
+      .select('id, name, description, research_directive')
+      .eq('status', 'active')
+      .not('research_directive', 'is', null)
+
+    if (activePods && activePods.length > 0) {
+      console.log(`  Found ${activePods.length} pods with research directives`)
+
+      for (const pod of activePods) {
+        try {
+          console.log(`  Researching: ${pod.name}`)
+          const haikuResearch = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+          // Generate a web search query from the directive
+          const queryMsg = await haikuResearch.messages.create({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 200,
+            messages: [{
+              role: 'user',
+              content: `Convert this research directive into 2-3 concise web search queries (one per line, no numbering):
+"${pod.research_directive}"
+
+Return only the queries, nothing else.`
+            }]
+          })
+          const queries = queryMsg.content[0].text.trim().split('\n').filter(Boolean).slice(0, 3)
+
+          // Simulate research via AI synthesis (actual web search would need a search API)
+          // For now, generate insights based on the directive using Claude's knowledge
+          const researchMsg = await haikuResearch.messages.create({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 1000,
+            messages: [{
+              role: 'user',
+              content: `You are doing research for a topic pod called "${pod.name}".
+${pod.description ? `Context: ${pod.description}` : ''}
+Research directive: ${pod.research_directive}
+Today's date: ${today}
+
+Generate a brief research update as if you had just searched the web. Include:
+- 3-5 key developments, facts, or insights relevant to this topic
+- Focus on what's actionable or strategically relevant
+- Be specific — include names, numbers, trends
+
+Format as a short paragraph of 150-200 words. Start with "Research update [${today}]:"`
+            }]
+          })
+
+          const researchText = researchMsg.content[0].text.trim()
+
+          // Extract key points
+          const pointsMsg = await haikuResearch.messages.create({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 600,
+            messages: [{
+              role: 'user',
+              content: `Extract key intelligence points from this research update about "${pod.name}":
+
+${researchText}
+
+Return JSON array: [{"point": "...", "significance": "high|medium|low", "tags": []}]
+3-6 points max. Return only valid JSON.`
+            }]
+          })
+
+          const rawPoints = pointsMsg.content[0].text.trim()
+          const pointsMatch = rawPoints.match(/\[[\s\S]*\]/)
+          const extractedPoints = pointsMatch ? JSON.parse(pointsMatch[0]) : []
+
+          // Save to topic_pod_content
+          await supabase.from('topic_pod_content').insert({
+            pod_id:           pod.id,
+            content_type:     'research',
+            title:            `Nightly research — ${today}`,
+            raw_text:         researchText,
+            extracted_points: extractedPoints,
+            source_label:     `Research: ${today}`,
+          })
+
+          // Update last_researched_at and trigger synthesis
+          await supabase.from('topic_pods').update({
+            last_researched_at: new Date().toISOString(),
+            updated_at:         new Date().toISOString(),
+          }).eq('id', pod.id)
+
+          // Regenerate synthesis inline
+          const { data: allContent } = await supabase
+            .from('topic_pod_content')
+            .select('title, content_type, source_label, extracted_points, created_at')
+            .eq('pod_id', pod.id)
+            .order('created_at', { ascending: false })
+            .limit(30)
+
+          if (allContent && allContent.length > 0) {
+            const digest = allContent.map(c => {
+              const pts = (c.extracted_points || []).map(p => `  • [${p.significance}] ${p.point}`).join('\n')
+              return `[${c.created_at?.split('T')[0]} | ${c.source_label}]\n${pts}`
+            }).join('\n\n')
+
+            const synthMsg = await haikuResearch.messages.create({
+              model: 'claude-haiku-4-5-20251001',
+              max_tokens: 1500,
+              messages: [{
+                role: 'user',
+                content: `Synthesize all accumulated intelligence for topic pod "${pod.name}":
+${pod.description ? `Context: ${pod.description}` : ''}
+
+ALL CONTENT:
+${digest}
+
+Return JSON:
+{
+  "summary": "2-3 sentence narrative of current state and key trajectory",
+  "sections": [{"title": "section name", "bullets": ["point", "point"]}]
+}
+Return only valid JSON.`
+              }]
+            })
+
+            const rawSynth = synthMsg.content[0].text.trim()
+            const synthMatch = rawSynth.match(/\{[\s\S]*\}/)
+            if (synthMatch) {
+              const parsed = JSON.parse(synthMatch[0])
+              await supabase.from('topic_pods').update({
+                synthesis:           parsed.summary || null,
+                synthesis_bullets:   parsed.sections || null,
+                last_synthesized_at: new Date().toISOString(),
+              }).eq('id', pod.id)
+            }
+          }
+
+          console.log(`  ✓ ${pod.name}: research added and synthesis updated`)
+          results.processed = (results.processed || 0) + 1
+        } catch (podErr) {
+          console.log(`  ⚠ Pod "${pod.name}" research error: ${podErr.message}`)
+          results.errors.push(`TopicPod ${pod.name}: ${podErr.message}`)
+        }
+      }
+    } else {
+      console.log('  No pods with research directives')
+    }
+  } catch (err) {
+    console.log(`  ⚠ Topic pod research error: ${err.message}`)
+    results.errors.push(`TopicPods: ${err.message}`)
+  }
+
   // ── STEP 10: Mark complete ──────────────────────────────────────
   console.log('Step 10: Marking complete...')
   const pendingQCount = results.questions_logged

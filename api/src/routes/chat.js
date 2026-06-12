@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
     // ── Parallel context fetch ────────────────────────────────────────
     const [
       knowledge,
+      topicPods,
       meetingNotes,
       emails,
       contacts,
@@ -53,6 +54,16 @@ module.exports = async (req, res) => {
         .eq('status', 'active')
         .order('updated_at', { ascending: false })
         .limit(40)
+        .then(r => r.data || []),
+
+      // Topic intelligence pods — include synthesis for relevant pods
+      supabase
+        .from('topic_pods')
+        .select('id, name, description, synthesis, synthesis_bullets, last_synthesized_at, content_count')
+        .eq('status', 'active')
+        .not('synthesis', 'is', null)
+        .order('updated_at', { ascending: false })
+        .limit(20)
         .then(r => r.data || []),
 
       // Meeting notes — full summary + transcript for deep context
@@ -214,12 +225,31 @@ module.exports = async (req, res) => {
       k => `${k.topic} ${k.category} ${k.context} ${k.resolution} ${k.our_position || ''} ${k.client_asks || ''} ${(k.applies_to || []).join(' ')} ${(k.project_refs || []).join(' ')}`,
       0)
 
+    const relTopicPods = filterRelevant(topicPods,
+      p => `${p.name} ${p.description || ''} ${p.synthesis || ''}`,
+      0)
+
     // ── Build context string ─────────────────────────────────────────
     const sections = []
 
     // Project intelligence goes FIRST — pre-computed rich narrative
     if (projectIntelSection) {
       sections.push(projectIntelSection)
+    }
+
+    if (relTopicPods.length) {
+      sections.push("=== TOPIC INTELLIGENCE PODS ===")
+      relTopicPods.forEach(p => {
+        const parts = [`[Topic Pod: ${p.name}] ${p.content_count || 0} items accumulated`]
+        if (p.description)  parts.push(`About: ${p.description}`)
+        if (p.synthesis)    parts.push(`Summary: ${p.synthesis.slice(0, 600)}`)
+        if ((p.synthesis_bullets || []).length) {
+          p.synthesis_bullets.slice(0, 3).forEach(s => {
+            parts.push(`${s.title}: ${(s.bullets || []).slice(0, 3).join(' | ')}`)
+          })
+        }
+        sections.push(parts.join('\n'))
+      })
     }
 
     if (relKnowledge.length) {

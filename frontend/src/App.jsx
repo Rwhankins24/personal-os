@@ -15,6 +15,7 @@ import OthersPage      from './pages/OthersPage'
 import CommitmentsPage from './pages/CommitmentsPage'
 import ChatPage        from './pages/ChatPage'
 import KnowledgePage   from './pages/KnowledgePage'
+import TopicsPage      from './pages/TopicsPage'
 import DecisionsPage  from './pages/DecisionsPage'
 import MeetingsPage   from './pages/MeetingsPage'
 import MeetingDetail  from './pages/MeetingDetail'
@@ -122,6 +123,7 @@ export default function App() {
             <Route path="/commitments-list" element={<CommitmentsPage />} />
             <Route path="/chat"             element={<ChatPage />} />
             <Route path="/knowledge"        element={<KnowledgePage />} />
+            <Route path="/topics"           element={<TopicsPage />} />
             <Route path="/decisions"        element={<DecisionsPage />} />
             <Route path="/meetings"         element={<MeetingsPage />} />
             <Route path="/meeting/:id"      element={<MeetingDetail />} />

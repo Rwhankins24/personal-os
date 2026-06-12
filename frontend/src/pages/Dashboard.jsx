@@ -1798,6 +1798,12 @@ export default function Dashboard() {
                 </span>
               )}
             </Link>
+            <Link
+              to="/topics"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Topics
+            </Link>
             <AIJobButton />
           </div>
           <div className="text-right">
