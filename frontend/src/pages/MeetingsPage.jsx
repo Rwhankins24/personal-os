@@ -3,7 +3,12 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
-import { getMeetingNotes, updateMeetingNote, getProjects, createProject } from '../lib/api'
+import {
+  getMeetingNotes, updateMeetingNote, getProjects, createProject,
+  getTasks, updateTask, createTask,
+  getOthersCommitments, updateOthersCommitment, createOthersCommitment,
+} from '../lib/api'
+import MeetingSummary from '../components/MeetingSummary'
 
 dayjs.extend(duration)
 
@@ -42,6 +47,7 @@ export default function MeetingsPage() {
   const [selected,    setSelected]    = useState(new Set())
   const [bulkProject, setBulkProject] = useState('')
   const [bulkSaving,  setBulkSaving]  = useState(false)
+  const [expandedId,  setExpandedId]  = useState(null)  // inline-expanded meeting card
 
   // Create project modal state
   const [showCreateProject, setShowCreateProject] = useState(false)
@@ -56,6 +62,15 @@ export default function MeetingsPage() {
   const { data: projects = [] } = useQuery({
     queryKey: ['projects'],
     queryFn:  getProjects,
+  })
+  // Load tasks + others_commitments so we can show/reconcile meeting items inline
+  const { data: allTasks = [] } = useQuery({
+    queryKey: ['tasks'],
+    queryFn:  getTasks,
+  })
+  const { data: allOthers = [] } = useQuery({
+    queryKey: ['others-commitments-all'],
+    queryFn:  () => getOthersCommitments('all'),
   })
 
   const update = useMutation({
@@ -81,6 +96,26 @@ export default function MeetingsPage() {
 
   const selectAll  = () => setSelected(new Set(filtered.map(m => m.id)))
   const clearAll   = () => setSelected(new Set())
+
+  // ── Inline task / others reconciliation ─────────────────────
+  const markTaskDone = async (id) => {
+    await updateTask(id, { status: 'done' })
+    qc.setQueryData(['tasks'], old => (old || []).map(t => t.id === id ? { ...t, status: 'done' } : t))
+  }
+  const markOtherDone = async (id) => {
+    await updateOthersCommitment(id, { status: 'closed' })
+    qc.setQueryData(['others-commitments-all'], old => (old || []).map(c => c.id === id ? { ...c, status: 'closed' } : c))
+  }
+  // Push an extracted (un-persisted) item into tasks, then mark it done
+  const pushTaskDone = async (meetingId, title) => {
+    const t = await createTask({ title, status: 'done', source_type: 'meeting', meeting_note_id: meetingId })
+    qc.setQueryData(['tasks'], old => [...(old || []), t])
+  }
+  // Push an extracted others item into others_commitments, then mark closed
+  const pushOtherDone = async (meetingId, title, person) => {
+    const c = await createOthersCommitment({ title, committed_by_name: person, status: 'closed', source_type: 'meeting', meeting_note_id: meetingId })
+    qc.setQueryData(['others-commitments-all'], old => [...(old || []), c])
+  }
 
   const bulkAssign = async () => {
     if (!bulkProject || selected.size === 0) return
@@ -275,18 +310,35 @@ export default function MeetingsPage() {
           const isEditing    = editing === meeting.id
           const isSelected   = selected.has(meeting.id)
           const dur          = getMeetingDuration(meeting)
+          const isExpanded   = expandedId === meeting.id
+
+          // Pull DB records linked to this meeting
+          const meetingTasks   = allTasks.filter(t => t.meeting_note_id === meeting.id)
+          const meetingOthers  = allOthers.filter(c => c.meeting_note_id === meeting.id)
+
+          // Fall back to extracted_intelligence arrays if no DB records exist
+          const intel      = meeting.extracted_intelligence || {}
+          const exTasks    = intel.my_action_items   || []
+          const exOthers   = intel.others_commitments || []
+          const decisions  = intel.decisions          || intel.key_decisions || []
+          const risks      = intel.risk_signals       || []
+
+          // Use DB records when available; else extracted items (for "push+done" flow)
+          const showDbTasks   = meetingTasks.length  > 0
+          const showDbOthers  = meetingOthers.length > 0
 
           return (
             <div
               key={meeting.id}
               className={`bg-white border rounded-2xl transition-colors ${
-                isSelected ? 'border-blue-300 bg-blue-50/30' : 'border-[#e5e5e3]'
+                isSelected   ? 'border-blue-300 bg-blue-50/30' :
+                isExpanded   ? 'border-[#C9A84C]/50 shadow-sm'  : 'border-[#e5e5e3]'
               }`}
             >
               {/* Main clickable area */}
               <div
                 className="p-4 cursor-pointer"
-                onClick={() => navigate(`/meeting/${meeting.id}`)}
+                onClick={() => setExpandedId(isExpanded ? null : meeting.id)}
               >
                 {/* Top row: checkbox + title + project */}
                 <div className="flex items-start gap-3">
@@ -375,16 +427,187 @@ export default function MeetingsPage() {
                   </div>
                 </div>
 
-                {/* Summary — only show if intelligence extracted (real AI summary, not raw transcript) */}
-                {meeting.intelligence_extracted && (meeting.summary || meeting.short_summary) && (
-                  <p className="text-xs text-[#6b6b67] mt-2.5 ml-7 leading-relaxed line-clamp-2">
+                {/* Collapsed hint — show first line of summary */}
+                {!isExpanded && (meeting.summary || meeting.short_summary) && (
+                  <p className="text-xs text-[#6b6b67] mt-2 ml-7 leading-relaxed line-clamp-1">
                     {(meeting.summary || meeting.short_summary || '')
-                      .replace(/^#+\s*/gm, '')   // strip ## heading markers
-                      .replace(/\n+/g, ' ')        // collapse newlines to spaces
-                      .trim()}
+                      .replace(/^#+\s*/gm, '').replace(/\*\*/g, '').replace(/\n+/g, ' ').trim()}
                   </p>
                 )}
               </div>
+
+              {/* ── Full inline expansion ────────────────────────── */}
+              {isExpanded && (
+                <div className="border-t border-[#f0f0ee] px-4 pt-4 pb-5 space-y-5">
+
+                  {/* Attendees */}
+                  {(meeting.participants || []).length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Attendees</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {meeting.participants.slice(0, 15).map((p, i) => (
+                          <span key={i} className="text-xs bg-[#f0f0ee] text-[#1a1a18] px-2 py-0.5 rounded-full">{p}</span>
+                        ))}
+                        {meeting.participants.length > 15 && (
+                          <span className="text-xs text-[#9b9b97]">+{meeting.participants.length - 15} more</span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Full summary */}
+                  {(meeting.summary || meeting.short_summary) && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Summary</p>
+                      <MeetingSummary text={meeting.summary || meeting.short_summary} />
+                    </div>
+                  )}
+
+                  {/* My action items */}
+                  {(showDbTasks ? meetingTasks : exTasks).length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">My Actions</p>
+                      <div className="space-y-1.5">
+                        {showDbTasks ? meetingTasks.map(t => (
+                          <div key={t.id} className="flex items-start gap-2.5">
+                            <button
+                              onClick={() => markTaskDone(t.id)}
+                              disabled={t.status === 'done'}
+                              className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                                t.status === 'done'
+                                  ? 'bg-green-500 border-green-500'
+                                  : 'border-[#d0d0cc] hover:border-green-500'
+                              }`}
+                              title={t.status === 'done' ? 'Done' : 'Mark done'}
+                            >
+                              {t.status === 'done' && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
+                                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              )}
+                            </button>
+                            <span className={`text-sm leading-snug ${t.status === 'done' ? 'line-through text-[#9b9b97]' : 'text-[#1a1a18]'}`}>
+                              {t.title}
+                              {t.due_date && <span className="text-xs text-[#9b9b97] ml-1.5">due {dayjs(t.due_date).format('MMM D')}</span>}
+                            </span>
+                          </div>
+                        )) : exTasks.map((t, i) => {
+                          const title = typeof t === 'string' ? t : (t.title || t.description || JSON.stringify(t))
+                          return (
+                            <div key={i} className="flex items-start gap-2.5">
+                              <button
+                                onClick={() => pushTaskDone(meeting.id, title)}
+                                className="flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 border-[#d0d0cc] hover:border-green-500 flex items-center justify-center transition-colors"
+                                title="Mark done + save to tasks"
+                              />
+                              <span className="text-sm text-[#1a1a18] leading-snug">{title}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Others' commitments */}
+                  {(showDbOthers ? meetingOthers : exOthers).length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Others' Commitments</p>
+                      <div className="space-y-1.5">
+                        {showDbOthers ? meetingOthers.map(c => (
+                          <div key={c.id} className="flex items-start gap-2.5">
+                            <button
+                              onClick={() => markOtherDone(c.id)}
+                              disabled={c.status === 'closed'}
+                              className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                                c.status === 'closed'
+                                  ? 'bg-green-500 border-green-500'
+                                  : 'border-[#d0d0cc] hover:border-green-500'
+                              }`}
+                              title={c.status === 'closed' ? 'Closed' : 'Mark closed'}
+                            >
+                              {c.status === 'closed' && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
+                                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              )}
+                            </button>
+                            <span className={`text-sm leading-snug ${c.status === 'closed' ? 'line-through text-[#9b9b97]' : 'text-[#1a1a18]'}`}>
+                              {c.committed_by_name && <span className="font-medium text-[#1B2A4A]">{c.committed_by_name}: </span>}
+                              {c.title}
+                            </span>
+                          </div>
+                        )) : exOthers.map((c, i) => {
+                          const title  = typeof c === 'string' ? c : (c.title || c.description || JSON.stringify(c))
+                          const person = typeof c === 'object' ? (c.person || c.committed_by || c.committed_by_name || '') : ''
+                          return (
+                            <div key={i} className="flex items-start gap-2.5">
+                              <button
+                                onClick={() => pushOtherDone(meeting.id, title, person)}
+                                className="flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 border-[#d0d0cc] hover:border-green-500 flex items-center justify-center transition-colors"
+                                title="Mark done + save"
+                              />
+                              <span className="text-sm text-[#1a1a18] leading-snug">
+                                {person && <span className="font-medium text-[#1B2A4A]">{person}: </span>}
+                                {title}
+                              </span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Key decisions */}
+                  {decisions.length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Key Decisions</p>
+                      <div className="space-y-1">
+                        {decisions.map((d, i) => {
+                          const text = typeof d === 'string' ? d : (d.decision || d.title || d.description || JSON.stringify(d))
+                          return (
+                            <div key={i} className="flex items-start gap-2">
+                              <span className="text-[#C9A84C] text-xs mt-0.5 flex-shrink-0">▸</span>
+                              <span className="text-sm text-[#1a1a18] leading-snug">{text}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Risk signals */}
+                  {risks.length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Risk Signals</p>
+                      <div className="space-y-1">
+                        {risks.map((r, i) => {
+                          const text = typeof r === 'string' ? r : (r.description || r.risk || r.title || JSON.stringify(r))
+                          return (
+                            <div key={i} className="flex items-start gap-2">
+                              <span className="text-red-400 text-xs mt-0.5 flex-shrink-0">⚠</span>
+                              <span className="text-sm text-[#1a1a18] leading-snug">{text}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Footer: view full detail */}
+                  <div className="flex items-center justify-between pt-1 border-t border-[#f0f0ee]">
+                    <span className="text-xs text-[#9b9b97]">
+                      {meetingTasks.filter(t => t.status === 'done').length}/{meetingTasks.length || exTasks.length} tasks done
+                      {meetingOthers.length > 0 && ` · ${meetingOthers.filter(c => c.status === 'closed').length}/${meetingOthers.length} others closed`}
+                    </span>
+                    <button
+                      onClick={() => navigate(`/meeting/${meeting.id}`)}
+                      className="text-xs text-[#1B2A4A] font-medium hover:underline"
+                    >
+                      View full detail →
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )
         })}

@@ -22,6 +22,7 @@ import {
   generatePreMeetingBrief,
 } from '../lib/api'
 import SyncButton from '../components/SyncButton'
+import MeetingSummary from '../components/MeetingSummary'
 
 dayjs.extend(relativeTime)
 
@@ -1733,10 +1734,20 @@ export default function Dashboard() {
   const { data: contacts }   = useQuery({ queryKey: ['contacts'],    queryFn: getContacts,     refetchInterval: 300000 })
   const { data: decisions }  = useQuery({ queryKey: ['pending-decisions'], queryFn: getPendingDecisions, refetchInterval: 300000 })
   const { data: questions }  = useQuery({ queryKey: ['ai-questions'],      queryFn: getAIQuestions,     refetchInterval: 300000 })
-  const { data: meetingNotes = [] } = useQuery({
+  const { data: meetingNotesRaw = [] } = useQuery({
     queryKey: ['meeting-notes'],
     queryFn: () => getMeetingNotes(),
     refetchInterval: 300000
+  })
+  // Only show meetings from the last 14 days on the dashboard
+  const meetingNotes = meetingNotesRaw.filter(m => {
+    const d = m.start_time || m.meeting_date
+    if (!d) return false
+    return dayjs(d).isAfter(dayjs().subtract(14, 'day'))
+  }).sort((a, b) => {
+    const da = a.start_time || a.meeting_date || ''
+    const db = b.start_time || b.meeting_date || ''
+    return db.localeCompare(da)
   })
 
   const { data: proposedKnowledge = [] } = useQuery({
@@ -1878,62 +1889,86 @@ export default function Dashboard() {
                 const participantCount = (m.participants || []).length
                 const ryanItems = (m.action_items_raw || []).filter(a => a.is_ryan_item || a.assignee_email === 'hankinsr@claycorp.com')
                 const othersItems = (m.action_items_raw || []).filter(a => !a.is_ryan_item && a.assignee_email !== 'hankinsr@claycorp.com')
-                const summaryPreview = m.short_summary ? m.short_summary.slice(0, 100) + (m.short_summary.length > 100 ? '...' : '') : ''
+                // Clean 2-3 line summary: strip markdown markers, collapse to sentences
+                const rawSummary = m.summary || m.short_summary || ''
+                const cleanSummary = rawSummary
+                  .replace(/^#+\s*/gm, '')
+                  .replace(/\*\*/g, '')
+                  .replace(/\n+/g, ' ')
+                  .trim()
+                  .slice(0, 200) + (rawSummary.length > 200 ? '…' : '')
+
+                // Ryan's action items — from extracted tasks (preferred) or action_items_raw fallback
+                const myTasks = (m.action_items_raw || [])
+                  .filter(a => a.is_ryan_item || (a.assignee_email || '').includes('hankinsr'))
+                  .slice(0, 5)
+
                 return (
                   <div
                     key={m.otter_id}
                     className="border border-[#e5e5e3] rounded-xl p-3 cursor-pointer hover:bg-[#f8f8f6] transition-colors"
                     onClick={() => setExpandedMeeting(isExpanded ? null : m.otter_id)}
                   >
+                    {/* Title + date */}
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-[#1a1a18] truncate flex-1 mr-2">{m.title || 'Untitled meeting'}</span>
                       <span className="text-xs text-[#9b9b97] shrink-0">{dateStr}</span>
                     </div>
-                    <div className="flex items-center gap-2 mt-1">
-                      {m.duration_raw && <span className="text-xs text-[#6b6b67]">{m.duration_raw}</span>}
-                      {participantCount > 0 && <span className="text-xs text-[#9b9b97]">{participantCount} attendees</span>}
-                    </div>
-                    {!isExpanded && summaryPreview && (
-                      <p className="text-xs text-[#6b6b67] mt-1 leading-relaxed">{summaryPreview}</p>
+
+                    {/* Collapsed: clean summary snippet */}
+                    {!isExpanded && cleanSummary && (
+                      <p className="text-xs text-[#6b6b67] mt-1 leading-relaxed">{cleanSummary}</p>
                     )}
+
+                    {/* Expanded */}
                     {isExpanded && (
-                      <div className="mt-2 space-y-2">
-                        {m.short_summary && (
-                          <p className="text-xs text-[#6b6b67] leading-relaxed">{m.short_summary.slice(0, 400)}{m.short_summary.length > 400 ? '...' : ''}</p>
-                        )}
+                      <div className="mt-3 space-y-3" onClick={e => e.stopPropagation()}>
+
+                        {/* Attendees — max 10 */}
                         {(m.participants || []).length > 0 && (
-                          <p className="text-xs text-[#9b9b97]">
-                            <span className="font-medium text-[#6b6b67]">Participants: </span>
-                            {(m.participants || []).slice(0, 8).join(', ')}
-                            {(m.participants || []).length > 8 ? ` +${(m.participants || []).length - 8} more` : ''}
-                          </p>
-                        )}
-                        {ryanItems.length > 0 && (
                           <div>
-                            <p className="text-xs font-medium text-[#3b82f6] mb-1">My action items</p>
-                            <ul className="space-y-0.5">
-                              {ryanItems.slice(0, 5).map((item, i) => (
-                                <li key={i} className="text-xs text-[#3b82f6]">- {item.task_text}</li>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">Attendees</p>
+                            <div className="flex flex-wrap gap-1">
+                              {(m.participants || []).slice(0, 10).map((p, i) => (
+                                <span key={i} className="text-[10px] bg-gray-100 text-[#4a4a48] px-2 py-0.5 rounded-full">{p}</span>
+                              ))}
+                              {(m.participants || []).length > 10 && (
+                                <span className="text-[10px] text-[#9b9b97]">+{(m.participants || []).length - 10} more</span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Summary — 2-3 lines */}
+                        {cleanSummary && (
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">Summary</p>
+                            <p className="text-xs text-[#1a1a18] leading-relaxed">{cleanSummary}</p>
+                          </div>
+                        )}
+
+                        {/* My action items */}
+                        {myTasks.length > 0 && (
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">My Action Items</p>
+                            <ul className="space-y-1">
+                              {myTasks.map((item, i) => (
+                                <li key={i} className="flex items-start gap-1.5 text-xs text-[#1a1a18]">
+                                  <span className="text-[#C9A84C] shrink-0 mt-0.5">▸</span>
+                                  <span>{item.task_text}</span>
+                                </li>
                               ))}
                             </ul>
                           </div>
                         )}
-                        {othersItems.length > 0 && (
-                          <div>
-                            <p className="text-xs font-medium text-[#6b6b67] mb-1">Others action items</p>
-                            <ul className="space-y-0.5">
-                              {othersItems.slice(0, 5).map((item, i) => (
-                                <li key={i} className="text-xs text-[#9b9b97]">- {item.assignee_name}: {item.task_text}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        {m.continuity_context && (
-                          <div className="border-t border-[#e5e5e3] pt-2 mt-2">
-                            <p className="text-xs font-medium text-[#9b9b97] mb-1">Recurring context:</p>
-                            <p className="text-xs text-[#6b6b67] leading-relaxed italic">{m.continuity_context.slice(0, 400)}{m.continuity_context.length > 400 ? '...' : ''}</p>
-                          </div>
-                        )}
+
+                        {/* View full */}
+                        <button
+                          onClick={() => navigate(`/meeting/${m.id}`)}
+                          className="text-xs text-blue-600 hover:underline font-medium pt-1 border-t border-[#f0f0ee] w-full text-left"
+                        >
+                          View full detail →
+                        </button>
                       </div>
                     )}
                   </div>

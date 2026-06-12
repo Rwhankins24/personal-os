@@ -19,11 +19,17 @@ module.exports = async (req, res) => {
       const { status } = req.query
       const filterStatus = status || 'open'
 
-      const { data, error } = await supabase
+      let query = supabase
         .from('others_commitments')
         .select('*')
-        .eq('status', filterStatus)
         .order('due_date', { ascending: true, nullsLast: true })
+
+      // 'all' = no status filter (used by meeting card inline view)
+      if (filterStatus !== 'all') {
+        query = query.eq('status', filterStatus)
+      }
+
+      const { data, error } = await query
 
       if (error) throw error
 

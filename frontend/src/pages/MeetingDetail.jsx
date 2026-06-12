@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getMeetingNote, updateMeetingNote, getProjects, createTask } from '../lib/api'
+import MeetingSummary from '../components/MeetingSummary'
 
 const URGENCY_COLOR = {
   critical: 'bg-red-50 text-red-700 border-red-200',
@@ -205,45 +206,8 @@ export default function MeetingDetail() {
         {/* ── Summary ────────────────────────────────────────────── */}
         {(meeting.summary || meeting.short_summary) && (
           <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2A4A] mb-2">Summary</p>
-            {(() => {
-              const raw = meeting.summary || meeting.short_summary || ''
-              const lines = raw.split('\n').map(l => l.trim()).filter(Boolean)
-              const hasStructure = lines.some(l => l.startsWith('##') || l.startsWith('•') || l.startsWith('-'))
-              if (!hasStructure) {
-                return <p className="text-sm text-[#1a1a18] leading-relaxed whitespace-pre-wrap">{raw}</p>
-              }
-              const sections = []
-              let current = null
-              for (const line of lines) {
-                if (line.startsWith('##')) {
-                  current = { heading: line.replace(/^##\s*/, ''), bullets: [] }
-                  sections.push(current)
-                } else if (line.startsWith('•') || line.startsWith('-')) {
-                  if (!current) { current = { heading: null, bullets: [] }; sections.push(current) }
-                  current.bullets.push(line.replace(/^[•\-]\s*/, ''))
-                }
-              }
-              return (
-                <div className="space-y-3">
-                  {sections.map((s, i) => (
-                    <div key={i}>
-                      {s.heading && (
-                        <p className="text-xs font-semibold uppercase tracking-wide text-[#6b6b67] mb-1">{s.heading}</p>
-                      )}
-                      <ul className="space-y-1">
-                        {s.bullets.map((b, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm text-[#1a1a18]">
-                            <span className="text-[#C9A84C] mt-0.5 shrink-0 text-xs">▸</span>
-                            <span className="leading-relaxed">{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )
-            })()}
+            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2A4A] mb-3">Summary</p>
+            <MeetingSummary text={meeting.summary || meeting.short_summary} />
           </div>
         )}
 
