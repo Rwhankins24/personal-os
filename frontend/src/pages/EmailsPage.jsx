@@ -508,8 +508,8 @@ export default function EmailsPage() {
 
       {/* ── Assign to contact modal ── */}
       {showAssign && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 pb-0">
-          <div className="bg-white w-full max-w-lg rounded-t-2xl max-h-[70vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="bg-white w-full max-w-lg rounded-2xl max-h-[70vh] flex flex-col">
             <div className="px-4 pt-4 pb-2 border-b border-[#e5e5e3]">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-sm font-semibold text-[#1a1a18]">

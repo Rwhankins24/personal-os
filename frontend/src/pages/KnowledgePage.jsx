@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge,
-  extractKnowledgeDoc, getProjects,
+  extractKnowledgeDoc, extractKnowledgeText, getProjects,
 } from '../lib/api'
 
 // ── Category config ────────────────────────────────────────────
@@ -60,19 +60,34 @@ function ProjectSelect({ value, onChange, projects, placeholder = '— None —'
   )
 }
 
-// ── Extract modal — project picker + file upload ───────────────
+// ── Extract modal — paste or upload, with project picker ───────
 function ExtractModal({ projects, onClose, onExtracted }) {
+  const [tab,        setTab]        = useState('paste') // 'paste' | 'upload'
   const [projectId,  setProjectId]  = useState(null)
+  const [pasteText,  setPasteText]  = useState('')
   const [extracting, setExtracting] = useState(false)
   const [error,      setError]      = useState(null)
   const fileRef = useRef(null)
+
+  const handlePaste = async () => {
+    if (!pasteText.trim()) return
+    setError(null); setExtracting(true)
+    try {
+      const result = await extractKnowledgeText({ text: pasteText, project_id: projectId || undefined })
+      onExtracted(result, projectId)
+      onClose()
+    } catch (err) {
+      setError(err?.response?.data?.error || err.message)
+    } finally {
+      setExtracting(false)
+    }
+  }
 
   const handleFile = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
     e.target.value = ''
-    setError(null)
-    setExtracting(true)
+    setError(null); setExtracting(true)
     try {
       const fd = new FormData()
       fd.append('file', file)
@@ -88,17 +103,28 @@ function ExtractModal({ projects, onClose, onExtracted }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
       <div
-        className="w-full max-w-md bg-white rounded-t-2xl p-5 pb-8 shadow-xl"
+        className="w-full max-w-lg bg-white rounded-2xl p-5 shadow-xl"
+        style={{ maxHeight: '88vh', overflowY: 'auto' }}
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-base font-semibold text-[#1a1a18]">Extract from Document</h2>
-            <p className="text-xs text-[#6b6b67] mt-0.5">Upload a contract exhibit, spec, or memo</p>
+            <h2 className="text-base font-semibold text-[#1a1a18]">Extract Knowledge</h2>
+            <p className="text-xs text-[#6b6b67] mt-0.5">Paste text or upload a document — AI will create one entry per issue</p>
           </div>
           <button onClick={onClose} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+        </div>
+
+        {/* Tab toggle */}
+        <div className="flex gap-1 mb-4 bg-[#f3f3f1] rounded-lg p-1">
+          {[['paste', '📋 Paste Text'], ['upload', '📎 Upload File']].map(([t, label]) => (
+            <button key={t} onClick={() => setTab(t)}
+              className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${tab === t ? 'bg-white text-[#1a1a18] shadow-sm' : 'text-[#6b6b67]'}`}>
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="space-y-4">
@@ -115,40 +141,57 @@ function ExtractModal({ projects, onClose, onExtracted }) {
             />
             {projectId && (
               <p className="text-xs text-blue-600 mt-1">
-                ✓ Meeting notes for this project will be used to fill in negotiation history
+                ✓ Meeting notes for this project will inform Our Position and resolution fields
               </p>
             )}
           </div>
 
-          {/* File upload trigger */}
-          <div>
-            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
-              Document <span className="text-[#aaa] font-normal">(PDF, DOCX, or TXT)</span>
-            </label>
-            <input ref={fileRef} type="file" accept=".pdf,.docx,.txt" className="hidden" onChange={handleFile} />
-            <button
-              onClick={() => fileRef.current?.click()}
-              disabled={extracting}
-              className="w-full py-3 border-2 border-dashed border-[#e5e5e3] rounded-xl text-sm text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors disabled:opacity-40 flex items-center justify-center gap-2"
-            >
-              {extracting ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-                  Extracting clause issues…
-                </>
-              ) : (
-                <>📎 Choose file to upload</>
-              )}
-            </button>
-          </div>
-
-          {error && (
-            <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+          {/* Paste tab */}
+          {tab === 'paste' && (
+            <>
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Text *</label>
+                <textarea
+                  value={pasteText}
+                  onChange={e => setPasteText(e.target.value)}
+                  placeholder="Paste an article, contract clause, email, notes, or any relevant text…"
+                  rows={8}
+                  autoFocus
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
+                />
+              </div>
+              {error && <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>}
+              <button
+                onClick={handlePaste}
+                disabled={extracting || !pasteText.trim()}
+                className="w-full py-2.5 bg-[#1a1a18] text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-gray-800 flex items-center justify-center gap-2"
+              >
+                {extracting ? (
+                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Extracting…</>
+                ) : 'Extract & Review'}
+              </button>
+            </>
           )}
 
-          <p className="text-xs text-[#aaa] leading-relaxed">
-            Claude will identify each material clause issue and create a separate knowledge entry for each one — indemnification, LD caps, consequential damages, etc. You'll review and approve each before anything saves.
-          </p>
+          {/* Upload tab */}
+          {tab === 'upload' && (
+            <>
+              <input ref={fileRef} type="file" accept=".pdf,.docx,.txt" className="hidden" onChange={handleFile} />
+              <button
+                onClick={() => fileRef.current?.click()}
+                disabled={extracting}
+                className="w-full py-5 border-2 border-dashed border-[#e5e5e3] rounded-xl text-sm text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors disabled:opacity-40 flex items-center justify-center gap-2"
+              >
+                {extracting ? (
+                  <><span className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" /> Extracting…</>
+                ) : <>📎 Choose PDF, DOCX, or TXT</>}
+              </button>
+              {error && <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>}
+              <p className="text-xs text-[#aaa] leading-relaxed">
+                Claude identifies each material clause issue and creates a separate entry — indemnification, LD caps, consequential damages, etc. Review each before saving.
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -330,9 +373,9 @@ function KnowledgeModal({ entry, projects, onClose, onSave }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
       <div
-        className="w-full max-w-2xl bg-white rounded-t-2xl p-5 pb-8 shadow-xl"
+        className="w-full max-w-2xl bg-white rounded-2xl p-5 shadow-xl"
         style={{ maxHeight: '90vh', overflowY: 'auto' }}
         onClick={e => e.stopPropagation()}
       >

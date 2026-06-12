@@ -172,7 +172,10 @@ module.exports = async (req, res) => {
             if (error) throw error
 
             // Increment count and trigger synthesis in background
-            await supabase.rpc('increment_pod_content_count', { pod_id: podId }).catch(() => {})
+            try {
+              const { data: cp } = await supabase.from('topic_pods').select('content_count').eq('id', podId).single()
+              await supabase.from('topic_pods').update({ content_count: (cp?.content_count || 0) + 1 }).eq('id', podId)
+            } catch {}
             regenerateSynthesis(podId, pod.name, pod.description).catch(console.error)
 
             res.status(201).json(item)
@@ -207,7 +210,10 @@ module.exports = async (req, res) => {
           .single()
         if (error) throw error
 
-        await supabase.rpc('increment_pod_content_count', { pod_id: podId }).catch(() => {})
+        try {
+          const { data: cp } = await supabase.from('topic_pods').select('content_count').eq('id', podId).single()
+          await supabase.from('topic_pods').update({ content_count: (cp?.content_count || 0) + 1 }).eq('id', podId)
+        } catch {}
         regenerateSynthesis(podId, pod.name, pod.description).catch(console.error)
 
         return res.status(201).json(item)
