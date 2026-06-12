@@ -870,6 +870,121 @@ Respond with just the sentence, no quotes, no JSON.`
     console.log(`  ✗ Task dedup error (non-fatal): ${taskDedupErr.message}`)
   }
 
+  // ── STEP 1.6: Others-commitments semantic dedup ─────────────────
+  console.log('Step 1.6: Others-commitments semantic dedup...')
+  try {
+    const { data: allOthers } = await supabase
+      .from('others_commitments')
+      .select('id, title, context, committed_by_name, committed_by_email, source_type, source_label, created_at, duplicate_reviewed, known_not_duplicate_with')
+      .eq('status', 'open')
+      .is('potential_duplicate_of', null)
+      .order('created_at', { ascending: true })
+
+    if (!allOthers?.length) {
+      console.log('  No open others to dedup')
+    } else {
+      const othersTokenMap = new Map(allOthers.map(o => [o.id, taskTokens(o.title)]))
+
+      // Group by person — only compare within same person
+      const byPerson = new Map()
+      for (const o of allOthers) {
+        const key = (o.committed_by_name || o.committed_by_email || 'unknown').toLowerCase().trim()
+        if (!byPerson.has(key)) byPerson.set(key, [])
+        byPerson.get(key).push(o)
+      }
+
+      const othersNearMatches = []
+      for (const [, group] of byPerson) {
+        if (group.length < 2) continue
+        for (let i = 0; i < group.length; i++) {
+          for (let j = i + 1; j < group.length; j++) {
+            const a = group[i], b = group[j]
+            if (a.duplicate_reviewed || b.duplicate_reviewed) continue
+            const aExcludes = a.known_not_duplicate_with || []
+            const bExcludes = b.known_not_duplicate_with || []
+            if (aExcludes.includes(b.id) || bExcludes.includes(a.id)) continue
+            if (a.source_type === 'manual' && b.source_type === 'manual') continue
+            const score = jaccard(othersTokenMap.get(a.id), othersTokenMap.get(b.id))
+            if (score >= 0.55) othersNearMatches.push({ a, b, score })
+          }
+        }
+      }
+
+      othersNearMatches.sort((x, y) => y.score - x.score)
+      console.log(`  Token overlap: ${othersNearMatches.length} near-match pairs`)
+
+      const haikuOthers = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const othersArchived = new Set()
+      let othersMerged = 0, othersFlagged = 0
+
+      for (const { a, b } of othersNearMatches.slice(0, 30)) {
+        if (othersArchived.has(a.id) || othersArchived.has(b.id)) continue
+        try {
+          const prompt = `Two commitments from Ryan's personal OS assigned to the same person:
+
+Person: ${a.committed_by_name || 'unknown'}
+
+Commitment A: "${a.title}"
+  Context: ${a.context || 'none'}
+  Source: ${a.source_label || a.source_type || 'unknown'}
+  Created: ${a.created_at?.split('T')[0]}
+
+Commitment B: "${b.title}"
+  Context: ${b.context || 'none'}
+  Source: ${b.source_label || b.source_type || 'unknown'}
+  Created: ${b.created_at?.split('T')[0]}
+
+Are these the same underlying commitment or genuinely distinct items?
+
+Respond ONLY with valid JSON:
+{
+  "is_duplicate": true,
+  "confidence": 82,
+  "winner": "A",
+  "best_title": "The clearest, most complete phrasing",
+  "reason": "one sentence why they are the same"
+}
+
+"confidence" is an integer 0-100.`
+
+          const msg = await haikuOthers.messages.create({
+            model: 'claude-haiku-4-5-20251001', max_tokens: 200,
+            messages: [{ role: 'user', content: prompt }]
+          })
+          const raw = (msg.content[0]?.text || '').trim()
+          let verdict
+          try { const m = raw.match(/\{[\s\S]*\}/); verdict = JSON.parse(m ? m[0] : raw) } catch { continue }
+          if (!verdict?.is_duplicate) continue
+          const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
+          if (confidence < 65) continue
+
+          const winner = verdict.winner === 'B' ? b : a
+          const loser  = verdict.winner === 'B' ? a : b
+
+          if (confidence >= 75) {
+            await supabase.from('others_commitments')
+              .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+              .eq('id', loser.id)
+            if (verdict.best_title && verdict.best_title !== winner.title) {
+              await supabase.from('others_commitments').update({ title: verdict.best_title }).eq('id', winner.id)
+            }
+            othersArchived.add(loser.id)
+            othersMerged++
+          } else {
+            await supabase.from('others_commitments')
+              .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+              .eq('id', loser.id)
+            othersFlagged++
+          }
+        } catch (pairErr) { /* non-fatal */ }
+      }
+
+      console.log(`  ✓ Others dedup: ${othersMerged} auto-merged, ${othersFlagged} flagged for review`)
+    }
+  } catch (othersDedupErr) {
+    console.log(`  ✗ Others dedup error (non-fatal): ${othersDedupErr.message}`)
+  }
+
   // ── STEP 2: Get active emails ───────────────────────────────────
   console.log('Step 2: Fetching active emails...')
   const { data: activeEmails } = await supabase
