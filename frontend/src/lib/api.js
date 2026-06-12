@@ -51,6 +51,7 @@ export const getProjectKeywordPreview = (id, keywords) =>
 // ── Contacts ──────────────────────────────────────────────────
 export const getContacts    = () => api.get('/api/contacts').then(r => r.data)
 export const getContact     = (id) => api.get(`/api/contacts?id=${id}`).then(r => r.data)
+export const createContact  = (data) => api.post('/api/contacts', data).then(r => r.data)
 export const updateContact  = (id, data) => api.patch(`/api/contacts?id=${id}`, data).then(r => r.data)
 export const deleteContact  = (id) => api.delete(`/api/contacts?id=${id}`).then(r => r.data)
 
@@ -105,10 +106,12 @@ export const generatePreMeetingBrief = (event_id) =>
   api.post('/api/jobs/pre-meeting-brief', { event_id }).then(r => r.data)
 
 // ── Knowledge Doc Extraction ──────────────────────────────────
-export const extractKnowledgeDoc = (formData) =>
+export const extractKnowledgeDoc  = (formData) =>
   api.post('/api/knowledge?action=extract', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }).then(r => r.data)
+export const extractKnowledgeText = (data) =>
+  api.post('/api/knowledge?action=extract-text', data).then(r => r.data)
 
 // ── Topic Intelligence Pods ───────────────────────────────────
 export const getTopicPods      = (status = 'active') => api.get(`/api/topic-pods?status=${status}`).then(r => r.data)

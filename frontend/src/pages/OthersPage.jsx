@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getOthersCommitments, updateOthersCommitment, getContacts, createTask, getProjects } from '../lib/api'
+import { getOthersCommitments, updateOthersCommitment, getContacts, createContact, createTask, getProjects } from '../lib/api'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -170,12 +170,14 @@ export default function OthersPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
 
-  const [typeFilter, setTypeFilter] = useState('all')
-  const [sortBy, setSortBy] = useState('person')
-  const [selectMode, setSelectMode] = useState(false)
-  const [selectedIds, setSelectedIds] = useState(new Set())
-  const [promoting, setPromoting] = useState(false)
-  const [promotedIds, setPromotedIds] = useState(new Set())
+  const [typeFilter,    setTypeFilter]    = useState('all')
+  const [contactFilter, setContactFilter] = useState('all')
+  const [sortBy,        setSortBy]        = useState('person')
+  const [selectMode,    setSelectMode]    = useState(false)
+  const [selectedIds,   setSelectedIds]   = useState(new Set())
+  const [promoting,     setPromoting]     = useState(false)
+  const [promotedIds,   setPromotedIds]   = useState(new Set())
+  const [linkModalItem, setLinkModalItem] = useState(null)
 
   const { data: items, isLoading } = useQuery({
     queryKey: ['others-commitments'],
@@ -296,7 +298,9 @@ export default function OthersPage() {
     return keyNameSet.has((name || '').toLowerCase())
   }
 
-  const keyCount = (items || []).filter(isKeyPerson).length
+  const keyCount      = (items || []).filter(isKeyPerson).length
+  const linkedCount   = (items || []).filter(c => !!c.contact_id).length
+  const unlinkedCount = (items || []).filter(c => !c.contact_id && !isSpeaker(c.committed_by_name || c.person_name)).length
 
   const typeOptions = [
     { value: 'all',           label: 'All' },
@@ -312,11 +316,14 @@ export default function OthersPage() {
   ]
 
   const filtered = (items || []).filter(c => {
-    if (typeFilter === 'all') return true
-    if (typeFilter === 'blocking_ryan') return c.delivery_type === 'blocking_ryan'
-    if (typeFilter === 'to_ryan') return c.delivery_type === 'to_ryan'
-    if (typeFilter === 'general') return !c.delivery_type || c.delivery_type === 'general'
-    if (typeFilter === 'key') return isKeyPerson(c)
+    // type filter
+    if (typeFilter === 'blocking_ryan' && c.delivery_type !== 'blocking_ryan') return false
+    if (typeFilter === 'to_ryan'       && c.delivery_type !== 'to_ryan')       return false
+    if (typeFilter === 'general'       && c.delivery_type && c.delivery_type !== 'general') return false
+    if (typeFilter === 'key'           && !isKeyPerson(c)) return false
+    // contact link filter
+    if (contactFilter === 'linked'   && !c.contact_id) return false
+    if (contactFilter === 'unlinked' && !!c.contact_id) return false
     return true
   })
 
@@ -406,6 +413,18 @@ export default function OthersPage() {
             <PillToggle options={typeOptions} value={typeFilter} onChange={setTypeFilter} />
           </div>
           <div>
+            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Contact</p>
+            <PillToggle
+              options={[
+                { value: 'all',      label: 'All' },
+                { value: 'linked',   label: `🔗 Linked${linkedCount   ? ` (${linkedCount})`   : ''}` },
+                { value: 'unlinked', label: `⬜ Unlinked${unlinkedCount ? ` (${unlinkedCount})` : ''}` },
+              ]}
+              value={contactFilter}
+              onChange={setContactFilter}
+            />
+          </div>
+          <div>
             <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Sort</p>
             <PillToggle options={sortOptions} value={sortBy} onChange={setSortBy} />
           </div>
@@ -438,6 +457,7 @@ export default function OthersPage() {
                   promoted={promotedIds.has(c.id)}
                   onPromote={() => handleSinglePromoteToMyTask(c)}
                   allItems={items}
+                  onLink={() => setLinkModalItem(c)}
                 />
               )
             })}
@@ -488,6 +508,7 @@ export default function OthersPage() {
                           promoted={promotedIds.has(c.id)}
                           onPromote={() => handleSinglePromoteToMyTask(c)}
                           allItems={items}
+                          onLink={() => setLinkModalItem(c)}
                         />
                       )
                     })}
@@ -517,6 +538,25 @@ export default function OthersPage() {
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
         promoting={promoting}
       />
+
+      {/* Link contact modal */}
+      {linkModalItem && (
+        <LinkContactModal
+          item={linkModalItem}
+          contacts={contacts}
+          onLink={({ contact_id, committed_by_name, committed_by_email }) => {
+            update.mutate({
+              id: linkModalItem.id,
+              updates: {
+                contact_id,
+                ...(committed_by_name  ? { committed_by_name }  : {}),
+                ...(committed_by_email ? { committed_by_email } : {}),
+              }
+            })
+          }}
+          onClose={() => setLinkModalItem(null)}
+        />
+      )}
     </div>
   )
 }
@@ -780,7 +820,149 @@ function OthersContextPanel({ c, allItems }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems }) {
+// ── Link Contact Modal ─────────────────────────────────────────
+function LinkContactModal({ item, contacts, onLink, onClose }) {
+  const personName = item.committed_by_name || item.person_name || ''
+  const [query,    setQuery]    = useState(personName)
+  const [email,    setEmail]    = useState(item.committed_by_email || '')
+  const [saving,   setSaving]   = useState(false)
+  const [tab,      setTab]      = useState('search') // 'search' | 'create'
+  const inputRef = useRef(null)
+
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  const filtered = (contacts || [])
+    .filter(c => !query.trim() || c.name?.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 8)
+
+  const exactMatch = (contacts || []).find(c => c.name?.toLowerCase() === query.toLowerCase())
+
+  const handleLinkExisting = (contact) => {
+    onLink({ contact_id: contact.id, committed_by_name: contact.name, committed_by_email: contact.email || item.committed_by_email || null })
+    onClose()
+  }
+
+  const handleCreateAndLink = async () => {
+    if (!query.trim()) return
+    setSaving(true)
+    try {
+      const newContact = await createContact({
+        name:  query.trim(),
+        email: email.trim() || null,
+      })
+      onLink({ contact_id: newContact.id, committed_by_name: newContact.name, committed_by_email: newContact.email || null })
+      onClose()
+    } catch (e) {
+      alert(e?.response?.data?.error || e.message)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl" onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+          <div>
+            <h2 className="text-sm font-semibold text-[#1a1a18]">Link to Contact</h2>
+            <p className="text-xs text-[#6b6b67] mt-0.5 truncate max-w-[240px]">
+              "{item.title?.slice(0, 50)}{item.title?.length > 50 ? '…' : ''}"
+            </p>
+          </div>
+          <button onClick={onClose} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none ml-3">×</button>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-1 mx-4 mt-3 mb-0 bg-[#f3f3f1] rounded-lg p-1">
+          {[['search', '🔍 Find Contact'], ['create', '+ Create New']].map(([t, lbl]) => (
+            <button key={t} onClick={() => setTab(t)}
+              className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${tab === t ? 'bg-white text-[#1a1a18] shadow-sm' : 'text-[#6b6b67]'}`}>
+              {lbl}
+            </button>
+          ))}
+        </div>
+
+        <div className="px-4 py-3">
+          {tab === 'search' && (
+            <>
+              <input
+                ref={inputRef}
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Search contacts…"
+                className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <div className="space-y-1 max-h-56 overflow-y-auto">
+                {filtered.length > 0 ? filtered.map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => handleLinkExisting(c)}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors text-left"
+                  >
+                    <span className="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      {c.name?.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-[#1a1a18] leading-tight">{c.name}</p>
+                      {(c.email || c.company) && (
+                        <p className="text-xs text-[#9b9b97] truncate">{c.email || c.company}</p>
+                      )}
+                    </div>
+                    {c.is_key_contact && <span className="ml-auto text-amber-500 text-xs flex-shrink-0">⭐</span>}
+                  </button>
+                )) : (
+                  <p className="text-xs text-[#9b9b97] text-center py-4">No contacts match "{query}"</p>
+                )}
+              </div>
+              {!exactMatch && query.trim().length > 1 && (
+                <button
+                  onClick={() => setTab('create')}
+                  className="w-full mt-2 py-2 text-xs text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium"
+                >
+                  + Create "{query}" as new contact →
+                </button>
+              )}
+            </>
+          )}
+
+          {tab === 'create' && (
+            <div className="space-y-3">
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Name *</label>
+                <input
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  placeholder="Full name"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Email</label>
+                <input
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="email@company.com"
+                  type="email"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <button
+                onClick={handleCreateAndLink}
+                disabled={saving || !query.trim()}
+                className="w-full py-2.5 bg-[#1a1a18] text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-gray-800 flex items-center justify-center gap-2"
+              >
+                {saving ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Creating…</> : 'Create & Link'}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink }) {
   const [reassigning, setReassigning] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const speaker = isSpeaker(personName)
@@ -838,7 +1020,7 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
 
           {/* Person name — amber + reassign hint if Speaker */}
           {showPerson && (
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
               <p className={`text-xs ${speaker ? 'text-amber-600 font-medium' : 'text-[#6b6b67]'}`}>
                 {speaker ? `⚠ ${personName} — unattributed` : personName}
               </p>
@@ -846,6 +1028,18 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-500 font-medium flex-shrink-0">
                   Internal
                 </span>
+              )}
+              {c.contact_id ? (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-50 text-green-600 font-medium flex-shrink-0" title="Linked to contact">
+                  🔗 Linked
+                </span>
+              ) : !speaker && (
+                <button
+                  onClick={e => { e.stopPropagation(); onLink && onLink() }}
+                  className="text-[10px] px-1.5 py-0.5 rounded border border-dashed border-gray-300 text-[#9b9b97] hover:border-blue-400 hover:text-blue-500 flex-shrink-0 transition-colors"
+                >
+                  + link
+                </button>
               )}
               {speaker && !reassigning && (
                 <button
@@ -879,6 +1073,20 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
 
         {/* Action buttons — hidden in select mode */}
         <div className={`flex items-center gap-1 flex-shrink-0 mt-0.5 ${selectMode ? 'hidden' : ''}`}>
+          {/* Link/Unlink contact */}
+          {!speaker && (
+            <button
+              onClick={e => { e.stopPropagation(); onLink && onLink() }}
+              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all ${
+                c.contact_id
+                  ? 'border-green-300 text-green-600 bg-green-50'
+                  : 'border-dashed border-gray-300 text-[#9b9b97] hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50'
+              }`}
+              title={c.contact_id ? 'Linked to contact' : 'Link to contact'}
+            >
+              🔗
+            </button>
+          )}
           {/* Reassign */}
           {!speaker && (
             <button
