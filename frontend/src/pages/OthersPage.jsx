@@ -370,12 +370,23 @@ export default function OthersPage() {
   const linkedCount   = (items || []).filter(c => !!c.contact_id).length
   const unlinkedCount = (items || []).filter(c => !c.contact_id && !isSpeaker(c.committed_by_name || c.person_name)).length
 
+  // Count winners (items that have at least one loser pointing at them)
+  const loserWinnerIds = useMemo(() => {
+    const ids = new Set()
+    for (const c of (items || [])) {
+      if (c.potential_duplicate_of && c.status !== 'archived') ids.add(c.potential_duplicate_of)
+    }
+    return ids
+  }, [items])
+  const dupesCount = loserWinnerIds.size
+
   const typeOptions = [
     { value: 'all',           label: 'All' },
     { value: 'key',           label: `⭐ Key${keyCount ? ` (${keyCount})` : ''}` },
     { value: 'blocking_ryan', label: '🚧 Blocking' },
     { value: 'to_ryan',       label: '📬 Owed to Me' },
     { value: 'general',       label: '📋 General' },
+    { value: 'dupes',         label: `⚠ Dupes${dupesCount ? ` (${dupesCount})` : ''}` },
   ]
 
   const sortOptions = [
@@ -391,6 +402,8 @@ export default function OthersPage() {
     if (typeFilter === 'to_ryan'       && c.delivery_type !== 'to_ryan')       return false
     if (typeFilter === 'general'       && c.delivery_type && c.delivery_type !== 'general') return false
     if (typeFilter === 'key'           && !isKeyPerson(c)) return false
+    // dupes filter — show only winners (items with at least one loser queued)
+    if (typeFilter === 'dupes'         && !loserWinnerIds.has(c.id)) return false
     // contact link filter
     if (contactFilter === 'linked'   && !c.contact_id) return false
     if (contactFilter === 'unlinked' && !!c.contact_id) return false
