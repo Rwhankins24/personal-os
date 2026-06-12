@@ -716,8 +716,8 @@ The "confidence" field must be an integer 0-100 representing how certain you are
 
           const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
 
-          // Confidence < 50: skip entirely
-          if (confidence < 50) continue
+          // Confidence < 65: skip — too ambiguous to surface for review
+          if (confidence < 65) continue
 
           // Determine winner and loser
           const winner = verdict.winner === 'A' ? a : b
@@ -2714,7 +2714,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   project_id:       meetingProjectId
                 }
 
-                if (smcResult.match && smcResult.confidence >= 50) {
+                if (smcResult.match && smcResult.confidence >= 65) {
                   // Medium confidence — flag as potential duplicate
                   insertPatch.potential_duplicate_of = smcResult.match.id
                   insertPatch.duplicate_confidence   = smcResult.confidence
@@ -2728,7 +2728,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
 
                 results.otter_tasks_created++
 
-                if (smcResult.match && smcResult.confidence >= 50) {
+                if (smcResult.match && smcResult.confidence >= 65) {
                   await logAIQuestion(
                     `Two tasks look like the same thing — merge or keep separate? Task A: "${smcResult.match.title}" Task B: "${item.task_text}"`,
                     `Confidence: ${smcResult.confidence}%. Source: ${meeting.title || 'Meeting'}`,
@@ -2823,7 +2823,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   delivery_type: 'general'
                 }
 
-                if (smcResult.match && smcResult.confidence >= 50) {
+                if (smcResult.match && smcResult.confidence >= 65) {
                   insertPatch.potential_duplicate_of = smcResult.match.id
                   insertPatch.duplicate_confidence   = smcResult.confidence
                 }
@@ -2836,7 +2836,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
 
                 results.otter_others_created++
 
-                if (smcResult.match && smcResult.confidence >= 50) {
+                if (smcResult.match && smcResult.confidence >= 65) {
                   await logAIQuestion(
                     `Two commitments look like the same thing — merge or keep separate? Commitment A: "${smcResult.match.title}" Commitment B: "${item.task_text}"`,
                     `Confidence: ${smcResult.confidence}%. Person: ${item.assignee_name || 'unknown'}. Source: ${meeting.title || 'Meeting'}`,
