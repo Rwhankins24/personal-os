@@ -51,38 +51,51 @@ jobs:
             "import json,sys; d=json.load(sys.stdin); print(d.get('processing_completed_at') or '')" \
             2>/dev/null)
 
+          PLAUD_DONE=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('plaud_pull_completed_at') or '')" \
+            2>/dev/null)
+
           AI_DONE=$(echo "$STATUS" | python3 -c \
             "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" \
             2>/dev/null)
 
-          # Calculate minutes since email processing
-          MINUTES_SINCE=0
+          # Calculate minutes since email processing completed
+          MINUTES_SINCE_EMAIL=0
           if [ -n "$PROCESSING_DONE" ]; then
             PROC_EPOCH=$(python3 -c "
           from datetime import datetime, timezone
           import time
           dt = datetime.fromisoformat('${PROCESSING_DONE}'.replace('Z', '+00:00'))
           print(int(time.time() - dt.timestamp()))" 2>/dev/null || echo "0")
-            MINUTES_SINCE=$((PROC_EPOCH / 60))
+            MINUTES_SINCE_EMAIL=$((PROC_EPOCH / 60))
           fi
 
           echo "Email done: $PROCESSING_DONE"
-          echo "Otter done: $OTTER_DONE"
           echo "Plaud done: $PLAUD_DONE"
           echo "AI done: $AI_DONE"
-          echo "Minutes since email: $MINUTES_SINCE"
+          echo "Minutes since email: $MINUTES_SINCE_EMAIL"
 
-          # Fire when: email processing complete AND AI not done yet
-          # Otter removed — fully migrated to Plaud (loaded from Supabase storage internally)
-          # Run immediately when email is done, no meeting-source wait needed
-          if [ -n "$PROCESSING_DONE" ] && [ -z "$AI_DONE" ]; then
+          # Fire when: email done AND (plaud done OR 90+ min since email) AND AI not done yet
+          # The 90-min fallback ensures AI runs even if plaud-pull fails or has no meetings
+          PLAUD_READY=false
+          if [ -n "$PLAUD_DONE" ]; then
+            PLAUD_READY=true
+            echo "Plaud processing complete."
+          elif [ "$MINUTES_SINCE_EMAIL" -ge 90 ]; then
+            PLAUD_READY=true
+            echo "Plaud not done but 90+ min since email — proceeding without waiting."
+          else
+            echo "Waiting for Plaud (${MINUTES_SINCE_EMAIL}m since email, need 90m fallback or plaud completion)."
+          fi
+
+          if [ -n "$PROCESSING_DONE" ] && [ "$PLAUD_READY" = "true" ] && [ -z "$AI_DONE" ]; then
             echo "should_run=true" >> $GITHUB_OUTPUT
-            echo "Email done. Running AI job."
+            echo "All prerequisites met. Running AI job."
           else
             echo "should_run=false" >> $GITHUB_OUTPUT
             if [ -z "$PROCESSING_DONE" ]; then
               echo "Email not processed yet. Skipping."
-            else
+            elif [ -n "$AI_DONE" ]; then
               echo "AI already ran today. Skipping."
             fi
           fi

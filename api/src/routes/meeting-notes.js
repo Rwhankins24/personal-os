@@ -9,12 +9,78 @@ const supabase = createClient(
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PATCH, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-trigger-secret')
 
   if (req.method === 'OPTIONS') return res.status(200).end()
 
   const { id } = req.query
+
+  // ── POST — ingest a meeting from the plaud-pull GitHub Action ─────────────
+  // Payload: { title, meeting_date, source, summary, action_items, participants,
+  //            raw_transcript, external_id, has_transcript, transcript_word_count }
+  if (req.method === 'POST') {
+    const secret = req.headers['x-trigger-secret']
+    if (!secret || secret !== process.env.TRIGGER_SECRET) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
+    try {
+      const {
+        title, meeting_date, source = 'plaud', summary,
+        action_items = [], participants = [],
+        raw_transcript, external_id, has_transcript, transcript_word_count,
+      } = req.body
+
+      if (!external_id) return res.status(400).json({ error: 'external_id required' })
+
+      const otterId = `plaud_${external_id}`
+
+      // Idempotent — skip if already inserted
+      const { data: existing } = await supabase
+        .from('meeting_notes')
+        .select('id')
+        .eq('otter_id', otterId)
+        .maybeSingle()
+
+      if (existing) {
+        return res.status(200).json({ id: existing.id, skipped: true })
+      }
+
+      // Map action_items array → action_items_raw schema
+      const actionItemsRaw = action_items.map(item => ({
+        task_text:      item.task || item.task_text || '',
+        assignee_name:  item.assignee || item.assignee_name || null,
+        assignee_email: item.assignee_email || null,
+      })).filter(i => i.task_text)
+
+      const startTime = meeting_date ? `${meeting_date}T12:00:00Z` : null
+
+      const { data: inserted, error } = await supabase
+        .from('meeting_notes')
+        .insert({
+          otter_id:               otterId,
+          title:                  title || 'Untitled Meeting',
+          meeting_date:           meeting_date || null,
+          start_time:             startTime,
+          short_summary:          summary || '',
+          full_transcript:        raw_transcript || null,
+          raw_transcript:         raw_transcript || null,
+          action_items_raw:       actionItemsRaw,
+          participants:           participants || [],
+          source,
+          intelligence_extracted: false,
+          commitments_extracted:  false,
+        })
+        .select('id')
+        .single()
+
+      if (error) throw error
+
+      return res.status(201).json({ id: inserted.id, created: true })
+    } catch (err) {
+      return res.status(500).json({ error: err.message })
+    }
+  }
 
   // ── PATCH — update a meeting note (user_notes, project_id, etc.)
   if (req.method === 'PATCH') {
