@@ -24,6 +24,75 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 )
 
+// ── Calendar ↔ Recording matching ────────────────────────────────────
+// Recordings arrive 1-2 days after the meeting. Match by:
+//   1. Title token overlap (normalized, ignore common words)
+//   2. Date proximity window ±48 hours
+//   3. Participant / attendee overlap (bonus score)
+// Returns the best-match event ID or null if confidence < threshold.
+
+const STOP_WORDS = new Set(['the','a','an','and','or','of','in','at','for','with','to','on','is','this','call','meeting','sync','standup','check-in','checkin','weekly','monthly'])
+
+function tokenize(str) {
+  return (str || '').toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 1 && !STOP_WORDS.has(w))
+}
+
+function titleScore(a, b) {
+  const ta = new Set(tokenize(a))
+  const tb = new Set(tokenize(b))
+  if (!ta.size || !tb.size) return 0
+  let overlap = 0
+  for (const t of ta) if (tb.has(t)) overlap++
+  return overlap / Math.min(ta.size, tb.size) // Jaccard-ish on smaller set
+}
+
+function participantScore(recParticipants, evtAttendees) {
+  if (!recParticipants?.length || !evtAttendees?.length) return 0
+  const rp = new Set((recParticipants).map(p => p.toLowerCase().trim()))
+  const ea = new Set((evtAttendees).map(a => (typeof a === 'string' ? a : a?.name || a?.email || '').toLowerCase().trim()))
+  let overlap = 0
+  for (const p of rp) {
+    for (const a of ea) {
+      if (a.includes(p) || p.includes(a)) { overlap++; break }
+    }
+  }
+  return overlap / Math.min(rp.size, ea.size)
+}
+
+async function matchRecordingToEvent(supabase, recording) {
+  if (recording.event_id) return null // already matched
+
+  const refDate = recording.start_time || recording.meeting_date
+  if (!refDate) return null
+
+  const ref = new Date(refDate)
+  const windowStart = new Date(ref.getTime() - 48 * 60 * 60 * 1000).toISOString()
+  const windowEnd   = new Date(ref.getTime() + 48 * 60 * 60 * 1000).toISOString()
+
+  const { data: candidates } = await supabase
+    .from('events')
+    .select('id, title, start_time, attendees')
+    .gte('start_time', windowStart)
+    .lte('start_time', windowEnd)
+
+  if (!candidates?.length) return null
+
+  let best = null, bestScore = 0
+  for (const evt of candidates) {
+    const ts = titleScore(recording.title, evt.title)
+    const ps = participantScore(recording.participants, evt.attendees)
+    // Weight: title 60%, participants 40%
+    const score = ts * 0.6 + ps * 0.4
+    if (score > bestScore) { bestScore = score; best = evt }
+  }
+
+  // Threshold: require at least 0.25 confidence (1+ shared title tokens)
+  return bestScore >= 0.25 ? { event_id: best.id, match_score: bestScore, matched_title: best.title } : null
+}
+
 module.exports = async (req, res) => {
   // ── Auth ──────────────────────────────────────────────────────────────
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -72,6 +141,30 @@ module.exports = async (req, res) => {
         .from('tasks')
         .update({ overdue_days: overdueDays })
         .eq('id', task.id)
+    }
+
+    // ── STEP 1b: Match unlinked recordings → calendar events ─────────
+    // Recordings arrive 1-2 days late; match by title similarity + date window ±48h
+    results.calendar_matches = 0
+    const { data: unlinkedRecordings } = await supabase
+      .from('meeting_notes')
+      .select('id, title, meeting_date, start_time, participants, event_id')
+      .is('event_id', null)
+      .not('title', 'is', null)
+
+    for (const rec of (unlinkedRecordings || [])) {
+      try {
+        const match = await matchRecordingToEvent(supabase, rec)
+        if (match) {
+          await supabase
+            .from('meeting_notes')
+            .update({ event_id: match.event_id })
+            .eq('id', rec.id)
+          results.calendar_matches++
+        }
+      } catch (err) {
+        // non-fatal
+      }
     }
 
     // ── STEP 2: Get active emails needing processing ──────────────────

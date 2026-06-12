@@ -335,6 +335,24 @@ Due: ${t.due_date || 'no date'}`)
     const context = sections.join('\n\n')
 
     // ── Build messages ────────────────────────────────────────────────
+    // ── Detect overdue patterns across tasks ─────────────────────────
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const allCurrentTasks = relTasks || []
+    const overdueTasks = allCurrentTasks.filter(t =>
+      t.due_date && new Date(t.due_date) < today && t.status !== 'done'
+    )
+    // Count how often the same person appears in blocking/waiting items
+    const blockingPersonCounts = {}
+    ;(relOthers || []).filter(c => c.due_date && new Date(c.due_date) < today).forEach(c => {
+      if (c.committed_by_name) {
+        blockingPersonCounts[c.committed_by_name] = (blockingPersonCounts[c.committed_by_name] || 0) + 1
+      }
+    })
+    const patternAlerts = Object.entries(blockingPersonCounts)
+      .filter(([, count]) => count >= 2)
+      .map(([name, count]) => `${name} has ${count} overdue deliverables to Ryan`)
+
     const systemPrompt = `You are Ryan Hankins' personal chief of staff AI, embedded in his Personal OS. You have access to his live data: emails, meeting notes, tasks, commitments, contacts, and intelligence.
 
 Ryan is a Project Executive at Clayco managing complex construction projects including Pacific Fusion, Project Solis, Gotion BESS, and others. He thinks like an owner-side integrator — systems-first, pressure-tests assumptions, hates surprises.
@@ -342,6 +360,13 @@ Ryan is a Project Executive at Clayco managing complex construction projects inc
 Answer his questions directly and concisely. When recalling specific facts (what someone said, dates, numbers), be precise and cite your source (e.g., "from the June 3 meeting" or "per Courtney's email on June 2"). If you don't have enough data to answer confidently, say so briefly and suggest where he might find it.
 
 Keep answers tight — no fluff. If the answer is a list, use bullet points. For quick factual questions, one or two sentences is fine. For complex questions, give structured analysis.
+
+IMPORTANT BEHAVIORAL RULES:
+- NEVER ask Ryan why something is late or overdue. Note it as context and move on.
+- Do not ask follow-up clarifying questions unless you genuinely cannot answer without them.
+- When you see overdue items, identify patterns (same person, same project) and surface those as insights — don't interrogate each item.
+- If a pattern is detected, state it once clearly (e.g., "3 items waiting on Bob — that's a choke point").
+${patternAlerts.length > 0 ? `\nDETECTED PATTERNS:\n${patternAlerts.join('\n')}` : ''}${overdueTasks.length > 2 ? `\n${overdueTasks.length} tasks currently overdue — treat as context, not topics requiring explanation.` : ''}
 
 Today's date: ${new Date().toISOString().split('T')[0]}
 

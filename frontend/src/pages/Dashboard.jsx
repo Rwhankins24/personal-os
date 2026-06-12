@@ -23,6 +23,7 @@ import {
 } from '../lib/api'
 import SyncButton from '../components/SyncButton'
 import MeetingSummary from '../components/MeetingSummary'
+import MeetingUpload from '../components/MeetingUpload'
 
 dayjs.extend(relativeTime)
 
@@ -1878,6 +1879,10 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-[#1a1a18] text-sm">Recent Meetings</h2>
             <span className="text-xs text-[#6b6b67] bg-[#f0f0ee] px-2 py-0.5 rounded-full">from Plaud</span>
+          </div>
+          {/* Upload zone */}
+          <div className="mb-3">
+            <MeetingUpload onUploaded={() => qc.invalidateQueries({ queryKey: ['meeting-notes'] })} />
           </div>
           {meetingNotes.length === 0 ? (
             <p className="text-xs text-[#9b9b97] py-4 text-center">No meetings recorded yet</p>

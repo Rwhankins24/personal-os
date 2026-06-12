@@ -58,6 +58,9 @@ export const deleteContact  = (id) => api.delete(`/api/contacts?id=${id}`).then(
 export const getMeetingNotes   = ()         => api.get('/api/meeting-notes').then(r => r.data)
 export const getMeetingNote    = (id)       => api.get(`/api/meeting-notes?id=${id}`).then(r => r.data)
 export const updateMeetingNote = (id, data) => api.patch(`/api/meeting-notes?id=${id}`, data).then(r => r.data)
+export const uploadMeetingFile = (formData) => api.post('/api/upload-meeting', formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+}).then(r => r.data)
 
 // ── Captures ──────────────────────────────────────────────────
 export const getCaptures    = ()     => api.get('/api/captures').then(r => r.data)
