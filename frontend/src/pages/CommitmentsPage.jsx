@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getCommitments, updateCommitment, getContacts } from '../lib/api'
+import { useToast } from '../contexts/ToastContext'
 
 const URGENCY_COLOR = {
   critical: 'bg-red-500',
@@ -58,6 +59,7 @@ function getInitials(name) {
 export default function CommitmentsPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const toast = useToast()
 
   const [typeFilter, setTypeFilter] = useState('all')
   const [selectMode, setSelectMode] = useState(false)
@@ -83,11 +85,13 @@ export default function CommitmentsPage() {
   const bulkMarkDone = async () => {
     if (!selected.size) return
     setBulkSaving(true)
+    const count = selected.size
     try {
       await Promise.all([...selected].map(id => updateCommitment(id, { status: 'closed' })))
       qc.setQueryData(['commitments'], old =>
         (old || []).map(c => selected.has(c.id) ? { ...c, status: 'closed' } : c)
       )
+      toast(`${count} commitment${count !== 1 ? 's' : ''} marked done`, { icon: '✓' })
       exitSelectMode()
     } finally {
       setBulkSaving(false)
@@ -178,7 +182,7 @@ export default function CommitmentsPage() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
+      <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Filter bar */}
         <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3">
           <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Type</p>
@@ -262,7 +266,7 @@ export default function CommitmentsPage() {
                           </div>
 
                           <button
-                            onClick={() => markDone.mutate({ id: c.id })}
+                            onClick={() => { markDone.mutate({ id: c.id }); toast('Marked done', { icon: '✓' }) }}
                             className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 mt-0.5"
                             title="Mark done"
                           >
@@ -281,7 +285,7 @@ export default function CommitmentsPage() {
 
       {/* Bulk action bar */}
       {selectMode && selected.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center px-4 pb-20">
+        <div className="fixed left-0 right-0 z-[60] flex justify-center px-4" style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}>
           <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
             <span className="text-sm font-medium whitespace-nowrap">{selected.size} selected</span>
             <button

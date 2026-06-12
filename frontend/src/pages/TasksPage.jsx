@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getTasks, updateTask, deleteTask, getProjects } from '../lib/api'
+import { useToast } from '../contexts/ToastContext'
 import InlineEdit from '../components/InlineEdit'
 
 // ── Potential Duplicates Section ──────────────────────────────────
@@ -374,6 +375,7 @@ function TaskContextPanel({ task, allTasks, projects, update }) {
 export default function TasksPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const toast = useToast()
 
   const [statusFilter, setStatusFilter] = useState('all')
   const [urgencyFilter, setUrgencyFilter] = useState('all')
@@ -401,11 +403,13 @@ export default function TasksPage() {
   const bulkMarkDone = async () => {
     if (!selected.size) return
     setBulkSaving(true)
+    const count = selected.size
     try {
       await Promise.all([...selected].map(id => updateTask(id, { status: 'done' })))
       qc.setQueryData(['tasks'], old =>
         (old || []).map(t => selected.has(t.id) ? { ...t, status: 'done' } : t)
       )
+      toast(`${count} task${count !== 1 ? 's' : ''} marked complete`, { icon: '✓' })
       exitSelectMode()
     } finally {
       setBulkSaving(false)
@@ -415,9 +419,11 @@ export default function TasksPage() {
   const bulkDelete = async () => {
     if (!selected.size) return
     setBulkSaving(true)
+    const count = selected.size
     try {
       await Promise.all([...selected].map(id => deleteTask(id)))
       qc.setQueryData(['tasks'], old => (old || []).filter(t => !selected.has(t.id)))
+      toast(`${count} task${count !== 1 ? 's' : ''} deleted`, { icon: '🗑', type: 'info' })
       exitSelectMode()
     } finally {
       setBulkSaving(false)
@@ -528,7 +534,7 @@ export default function TasksPage() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
+      <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Filter bar */}
         <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2">
           <div>
@@ -609,6 +615,7 @@ export default function TasksPage() {
                         onClick={e => {
                           e.stopPropagation()
                           complete.mutate({ id: task.id })
+                          toast('Task complete', { icon: '✓' })
                         }}
                         className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
                         title="Mark complete"
@@ -644,7 +651,7 @@ export default function TasksPage() {
 
       {/* Bulk action bar */}
       {selectMode && selected.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center px-4 pb-20">
+        <div className="fixed left-0 right-0 z-[60] flex justify-center px-4" style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}>
           <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
             <span className="text-sm font-medium whitespace-nowrap">{selected.size} selected</span>
             <button

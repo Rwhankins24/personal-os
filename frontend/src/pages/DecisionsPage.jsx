@@ -109,7 +109,7 @@ export default function DecisionsPage() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
+      <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Status filter */}
         <PillToggle options={statusOptions} value={statusFilter} onChange={setStatusFilter} />
 

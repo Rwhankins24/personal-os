@@ -21,6 +21,7 @@ import MeetingsPage   from './pages/MeetingsPage'
 import MeetingDetail  from './pages/MeetingDetail'
 import ChatWidget      from './components/ChatWidget'
 import CaptureButton   from './components/CaptureButton'
+import { ToastProvider } from './contexts/ToastContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -106,6 +107,7 @@ export default function App() {
   return (
     <PasswordGate>
       <QueryClientProvider client={queryClient}>
+        <ToastProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/"               element={<Dashboard />} />
@@ -131,6 +133,7 @@ export default function App() {
           <ChatWidget />
           <CaptureButton />
         </BrowserRouter>
+        </ToastProvider>
       </QueryClientProvider>
     </PasswordGate>
   )

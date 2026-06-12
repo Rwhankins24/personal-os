@@ -294,7 +294,7 @@ function PodDetail({ pod, onBack, onUpdated }) {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 py-4">
+      <div className="max-w-3xl mx-auto px-4 py-4 pb-36">
         {/* SYNTHESIS VIEW */}
         {view === 'synthesis' && (
           <div className="space-y-4">
@@ -531,7 +531,7 @@ export default function TopicsPage() {
       </div>
 
       {/* Content */}
-      <div className="max-w-3xl mx-auto px-4 py-4">
+      <div className="max-w-3xl mx-auto px-4 py-4 pb-36">
         {isLoading ? (
           <div className="flex justify-center py-16">
             <div className="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />

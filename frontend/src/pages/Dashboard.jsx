@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useToast } from '../contexts/ToastContext'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { marked } from 'marked'
@@ -437,6 +438,7 @@ function CalendarStrip({ events, isLoading }) {
 function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const toast = useToast()
 
   const toggle = useMutation({
     mutationFn: ({ id, status }) => updateTask(id, { status }),
@@ -479,10 +481,11 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
                 <input
                   type="checkbox"
                   checked={task.status === 'done' || task.status === 'complete'}
-                  onChange={() => toggle.mutate({
-                    id: task.id,
-                    status: task.status === 'done' ? 'open' : 'done',
-                  })}
+                  onChange={() => {
+                    const toDone = task.status !== 'done' && task.status !== 'complete'
+                    toggle.mutate({ id: task.id, status: toDone ? 'done' : 'open' })
+                    if (toDone) toast('Task complete', { icon: '✓' })
+                  }}
                   className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 cursor-pointer flex-shrink-0"
                 />
                 <div
@@ -546,6 +549,7 @@ function TaskPanel({ tasks, isLoading, showAll, setShowAll }) {
 function CommitmentsPanel({ commitments, isLoading, contacts }) {
   const qc = useQueryClient()
   const [showAll, setShowAll] = useState(false)
+  const toast = useToast()
   const close = useMutation({
     mutationFn: (id) => updateCommitment(id, { status: 'closed' }),
     onMutate: async (id) => {
@@ -601,7 +605,7 @@ function CommitmentsPanel({ commitments, isLoading, contacts }) {
                   </p>
                 </div>
                 <button
-                  onClick={() => close.mutate(c.id)}
+                  onClick={() => { close.mutate(c.id); toast('Marked done', { icon: '✓' }) }}
                   className="text-xs text-[#6b6b67] hover:text-green-600 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 mt-0.5"
                   title="Mark done"
                 >
@@ -730,6 +734,7 @@ function QuickQuestion({ question: q, remaining }) {
 //   general       — others' actions not specifically owed to Ryan
 function OthersCommitmentsPanel({ contacts }) {
   const qc = useQueryClient()
+  const toast = useToast()
   const [collapsed, setCollapsed] = useState({ blocking_ryan: false, to_ryan: false, general: true })
 
   const { data, isLoading } = useQuery({
@@ -800,7 +805,7 @@ function OthersCommitmentsPanel({ contacts }) {
         )}
         {/* Mark done */}
         <button
-          onClick={() => update.mutate({ id: c.id, updates: { status: 'closed' } })}
+          onClick={() => { update.mutate({ id: c.id, updates: { status: 'closed' } }); toast('Marked complete', { icon: '✓' }) }}
           className="text-xs text-[#6b6b67] hover:text-green-600 px-1"
           title="Mark done"
         >✓</button>
@@ -1814,7 +1819,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── Main content ────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-3 md:px-6 py-4 pb-28 md:pb-4 space-y-3">
+      <div className="max-w-5xl mx-auto px-3 md:px-6 py-4 pb-36 space-y-3">
 
         {/* Pipeline banner */}
         <PipelineBanner />

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getOthersCommitments, updateOthersCommitment, getContacts, createContact, createTask, getProjects } from '../lib/api'
+import { useToast } from '../contexts/ToastContext'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -124,7 +125,7 @@ function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, 
   if (selectedIds.size === 0) return null
 
   return (
-    <div className="fixed bottom-14 left-0 right-0 z-20 px-4 pb-2">
+    <div className="fixed left-0 right-0 z-[55] px-4 pb-2" style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 68px)' }}>
       <div className="max-w-2xl mx-auto bg-[#1a1a18] text-white rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg flex-wrap">
         <span className="text-sm font-medium flex-shrink-0">{selectedIds.size} selected</span>
         <div className="flex items-center gap-2 ml-auto flex-wrap">
@@ -179,6 +180,8 @@ export default function OthersPage() {
   const [promotedIds,   setPromotedIds]   = useState(new Set())
   const [linkModalItem, setLinkModalItem] = useState(null)
 
+  const toast = useToast()
+
   const { data: items, isLoading } = useQuery({
     queryKey: ['others-commitments'],
     queryFn: () => getOthersCommitments('open'),
@@ -232,6 +235,7 @@ export default function OthersPage() {
         }
       })
     })
+    toast(`Reassigned ${selectedIds.size} item${selectedIds.size !== 1 ? 's' : ''} to ${name}`, { icon: '👤' })
     setSelectedIds(new Set())
     setSelectMode(false)
   }
@@ -256,9 +260,11 @@ export default function OthersPage() {
         setPromotedIds(prev => new Set([...prev, c.id]))
       } catch (_) { /* keep going */ }
     }
+    const addedCount = toPromote.length
     setPromoting(false)
     setSelectedIds(new Set())
     setSelectMode(false)
+    if (addedCount > 0) toast(`${addedCount} item${addedCount !== 1 ? 's' : ''} added to My Tasks`, { icon: '→' })
   }
 
   const handleSinglePromoteToMyTask = async (c) => {
@@ -275,6 +281,7 @@ export default function OthersPage() {
         project_id:   c.project_id || null,
       })
       setPromotedIds(prev => new Set([...prev, c.id]))
+      toast('Added to My Tasks', { icon: '→' })
     } catch (_) {}
   }
 
@@ -405,7 +412,7 @@ export default function OthersPage() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
+      <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Filter bar */}
         <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2">
           <div>
@@ -522,7 +529,7 @@ export default function OthersPage() {
 
       {/* Potential duplicates review section */}
       {!isLoading && (
-        <div className="max-w-2xl mx-auto px-4 pb-4">
+        <div className="max-w-2xl mx-auto px-4 pb-36">
           <OthersDuplicatesSection
             allItems={items || []}
             update={update}
@@ -554,6 +561,7 @@ export default function OthersPage() {
                 ...(committed_by_email ? { committed_by_email } : {}),
               }
             })
+            toast(`Linked to ${committed_by_name || 'contact'}`, { icon: '🔗' })
           }}
           onClose={() => setLinkModalItem(null)}
         />
@@ -1037,6 +1045,7 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
 function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink }) {
   const [reassigning, setReassigning] = useState(false)
   const [expanded, setExpanded] = useState(false)
+  const toast = useToast()
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
 
@@ -1052,6 +1061,7 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
         ...(email ? { committed_by_email: email } : {})
       }
     })
+    toast(`Reassigned to ${name}`, { icon: '👤' })
     setReassigning(false)
   }
 
@@ -1174,7 +1184,7 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
 
           {/* Mark done */}
           <button
-            onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { status: 'closed' } }) }}
+            onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { status: 'closed' } }); toast('Marked complete', { icon: '✓' }) }}
             className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
             title="Mark done"
           >
