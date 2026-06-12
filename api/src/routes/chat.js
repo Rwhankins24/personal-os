@@ -49,10 +49,10 @@ module.exports = async (req, res) => {
       // Knowledge base — always include relevant entries
       supabase
         .from('knowledge_base')
-        .select('topic, category, context, resolution, applies_to')
+        .select('topic, category, context, resolution, our_position, client_asks, risk_level, applies_to, project_refs')
         .eq('status', 'active')
         .order('updated_at', { ascending: false })
-        .limit(20)
+        .limit(40)
         .then(r => r.data || []),
 
       // Meeting notes — full summary + transcript for deep context
@@ -211,7 +211,8 @@ module.exports = async (req, res) => {
       e => `${e.title} ${(e.attendees || []).map(a => a.name || a).join(' ')} ${e.body}`)
 
     const relKnowledge = filterRelevant(knowledge,
-      k => `${k.topic} ${k.context} ${k.resolution} ${(k.applies_to || []).join(' ')}`)
+      k => `${k.topic} ${k.category} ${k.context} ${k.resolution} ${k.our_position || ''} ${k.client_asks || ''} ${(k.applies_to || []).join(' ')} ${(k.project_refs || []).join(' ')}`,
+      0)
 
     // ── Build context string ─────────────────────────────────────────
     const sections = []
@@ -224,10 +225,15 @@ module.exports = async (req, res) => {
     if (relKnowledge.length) {
       sections.push("=== RYAN'S KNOWLEDGE BASE ===")
       relKnowledge.forEach(k => {
-        sections.push(`[${k.category}] ${k.topic}
-Context: ${k.context?.slice(0, 300) || ''}
-Resolution/Learning: ${k.resolution?.slice(0, 300) || ''}
-Applies to: ${(k.applies_to || []).join(', ')}`)
+        const isContract = k.category === 'contract_legal'
+        const parts = [`[${k.category}${k.risk_level ? ` / ${k.risk_level} risk` : ''}] ${k.topic}`]
+        if (k.context)       parts.push(`${isContract ? "Where's the risk" : 'Context'}: ${k.context.slice(0, 400)}`)
+        if (k.our_position)  parts.push(`Our position: ${k.our_position.slice(0, 300)}`)
+        if (k.client_asks)   parts.push(`Client asks for: ${k.client_asks.slice(0, 300)}`)
+        if (k.resolution)    parts.push(`${isContract ? "How resolved" : 'Resolution'}: ${k.resolution.slice(0, 300)}`)
+        const tags = [...(k.applies_to || []), ...(k.project_refs || [])].filter(Boolean)
+        if (tags.length)     parts.push(`Applies to: ${tags.join(', ')}`)
+        sections.push(parts.join('\n'))
       })
     }
 

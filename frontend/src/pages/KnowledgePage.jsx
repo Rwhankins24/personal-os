@@ -1,7 +1,10 @@
 import { useState, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge, extractKnowledgeDoc } from '../lib/api'
+import {
+  getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge,
+  extractKnowledgeDoc, getProjects,
+} from '../lib/api'
 
 // ── Category config ────────────────────────────────────────────
 const CATEGORIES = [
@@ -22,16 +25,11 @@ const RISK_BADGE = {
   low:    'bg-green-100 text-green-700',
 }
 
-const CONTRACT_ENTRY_TYPES = [
-  { value: 'specific_contract', label: 'Specific Contract' },
-  { value: 'general_knowledge', label: 'General Knowledge / Clause' },
-]
-
 const CONSTRUCTION_ENTRY_TYPES = [
-  { value: 'scope_trap',         label: 'Scope Trap' },
-  { value: 'system_coordination', label: 'System Coordination' },
-  { value: 'sequencing_risk',    label: 'Sequencing Risk' },
-  { value: 'lesson_learned',     label: 'Lesson Learned' },
+  { value: 'scope_trap',            label: 'Scope Trap' },
+  { value: 'system_coordination',   label: 'System Coordination' },
+  { value: 'sequencing_risk',       label: 'Sequencing Risk' },
+  { value: 'lesson_learned',        label: 'Lesson Learned' },
 ]
 
 const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.value, c]))
@@ -46,8 +44,243 @@ function CategoryBadge({ category }) {
   )
 }
 
+// ── Project selector (shared) ──────────────────────────────────
+function ProjectSelect({ value, onChange, projects, placeholder = '— None —', className = '' }) {
+  return (
+    <select
+      value={value || ''}
+      onChange={e => onChange(e.target.value || null)}
+      className={`w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 ${className}`}
+    >
+      <option value="">{placeholder}</option>
+      {(projects || []).map(p => (
+        <option key={p.id} value={p.id}>{p.name}</option>
+      ))}
+    </select>
+  )
+}
+
+// ── Extract modal — project picker + file upload ───────────────
+function ExtractModal({ projects, onClose, onExtracted }) {
+  const [projectId,  setProjectId]  = useState(null)
+  const [extracting, setExtracting] = useState(false)
+  const [error,      setError]      = useState(null)
+  const fileRef = useRef(null)
+
+  const handleFile = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    e.target.value = ''
+    setError(null)
+    setExtracting(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      if (projectId) fd.append('project_id', projectId)
+      const result = await extractKnowledgeDoc(fd)
+      onExtracted(result, projectId)
+      onClose()
+    } catch (err) {
+      setError(err?.response?.data?.error || err.message)
+    } finally {
+      setExtracting(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={onClose}>
+      <div
+        className="w-full max-w-md bg-white rounded-t-2xl p-5 pb-8 shadow-xl"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-base font-semibold text-[#1a1a18]">Extract from Document</h2>
+            <p className="text-xs text-[#6b6b67] mt-0.5">Upload a contract exhibit, spec, or memo</p>
+          </div>
+          <button onClick={onClose} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+        </div>
+
+        <div className="space-y-4">
+          {/* Project picker */}
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+              Source Project <span className="text-[#aaa] font-normal">(optional — enables meeting context)</span>
+            </label>
+            <ProjectSelect
+              value={projectId}
+              onChange={setProjectId}
+              projects={projects}
+              placeholder="— No project / general knowledge —"
+            />
+            {projectId && (
+              <p className="text-xs text-blue-600 mt-1">
+                ✓ Meeting notes for this project will be used to fill in negotiation history
+              </p>
+            )}
+          </div>
+
+          {/* File upload trigger */}
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+              Document <span className="text-[#aaa] font-normal">(PDF, DOCX, or TXT)</span>
+            </label>
+            <input ref={fileRef} type="file" accept=".pdf,.docx,.txt" className="hidden" onChange={handleFile} />
+            <button
+              onClick={() => fileRef.current?.click()}
+              disabled={extracting}
+              className="w-full py-3 border-2 border-dashed border-[#e5e5e3] rounded-xl text-sm text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors disabled:opacity-40 flex items-center justify-center gap-2"
+            >
+              {extracting ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+                  Extracting clause issues…
+                </>
+              ) : (
+                <>📎 Choose file to upload</>
+              )}
+            </button>
+          </div>
+
+          {error && (
+            <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+          )}
+
+          <p className="text-xs text-[#aaa] leading-relaxed">
+            Claude will identify each material clause issue and create a separate knowledge entry for each one — indemnification, LD caps, consequential damages, etc. You'll review and approve each before anything saves.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Batch review panel ─────────────────────────────────────────
+function BatchReviewPanel({ entries, sourceDoc, projects, projectId, onApproveAll, onApproveOne, onEditOne, onSkipOne, onDone }) {
+  const projectName = projects.find(p => p.id === projectId)?.name
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-[#f8f8f6]">
+      {/* Header */}
+      <div className="bg-[#0f1923] px-5 py-4 flex items-center justify-between flex-shrink-0">
+        <div>
+          <p className="text-xs text-[#C9A84C] uppercase tracking-widest mb-0.5">Extracted Knowledge</p>
+          <h2 className="text-white font-semibold text-sm">{sourceDoc}</h2>
+          {projectName && (
+            <p className="text-xs text-[#8899aa] mt-0.5">Project: {projectName}</p>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onApproveAll}
+            className="text-xs px-3 py-1.5 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+          >
+            Approve All ({entries.filter(e => e._status === 'pending').length})
+          </button>
+          <button
+            onClick={onDone}
+            className="text-xs px-3 py-1.5 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+
+      {/* Entry list */}
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+        {entries.map((entry, i) => {
+          if (entry._status === 'skipped') return null
+          const saved = entry._status === 'saved'
+          return (
+            <div
+              key={i}
+              className={`bg-white border rounded-2xl p-4 transition-all ${
+                saved
+                  ? 'border-green-200 opacity-60'
+                  : 'border-[#e5e5e3]'
+              }`}
+            >
+              {/* Title row */}
+              <div className="flex items-start gap-2 mb-2 flex-wrap">
+                <span className="text-sm font-semibold text-[#1a1a18] flex-1">{entry.topic}</span>
+                <CategoryBadge category={entry.category} />
+                {entry.risk_level && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${RISK_BADGE[entry.risk_level] || 'bg-gray-100 text-gray-600'}`}>
+                    {entry.risk_level.charAt(0).toUpperCase() + entry.risk_level.slice(1)} Risk
+                  </span>
+                )}
+                {saved && (
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">✓ Saved</span>
+                )}
+              </div>
+
+              {/* Where's the risk */}
+              {entry.context && (
+                <div className="mb-2">
+                  <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">Where's the Risk</p>
+                  <p className="text-xs text-[#1a1a18] leading-snug">{entry.context}</p>
+                </div>
+              )}
+
+              {/* Our position + client asks — side by side */}
+              {(entry.our_position || entry.client_asks) && (
+                <div className="grid grid-cols-2 gap-2 mb-2 bg-red-50 rounded-lg px-3 py-2">
+                  {entry.our_position && (
+                    <div>
+                      <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Our Position</p>
+                      <p className="text-xs text-[#1a1a18] leading-snug">{entry.our_position}</p>
+                    </div>
+                  )}
+                  {entry.client_asks && (
+                    <div>
+                      <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Client Asks For</p>
+                      <p className="text-xs text-[#1a1a18] leading-snug">{entry.client_asks}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Resolution */}
+              {entry.resolution && (
+                <div className="mb-3">
+                  <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">How We've Resolved It</p>
+                  <p className="text-xs text-[#1a1a18] leading-snug">{entry.resolution}</p>
+                </div>
+              )}
+
+              {/* Actions */}
+              {!saved && (
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => onApproveOne(i)}
+                    className="text-xs px-2.5 py-1 bg-green-100 text-green-700 rounded-lg font-medium hover:bg-green-200 transition-colors"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => onEditOne(i)}
+                    className="text-xs px-2.5 py-1 bg-blue-100 text-blue-700 rounded-lg font-medium hover:bg-blue-200 transition-colors"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => onSkipOne(i)}
+                    className="text-xs px-2.5 py-1 text-[#6b6b67] hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    Skip
+                  </button>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ── Add/Edit Modal ─────────────────────────────────────────────
-function KnowledgeModal({ entry, onClose, onSave }) {
+function KnowledgeModal({ entry, projects, onClose, onSave }) {
   const [form, setForm] = useState({
     topic:        entry?.topic        || '',
     category:     entry?.category     || 'domain_knowledge',
@@ -59,6 +292,7 @@ function KnowledgeModal({ entry, onClose, onSave }) {
     entry_type:   entry?.entry_type   || '',
     our_position: entry?.our_position || '',
     client_asks:  entry?.client_asks  || '',
+    project_id:   entry?.project_id   || null,
     project_refs: (entry?.project_refs || []).join(', '),
   })
   const [saving, setSaving] = useState(false)
@@ -77,14 +311,15 @@ function KnowledgeModal({ entry, onClose, onSave }) {
       const payload = {
         topic:        form.topic.trim(),
         category:     form.category,
-        context:      form.context.trim() || null,
-        resolution:   form.resolution.trim() || null,
+        context:      form.context.trim()      || null,
+        resolution:   form.resolution.trim()   || null,
         applies_to:   form.applies_to.split(',').map(t => t.trim()).filter(Boolean),
         status:       form.status,
-        risk_level:   form.risk_level || null,
-        entry_type:   form.entry_type || null,
-        our_position: form.our_position?.trim() || null,
-        client_asks:  form.client_asks?.trim()  || null,
+        risk_level:   form.risk_level          || null,
+        entry_type:   form.entry_type          || null,
+        our_position: form.our_position?.trim()|| null,
+        client_asks:  form.client_asks?.trim() || null,
+        project_id:   form.project_id          || null,
         project_refs: form.project_refs.split(',').map(t => t.trim()).filter(Boolean),
       }
       await onSave(payload)
@@ -133,6 +368,19 @@ function KnowledgeModal({ entry, onClose, onSave }) {
                 <option key={c.value} value={c.value}>{c.label}</option>
               ))}
             </select>
+          </div>
+
+          {/* Source project */}
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+              Source Project <span className="text-[#aaa] font-normal">(where this negotiation happened)</span>
+            </label>
+            <ProjectSelect
+              value={form.project_id}
+              onChange={v => set('project_id', v)}
+              projects={projects}
+              placeholder="— General knowledge / no specific project —"
+            />
           </div>
 
           {/* Extended fields for contract_legal / construction_complexity */}
@@ -196,13 +444,13 @@ function KnowledgeModal({ entry, onClose, onSave }) {
                 </>
               )}
 
-              {/* Project refs */}
+              {/* Project refs (cross-project tags) */}
               <div>
-                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Projects this applies to</label>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Also applies to (project tags)</label>
                 <input
                   value={form.project_refs}
                   onChange={e => set('project_refs', e.target.value)}
-                  placeholder="Comma separated project names"
+                  placeholder="Other project names this applies to — comma separated"
                   className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
@@ -285,17 +533,16 @@ function KnowledgeModal({ entry, onClose, onSave }) {
 }
 
 // ── Entry Card ─────────────────────────────────────────────────
-function EntryCard({ entry, onEdit, onDelete }) {
+function EntryCard({ entry, projects, onEdit, onDelete }) {
   const [expanded, setExpanded] = useState(false)
 
-  const previewLen = 180
+  const previewLen      = 180
   const isContractLegal = entry.category === 'contract_legal'
   const isConstruction  = entry.category === 'construction_complexity'
+  const projectName     = projects?.find(p => p.id === entry.project_id)?.name
 
-  const entryTypeLabel = (type) => {
-    const all = [...CONTRACT_ENTRY_TYPES, ...CONSTRUCTION_ENTRY_TYPES]
-    return all.find(o => o.value === type)?.label || type
-  }
+  const entryTypeLabel = (type) =>
+    CONSTRUCTION_ENTRY_TYPES.find(o => o.value === type)?.label || type
 
   return (
     <div
@@ -318,7 +565,6 @@ function EntryCard({ entry, onEdit, onDelete }) {
             </span>
           )}
         </div>
-        {/* Edit/delete — visible on hover */}
         <div
           className="flex items-center gap-1 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
           onClick={e => e.stopPropagation()}
@@ -326,35 +572,24 @@ function EntryCard({ entry, onEdit, onDelete }) {
           <button
             onClick={() => onEdit(entry)}
             className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100"
-            title="Edit"
           >
             Edit
           </button>
           <button
             onClick={() => onDelete(entry.id)}
             className="text-xs text-[#6b6b67] hover:text-red-600 px-2 py-1 rounded-lg hover:bg-red-50"
-            title="Delete"
           >
             Delete
           </button>
         </div>
       </div>
 
-      {/* Contract/Legal — Our Position + What Clients Ask For */}
-      {isContractLegal && (entry.our_position || entry.client_asks) && expanded && (
-        <div className="space-y-2 mb-2 bg-red-50 rounded-lg px-3 py-2">
-          {entry.our_position && (
-            <div>
-              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Our Position</p>
-              <p className="text-sm text-[#1a1a18] leading-snug">{entry.our_position}</p>
-            </div>
-          )}
-          {entry.client_asks && (
-            <div>
-              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">What Clients Ask For</p>
-              <p className="text-sm text-[#1a1a18] leading-snug">{entry.client_asks}</p>
-            </div>
-          )}
+      {/* Source project chip */}
+      {projectName && (
+        <div className="mb-2">
+          <span className="text-xs border border-[#C9A84C]/50 text-[#C9A84C] bg-amber-50 px-2 py-0.5 rounded-full font-medium">
+            📁 {projectName}
+          </span>
         </div>
       )}
 
@@ -362,7 +597,7 @@ function EntryCard({ entry, onEdit, onDelete }) {
       {(entry.project_refs || []).length > 0 && (
         <div className="flex items-center gap-1 flex-wrap mb-2">
           {entry.project_refs.map((p, i) => (
-            <span key={i} className="text-xs border border-[#C9A84C]/50 text-[#C9A84C] bg-amber-50 px-2 py-0.5 rounded-full font-medium">
+            <span key={i} className="text-xs border border-[#e5e5e3] text-[#6b6b67] bg-gray-50 px-2 py-0.5 rounded-full">
               {p}
             </span>
           ))}
@@ -377,6 +612,24 @@ function EntryCard({ entry, onEdit, onDelete }) {
               {tag}
             </span>
           ))}
+        </div>
+      )}
+
+      {/* Contract/Legal — Our Position + What Clients Ask For (expanded only) */}
+      {isContractLegal && expanded && (entry.our_position || entry.client_asks) && (
+        <div className="grid grid-cols-2 gap-2 mb-2 bg-red-50 rounded-lg px-3 py-2">
+          {entry.our_position && (
+            <div>
+              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Our Position</p>
+              <p className="text-sm text-[#1a1a18] leading-snug">{entry.our_position}</p>
+            </div>
+          )}
+          {entry.client_asks && (
+            <div>
+              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Client Asks For</p>
+              <p className="text-sm text-[#1a1a18] leading-snug">{entry.client_asks}</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -409,7 +662,7 @@ function EntryCard({ entry, onEdit, onDelete }) {
       )}
 
       {/* Expand hint */}
-      {!expanded && ((entry.context?.length > previewLen) || (entry.resolution?.length > previewLen)) && (
+      {!expanded && ((entry.context?.length > previewLen) || (entry.resolution?.length > previewLen) || (isContractLegal && (entry.our_position || entry.client_asks))) && (
         <p className="text-xs text-blue-500 mt-1.5">Tap to expand</p>
       )}
       {expanded && (
@@ -429,14 +682,12 @@ function ProposedRow({ entry, onApprove, onEditApprove, onSkip }) {
           <CategoryBadge category={entry.category} />
         </div>
       </div>
-
       {entry.context && (
         <p className="text-xs text-[#6b6b67] line-clamp-2 mb-1">{entry.context}</p>
       )}
       {entry.resolution && (
         <p className="text-xs text-[#1a1a18] line-clamp-2 mb-2">{entry.resolution}</p>
       )}
-
       <div className="flex items-center gap-2">
         <button
           onClick={() => onApprove(entry)}
@@ -467,10 +718,10 @@ export default function KnowledgePage() {
 
   const [search,      setSearch]      = useState('')
   const [catFilter,   setCatFilter]   = useState('all')
-  const [modal,       setModal]       = useState(null) // null | { mode: 'add' | 'edit', entry?: {} }
+  const [modal,       setModal]       = useState(null)   // null | { mode, entry? }
   const [editEntry,   setEditEntry]   = useState(null)
-  const [extracting,  setExtracting]  = useState(false)
-  const fileInputRef = useRef(null)
+  const [extractModal, setExtractModal] = useState(false)
+  const [batchReview, setBatchReview] = useState(null)   // null | { entries[], sourceDoc, projectId }
 
   const { data: active = [],   isLoading } = useQuery({
     queryKey: ['knowledge'],
@@ -482,6 +733,12 @@ export default function KnowledgePage() {
     queryKey: ['knowledge-proposed'],
     queryFn:  () => getKnowledge('proposed'),
     staleTime: 1000 * 60 * 2,
+  })
+
+  const { data: projects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn:  getProjects,
+    staleTime: 1000 * 60 * 5,
   })
 
   // ── Mutations ────────────────────────────────────────────────
@@ -507,17 +764,11 @@ export default function KnowledgePage() {
   })
 
   // ── Handlers ─────────────────────────────────────────────────
-  const handleAdd = () => setModal({ mode: 'add' })
-
-  const handleEdit = (entry) => {
-    setEditEntry(entry)
-    setModal({ mode: 'edit', entry })
-  }
+  const handleAdd  = () => setModal({ mode: 'add' })
+  const handleEdit = (entry) => { setEditEntry(entry); setModal({ mode: 'edit', entry }) }
 
   const handleDelete = (id) => {
-    if (window.confirm('Delete this knowledge entry?')) {
-      deleteMut.mutate(id)
-    }
+    if (window.confirm('Delete this knowledge entry?')) deleteMut.mutate(id)
   }
 
   const handleSave = async (payload) => {
@@ -528,49 +779,60 @@ export default function KnowledgePage() {
     }
   }
 
-  const handleApprove = (entry) => {
-    updateMut.mutate({ id: entry.id, data: { status: 'active' } })
+  const handleApprove      = (entry) => updateMut.mutate({ id: entry.id, data: { status: 'active' } })
+  const handleEditApprove  = (entry) => { setEditEntry({ ...entry, status: 'active' }); setModal({ mode: 'edit', entry: { ...entry, status: 'active' } }) }
+  const handleSkip         = (id)    => updateMut.mutate({ id, data: { status: 'archived' } })
+
+  // ── Extraction → batch review ─────────────────────────────────
+  const handleExtracted = (result, projectId) => {
+    const entries = (result.entries || []).map(e => ({ ...e, _status: 'pending' }))
+    setBatchReview({ entries, sourceDoc: result.source_doc || 'Document', projectId })
   }
 
-  const handleEditApprove = (entry) => {
-    setEditEntry({ ...entry, status: 'active' })
-    setModal({ mode: 'edit', entry: { ...entry, status: 'active' } })
-  }
-
-  const handleSkip = (id) => {
-    updateMut.mutate({ id, data: { status: 'archived' } })
-  }
-
-  const handleExtractFile = async (e) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    e.target.value = ''
-    setExtracting(true)
-    try {
-      const fd = new FormData()
-      fd.append('file', file)
-      const extracted = await extractKnowledgeDoc(fd)
-      // Pre-fill the modal with extracted data
-      const prefilled = {
-        topic:        extracted.topic        || '',
-        category:     extracted.category     || 'domain_knowledge',
-        context:      extracted.context      || '',
-        resolution:   extracted.resolution   || '',
-        applies_to:   (extracted.applies_to  || []).join(', '),
-        status:       'active',
-        risk_level:   extracted.risk_level   || '',
-        entry_type:   extracted.entry_type   || '',
-        our_position: extracted.our_position || '',
-        client_asks:  extracted.client_asks  || '',
-        project_refs: (extracted.project_refs || []).join(', '),
-      }
-      setEditEntry(null)
-      setModal({ mode: 'add', entry: prefilled })
-    } catch (err) {
-      alert('Extraction failed: ' + (err?.response?.data?.error || err.message))
-    } finally {
-      setExtracting(false)
+  const handleBatchApproveOne = async (idx) => {
+    const entry = batchReview.entries[idx]
+    const payload = {
+      ...entry,
+      status:       'active',
+      proposed_by:  'extract',
+      project_id:   batchReview.projectId || entry.project_id || null,
     }
+    delete payload._status
+    await createMut.mutateAsync(payload)
+    setBatchReview(prev => {
+      const entries = [...prev.entries]
+      entries[idx] = { ...entries[idx], _status: 'saved' }
+      return { ...prev, entries }
+    })
+  }
+
+  const handleBatchApproveAll = async () => {
+    const pending = batchReview.entries.filter(e => e._status === 'pending')
+    for (const entry of pending) {
+      const idx = batchReview.entries.indexOf(entry)
+      await handleBatchApproveOne(idx)
+    }
+  }
+
+  const handleBatchEditOne = (idx) => {
+    const entry = batchReview.entries[idx]
+    setEditEntry(null)
+    setModal({
+      mode: 'add',
+      entry: {
+        ...entry,
+        project_id: batchReview.projectId || entry.project_id || null,
+        status: 'active',
+      }
+    })
+  }
+
+  const handleBatchSkipOne = (idx) => {
+    setBatchReview(prev => {
+      const entries = [...prev.entries]
+      entries[idx] = { ...entries[idx], _status: 'skipped' }
+      return { ...prev, entries }
+    })
   }
 
   // ── Filtered entries ─────────────────────────────────────────
@@ -580,9 +842,11 @@ export default function KnowledgePage() {
       if (!search.trim()) return true
       const q = search.toLowerCase()
       return (
-        e.topic?.toLowerCase().includes(q) ||
-        e.context?.toLowerCase().includes(q) ||
-        e.resolution?.toLowerCase().includes(q) ||
+        e.topic?.toLowerCase().includes(q)       ||
+        e.context?.toLowerCase().includes(q)     ||
+        e.resolution?.toLowerCase().includes(q)  ||
+        e.our_position?.toLowerCase().includes(q)||
+        e.client_asks?.toLowerCase().includes(q) ||
         (e.applies_to || []).some(t => t.toLowerCase().includes(q))
       )
     })
@@ -595,7 +859,6 @@ export default function KnowledgePage() {
       <div className="sticky top-0 z-10 bg-[#f8f8f6]/95 backdrop-blur border-b border-[#e5e5e3] px-4 py-3">
         <div className="max-w-4xl mx-auto">
 
-          {/* Title row */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <Link to="/" className="text-sm text-[#6b6b67] hover:text-[#1a1a18]">← Dashboard</Link>
@@ -607,28 +870,11 @@ export default function KnowledgePage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {/* Hidden file input for doc extract */}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".pdf,.docx,.txt"
-                className="hidden"
-                onChange={handleExtractFile}
-              />
               <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={extracting}
-                className="text-xs px-3 py-1.5 border border-[#e5e5e3] rounded-lg font-medium text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors disabled:opacity-40 flex items-center gap-1.5"
-                title="Extract knowledge from a PDF, DOCX, or TXT document"
+                onClick={() => setExtractModal(true)}
+                className="text-xs px-3 py-1.5 border border-[#e5e5e3] rounded-lg font-medium text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors flex items-center gap-1.5"
               >
-                {extracting ? (
-                  <>
-                    <span className="w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin" />
-                    Extracting…
-                  </>
-                ) : (
-                  <>📎 Extract from doc</>
-                )}
+                📎 Extract from doc
               </button>
               <button
                 onClick={handleAdd}
@@ -670,14 +916,11 @@ export default function KnowledgePage() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search topic, context, resolution, tags..."
+              placeholder="Search topic, context, resolution, our position, client asks..."
               className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e5e5e3] rounded-lg bg-white text-[#1a1a18] placeholder-[#6b6b67] focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {search && (
-              <button
-                onClick={() => setSearch('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs"
-              >×</button>
+              <button onClick={() => setSearch('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs">×</button>
             )}
           </div>
         </div>
@@ -686,7 +929,7 @@ export default function KnowledgePage() {
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-4 py-4 space-y-4">
 
-        {/* Section A — Review Queue */}
+        {/* Proposed queue */}
         {proposed.length > 0 && (
           <div>
             <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-xl mb-3">
@@ -709,7 +952,7 @@ export default function KnowledgePage() {
           </div>
         )}
 
-        {/* Section B — Active Knowledge */}
+        {/* Active knowledge */}
         {isLoading ? (
           <div className="flex items-center justify-center py-16">
             <div className="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />
@@ -720,7 +963,7 @@ export default function KnowledgePage() {
             <p className="text-sm">
               {search || catFilter !== 'all'
                 ? 'No entries match your filters'
-                : 'No knowledge entries yet — add one to get started'}
+                : 'No knowledge entries yet — add one or extract from a document'}
             </p>
           </div>
         ) : (
@@ -729,6 +972,7 @@ export default function KnowledgePage() {
               <EntryCard
                 key={entry.id}
                 entry={entry}
+                projects={projects}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
               />
@@ -737,10 +981,35 @@ export default function KnowledgePage() {
         )}
       </div>
 
+      {/* Extract modal */}
+      {extractModal && (
+        <ExtractModal
+          projects={projects}
+          onClose={() => setExtractModal(false)}
+          onExtracted={handleExtracted}
+        />
+      )}
+
+      {/* Batch review panel */}
+      {batchReview && (
+        <BatchReviewPanel
+          entries={batchReview.entries}
+          sourceDoc={batchReview.sourceDoc}
+          projectId={batchReview.projectId}
+          projects={projects}
+          onApproveOne={handleBatchApproveOne}
+          onApproveAll={handleBatchApproveAll}
+          onEditOne={handleBatchEditOne}
+          onSkipOne={handleBatchSkipOne}
+          onDone={() => setBatchReview(null)}
+        />
+      )}
+
       {/* Add/Edit modal */}
       {modal && (
         <KnowledgeModal
           entry={modal.entry || null}
+          projects={projects}
           onClose={() => { setModal(null); setEditEntry(null) }}
           onSave={handleSave}
         />
