@@ -139,7 +139,7 @@ async function main() {
           const { data: existing } = await supabase
             .from('tasks').select('id')
             .ilike('title', title.slice(0, 80))
-            .eq('status', 'active')
+            .eq('status', 'open')
             .maybeSingle()
           if (!existing) {
             await supabase.from('tasks').insert({
@@ -147,7 +147,7 @@ async function main() {
               context:         item.attribution_basis || `From meeting: ${meeting.title || 'Meeting'}`,
               urgency:         item.urgency || 'medium',
               due_date:        item.due_date || null,
-              status:          'active',
+              status:          'open',
               type:            'action',
               source_type:     'ai_otter',
               source_label:    meeting.title || 'Meeting',
@@ -214,14 +214,14 @@ async function main() {
           const { data: existing } = await supabase
             .from('others_commitments').select('id')
             .ilike('title', title.slice(0, 60))
-            .eq('status', 'pending')
+            .eq('status', 'open')
             .maybeSingle()
 
           if (!existing) {
             await supabase.from('others_commitments').insert({
-              title:           title,
-              person_name:     name,
-              person_email:    item.assigned_to_email || item.committed_by_email || contact?.email || null,
+              title:              title,
+              committed_by_name:  name,
+              committed_by_email: item.assigned_to_email || item.committed_by_email || contact?.email || null,
               contact_id:      contact?.id || null,
               due_date:        item.due_date || null,
               urgency:         item.urgency || 'medium',
@@ -243,7 +243,7 @@ async function main() {
       let pendingCount = 0
       for (const p of (intel.pending_decisions || [])) {
         const title = p.decision || p.title
-        if (!title || !meeting.project_id) continue
+        if (!title) continue
         try {
           const { data: existing } = await supabase
             .from('pending_decisions').select('id')

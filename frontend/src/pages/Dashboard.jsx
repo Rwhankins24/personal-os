@@ -235,23 +235,60 @@ function PipelineBanner() {
   const allDone = !!status.ai_completed_at
   const anyStarted = !!status.email_pull_completed_at
 
-  if (!anyStarted) return (
+  // Staleness: use last_ai_completed_at (most recent successful run, even if yesterday)
+  const lastAiTs = status.last_ai_completed_at || status.ai_completed_at || null
+  const hoursStale = lastAiTs
+    ? (Date.now() - new Date(lastAiTs).getTime()) / (1000 * 60 * 60)
+    : Infinity
+  const isAmber = hoursStale >= 36 && hoursStale < 72
+  const isRed   = hoursStale >= 72
+
+  // Guard: no pipeline activity at all AND no prior AI run
+  if (!anyStarted && !lastAiTs) return (
     <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2">
       <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-      No pipeline run today — tap Sync to start
+      No pipeline run yet — tap Sync to start
+    </div>
+  )
+
+  // Guard: today's run started but AI has never completed (fresh system or broken pipeline)
+  // Don't show staleness timestamp if we have no valid timestamp to show
+  if ((isAmber || isRed) && !lastAiTs) return (
+    <div className="flex items-center gap-2 text-xs rounded-lg px-3 py-2 border bg-amber-50 border-amber-300 text-amber-700">
+      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-amber-400" />
+      <span className="truncate">Pipeline running — AI analysis not yet completed</span>
+    </div>
+  )
+
+  // Staleness override: show amber/red even if today's run is in-progress
+  if (isRed && !allDone) return (
+    <div className="flex items-center gap-2 text-xs rounded-lg px-3 py-2 border bg-red-50 border-red-300 text-red-700">
+      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-red-500" />
+      <span className="truncate font-medium">
+        Data stale — AI last ran {dayjs(lastAiTs).fromNow()} · Pipeline may be stuck
+      </span>
     </div>
   )
 
   return (
     <div className={`flex items-center gap-2 text-xs rounded-lg px-3 py-2 border ${
-      allDone
-        ? 'bg-green-50 border-green-200 text-green-700'
-        : 'bg-blue-50 border-blue-200 text-blue-700'
+      isRed   ? 'bg-red-50 border-red-300 text-red-700'    :
+      isAmber ? 'bg-amber-50 border-amber-300 text-amber-700' :
+      allDone ? 'bg-green-50 border-green-200 text-green-700'
+              : 'bg-blue-50 border-blue-200 text-blue-700'
     }`}>
-      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${allDone ? 'bg-green-500' : 'bg-blue-400 animate-pulse'}`} />
+      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+        isRed   ? 'bg-red-500'       :
+        isAmber ? 'bg-amber-400'     :
+        allDone ? 'bg-green-500'     : 'bg-blue-400 animate-pulse'
+      }`} />
       <span className="truncate">
-        {allDone
-          ? `Full pipeline complete · AI finished ${dayjs(status.ai_completed_at).fromNow()}`
+        {allDone && !isAmber && !isRed
+          ? `Pipeline complete · AI finished ${dayjs(status.ai_completed_at).fromNow()}`
+          : isAmber
+          ? `Data aging — AI last ran ${dayjs(lastAiTs).fromNow()} · ${anyStarted ? 'Today\'s run in progress' : 'No run today yet'}`
+          : isRed
+          ? `Data stale — AI last ran ${dayjs(lastAiTs).fromNow()}`
           : `Pipeline in progress · ${lastCompleted?.label || 'Starting'} done`}
       </span>
       <div className="ml-auto flex items-center gap-1">

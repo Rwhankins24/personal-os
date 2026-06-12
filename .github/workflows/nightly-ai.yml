@@ -152,7 +152,34 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "from": "personalos@resend.dev",
-              "to": "ryanhankins.personalos@gmail.com",
-              "subject": "Personal OS — AI job failed",
-              "text": "The nightly AI job failed. Check GitHub Actions logs."
+              "to": "hankinsr@claycorp.com",
+              "subject": "Personal OS — AI job FAILED (hard crash)",
+              "text": "The nightly AI job crashed. Check GitHub Actions logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }' || echo "Notification failed too"
+
+      - name: Check for partial failures
+        if: success() && steps.check.outputs.should_run == 'true'
+        run: |
+          # Job exited 0 but individual steps may have soft-errored.
+          # Query pipeline_runs error_count — if > 0, send a softer warning.
+          STATUS=$(curl -s \
+            "${{ secrets.API_URL }}/api/pipeline/status" \
+            -H "x-trigger-secret: ${{ secrets.TRIGGER_SECRET }}")
+          ERROR_COUNT=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('error_count') or 0)" 2>/dev/null || echo "0")
+          echo "Pipeline error_count: $ERROR_COUNT"
+          if [ "$ERROR_COUNT" -gt 0 ]; then
+            echo "Partial failures detected — sending alert"
+            curl -s -X POST \
+              "https://api.resend.com/emails" \
+              -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"from\": \"personalos@resend.dev\",
+                \"to\": \"hankinsr@claycorp.com\",
+                \"subject\": \"Personal OS — AI job partial failures (${ERROR_COUNT} errors)\",
+                \"text\": \"The nightly AI job completed but had ${ERROR_COUNT} step-level errors. Some intelligence may be missing. Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+              }" || echo "Partial-failure notification failed"
+          else
+            echo "No partial failures — clean run."
+          fi

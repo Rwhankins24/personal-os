@@ -16,11 +16,18 @@ module.exports = async (req, res) => {
 
   try {
     if (req.method === 'GET') {
-      const { data, error } = await supabase
+      const statusParam = req.query.status
+      let query = supabase
         .from('pending_decisions')
         .select('*, projects(name)')
-        .eq('status', 'open')
         .order('due_date', { ascending: true })
+      // Default to 'open' unless caller requests 'all' or a specific status
+      if (!statusParam || statusParam === 'open') {
+        query = query.eq('status', 'open')
+      } else if (statusParam !== 'all') {
+        query = query.eq('status', statusParam)
+      }
+      const { data, error } = await query
       if (error) throw error
       return res.json(data)
     }

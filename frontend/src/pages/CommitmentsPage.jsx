@@ -60,6 +60,39 @@ export default function CommitmentsPage() {
   const qc = useQueryClient()
 
   const [typeFilter, setTypeFilter] = useState('all')
+  const [selectMode, setSelectMode] = useState(false)
+  const [selected, setSelected] = useState(new Set())
+  const [bulkSaving, setBulkSaving] = useState(false)
+
+  const toggleSelect = (id) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const selectAll = () => setSelected(new Set(filtered.map(c => c.id)))
+  const clearAll  = () => setSelected(new Set())
+
+  const exitSelectMode = () => {
+    setSelectMode(false)
+    setSelected(new Set())
+  }
+
+  const bulkMarkDone = async () => {
+    if (!selected.size) return
+    setBulkSaving(true)
+    try {
+      await Promise.all([...selected].map(id => updateCommitment(id, { status: 'closed' })))
+      qc.setQueryData(['commitments'], old =>
+        (old || []).map(c => selected.has(c.id) ? { ...c, status: 'closed' } : c)
+      )
+      exitSelectMode()
+    } finally {
+      setBulkSaving(false)
+    }
+  }
 
   const { data: commitments, isLoading } = useQuery({
     queryKey: ['commitments'],
@@ -127,7 +160,21 @@ export default function CommitmentsPage() {
             ← Back
           </button>
           <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">My Commitments</h1>
-          <span className="text-xs text-[#6b6b67] flex-shrink-0">{filtered.length} items</span>
+          {selectMode ? (
+            <div className="flex items-center gap-2">
+              <button onClick={selectAll}  className="text-xs text-blue-600 hover:underline">All</button>
+              <button onClick={clearAll}   className="text-xs text-[#6b6b67] hover:underline">Clear</button>
+              <button onClick={exitSelectMode} className="text-xs text-[#6b6b67] hover:underline">Cancel</button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setSelectMode(true)}
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18]"
+            >
+              Select
+            </button>
+          )}
+          <span className="text-xs text-[#9b9b97] flex-shrink-0">{filtered.length} items</span>
         </div>
       </div>
 
@@ -171,8 +218,20 @@ export default function CommitmentsPage() {
                       return (
                         <div
                           key={c.id}
-                          className={`flex items-start gap-3 px-4 py-3 group border-l-2 ${typeStyle}`}
+                          className={`flex items-start gap-3 px-4 py-3 group border-l-2 ${typeStyle} ${selected.has(c.id) ? 'bg-blue-50/40' : ''} ${selectMode ? 'cursor-pointer' : ''}`}
+                          onClick={() => selectMode && toggleSelect(c.id)}
                         >
+                          {selectMode && (
+                            <div className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                              selected.has(c.id) ? 'bg-blue-500 border-blue-500' : 'border-[#d0d0cc]'
+                            }`}>
+                              {selected.has(c.id) && (
+                                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
+                                  <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              )}
+                            </div>
+                          )}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
@@ -219,6 +278,23 @@ export default function CommitmentsPage() {
           </div>
         )}
       </div>
+
+      {/* Bulk action bar */}
+      {selectMode && selected.size > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center px-4 pb-20">
+          <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
+            <span className="text-sm font-medium whitespace-nowrap">{selected.size} selected</span>
+            <button
+              onClick={bulkMarkDone}
+              disabled={bulkSaving}
+              className="flex-1 text-sm font-semibold bg-green-500 text-white px-4 py-2 rounded-xl disabled:opacity-40 hover:bg-green-400 transition-colors"
+            >
+              {bulkSaving ? 'Saving…' : '✓ Mark done'}
+            </button>
+            <button onClick={exitSelectMode} className="text-white/60 hover:text-white text-lg leading-none px-1">✕</button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -34,14 +34,31 @@ module.exports = async (req, res) => {
 
     if (error) return res.status(500).json({ error: error.message })
 
-    return res.json(data || {
+    // Always include last_ai_completed_at for staleness detection in the UI.
+    // If today's run hasn't completed AI yet, look back at the most recent run that did.
+    let lastAiCompletedAt = data?.ai_completed_at || null
+    if (!lastAiCompletedAt) {
+      const { data: lastRun } = await supabase
+        .from('pipeline_runs')
+        .select('ai_completed_at')
+        .not('ai_completed_at', 'is', null)
+        .order('ai_completed_at', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+      lastAiCompletedAt = lastRun?.ai_completed_at || null
+    }
+
+    const todayData = data || {
       run_date: today,
       status: 'not_started',
       email_pull_completed_at: null,
       upload_completed_at: null,
       processing_completed_at: null,
-      ai_completed_at: null
-    })
+      ai_completed_at: null,
+      error_count: 0,
+    }
+
+    return res.json({ ...todayData, last_ai_completed_at: lastAiCompletedAt })
   }
 
   // ── POST — mark a step complete ───────────────────────────────────────

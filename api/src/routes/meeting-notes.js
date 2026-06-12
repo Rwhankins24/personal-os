@@ -53,7 +53,8 @@ module.exports = async (req, res) => {
         assignee_email: item.assignee_email || null,
       })).filter(i => i.task_text)
 
-      const startTime = meeting_date ? `${meeting_date}T12:00:00Z` : null
+      // T19:00:00Z = noon Phoenix (UTC-7, Arizona never observes DST)
+      const startTime = meeting_date ? `${meeting_date}T19:00:00Z` : null
 
       const { data: inserted, error } = await supabase
         .from('meeting_notes')
@@ -134,14 +135,14 @@ module.exports = async (req, res) => {
       // Fallback: match by source_label = meeting title (for older records)
       let { data: othersCommitments } = await supabase
         .from('others_commitments')
-        .select('id, title, person_name, committed_by_name, due_date, urgency, status, context')
+        .select('id, title, committed_by_name, committed_by_email, due_date, urgency, status, context')
         .eq('meeting_note_id', id)
         .order('urgency', { ascending: true })
 
       if (!othersCommitments?.length && meeting.title) {
         const { data: byLabel } = await supabase
           .from('others_commitments')
-          .select('id, title, person_name, committed_by_name, due_date, urgency, status, context')
+          .select('id, title, committed_by_name, committed_by_email, due_date, urgency, status, context')
           .eq('source_label', meeting.title)
           .in('status', ['open', 'pending'])
           .order('urgency', { ascending: true })

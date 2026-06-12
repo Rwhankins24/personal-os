@@ -297,7 +297,7 @@ export default function MeetingDetail() {
                 return (
                   <div key={i} className="text-xs border border-purple-100 bg-purple-50 rounded-lg px-3 py-2 flex items-start gap-2">
                     <div className="flex-1">
-                      <span className="font-semibold text-purple-800">{c.person_name}: </span>
+                      <span className="font-semibold text-purple-800">{c.committed_by_name || c.person_name}: </span>
                       <span className="text-purple-900">{c.title}</span>
                       {c.due_date && <span className="ml-2 text-purple-600">due {c.due_date}</span>}
                     </div>

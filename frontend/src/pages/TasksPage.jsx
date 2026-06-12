@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getTasks, updateTask } from '../lib/api'
+import { getTasks, updateTask, deleteTask } from '../lib/api'
 import InlineEdit from '../components/InlineEdit'
 
 // ── Potential Duplicates Section ──────────────────────────────────
@@ -204,6 +204,51 @@ export default function TasksPage() {
   const [statusFilter, setStatusFilter] = useState('all')
   const [urgencyFilter, setUrgencyFilter] = useState('all')
   const [expandedId, setExpandedId] = useState(null)
+  const [selectMode, setSelectMode] = useState(false)
+  const [selected, setSelected] = useState(new Set())
+  const [bulkSaving, setBulkSaving] = useState(false)
+
+  const toggleSelect = (id) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const selectAll = () => setSelected(new Set(sorted.map(t => t.id)))
+  const clearAll  = () => setSelected(new Set())
+
+  const exitSelectMode = () => {
+    setSelectMode(false)
+    setSelected(new Set())
+  }
+
+  const bulkMarkDone = async () => {
+    if (!selected.size) return
+    setBulkSaving(true)
+    try {
+      await Promise.all([...selected].map(id => updateTask(id, { status: 'done' })))
+      qc.setQueryData(['tasks'], old =>
+        (old || []).map(t => selected.has(t.id) ? { ...t, status: 'done' } : t)
+      )
+      exitSelectMode()
+    } finally {
+      setBulkSaving(false)
+    }
+  }
+
+  const bulkDelete = async () => {
+    if (!selected.size) return
+    setBulkSaving(true)
+    try {
+      await Promise.all([...selected].map(id => deleteTask(id)))
+      qc.setQueryData(['tasks'], old => (old || []).filter(t => !selected.has(t.id)))
+      exitSelectMode()
+    } finally {
+      setBulkSaving(false)
+    }
+  }
 
   const { data: tasks, isLoading } = useQuery({
     queryKey: ['tasks'],
@@ -286,7 +331,21 @@ export default function TasksPage() {
             ← Back
           </button>
           <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Tasks</h1>
-          <span className="text-xs text-[#6b6b67] flex-shrink-0">{sorted.length} items</span>
+          {selectMode ? (
+            <div className="flex items-center gap-2">
+              <button onClick={selectAll}  className="text-xs text-blue-600 hover:underline">All</button>
+              <button onClick={clearAll}   className="text-xs text-[#6b6b67] hover:underline">Clear</button>
+              <button onClick={exitSelectMode} className="text-xs text-[#6b6b67] hover:underline">Cancel</button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setSelectMode(true)}
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18]"
+            >
+              Select
+            </button>
+          )}
+          <span className="text-xs text-[#9b9b97] flex-shrink-0">{sorted.length} items</span>
         </div>
       </div>
 
@@ -318,11 +377,23 @@ export default function TasksPage() {
               return (
                 <div key={task.id}>
                   <div
-                    className="flex items-start gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors"
-                    onClick={() => setExpandedId(expanded ? null : task.id)}
+                    className={`flex items-start gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors ${selected.has(task.id) ? 'bg-blue-50/40' : ''}`}
+                    onClick={() => selectMode ? toggleSelect(task.id) : setExpandedId(expanded ? null : task.id)}
                   >
-                    {/* Urgency dot */}
-                    <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${URGENCY_COLOR[task.urgency] || 'bg-gray-300'}`} />
+                    {/* Checkbox (select mode) or urgency dot */}
+                    {selectMode ? (
+                      <div className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                        selected.has(task.id) ? 'bg-blue-500 border-blue-500' : 'border-[#d0d0cc]'
+                      }`}>
+                        {selected.has(task.id) && (
+                          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
+                            <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                      </div>
+                    ) : (
+                      <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1.5 ${URGENCY_COLOR[task.urgency] || 'bg-gray-300'}`} />
+                    )}
 
                     {/* Main content */}
                     <div className="flex-1 min-w-0">
@@ -412,6 +483,30 @@ export default function TasksPage() {
           />
         )}
       </div>
+
+      {/* Bulk action bar */}
+      {selectMode && selected.size > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center px-4 pb-20">
+          <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
+            <span className="text-sm font-medium whitespace-nowrap">{selected.size} selected</span>
+            <button
+              onClick={bulkMarkDone}
+              disabled={bulkSaving}
+              className="flex-1 text-sm font-semibold bg-green-500 text-white px-4 py-2 rounded-xl disabled:opacity-40 hover:bg-green-400 transition-colors"
+            >
+              {bulkSaving ? 'Saving…' : '✓ Mark done'}
+            </button>
+            <button
+              onClick={bulkDelete}
+              disabled={bulkSaving}
+              className="text-sm font-semibold bg-red-500 text-white px-4 py-2 rounded-xl disabled:opacity-40 hover:bg-red-400 transition-colors"
+            >
+              Delete
+            </button>
+            <button onClick={exitSelectMode} className="text-white/60 hover:text-white text-lg leading-none px-1">✕</button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

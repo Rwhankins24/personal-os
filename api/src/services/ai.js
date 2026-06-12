@@ -20,6 +20,43 @@ const supabase = createClient(
 // ─── Ryan's base context — role and operating style
 const RYAN_BASE = `Ryan Hankins is a Project Executive at Clayco, a national design-build construction firm. He operates at the intersection of pursuit, preconstruction, and execution. He thinks like an owner-side integrator trapped in a GC role. Values: decision advantage, risk clarity, no surprises. Email: hankinsr@claycorp.com.`
 
+// ─── Construction domain context — terminology + commitment attribution conventions
+// Injected into meeting transcript and email extraction prompts to reduce ambiguity
+const CONSTRUCTION_DOMAIN_CONTEXT = `
+CONSTRUCTION DOMAIN CONTEXT (use this to interpret terminology and attribute ownership correctly):
+
+Clayco is a national design-build general contractor. Key roles in meetings:
+- Ryan Hankins (GC/Clayco side) — Project Executive; owns scope, risk, budget, and owner relationship
+- Owner / Owner's team — the client who hired Clayco; their commitments belong to them, not Ryan
+- Architect / Design team / LJC — design authority; RFIs and ASIs are their outputs
+- AHJ — Authority Having Jurisdiction (permitting/code); external third party
+
+Key construction terminology:
+- OAC Meeting = Owner, Architect, Contractor — core project leadership team
+- GMP = Guaranteed Maximum Price (Clayco's contract type; budget is fixed once set)
+- NTE = Not to Exceed (budget ceiling)
+- RFI = Request for Information (formal design clarification request to architect)
+- ASI = Architect's Supplemental Instructions (design change directive from architect)
+- PCO/PCCO = Proposed/Potential Change Order (unresolved cost change; Clayco's exposure until signed)
+- CO = Change Order (executed scope/cost change; mutually agreed)
+- BESS = Battery Energy Storage System (industrial project type)
+- BIM = Building Information Modeling (3D coordination)
+- DD / CD = Design Development / Construction Documents (drawing stages)
+- MEP = Mechanical, Electrical, Plumbing (systems coordination)
+- LTI = Long-Lead Item (equipment with 20+ week procurement lead time)
+- SOV = Schedule of Values (payment breakdown)
+- Buyout = procurement / subcontractor selection phase
+
+Commitment attribution rules:
+- "The owner will..." or "Owner's team will..." = their commitment, not Ryan's
+- "We will..." or "Clayco will..." in GC context = Ryan/Clayco team owns it
+- "I'll [verb]" / "I will [verb]" / "Let me [verb]" from Ryan = Ryan's action item
+- "[Name], can you..." or "Can you [verb]" addressed to someone = that person's commitment
+- "Design team will..." or "Architect will..." = architect/LJC commitment
+- "Your team will..." = belongs to the person being spoken to, not Ryan
+- Passive voice ("it will be done") = flag as ambiguous, assign to most likely owner from context
+`
+
 // ─── Build live RYAN_CONTEXT by pulling current project state from DB
 // Returns a context string injected into every AI call
 let _cachedContext = null
@@ -213,7 +250,7 @@ async function buildProjectContext(projectId) {
 
       supabase
         .from('others_commitments')
-        .select('title, assigned_to_name, due_date, urgency, status')
+        .select('title, committed_by_name, due_date, urgency, status')
         .eq('project_id', projectId)
         .eq('status', 'open')
         .order('created_at', { ascending: false })
@@ -272,7 +309,7 @@ async function buildProjectContext(projectId) {
     if (othersCommitments?.length) {
       ctx += '\nOPEN COMMITMENTS FROM OTHERS:\n'
       ctx += othersCommitments.map(c => {
-        const who = c.assigned_to_name || 'Unknown'
+        const who = c.committed_by_name || 'Unknown'
         const due = c.due_date ? ` (due ${c.due_date})` : ''
         return `  - ${who}: ${c.title}${due}`
       }).join('\n')
@@ -443,7 +480,7 @@ async function extractIntelligence(email, threadHistory = [], meetingContext = '
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}${projectContext}
-
+${CONSTRUCTION_DOMAIN_CONTEXT}
 Extract ALL valuable intelligence from this email thread. Use thread history to understand what is current vs already resolved. Use meeting context to connect email threads to verbal discussions — flag when an email is a follow-up to a meeting commitment or contradicts something said in a meeting. Use project context to cross-reference against known decisions, open commitments, and risks for this project.
 
 Thread: ${email.thread_subject || email.subject}
@@ -1086,9 +1123,87 @@ Return ONLY the JSON object.`
   }
 }
 
+// ─── PARSE PLAUD SUMMARY (Haiku — fast, cheap)
+// Plaud emails contain a fully structured intelligence report in the email body:
+// decisions with confidence, action items with owners/dates, risks with owners,
+// open loops, schedule impacts, commercial signals, scope, people reads.
+// This function parses that pre-structured summary directly into the same JSON
+// schema as extractIntelligenceFromTranscript — no need to re-derive from raw transcript.
+//
+// Use this for all ongoing Plaud recordings (source='plaud', summary present).
+// Fall back to extractIntelligenceFromTranscript only when summary is absent/thin.
+// Backfill (transcript-only) always uses extractIntelligenceFromTranscript.
+async function parsePlaudSummary(meeting) {
+  const RYAN_CONTEXT = await buildRyanContext()
+  const summaryText = meeting.short_summary || meeting.summary || ''
+  if (!summaryText || summaryText.trim().length < 200) return null
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 8000,
+      messages: [{
+        role: 'user',
+        content: `${RYAN_CONTEXT}
+${CONSTRUCTION_DOMAIN_CONTEXT}
+
+You are parsing a pre-structured meeting intelligence report generated by Plaud AI from a recorded meeting. This is NOT raw text — it is already organized into labeled sections. Extract every data point into the JSON schema below.
+
+Meeting: ${meeting.title || 'Untitled'}
+Date: ${meeting.start_time || 'Unknown'}
+Participants: ${(meeting.participants || []).join(', ') || 'Unknown'}
+
+PLAUD INTELLIGENCE REPORT:
+${summaryText}
+
+Parse the above into this exact JSON schema. Use real names where Plaud has already identified speakers (e.g., "Driver: Chris Tinney" means Chris Tinney). For Ryan's items look for "Ryan Hankins" or "Ryan" as owner. Preserve exact language from the report — do not paraphrase.
+
+Return ONLY valid JSON:
+{
+  "technical_facts": [{"fact": "string", "stated_by": "name", "attribution_confidence": "high|medium|low", "attribution_basis": "from report section"}],
+  "financial_signals": [{"amount": "string", "context": "string", "stated_by": "name", "attribution_confidence": "high|medium|low"}],
+  "schedule_signals": [{"date_or_deadline": "string", "context": "string", "stated_by": "name", "hard_deadline": true, "attribution_confidence": "high|medium|low"}],
+  "scope_signals": [{"signal": "string", "type": "addition|change|assumption|risk", "stated_by": "name", "attribution_confidence": "high|medium|low"}],
+  "decisions_made": [{"decision": "string", "decided_by": "name", "all_parties": ["name"], "implications": "string", "attribution_confidence": "high|medium|low"}],
+  "pending_decisions": [{"decision": "string", "blocking": "string", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "decision_maker": "name"}],
+  "risk_signals": [{"signal": "string", "type": "escalation|silence|scope|legal|relationship|schedule|financial", "severity": "high|medium|low", "involves_key_contact": true, "involves_active_project": true, "evidence": "string"}],
+  "ryan_action_items": [{"title": "string", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high", "attribution_basis": "from action items section"}],
+  "verbal_commitments_ryan": [{"title": "string", "made_to": "name", "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "commitment_type": "hard|soft|conditional", "attribution_confidence": "high"}],
+  "verbal_commitments_others": [{"title": "string", "committed_by_name": "name", "committed_by_email": null, "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high"}],
+  "others_action_items": [{"title": "string", "assigned_to_name": "name", "assigned_to_email": null, "due_date": "YYYY-MM-DD or null", "urgency": "critical|high|medium|low", "attribution_confidence": "high", "attribution_basis": "from action items section"}],
+  "key_facts": [{"fact": "string", "category": "project|person|contract|technical|financial", "stated_by": "name"}],
+  "meeting_outcome": {
+    "summary": "Use the full Plaud report text as-is — do not summarize it",
+    "resolved_items": ["string"],
+    "unresolved_items": ["string"],
+    "next_steps": ["string"],
+    "overall_sentiment": "productive|tense|unclear|routine"
+  },
+  "speaker_attributions": [{"speaker_label": "name as used in report", "likely_person": "full name", "confidence": "high", "basis": "named explicitly in Plaud report"}]
+}`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    const parsed = JSON.parse(clean)
+    // Always preserve the full Plaud report as summary — don't let Haiku summarize it
+    if (parsed.meeting_outcome) {
+      parsed.meeting_outcome.summary = summaryText
+    }
+    return parsed
+  } catch (parseErr) {
+    console.error(`parsePlaudSummary JSON parse error: ${parseErr.message}`)
+    return null
+  }
+}
+
 // ─── EXTRACT INTELLIGENCE FROM TRANSCRIPT
 // Full 10-category extraction from meeting transcripts
 // Speaker labels are generic (Speaker 1, 2...) — we resolve via roster + context
+// Use for: backfill (transcript-only), Otter meetings, Plaud meetings without summary
 async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext) {
   const RYAN_CONTEXT = await buildRyanContext()
   const transcript = meeting.full_transcript || meeting.raw_transcript
@@ -1134,7 +1249,7 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
-
+${CONSTRUCTION_DOMAIN_CONTEXT}
 Extract ALL valuable intelligence from this meeting transcript. Audio recording — speakers may be labeled "Speaker 1" etc. or by name if the recording tool identified them.
 
 Speaker attribution signals:
@@ -1278,5 +1393,6 @@ module.exports = {
   refreshStaleItem,
   createContactProfile,
   extractContactFromSignature,
-  extractIntelligenceFromTranscript
+  extractIntelligenceFromTranscript,
+  parsePlaudSummary
 }

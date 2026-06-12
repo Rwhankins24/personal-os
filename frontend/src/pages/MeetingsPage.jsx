@@ -378,7 +378,10 @@ export default function MeetingsPage() {
                 {/* Summary — only show if intelligence extracted (real AI summary, not raw transcript) */}
                 {meeting.intelligence_extracted && (meeting.summary || meeting.short_summary) && (
                   <p className="text-xs text-[#6b6b67] mt-2.5 ml-7 leading-relaxed line-clamp-2">
-                    {meeting.summary || meeting.short_summary}
+                    {(meeting.summary || meeting.short_summary || '')
+                      .replace(/^#+\s*/gm, '')   // strip ## heading markers
+                      .replace(/\n+/g, ' ')        // collapse newlines to spaces
+                      .trim()}
                   </p>
                 )}
               </div>
@@ -389,7 +392,7 @@ export default function MeetingsPage() {
 
       {/* ── Bulk Assign Floating Bar ──────────────────────────── */}
       {selected.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-center px-4 pb-4">
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex justify-center px-4 pb-20">
           <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
             <span className="text-sm font-medium whitespace-nowrap">
               {selected.size} selected

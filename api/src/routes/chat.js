@@ -114,14 +114,20 @@ module.exports = async (req, res) => {
         .limit(20)
         .then(r => r.data || []),
 
-      // Intelligence notes
+      // Pending decisions — intelligence_notes table doesn't exist as a flat table;
+      // project intelligence lives as JSONB on projects (handled separately in projectIntelSection).
+      // Use this slot for pending decisions instead — high-signal context for chat.
       supabase
-        .from('intelligence_notes')
-        .select('note, category, project_id, created_at')
-        .gte('created_at', since)
+        .from('pending_decisions')
+        .select('title, context, urgency, status, due_date, blocking, created_at')
+        .eq('status', 'open')
         .order('created_at', { ascending: false })
         .limit(20)
-        .then(r => r.data || []),
+        .then(r => (r.data || []).map(d => ({
+          note: `[${d.urgency || 'medium'}${d.blocking ? '/BLOCKING' : ''}] ${d.title}${d.context ? ` — ${d.context}` : ''}${d.due_date ? ` (due ${d.due_date})` : ''}`,
+          category: 'pending_decision',
+          created_at: d.created_at,
+        }))),
 
       // Upcoming events
       supabase
@@ -313,7 +319,7 @@ Due: ${t.due_date || 'no date'}`)
     }
 
     if (relIntel.length) {
-      sections.push('=== INTELLIGENCE NOTES ===')
+      sections.push('=== PENDING DECISIONS ===')
       relIntel.forEach(n => {
         sections.push(`[${n.created_at?.split('T')[0]}] ${n.note}`)
       })
@@ -347,10 +353,10 @@ ${context || 'No relevant data found for this time period.'}`.trim()
       { role: 'user', content: question }
     ]
 
-    // ── Call Claude Haiku (fast + cheap) ─────────────────────────────
+    // ── Call Claude Sonnet — better reasoning + longer answers ───────
     const response = await anthropic.messages.create({
-      model:      'claude-haiku-4-5-20251001',
-      max_tokens: 600,
+      model:      'claude-sonnet-4-6',
+      max_tokens: 2000,
       system:     systemPrompt,
       messages,
     })

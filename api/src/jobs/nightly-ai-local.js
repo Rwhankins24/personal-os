@@ -24,6 +24,7 @@ require('dotenv').config({
 })
 
 const { createClient } = require('@supabase/supabase-js')
+const Anthropic = require('@anthropic-ai/sdk')
 const aiService = require('../services/ai')
 
 const supabase = createClient(
@@ -85,13 +86,24 @@ async function getThreadHistory(email) {
 }
 
 // ─── PROJECT KEYWORD MATCHING
+// Module-level cache — loaded once per nightly run, avoids 75-125 redundant DB calls
+let _projectCache = null
+
+async function getActiveProjects() {
+  if (!_projectCache) {
+    const { data } = await supabase
+      .from('projects')
+      .select('id, name, keywords')
+      .eq('status', 'active')
+    _projectCache = data || []
+  }
+  return _projectCache
+}
+
 async function findProjectByKeywords(text) {
   if (!text) return null
 
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('id, name, keywords')
-    .eq('status', 'active')
+  const projects = await getActiveProjects()
 
   if (!projects?.length) return null
 
@@ -2343,6 +2355,61 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     console.log(`  ⚠ Auto-create contacts error: ${err.message}`)
   }
 
+  // ── Step 3.66: Auto-set relationship_tier from 30-day email frequency ──
+  // tier 1 = 15+ emails in 30 days (high-volume relationship)
+  // tier 2 = 5–14 emails in 30 days (regular relationship)
+  // Never downgrades — only sets null tiers or promotes to a higher tier
+  console.log('Step 3.66: Auto-setting contact relationship_tier from email frequency...')
+  try {
+    const thirtyDaysAgoTier = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+
+    // Count emails per sender in last 30 days (skip internal domains)
+    const { data: recentEmails } = await supabase
+      .from('emails')
+      .select('from_address')
+      .gte('received_at', thirtyDaysAgoTier)
+      .not('from_address', 'is', null)
+
+    // Tally per address
+    const countByEmail = {}
+    for (const e of (recentEmails || [])) {
+      const addr = (e.from_address || '').toLowerCase().trim()
+      if (addr) countByEmail[addr] = (countByEmail[addr] || 0) + 1
+    }
+
+    // Bucket into tiers
+    const tier1Addresses = Object.entries(countByEmail).filter(([, n]) => n >= 15).map(([a]) => a)
+    const tier2Addresses = Object.entries(countByEmail).filter(([, n]) => n >= 5 && n < 15).map(([a]) => a)
+
+    let tierUpdates = 0
+
+    // Tier 1 upgrades — set tier='tier1' if currently null, tier2, or tier3
+    // Matches the string enum used everywhere else: ai.js queries ['tier1','tier2']
+    for (const addr of tier1Addresses) {
+      const { error } = await supabase
+        .from('contacts')
+        .update({ relationship_tier: 'tier1' })
+        .eq('email', addr)
+        .or('relationship_tier.is.null,relationship_tier.eq.tier2,relationship_tier.eq.tier3')
+      if (!error) tierUpdates++
+    }
+
+    // Tier 2 upgrades — set tier='tier2' if currently null or tier3 (don't overwrite tier1)
+    for (const addr of tier2Addresses) {
+      const { error } = await supabase
+        .from('contacts')
+        .update({ relationship_tier: 'tier2' })
+        .eq('email', addr)
+        .or('relationship_tier.is.null,relationship_tier.eq.tier3')
+      if (!error) tierUpdates++
+    }
+
+    console.log(`  ✓ Relationship tiers updated: ${tier1Addresses.length} tier-1 candidates, ${tier2Addresses.length} tier-2 candidates → ${tierUpdates} updates applied`)
+  } catch (err) {
+    console.log(`  ⚠ Relationship tier error: ${err.message}`)
+    results.errors.push(`RelationshipTier: ${err.message}`)
+  }
+
   console.log('Step 3.7: Enriching contacts from signatures...')
   let contactsEnriched = 0
 
@@ -2578,14 +2645,13 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         // PASS 1: Process metadata action items
         const actionItems = meeting.action_items_raw || []
 
+        // Project ID comes from manual assignment in frontend — not keyword guessing
+        const meetingProjectId  = meeting.project_id || null
+        const meetingSource     = meeting.source === 'plaud' ? 'plaud' : 'otter'
+        const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter'
+
         for (const item of actionItems) {
           const isRyan = item.assignee_email === 'hankinsr@claycorp.com'
-          const projectId = await findProjectByKeywords(
-            (meeting.title || '') + ' ' + (meeting.short_summary || '')
-          )
-
-          const meetingSource = meeting.source === 'plaud' ? 'plaud' : 'otter'
-        const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter'
 
         if (isRyan) {
             // Level 1: exact title match
@@ -2615,7 +2681,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                 item.task_text,
                 null,
                 'tasks',
-                projectId || null
+                meetingProjectId
               )
 
               if (smcResult.match && smcResult.confidence >= 75) {
@@ -2642,9 +2708,10 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   source_type:      meetingSourceType,
                   source_label:     meeting.title || 'Meeting',
                   source_date:      today,
+                  meeting_note_id:  meeting.id,
                   ai_enriched:      true,
                   source_confidence: 0.9,
-                  project_id:       projectId || null
+                  project_id:       meetingProjectId
                 }
 
                 if (smcResult.match && smcResult.confidence >= 50) {
@@ -2721,7 +2788,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                 item.task_text,
                 assigneeEmail,
                 'others_commitments',
-                projectId || null
+                meetingProjectId
               )
 
               if (smcResult.match && smcResult.confidence >= 75) {
@@ -2744,11 +2811,14 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   committed_by_email: assigneeEmail,
                   title:        item.task_text,
                   context:      `Action item from meeting: ${meeting.title || 'Meeting'}`,
+                  source:       meetingSource,
                   source_type:  meetingSourceType,
                   source_id:    meeting.id,
                   source_label: meeting.title || 'Meeting',
+                  source_date:  today,
+                  meeting_note_id: meeting.id,
                   status:       'open',
-                  project_id:   projectId || null,
+                  project_id:   meetingProjectId,
                   urgency:      'medium',
                   delivery_type: 'general'
                 }
@@ -2800,7 +2870,16 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
             (meeting.title || '').toLowerCase().includes(phrase)
           )
 
-        if (meeting.full_transcript && !isAllHands) {
+        const hasRichSummary = (meeting.short_summary || meeting.summary || '').trim().length > 500
+        const isPlaud = meeting.source === 'plaud'
+
+        // Plaud meetings: parse pre-structured email summary (Haiku — fast, cheap)
+        // Otter / no-summary: extract from transcript (Sonnet — full depth)
+        // Backfill always uses extractIntelligenceFromTranscript — no summary available
+        const hasTranscript = !!(meeting.full_transcript || meeting.raw_transcript)
+        const shouldUsePlaudParser = isPlaud && hasRichSummary
+
+        if ((hasTranscript || shouldUsePlaudParser) && !isAllHands) {
           const attendeeRoster = meeting.participants || []
 
           const keywords = ((meeting.title || '') + ' ' + (meeting.short_summary || ''))
@@ -2812,20 +2891,29 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
           const { data: relatedEmails } = await supabase
             .from('emails')
             .select('thread_subject, from_name, ai_summary, body_preview, received_at')
-            .or(keywords.map(k => `thread_subject.ilike.%${k}%`).join(','))
+            .or(keywords.length ? keywords.map(k => `thread_subject.ilike.%${k}%`).join(',') : 'id.is.null')
             .limit(5)
 
-          const intel = await aiService.extractIntelligenceFromTranscript(
-            meeting,
-            attendeeRoster,
-            relatedEmails || []
-          )
+          let intel
+          if (shouldUsePlaudParser) {
+            // Parse the structured Plaud email body directly — Haiku, ~$0.005/meeting
+            console.log(`    Using Plaud summary parser (Haiku) for: ${meeting.title}`)
+            intel = await aiService.parsePlaudSummary(meeting)
+            if (!intel && hasTranscript) {
+              // Fall back to transcript extraction if parse fails
+              console.log(`    Plaud parse failed, falling back to transcript extraction`)
+              intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [])
+            }
+          } else {
+            // Otter or Plaud without rich summary — extract from raw transcript
+            intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [])
+          }
 
           if (intel) {
-            const projectId = await findProjectByKeywords(
-              (meeting.title || '') + ' ' + (meeting.short_summary || '')
-            )
+            // Use manually-assigned project_id — no keyword guessing
+            const projectId = meetingProjectId
 
+            // ── Project JSONB writes (only if project assigned) ──────────
             if (projectId) {
               const { data: project } = await supabase
                 .from('projects')
@@ -2848,6 +2936,9 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                     ...s, type: 'scope', source: meeting.title, source_type: meetingSource, date: today
                   }))
                 ]
+                const newRisks = (intel.risk_signals || []).map(r => ({
+                  ...r, source: meeting.title, source_type: meetingSource, date: today
+                }))
 
                 await supabase
                   .from('projects')
@@ -2856,101 +2947,53 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                       ...(project.intelligence_notes || []),
                       ...newNotes
                     ].slice(-50),
+                    risk_signals: [
+                      ...(project.risk_signals || []),
+                      ...newRisks
+                    ].slice(-30),
                     decisions_made: [
                       ...(project.decisions_made || []),
                       ...(intel.decisions_made || []).map(d => ({
-                        ...d, source: meeting.title, source_type: 'otter', date: today
+                        ...d, source: meeting.title, source_type: meetingSource, date: today
                       }))
                     ],
                     key_facts: [
                       ...(project.key_facts || []),
                       ...(intel.key_facts || []).map(f => ({
-                        ...f, source: meeting.title, source_type: 'otter', date: today
+                        ...f, source: meeting.title, source_type: meetingSource, date: today
                       }))
                     ].slice(-30)
                   })
                   .eq('id', projectId)
-
-                // Log decisions
-                for (const d of (intel.decisions_made || [])) {
-                  const { data: existD } = await supabase
-                    .from('decisions')
-                    .select('id')
-                    .eq('title', d.decision)
-                    .eq('project_id', projectId)
-                    .maybeSingle()
-
-                  if (!existD) {
-                    await supabase.from('decisions').insert({
-                      title:           d.decision,
-                      what_was_decided: d.decision,
-                      who_was_present: d.all_parties?.join(', '),
-                      decided_on:      today,
-                      project_id:      projectId,
-                      source_type:     'ai_otter',
-                      source_id:       meeting.id,
-                      status:          'made'
-                    })
-                    results.decisions_logged++
-                  }
-                }
-
-                // Log pending decisions
-                for (const p of (intel.pending_decisions || [])) {
-                  const { data: existP } = await supabase
-                    .from('pending_decisions')
-                    .select('id')
-                    .eq('title', p.decision)
-                    .eq('status', 'open')
-                    .maybeSingle()
-
-                  if (!existP) {
-                    await supabase.from('pending_decisions').insert({
-                      title:       p.decision,
-                      context:     p.decision,
-                      blocking:    p.blocking,
-                      due_date:    p.due_date,
-                      urgency:     p.urgency || 'medium',
-                      project_id:  projectId,
-                      source_type: 'ai_otter',
-                      source_id:   meeting.id,
-                      status:      'open'
-                    })
-                    results.pending_decisions_created++
-                  }
-                }
               }
             }
 
-            // Speaker attributions
-            for (const sa of (intel.speaker_attributions || [])) {
-              const { data: contact } = await supabase
-                .from('contacts')
+            // ── Decisions table — always write, project_id nullable ───────
+            for (const d of (intel.decisions_made || [])) {
+              if (!d.decision) continue
+              const { data: existD } = await supabase
+                .from('decisions')
                 .select('id')
-                .ilike('name', `%${sa.likely_person}%`)
+                .eq('title', d.decision)
+                .eq('source_id', meeting.id)
                 .maybeSingle()
 
-              await supabase.from('speaker_attributions').insert({
-                meeting_id:               meeting.id,
-                speaker_label:            sa.speaker_label,
-                attributed_to_name:       sa.likely_person,
-                attributed_to_contact_id: contact?.id || null,
-                confidence:               sa.confidence,
-                attribution_basis:        [sa.basis]
-              })
-
-              // Update last_contact_date for high-confidence attendees
-              if (sa.confidence === 'high' && sa.likely_person && contact) {
-                await supabase
-                  .from('contacts')
-                  .update({
-                    last_contact_date: meeting.start_time?.split('T')[0] || today
-                  })
-                  .eq('id', contact.id)
+              if (!existD) {
+                await supabase.from('decisions').insert({
+                  title:            d.decision,
+                  what_was_decided: d.decision,
+                  who_was_present:  d.all_parties?.join(', '),
+                  decided_on:       today,
+                  project_id:       projectId || null,
+                  source_type:      meetingSourceType,
+                  source_id:        meeting.id,
+                  status:           'made'
+                })
+                results.decisions_logged++
               }
             }
 
-            // Ryan's action items → tasks table
+            // ── Ryan's action items → tasks (always, project_id nullable) ─
             for (const item of (intel.ryan_action_items || [])) {
               const taskText = item.title || item.task_text || item.task
               if (!taskText) continue
@@ -2959,7 +3002,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                 .from('tasks')
                 .select('id')
                 .ilike('title', taskText.slice(0, 80))
-                .eq('status', 'active')
+                .eq('status', 'open')
                 .maybeSingle()
 
               if (!existingTask) {
@@ -2967,10 +3010,13 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   title:           taskText,
                   urgency:         item.urgency || 'medium',
                   due_date:        item.due_date || null,
-                  status:          'active',
+                  status:          'open',
                   type:            'action',
-                  source_type:     'ai_otter',
+                  source_type:     meetingSourceType,
+                  source_label:    meeting.title || 'Meeting',
+                  source_date:     today,
                   meeting_note_id: meeting.id,
+                  project_id:      projectId || null,
                   ai_enriched:     true,
                   context:         item.attribution_basis || null,
                 })
@@ -2994,10 +3040,11 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   urgency:         c.urgency,
                   due_date:        c.due_date,
                   status:          'open',
-                  source_type:     'ai_otter',
+                  source_type:     meetingSourceType,
                   commitment_type: c.commitment_type || 'hard',
                   implicit:        false,
-                  made_on:         today
+                  made_on:         today,
+                  project_id:      projectId || null,
                 })
                 results.otter_my_commitments++
               }
@@ -3049,6 +3096,33 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                   status:          'open',
                 })
                 results.otter_others_created++
+              }
+            }
+
+            // Pending decisions — always write, project_id nullable
+            for (const p of (intel.pending_decisions || [])) {
+              const decisionTitle = p.decision || p.title
+              if (!decisionTitle) continue
+              const { data: existP } = await supabase
+                .from('pending_decisions')
+                .select('id')
+                .ilike('title', decisionTitle.slice(0, 80))
+                .eq('status', 'open')
+                .maybeSingle()
+
+              if (!existP) {
+                await supabase.from('pending_decisions').insert({
+                  title:       decisionTitle,
+                  context:     p.context || p.decision || decisionTitle,
+                  blocking:    p.blocking || false,
+                  due_date:    p.due_date || null,
+                  urgency:     p.urgency || 'medium',
+                  project_id:  projectId || null,
+                  source_type: meetingSourceType,
+                  source_id:   meeting.id,
+                  status:      'open'
+                })
+                results.pending_decisions_created++
               }
             }
           }
@@ -3144,18 +3218,47 @@ Be direct and specific. No fluff.`
           console.log(`  ⚠ Continuity context error for ${meeting.title}: ${continuityErr.message}`)
         }
 
-        // Mark meeting as processed — save summary and outcome fields
+        // ── Speaker attributions — always write, Ryan resolves in frontend ──
+        for (const s of (intel.speaker_attributions || [])) {
+          if (!s.speaker_label || !s.likely_person) continue
+          const { data: existSA } = await supabase
+            .from('speaker_attributions')
+            .select('id')
+            .eq('meeting_id', meeting.id)
+            .eq('speaker_label', s.speaker_label)
+            .maybeSingle()
+          if (!existSA) {
+            const nameParts = (s.likely_person || '').trim().split(/\s+/)
+            const { data: contact } = nameParts.length > 1
+              ? await supabase.from('contacts').select('id, email')
+                  .ilike('name', `%${nameParts[nameParts.length - 1]}%`).maybeSingle()
+              : { data: null }
+            await supabase.from('speaker_attributions').insert({
+              meeting_id:               meeting.id,
+              speaker_label:            s.speaker_label,
+              attributed_to_name:       s.likely_person,
+              attributed_to_email:      contact?.email || null,
+              attributed_to_contact_id: contact?.id || null,
+              confidence:               s.confidence || 'medium',
+              attribution_basis:        s.basis ? [s.basis] : [],
+              confirmed_by_ryan:        false,
+            })
+          }
+        }
+
+        // Mark meeting as processed — save summary, outcome, and cached intel
         const meetingFinalUpdate = {
           intelligence_extracted: true,
           commitments_extracted:  true,
           extraction_date:        today,
+          extracted_intelligence: intel,   // cache full extraction for later project assignment
         }
         // Save narrative summary from meeting_outcome (the comprehensive one)
         if (intel?.meeting_outcome?.summary && !meeting.summary) {
           meetingFinalUpdate.summary = intel.meeting_outcome.summary
         }
         if (intel?.meeting_outcome?.summary && (!meeting.short_summary || meeting.short_summary.length < 100)) {
-          meetingFinalUpdate.short_summary = intel.meeting_outcome.summary.slice(0, 300)
+          meetingFinalUpdate.short_summary = intel.meeting_outcome.summary  // full text — no truncation
         }
         await supabase
           .from('meeting_notes')
@@ -4442,7 +4545,6 @@ Be specific, direct, and actionable. Today is ${today}.`
   // ── STEP 9.7: Propose knowledge base entries ──────────────────────
   console.log('Step 9.7: Extracting knowledge base proposals...')
   let knowledgeProposed = 0
-  const Anthropic = require('@anthropic-ai/sdk')
   const haiku = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
   async function proposeWithHaiku(prompt) {

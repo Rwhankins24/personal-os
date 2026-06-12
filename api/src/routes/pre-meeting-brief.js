@@ -107,7 +107,7 @@ module.exports = async (req, res) => {
       // Pending decisions
       supabase
         .from('pending_decisions')
-        .select('question, context, urgency, status')
+        .select('title, context, urgency, status')
         .eq('status', 'open')
         .limit(20)
         .then(r => r.data || []),
@@ -140,7 +140,7 @@ module.exports = async (req, res) => {
       attendeeEmails.some(ae => (e.from_address || '').includes(ae.split('@')[0])) ||
       isRelevant(`${e.thread_subject} ${e.ai_summary} ${e.from_name}`)
     )
-    const relDecisions = pendingDecisions.filter(d => isRelevant(`${d.question} ${d.context}`))
+    const relDecisions = pendingDecisions.filter(d => isRelevant(`${d.title} ${d.context}`))
 
     // Find matching project context
     const matchingProject = projectData.find(p =>
@@ -213,7 +213,7 @@ module.exports = async (req, res) => {
 
     if (relDecisions.length) {
       sections.push('PENDING DECISIONS:\n' +
-        relDecisions.slice(0, 5).map(d => `• [${d.urgency || 'open'}] ${d.question}`).join('\n')
+        relDecisions.slice(0, 5).map(d => `• [${d.urgency || 'open'}] ${d.title}`).join('\n')
       )
     }
 
