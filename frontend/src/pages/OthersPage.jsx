@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -544,6 +544,7 @@ export default function OthersPage() {
         <LinkContactModal
           item={linkModalItem}
           contacts={contacts}
+          allItems={items}
           onLink={({ contact_id, committed_by_name, committed_by_email }) => {
             update.mutate({
               id: linkModalItem.id,
@@ -821,25 +822,57 @@ function OthersContextPanel({ c, allItems }) {
 }
 
 // ── Link Contact Modal ─────────────────────────────────────────
-function LinkContactModal({ item, contacts, onLink, onClose }) {
+function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   const personName = item.committed_by_name || item.person_name || ''
-  const [query,    setQuery]    = useState(personName)
-  const [email,    setEmail]    = useState(item.committed_by_email || '')
-  const [saving,   setSaving]   = useState(false)
-  const [tab,      setTab]      = useState('search') // 'search' | 'create'
+  const [query,    setQuery]   = useState(personName)
+  const [email,    setEmail]   = useState(item.committed_by_email || '')
+  const [company,  setCompany] = useState('')
+  const [saving,   setSaving]  = useState(false)
+  const [tab,      setTab]     = useState('create') // start on create — matches user intent
   const inputRef = useRef(null)
 
-  useEffect(() => { inputRef.current?.focus() }, [])
+  useEffect(() => { setTimeout(() => inputRef.current?.focus(), 80) }, [tab])
 
-  const filtered = (contacts || [])
+  // ── Build unique name lookup from ALL activity (others_commitments)
+  // Used to verify spelling before creating — no extra API calls needed
+  const activityNames = useMemo(() => {
+    const seen = new Map()
+    for (const c of allItems || []) {
+      const name = c.committed_by_name || c.person_name
+      if (!name || isSpeaker(name)) continue
+      const key = name.toLowerCase().trim()
+      if (!seen.has(key)) {
+        seen.set(key, { displayName: name, email: c.committed_by_email || null, count: 1 })
+      } else {
+        const ex = seen.get(key)
+        ex.count++
+        if (!ex.email && c.committed_by_email) ex.email = c.committed_by_email
+      }
+    }
+    return Array.from(seen.values()).sort((a, b) => b.count - a.count)
+  }, [allItems])
+
+  // Activity matches for the current query — shown in Create tab for spelling verification
+  const activityMatches = activityNames.filter(n =>
+    query.trim().length >= 2 &&
+    n.displayName.toLowerCase().includes(query.toLowerCase()) &&
+    n.displayName.toLowerCase() !== query.toLowerCase()  // hide exact match (no need to confirm)
+  ).slice(0, 5)
+
+  // Contacts filter (Search tab)
+  const filteredContacts = (contacts || [])
     .filter(c => !query.trim() || c.name?.toLowerCase().includes(query.toLowerCase()))
     .slice(0, 8)
-
-  const exactMatch = (contacts || []).find(c => c.name?.toLowerCase() === query.toLowerCase())
+  const exactContactMatch = (contacts || []).find(c => c.name?.toLowerCase() === query.toLowerCase())
 
   const handleLinkExisting = (contact) => {
     onLink({ contact_id: contact.id, committed_by_name: contact.name, committed_by_email: contact.email || item.committed_by_email || null })
     onClose()
+  }
+
+  const handlePickActivityName = (n) => {
+    setQuery(n.displayName)
+    if (n.email && !email) setEmail(n.email)
   }
 
   const handleCreateAndLink = async () => {
@@ -847,8 +880,9 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
     setSaving(true)
     try {
       const newContact = await createContact({
-        name:  query.trim(),
-        email: email.trim() || null,
+        name:    query.trim(),
+        email:   email.trim()   || null,
+        company: company.trim() || null,
       })
       onLink({ contact_id: newContact.id, committed_by_name: newContact.name, committed_by_email: newContact.email || null })
       onClose()
@@ -875,7 +909,7 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
 
         {/* Tabs */}
         <div className="flex gap-1 mx-4 mt-3 mb-0 bg-[#f3f3f1] rounded-lg p-1">
-          {[['search', '🔍 Find Contact'], ['create', '+ Create New']].map(([t, lbl]) => (
+          {[['create', '+ Create New'], ['search', '🔍 Find Existing']].map(([t, lbl]) => (
             <button key={t} onClick={() => setTab(t)}
               className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${tab === t ? 'bg-white text-[#1a1a18] shadow-sm' : 'text-[#6b6b67]'}`}>
               {lbl}
@@ -884,6 +918,75 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
         </div>
 
         <div className="px-4 py-3">
+          {/* ── CREATE TAB ─────────────────────────────────────── */}
+          {tab === 'create' && (
+            <div className="space-y-3">
+
+              {/* Name + activity spelling suggestions */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Name *</label>
+                <input
+                  ref={inputRef}
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  placeholder="Full name"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+
+                {/* Spelling suggestions from activity queue */}
+                {activityMatches.length > 0 && (
+                  <div className="mt-1.5">
+                    <p className="text-[10px] text-[#9b9b97] mb-1">Names from your activity — tap to use:</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {activityMatches.map(n => (
+                        <button
+                          key={n.displayName}
+                          onClick={() => handlePickActivityName(n)}
+                          className="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-100"
+                        >
+                          {n.displayName}
+                          {n.count > 1 && <span className="text-blue-400 ml-1">×{n.count}</span>}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Email</label>
+                <input
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="email@company.com"
+                  type="email"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+
+              {/* Company (new) */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Company</label>
+                <input
+                  value={company}
+                  onChange={e => setCompany(e.target.value)}
+                  placeholder="Organization or firm"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+
+              <button
+                onClick={handleCreateAndLink}
+                disabled={saving || !query.trim()}
+                className="w-full py-2.5 bg-[#1a1a18] text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-gray-800 flex items-center justify-center gap-2"
+              >
+                {saving ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Creating…</> : 'Create & Link'}
+              </button>
+            </div>
+          )}
+
+          {/* ── SEARCH TAB ─────────────────────────────────────── */}
           {tab === 'search' && (
             <>
               <input
@@ -893,8 +996,8 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
                 placeholder="Search contacts…"
                 className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
-              <div className="space-y-1 max-h-56 overflow-y-auto">
-                {filtered.length > 0 ? filtered.map(c => (
+              <div className="space-y-1 max-h-64 overflow-y-auto">
+                {filteredContacts.length > 0 ? filteredContacts.map(c => (
                   <button
                     key={c.id}
                     onClick={() => handleLinkExisting(c)}
@@ -915,7 +1018,7 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
                   <p className="text-xs text-[#9b9b97] text-center py-4">No contacts match "{query}"</p>
                 )}
               </div>
-              {!exactMatch && query.trim().length > 1 && (
+              {!exactContactMatch && query.trim().length > 1 && (
                 <button
                   onClick={() => setTab('create')}
                   className="w-full mt-2 py-2 text-xs text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium"
@@ -924,37 +1027,6 @@ function LinkContactModal({ item, contacts, onLink, onClose }) {
                 </button>
               )}
             </>
-          )}
-
-          {tab === 'create' && (
-            <div className="space-y-3">
-              <div>
-                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Name *</label>
-                <input
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  placeholder="Full name"
-                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Email</label>
-                <input
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="email@company.com"
-                  type="email"
-                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-              </div>
-              <button
-                onClick={handleCreateAndLink}
-                disabled={saving || !query.trim()}
-                className="w-full py-2.5 bg-[#1a1a18] text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-gray-800 flex items-center justify-center gap-2"
-              >
-                {saving ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Creating…</> : 'Create & Link'}
-              </button>
-            </div>
           )}
         </div>
       </div>
