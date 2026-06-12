@@ -1070,7 +1070,7 @@ Respond with JSON only:
   "inferred_title": "If the recording is clearly an OAC or specific meeting type based on content, provide a better title here. Otherwise null."
 }`
 
-              const haikuMatch = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+              const haikuMatch = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
               const matchMsg = await haikuMatch.messages.create({
                 model:      'claude-haiku-4-5-20251001',
                 max_tokens: 200,
@@ -1216,7 +1216,7 @@ Respond with JSON only:
   "reason": "one sentence"
 }`
 
-        const haikuClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+        const haikuClient = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
         const matchMsg = await haikuClient.messages.create({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 150,
