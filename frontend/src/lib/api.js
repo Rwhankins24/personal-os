@@ -103,3 +103,9 @@ export const deleteKnowledge = (id) => api.delete(`/api/knowledge?id=${id}`).the
 
 export const generatePreMeetingBrief = (event_id) =>
   api.post('/api/jobs/pre-meeting-brief', { event_id }).then(r => r.data)
+
+// ── Knowledge Doc Extraction ──────────────────────────────────
+export const extractKnowledgeDoc = (formData) =>
+  api.post('/api/knowledge?action=extract', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }).then(r => r.data)

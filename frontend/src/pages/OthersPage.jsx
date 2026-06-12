@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getOthersCommitments, updateOthersCommitment, getContacts, createTask } from '../lib/api'
+import { getOthersCommitments, updateOthersCommitment, getContacts, createTask, getProjects } from '../lib/api'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -185,6 +185,11 @@ export default function OthersPage() {
   const { data: contacts } = useQuery({
     queryKey: ['contacts'],
     queryFn: getContacts,
+  })
+
+  const { data: projects } = useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects,
   })
 
   const update = useMutation({
@@ -432,6 +437,7 @@ export default function OthersPage() {
                   onToggleSelect={() => toggleItemSelect(c.id)}
                   promoted={promotedIds.has(c.id)}
                   onPromote={() => handleSinglePromoteToMyTask(c)}
+                  allItems={items}
                 />
               )
             })}
@@ -481,6 +487,7 @@ export default function OthersPage() {
                           onToggleSelect={() => toggleItemSelect(c.id)}
                           promoted={promotedIds.has(c.id)}
                           onPromote={() => handleSinglePromoteToMyTask(c)}
+                          allItems={items}
                         />
                       )
                     })}
@@ -707,8 +714,75 @@ function OthersDuplicatesSection({ allItems, update }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote }) {
+// ── Others commitment context panel ───────────────────────────
+function OthersContextPanel({ c, allItems }) {
+  const relatedCommitments = c.meeting_note_id
+    ? (allItems || []).filter(i => i.meeting_note_id === c.meeting_note_id && i.id !== c.id).slice(0, 4)
+    : []
+
+  const personName = c.committed_by_name || c.person_name || c.made_by || 'Unknown'
+  const initials = personName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+
+  const sourceIcon = () => {
+    const st = c.source_type || ''
+    if (st.includes('otter') || st.includes('plaud')) return '🎙'
+    if (st === 'ai_email') return '📧'
+    return '↳'
+  }
+
+  return (
+    <div className="px-4 pb-3 pt-2 ml-5 border-t border-[#C9A84C]/30 bg-amber-50/20 space-y-2.5">
+      {/* Source */}
+      {c.source_label && (
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-sm">{sourceIcon()}</span>
+          <span className="text-xs text-[#6b6b67]">{c.source_label}</span>
+          {c.source_date && (
+            <span className="text-xs text-[#9b9b97]">· {dayjs(c.source_date).format('MMM D')}</span>
+          )}
+        </div>
+      )}
+
+      {/* Person chip */}
+      <div className="flex items-center gap-1.5">
+        <span className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide">From</span>
+        <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-gray-100 text-[#6b6b67]">
+          <span className="w-4 h-4 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center text-[9px] font-bold flex-shrink-0">
+            {initials}
+          </span>
+          {personName}
+        </span>
+      </div>
+
+      {/* Related from same meeting */}
+      {relatedCommitments.length > 0 && (
+        <div>
+          <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-1">Related from this meeting</p>
+          <div className="flex flex-wrap gap-1.5">
+            {relatedCommitments.map(r => (
+              <span key={r.id} className="flex items-center gap-1 text-xs bg-gray-100 text-[#6b6b67] px-2 py-0.5 rounded-full">
+                <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${r.status === 'closed' || r.status === 'done' ? 'bg-green-500' : 'bg-amber-400'}`} />
+                {r.title && r.title.length > 40 ? r.title.slice(0, 40) + '…' : r.title}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Context/notes */}
+      {c.context && (
+        <div>
+          <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-0.5">Notes</p>
+          <p className="text-xs text-[#6b6b67] leading-snug whitespace-pre-wrap">{c.context}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems }) {
   const [reassigning, setReassigning] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
 
@@ -729,8 +803,11 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
 
   return (
     <div
-      className={`px-4 py-3 group ${speaker ? 'bg-amber-50/40' : ''} ${selectMode ? 'cursor-pointer' : ''} ${selected ? 'bg-blue-50' : ''}`}
-      onClick={selectMode ? onToggleSelect : undefined}
+      className={`group ${speaker ? 'bg-amber-50/40' : ''} ${selected ? 'bg-blue-50' : ''}`}
+    >
+    <div
+      className={`px-4 py-3 ${selectMode ? 'cursor-pointer' : 'cursor-pointer'}`}
+      onClick={selectMode ? onToggleSelect : () => setExpanded(v => !v)}
     >
       <div className="flex items-start gap-3">
         {selectMode && (
@@ -861,6 +938,12 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           </button>
         </div>
       </div>
+    </div>
+
+      {/* Expanded context panel */}
+      {expanded && !selectMode && (
+        <OthersContextPanel c={c} allItems={allItems} />
+      )}
     </div>
   )
 }

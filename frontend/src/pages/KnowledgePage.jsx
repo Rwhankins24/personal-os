@@ -1,17 +1,37 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge } from '../lib/api'
+import { getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge, extractKnowledgeDoc } from '../lib/api'
 
 // ── Category config ────────────────────────────────────────────
 const CATEGORIES = [
-  { value: 'domain_knowledge', label: 'Domain',        color: 'bg-blue-100 text-blue-700' },
-  { value: 'project_lesson',   label: 'Project Lesson', color: 'bg-green-100 text-green-700' },
-  { value: 'client_intel',     label: 'Client Intel',   color: 'bg-purple-100 text-purple-700' },
-  { value: 'process',          label: 'Process',        color: 'bg-gray-100 text-gray-600' },
-  { value: 'relationship',     label: 'Relationship',   color: 'bg-orange-100 text-orange-700' },
-  { value: 'decision',         label: 'Decision',       color: 'bg-amber-100 text-amber-700' },
-  { value: 'other',            label: 'Other',          color: 'bg-slate-100 text-slate-600' },
+  { value: 'domain_knowledge',        label: 'Domain',          color: 'bg-blue-100 text-blue-700' },
+  { value: 'project_lesson',          label: 'Project Lesson',  color: 'bg-green-100 text-green-700' },
+  { value: 'client_intel',            label: 'Client Intel',    color: 'bg-purple-100 text-purple-700' },
+  { value: 'process',                 label: 'Process',         color: 'bg-gray-100 text-gray-600' },
+  { value: 'relationship',            label: 'Relationship',    color: 'bg-orange-100 text-orange-700' },
+  { value: 'decision',                label: 'Decision',        color: 'bg-amber-100 text-amber-700' },
+  { value: 'contract_legal',          label: 'Contract/Legal',  color: 'bg-red-50 text-red-700' },
+  { value: 'construction_complexity', label: 'Construction',    color: 'bg-indigo-50 text-indigo-700' },
+  { value: 'other',                   label: 'Other',           color: 'bg-slate-100 text-slate-600' },
+]
+
+const RISK_BADGE = {
+  high:   'bg-red-100 text-red-700',
+  medium: 'bg-amber-100 text-amber-700',
+  low:    'bg-green-100 text-green-700',
+}
+
+const CONTRACT_ENTRY_TYPES = [
+  { value: 'specific_contract', label: 'Specific Contract' },
+  { value: 'general_knowledge', label: 'General Knowledge / Clause' },
+]
+
+const CONSTRUCTION_ENTRY_TYPES = [
+  { value: 'scope_trap',         label: 'Scope Trap' },
+  { value: 'system_coordination', label: 'System Coordination' },
+  { value: 'sequencing_risk',    label: 'Sequencing Risk' },
+  { value: 'lesson_learned',     label: 'Lesson Learned' },
 ]
 
 const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map(c => [c.value, c]))
@@ -29,16 +49,32 @@ function CategoryBadge({ category }) {
 // ── Add/Edit Modal ─────────────────────────────────────────────
 function KnowledgeModal({ entry, onClose, onSave }) {
   const [form, setForm] = useState({
-    topic:      entry?.topic      || '',
-    category:   entry?.category   || 'domain_knowledge',
-    context:    entry?.context    || '',
-    resolution: entry?.resolution || '',
-    applies_to: (entry?.applies_to || []).join(', '),
-    status:     entry?.status     || 'active',
+    topic:        entry?.topic        || '',
+    category:     entry?.category     || 'domain_knowledge',
+    context:      entry?.context      || '',
+    resolution:   entry?.resolution   || '',
+    applies_to:   (entry?.applies_to  || []).join(', '),
+    status:       entry?.status       || 'active',
+    risk_level:   entry?.risk_level   || '',
+    entry_type:   entry?.entry_type   || '',
+    effective_date: entry?.effective_date || '',
+    parties:      entry?.parties      || '',
+    project_refs: (entry?.project_refs || []).join(', '),
   })
   const [saving, setSaving] = useState(false)
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
+
+  const isContractLegal = form.category === 'contract_legal'
+  const isConstruction  = form.category === 'construction_complexity'
+  const showExtended    = isContractLegal || isConstruction
+  const showContractSpecific = isContractLegal && form.entry_type === 'specific_contract'
+
+  const entryTypeOptions = isContractLegal
+    ? CONTRACT_ENTRY_TYPES
+    : isConstruction
+    ? CONSTRUCTION_ENTRY_TYPES
+    : []
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,15 +82,17 @@ function KnowledgeModal({ entry, onClose, onSave }) {
     setSaving(true)
     try {
       const payload = {
-        topic:      form.topic.trim(),
-        category:   form.category,
-        context:    form.context.trim() || null,
-        resolution: form.resolution.trim() || null,
-        applies_to: form.applies_to
-          .split(',')
-          .map(t => t.trim())
-          .filter(Boolean),
-        status:     form.status,
+        topic:        form.topic.trim(),
+        category:     form.category,
+        context:      form.context.trim() || null,
+        resolution:   form.resolution.trim() || null,
+        applies_to:   form.applies_to.split(',').map(t => t.trim()).filter(Boolean),
+        status:       form.status,
+        risk_level:   form.risk_level || null,
+        entry_type:   form.entry_type || null,
+        effective_date: form.effective_date || null,
+        parties:      form.parties.trim() || null,
+        project_refs: form.project_refs.split(',').map(t => t.trim()).filter(Boolean),
       }
       await onSave(payload)
       onClose()
@@ -95,7 +133,7 @@ function KnowledgeModal({ entry, onClose, onSave }) {
             <label className="block text-xs font-medium text-[#6b6b67] mb-1">Category</label>
             <select
               value={form.category}
-              onChange={e => set('category', e.target.value)}
+              onChange={e => { set('category', e.target.value); set('entry_type', '') }}
               className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               {CATEGORIES.map(c => (
@@ -103,6 +141,80 @@ function KnowledgeModal({ entry, onClose, onSave }) {
               ))}
             </select>
           </div>
+
+          {/* Extended fields for contract_legal / construction_complexity */}
+          {showExtended && (
+            <>
+              {/* Risk level */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Risk Level</label>
+                <select
+                  value={form.risk_level}
+                  onChange={e => set('risk_level', e.target.value)}
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                  <option value="">— Select —</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+
+              {/* Entry type */}
+              {entryTypeOptions.length > 0 && (
+                <div>
+                  <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+                    {isContractLegal ? 'Entry Type' : 'Complexity Type'}
+                  </label>
+                  <select
+                    value={form.entry_type}
+                    onChange={e => set('entry_type', e.target.value)}
+                    className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    <option value="">— Select —</option>
+                    {entryTypeOptions.map(o => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Specific contract fields */}
+              {showContractSpecific && (
+                <>
+                  <div>
+                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">Effective Date</label>
+                    <input
+                      type="date"
+                      value={form.effective_date}
+                      onChange={e => set('effective_date', e.target.value)}
+                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">Parties</label>
+                    <input
+                      value={form.parties}
+                      onChange={e => set('parties', e.target.value)}
+                      placeholder="e.g. Clayco / Trammell Crow"
+                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Project refs */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Projects this applies to</label>
+                <input
+                  value={form.project_refs}
+                  onChange={e => set('project_refs', e.target.value)}
+                  placeholder="Comma separated project names"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+            </>
+          )}
 
           {/* Context */}
           <div>
@@ -130,7 +242,7 @@ function KnowledgeModal({ entry, onClose, onSave }) {
 
           {/* Applies To */}
           <div>
-            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Applies To</label>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Applies To (tags)</label>
             <input
               value={form.applies_to}
               onChange={e => set('applies_to', e.target.value)}
@@ -178,9 +290,15 @@ function KnowledgeModal({ entry, onClose, onSave }) {
 // ── Entry Card ─────────────────────────────────────────────────
 function EntryCard({ entry, onEdit, onDelete }) {
   const [expanded, setExpanded] = useState(false)
-  const [showFull, setShowFull] = useState(false)
 
   const previewLen = 180
+  const isContractLegal = entry.category === 'contract_legal'
+  const isConstruction  = entry.category === 'construction_complexity'
+
+  const entryTypeLabel = (type) => {
+    const all = [...CONTRACT_ENTRY_TYPES, ...CONSTRUCTION_ENTRY_TYPES]
+    return all.find(o => o.value === type)?.label || type
+  }
 
   return (
     <div
@@ -192,6 +310,16 @@ function EntryCard({ entry, onEdit, onDelete }) {
         <div className="flex items-start gap-2 flex-wrap flex-1 min-w-0">
           <span className="text-sm font-semibold text-[#1a1a18]">{entry.topic}</span>
           <CategoryBadge category={entry.category} />
+          {entry.risk_level && (
+            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${RISK_BADGE[entry.risk_level] || 'bg-gray-100 text-gray-600'}`}>
+              {entry.risk_level.charAt(0).toUpperCase() + entry.risk_level.slice(1)} Risk
+            </span>
+          )}
+          {(isConstruction && entry.entry_type) && (
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-[#1a1a18] text-white">
+              {entryTypeLabel(entry.entry_type)}
+            </span>
+          )}
         </div>
         {/* Edit/delete — visible on hover */}
         <div
@@ -214,6 +342,29 @@ function EntryCard({ entry, onEdit, onDelete }) {
           </button>
         </div>
       </div>
+
+      {/* Contract/Legal specific meta */}
+      {isContractLegal && (entry.parties || entry.effective_date) && (
+        <div className="flex items-center gap-3 flex-wrap mb-2">
+          {entry.parties && (
+            <span className="text-xs text-[#6b6b67]">⚖️ {entry.parties}</span>
+          )}
+          {entry.effective_date && (
+            <span className="text-xs text-[#6b6b67]">📅 Effective {entry.effective_date}</span>
+          )}
+        </div>
+      )}
+
+      {/* Project refs chips */}
+      {(entry.project_refs || []).length > 0 && (
+        <div className="flex items-center gap-1 flex-wrap mb-2">
+          {entry.project_refs.map((p, i) => (
+            <span key={i} className="text-xs border border-[#C9A84C]/50 text-[#C9A84C] bg-amber-50 px-2 py-0.5 rounded-full font-medium">
+              {p}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Applies-to tags */}
       {(entry.applies_to || []).length > 0 && (
@@ -311,6 +462,8 @@ export default function KnowledgePage() {
   const [catFilter,   setCatFilter]   = useState('all')
   const [modal,       setModal]       = useState(null) // null | { mode: 'add' | 'edit', entry?: {} }
   const [editEntry,   setEditEntry]   = useState(null)
+  const [extracting,  setExtracting]  = useState(false)
+  const fileInputRef = useRef(null)
 
   const { data: active = [],   isLoading } = useQuery({
     queryKey: ['knowledge'],
@@ -381,6 +534,38 @@ export default function KnowledgePage() {
     updateMut.mutate({ id, data: { status: 'archived' } })
   }
 
+  const handleExtractFile = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    e.target.value = ''
+    setExtracting(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      const extracted = await extractKnowledgeDoc(fd)
+      // Pre-fill the modal with extracted data
+      const prefilled = {
+        topic:        extracted.topic        || '',
+        category:     extracted.category     || 'domain_knowledge',
+        context:      extracted.context      || '',
+        resolution:   extracted.resolution   || '',
+        applies_to:   (extracted.applies_to  || []).join(', '),
+        status:       'active',
+        risk_level:   extracted.risk_level   || '',
+        entry_type:   extracted.entry_type   || '',
+        effective_date: extracted.effective_date || '',
+        parties:      extracted.parties      || '',
+        project_refs: (extracted.project_refs || []).join(', '),
+      }
+      setEditEntry(null)
+      setModal({ mode: 'add', entry: prefilled })
+    } catch (err) {
+      alert('Extraction failed: ' + (err?.response?.data?.error || err.message))
+    } finally {
+      setExtracting(false)
+    }
+  }
+
   // ── Filtered entries ─────────────────────────────────────────
   const filtered = useMemo(() => {
     return active.filter(e => {
@@ -414,12 +599,37 @@ export default function KnowledgePage() {
                 <span className="text-xs text-[#6b6b67]">{active.length} {active.length === 1 ? 'entry' : 'entries'}</span>
               </div>
             </div>
-            <button
-              onClick={handleAdd}
-              className="text-xs px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
-            >
-              + Add
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Hidden file input for doc extract */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.docx,.txt"
+                className="hidden"
+                onChange={handleExtractFile}
+              />
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={extracting}
+                className="text-xs px-3 py-1.5 border border-[#e5e5e3] rounded-lg font-medium text-[#6b6b67] hover:border-gray-400 hover:text-[#1a1a18] transition-colors disabled:opacity-40 flex items-center gap-1.5"
+                title="Extract knowledge from a PDF, DOCX, or TXT document"
+              >
+                {extracting ? (
+                  <>
+                    <span className="w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin" />
+                    Extracting…
+                  </>
+                ) : (
+                  <>📎 Extract from doc</>
+                )}
+              </button>
+              <button
+                onClick={handleAdd}
+                className="text-xs px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              >
+                + Add
+              </button>
+            </div>
           </div>
 
           {/* Category filter pills */}

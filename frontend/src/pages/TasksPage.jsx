@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getTasks, updateTask, deleteTask } from '../lib/api'
+import { getTasks, updateTask, deleteTask, getProjects } from '../lib/api'
 import InlineEdit from '../components/InlineEdit'
 
 // ── Potential Duplicates Section ──────────────────────────────────
@@ -197,6 +197,180 @@ function PillToggle({ options, value, onChange }) {
   )
 }
 
+// ── Task expanded context panel ───────────────────────────────
+function TaskContextPanel({ task, allTasks, projects, update }) {
+  const [tab, setTab] = useState('context')
+  const [editUrgency, setEditUrgency] = useState(task.urgency || 'medium')
+  const [editDue, setEditDue] = useState(task.due_date || '')
+  const [editNotes, setEditNotes] = useState(task.notes || '')
+  const [saving, setSaving] = useState(false)
+
+  const project = projects && task.project_id
+    ? projects.find(p => p.id === task.project_id)
+    : null
+
+  const relatedTasks = task.meeting_note_id
+    ? (allTasks || []).filter(t => t.meeting_note_id === task.meeting_note_id && t.id !== task.id).slice(0, 4)
+    : []
+
+  const overdue = task.due_date && dayjs(task.due_date).isBefore(dayjs(), 'day')
+    && task.status !== 'done' && task.status !== 'complete'
+
+  const sourceIcon = () => {
+    const st = task.source_type || ''
+    if (st.includes('otter') || st.includes('plaud') || st === 'upload') return '🎙'
+    if (st === 'ai_email') return '📧'
+    return '↳'
+  }
+
+  const handleSaveEdit = async () => {
+    setSaving(true)
+    try {
+      await update.mutateAsync({ id: task.id, updates: {
+        urgency:   editUrgency,
+        due_date:  editDue || null,
+        notes:     editNotes || null,
+      }})
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <div className="px-4 pb-3 pt-2 ml-5 border-t border-[#C9A84C]/30 bg-amber-50/20">
+      {/* Tab row */}
+      <div className="flex items-center gap-3 mb-3">
+        <button
+          onClick={() => setTab('context')}
+          className={`text-xs font-semibold pb-0.5 transition-colors ${tab === 'context' ? 'text-[#C9A84C] border-b-2 border-[#C9A84C]' : 'text-[#9b9b97] hover:text-[#1a1a18]'}`}
+        >
+          Context
+        </button>
+        <button
+          onClick={() => setTab('edit')}
+          className={`text-xs font-semibold pb-0.5 transition-colors ${tab === 'edit' ? 'text-[#C9A84C] border-b-2 border-[#C9A84C]' : 'text-[#9b9b97] hover:text-[#1a1a18]'}`}
+        >
+          Edit
+        </button>
+      </div>
+
+      {tab === 'context' && (
+        <div className="space-y-2.5">
+          {/* Source */}
+          {task.source_label && (
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-sm">{sourceIcon()}</span>
+              <span className="text-xs text-[#6b6b67]">{task.source_label}</span>
+              {task.source_date && (
+                <span className="text-xs text-[#9b9b97]">· {dayjs(task.source_date).format('MMM D')}</span>
+              )}
+            </div>
+          )}
+
+          {/* Project chip */}
+          {project && (
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide">Project</span>
+              <span className="text-xs px-2 py-0.5 rounded-full border border-[#C9A84C]/60 text-[#C9A84C] font-medium bg-amber-50">
+                {project.name}
+              </span>
+            </div>
+          )}
+
+          {/* Related from same meeting */}
+          {relatedTasks.length > 0 && (
+            <div>
+              <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-1">Related from this meeting</p>
+              <div className="flex flex-wrap gap-1.5">
+                {relatedTasks.map(t => (
+                  <span key={t.id} className="flex items-center gap-1 text-xs bg-gray-100 text-[#6b6b67] px-2 py-0.5 rounded-full">
+                    <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${t.status === 'done' || t.status === 'complete' ? 'bg-green-500' : 'bg-amber-400'}`} />
+                    {t.title.length > 40 ? t.title.slice(0, 40) + '…' : t.title}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Context/notes block */}
+          {task.context && (
+            <div>
+              <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-0.5">Notes</p>
+              <p className="text-xs text-[#6b6b67] leading-snug whitespace-pre-wrap">{task.context}</p>
+            </div>
+          )}
+
+          {/* Due date */}
+          {task.due_date && (
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide">Due</span>
+              <span className={`text-xs font-medium ${overdue ? 'text-red-600 bg-red-50 px-2 py-0.5 rounded-full' : 'text-[#6b6b67]'}`}>
+                {overdue ? 'Overdue · ' : ''}{dayjs(task.due_date).format('MMM D, YYYY')}
+              </span>
+            </div>
+          )}
+
+          {/* Compact quick-edit strip */}
+          <div className="flex items-center gap-2 pt-1 border-t border-[#f0f0ee] flex-wrap">
+            <select
+              value={editUrgency}
+              onChange={e => setEditUrgency(e.target.value)}
+              className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 bg-white text-[#1a1a18] focus:outline-none"
+            >
+              <option value="critical">Critical</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <input
+              type="date"
+              value={editDue}
+              onChange={e => setEditDue(e.target.value)}
+              className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 bg-white text-[#1a1a18] focus:outline-none"
+            />
+            <input
+              value={editNotes}
+              onChange={e => setEditNotes(e.target.value)}
+              placeholder="Add a note…"
+              className="flex-1 min-w-[80px] text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 bg-white text-[#1a1a18] focus:outline-none"
+            />
+            <button
+              onClick={handleSaveEdit}
+              disabled={saving}
+              className="text-xs px-2 py-1 bg-[#1a1a18] text-white rounded-lg disabled:opacity-40 hover:bg-gray-800 transition-colors"
+            >
+              {saving ? '…' : 'Save'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === 'edit' && (
+        <div>
+          <InlineEdit
+            item={task}
+            type="task"
+            onSave={(id, patch) => update.mutate({ id, updates: patch })}
+          />
+          <div className="flex items-center gap-2 flex-wrap mt-2">
+            {task.status && (
+              <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-[#6b6b67]">
+                {task.status}
+              </span>
+            )}
+            {task.ai_extracted && (
+              <span className="text-xs px-2 py-0.5 rounded bg-purple-100 text-purple-700">AI extracted</span>
+            )}
+          </div>
+          {task.source_email_id && (
+            <p className="text-xs text-[#9b9b97] mt-1">Email ID: {task.source_email_id}</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function TasksPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
@@ -253,6 +427,11 @@ export default function TasksPage() {
   const { data: tasks, isLoading } = useQuery({
     queryKey: ['tasks'],
     queryFn: getTasks,
+  })
+
+  const { data: projects } = useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects,
   })
 
   const update = useMutation({
@@ -439,35 +618,14 @@ export default function TasksPage() {
                     )}
                   </div>
 
-                  {/* Expanded detail — inline edit */}
+                  {/* Expanded detail — enriched context + edit */}
                   {expanded && (
-                    <div className="px-4 pb-3 pt-2 ml-5 bg-gray-50 border-t border-[#f0f0ee]">
-                      <p className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide mb-2">Edit · click any field</p>
-                      <InlineEdit
-                        item={task}
-                        type="task"
-                        onSave={(id, patch) => update.mutate({ id, updates: patch })}
-                      />
-                      <div className="flex items-center gap-2 flex-wrap mt-2">
-                        {task.status && (
-                          <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-[#6b6b67]">
-                            {task.status}
-                          </span>
-                        )}
-                        {task.ai_extracted && (
-                          <span className="text-xs px-2 py-0.5 rounded bg-purple-100 text-purple-700">AI extracted</span>
-                        )}
-                      </div>
-                      {task.source_label && (
-                        <p className="text-xs text-[#9b9b97]">Source: {task.source_label}</p>
-                      )}
-                      {task.source_email_id && (
-                        <p className="text-xs text-[#9b9b97]">Email ID: {task.source_email_id}</p>
-                      )}
-                      {task.notes && (
-                        <p className="text-xs text-[#6b6b67] whitespace-pre-wrap">{task.notes}</p>
-                      )}
-                    </div>
+                    <TaskContextPanel
+                      task={task}
+                      allTasks={tasks}
+                      projects={projects}
+                      update={update}
+                    />
                   )}
                 </div>
               )
