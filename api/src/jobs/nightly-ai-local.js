@@ -2647,8 +2647,8 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
 
         // Project ID comes from manual assignment in frontend — not keyword guessing
         const meetingProjectId  = meeting.project_id || null
-        const meetingSource     = meeting.source === 'plaud' ? 'plaud' : 'otter'
-        const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : 'ai_otter'
+        const meetingSource     = meeting.source === 'plaud' ? 'plaud' : meeting.source === 'manual' ? 'manual' : 'otter'
+        const meetingSourceType = meeting.source === 'plaud' ? 'ai_plaud' : meeting.source === 'manual' ? 'ai_upload' : 'ai_otter'
 
         for (const item of actionItems) {
           const isRyan = item.assignee_email === 'hankinsr@claycorp.com'
@@ -2956,7 +2956,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
                       ...(intel.decisions_made || []).map(d => ({
                         ...d, source: meeting.title, source_type: meetingSource, date: today
                       }))
-                    ],
+                    ].slice(-50),
                     key_facts: [
                       ...(project.key_facts || []),
                       ...(intel.key_facts || []).map(f => ({

@@ -111,8 +111,10 @@ module.exports = (req, res) => {
 
       // 3. Insert initial record
       const insertPayload = {
+        otter_id: `upload_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
         title,
         meeting_date: meetingDate,
+        start_time:   `${meetingDate}T17:00:00Z`, // noon Phoenix (MST) as default
         source,
         project_id: projectId || null,
         raw_transcript: rawText,
@@ -174,16 +176,20 @@ module.exports = (req, res) => {
           let intelligence = null
 
           if (fileType === 'transcript') {
-            // Full extraction pipeline
-            intelligence = await extractIntelligenceFromTranscript(rawText, {
-              title,
-              meeting_date: meetingDate,
-              project_id: projectId,
-            })
-            summary = intelligence?.summary || null
+            // Full extraction pipeline — pass the actual DB record so
+            // extractIntelligenceFromTranscript can read .full_transcript / .raw_transcript
+            intelligence = await extractIntelligenceFromTranscript(record, [], [])
+            summary = intelligence?.meeting_outcome?.summary || null
           } else {
             // Summary/intelligence doc — lighter parse
-            intelligence = await parsePlaudSummary(rawText)
+            // Pass a synthetic record so parsePlaudSummary can read .short_summary
+            intelligence = await parsePlaudSummary({
+              short_summary: rawText,
+              summary:       rawText,
+              title,
+              start_time:    `${meetingDate}T17:00:00Z`,
+              participants:  []
+            })
             summary = rawText.slice(0, 4000) // keep original text as summary
           }
 

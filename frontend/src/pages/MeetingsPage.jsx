@@ -318,10 +318,14 @@ export default function MeetingsPage() {
 
           // Fall back to extracted_intelligence arrays if no DB records exist
           const intel      = meeting.extracted_intelligence || {}
-          const exTasks    = intel.my_action_items   || []
-          const exOthers   = intel.others_commitments || []
-          const decisions  = intel.decisions          || intel.key_decisions || []
-          const risks      = intel.risk_signals       || []
+          // Field names match ai.js return schema (ryan_action_items, verbal_commitments_others, etc.)
+          const exTasks    = intel.ryan_action_items || []
+          const exOthers   = [
+            ...(intel.verbal_commitments_others || []),
+            ...(intel.others_action_items       || []),
+          ]
+          const decisions  = intel.decisions_made || intel.decisions || []
+          const risks      = intel.risk_signals   || []
 
           // Use DB records when available; else extracted items (for "push+done" flow)
           const showDbTasks   = meetingTasks.length  > 0

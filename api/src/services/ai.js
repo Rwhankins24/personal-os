@@ -133,7 +133,7 @@ async function buildRyanContext() {
       .select('title, summary, meeting_date, start_time, project_id')
       .eq('intelligence_extracted', true)
       .not('summary', 'is', null)
-      .order('meeting_date', { ascending: false })
+      .order('start_time', { ascending: false, nullsFirst: false })
       .limit(25)
 
     // Pull open pending decisions
