@@ -57,8 +57,8 @@ function KnowledgeModal({ entry, onClose, onSave }) {
     status:       entry?.status       || 'active',
     risk_level:   entry?.risk_level   || '',
     entry_type:   entry?.entry_type   || '',
-    effective_date: entry?.effective_date || '',
-    parties:      entry?.parties      || '',
+    our_position: entry?.our_position || '',
+    client_asks:  entry?.client_asks  || '',
     project_refs: (entry?.project_refs || []).join(', '),
   })
   const [saving, setSaving] = useState(false)
@@ -68,13 +68,6 @@ function KnowledgeModal({ entry, onClose, onSave }) {
   const isContractLegal = form.category === 'contract_legal'
   const isConstruction  = form.category === 'construction_complexity'
   const showExtended    = isContractLegal || isConstruction
-  const showContractSpecific = isContractLegal && form.entry_type === 'specific_contract'
-
-  const entryTypeOptions = isContractLegal
-    ? CONTRACT_ENTRY_TYPES
-    : isConstruction
-    ? CONSTRUCTION_ENTRY_TYPES
-    : []
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -90,8 +83,8 @@ function KnowledgeModal({ entry, onClose, onSave }) {
         status:       form.status,
         risk_level:   form.risk_level || null,
         entry_type:   form.entry_type || null,
-        effective_date: form.effective_date || null,
-        parties:      form.parties.trim() || null,
+        our_position: form.our_position?.trim() || null,
+        client_asks:  form.client_asks?.trim()  || null,
         project_refs: form.project_refs.split(',').map(t => t.trim()).filter(Boolean),
       }
       await onSave(payload)
@@ -160,44 +153,44 @@ function KnowledgeModal({ entry, onClose, onSave }) {
                 </select>
               </div>
 
-              {/* Entry type */}
-              {entryTypeOptions.length > 0 && (
+              {/* Complexity type — construction only */}
+              {isConstruction && (
                 <div>
-                  <label className="block text-xs font-medium text-[#6b6b67] mb-1">
-                    {isContractLegal ? 'Entry Type' : 'Complexity Type'}
-                  </label>
+                  <label className="block text-xs font-medium text-[#6b6b67] mb-1">Complexity Type</label>
                   <select
                     value={form.entry_type}
                     onChange={e => set('entry_type', e.target.value)}
                     className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="">— Select —</option>
-                    {entryTypeOptions.map(o => (
+                    {CONSTRUCTION_ENTRY_TYPES.map(o => (
                       <option key={o.value} value={o.value}>{o.label}</option>
                     ))}
                   </select>
                 </div>
               )}
 
-              {/* Specific contract fields */}
-              {showContractSpecific && (
+              {/* Contract/Legal negotiation playbook fields */}
+              {isContractLegal && (
                 <>
                   <div>
-                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">Effective Date</label>
-                    <input
-                      type="date"
-                      value={form.effective_date}
-                      onChange={e => set('effective_date', e.target.value)}
-                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">Our Position</label>
+                    <textarea
+                      value={form.our_position}
+                      onChange={e => set('our_position', e.target.value)}
+                      placeholder="Clayco's standard position on this issue"
+                      rows={2}
+                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">Parties</label>
-                    <input
-                      value={form.parties}
-                      onChange={e => set('parties', e.target.value)}
-                      placeholder="e.g. Clayco / Trammell Crow"
-                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    <label className="block text-xs font-medium text-[#6b6b67] mb-1">What Clients Ask For</label>
+                    <textarea
+                      value={form.client_asks}
+                      onChange={e => set('client_asks', e.target.value)}
+                      placeholder="What clients typically push for on this issue"
+                      rows={2}
+                      className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
                     />
                   </div>
                 </>
@@ -216,25 +209,29 @@ function KnowledgeModal({ entry, onClose, onSave }) {
             </>
           )}
 
-          {/* Context */}
+          {/* Context / Where's the Risk */}
           <div>
-            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Context</label>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+              {isContractLegal ? "Where's the Risk" : 'Context'}
+            </label>
             <textarea
               value={form.context}
               onChange={e => set('context', e.target.value)}
-              placeholder="Background — what was the situation or issue?"
+              placeholder={isContractLegal ? "What's the exposure if this clause goes wrong?" : "Background — what was the situation or issue?"}
               rows={3}
               className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
             />
           </div>
 
-          {/* Resolution */}
+          {/* Resolution / How We've Resolved It */}
           <div>
-            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Resolution / Learning</label>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">
+              {isContractLegal ? "How We've Resolved It" : 'Resolution / Learning'}
+            </label>
             <textarea
               value={form.resolution}
               onChange={e => set('resolution', e.target.value)}
-              placeholder="How it was resolved, what was learned"
+              placeholder={isContractLegal ? "How this has been negotiated or resolved in past deals" : "How it was resolved, what was learned"}
               rows={3}
               className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 text-[#1a1a18] focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
             />
@@ -343,14 +340,20 @@ function EntryCard({ entry, onEdit, onDelete }) {
         </div>
       </div>
 
-      {/* Contract/Legal specific meta */}
-      {isContractLegal && (entry.parties || entry.effective_date) && (
-        <div className="flex items-center gap-3 flex-wrap mb-2">
-          {entry.parties && (
-            <span className="text-xs text-[#6b6b67]">⚖️ {entry.parties}</span>
+      {/* Contract/Legal — Our Position + What Clients Ask For */}
+      {isContractLegal && (entry.our_position || entry.client_asks) && expanded && (
+        <div className="space-y-2 mb-2 bg-red-50 rounded-lg px-3 py-2">
+          {entry.our_position && (
+            <div>
+              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">Our Position</p>
+              <p className="text-sm text-[#1a1a18] leading-snug">{entry.our_position}</p>
+            </div>
           )}
-          {entry.effective_date && (
-            <span className="text-xs text-[#6b6b67]">📅 Effective {entry.effective_date}</span>
+          {entry.client_asks && (
+            <div>
+              <p className="text-xs font-medium text-red-700 uppercase tracking-wide mb-0.5">What Clients Ask For</p>
+              <p className="text-sm text-[#1a1a18] leading-snug">{entry.client_asks}</p>
+            </div>
           )}
         </div>
       )}
@@ -377,10 +380,12 @@ function EntryCard({ entry, onEdit, onDelete }) {
         </div>
       )}
 
-      {/* Context */}
+      {/* Context / Where's the Risk */}
       {entry.context && (
         <div className="mb-2">
-          <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">Context</p>
+          <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">
+            {isContractLegal ? "Where's the Risk" : 'Context'}
+          </p>
           <p className="text-sm text-[#1a1a18] leading-snug">
             {expanded || entry.context.length <= previewLen
               ? entry.context
@@ -389,10 +394,12 @@ function EntryCard({ entry, onEdit, onDelete }) {
         </div>
       )}
 
-      {/* Resolution */}
+      {/* Resolution / How We've Resolved It */}
       {entry.resolution && (
         <div>
-          <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">Resolution</p>
+          <p className="text-xs font-medium text-[#6b6b67] uppercase tracking-wide mb-0.5">
+            {isContractLegal ? "How We've Resolved It" : 'Resolution'}
+          </p>
           <p className="text-sm text-[#1a1a18] leading-snug">
             {expanded || entry.resolution.length <= previewLen
               ? entry.resolution
@@ -553,8 +560,8 @@ export default function KnowledgePage() {
         status:       'active',
         risk_level:   extracted.risk_level   || '',
         entry_type:   extracted.entry_type   || '',
-        effective_date: extracted.effective_date || '',
-        parties:      extracted.parties      || '',
+        our_position: extracted.our_position || '',
+        client_asks:  extracted.client_asks  || '',
         project_refs: (extracted.project_refs || []).join(', '),
       }
       setEditEntry(null)
