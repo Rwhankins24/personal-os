@@ -384,6 +384,8 @@ export default function OthersPage() {
   ]
 
   const filtered = (items || []).filter(c => {
+    // exclude loser duplicates — they render as sub-rows under their winner
+    if (c.potential_duplicate_of && c.status !== 'archived') return false
     // type filter
     if (typeFilter === 'blocking_ryan' && c.delivery_type !== 'blocking_ryan') return false
     if (typeFilter === 'to_ryan'       && c.delivery_type !== 'to_ryan')       return false
