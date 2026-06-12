@@ -225,7 +225,7 @@ async function main() {
               contact_id:      contact?.id || null,
               due_date:        item.due_date || null,
               urgency:         item.urgency || 'medium',
-              status:          'pending',
+              status:          'open',
               source_label:    meeting.title || 'Meeting',
               source_date:     meeting.start_time?.split('T')[0] || today,
               project_id:      meeting.project_id || null,

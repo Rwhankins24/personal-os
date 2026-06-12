@@ -3584,10 +3584,17 @@ Be direct and specific. No fluff.`
 
         if (!existing) {
           const projectId = await findProjectByKeywords(email.thread_subject)
+          let emailContactId = null
+          if (c.committed_by_email) {
+            const { data: ec } = await supabase.from('contacts').select('id')
+              .ilike('email', c.committed_by_email).maybeSingle()
+            emailContactId = ec?.id || null
+          }
 
           const { data: newCommitment } = await supabase.from('others_commitments').insert({
             committed_by_name: c.committed_by_name,
             committed_by_email: c.committed_by_email,
+            contact_id: emailContactId,
             title: c.title,
             context: c.context,
             due_date: c.due_date,
@@ -3810,9 +3817,18 @@ Respond ONLY with valid JSON:
           .maybeSingle()
         if (titleMatch) continue
 
+        const personEmail3 = verdict.person_email || email.from_address || null
+        let verdictContactId = null
+        if (personEmail3) {
+          const { data: vc } = await supabase.from('contacts').select('id')
+            .ilike('email', personEmail3).maybeSingle()
+          verdictContactId = vc?.id || null
+        }
+
         await supabase.from('others_commitments').insert({
           committed_by_name:  verdict.person_name  || email.from_name  || 'Unknown',
-          committed_by_email: verdict.person_email || email.from_address || null,
+          committed_by_email: personEmail3,
+          contact_id:         verdictContactId,
           title:              verdict.what_they_owe,
           context:            `Waiting since email: "${email.thread_subject}"${email.days_waiting > 0 ? ` (${email.days_waiting}d)` : ''}`,
           due_date:           verdict.deadline || null,

@@ -75,6 +75,58 @@ module.exports = async (req, res) => {
 
   if (req.method === 'OPTIONS') return res.status(200).end()
 
+  // ── Extract knowledge from pasted text ──────────────────────
+  if (req.method === 'POST' && req.query.action === 'extract-text') {
+    try {
+      const { text, project_id } = req.body || {}
+      if (!text?.trim()) return res.status(400).json({ error: 'text required' })
+
+      const snippet       = text.slice(0, 4000)
+      const meetingContext = await getProjectMeetingContext(project_id)
+      const meetingSection = meetingContext
+        ? `\n\nRELEVANT MEETING HISTORY FOR THIS PROJECT:\n${meetingContext}\n\nUse the meeting history to populate "our_position" and "resolution".`
+        : ''
+
+      const Anthropic = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const msg = await Anthropic.messages.create({
+        model: 'claude-opus-4-5',
+        max_tokens: 4096,
+        messages: [{
+          role: 'user',
+          content: `You are extracting structured knowledge from text for a construction executive's knowledge base at Clayco.
+
+Text:
+${snippet}
+${meetingSection}
+
+Extract ONE entry per material issue or insight found. Return a JSON array:
+[{
+  "topic": "concise title (max 8 words)",
+  "category": "contract_legal" | "construction_complexity" | "domain_knowledge" | "project_lesson" | "client_intel",
+  "context": "background / where's the risk (2-3 sentences)",
+  "our_position": "for contract_legal: Clayco's preferred position; null otherwise",
+  "client_asks": "for contract_legal: what clients push for; null otherwise",
+  "resolution": "how resolved or key takeaway (2-3 sentences)",
+  "risk_level": "high" | "medium" | "low" | null,
+  "entry_type": null,
+  "project_refs": [],
+  "applies_to": ["relevant tags"]
+}]
+
+Return ONLY a valid JSON array. No explanation.`
+        }]
+      })
+
+      const raw       = msg.content[0].text.trim()
+      const jsonMatch = raw.match(/\[[\s\S]*\]/)
+      const entries   = jsonMatch ? JSON.parse(jsonMatch[0]) : JSON.parse(raw)
+      const enriched  = entries.map(e => ({ ...e, project_id: project_id || null }))
+      return res.json({ entries: enriched, source_doc: 'Pasted text' })
+    } catch (e) {
+      return res.status(500).json({ error: e.message })
+    }
+  }
+
   // ── Extract knowledge from uploaded doc ─────────────────────
   if (req.method === 'POST' && req.query.action === 'extract') {
     return new Promise((resolve) => {

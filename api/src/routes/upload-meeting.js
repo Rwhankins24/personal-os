@@ -114,7 +114,7 @@ module.exports = (req, res) => {
         otter_id: `upload_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
         title,
         meeting_date: meetingDate,
-        start_time:   `${meetingDate}T17:00:00Z`, // noon Phoenix (MST) as default
+        start_time:   `${meetingDate}T19:00:00Z`, // noon Phoenix (MST = UTC-7, no DST)
         source,
         project_id: projectId || null,
         raw_transcript: rawText,
