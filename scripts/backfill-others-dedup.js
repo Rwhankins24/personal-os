@@ -98,7 +98,7 @@ async function main() {
         // Skip if both are manual entries
         if (a.source_type === 'manual' && b.source_type === 'manual') continue
         const score = jaccard(tokenMap.get(a.id), tokenMap.get(b.id))
-        if (score >= 0.55) {
+        if (score >= 0.30) {
           nearMatches.push({ a, b, score })
         }
       }
@@ -109,7 +109,7 @@ async function main() {
   nearMatches.sort((x, y) => y.score - x.score)
 
   console.log(`Found ${nearMatches.length} near-match pairs (Jaccard >= 0.55)`)
-  console.log(`Processing top ${Math.min(nearMatches.length, 60)} pairs...`)
+  console.log(`Processing top ${Math.min(nearMatches.length, 120)} pairs...`)
 
   // ── AI confirmation ──────────────────────────────────────────────
   let autoMerged = 0
@@ -117,7 +117,7 @@ async function main() {
   let skipped    = 0
   const archived = new Set()
 
-  for (const { a, b, score } of nearMatches.slice(0, 60)) {
+  for (const { a, b, score } of nearMatches.slice(0, 120)) {
     if (archived.has(a.id) || archived.has(b.id)) continue
 
     const prompt = `Two commitments from Ryan's personal OS — both assigned to the same person:
@@ -214,7 +214,7 @@ Respond ONLY with valid JSON:
   console.log(`  Auto-merged (75%+): ${autoMerged}`)
   console.log(`  Flagged for review (65–74%): ${flagged}`)
   console.log(`  Skipped (low confidence / error): ${skipped}`)
-  console.log(`  Remaining near-match pairs not processed: ${Math.max(0, nearMatches.length - 60)}`)
+  console.log(`  Remaining near-match pairs not processed: ${Math.max(0, nearMatches.length - 120)}`)
 
   if (nearMatches.length > 60) {
     console.log('\n  Run again to process next batch (already-flagged items are skipped automatically).')
