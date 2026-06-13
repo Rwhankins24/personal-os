@@ -3334,7 +3334,7 @@ Be direct and specific. No fluff.`
         }
 
         // ── Speaker attributions — always write, Ryan resolves in frontend ──
-        for (const s of (intel.speaker_attributions || [])) {
+        for (const s of (intel?.speaker_attributions || [])) {
           if (!s.speaker_label || !s.likely_person) continue
           const { data: existSA } = await supabase
             .from('speaker_attributions')
@@ -3366,7 +3366,7 @@ Be direct and specific. No fluff.`
           intelligence_extracted: true,
           commitments_extracted:  true,
           extraction_date:        today,
-          extracted_intelligence: intel,   // cache full extraction for later project assignment
+          extracted_intelligence: intel || null,   // cache full extraction for later project assignment
         }
         // Save narrative summary from meeting_outcome (the comprehensive one)
         if (intel?.meeting_outcome?.summary && !meeting.summary) {
