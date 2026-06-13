@@ -671,31 +671,54 @@ function isInternal(email) {
 // Pre-queued for merge; user can opt individual ones out.
 function DuplicateSubRow({ loser, isKept, onToggleKeep }) {
   return (
-    <div className={`flex items-center gap-2 px-4 py-2 border-t ${isKept ? 'border-gray-100 bg-gray-50/50' : 'border-amber-100 bg-amber-50/30'}`}>
+    <div className={`flex items-start gap-2 px-4 py-2.5 border-t ${isKept ? 'border-gray-100 bg-gray-50/50' : 'border-amber-100 bg-amber-50/30'}`}>
       {/* indent indicator */}
-      <span className="text-[#9b9b97] flex-shrink-0 text-xs pl-1">↳</span>
+      <span className="text-[#9b9b97] flex-shrink-0 text-xs pl-1 mt-0.5">↳</span>
 
-      {/* status chip */}
-      {isKept ? (
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 flex-shrink-0 whitespace-nowrap">keeping</span>
-      ) : (
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 flex-shrink-0 whitespace-nowrap">will merge</span>
-      )}
+      {/* content */}
+      <div className="flex-1 min-w-0">
+        {/* status chip + confidence */}
+        <div className="flex items-center gap-1.5 mb-1">
+          {isKept ? (
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 whitespace-nowrap">keeping</span>
+          ) : (
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 whitespace-nowrap">will merge</span>
+          )}
+          {loser.duplicate_confidence && (
+            <span className="text-[10px] text-[#9b9b97]">{loser.duplicate_confidence}% match</span>
+          )}
+        </div>
 
-      {/* duplicate title */}
-      <p className={`text-xs flex-1 min-w-0 truncate leading-snug ${isKept ? 'text-[#6b6b67]' : 'text-[#6b6b67] line-through'}`}>
-        {loser.title}
-      </p>
+        {/* duplicate title — wraps instead of truncates */}
+        <p className={`text-xs leading-snug mb-1 ${isKept ? 'text-[#6b6b67]' : 'text-[#6b6b67] line-through'}`}>
+          {loser.title}
+        </p>
 
-      {/* source */}
-      {loser.source_label && (
-        <span className="text-[10px] text-[#9b9b97] flex-shrink-0 hidden sm:block truncate max-w-[80px]">{loser.source_label}</span>
-      )}
+        {/* context snippet */}
+        {loser.context && (
+          <p className="text-[11px] text-[#9b9b97] leading-snug mb-0.5 italic">
+            {loser.context.slice(0, 120)}{loser.context.length > 120 ? '…' : ''}
+          </p>
+        )}
+
+        {/* source + person */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {loser.source_label && (
+            <span className="text-[10px] text-[#9b9b97]">📋 {loser.source_label}</span>
+          )}
+          {loser.committed_by_name && (
+            <span className="text-[10px] text-[#9b9b97]">· {loser.committed_by_name}</span>
+          )}
+          {loser.source_date && (
+            <span className="text-[10px] text-[#9b9b97]">· {dayjs(loser.source_date).format('MMM D')}</span>
+          )}
+        </div>
+      </div>
 
       {/* toggle button */}
       <button
         onClick={e => { e.stopPropagation(); onToggleKeep(loser.id) }}
-        className={`text-[10px] font-semibold px-2 py-1 rounded-lg flex-shrink-0 transition-colors whitespace-nowrap ${
+        className={`text-[10px] font-semibold px-2 py-1 rounded-lg flex-shrink-0 transition-colors whitespace-nowrap mt-0.5 ${
           isKept
             ? 'bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100'
             : 'text-[#9b9b97] border border-dashed border-gray-300 hover:border-gray-400 hover:text-[#6b6b67]'
