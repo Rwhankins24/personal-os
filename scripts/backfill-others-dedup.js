@@ -14,10 +14,12 @@
 // Env: requires .env with SUPABASE_URL, SUPABASE_SERVICE_KEY, ANTHROPIC_API_KEY
 
 const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../api/.env') })
+const apiDir = path.join(__dirname, '../api')
 
-const { createClient } = require('@supabase/supabase-js')
-const Anthropic = require('@anthropic-ai/sdk')
+// Resolve all packages from api/node_modules
+require(path.join(apiDir, 'node_modules/dotenv')).config({ path: path.join(apiDir, '.env') })
+const { createClient } = require(path.join(apiDir, 'node_modules/@supabase/supabase-js'))
+const Anthropic = require(path.join(apiDir, 'node_modules/@anthropic-ai/sdk'))
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
