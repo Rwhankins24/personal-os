@@ -1809,6 +1809,12 @@ export default function Dashboard() {
             >
               Topics
             </Link>
+            <Link
+              to="/leads"
+              className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Leads
+            </Link>
             <AIJobButton />
           </div>
           <div className="text-right">

@@ -125,4 +125,16 @@ export const addPodFile        = (id, formData) => api.post(`/api/topic-pods/${i
   headers: { 'Content-Type': 'multipart/form-data' }
 }).then(r => r.data)
 export const deletePodContent  = (podId, contentId) => api.delete(`/api/topic-pods/${podId}/content/${contentId}`).then(r => r.data)
+
+// ── Leads ─────────────────────────────────────────────────────
+export const getLeads      = () => api.get('/api/leads').then(r => r.data)
+export const getLead       = (id) => api.get(`/api/leads?id=${id}`).then(r => r.data)
+export const createLead    = (data) => api.post('/api/leads', data).then(r => r.data)
+export const updateLead    = (id, data) => api.patch(`/api/leads?id=${id}`, data).then(r => r.data)
+export const deleteLead    = (id) => api.delete(`/api/leads?id=${id}`).then(r => r.data)
+export const uploadLeadFile = (leadId, formData) =>
+  api.post(`/api/leads?action=upload&id=${leadId}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }).then(r => r.data)
+export const deleteLeadFile = (fileId) => api.delete(`/api/leads?action=file&id=${fileId}`).then(r => r.data)
 export const synthesizePod     = (id) => api.post(`/api/topic-pods/${id}/synthesize`).then(r => r.data)

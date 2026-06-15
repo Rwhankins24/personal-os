@@ -19,6 +19,7 @@ import TopicsPage      from './pages/TopicsPage'
 import DecisionsPage  from './pages/DecisionsPage'
 import MeetingsPage   from './pages/MeetingsPage'
 import MeetingDetail  from './pages/MeetingDetail'
+import LeadsPage       from './pages/LeadsPage'
 import ChatWidget      from './components/ChatWidget'
 import CaptureButton   from './components/CaptureButton'
 import { ToastProvider } from './contexts/ToastContext'
@@ -129,6 +130,7 @@ export default function App() {
             <Route path="/decisions"        element={<DecisionsPage />} />
             <Route path="/meetings"         element={<MeetingsPage />} />
             <Route path="/meeting/:id"      element={<MeetingDetail />} />
+            <Route path="/leads"            element={<LeadsPage />} />
           </Routes>
           <ChatWidget />
           <CaptureButton />

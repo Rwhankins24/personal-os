@@ -2972,6 +2972,123 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   }
   console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
 
+  // ── STEP 3.8: Process unprocessed lead file attachments ─────────
+  console.log('Step 3.8: Processing lead file attachments with AI...')
+  try {
+    const haikuLeads = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const { data: unprocessedFiles } = await supabase
+      .from('lead_files')
+      .select('id, lead_id, filename, storage_path, mime_type')
+      .eq('ai_processed', false)
+      .order('created_at', { ascending: true })
+      .limit(20)
+
+    let leadFilesProcessed = 0
+
+    for (const lf of (unprocessedFiles || [])) {
+      try {
+        // Download file from Supabase Storage
+        const { data: blob, error: dlErr } = await supabase.storage
+          .from('lead-files')
+          .download(lf.storage_path)
+        if (dlErr) { console.log(`    ⚠ Download error for ${lf.filename}: ${dlErr.message}`); continue }
+
+        // Convert Blob → Buffer → text
+        const buf = Buffer.from(await blob.arrayBuffer())
+        let rawText = ''
+        const ext = (lf.filename || '').toLowerCase()
+        try {
+          if (ext.endsWith('.pdf')) {
+            const pdfParse = require('pdf-parse')
+            const parsed = await pdfParse(buf)
+            rawText = parsed.text
+          } else if (ext.endsWith('.docx')) {
+            const mammoth = require('mammoth')
+            const result = await mammoth.extractRawText({ buffer: buf })
+            rawText = result.value
+          } else {
+            rawText = buf.toString('utf-8')
+          }
+        } catch (parseErr) {
+          rawText = buf.toString('utf-8').slice(0, 50000)
+        }
+
+        if (!rawText || rawText.trim().length < 50) {
+          await supabase.from('lead_files').update({ ai_processed: true, extracted_at: new Date().toISOString() }).eq('id', lf.id)
+          continue
+        }
+
+        const textSnippet = rawText.slice(0, 12000) // Haiku context window is generous
+
+        // Fetch parent lead for context
+        const { data: lead } = await supabase.from('leads').select('codename, client_name, project_type').eq('id', lf.lead_id).single()
+
+        const prompt = `You are analyzing an article, press release, or document attached to a construction/development lead tracker.
+
+Lead context: ${lead?.codename || 'Unknown project'}${lead?.client_name ? ` — ${lead.client_name}` : ''}${lead?.project_type ? ` (${lead.project_type})` : ''}
+File: ${lf.filename}
+
+DOCUMENT TEXT:
+${textSnippet}
+
+Extract the following intelligence in a concise, structured format. Only include fields where there is clear evidence in the document. Skip fields that are not mentioned.
+
+Return your response as a compact summary with these sections (skip sections with no data):
+
+FACILITY TYPE: [data center / advanced manufacturing / pharma / industrial / etc.]
+PROCESS / USE: [what they will make, store, or do in the facility]
+SCALE / SIZE: [SF, MW, units, or other scale indicators]
+LOCATION: [city, state, region — be specific]
+KEY STAKEHOLDERS: [developer, owner, tenant, GC, architect — names and roles]
+TIMELINE: [when construction starts, when operational, key milestones]
+INVESTMENT / VALUE: [capital investment, project cost, bond size]
+PROCUREMENT: [how they will hire builder — CM-at-risk, design-build, bid, etc.]
+COMPETITIVE INTEL: [other builders/developers mentioned, market positioning signals]
+SALES NOTES: [anything else relevant to Clayco pursuing this project — relationships, hurdles, opportunities]
+
+Be specific and cite concrete details. Avoid generic statements.`
+
+        const response = await haikuLeads.messages.create({
+          model:      'claude-haiku-4-5-20251001',
+          max_tokens: 800,
+          messages:   [{ role: 'user', content: prompt }],
+        })
+
+        const aiSummary = response.content?.[0]?.text?.trim() || null
+
+        // Write AI summary to lead_files
+        await supabase.from('lead_files').update({
+          ai_processed: true,
+          ai_summary:   aiSummary,
+          extracted_at: new Date().toISOString(),
+        }).eq('id', lf.id)
+
+        // Roll up all processed file summaries to parent lead.ai_summary
+        const { data: allFiles } = await supabase
+          .from('lead_files')
+          .select('filename, ai_summary')
+          .eq('lead_id', lf.lead_id)
+          .eq('ai_processed', true)
+          .not('ai_summary', 'is', null)
+
+        if (allFiles?.length > 0) {
+          const rolled = allFiles.map(f => `=== ${f.filename} ===\n${f.ai_summary}`).join('\n\n')
+          await supabase.from('leads').update({ ai_summary: rolled }).eq('id', lf.lead_id)
+        }
+
+        leadFilesProcessed++
+        console.log(`    ✓ Processed: ${lf.filename} (${lead?.codename || lf.lead_id})`)
+      } catch (fileErr) {
+        console.log(`    ✗ Lead file error [${lf.filename}]: ${fileErr.message}`)
+      }
+    }
+
+    console.log(`  ✓ Lead files processed: ${leadFilesProcessed}`)
+  } catch (err) {
+    results.errors.push(`Lead file processing: ${err.message}`)
+    console.log(`  ✗ Lead file processing error: ${err.message}`)
+  }
+
   // ── STEP 2.6: Process meeting transcripts (Otter + Plaud) ───────
   console.log('Step 2.6: Processing meeting intelligence (Otter + Plaud)...')
   try {
