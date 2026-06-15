@@ -377,6 +377,7 @@ export default function TasksPage() {
   const qc = useQueryClient()
   const toast = useToast()
 
+  const [search,        setSearch]        = useState('')
   const [statusFilter,  setStatusFilter]  = useState('all')
   const [urgencyFilter, setUrgencyFilter] = useState('all')
   const [sortBy,        setSortBy]        = useState('urgency') // urgency | newest | oldest | due
@@ -558,6 +559,15 @@ export default function TasksPage() {
       if (projectFilter === 'none' && t.project_id) return false
       if (projectFilter !== 'none' && t.project_id !== projectFilter) return false
     }
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      if (
+        !t.title?.toLowerCase().includes(q) &&
+        !t.context?.toLowerCase().includes(q) &&
+        !t.source_label?.toLowerCase().includes(q) &&
+        !t.notes?.toLowerCase().includes(q)
+      ) return false
+    }
     return true
   })
 
@@ -629,6 +639,22 @@ export default function TasksPage() {
       <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Filter bar */}
         <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2">
+          {/* Search */}
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search tasks..."
+              className="w-full pl-8 pr-8 py-1.5 text-sm border border-[#e5e5e3] rounded-lg bg-[#f8f8f6] text-[#1a1a18] placeholder-[#9b9b97] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-sm"
+              >×</button>
+            )}
+          </div>
           <div>
             <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Status</p>
             <PillToggle options={statusOptions} value={statusFilter} onChange={setStatusFilter} />
