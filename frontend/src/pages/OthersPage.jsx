@@ -119,7 +119,7 @@ function getInitials(name) {
 }
 
 // ── Bulk action bar ────────────────────────────────────────────
-function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onCancel, promoting }) {
+function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onMarkDone, onCancel, promoting, saving }) {
   const [open, setOpen] = useState(false)
 
   if (selectedIds.size === 0) return null
@@ -129,13 +129,21 @@ function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, 
       <div className="max-w-2xl mx-auto bg-[#1a1a18] text-white rounded-2xl px-4 py-3 flex items-center gap-2 shadow-lg flex-wrap">
         <span className="text-sm font-medium flex-shrink-0">{selectedIds.size} selected</span>
         <div className="flex items-center gap-2 ml-auto flex-wrap">
+          {/* Mark done */}
+          <button
+            onClick={onMarkDone}
+            disabled={saving}
+            className="text-sm bg-green-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-green-400 transition-colors disabled:opacity-50 whitespace-nowrap"
+          >
+            {saving ? 'Saving…' : '✓ Done'}
+          </button>
           {/* Promote to my tasks */}
           <button
             onClick={onPromoteToMyTasks}
             disabled={promoting}
             className="text-sm bg-blue-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-blue-600 transition-colors disabled:opacity-50 whitespace-nowrap"
           >
-            {promoting ? 'Adding…' : `→ My tasks (${selectedIds.size})`}
+            {promoting ? 'Adding…' : '→ My tasks'}
           </button>
           {/* Reassign */}
           <div className="relative">
@@ -171,8 +179,10 @@ export default function OthersPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
 
+  const [search,        setSearch]        = useState('')
   const [typeFilter,    setTypeFilter]    = useState('all')
   const [contactFilter, setContactFilter] = useState('all')
+  const [projectFilter, setProjectFilter] = useState('all')
   const [sortBy,        setSortBy]        = useState('person')
   const [selectMode,    setSelectMode]    = useState(false)
   const [selectedIds,   setSelectedIds]   = useState(new Set())
@@ -298,6 +308,8 @@ export default function OthersPage() {
     })
   }
 
+  const [bulkSaving, setBulkSaving] = useState(false)
+
   const toggleSelectMode = () => {
     setSelectMode(v => !v)
     setSelectedIds(new Set())
@@ -310,6 +322,33 @@ export default function OthersPage() {
       else next.add(id)
       return next
     })
+  }
+
+  const handleBulkMarkDone = async () => {
+    if (bulkSaving) return
+    setBulkSaving(true)
+    const ids = [...selectedIds]
+    try {
+      await Promise.all(ids.map(id => updateOthersCommitment(id, { status: 'closed' })))
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(c => ids.includes(c.id) ? { ...c, status: 'closed' } : c)
+      )
+      // Add each to the 5-sec undo window
+      ids.forEach(id => {
+        if (recentlyCompletedRef.current.has(id)) clearTimeout(recentlyCompletedRef.current.get(id))
+        const timerId = setTimeout(() => {
+          recentlyCompletedRef.current.delete(id)
+          setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+        }, 5000)
+        recentlyCompletedRef.current.set(id, timerId)
+      })
+      setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+      toast(`${ids.length} item${ids.length !== 1 ? 's' : ''} marked done`, { icon: '✓' })
+      setSelectedIds(new Set())
+      setSelectMode(false)
+    } finally {
+      setBulkSaving(false)
+    }
   }
 
   const handleBulkReassign = ({ name, email }) => {
@@ -417,7 +456,9 @@ export default function OthersPage() {
 
   const sortOptions = [
     { value: 'person',   label: 'By Person' },
-    { value: 'due_date', label: 'By Due Date' },
+    { value: 'due_date', label: 'Due Date' },
+    { value: 'newest',   label: 'Newest' },
+    { value: 'oldest',   label: 'Oldest' },
   ]
 
   const isItemDone = (c) => c.status === 'closed' || c.status === 'done'
@@ -438,6 +479,21 @@ export default function OthersPage() {
     // contact link filter
     if (contactFilter === 'linked'   && !c.contact_id) return false
     if (contactFilter === 'unlinked' && !!c.contact_id) return false
+    // project filter
+    if (projectFilter !== 'all') {
+      if (projectFilter === 'none' && c.project_id) return false
+      if (projectFilter !== 'none' && c.project_id !== projectFilter) return false
+    }
+    // search
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      if (
+        !c.title?.toLowerCase().includes(q) &&
+        !(c.committed_by_name || c.person_name || '').toLowerCase().includes(q) &&
+        !c.context?.toLowerCase().includes(q) &&
+        !c.source_label?.toLowerCase().includes(q)
+      ) return false
+    }
     return true
   })
 
@@ -480,9 +536,12 @@ export default function OthersPage() {
     return a.localeCompare(b)
   })
 
-  // If sorting by due date, key contacts sort first within same date, then by date
-  const flatSorted = sortBy === 'due_date'
+  // Flat sort for non-person views
+  const flatSorted = (sortBy === 'due_date' || sortBy === 'newest' || sortBy === 'oldest')
     ? [...filtered].sort((a, b) => {
+        if (sortBy === 'newest') return new Date(b.created_at || 0) - new Date(a.created_at || 0)
+        if (sortBy === 'oldest') return new Date(a.created_at || 0) - new Date(b.created_at || 0)
+        // due_date: key contacts first, then by date
         const aKey = isKeyPerson(a) ? 0 : 1
         const bKey = isKeyPerson(b) ? 0 : 1
         if (aKey !== bKey) return aKey - bKey
@@ -532,6 +591,22 @@ export default function OthersPage() {
       <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">
         {/* Filter bar */}
         <div className="bg-white border border-[#e5e5e3] rounded-2xl p-3 space-y-2">
+          {/* Search */}
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search items, people, context..."
+              className="w-full pl-8 pr-8 py-1.5 text-sm border border-[#e5e5e3] rounded-lg bg-[#f8f8f6] text-[#1a1a18] placeholder-[#9b9b97] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-sm"
+              >×</button>
+            )}
+          </div>
           <div>
             <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Type</p>
             <PillToggle options={typeOptions} value={typeFilter} onChange={setTypeFilter} />
@@ -552,6 +627,26 @@ export default function OthersPage() {
             <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Sort</p>
             <PillToggle options={sortOptions} value={sortBy} onChange={setSortBy} />
           </div>
+          {projects && projects.length > 0 && (
+            <div>
+              <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Project</p>
+              <div className="flex flex-wrap gap-1">
+                {[{ id: 'all', name: 'All' }, { id: 'none', name: 'No project' }, ...projects].map(p => (
+                  <button
+                    key={p.id}
+                    onClick={() => setProjectFilter(p.id)}
+                    className={`text-xs px-2.5 py-1 rounded-lg font-medium transition-all ${
+                      projectFilter === p.id
+                        ? 'bg-[#1a1a18] text-white'
+                        : 'text-[#6b6b67] hover:bg-gray-100'
+                    }`}
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Merge pending banner */}
@@ -575,8 +670,8 @@ export default function OthersPage() {
           <p className="text-sm text-[#6b6b67] text-center py-8">Loading...</p>
         ) : filtered.length === 0 ? (
           <p className="text-sm text-gray-400 text-center py-8">Nothing here</p>
-        ) : sortBy === 'due_date' ? (
-          /* Flat list sorted by due date */
+        ) : flatSorted ? (
+          /* Flat list — due date, newest, oldest */
           <div className="bg-white border border-[#e5e5e3] rounded-2xl divide-y divide-[#f0f0ee]">
             {flatSorted.map(c => {
               const daysOverdue = getDaysOverdue(c)
@@ -677,10 +772,12 @@ export default function OthersPage() {
       <BulkActionBar
         selectedIds={selectedIds}
         contacts={contacts}
+        onMarkDone={handleBulkMarkDone}
         onReassign={handleBulkReassign}
         onPromoteToMyTasks={handleBulkPromoteToMyTasks}
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
         promoting={promoting}
+        saving={bulkSaving}
       />
 
       {/* Link contact modal */}
