@@ -119,7 +119,7 @@ function getInitials(name) {
 }
 
 // ── Bulk action bar ────────────────────────────────────────────
-function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onMarkDone, onCancel, promoting, saving }) {
+function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onMarkDone, onMerge, onCancel, promoting, saving }) {
   const [open, setOpen] = useState(false)
 
   if (selectedIds.size === 0) return null
@@ -137,6 +137,16 @@ function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, 
           >
             {saving ? 'Saving…' : '✓ Done'}
           </button>
+          {/* Merge — only when 2+ selected */}
+          {selectedIds.size >= 2 && (
+            <button
+              onClick={onMerge}
+              disabled={saving}
+              className="text-sm bg-blue-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-blue-400 transition-colors disabled:opacity-50 whitespace-nowrap"
+            >
+              ⛓ Merge
+            </button>
+          )}
           {/* Promote to my tasks */}
           <button
             onClick={onPromoteToMyTasks}
@@ -309,6 +319,7 @@ export default function OthersPage() {
   }
 
   const [bulkSaving, setBulkSaving] = useState(false)
+  const [mergeModal, setMergeModal] = useState(false)
 
   const toggleSelectMode = () => {
     setSelectMode(v => !v)
@@ -344,6 +355,34 @@ export default function OthersPage() {
       })
       setRecentlyCompleted(new Map(recentlyCompletedRef.current))
       toast(`${ids.length} item${ids.length !== 1 ? 's' : ''} marked done`, { icon: '✓' })
+      setSelectedIds(new Set())
+      setSelectMode(false)
+    } finally {
+      setBulkSaving(false)
+    }
+  }
+
+  const handleMerge = async (keeperId) => {
+    const losers = [...selectedIds].filter(id => id !== keeperId)
+    const keeper = (items || []).find(c => c.id === keeperId)
+    const loserItems = (items || []).filter(c => losers.includes(c.id))
+    const extra = loserItems
+      .map(c => `• ${c.title}${c.context ? ` — ${c.context}` : ''}${c.committed_by_name ? ` (from ${c.committed_by_name})` : ''}`)
+      .join('\n')
+    const mergedNotes = [keeper?.notes, extra].filter(Boolean).join('\n\n[Merged from:]\n')
+    setBulkSaving(true)
+    try {
+      await updateOthersCommitment(keeperId, { notes: mergedNotes || null })
+      await Promise.all(losers.map(id => updateOthersCommitment(id, { status: 'archived' })))
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(c => {
+          if (c.id === keeperId) return { ...c, notes: mergedNotes || null }
+          if (losers.includes(c.id)) return { ...c, status: 'archived' }
+          return c
+        })
+      )
+      toast(`Merged ${selectedIds.size} items into 1`, { icon: '⛓' })
+      setMergeModal(false)
       setSelectedIds(new Set())
       setSelectMode(false)
     } finally {
@@ -773,12 +812,51 @@ export default function OthersPage() {
         selectedIds={selectedIds}
         contacts={contacts}
         onMarkDone={handleBulkMarkDone}
+        onMerge={() => setMergeModal(true)}
         onReassign={handleBulkReassign}
         onPromoteToMyTasks={handleBulkPromoteToMyTasks}
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
         promoting={promoting}
         saving={bulkSaving}
       />
+
+      {/* Merge modal — pick the keeper */}
+      {mergeModal && (
+        <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-4" onClick={() => setMergeModal(false)}>
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+              <div>
+                <h2 className="text-sm font-semibold text-[#1a1a18]">Merge {selectedIds.size} items</h2>
+                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the one to keep. The others get archived.</p>
+              </div>
+              <button onClick={() => setMergeModal(false)} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+            </div>
+            <div className="px-4 py-3 space-y-2 max-h-80 overflow-y-auto">
+              {(items || []).filter(c => selectedIds.has(c.id)).map(c => (
+                <button
+                  key={c.id}
+                  onClick={() => handleMerge(c.id)}
+                  disabled={bulkSaving}
+                  className="w-full text-left px-4 py-3 rounded-xl border border-[#e5e5e3] hover:border-blue-400 hover:bg-blue-50 transition-all disabled:opacity-40 group"
+                >
+                  <div className="flex items-start gap-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#1a1a18] leading-snug group-hover:text-blue-700">{c.title}</p>
+                      {c.committed_by_name && <p className="text-xs text-[#9b9b97] mt-0.5">from {c.committed_by_name}</p>}
+                      {c.context && <p className="text-xs text-[#9b9b97] mt-0.5 line-clamp-1">{c.context}</p>}
+                      {c.source_label && <p className="text-[10px] text-[#9b9b97] mt-0.5">↳ {c.source_label}</p>}
+                    </div>
+                    <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 flex-shrink-0 font-medium">Keep →</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+            <div className="px-5 pb-4 pt-2">
+              <p className="text-[10px] text-[#9b9b97] text-center">The kept item will inherit notes from the archived ones.</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Link contact modal */}
       {linkModalItem && (
