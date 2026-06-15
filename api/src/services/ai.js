@@ -419,7 +419,7 @@ async function summarizeThread(email, projectContext = '') {
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 600,
       messages: [{
         role: 'user',
@@ -779,7 +779,7 @@ async function detectHighStakesMeeting(event, relatedEmails) {
   const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       messages: [{
         role: 'user',
@@ -957,7 +957,7 @@ async function generateDailyDigest(data) {
   const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 800,
       messages: [{
         role: 'user',
@@ -981,7 +981,7 @@ async function updateRollingContext(existingContext, todayDigest, date) {
   const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 1200,
       messages: [{
         role: 'user',
@@ -1013,7 +1013,7 @@ async function enrichTask(task, relatedEmails) {
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
       messages: [{
         role: 'user',
@@ -1037,7 +1037,7 @@ async function createContactProfile(contact, interactions) {
   const RYAN_CONTEXT = await buildRyanContext()
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 600,
       messages: [{
         role: 'user',

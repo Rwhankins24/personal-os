@@ -612,209 +612,164 @@ The "confidence" field must be an integer 0-100 representing how certain you are
   // 4. Enrich context + source_ref on tasks missing them
   console.log('Step 1.5: Task semantic dedup + enrichment...')
   try {
+    // Thresholds (must match backfill-tasks-dedup.js and dedup-lib.js):
+    //   ≥93% → auto-archive (reversible; status='archived' + potential_duplicate_of set)
+    //   85–92% → flag for review
+    //   <85% → discard
+    const TASKS_AUTO_ARCHIVE  = 93
+    const TASKS_FLAG_MIN      = 85
+    const TASKS_MIN_TITLE_LEN = 10
+    const TASKS_WINDOW_SIZE   = 40
+    const TASKS_WINDOW_STEP   = 20
+
+    // Project/client buckets — items only compared within their own bucket
+    const TASKS_BUCKETS = [
+      { key: 'pacific_fusion', terms: [
+        'pacific fusion', 'pf coordination', 'pf workshop', 'pf team',
+        'kone crane', 'kone 300', 'kone proposal', 'kone cranes',
+        'ds3', 'albuquerque', 'new mexico', 'mesa del sol',
+        'stantec', 'thornton tomasetti', 'jensen hughes',
+        'wgi', 'geopier', 'echo ', 'conor cranes',
+      ]},
+      { key: 'gotion',  terms: ['gotion'] },
+      { key: 'sofidel', terms: ['sofidel'] },
+      { key: 'boeing',  terms: ['boeing'] },
+      { key: 'stack',   terms: ['stack infrastructure'] },
+      { key: 'csi',     terms: ['concrete strategies', 'csi team', 'csi capacity'] },
+    ]
+
+    function tasksGetBucket(item) {
+      const text = ((item.title || '') + ' ' + (item.context || '') + ' ' + (item.source_label || '')).toLowerCase()
+      for (const { key, terms } of TASKS_BUCKETS) {
+        if (terms.some(t => text.includes(t))) return key
+      }
+      return 'general'
+    }
+
+    function tasksValidTitle(title) {
+      if (!title || title === 'undefined' || title === 'null') return false
+      return title.trim().length >= TASKS_MIN_TITLE_LEN
+    }
+
     const { data: allOpenTasks } = await supabase
       .from('tasks')
       .select(
         'id, title, urgency, due_date, context, ai_context, source_type, ' +
-        'source_label, source_id, project_id, cross_references, created_at, ' +
-        'blocking, ai_extracted, duplicate_reviewed, known_not_duplicate_with'
+        'source_label, source_id, project_id, cross_references, created_at'
       )
       .eq('status', 'open')
-      .order('created_at', { ascending: true })
+      .is('potential_duplicate_of', null)
+      .order('title', { ascending: true })
 
     if (!allOpenTasks?.length) {
       console.log('  No open tasks to dedup')
     } else {
-
-      // ── Token overlap helpers (STOP_WORDS / taskTokens / jaccard
-      //    are now declared at the top of main() — shared scope)
-
-      // Pre-compute tokens for all tasks
-      const tokenMap = new Map(allOpenTasks.map(t => [t.id, taskTokens(t.title)]))
-
-      // Find near-match pairs (Jaccard ≥ 0.55, same project or both unlinked)
-      const nearMatches = []
-      for (let i = 0; i < allOpenTasks.length; i++) {
-        for (let j = i + 1; j < allOpenTasks.length; j++) {
-          const a = allOpenTasks[i], b = allOpenTasks[j]
-          // Skip if both manual — never auto-merge manual tasks
-          if (a.source_type === 'manual' && b.source_type === 'manual') continue
-          // Skip if Ryan already reviewed this pair and said keep separate
-          if (a.duplicate_reviewed || b.duplicate_reviewed) continue
-          const aExcludes = a.known_not_duplicate_with || []
-          const bExcludes = b.known_not_duplicate_with || []
-          if (aExcludes.includes(b.id) || bExcludes.includes(a.id)) continue
-          const score = jaccard(tokenMap.get(a.id), tokenMap.get(b.id))
-          if (score >= 0.55) {
-            // Prefer pairs in same project, but also catch unlinked matches
-            const sameProject = a.project_id && b.project_id && a.project_id === b.project_id
-            const bothUnlinked = !a.project_id && !b.project_id
-            if (sameProject || bothUnlinked || score >= 0.75) {
-              nearMatches.push({ a, b, score })
-            }
-          }
-        }
+      // Pre-cluster by project/client
+      const tasksClusters = {}
+      for (const item of allOpenTasks) {
+        const bucket = tasksGetBucket(item)
+        if (!tasksClusters[bucket]) tasksClusters[bucket] = []
+        tasksClusters[bucket].push(item)
       }
 
-      console.log(`  Token overlap: ${nearMatches.length} near-match pairs`)
+      const haikuDedup  = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const tasksArchived = new Set()
+      let tasksMerged = 0, tasksFlagged = 0, tasksWindows = 0
 
-      // ── Haiku semantic confirmation ──────────────────────────────
-      const haikuDedup = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-      const toDelete   = new Map() // id → winner_id (track merges)
-      let   merged     = 0
+      for (const [clusterName, clusterItems] of Object.entries(tasksClusters)) {
+        if (clusterItems.length < 2) continue
+        clusterItems.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
 
-      for (const { a, b, score } of nearMatches.slice(0, 30)) {
-        // Skip if either already marked for deletion in this pass
-        if (toDelete.has(a.id) || toDelete.has(b.id)) continue
+        for (let start = 0; start < clusterItems.length; start += TASKS_WINDOW_STEP) {
+          const win = clusterItems.slice(start, start + TASKS_WINDOW_SIZE)
+          if (win.length < 2) continue
+          tasksWindows++
 
-        try {
-          const prompt = `Two tasks from Ryan's personal OS task list:
+          const list = win.map((item, i) =>
+            `${i + 1}. "${item.title}" | ${item.source_label || item.source_type || 'unknown'}${item.context ? ' | ' + item.context.slice(0, 80) : ''}`
+          ).join('\n')
 
-Task A: "${a.title}"
-  - Urgency: ${a.urgency || 'unknown'}
-  - Due: ${a.due_date || 'none'}
-  - Context: ${a.context || a.ai_context || 'none'}
-  - Source: ${a.source_label || a.source_type || 'unknown'}
-  - Created: ${a.created_at?.split('T')[0]}
+          const prompt = `You are reviewing a list of tasks from Ryan's personal OS. Many were extracted from different emails or meetings but describe the same underlying action item.
 
-Task B: "${b.title}"
-  - Urgency: ${b.urgency || 'unknown'}
-  - Due: ${b.due_date || 'none'}
-  - Context: ${b.context || b.ai_context || 'none'}
-  - Source: ${b.source_label || b.source_type || 'unknown'}
-  - Created: ${b.created_at?.split('T')[0]}
+Identify any pairs that are duplicates — meaning they describe the same underlying task, even if worded differently.
 
-Are these the same underlying action item (just phrased differently), or genuinely distinct tasks?
+${list}
 
-If they ARE the same: pick the best title (clearest, most specific), and identify which task is the "winner" to keep (A or B).
+Respond ONLY with a JSON array. Each element is a duplicate pair:
+[
+  {
+    "keep": 3,
+    "archive": 7,
+    "confidence": 85,
+    "reason": "one sentence"
+  }
+]
 
-Respond ONLY with valid JSON:
-{
-  "is_duplicate": true,
-  "confidence": 82,
-  "winner": "A",
-  "best_title": "The clearest, most complete phrasing of the task",
-  "reason": "one sentence why they are the same"
-}
+Rules:
+- "keep" and "archive" are the NUMBER from the list above (1-${win.length})
+- confidence is 0-100 (how certain the two items are the same task)
+- Only include pairs with confidence >= ${TASKS_FLAG_MIN}
+- "keep" should be the more specific/complete phrasing
+- If no duplicates found, return []
+- Return ONLY the JSON array, nothing else`
 
-The "confidence" field must be an integer 0-100 representing how certain you are they describe the same action.`
-
-          const msg = await haikuDedup.messages.create({
-            model:      'claude-haiku-4-5-20251001',
-            max_tokens: 200,
-            messages:   [{ role: 'user', content: prompt }]
-          })
-
-          const raw = (msg.content[0]?.text || '').trim()
-          let verdict
           try {
-            const jsonMatch = raw.match(/\{[\s\S]*\}/)
-            verdict = JSON.parse(jsonMatch ? jsonMatch[0] : raw)
-          } catch { continue }
+            const msg = await haikuDedup.messages.create({
+              model: 'claude-haiku-4-5-20251001', max_tokens: 1000,
+              messages: [{ role: 'user', content: prompt }]
+            })
+            const raw = (msg.content[0]?.text || '').trim()
+            let pairs = []
+            try {
+              const m = raw.match(/\[[\s\S]*\]/)
+              pairs = JSON.parse(m ? m[0] : raw)
+              if (!Array.isArray(pairs)) pairs = []
+            } catch { continue }
 
-          if (!verdict?.is_duplicate) continue
+            for (const pair of pairs) {
+              const { keep, archive, confidence } = pair
+              if (typeof keep !== 'number' || typeof archive !== 'number') continue
+              if (typeof confidence !== 'number') continue
+              const winner = win[keep - 1]
+              const loser  = win[archive - 1]
+              if (!winner || !loser) continue
+              if (!tasksValidTitle(winner.title) || !tasksValidTitle(loser.title)) continue
+              if (loser.source_type === 'manual') continue  // never auto-archive manual tasks
+              if (tasksArchived.has(loser.id) || tasksArchived.has(winner.id)) continue
 
-          const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
-
-          // Confidence < 65: skip — too ambiguous to surface for review
-          if (confidence < 65) continue
-
-          // Determine winner and loser
-          const winner = verdict.winner === 'A' ? a : b
-          const loser  = verdict.winner === 'A' ? b : a
-
-          // Never delete manual tasks
-          if (loser.source_type === 'manual') continue
-
-          if (confidence >= 75) {
-            // ── HIGH confidence: smart merge + delete loser ───────────
-            const patch = {}
-            if (!winner.due_date   && loser.due_date)   patch.due_date   = loser.due_date
-            if (!winner.project_id && loser.project_id) patch.project_id = loser.project_id
-            if (!winner.context    && (loser.context || loser.ai_context)) {
-              patch.context = loser.context || loser.ai_context
-            }
-            if (!winner.urgency && loser.urgency)       patch.urgency    = loser.urgency
-            if (verdict.best_title && verdict.best_title !== winner.title) {
-              patch.title = verdict.best_title
-            }
-
-            // Merge cross_references: carry loser's source as a cross-ref on winner
-            const existingRefs = winner.cross_references || []
-            const alreadyRef   = existingRefs.some(r => r.source_label === loser.source_label)
-            if (!alreadyRef && (loser.source_label || loser.source_type)) {
-              patch.cross_references = [
-                ...existingRefs,
-                {
-                  source_type:  loser.source_type  || 'ai_email',
-                  source_label: loser.source_label || loser.title,
-                  merged_from:  loser.id,
-                  date:         today
+              if (confidence >= TASKS_AUTO_ARCHIVE) {
+                // Smart merge: copy missing metadata from loser → winner before archiving
+                const patch = {}
+                if (!winner.due_date   && loser.due_date)                      patch.due_date   = loser.due_date
+                if (!winner.project_id && loser.project_id)                    patch.project_id = loser.project_id
+                if (!winner.context    && (loser.context || loser.ai_context)) patch.context    = loser.context || loser.ai_context
+                if (!winner.urgency    && loser.urgency)                       patch.urgency    = loser.urgency
+                if (Object.keys(patch).length > 0) {
+                  await supabase.from('tasks').update(patch).eq('id', winner.id)
                 }
-              ]
+                const { error: ae } = await supabase.from('tasks')
+                  .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!ae) { tasksArchived.add(loser.id); tasksMerged++ }
+              } else {
+                const { error: fe } = await supabase.from('tasks')
+                  .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!fe) tasksFlagged++
+              }
             }
+          } catch (winErr) { /* non-fatal */ }
 
-            if (Object.keys(patch).length > 0) {
-              await supabase.from('tasks').update(patch).eq('id', winner.id)
-            }
-
-            // Write work_item_sources row so the loser's source is preserved on the winner
-            try {
-              await supabase.from('work_item_sources').insert({
-                work_item_id:   winner.id,
-                work_item_type: 'task',
-                source_type:    loser.source_type  || 'unknown',
-                source_id:      loser.source_id    || null,
-                source_label:   loser.source_label || loser.title,
-                excerpt:        loser.title,
-                confidence:     'merged',
-              })
-            } catch (_) {}
-
-            toDelete.set(loser.id, winner.id)
-            merged++
-            console.log(`  Merged (conf=${confidence}): "${loser.title}" → "${verdict.best_title || winner.title}"`)
-
-          } else {
-            // ── MEDIUM confidence (50-74): flag for review, both survive ─
-            try {
-              await supabase
-                .from('tasks')
-                .update({
-                  potential_duplicate_of: winner.id,
-                  duplicate_confidence:   confidence
-                })
-                .eq('id', loser.id)
-
-              await logAIQuestion(
-                `Two tasks look like the same thing — merge or keep separate? Task A: "${winner.title}" Task B: "${loser.title}"`,
-                `Confidence: ${confidence}%. Reason: ${verdict.reason || 'semantic overlap detected'}`,
-                'binary'
-              )
-              console.log(`  Flagged (conf=${confidence}): "${loser.title}" may duplicate "${winner.title}"`)
-            } catch (flagErr) {
-              console.log(`  Flag error: ${flagErr.message}`)
-            }
-          }
-
-        } catch (pairErr) {
-          console.log(`  Pair check error: ${pairErr.message}`)
+          await new Promise(r => setTimeout(r, 100))
         }
       }
 
-      // Delete losers
-      if (toDelete.size > 0) {
-        await supabase.from('tasks').delete().in('id', [...toDelete.keys()])
-        console.log(`  ✓ Task dedup: ${merged} pairs merged, ${toDelete.size} duplicates removed`)
-      } else {
-        console.log(`  ✓ Task dedup: no duplicates found`)
-      }
+      console.log(`  ✓ Task dedup: ${tasksWindows} windows, ${tasksMerged} auto-archived (≥${TASKS_AUTO_ARCHIVE}%), ${tasksFlagged} flagged (${TASKS_FLAG_MIN}–${TASKS_AUTO_ARCHIVE - 1}%)`)
 
       // ── Task context enrichment ──────────────────────────────────
-      // For tasks with no context or stale context, generate a 1-line description
-      // and surface the source reference on the card
+      // For tasks with no context, generate a 1-line description from their source
       const needsContext = allOpenTasks.filter(t =>
-        !toDelete.has(t.id) &&           // not just deleted
+        !tasksArchived.has(t.id) &&      // not just archived
         !t.context &&                    // no context yet
         t.source_label                   // has a source we can reference
       ).slice(0, 25)                     // cap per run
@@ -873,116 +828,388 @@ Respond with just the sentence, no quotes, no JSON.`
   // ── STEP 1.6: Others-commitments semantic dedup ─────────────────
   console.log('Step 1.6: Others-commitments semantic dedup...')
   try {
+    // Thresholds (must match backfill-others-dedup.js):
+    //   ≥93% → auto-archive (no review needed)
+    //   85–92% → flag for review in Dupes filter
+    //   <85% → discard (too noisy)
+    const OTHERS_AUTO_ARCHIVE = 93
+    const OTHERS_FLAG_MIN     = 85
+    const OTHERS_MIN_TITLE_LEN = 10
+    const OTHERS_WINDOW_SIZE  = 40
+    const OTHERS_WINDOW_STEP  = 20
+
+    // Project/client buckets — items only compared within their own bucket.
+    // Prevents cross-project false positives (e.g. Gotion items vs Sofidel items).
+    const OTHERS_BUCKETS = [
+      { key: 'pacific_fusion', terms: [
+        'pacific fusion', 'pf coordination', 'pf workshop', 'pf team',
+        'kone crane', 'kone 300', 'kone proposal', 'kone cranes',
+        'ds3', 'albuquerque', 'new mexico', 'mesa del sol',
+        'stantec', 'thornton tomasetti', 'jensen hughes',
+        'wgi', 'geopier', 'echo ', 'conor cranes',
+      ]},
+      { key: 'gotion',  terms: ['gotion'] },
+      { key: 'sofidel', terms: ['sofidel'] },
+      { key: 'boeing',  terms: ['boeing'] },
+      { key: 'stack',   terms: ['stack infrastructure'] },
+      { key: 'csi',     terms: ['concrete strategies', 'csi team', 'csi capacity'] },
+    ]
+
+    function othersGetBucket(item) {
+      const text = ((item.title || '') + ' ' + (item.context || '')).toLowerCase()
+      for (const { key, terms } of OTHERS_BUCKETS) {
+        if (terms.some(t => text.includes(t))) return key
+      }
+      return 'general'
+    }
+
+    function othersValidTitle(title) {
+      if (!title || title === 'undefined' || title === 'null') return false
+      return title.trim().length >= OTHERS_MIN_TITLE_LEN
+    }
+
     const { data: allOthers } = await supabase
       .from('others_commitments')
-      .select('id, title, context, committed_by_name, committed_by_email, source_type, source_label, created_at, duplicate_reviewed, known_not_duplicate_with')
+      .select('id, title, context, committed_by_name, source_label, created_at')
       .eq('status', 'open')
       .is('potential_duplicate_of', null)
-      .order('created_at', { ascending: true })
+      .order('title', { ascending: true })
 
     if (!allOthers?.length) {
       console.log('  No open others to dedup')
     } else {
-      const othersTokenMap = new Map(allOthers.map(o => [o.id, taskTokens(o.title)]))
-
-      // Group by person — only compare within same person
-      const byPerson = new Map()
-      for (const o of allOthers) {
-        const key = (o.committed_by_name || o.committed_by_email || 'unknown').toLowerCase().trim()
-        if (!byPerson.has(key)) byPerson.set(key, [])
-        byPerson.get(key).push(o)
+      // Pre-cluster by project/client
+      const othersClusters = {}
+      for (const item of allOthers) {
+        const bucket = othersGetBucket(item)
+        if (!othersClusters[bucket]) othersClusters[bucket] = []
+        othersClusters[bucket].push(item)
       }
-
-      const othersNearMatches = []
-      for (const [, group] of byPerson) {
-        if (group.length < 2) continue
-        for (let i = 0; i < group.length; i++) {
-          for (let j = i + 1; j < group.length; j++) {
-            const a = group[i], b = group[j]
-            if (a.duplicate_reviewed || b.duplicate_reviewed) continue
-            const aExcludes = a.known_not_duplicate_with || []
-            const bExcludes = b.known_not_duplicate_with || []
-            if (aExcludes.includes(b.id) || bExcludes.includes(a.id)) continue
-            if (a.source_type === 'manual' && b.source_type === 'manual') continue
-            const score = jaccard(othersTokenMap.get(a.id), othersTokenMap.get(b.id))
-            if (score >= 0.55) othersNearMatches.push({ a, b, score })
-          }
-        }
-      }
-
-      othersNearMatches.sort((x, y) => y.score - x.score)
-      console.log(`  Token overlap: ${othersNearMatches.length} near-match pairs`)
 
       const haikuOthers = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
       const othersArchived = new Set()
-      let othersMerged = 0, othersFlagged = 0
+      let othersMerged = 0, othersFlagged = 0, othersWindows = 0
 
-      for (const { a, b } of othersNearMatches.slice(0, 30)) {
-        if (othersArchived.has(a.id) || othersArchived.has(b.id)) continue
-        try {
-          const prompt = `Two commitments from Ryan's personal OS assigned to the same person:
+      for (const [clusterName, clusterItems] of Object.entries(othersClusters)) {
+        if (clusterItems.length < 2) continue
+        // Sort alphabetically within cluster
+        clusterItems.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
 
-Person: ${a.committed_by_name || 'unknown'}
+        for (let start = 0; start < clusterItems.length; start += OTHERS_WINDOW_STEP) {
+          const win = clusterItems.slice(start, start + OTHERS_WINDOW_SIZE)
+          if (win.length < 2) continue
+          othersWindows++
 
-Commitment A: "${a.title}"
-  Context: ${a.context || 'none'}
-  Source: ${a.source_label || a.source_type || 'unknown'}
-  Created: ${a.created_at?.split('T')[0]}
+          const list = win.map((item, i) =>
+            `${i + 1}. "${item.title}" — ${item.committed_by_name || 'unknown'}${item.context ? ' | ' + item.context.slice(0, 80) : ''}`
+          ).join('\n')
 
-Commitment B: "${b.title}"
-  Context: ${b.context || 'none'}
-  Source: ${b.source_label || b.source_type || 'unknown'}
-  Created: ${b.created_at?.split('T')[0]}
+          const prompt = `You are reviewing a list of commitments extracted from construction project meeting recordings. Many were captured from different meetings but describe the same underlying action item.
 
-Are these the same underlying commitment or genuinely distinct items?
+Identify any pairs that are duplicates — meaning they describe the same underlying commitment, even if worded differently.
 
-Respond ONLY with valid JSON:
-{
-  "is_duplicate": true,
-  "confidence": 82,
-  "winner": "A",
-  "best_title": "The clearest, most complete phrasing",
-  "reason": "one sentence why they are the same"
-}
+${list}
 
-"confidence" is an integer 0-100.`
+Respond ONLY with a JSON array. Each element is a duplicate pair:
+[
+  {
+    "keep": 3,
+    "archive": 7,
+    "confidence": 85,
+    "reason": "one sentence"
+  }
+]
 
-          const msg = await haikuOthers.messages.create({
-            model: 'claude-haiku-4-5-20251001', max_tokens: 200,
-            messages: [{ role: 'user', content: prompt }]
-          })
-          const raw = (msg.content[0]?.text || '').trim()
-          let verdict
-          try { const m = raw.match(/\{[\s\S]*\}/); verdict = JSON.parse(m ? m[0] : raw) } catch { continue }
-          if (!verdict?.is_duplicate) continue
-          const confidence = typeof verdict.confidence === 'number' ? verdict.confidence : 0
-          if (confidence < 65) continue
+Rules:
+- "keep" and "archive" are the NUMBER from the list above (1-${win.length})
+- confidence is 0-100 (how certain the two items are the same commitment)
+- Only include pairs with confidence >= ${OTHERS_FLAG_MIN}
+- "keep" should be the more specific/complete phrasing
+- If no duplicates found, return []
+- Return ONLY the JSON array, nothing else`
 
-          const winner = verdict.winner === 'B' ? b : a
-          const loser  = verdict.winner === 'B' ? a : b
+          try {
+            const msg = await haikuOthers.messages.create({
+              model: 'claude-haiku-4-5-20251001', max_tokens: 1000,
+              messages: [{ role: 'user', content: prompt }]
+            })
+            const raw = (msg.content[0]?.text || '').trim()
+            let pairs = []
+            try {
+              const m = raw.match(/\[[\s\S]*\]/)
+              pairs = JSON.parse(m ? m[0] : raw)
+              if (!Array.isArray(pairs)) pairs = []
+            } catch { continue }
 
-          if (confidence >= 75) {
-            await supabase.from('others_commitments')
-              .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
-              .eq('id', loser.id)
-            if (verdict.best_title && verdict.best_title !== winner.title) {
-              await supabase.from('others_commitments').update({ title: verdict.best_title }).eq('id', winner.id)
+            for (const pair of pairs) {
+              const { keep, archive, confidence } = pair
+              if (typeof keep !== 'number' || typeof archive !== 'number') continue
+              if (typeof confidence !== 'number') continue
+              const winner = win[keep - 1]
+              const loser  = win[archive - 1]
+              if (!winner || !loser) continue
+              // Guard: skip mangled/undefined titles
+              if (!othersValidTitle(winner.title) || !othersValidTitle(loser.title)) continue
+              if (othersArchived.has(loser.id) || othersArchived.has(winner.id)) continue
+
+              if (confidence >= OTHERS_AUTO_ARCHIVE) {
+                const { error: ae } = await supabase.from('others_commitments')
+                  .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!ae) { othersArchived.add(loser.id); othersMerged++ }
+              } else {
+                const { error: fe } = await supabase.from('others_commitments')
+                  .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!fe) othersFlagged++
+              }
             }
-            othersArchived.add(loser.id)
-            othersMerged++
-          } else {
-            await supabase.from('others_commitments')
-              .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
-              .eq('id', loser.id)
-            othersFlagged++
-          }
-        } catch (pairErr) { /* non-fatal */ }
+          } catch (winErr) { /* non-fatal — continue to next window */ }
+
+          await new Promise(r => setTimeout(r, 100))
+        }
       }
 
-      console.log(`  ✓ Others dedup: ${othersMerged} auto-merged, ${othersFlagged} flagged for review`)
+      console.log(`  ✓ Others dedup: ${othersWindows} windows, ${othersMerged} auto-merged (≥${OTHERS_AUTO_ARCHIVE}%), ${othersFlagged} flagged for review (${OTHERS_FLAG_MIN}–${OTHERS_AUTO_ARCHIVE - 1}%)`)
     }
   } catch (othersDedupErr) {
     console.log(`  ✗ Others dedup error (non-fatal): ${othersDedupErr.message}`)
+  }
+
+  // ── STEP 1.65: Ryan's commitments semantic dedup ─────────────────
+  console.log('Step 1.65: Commitments (Ryan\'s own) semantic dedup...')
+  try {
+    const MINE_AUTO_ARCHIVE  = 93
+    const MINE_FLAG_MIN      = 85
+    const MINE_MIN_TITLE_LEN = 10
+    const MINE_WINDOW_SIZE   = 40
+    const MINE_WINDOW_STEP   = 20
+
+    const MINE_BUCKETS = [
+      { key: 'pacific_fusion', terms: [
+        'pacific fusion', 'pf ', 'kone', 'ds3', 'albuquerque', 'new mexico',
+        'mesa del sol', 'stantec', 'thornton tomasetti', 'jensen hughes', 'wgi', 'geopier',
+      ]},
+      { key: 'gotion',  terms: ['gotion'] },
+      { key: 'sofidel', terms: ['sofidel'] },
+      { key: 'boeing',  terms: ['boeing'] },
+      { key: 'stack',   terms: ['stack infrastructure'] },
+    ]
+
+    function mineGetBucket(item) {
+      const text = ((item.title || '') + ' ' + (item.made_to || '')).toLowerCase()
+      for (const { key, terms } of MINE_BUCKETS) {
+        if (terms.some(t => text.includes(t))) return key
+      }
+      return 'general'
+    }
+
+    const { data: allMine } = await supabase
+      .from('commitments')
+      .select('id, title, made_to, urgency, due_date, source_type, project_id, created_at')
+      .eq('status', 'open')
+      .is('potential_duplicate_of', null)
+      .order('title', { ascending: true })
+
+    if (!allMine?.length) {
+      console.log('  No open commitments to dedup')
+    } else {
+      const mineClusters = {}
+      for (const item of allMine) {
+        const bucket = mineGetBucket(item)
+        if (!mineClusters[bucket]) mineClusters[bucket] = []
+        mineClusters[bucket].push(item)
+      }
+
+      const haikuMine = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const mineArchived = new Set()
+      let mineMerged = 0, mineFlagged = 0, mineWindows = 0
+
+      for (const [, clusterItems] of Object.entries(mineClusters)) {
+        if (clusterItems.length < 2) continue
+        clusterItems.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+
+        for (let start = 0; start < clusterItems.length; start += MINE_WINDOW_STEP) {
+          const win = clusterItems.slice(start, start + MINE_WINDOW_SIZE)
+          if (win.length < 2) continue
+          mineWindows++
+
+          const list = win.map((item, i) =>
+            `${i + 1}. "${item.title}"${item.made_to ? ' — to: ' + item.made_to : ''}${item.urgency ? ' | urgency: ' + item.urgency : ''}`
+          ).join('\n')
+
+          const prompt = `You are reviewing a list of Ryan's own verbal commitments — promises he made to others, extracted from meeting recordings and emails.
+
+Identify any pairs that are duplicates — the same underlying promise, even if worded differently.
+
+${list}
+
+Respond ONLY with a JSON array:
+[{ "keep": 3, "archive": 7, "confidence": 85, "reason": "one sentence" }]
+
+Rules:
+- "keep" and "archive" are the NUMBER from the list (1-${win.length})
+- confidence is 0-100
+- Only include pairs with confidence >= ${MINE_FLAG_MIN}
+- "keep" should be the more specific/complete phrasing
+- If no duplicates found, return []
+- Return ONLY the JSON array`
+
+          try {
+            const msg = await haikuMine.messages.create({
+              model: 'claude-haiku-4-5-20251001', max_tokens: 1000,
+              messages: [{ role: 'user', content: prompt }]
+            })
+            const raw = (msg.content[0]?.text || '').trim()
+            let pairs = []
+            try { const m = raw.match(/\[[\s\S]*\]/); pairs = JSON.parse(m ? m[0] : raw); if (!Array.isArray(pairs)) pairs = [] } catch { continue }
+
+            for (const pair of pairs) {
+              const { keep, archive, confidence } = pair
+              if (typeof keep !== 'number' || typeof archive !== 'number' || typeof confidence !== 'number') continue
+              const winner = win[keep - 1]; const loser = win[archive - 1]
+              if (!winner || !loser) continue
+              if (!winner.title || winner.title === 'undefined' || winner.title.trim().length < MINE_MIN_TITLE_LEN) continue
+              if (!loser.title  || loser.title  === 'undefined' || loser.title.trim().length  < MINE_MIN_TITLE_LEN) continue
+              if (mineArchived.has(loser.id) || mineArchived.has(winner.id)) continue
+              if (confidence >= MINE_AUTO_ARCHIVE) {
+                const { error: ae } = await supabase.from('commitments')
+                  .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!ae) { mineArchived.add(loser.id); mineMerged++ }
+              } else {
+                const { error: fe } = await supabase.from('commitments')
+                  .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!fe) mineFlagged++
+              }
+            }
+          } catch (_) {}
+          await new Promise(r => setTimeout(r, 100))
+        }
+      }
+      console.log(`  ✓ Commitments dedup: ${mineWindows} windows, ${mineMerged} auto-archived (≥${MINE_AUTO_ARCHIVE}%), ${mineFlagged} flagged (${MINE_FLAG_MIN}–${MINE_AUTO_ARCHIVE - 1}%)`)
+    }
+  } catch (mineErr) {
+    console.log(`  ✗ Commitments dedup error (non-fatal): ${mineErr.message}`)
+  }
+
+  // ── STEP 1.7: Pending decisions semantic dedup ───────────────────
+  console.log('Step 1.7: Pending decisions semantic dedup...')
+  try {
+    const PDEC_AUTO_ARCHIVE  = 93
+    const PDEC_FLAG_MIN      = 85
+    const PDEC_MIN_TITLE_LEN = 10
+    const PDEC_WINDOW_SIZE   = 40
+    const PDEC_WINDOW_STEP   = 20
+
+    const PDEC_BUCKETS = [
+      { key: 'pacific_fusion', terms: [
+        'pacific fusion', 'pf ', 'kone', 'ds3', 'albuquerque', 'new mexico',
+        'mesa del sol', 'stantec', 'thornton tomasetti', 'jensen hughes', 'wgi', 'geopier',
+      ]},
+      { key: 'gotion',  terms: ['gotion'] },
+      { key: 'sofidel', terms: ['sofidel'] },
+      { key: 'boeing',  terms: ['boeing'] },
+      { key: 'stack',   terms: ['stack infrastructure'] },
+    ]
+
+    function pdecGetBucket(item) {
+      const text = ((item.title || '') + ' ' + (item.context || '')).toLowerCase()
+      for (const { key, terms } of PDEC_BUCKETS) {
+        if (terms.some(t => text.includes(t))) return key
+      }
+      return 'general'
+    }
+
+    const { data: allPDec } = await supabase
+      .from('pending_decisions')
+      .select('id, title, context, source_type, urgency, project_id, created_at')
+      .eq('status', 'open')
+      .is('potential_duplicate_of', null)
+      .order('title', { ascending: true })
+
+    if (!allPDec?.length) {
+      console.log('  No open decisions to dedup')
+    } else {
+      const pdecClusters = {}
+      for (const item of allPDec) {
+        const bucket = pdecGetBucket(item)
+        if (!pdecClusters[bucket]) pdecClusters[bucket] = []
+        pdecClusters[bucket].push(item)
+      }
+
+      const haikuPDec = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const pdecArchived = new Set()
+      let pdecMerged = 0, pdecFlagged = 0, pdecWindows = 0
+
+      for (const [, clusterItems] of Object.entries(pdecClusters)) {
+        if (clusterItems.length < 2) continue
+        clusterItems.sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+
+        for (let start = 0; start < clusterItems.length; start += PDEC_WINDOW_STEP) {
+          const win = clusterItems.slice(start, start + PDEC_WINDOW_SIZE)
+          if (win.length < 2) continue
+          pdecWindows++
+
+          const list = win.map((item, i) =>
+            `${i + 1}. "${item.title}"${item.context ? ' | ' + item.context.slice(0, 80) : ''}`
+          ).join('\n')
+
+          const prompt = `You are reviewing a list of pending decisions — open questions that need to be resolved, extracted from meeting recordings and emails.
+
+Identify any pairs that are duplicates — the same underlying decision point, even if worded differently.
+
+${list}
+
+Respond ONLY with a JSON array:
+[{ "keep": 3, "archive": 7, "confidence": 85, "reason": "one sentence" }]
+
+Rules:
+- "keep" and "archive" are the NUMBER from the list (1-${win.length})
+- confidence is 0-100
+- Only include pairs with confidence >= ${PDEC_FLAG_MIN}
+- "keep" should be the more specific/complete phrasing
+- If no duplicates found, return []
+- Return ONLY the JSON array`
+
+          try {
+            const msg = await haikuPDec.messages.create({
+              model: 'claude-haiku-4-5-20251001', max_tokens: 1000,
+              messages: [{ role: 'user', content: prompt }]
+            })
+            const raw = (msg.content[0]?.text || '').trim()
+            let pairs = []
+            try { const m = raw.match(/\[[\s\S]*\]/); pairs = JSON.parse(m ? m[0] : raw); if (!Array.isArray(pairs)) pairs = [] } catch { continue }
+
+            for (const pair of pairs) {
+              const { keep, archive, confidence } = pair
+              if (typeof keep !== 'number' || typeof archive !== 'number' || typeof confidence !== 'number') continue
+              const winner = win[keep - 1]; const loser = win[archive - 1]
+              if (!winner || !loser) continue
+              if (!winner.title || winner.title === 'undefined' || winner.title.trim().length < PDEC_MIN_TITLE_LEN) continue
+              if (!loser.title  || loser.title  === 'undefined' || loser.title.trim().length  < PDEC_MIN_TITLE_LEN) continue
+              if (pdecArchived.has(loser.id) || pdecArchived.has(winner.id)) continue
+              if (confidence >= PDEC_AUTO_ARCHIVE) {
+                const { error: ae } = await supabase.from('pending_decisions')
+                  .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!ae) { pdecArchived.add(loser.id); pdecMerged++ }
+              } else {
+                const { error: fe } = await supabase.from('pending_decisions')
+                  .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
+                  .eq('id', loser.id)
+                if (!fe) pdecFlagged++
+              }
+            }
+          } catch (_) {}
+          await new Promise(r => setTimeout(r, 100))
+        }
+      }
+      console.log(`  ✓ Decisions dedup: ${pdecWindows} windows, ${pdecMerged} auto-archived (≥${PDEC_AUTO_ARCHIVE}%), ${pdecFlagged} flagged (${PDEC_FLAG_MIN}–${PDEC_AUTO_ARCHIVE - 1}%)`)
+    }
+  } catch (pdecErr) {
+    console.log(`  ✗ Decisions dedup error (non-fatal): ${pdecErr.message}`)
   }
 
   // ── STEP 2: Get active emails ───────────────────────────────────
@@ -2994,6 +3221,8 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
         const hasTranscript = !!(meeting.full_transcript || meeting.raw_transcript)
         const shouldUsePlaudParser = isPlaud && hasRichSummary
 
+        let intel = null  // declared here so speaker attributions + meetingFinalUpdate can access it
+
         if ((hasTranscript || shouldUsePlaudParser) && !isAllHands) {
           const attendeeRoster = meeting.participants || []
 
@@ -3009,7 +3238,6 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
             .or(keywords.length ? keywords.map(k => `thread_subject.ilike.%${k}%`).join(',') : 'id.is.null')
             .limit(5)
 
-          let intel
           if (shouldUsePlaudParser) {
             // Parse the structured Plaud email body directly — Haiku, ~$0.005/meeting
             console.log(`    Using Plaud summary parser (Haiku) for: ${meeting.title}`)
