@@ -601,6 +601,9 @@ export default function OthersPage() {
                   duplicates={duplicatesByWinner[c.id] || []}
                   keepSeparate={keepSeparate}
                   onToggleKeep={toggleKeepSeparate}
+                  onMarkDone={markDone}
+                  onUndoComplete={undoComplete}
+                  isRecentlyDone={recentlyCompleted.has(c.id)}
                 />
               )
             })}
@@ -655,6 +658,9 @@ export default function OthersPage() {
                           duplicates={duplicatesByWinner[c.id] || []}
                           keepSeparate={keepSeparate}
                           onToggleKeep={toggleKeepSeparate}
+                          onMarkDone={markDone}
+                          onUndoComplete={undoComplete}
+                          isRecentlyDone={recentlyCompleted.has(c.id)}
                         />
                       )
                     })}
@@ -1068,7 +1074,7 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, duplicates = [], keepSeparate, onToggleKeep }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, duplicates = [], keepSeparate, onToggleKeep, onMarkDone, onUndoComplete, isRecentlyDone }) {
   const [reassigning, setReassigning] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const toast = useToast()
@@ -1209,30 +1215,35 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
           )}
 
           {/* Mark done / Undo */}
-          {isItemDone(c) && recentlyCompleted.has(c.id) ? (
-            <button
-              onClick={e => { e.stopPropagation(); undoComplete(c.id) }}
-              className="flex-shrink-0 text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition-all font-medium border border-amber-200 whitespace-nowrap"
-            >
-              Undo
-            </button>
-          ) : isItemDone(c) ? (
-            <button
-              onClick={e => { e.stopPropagation(); undoComplete(c.id) }}
-              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-gray-300 hover:text-amber-600 hover:bg-amber-50 hover:border-amber-300 transition-all text-xs"
-              title="Mark incomplete"
-            >
-              ↩
-            </button>
-          ) : (
-            <button
-              onClick={e => { e.stopPropagation(); markDone(c.id) }}
-              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
-              title="Mark done"
-            >
-              ✓
-            </button>
-          )}
+          {(() => {
+            const done = c.status === 'closed' || c.status === 'done'
+            if (done && isRecentlyDone) return (
+              <button
+                onClick={e => { e.stopPropagation(); onUndoComplete && onUndoComplete(c.id) }}
+                className="flex-shrink-0 text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition-all font-medium border border-amber-200 whitespace-nowrap"
+              >
+                Undo
+              </button>
+            )
+            if (done) return (
+              <button
+                onClick={e => { e.stopPropagation(); onUndoComplete && onUndoComplete(c.id) }}
+                className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-gray-300 hover:text-amber-600 hover:bg-amber-50 hover:border-amber-300 transition-all text-xs"
+                title="Mark incomplete"
+              >
+                ↩
+              </button>
+            )
+            return (
+              <button
+                onClick={e => { e.stopPropagation(); onMarkDone ? onMarkDone(c.id) : update.mutate({ id: c.id, updates: { status: 'closed' } }) }}
+                className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
+                title="Mark done"
+              >
+                ✓
+              </button>
+            )
+          })()}
 
           {/* Escalate to blocking */}
           {c.delivery_type !== 'blocking_ryan' && (
