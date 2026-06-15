@@ -1,31 +1,16 @@
 'use strict'
-// Backfill: semantic dedup for others_commitments
-// Items are pre-clustered by project/client before windowing — prevents cross-project false positives
-// Run: node scripts/backfill-others-dedup.js
-// Re-runnable: already-flagged/archived items are skipped automatically
+// Shared library for semantic dedup backfill scripts
+// Used by: backfill-tasks-dedup.js, backfill-commitments-dedup.js, backfill-decisions-dedup.js
 
-const path = require('path')
-const apiDir = path.join(__dirname, '../api')
-
-require(path.join(apiDir, 'node_modules/dotenv')).config({ path: path.join(apiDir, '.env') })
-const { createClient } = require(path.join(apiDir, 'node_modules/@supabase/supabase-js'))
-const Anthropic = require(path.join(apiDir, 'node_modules/@anthropic-ai/sdk'))
-
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY)
-const haiku    = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-
-const WINDOW_SIZE = 40
-const WINDOW_STEP = 20
-const MIN_TITLE_LENGTH = 10  // skip mangled extractions like "Ryan" or "undefined"
-
-// Confidence tiers:
-//   ≥93% → auto-archive (no review needed)
-//   85–92% → flag for review in Dupes filter
-//   <85% → discard (too noisy)
+// ── Thresholds ────────────────────────────────────────────────────────────────
 const AUTO_ARCHIVE_THRESHOLD = 93
 const FLAG_THRESHOLD         = 85
+const MIN_TITLE_LEN          = 10
+const WINDOW_SIZE            = 40
+const WINDOW_STEP            = 20
 
-// Project/client buckets — items are windowed within their own bucket only.
+// ── Project/client buckets ────────────────────────────────────────────────────
+// Items are windowed within their own bucket only.
 // This prevents cross-project contamination (e.g., Gotion items never compared to Sofidel items).
 // Order matters: first match wins. More specific patterns should come first.
 const PROJECT_BUCKETS = [
@@ -46,8 +31,14 @@ const PROJECT_BUCKETS = [
   { key: 'csi',      terms: ['concrete strategies', 'csi team', 'csi capacity'] },
 ]
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
 function getProjectBucket(item) {
-  const text = ((item.title || '') + ' ' + (item.context || '')).toLowerCase()
+  const text = (
+    (item.title        || '') + ' ' +
+    (item.context      || '') + ' ' +
+    (item.source_label || '')
+  ).toLowerCase()
   for (const { key, terms } of PROJECT_BUCKETS) {
     if (terms.some(t => text.includes(t))) return key
   }
@@ -56,13 +47,39 @@ function getProjectBucket(item) {
 
 function isValidTitle(title) {
   if (!title || title === 'undefined' || title === 'null') return false
-  if (title.trim().length < MIN_TITLE_LENGTH) return false
+  if (title.trim().length < MIN_TITLE_LEN) return false
   return true
 }
 
-async function processCluster(clusterName, items, archived, stats) {
-  // Sort alphabetically within cluster (clusters items with similar phrasing near each other)
-  const sorted = [...items].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+// ── Core window loop ──────────────────────────────────────────────────────────
+//
+// Options:
+//   clusterItems  — array of items in this cluster
+//   clusterName   — string label (for logging)
+//   supabase      — Supabase client
+//   haiku         — Anthropic client
+//   archived      — Set of IDs already archived this run (mutated in place)
+//   stats         — { autoMerged, flagged, totalWindows } (mutated in place)
+//   tableName     — e.g. 'tasks'
+//   promptContext — one-line description of what these items are (for Haiku prompt)
+//   buildListLine — fn(item, index) → string line for the numbered list
+//   onAutoMerge   — optional async fn(winner, loser, confidence, supabase)
+//                   called BEFORE the supabase archive update (used by tasks to copy metadata)
+
+async function runDedupWindows({
+  clusterItems,
+  clusterName,
+  supabase,
+  haiku,
+  archived,
+  stats,
+  tableName,
+  promptContext,
+  buildListLine,
+  onAutoMerge,
+}) {
+  // Sort alphabetically within cluster — clusters items with similar phrasing near each other
+  const sorted = [...clusterItems].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
 
   let windows = 0
   for (let start = 0; start < sorted.length; start += WINDOW_STEP) {
@@ -70,13 +87,11 @@ async function processCluster(clusterName, items, archived, stats) {
     if (window.length < 2) continue
     windows++
 
-    const list = window.map((item, i) =>
-      `${i + 1}. "${item.title}" — ${item.committed_by_name || 'unknown'}${item.context ? ' | ' + item.context.slice(0, 80) : ''}`
-    ).join('\n')
+    const list = window.map((item, i) => buildListLine(item, i)).join('\n')
 
-    const prompt = `You are reviewing a list of commitments extracted from construction project meeting recordings. Many were captured from different meetings but describe the same underlying action item.
+    const prompt = `You are reviewing a list of ${promptContext} extracted from construction project meeting recordings. Many were captured from different meetings but describe the same underlying item.
 
-Identify any pairs that are duplicates — meaning they describe the same underlying commitment, even if worded differently.
+Identify any pairs that are duplicates — meaning they describe the same underlying item, even if worded differently.
 
 ${list}
 
@@ -92,7 +107,7 @@ Respond ONLY with a JSON array. Each element is a duplicate pair:
 
 Rules:
 - "keep" and "archive" are the NUMBER from the list above (1-${window.length})
-- confidence is 0-100 (how certain the two items are the same commitment)
+- confidence is 0-100 (how certain the two items are the same item)
 - Only include pairs with confidence >= ${FLAG_THRESHOLD}
 - "keep" should be the more specific/complete phrasing
 - If no duplicates found, return []
@@ -134,9 +149,14 @@ Rules:
         if (archived.has(loser.id) || archived.has(winner.id)) continue
 
         if (confidence >= AUTO_ARCHIVE_THRESHOLD) {
+          // Optional pre-archive callback (e.g. copy metadata from loser to winner)
+          if (typeof onAutoMerge === 'function') {
+            await onAutoMerge(winner, loser, confidence, supabase)
+          }
+
           // Auto-archive: high enough confidence, no review needed
           const { error: archiveErr } = await supabase
-            .from('others_commitments')
+            .from(tableName)
             .update({ status: 'archived', potential_duplicate_of: winner.id, duplicate_confidence: confidence })
             .eq('id', loser.id)
 
@@ -148,7 +168,7 @@ Rules:
         } else {
           // Flag for review: confident enough to surface, not confident enough to auto-merge
           const { error: flagErr } = await supabase
-            .from('others_commitments')
+            .from(tableName)
             .update({ potential_duplicate_of: winner.id, duplicate_confidence: confidence })
             .eq('id', loser.id)
 
@@ -171,50 +191,15 @@ Rules:
   return windows
 }
 
-async function main() {
-  console.log('Loading open others_commitments...')
-
-  const { data: items, error } = await supabase
-    .from('others_commitments')
-    .select('id, title, context, committed_by_name, source_label, created_at, potential_duplicate_of')
-    .eq('status', 'open')
-    .order('title', { ascending: true })
-
-  if (error) { console.error('Load error:', error.message); process.exit(1) }
-
-  // Only items not already flagged or archived
-  const pool = (items || []).filter(i => !i.potential_duplicate_of)
-  console.log(`Pool: ${pool.length} unflagged open items`)
-
-  // Pre-cluster by project/client
-  const clusters = {}
-  for (const item of pool) {
-    const bucket = getProjectBucket(item)
-    if (!clusters[bucket]) clusters[bucket] = []
-    clusters[bucket].push(item)
-  }
-
-  const bucketSummary = Object.entries(clusters)
-    .map(([k, v]) => `${k}: ${v.length}`)
-    .join(', ')
-  console.log(`Clusters: ${bucketSummary}`)
-  console.log(`Thresholds: auto-archive ≥${AUTO_ARCHIVE_THRESHOLD}%, flag for review ${FLAG_THRESHOLD}–${AUTO_ARCHIVE_THRESHOLD - 1}%, discard <${FLAG_THRESHOLD}%\n`)
-
-  const archived = new Set()
-  const stats = { autoMerged: 0, flagged: 0, totalWindows: 0 }
-
-  for (const [clusterName, clusterItems] of Object.entries(clusters)) {
-    if (clusterItems.length < 2) continue
-    console.log(`\n── Cluster: ${clusterName} (${clusterItems.length} items) ──`)
-    const w = await processCluster(clusterName, clusterItems, archived, stats)
-    stats.totalWindows += w
-  }
-
-  console.log('\n\n── Summary ──')
-  console.log(`  Windows processed: ${stats.totalWindows}`)
-  console.log(`  Auto-merged (≥${AUTO_ARCHIVE_THRESHOLD}%): ${stats.autoMerged}`)
-  console.log(`  Flagged for review (${FLAG_THRESHOLD}–${AUTO_ARCHIVE_THRESHOLD - 1}%): ${stats.flagged}`)
-  console.log(`  Re-run to catch any remaining pairs.`)
+// ── Exports ───────────────────────────────────────────────────────────────────
+module.exports = {
+  AUTO_ARCHIVE_THRESHOLD,
+  FLAG_THRESHOLD,
+  MIN_TITLE_LEN,
+  WINDOW_SIZE,
+  WINDOW_STEP,
+  PROJECT_BUCKETS,
+  getProjectBucket,
+  isValidTitle,
+  runDedupWindows,
 }
-
-main().catch(err => { console.error(err); process.exit(1) })

@@ -131,7 +131,7 @@ export default function CommitmentsPage() {
 
   const today = dayjs()
 
-  const open = (commitments || []).filter(c => c.status !== 'closed' && c.status !== 'done')
+  const open = (commitments || []).filter(c => c.status !== 'closed' && c.status !== 'done' && c.status !== 'archived')
 
   const filtered = open.filter(c => {
     if (typeFilter !== 'all' && c.commitment_type !== typeFilter) return false
