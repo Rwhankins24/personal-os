@@ -48,7 +48,7 @@ function ReassignDropdown({ contacts, onSelect, onClose }) {
         className="w-full text-xs border border-[#e5e5e3] rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#1a1a18] bg-white"
       />
       {query.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-[#e5e5e3] rounded-xl shadow-lg z-30 overflow-hidden">
+        <div className="absolute left-0 right-0 bottom-full mb-1 bg-white border border-[#e5e5e3] rounded-xl shadow-lg z-[60]">
           {filtered.length > 0 ? (
             filtered.map(c => (
               <button
