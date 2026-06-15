@@ -410,6 +410,7 @@ export default function OthersPage() {
     setPromoting(true)
     const allItems = items || []
     const toPromote = allItems.filter(c => selectedIds.has(c.id) && !promotedIds.has(c.id))
+    const promoted = []
     for (const c of toPromote) {
       try {
         await createTask({
@@ -422,10 +423,17 @@ export default function OthersPage() {
           source_label: c.source_label || 'Others',
           project_id:   c.project_id || null,
         })
-        setPromotedIds(prev => new Set([...prev, c.id]))
+        await updateOthersCommitment(c.id, { status: 'archived' })
+        promoted.push(c.id)
       } catch (_) { /* keep going */ }
     }
-    const addedCount = toPromote.length
+    if (promoted.length > 0) {
+      setPromotedIds(prev => new Set([...prev, ...promoted]))
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(c => promoted.includes(c.id) ? { ...c, status: 'archived' } : c)
+      )
+    }
+    const addedCount = promoted.length
     setPromoting(false)
     setSelectedIds(new Set())
     setSelectMode(false)
@@ -445,7 +453,11 @@ export default function OthersPage() {
         source_label: c.source_label || 'Others',
         project_id:   c.project_id || null,
       })
+      await updateOthersCommitment(c.id, { status: 'archived' })
       setPromotedIds(prev => new Set([...prev, c.id]))
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(item => item.id === c.id ? { ...item, status: 'archived' } : item)
+      )
       toast('Added to My Tasks', { icon: '→' })
     } catch (_) {}
   }
