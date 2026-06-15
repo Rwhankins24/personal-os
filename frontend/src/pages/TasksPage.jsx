@@ -377,16 +377,19 @@ export default function TasksPage() {
   const qc = useQueryClient()
   const toast = useToast()
 
-  const [statusFilter, setStatusFilter] = useState('all')
+  const [statusFilter,  setStatusFilter]  = useState('all')
   const [urgencyFilter, setUrgencyFilter] = useState('all')
-  const [expandedId, setExpandedId] = useState(null)
-  const [selectMode, setSelectMode] = useState(false)
-  const [selected, setSelected] = useState(new Set())
-  const [bulkSaving, setBulkSaving] = useState(false)
+  const [sortBy,        setSortBy]        = useState('urgency') // urgency | newest | oldest | due
+  const [projectFilter, setProjectFilter] = useState('all')    // 'all' | project id
+  const [expandedId,    setExpandedId]    = useState(null)
+  const [selectMode,    setSelectMode]    = useState(false)
+  const [selected,      setSelected]      = useState(new Set())
+  const [bulkSaving,    setBulkSaving]    = useState(false)
   const [showCompleted, setShowCompleted] = useState(false)
   // recentlyCompleted: Map<taskId, timeoutId> — 5-sec undo window after marking done
   const [recentlyCompleted, setRecentlyCompleted] = useState(() => new Map())
   const recentlyCompletedRef = useRef(new Map())
+  const [mergeModal, setMergeModal] = useState(false) // open merge picker
 
   const toggleSelect = (id) => {
     setSelected(prev => {
@@ -428,6 +431,35 @@ export default function TasksPage() {
       await Promise.all([...selected].map(id => deleteTask(id)))
       qc.setQueryData(['tasks'], old => (old || []).filter(t => !selected.has(t.id)))
       toast(`${count} task${count !== 1 ? 's' : ''} deleted`, { icon: '🗑', type: 'info' })
+      exitSelectMode()
+    } finally {
+      setBulkSaving(false)
+    }
+  }
+
+  // Merge: keep one task, archive the rest (append their context as notes)
+  const handleMerge = async (keeperId) => {
+    const losers = [...selected].filter(id => id !== keeperId)
+    const keeper = (tasks || []).find(t => t.id === keeperId)
+    const loserTasks = (tasks || []).filter(t => losers.includes(t.id))
+    // Build combined notes: keeper notes + loser titles/context
+    const extra = loserTasks
+      .map(t => `• ${t.title}${t.context ? ` — ${t.context}` : ''}`)
+      .join('\n')
+    const mergedNotes = [keeper?.notes, extra].filter(Boolean).join('\n\n[Merged from:]\n')
+    setBulkSaving(true)
+    try {
+      await updateTask(keeperId, { notes: mergedNotes || null })
+      await Promise.all(losers.map(id => updateTask(id, { status: 'archived' })))
+      qc.setQueryData(['tasks'], old =>
+        (old || []).map(t => {
+          if (t.id === keeperId) return { ...t, notes: mergedNotes || null }
+          if (losers.includes(t.id)) return { ...t, status: 'archived' }
+          return t
+        })
+      )
+      toast(`Merged ${selected.size} tasks into 1`, { icon: '⛓' })
+      setMergeModal(false)
       exitSelectMode()
     } finally {
       setBulkSaving(false)
@@ -522,16 +554,32 @@ export default function TasksPage() {
       if (statusFilter === 'in_progress' && t.status !== 'in_progress') return false
     }
     if (urgencyFilter !== 'all' && t.urgency !== urgencyFilter) return false
+    if (projectFilter !== 'all') {
+      if (projectFilter === 'none' && t.project_id) return false
+      if (projectFilter !== 'none' && t.project_id !== projectFilter) return false
+    }
     return true
   })
 
   const completedCount = (tasks || []).filter(isDone).length
 
   const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === 'newest') {
+      return new Date(b.created_at || 0) - new Date(a.created_at || 0)
+    }
+    if (sortBy === 'oldest') {
+      return new Date(a.created_at || 0) - new Date(b.created_at || 0)
+    }
+    if (sortBy === 'due') {
+      if (a.due_date && b.due_date) return dayjs(a.due_date).diff(dayjs(b.due_date))
+      if (a.due_date) return -1
+      if (b.due_date) return 1
+      return 0
+    }
+    // default: urgency
     const ua = URGENCY_ORDER[a.urgency] ?? 4
     const ub = URGENCY_ORDER[b.urgency] ?? 4
     if (ua !== ub) return ua - ub
-    // due_date ascending, undated last
     if (a.due_date && b.due_date) return dayjs(a.due_date).diff(dayjs(b.due_date))
     if (a.due_date) return -1
     if (b.due_date) return 1
@@ -589,6 +637,44 @@ export default function TasksPage() {
             <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Urgency</p>
             <PillToggle options={urgencyOptions} value={urgencyFilter} onChange={setUrgencyFilter} />
           </div>
+          <div>
+            <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Sort</p>
+            <PillToggle
+              options={[
+                { value: 'urgency', label: 'Urgency' },
+                { value: 'newest',  label: 'Newest' },
+                { value: 'oldest',  label: 'Oldest' },
+                { value: 'due',     label: 'Due date' },
+              ]}
+              value={sortBy}
+              onChange={setSortBy}
+            />
+          </div>
+          {projects && projects.length > 0 && (
+            <div>
+              <p className="text-xs text-[#6b6b67] mb-1.5 font-medium">Project</p>
+              <div className="flex flex-wrap gap-1">
+                {[{ id: 'all', name: 'All' }, { id: 'none', name: 'No project' }, ...projects].map(p => (
+                  <button
+                    key={p.id}
+                    onClick={() => setProjectFilter(p.id)}
+                    className={`text-xs px-2.5 py-1 rounded-lg font-medium transition-all ${
+                      projectFilter === p.id
+                        ? 'bg-[#1a1a18] text-white'
+                        : 'text-[#6b6b67] hover:bg-gray-100'
+                    }`}
+                  >
+                    {p.name}
+                    {p.id !== 'all' && p.id !== 'none' && (
+                      <span className="ml-1 opacity-60 text-[10px]">
+                        {(tasks || []).filter(t => t.project_id === p.id && !isDone(t)).length}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Task list */}
@@ -717,8 +803,17 @@ export default function TasksPage() {
               disabled={bulkSaving}
               className="flex-1 text-sm font-semibold bg-green-500 text-white px-4 py-2 rounded-xl disabled:opacity-40 hover:bg-green-400 transition-colors"
             >
-              {bulkSaving ? 'Saving…' : '✓ Mark done'}
+              {bulkSaving ? 'Saving…' : '✓ Done'}
             </button>
+            {selected.size >= 2 && (
+              <button
+                onClick={() => setMergeModal(true)}
+                disabled={bulkSaving}
+                className="text-sm font-semibold bg-blue-500 text-white px-4 py-2 rounded-xl disabled:opacity-40 hover:bg-blue-400 transition-colors"
+              >
+                ⛓ Merge
+              </button>
+            )}
             <button
               onClick={bulkDelete}
               disabled={bulkSaving}
@@ -727,6 +822,46 @@ export default function TasksPage() {
               Delete
             </button>
             <button onClick={exitSelectMode} className="text-white/60 hover:text-white text-lg leading-none px-1">✕</button>
+          </div>
+        </div>
+      )}
+
+      {/* Merge modal — pick the keeper */}
+      {mergeModal && (
+        <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-4" onClick={() => setMergeModal(false)}>
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+              <div>
+                <h2 className="text-sm font-semibold text-[#1a1a18]">Merge {selected.size} tasks</h2>
+                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the one to keep. The others get archived.</p>
+              </div>
+              <button onClick={() => setMergeModal(false)} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+            </div>
+            <div className="px-4 py-3 space-y-2 max-h-80 overflow-y-auto">
+              {(tasks || []).filter(t => selected.has(t.id)).map(t => (
+                <button
+                  key={t.id}
+                  onClick={() => handleMerge(t.id)}
+                  disabled={bulkSaving}
+                  className="w-full text-left px-4 py-3 rounded-xl border border-[#e5e5e3] hover:border-blue-400 hover:bg-blue-50 transition-all disabled:opacity-40 group"
+                >
+                  <div className="flex items-start gap-2">
+                    <span className="text-[10px] mt-0.5 px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-medium flex-shrink-0 uppercase">
+                      {t.urgency || 'med'}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#1a1a18] leading-snug group-hover:text-blue-700">{t.title}</p>
+                      {t.context && <p className="text-xs text-[#9b9b97] mt-0.5 line-clamp-1">{t.context}</p>}
+                      {t.source_label && <p className="text-[10px] text-[#9b9b97] mt-0.5">↳ {t.source_label}</p>}
+                    </div>
+                    <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 flex-shrink-0 font-medium">Keep →</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+            <div className="px-5 pb-4 pt-2">
+              <p className="text-[10px] text-[#9b9b97] text-center">The kept task will inherit notes from the archived ones.</p>
+            </div>
           </div>
         </div>
       )}
