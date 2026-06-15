@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { getContacts, getOthersCommitments, updateContact } from '../lib/api'
+import { getContacts, getOthersCommitments, updateContact, createContact } from '../lib/api'
 
 dayjs.extend(relativeTime)
 
@@ -59,6 +59,107 @@ function getLastName(name) {
   return parts.length > 1 ? parts[parts.length - 1] : parts[0]
 }
 
+// ── Add Contact Modal ──────────────────────────────────────────
+function AddContactModal({ onClose, onCreated }) {
+  const [name,    setName]    = useState('')
+  const [title,   setTitle]   = useState('')
+  const [company, setCompany] = useState('')
+  const [email,   setEmail]   = useState('')
+  const [saving,  setSaving]  = useState(false)
+  const [error,   setError]   = useState('')
+  const nameRef = useRef(null)
+
+  useState(() => { setTimeout(() => nameRef.current?.focus(), 80) })
+
+  const handleSave = async () => {
+    if (!name.trim()) { setError('Name is required'); return }
+    setSaving(true)
+    setError('')
+    try {
+      const contact = await createContact({
+        name:     name.trim(),
+        title:    title.trim()   || null,
+        company:  company.trim() || null,
+        email:    email.trim()   || null,
+        source:   'manual',
+        enriched: false,
+      })
+      onCreated(contact)
+      onClose()
+    } catch (e) {
+      setError(e?.response?.data?.error || e.message || 'Failed to create contact')
+      setSaving(false)
+    }
+  }
+
+  const handleKey = (e) => { if (e.key === 'Enter' && !e.shiftKey) handleSave() }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+          <h2 className="text-sm font-semibold text-[#1a1a18]">Add Contact</h2>
+          <button onClick={onClose} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+        </div>
+        <div className="px-5 py-4 space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Name *</label>
+            <input
+              ref={nameRef}
+              value={name}
+              onChange={e => setName(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="Full name"
+              className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Title</label>
+            <input
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="e.g. VP Development"
+              className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Company</label>
+            <input
+              value={company}
+              onChange={e => setCompany(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="Organization or firm"
+              className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-[#6b6b67] mb-1">Email</label>
+            <input
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="email@company.com"
+              className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+          {error && <p className="text-xs text-red-500">{error}</p>}
+          <p className="text-[10px] text-[#9b9b97]">AI will enrich this contact on the next nightly run.</p>
+          <button
+            onClick={handleSave}
+            disabled={saving || !name.trim()}
+            className="w-full py-2.5 bg-[#1a1a18] text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-gray-800 flex items-center justify-center gap-2"
+          >
+            {saving
+              ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving…</>
+              : 'Add Contact'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Contacts() {
   const navigate = useNavigate()
   const qc = useQueryClient()
@@ -67,6 +168,7 @@ export default function Contacts() {
   const [keyOnly,         setKeyOnly]         = useState(false)
   const [sort,            setSort]            = useState('key_first')
   const [internalFilter,  setInternalFilter]  = useState('all') // 'all' | 'internal' | 'external'
+  const [showAddModal,    setShowAddModal]    = useState(false)
 
   const toggleKey = useMutation({
     mutationFn: ({ id, is_key_contact }) => updateContact(id, { is_key_contact }),
@@ -210,16 +312,24 @@ export default function Contacts() {
               )}
             </div>
 
-            {/* Sort dropdown */}
-            <select
-              value={sort}
-              onChange={e => setSort(e.target.value)}
-              className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 bg-white text-[#6b6b67] focus:outline-none focus:ring-1 focus:ring-blue-400"
-            >
-              {SORT_OPTIONS.map(o => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </select>
+            {/* Sort dropdown + Add button */}
+            <div className="flex items-center gap-2">
+              <select
+                value={sort}
+                onChange={e => setSort(e.target.value)}
+                className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 bg-white text-[#6b6b67] focus:outline-none focus:ring-1 focus:ring-blue-400"
+              >
+                {SORT_OPTIONS.map(o => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="flex items-center gap-1 text-xs px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+              >
+                + Add
+              </button>
+            </div>
           </div>
 
           {/* All / Internal / External tabs */}
@@ -499,6 +609,15 @@ export default function Contacts() {
           </>
         )}
       </div>
+
+      {showAddModal && (
+        <AddContactModal
+          onClose={() => setShowAddModal(false)}
+          onCreated={() => {
+            qc.invalidateQueries({ queryKey: ['contacts'] })
+          }}
+        />
+      )}
     </div>
   )
 }

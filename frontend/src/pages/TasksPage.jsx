@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -383,6 +383,10 @@ export default function TasksPage() {
   const [selectMode, setSelectMode] = useState(false)
   const [selected, setSelected] = useState(new Set())
   const [bulkSaving, setBulkSaving] = useState(false)
+  const [showCompleted, setShowCompleted] = useState(false)
+  // recentlyCompleted: Map<taskId, timeoutId> — 5-sec undo window after marking done
+  const [recentlyCompleted, setRecentlyCompleted] = useState(() => new Map())
+  const recentlyCompletedRef = useRef(new Map())
 
   const toggleSelect = (id) => {
     setSelected(prev => {
@@ -466,6 +470,32 @@ export default function TasksPage() {
     onSettled: () => qc.invalidateQueries({ queryKey: ['tasks'] }),
   })
 
+  // markDone: fire API + show 5-sec undo window, then auto-hide
+  const markDone = useCallback((id) => {
+    complete.mutate({ id })
+    // Clear any existing timer for this id
+    if (recentlyCompletedRef.current.has(id)) {
+      clearTimeout(recentlyCompletedRef.current.get(id))
+    }
+    const timerId = setTimeout(() => {
+      recentlyCompletedRef.current.delete(id)
+      setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+    }, 5000)
+    recentlyCompletedRef.current.set(id, timerId)
+    setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+  }, [complete])
+
+  const undoComplete = useCallback((id) => {
+    // Cancel the hide timer
+    if (recentlyCompletedRef.current.has(id)) {
+      clearTimeout(recentlyCompletedRef.current.get(id))
+      recentlyCompletedRef.current.delete(id)
+      setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+    }
+    // Restore to open
+    update.mutate({ id, updates: { status: 'open' } })
+  }, [update])
+
   const statusOptions = [
     { value: 'all',         label: 'All' },
     { value: 'open',        label: 'Open' },
@@ -481,15 +511,21 @@ export default function TasksPage() {
     { value: 'low',      label: 'Low' },
   ]
 
+  const isDone = (t) => t.status === 'done' || t.status === 'complete'
+
   const filtered = (tasks || []).filter(t => {
+    // Hide completed unless: showCompleted is on, OR in 5-sec undo window, OR status filter explicitly set to 'done'
+    if (isDone(t) && !showCompleted && !recentlyCompleted.has(t.id) && statusFilter !== 'done') return false
     if (statusFilter !== 'all') {
-      if (statusFilter === 'done' && t.status !== 'done' && t.status !== 'complete') return false
+      if (statusFilter === 'done' && !isDone(t)) return false
       if (statusFilter === 'open' && t.status !== 'open') return false
       if (statusFilter === 'in_progress' && t.status !== 'in_progress') return false
     }
     if (urgencyFilter !== 'all' && t.urgency !== urgencyFilter) return false
     return true
   })
+
+  const completedCount = (tasks || []).filter(isDone).length
 
   const sorted = [...filtered].sort((a, b) => {
     const ua = URGENCY_ORDER[a.urgency] ?? 4
@@ -502,8 +538,6 @@ export default function TasksPage() {
     return 0
   })
 
-  const isDone = (t) => t.status === 'done' || t.status === 'complete'
-
   return (
     <div className="min-h-screen bg-[#f8f8f6]">
       {/* Top bar */}
@@ -515,7 +549,17 @@ export default function TasksPage() {
           >
             ← Back
           </button>
-          <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Tasks</h1>
+          <h1 className="text-sm font-semibold text-[#1a1a18]">Tasks</h1>
+          <button
+            onClick={() => setShowCompleted(v => !v)}
+            className={`text-xs px-2.5 py-1 rounded-full border transition-all flex-1 text-left ${
+              showCompleted
+                ? 'bg-gray-100 text-[#6b6b67] border-gray-200'
+                : 'text-[#9b9b97] border-transparent hover:border-gray-200'
+            }`}
+          >
+            {showCompleted ? `Hide completed (${completedCount})` : completedCount > 0 ? `+${completedCount} done` : ''}
+          </button>
           {selectMode ? (
             <div className="flex items-center gap-2">
               <button onClick={selectAll}  className="text-xs text-blue-600 hover:underline">All</button>
@@ -609,18 +653,32 @@ export default function TasksPage() {
                       )}
                     </div>
 
-                    {/* Complete button */}
-                    {!done && (
+                    {/* Complete / Undo buttons */}
+                    {done && recentlyCompleted.has(task.id) ? (
+                      <button
+                        onClick={e => { e.stopPropagation(); undoComplete(task.id) }}
+                        className="flex-shrink-0 text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition-all font-medium border border-amber-200 whitespace-nowrap"
+                      >
+                        Undo
+                      </button>
+                    ) : !done ? (
                       <button
                         onClick={e => {
                           e.stopPropagation()
-                          complete.mutate({ id: task.id })
-                          toast('Task complete', { icon: '✓' })
+                          markDone(task.id)
                         }}
                         className="flex-shrink-0 w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
                         title="Mark complete"
                       >
                         ✓
+                      </button>
+                    ) : (
+                      <button
+                        onClick={e => { e.stopPropagation(); undoComplete(task.id) }}
+                        className="flex-shrink-0 text-xs px-2 py-0.5 rounded text-gray-300 hover:text-amber-600 hover:bg-amber-50 transition-all"
+                        title="Mark incomplete"
+                      >
+                        ↩
                       </button>
                     )}
                   </div>

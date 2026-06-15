@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -180,6 +180,9 @@ export default function OthersPage() {
   const [promotedIds,   setPromotedIds]   = useState(new Set())
   const [linkModalItem, setLinkModalItem] = useState(null)
   const [keepSeparate,  setKeepSeparate]  = useState(new Set()) // loser IDs opted out of merge
+  const [showCompleted, setShowCompleted] = useState(false)
+  const [recentlyCompleted, setRecentlyCompleted] = useState(() => new Map())
+  const recentlyCompletedRef = useRef(new Map())
 
   const toast = useToast()
 
@@ -211,6 +214,29 @@ export default function OthersPage() {
     onError: (_, __, ctx) => qc.setQueryData(['others-commitments'], ctx.prev),
     onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
   })
+
+  // markDone: close item + show 5-sec undo window before hiding
+  const markDone = useCallback((id) => {
+    update.mutate({ id, updates: { status: 'closed' } })
+    if (recentlyCompletedRef.current.has(id)) {
+      clearTimeout(recentlyCompletedRef.current.get(id))
+    }
+    const timerId = setTimeout(() => {
+      recentlyCompletedRef.current.delete(id)
+      setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+    }, 5000)
+    recentlyCompletedRef.current.set(id, timerId)
+    setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+  }, [update])
+
+  const undoComplete = useCallback((id) => {
+    if (recentlyCompletedRef.current.has(id)) {
+      clearTimeout(recentlyCompletedRef.current.get(id))
+      recentlyCompletedRef.current.delete(id)
+      setRecentlyCompleted(new Map(recentlyCompletedRef.current))
+    }
+    update.mutate({ id, updates: { status: 'open' } })
+  }, [update])
 
   // ── Duplicate merge helpers ────────────────────────────────
   // Map: winnerId → [loser items]
@@ -394,9 +420,14 @@ export default function OthersPage() {
     { value: 'due_date', label: 'By Due Date' },
   ]
 
+  const isItemDone = (c) => c.status === 'closed' || c.status === 'done'
+  const completedCount = (items || []).filter(isItemDone).length
+
   const filtered = (items || []).filter(c => {
     // exclude loser duplicates — they render as sub-rows under their winner
     if (c.potential_duplicate_of && c.status !== 'archived') return false
+    // hide closed/done items unless in 5-sec undo window or showCompleted is on
+    if (isItemDone(c) && !showCompleted && !recentlyCompleted.has(c.id)) return false
     // type filter
     if (typeFilter === 'blocking_ryan' && c.delivery_type !== 'blocking_ryan') return false
     if (typeFilter === 'to_ryan'       && c.delivery_type !== 'to_ryan')       return false
@@ -473,7 +504,17 @@ export default function OthersPage() {
           >
             ← Back
           </button>
-          <h1 className="text-sm font-semibold text-[#1a1a18] flex-1">Waiting on Others</h1>
+          <h1 className="text-sm font-semibold text-[#1a1a18]">Waiting on Others</h1>
+          <button
+            onClick={() => setShowCompleted(v => !v)}
+            className={`text-xs px-2.5 py-1 rounded-full border transition-all flex-1 text-left ${
+              showCompleted
+                ? 'bg-gray-100 text-[#6b6b67] border-gray-200'
+                : 'text-[#9b9b97] border-transparent hover:border-gray-200'
+            }`}
+          >
+            {showCompleted ? `Hide completed (${completedCount})` : completedCount > 0 ? `+${completedCount} done` : ''}
+          </button>
           <span className="text-xs text-[#6b6b67] flex-shrink-0">{filtered.length} items</span>
           <button
             onClick={toggleSelectMode}
@@ -802,8 +843,10 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   const personName = item.committed_by_name || item.person_name || ''
   const [query,    setQuery]   = useState(personName)
   const [email,    setEmail]   = useState(item.committed_by_email || '')
+  const [title,    setTitle]   = useState('')
   const [company,  setCompany] = useState('')
   const [saving,   setSaving]  = useState(false)
+  const [error,    setError]   = useState('')
   const [tab,      setTab]     = useState('create') // start on create — matches user intent
   const inputRef = useRef(null)
 
@@ -854,17 +897,20 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   const handleCreateAndLink = async () => {
     if (!query.trim()) return
     setSaving(true)
+    setError('')
     try {
       const newContact = await createContact({
-        name:    query.trim(),
-        email:   email.trim()   || null,
-        company: company.trim() || null,
+        name:     query.trim(),
+        title:    title.trim()   || null,
+        email:    email.trim()   || null,
+        company:  company.trim() || null,
+        source:   'manual',
+        enriched: false,
       })
       onLink({ contact_id: newContact.id, committed_by_name: newContact.name, committed_by_email: newContact.email || null })
       onClose()
     } catch (e) {
-      alert(e?.response?.data?.error || e.message)
-    } finally {
+      setError(e?.response?.data?.error || e.message || 'Failed to create contact')
       setSaving(false)
     }
   }
@@ -929,6 +975,17 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
                 )}
               </div>
 
+              {/* Title */}
+              <div>
+                <label className="block text-xs font-medium text-[#6b6b67] mb-1">Title</label>
+                <input
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  placeholder="e.g. VP Development"
+                  className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+
               {/* Email */}
               <div>
                 <label className="block text-xs font-medium text-[#6b6b67] mb-1">Email</label>
@@ -936,12 +993,11 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="email@company.com"
-                  type="email"
                   className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
 
-              {/* Company (new) */}
+              {/* Company */}
               <div>
                 <label className="block text-xs font-medium text-[#6b6b67] mb-1">Company</label>
                 <input
@@ -951,6 +1007,8 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
                   className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
+
+              {error && <p className="text-xs text-red-500">{error}</p>}
 
               <button
                 onClick={handleCreateAndLink}
@@ -1150,14 +1208,31 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
             </button>
           )}
 
-          {/* Mark done */}
-          <button
-            onClick={e => { e.stopPropagation(); update.mutate({ id: c.id, updates: { status: 'closed' } }); toast('Marked complete', { icon: '✓' }) }}
-            className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
-            title="Mark done"
-          >
-            ✓
-          </button>
+          {/* Mark done / Undo */}
+          {isItemDone(c) && recentlyCompleted.has(c.id) ? (
+            <button
+              onClick={e => { e.stopPropagation(); undoComplete(c.id) }}
+              className="flex-shrink-0 text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition-all font-medium border border-amber-200 whitespace-nowrap"
+            >
+              Undo
+            </button>
+          ) : isItemDone(c) ? (
+            <button
+              onClick={e => { e.stopPropagation(); undoComplete(c.id) }}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-gray-300 hover:text-amber-600 hover:bg-amber-50 hover:border-amber-300 transition-all text-xs"
+              title="Mark incomplete"
+            >
+              ↩
+            </button>
+          ) : (
+            <button
+              onClick={e => { e.stopPropagation(); markDone(c.id) }}
+              className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
+              title="Mark done"
+            >
+              ✓
+            </button>
+          )}
 
           {/* Escalate to blocking */}
           {c.delivery_type !== 'blocking_ryan' && (
