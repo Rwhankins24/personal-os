@@ -3,9 +3,10 @@ name: Nightly AI Intelligence Job
 on:
   schedule:
     # 9:00am-18:00 UTC = 2:00am-11:00am Phoenix
-    # Polls every 10 minutes in this window
+    # Polls every 10 minutes in this window, weekdays only
+    # Monday run catches Friday's emails
     # Only fires when pipeline processing is done
-    - cron: '*/10 9-18 * * *'
+    - cron: '*/10 9-18 * * 1-5'
   workflow_dispatch:
     inputs:
       force_run:
