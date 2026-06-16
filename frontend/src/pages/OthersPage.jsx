@@ -776,7 +776,7 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   const [company,  setCompany] = useState('')
   const [saving,   setSaving]  = useState(false)
   const [error,    setError]   = useState('')
-  const [tab,      setTab]     = useState('create') // start on create — matches user intent
+  const [tab,      setTab]     = useState('search') // default: find existing contact
   const inputRef = useRef(null)
 
   useEffect(() => { setTimeout(() => inputRef.current?.focus(), 80) }, [tab])
@@ -860,7 +860,7 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
 
         {/* Tabs */}
         <div className="flex gap-1 mx-4 mt-3 mb-0 bg-[#f3f3f1] rounded-lg p-1">
-          {[['create', '+ Create New'], ['search', '🔍 Find Existing']].map(([t, lbl]) => (
+          {[['search', 'Find Contact'], ['create', '+ Create New']].map(([t, lbl]) => (
             <button key={t} onClick={() => setTab(t)}
               className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-all ${tab === t ? 'bg-white text-[#1a1a18] shadow-sm' : 'text-[#6b6b67]'}`}>
               {lbl}
