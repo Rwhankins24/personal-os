@@ -169,6 +169,39 @@ export default function Contacts() {
   const [sort,            setSort]            = useState('key_first')
   const [internalFilter,  setInternalFilter]  = useState('all') // 'all' | 'internal' | 'external'
   const [showAddModal,    setShowAddModal]    = useState(false)
+  const [selectMode,      setSelectMode]      = useState(false)
+  const [selectedIds,     setSelectedIds]     = useState(new Set())
+  const [mergeModal,      setMergeModal]      = useState(false)
+  const [mergeSaving,     setMergeSaving]     = useState(false)
+
+  const toggleContactSelect = (id) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  const exitContactSelectMode = () => {
+    setSelectMode(false)
+    setSelectedIds(new Set())
+  }
+
+  const handleContactMerge = async (keeperId) => {
+    const losers = [...selectedIds].filter(id => id !== keeperId)
+    setMergeSaving(true)
+    try {
+      await Promise.all(losers.map(id => updateContact(id, { parent_id: keeperId })))
+      qc.setQueryData(['contacts'], old =>
+        (old || []).map(c => losers.includes(c.id) ? { ...c, parent_id: keeperId } : c)
+      )
+      setMergeModal(false)
+      exitContactSelectMode()
+    } finally {
+      setMergeSaving(false)
+    }
+  }
 
   const toggleKey = useMutation({
     mutationFn: ({ id, is_key_contact }) => updateContact(id, { is_key_contact }),
@@ -211,6 +244,7 @@ export default function Contacts() {
   // Filter
   const filtered = useMemo(() => {
     return (contacts || []).filter(c => {
+      if (c.parent_id) return false
       if (keyOnly && !c.is_key_contact) return false
       if (warmthFilter !== 'all' && c.relationship_warmth !== warmthFilter) return false
       if (internalFilter === 'internal' && !isInternal(c.email)) return false
@@ -323,6 +357,16 @@ export default function Contacts() {
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
+              <button
+                onClick={() => { if (selectMode) exitContactSelectMode(); else setSelectMode(true) }}
+                className={`flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg transition-colors font-medium border ${
+                  selectMode
+                    ? 'bg-[#1a1a18] text-white border-[#1a1a18]'
+                    : 'bg-white text-[#6b6b67] border-[#e5e5e3] hover:border-gray-400'
+                }`}
+              >
+                {selectMode ? 'Cancel' : 'Select'}
+              </button>
               <button
                 onClick={() => setShowAddModal(true)}
                 className="flex items-center gap-1 text-xs px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
@@ -467,10 +511,10 @@ export default function Contacts() {
                     return (
                       <tr
                         key={c.id}
-                        onClick={() => navigate(`/contact/${c.id}`)}
+                        onClick={() => selectMode ? toggleContactSelect(c.id) : navigate(`/contact/${c.id}`)}
                         className={`cursor-pointer hover:bg-blue-50 transition-colors ${
                           i < sorted.length - 1 ? 'border-b border-[#f0f0ee]' : ''
-                        }`}
+                        } ${selectedIds.has(c.id) ? 'bg-blue-50' : ''}`}
                       >
                         {/* Star */}
                         <td className="px-3 py-3 w-8"
@@ -561,8 +605,12 @@ export default function Contacts() {
                 return (
                   <div
                     key={c.id}
-                    onClick={() => navigate(`/contact/${c.id}`)}
-                    className="bg-white border border-[#e5e5e3] rounded-xl px-4 py-3 cursor-pointer hover:border-blue-300 transition-colors flex items-center gap-3"
+                    onClick={() => selectMode ? toggleContactSelect(c.id) : navigate(`/contact/${c.id}`)}
+                    className={`border rounded-xl px-4 py-3 cursor-pointer transition-colors flex items-center gap-3 ${
+                      selectedIds.has(c.id)
+                        ? 'bg-blue-50 border-blue-300'
+                        : 'bg-white border-[#e5e5e3] hover:border-blue-300'
+                    }`}
                   >
                     <button
                       onClick={e => {
@@ -617,6 +665,66 @@ export default function Contacts() {
             qc.invalidateQueries({ queryKey: ['contacts'] })
           }}
         />
+      )}
+
+      {/* Bulk action bar — shown when 2+ contacts selected */}
+      {selectMode && selectedIds.size >= 2 && (
+        <div className="fixed left-0 right-0 z-[60] flex justify-center px-4" style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 16px)' }}>
+          <div className="bg-[#1a1a18] text-white rounded-2xl shadow-2xl px-4 py-3 flex items-center gap-3 w-full max-w-lg">
+            <span className="text-sm font-medium whitespace-nowrap">{selectedIds.size} selected</span>
+            <button
+              onClick={() => setMergeModal(true)}
+              className="flex-1 text-sm font-semibold bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-400 transition-colors"
+            >
+              ⛓ Merge contacts
+            </button>
+            <button onClick={exitContactSelectMode} className="text-white/60 hover:text-white text-lg leading-none px-1">✕</button>
+          </div>
+        </div>
+      )}
+
+      {/* Contact merge modal */}
+      {mergeModal && (
+        <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-4" onClick={() => setMergeModal(false)}>
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+              <div>
+                <h2 className="text-sm font-semibold text-[#1a1a18]">Merge {selectedIds.size} contacts</h2>
+                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the contact to keep. Others become sub-contacts linked to it.</p>
+              </div>
+              <button onClick={() => setMergeModal(false)} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+            </div>
+            <div className="px-4 py-3 space-y-2 max-h-80 overflow-y-auto">
+              {(contacts || []).filter(c => selectedIds.has(c.id)).map(c => {
+                const initials = (c.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => handleContactMerge(c.id)}
+                    disabled={mergeSaving}
+                    className="w-full text-left px-4 py-3 rounded-xl border border-[#e5e5e3] hover:border-blue-400 hover:bg-blue-50 transition-all disabled:opacity-40 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#1a1a18] flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+                        {initials}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-[#1a1a18] group-hover:text-blue-700">{c.display_name || c.name}</p>
+                        <p className="text-xs text-[#9b9b97] truncate">
+                          {[c.company, c.title].filter(Boolean).join(' · ') || c.email || '—'}
+                        </p>
+                      </div>
+                      <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 flex-shrink-0 font-medium">Keep →</span>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+            <div className="px-5 pb-4 pt-2">
+              <p className="text-[10px] text-[#9b9b97] text-center">The kept contact becomes the primary. Others get parent_id set and are hidden from the main list.</p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

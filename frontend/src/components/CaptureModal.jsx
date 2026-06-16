@@ -6,6 +6,7 @@ import {
   createOthersCommitment,
   createPendingDecision,
   getContacts,
+  getProjects,
 } from '../lib/api'
 import { useQuery } from '@tanstack/react-query'
 
@@ -99,7 +100,14 @@ export default function CaptureModal({ onClose }) {
   const [context,  setContext] = useState('')
 
   // Task-specific
-  const [urgency,  setUrgency] = useState('medium')
+  const [urgency,  setUrgency]   = useState('medium')
+  const [projectId, setProjectId] = useState(null)
+
+  const { data: projects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn: getProjects,
+    staleTime: 5 * 60 * 1000,
+  })
 
   // My Commitment
   const [madeTo,   setMadeTo]  = useState('')
@@ -115,6 +123,7 @@ export default function CaptureModal({ onClose }) {
     setTitle(''); setDueDate(''); setContext('')
     setUrgency('medium'); setMadeTo(''); setCommitType('hard')
     setFromName(''); setDeliveryType('general'); setOcUrgency('medium')
+    setProjectId(null)
     setError('')
     setTimeout(() => firstRef.current?.focus(), 50)
   }, [type])
@@ -132,11 +141,12 @@ export default function CaptureModal({ onClose }) {
 
       if (type === 'task') {
         return createTask({
-          title:    title.trim(),
+          title:      title.trim(),
           urgency,
-          due_date: dueDate || null,
-          context:  context.trim() || null,
-          status:   'open',
+          due_date:   dueDate || null,
+          context:    context.trim() || null,
+          status:     'open',
+          project_id: projectId || null,
         })
       }
 
@@ -149,6 +159,7 @@ export default function CaptureModal({ onClose }) {
           commitment_type: commitType,
           context:         context.trim() || null,
           status:          'open',
+          project_id:      projectId || null,
         })
       }
 
@@ -162,6 +173,7 @@ export default function CaptureModal({ onClose }) {
           urgency:            ocUrgency,
           context:            context.trim() || null,
           status:             'open',
+          project_id:         projectId || null,
         })
       }
 
@@ -171,6 +183,7 @@ export default function CaptureModal({ onClose }) {
           description: context.trim() || null,
           due_date:    dueDate || null,
           status:      'open',
+          project_id:  projectId || null,
         })
       }
     },
@@ -239,6 +252,25 @@ export default function CaptureModal({ onClose }) {
               className="w-full text-sm font-medium border border-[#e5e5e3] rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#1a1a18] placeholder-[#c0c0bc]"
             />
           </div>
+
+          {/* Project selector — shown for all types when projects exist */}
+          {projects.length > 0 && (
+            <div>
+              <label className="text-[10px] font-semibold text-[#9b9b97] uppercase tracking-wide block mb-1">
+                Project <span className="font-normal normal-case">(optional)</span>
+              </label>
+              <select
+                value={projectId || ''}
+                onChange={e => setProjectId(e.target.value || null)}
+                className="w-full text-sm border border-[#e5e5e3] rounded-lg px-2 py-2 focus:outline-none focus:ring-1 focus:ring-[#1a1a18] bg-white"
+              >
+                <option value="">No project</option>
+                {projects.map(p => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Task fields */}
           {type === 'task' && (

@@ -304,22 +304,11 @@ export default function OthersPage() {
 
   const handleMerge = async (keeperId) => {
     const losers = [...selectedIds].filter(id => id !== keeperId)
-    const keeper = (items || []).find(c => c.id === keeperId)
-    const loserItems = (items || []).filter(c => losers.includes(c.id))
-    const extra = loserItems
-      .map(c => `• ${c.title}${c.context ? ` — ${c.context}` : ''}${c.committed_by_name ? ` (from ${c.committed_by_name})` : ''}`)
-      .join('\n')
-    const mergedNotes = [keeper?.notes, extra].filter(Boolean).join('\n\n[Merged from:]\n')
     setBulkSaving(true)
     try {
-      await updateOthersCommitment(keeperId, { notes: mergedNotes || null })
-      await Promise.all(losers.map(id => updateOthersCommitment(id, { status: 'archived' })))
+      await Promise.all(losers.map(id => updateOthersCommitment(id, { parent_id: keeperId })))
       qc.setQueryData(['others-commitments'], old =>
-        (old || []).map(c => {
-          if (c.id === keeperId) return { ...c, notes: mergedNotes || null }
-          if (losers.includes(c.id)) return { ...c, status: 'archived' }
-          return c
-        })
+        (old || []).map(c => losers.includes(c.id) ? { ...c, parent_id: keeperId } : c)
       )
       toast(`Merged ${selectedIds.size} items into 1`, { icon: '⛓' })
       setMergeModal(false)
@@ -444,7 +433,21 @@ export default function OthersPage() {
   const isItemDone = (c) => c.status === 'closed' || c.status === 'done'
   const completedCount = (items || []).filter(isItemDone).length
 
+  // Map: parentId → [child items]
+  const childrenByParent = useMemo(() => {
+    const map = {}
+    for (const c of items || []) {
+      if (c.parent_id) {
+        if (!map[c.parent_id]) map[c.parent_id] = []
+        map[c.parent_id].push(c)
+      }
+    }
+    return map
+  }, [items])
+
   const filtered = (items || []).filter(c => {
+    // children render under their parent — exclude from main list
+    if (c.parent_id) return false
 
     // hide closed/done items unless in 5-sec undo window or showCompleted is on
     if (isItemDone(c) && !showCompleted && !recentlyCompleted.has(c.id)) return false
@@ -654,6 +657,7 @@ export default function OthersPage() {
                   onPromote={() => handleSinglePromoteToMyTask(c)}
                   allItems={items}
                   onLink={() => setLinkModalItem(c)}
+                  children={childrenByParent[c.id] || []}
                   onMarkDone={markDone}
                   onUndoComplete={undoComplete}
                   isRecentlyDone={recentlyCompleted.has(c.id)}
@@ -708,6 +712,7 @@ export default function OthersPage() {
                           onPromote={() => handleSinglePromoteToMyTask(c)}
                           allItems={items}
                           onLink={() => setLinkModalItem(c)}
+                          children={childrenByParent[c.id] || []}
                           onMarkDone={markDone}
                           onUndoComplete={undoComplete}
                           isRecentlyDone={recentlyCompleted.has(c.id)}
@@ -741,7 +746,7 @@ export default function OthersPage() {
             <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
               <div>
                 <h2 className="text-sm font-semibold text-[#1a1a18]">Merge {selectedIds.size} items</h2>
-                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the one to keep. The others get archived.</p>
+                <p className="text-xs text-[#6b6b67] mt-0.5">The kept item becomes the parent. Others become sub-items, visible when you expand it.</p>
               </div>
               <button onClick={() => setMergeModal(false)} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
             </div>
@@ -1098,9 +1103,11 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, onMarkDone, onUndoComplete, isRecentlyDone }) {
-  const [reassigning, setReassigning] = useState(false)
-  const [expanded, setExpanded] = useState(false)
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, children = [], onMarkDone, onUndoComplete, isRecentlyDone }) {
+  const [expanded,     setExpanded]     = useState(false)
+  const [reassigning,  setReassigning]  = useState(false)
+  const [editingTitle, setEditingTitle] = useState(false)
+  const [titleDraft,   setTitleDraft]   = useState('')
   const toast = useToast()
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
@@ -1142,7 +1149,37 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm flex-shrink-0">{typeIcon}</span>
-            <p className="text-sm font-medium text-[#1a1a18] leading-snug">{c.title}</p>
+            {editingTitle ? (
+              <input
+                autoFocus
+                value={titleDraft}
+                onChange={e => setTitleDraft(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    if (titleDraft.trim()) update.mutate({ id: c.id, updates: { title: titleDraft.trim() } })
+                    setEditingTitle(false)
+                  }
+                  if (e.key === 'Escape') { setEditingTitle(false) }
+                }}
+                onBlur={() => {
+                  if (titleDraft.trim()) update.mutate({ id: c.id, updates: { title: titleDraft.trim() } })
+                  setEditingTitle(false)
+                }}
+                onClick={e => e.stopPropagation()}
+                className="text-sm font-medium text-[#1a1a18] leading-snug border-b border-blue-400 outline-none bg-transparent flex-1 min-w-0"
+              />
+            ) : (
+              <p
+                className="text-sm font-medium text-[#1a1a18] leading-snug cursor-text"
+                onDoubleClick={e => { e.stopPropagation(); setTitleDraft(c.title); setEditingTitle(true) }}
+              >{c.title}</p>
+            )}
+            {children.length > 0 && !expanded && (
+              <span className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-medium flex-shrink-0" title={`${children.length} sub-item${children.length !== 1 ? 's' : ''}`}>
+                ⛓ {children.length}
+              </span>
+            )}
             {isKey && <span className="text-xs text-amber-500 flex-shrink-0" title="Key contact">⭐</span>}
             {c.urgency && (
               <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${URGENCY_TEXT[c.urgency] || 'text-gray-500 bg-gray-100'}`}>
@@ -1311,6 +1348,24 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
       {/* Expanded context panel */}
       {expanded && !selectMode && (
         <OthersContextPanel c={c} allItems={allItems} />
+      )}
+
+      {/* Children sub-items */}
+      {expanded && !selectMode && children.length > 0 && (
+        <div className="border-t border-[#f0f0ee] bg-gray-50/50">
+          {children.map(child => (
+            <div key={child.id} className="flex items-start gap-2 px-6 py-2 border-b border-[#f0f0ee] last:border-0">
+              <span className="text-[#9b9b97] text-xs mt-0.5 flex-shrink-0">↳</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-[#1a1a18] leading-snug">{child.title}</p>
+                <p className="text-xs text-[#9b9b97] mt-0.5">
+                  {child.committed_by_name || child.person_name || ''}
+                  {child.source_label ? ` · ${child.source_label}` : ''}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
     </div>

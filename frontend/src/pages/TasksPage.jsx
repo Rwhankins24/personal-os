@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -438,24 +438,15 @@ export default function TasksPage() {
     }
   }
 
-  // Merge: keep one task, archive the rest (append their context as notes)
+  // Merge: keep one task, make the rest sub-items (parent_id = keeperId)
   const handleMerge = async (keeperId) => {
     const losers = [...selected].filter(id => id !== keeperId)
-    const keeper = (tasks || []).find(t => t.id === keeperId)
-    const loserTasks = (tasks || []).filter(t => losers.includes(t.id))
-    // Build combined notes: keeper notes + loser titles/context
-    const extra = loserTasks
-      .map(t => `• ${t.title}${t.context ? ` — ${t.context}` : ''}`)
-      .join('\n')
-    const mergedNotes = [keeper?.notes, extra].filter(Boolean).join('\n\n[Merged from:]\n')
     setBulkSaving(true)
     try {
-      await updateTask(keeperId, { notes: mergedNotes || null })
-      await Promise.all(losers.map(id => updateTask(id, { status: 'archived' })))
+      await Promise.all(losers.map(id => updateTask(id, { parent_id: keeperId })))
       qc.setQueryData(['tasks'], old =>
         (old || []).map(t => {
-          if (t.id === keeperId) return { ...t, notes: mergedNotes || null }
-          if (losers.includes(t.id)) return { ...t, status: 'archived' }
+          if (losers.includes(t.id)) return { ...t, parent_id: keeperId }
           return t
         })
       )
@@ -546,7 +537,21 @@ export default function TasksPage() {
 
   const isDone = (t) => t.status === 'done' || t.status === 'complete'
 
+  // Map: parentId → [child tasks]
+  const childrenByParent = useMemo(() => {
+    const map = {}
+    for (const t of tasks || []) {
+      if (t.parent_id) {
+        if (!map[t.parent_id]) map[t.parent_id] = []
+        map[t.parent_id].push(t)
+      }
+    }
+    return map
+  }, [tasks])
+
   const filtered = (tasks || []).filter(t => {
+    // children render under their parent — exclude from main list
+    if (t.parent_id) return false
     // Hide completed unless: showCompleted is on, OR in 5-sec undo window, OR status filter explicitly set to 'done'
     if (isDone(t) && !showCompleted && !recentlyCompleted.has(t.id) && statusFilter !== 'done') return false
     if (statusFilter !== 'all') {
@@ -750,6 +755,11 @@ export default function TasksPage() {
                             {dayjs(task.due_date).format('MMM D')}
                           </span>
                         )}
+                        {childrenByParent[task.id]?.length > 0 && !expanded && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-medium flex-shrink-0" title={`${childrenByParent[task.id].length} sub-task${childrenByParent[task.id].length !== 1 ? 's' : ''}`}>
+                            ⛓ {childrenByParent[task.id].length}
+                          </span>
+                        )}
                       </div>
                       {task.context && (
                         <p className="text-xs text-[#6b6b67] mt-0.5 line-clamp-2 leading-snug">{task.context}</p>
@@ -803,6 +813,23 @@ export default function TasksPage() {
                       projects={projects}
                       update={update}
                     />
+                  )}
+
+                  {/* Sub-tasks (children) */}
+                  {expanded && childrenByParent[task.id]?.length > 0 && (
+                    <div className="border-t border-[#f0f0ee] bg-gray-50/50">
+                      {childrenByParent[task.id].map(child => (
+                        <div key={child.id} className="flex items-start gap-2 px-6 py-2 border-b border-[#f0f0ee] last:border-0">
+                          <span className="text-[#9b9b97] text-xs mt-0.5 flex-shrink-0">↳</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-[#1a1a18] leading-snug">{child.title}</p>
+                            {child.source_label && (
+                              <p className="text-xs text-[#9b9b97] mt-0.5">↳ {child.source_label}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   )}
                 </div>
               )
@@ -859,7 +886,7 @@ export default function TasksPage() {
             <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
               <div>
                 <h2 className="text-sm font-semibold text-[#1a1a18]">Merge {selected.size} tasks</h2>
-                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the one to keep. The others get archived.</p>
+                <p className="text-xs text-[#6b6b67] mt-0.5">Pick the one to keep. The others become sub-items.</p>
               </div>
               <button onClick={() => setMergeModal(false)} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
             </div>
@@ -886,7 +913,7 @@ export default function TasksPage() {
               ))}
             </div>
             <div className="px-5 pb-4 pt-2">
-              <p className="text-[10px] text-[#9b9b97] text-center">The kept task will inherit notes from the archived ones.</p>
+              <p className="text-[10px] text-[#9b9b97] text-center">The kept task becomes the parent. Others will appear as sub-tasks when expanded.</p>
             </div>
           </div>
         </div>
