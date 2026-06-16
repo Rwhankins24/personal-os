@@ -199,7 +199,6 @@ export default function OthersPage() {
   const [promoting,     setPromoting]     = useState(false)
   const [promotedIds,   setPromotedIds]   = useState(new Set())
   const [linkModalItem, setLinkModalItem] = useState(null)
-  const [keepSeparate,  setKeepSeparate]  = useState(new Set()) // loser IDs opted out of merge
   const [showCompleted, setShowCompleted] = useState(false)
   const [recentlyCompleted, setRecentlyCompleted] = useState(() => new Map())
   const recentlyCompletedRef = useRef(new Map())
@@ -258,65 +257,6 @@ export default function OthersPage() {
     update.mutate({ id, updates: { status: 'open' } })
   }, [update])
 
-  // ── Duplicate merge helpers ────────────────────────────────
-  // Map: winnerId → [loser items]
-  const duplicatesByWinner = useMemo(() => {
-    const map = {}
-    for (const c of items || []) {
-      if (c.potential_duplicate_of && c.status !== 'archived') {
-        if (!map[c.potential_duplicate_of]) map[c.potential_duplicate_of] = []
-        map[c.potential_duplicate_of].push(c)
-      }
-    }
-    return map
-  }, [items])
-
-  // All losers not opted out — these will be merged on "Merge all"
-  const pendingMerges = useMemo(() => {
-    return Object.values(duplicatesByWinner).flat().filter(l => !keepSeparate.has(l.id))
-  }, [duplicatesByWinner, keepSeparate])
-
-  const doMerge = (loser, winner) => {
-    const enrichment = {}
-    if (!winner.due_date   && loser.due_date)   enrichment.due_date   = loser.due_date
-    if (!winner.project_id && loser.project_id) enrichment.project_id = loser.project_id
-    if (!winner.context    && loser.context)    enrichment.context    = loser.context
-    if (!winner.urgency    && loser.urgency)    enrichment.urgency    = loser.urgency
-    if (Object.keys(enrichment).length > 0) update.mutate({ id: winner.id, updates: enrichment })
-    update.mutate({
-      id: loser.id,
-      updates: { status: 'archived', potential_duplicate_of: null, duplicate_confidence: null, duplicate_reviewed: true, duplicate_decision: 'merged' }
-    })
-  }
-
-  const doKeepSeparate = (loser, winner) => {
-    update.mutate({ id: winner.id, updates: { known_not_duplicate_with: [...(winner.known_not_duplicate_with || []), loser.id], duplicate_reviewed: true } })
-    update.mutate({ id: loser.id, updates: { potential_duplicate_of: null, duplicate_confidence: null, duplicate_reviewed: true, duplicate_decision: 'separate', known_not_duplicate_with: [...(loser.known_not_duplicate_with || []), winner.id] } })
-  }
-
-  const handleMergeAll = () => {
-    const allItems = items || []
-    for (const loser of pendingMerges) {
-      const winner = allItems.find(c => c.id === loser.potential_duplicate_of)
-      if (winner) doMerge(loser, winner)
-    }
-    // Also resolve the kept-separate ones
-    for (const loserId of keepSeparate) {
-      const loser  = allItems.find(c => c.id === loserId)
-      const winner = loser ? allItems.find(c => c.id === loser.potential_duplicate_of) : null
-      if (loser && winner) doKeepSeparate(loser, winner)
-    }
-    setKeepSeparate(new Set())
-    toast(`Merged ${pendingMerges.length} duplicate${pendingMerges.length !== 1 ? 's' : ''}`, { icon: '✓' })
-  }
-
-  const toggleKeepSeparate = (loserId) => {
-    setKeepSeparate(prev => {
-      const next = new Set(prev)
-      next.has(loserId) ? next.delete(loserId) : next.add(loserId)
-      return next
-    })
-  }
 
   const [bulkSaving, setBulkSaving] = useState(false)
   const [mergeModal, setMergeModal] = useState(false)
@@ -486,23 +426,12 @@ export default function OthersPage() {
   const linkedCount   = (items || []).filter(c => !!c.contact_id).length
   const unlinkedCount = (items || []).filter(c => !c.contact_id && !isSpeaker(c.committed_by_name || c.person_name)).length
 
-  // Count winners (items that have at least one loser pointing at them)
-  const loserWinnerIds = useMemo(() => {
-    const ids = new Set()
-    for (const c of (items || [])) {
-      if (c.potential_duplicate_of && c.status !== 'archived') ids.add(c.potential_duplicate_of)
-    }
-    return ids
-  }, [items])
-  const dupesCount = loserWinnerIds.size
-
   const typeOptions = [
     { value: 'all',           label: 'All' },
     { value: 'key',           label: `⭐ Key${keyCount ? ` (${keyCount})` : ''}` },
     { value: 'blocking_ryan', label: '🚧 Blocking' },
     { value: 'to_ryan',       label: '📬 Owed to Me' },
     { value: 'general',       label: '📋 General' },
-    { value: 'dupes',         label: `⚠ Dupes${dupesCount ? ` (${dupesCount})` : ''}` },
   ]
 
   const sortOptions = [
@@ -516,8 +445,7 @@ export default function OthersPage() {
   const completedCount = (items || []).filter(isItemDone).length
 
   const filtered = (items || []).filter(c => {
-    // exclude loser duplicates — they render as sub-rows under their winner
-    if (c.potential_duplicate_of && c.status !== 'archived') return false
+
     // hide closed/done items unless in 5-sec undo window or showCompleted is on
     if (isItemDone(c) && !showCompleted && !recentlyCompleted.has(c.id)) return false
     // type filter
@@ -525,8 +453,6 @@ export default function OthersPage() {
     if (typeFilter === 'to_ryan'       && c.delivery_type !== 'to_ryan')       return false
     if (typeFilter === 'general'       && c.delivery_type && c.delivery_type !== 'general') return false
     if (typeFilter === 'key'           && !isKeyPerson(c)) return false
-    // dupes filter — show only winners (items with at least one loser queued)
-    if (typeFilter === 'dupes'         && !loserWinnerIds.has(c.id)) return false
     // contact link filter
     if (contactFilter === 'linked'   && !c.contact_id) return false
     if (contactFilter === 'unlinked' && !!c.contact_id) return false
@@ -700,22 +626,6 @@ export default function OthersPage() {
           )}
         </div>
 
-        {/* Merge pending banner */}
-        {pendingMerges.length > 0 && (
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 flex items-center gap-3">
-            <span className="text-sm text-amber-800 flex-1 font-medium">
-              ⚠ {pendingMerges.length} duplicate{pendingMerges.length !== 1 ? 's' : ''} queued to merge
-              {keepSeparate.size > 0 && <span className="text-amber-600 font-normal"> · {keepSeparate.size} kept separate</span>}
-            </span>
-            <button
-              onClick={handleMergeAll}
-              className="text-xs font-semibold px-3 py-1.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors whitespace-nowrap"
-            >
-              Merge all
-            </button>
-          </div>
-        )}
-
         {/* List */}
         {isLoading ? (
           <p className="text-sm text-[#6b6b67] text-center py-8">Loading...</p>
@@ -744,9 +654,6 @@ export default function OthersPage() {
                   onPromote={() => handleSinglePromoteToMyTask(c)}
                   allItems={items}
                   onLink={() => setLinkModalItem(c)}
-                  duplicates={duplicatesByWinner[c.id] || []}
-                  keepSeparate={keepSeparate}
-                  onToggleKeep={toggleKeepSeparate}
                   onMarkDone={markDone}
                   onUndoComplete={undoComplete}
                   isRecentlyDone={recentlyCompleted.has(c.id)}
@@ -801,9 +708,6 @@ export default function OthersPage() {
                           onPromote={() => handleSinglePromoteToMyTask(c)}
                           allItems={items}
                           onLink={() => setLinkModalItem(c)}
-                          duplicates={duplicatesByWinner[c.id] || []}
-                          keepSeparate={keepSeparate}
-                          onToggleKeep={toggleKeepSeparate}
                           onMarkDone={markDone}
                           onUndoComplete={undoComplete}
                           isRecentlyDone={recentlyCompleted.has(c.id)}
@@ -817,8 +721,6 @@ export default function OthersPage() {
           </div>
         )}
       </div>
-
-      {/* Duplicate sub-items rendered inline in CommitmentRow — no bottom panel needed */}
 
       <BulkActionBar
         selectedIds={selectedIds}
@@ -898,71 +800,6 @@ function isInternal(email) {
   if (!email) return false
   const domain = email.toLowerCase().split('@')[1] || ''
   return domain === 'claycorp.com' || domain === 'ljc.com'
-}
-
-// ── Inline duplicate sub-row ───────────────────────────────────
-// Rendered under the primary CommitmentRow for each flagged duplicate.
-// Pre-queued for merge; user can opt individual ones out.
-function DuplicateSubRow({ loser, isKept, onToggleKeep }) {
-  return (
-    <div className={`flex items-start gap-2 px-4 py-2.5 border-t ${isKept ? 'border-gray-100 bg-gray-50/50' : 'border-amber-100 bg-amber-50/30'}`}>
-      {/* indent indicator */}
-      <span className="text-[#9b9b97] flex-shrink-0 text-xs pl-1 mt-0.5">↳</span>
-
-      {/* content */}
-      <div className="flex-1 min-w-0">
-        {/* status chip + confidence */}
-        <div className="flex items-center gap-1.5 mb-1">
-          {isKept ? (
-            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 whitespace-nowrap">keeping</span>
-          ) : (
-            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 whitespace-nowrap">will merge</span>
-          )}
-          {loser.duplicate_confidence && (
-            <span className="text-[10px] text-[#9b9b97]">{loser.duplicate_confidence}% match</span>
-          )}
-        </div>
-
-        {/* duplicate title — wraps instead of truncates */}
-        <p className={`text-xs leading-snug mb-1 ${isKept ? 'text-[#6b6b67]' : 'text-[#6b6b67] line-through'}`}>
-          {loser.title}
-        </p>
-
-        {/* context snippet */}
-        {loser.context && (
-          <p className="text-[11px] text-[#9b9b97] leading-snug mb-0.5 italic">
-            {loser.context.slice(0, 120)}{loser.context.length > 120 ? '…' : ''}
-          </p>
-        )}
-
-        {/* source + person */}
-        <div className="flex items-center gap-2 flex-wrap">
-          {loser.source_label && (
-            <span className="text-[10px] text-[#9b9b97]">📋 {loser.source_label}</span>
-          )}
-          {loser.committed_by_name && (
-            <span className="text-[10px] text-[#9b9b97]">· {loser.committed_by_name}</span>
-          )}
-          {loser.source_date && (
-            <span className="text-[10px] text-[#9b9b97]">· {dayjs(loser.source_date).format('MMM D')}</span>
-          )}
-        </div>
-      </div>
-
-      {/* toggle button */}
-      <button
-        onClick={e => { e.stopPropagation(); onToggleKeep(loser.id) }}
-        className={`text-[10px] font-semibold px-2 py-1 rounded-lg flex-shrink-0 transition-colors whitespace-nowrap mt-0.5 ${
-          isKept
-            ? 'bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100'
-            : 'text-[#9b9b97] border border-dashed border-gray-300 hover:border-gray-400 hover:text-[#6b6b67]'
-        }`}
-        title={isKept ? 'Re-queue for merge' : 'Keep this one separate'}
-      >
-        {isKept ? '↩ merge' : '✗ keep'}
-      </button>
-    </div>
-  )
 }
 
 // ── Others commitment context panel ───────────────────────────
@@ -1261,7 +1098,7 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, duplicates = [], keepSeparate, onToggleKeep, onMarkDone, onUndoComplete, isRecentlyDone }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, onMarkDone, onUndoComplete, isRecentlyDone }) {
   const [reassigning, setReassigning] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const toast = useToast()
@@ -1476,15 +1313,6 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
         <OthersContextPanel c={c} allItems={allItems} />
       )}
 
-      {/* Inline duplicate sub-rows — pre-queued for merge */}
-      {duplicates.length > 0 && !selectMode && duplicates.map(loser => (
-        <DuplicateSubRow
-          key={loser.id}
-          loser={loser}
-          isKept={keepSeparate && keepSeparate.has(loser.id)}
-          onToggleKeep={onToggleKeep}
-        />
-      ))}
     </div>
   )
 }
