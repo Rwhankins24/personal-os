@@ -11,73 +11,6 @@ function isSpeaker(name) {
   return /^speaker\s*\d+\s*[-–]?\s*$/i.test(n) || n.toLowerCase() === 'unknown'
 }
 
-// ── Inline reassign typeahead ──────────────────────────────────
-function ReassignDropdown({ contacts, onSelect, onClose }) {
-  const [query, setQuery] = useState('')
-  const inputRef = useRef(null)
-
-  useEffect(() => { inputRef.current?.focus() }, [])
-
-  const filtered = (contacts || [])
-    .filter(c => c.name && c.name.toLowerCase().includes(query.toLowerCase()))
-    .slice(0, 7)
-
-  const exactMatch = (contacts || []).find(
-    c => c.name?.toLowerCase() === query.toLowerCase()
-  )
-
-  const handleKey = (e) => {
-    if (e.key === 'Escape') { e.stopPropagation(); onClose() }
-    if (e.key === 'Enter' && query.trim()) {
-      if (exactMatch) {
-        onSelect({ name: exactMatch.name, email: exactMatch.email || null })
-      } else {
-        onSelect({ name: query.trim(), email: null })
-      }
-    }
-  }
-
-  return (
-    <div className="mt-2 relative" onClick={e => e.stopPropagation()}>
-      <input
-        ref={inputRef}
-        value={query}
-        onChange={e => setQuery(e.target.value)}
-        onKeyDown={handleKey}
-        placeholder="Type a name…"
-        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#1a1a18] bg-white"
-      />
-      {query.length > 0 && (
-        <div className="absolute left-0 right-0 bottom-full mb-1 bg-white border border-[#e5e5e3] rounded-xl shadow-lg z-[60]">
-          {filtered.length > 0 ? (
-            filtered.map(c => (
-              <button
-                key={c.id}
-                onClick={() => onSelect({ name: c.name, email: c.email || null })}
-                className="w-full text-left px-3 py-2 text-xs hover:bg-[#f8f8f6] flex items-center gap-2 border-b border-[#f0f0ee] last:border-0"
-              >
-                <span className="w-5 h-5 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">
-                  {c.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)}
-                </span>
-                <span className="font-medium text-[#1a1a18]">{c.name}</span>
-                {c.company && <span className="text-[#9b9b97] truncate">{c.company}</span>}
-              </button>
-            ))
-          ) : null}
-          {!exactMatch && query.trim().length > 1 && (
-            <button
-              onClick={() => onSelect({ name: query.trim(), email: null })}
-              className="w-full text-left px-3 py-2 text-xs hover:bg-blue-50 text-blue-600 flex items-center gap-2"
-            >
-              <span className="text-base">+</span>
-              Add "{query.trim()}" as new person
-            </button>
-          )}
-        </div>
-      )}
-    </div>
-  )
-}
 
 const URGENCY_COLOR = {
   critical: 'bg-red-500',
@@ -119,9 +52,7 @@ function getInitials(name) {
 }
 
 // ── Bulk action bar ────────────────────────────────────────────
-function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, onMarkDone, onMerge, onCancel, promoting, saving }) {
-  const [open, setOpen] = useState(false)
-
+function BulkActionBar({ selectedIds, onPromoteToMyTasks, onMarkDone, onMerge, onCancel, promoting, saving }) {
   if (selectedIds.size === 0) return null
 
   return (
@@ -155,24 +86,6 @@ function BulkActionBar({ selectedIds, contacts, onReassign, onPromoteToMyTasks, 
           >
             {promoting ? 'Adding…' : '→ My tasks'}
           </button>
-          {/* Reassign */}
-          <div className="relative">
-            <button
-              onClick={() => setOpen(v => !v)}
-              className="text-sm bg-white text-[#1a1a18] px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-            >
-              Reassign →
-            </button>
-            {open && (
-              <div className="absolute bottom-full mb-2 right-0 w-64 bg-white rounded-xl shadow-xl border border-[#e5e5e3] p-2 z-30">
-                <ReassignDropdown
-                  contacts={contacts}
-                  onSelect={(person) => { onReassign(person); setOpen(false) }}
-                  onClose={() => setOpen(false)}
-                />
-              </div>
-            )}
-          </div>
           <button
             onClick={onCancel}
             className="text-sm text-gray-400 hover:text-white transition-colors px-1"
@@ -319,22 +232,7 @@ export default function OthersPage() {
     }
   }
 
-  const handleBulkReassign = ({ name, email }) => {
-    selectedIds.forEach(id => {
-      update.mutate({
-        id,
-        updates: {
-          committed_by_name: name,
-          ...(email ? { committed_by_email: email } : {}),
-        }
-      })
-    })
-    toast(`Reassigned ${selectedIds.size} item${selectedIds.size !== 1 ? 's' : ''} to ${name}`, { icon: '👤' })
-    setSelectedIds(new Set())
-    setSelectMode(false)
-  }
-
-  const handleBulkPromoteToMyTasks = async () => {
+const handleBulkPromoteToMyTasks = async () => {
     if (promoting) return
     setPromoting(true)
     const allItems = items || []
@@ -649,7 +547,6 @@ export default function OthersPage() {
                   update={update}
                   showPerson
                   isKey={isKeyPerson(c)}
-                  contacts={contacts}
                   selectMode={selectMode}
                   selected={selectedIds.has(c.id)}
                   onToggleSelect={() => toggleItemSelect(c.id)}
@@ -704,7 +601,6 @@ export default function OthersPage() {
                           update={update}
                           showPerson={false}
                           isKey={keyContact}
-                          contacts={contacts}
                           selectMode={selectMode}
                           selected={selectedIds.has(c.id)}
                           onToggleSelect={() => toggleItemSelect(c.id)}
@@ -729,10 +625,8 @@ export default function OthersPage() {
 
       <BulkActionBar
         selectedIds={selectedIds}
-        contacts={contacts}
         onMarkDone={handleBulkMarkDone}
         onMerge={() => setMergeModal(true)}
-        onReassign={handleBulkReassign}
         onPromoteToMyTasks={handleBulkPromoteToMyTasks}
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
         promoting={promoting}
@@ -1103,30 +997,16 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   )
 }
 
-function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, contacts, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, children = [], onMarkDone, onUndoComplete, isRecentlyDone }) {
+function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, selectMode, selected, onToggleSelect, promoted, onPromote, allItems, onLink, children = [], onMarkDone, onUndoComplete, isRecentlyDone }) {
   const [expanded,     setExpanded]     = useState(false)
-  const [reassigning,  setReassigning]  = useState(false)
   const [editingTitle, setEditingTitle] = useState(false)
   const [titleDraft,   setTitleDraft]   = useState('')
-  const toast = useToast()
   const speaker = isSpeaker(personName)
   const internal = isInternal(c.committed_by_email)
 
   const typeIcon = c.delivery_type === 'blocking_ryan' ? '🚧'
     : c.delivery_type === 'to_ryan' ? '📬'
     : '📋'
-
-  const handleReassign = ({ name, email }) => {
-    update.mutate({
-      id: c.id,
-      updates: {
-        committed_by_name: name,
-        ...(email ? { committed_by_email: email } : {})
-      }
-    })
-    toast(`Reassigned to ${name}`, { icon: '👤' })
-    setReassigning(false)
-  }
 
   return (
     <div
@@ -1193,7 +1073,7 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
             )}
           </div>
 
-          {/* Person name — amber + reassign hint if Speaker */}
+          {/* Person name */}
           {showPerson && (
             <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
               <p className={`text-xs ${speaker ? 'text-amber-600 font-medium' : 'text-[#6b6b67]'}`}>
@@ -1204,25 +1084,10 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
                   Internal
                 </span>
               )}
-              {c.contact_id ? (
+              {c.contact_id && (
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-50 text-green-600 font-medium flex-shrink-0" title="Linked to contact">
                   🔗 Linked
                 </span>
-              ) : !speaker && (
-                <button
-                  onClick={e => { e.stopPropagation(); onLink && onLink() }}
-                  className="text-[10px] px-1.5 py-0.5 rounded border border-dashed border-gray-300 text-[#9b9b97] hover:border-blue-400 hover:text-blue-500 flex-shrink-0 transition-colors"
-                >
-                  + link
-                </button>
-              )}
-              {speaker && !reassigning && (
-                <button
-                  onClick={() => setReassigning(true)}
-                  className="text-[10px] text-amber-600 underline hover:text-amber-800"
-                >
-                  assign
-                </button>
               )}
             </div>
           )}
@@ -1235,45 +1100,22 @@ function CommitmentRow({ c, personName, daysOverdue, update, showPerson, isKey, 
               Due {dayjs(c.due_date).format('MMM D, YYYY')}
             </p>
           )}
-
-          {/* Inline reassign dropdown */}
-          {reassigning && (
-            <ReassignDropdown
-              contacts={contacts}
-              onSelect={handleReassign}
-              onClose={() => setReassigning(false)}
-            />
-          )}
         </div>
 
         {/* Action buttons — hidden in select mode */}
         <div className={`flex items-center gap-1 flex-shrink-0 mt-0.5 ${selectMode ? 'hidden' : ''}`}>
-          {/* Link/Unlink contact */}
-          {!speaker && (
-            <button
-              onClick={e => { e.stopPropagation(); onLink && onLink() }}
-              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all ${
-                c.contact_id
-                  ? 'border-green-300 text-green-600 bg-green-50'
-                  : 'border-dashed border-gray-300 text-[#9b9b97] hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50'
-              }`}
-              title={c.contact_id ? 'Linked to contact' : 'Link to contact'}
-            >
-              🔗
-            </button>
-          )}
-          {/* Reassign */}
-          {!speaker && (
-            <button
-              onClick={e => { e.stopPropagation(); setReassigning(r => !r) }}
-              className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-all ${
-                reassigning ? 'border-blue-400 bg-blue-50 text-blue-600' : 'border-[#e5e5e3] text-[#6b6b67] hover:border-blue-300 hover:text-blue-500 hover:bg-blue-50'
-              }`}
-              title="Reassign"
-            >
-              👤
-            </button>
-          )}
+          {/* Assign / Linked button */}
+          <button
+            onClick={e => { e.stopPropagation(); onLink && onLink() }}
+            className={`h-7 px-2 rounded-full border flex items-center justify-center text-[10px] font-medium transition-all whitespace-nowrap ${
+              c.contact_id
+                ? 'border-green-300 text-green-600 bg-green-50'
+                : 'border-dashed border-gray-300 text-[#9b9b97] hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50'
+            }`}
+            title={c.contact_id ? 'Linked to contact' : 'Assign to contact'}
+          >
+            {c.contact_id ? '🔗 Linked' : 'Assign'}
+          </button>
 
           {/* Mark done / Undo */}
           {(() => {

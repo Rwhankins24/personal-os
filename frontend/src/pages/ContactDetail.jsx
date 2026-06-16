@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getContacts, getOthersCommitments, updateContact } from '../lib/api'
+import { getContacts, getOthersCommitments, updateContact, updateOthersCommitment, createTask } from '../lib/api'
+import { useToast } from '../contexts/ToastContext'
 
 const INTERNAL_DOMAINS = new Set([
   'claycorp.com', 'theljc.com', 'realcrg.com', 'concretestrategies.com', 'ventana.vc',
@@ -38,6 +39,7 @@ export default function ContactDetail() {
   const [editOpen, setEditOpen] = useState(false)
   const [saved,    setSaved]    = useState(false)
   const [form,     setForm]     = useState({})
+  const toast = useToast()
 
   const { data: contacts, isLoading } = useQuery({
     queryKey: ['contacts'],
@@ -51,10 +53,13 @@ export default function ContactDetail() {
 
   const contact = contacts?.find(c => c.id === id)
 
-  const openItems = (othersCommitments || []).filter(
-    oc => oc.committed_by_email && contact?.email &&
-          oc.committed_by_email.toLowerCase() === contact.email.toLowerCase()
-  )
+  const openItems = (othersCommitments || []).filter(oc => {
+    if (oc.contact_id) return oc.contact_id === contact?.id
+    // fallback: email match for unlinked items
+    if (oc.committed_by_email && contact?.email)
+      return oc.committed_by_email.toLowerCase() === contact.email.toLowerCase()
+    return false
+  })
 
   const update = useMutation({
     mutationFn: (data) => updateContact(id, data),
@@ -86,6 +91,49 @@ export default function ContactDetail() {
     },
     onError: (_, __, ctx) => qc.setQueryData(['contacts'], ctx.prev),
     onSettled: () => qc.invalidateQueries({ queryKey: ['contacts'] }),
+  })
+
+  const markItemDone = useMutation({
+    mutationFn: (itemId) => updateOthersCommitment(itemId, { status: 'closed' }),
+    onMutate: async (itemId) => {
+      await qc.cancelQueries({ queryKey: ['others-commitments'] })
+      const prev = qc.getQueryData(['others-commitments'])
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(c => c.id === itemId ? { ...c, status: 'closed' } : c)
+      )
+      return { prev }
+    },
+    onError: (_, __, ctx) => qc.setQueryData(['others-commitments'], ctx.prev),
+    onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
+    onSuccess: () => toast('Item marked done', { icon: '✓' }),
+  })
+
+  const promoteItemToTask = useMutation({
+    mutationFn: async (item) => {
+      await createTask({
+        title:      item.title,
+        urgency:    item.urgency || 'medium',
+        status:     'open',
+        source:     'manual',
+        project_id: item.project_id || null,
+      })
+      await updateOthersCommitment(item.id, { status: 'archived' })
+      return item.id
+    },
+    onMutate: async (item) => {
+      await qc.cancelQueries({ queryKey: ['others-commitments'] })
+      const prev = qc.getQueryData(['others-commitments'])
+      qc.setQueryData(['others-commitments'], old =>
+        (old || []).map(c => c.id === item.id ? { ...c, status: 'archived' } : c)
+      )
+      return { prev }
+    },
+    onError: (_, __, ctx) => qc.setQueryData(['others-commitments'], ctx.prev),
+    onSettled: () => {
+      qc.invalidateQueries({ queryKey: ['others-commitments'] })
+      qc.invalidateQueries({ queryKey: ['tasks'] })
+    },
+    onSuccess: () => toast('Added to My Tasks', { icon: '→' }),
   })
 
   function openEdit() {
@@ -229,6 +277,24 @@ export default function ContactDetail() {
                         Overdue
                       </span>
                     )}
+                    <div className="flex items-center gap-1 flex-shrink-0 mt-0.5">
+                      <button
+                        onClick={() => markItemDone.mutate(item.id)}
+                        disabled={markItemDone.isPending}
+                        className="w-7 h-7 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[#6b6b67] hover:border-green-400 hover:text-green-600 hover:bg-green-50 transition-all text-xs"
+                        title="Mark done"
+                      >
+                        ✓
+                      </button>
+                      <button
+                        onClick={() => promoteItemToTask.mutate(item)}
+                        disabled={promoteItemToTask.isPending}
+                        className="h-7 px-2 rounded-full border border-[#e5e5e3] flex items-center justify-center text-[10px] font-medium text-[#6b6b67] hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-all whitespace-nowrap"
+                        title="Add to my tasks"
+                      >
+                        → Me
+                      </button>
+                    </div>
                   </div>
                 )
               })}
