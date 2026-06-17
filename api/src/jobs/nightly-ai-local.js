@@ -1818,11 +1818,38 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     return name
   }
 
+  // ── STEP 3.6: Auto-create contacts — scan ALL of today's emails ──
+  // activeEmails only covers 25 bucket-1/2 threads. New senders in bucket 3-5
+  // or outside that narrow slice never got contacts. Fix: query the full emails
+  // table for today's report date across all buckets.
   console.log('Step 3.6: Updating contacts...')
-  for (const email of (activeEmails || [])) {
+  const { data: allTodayEmails } = await supabase
+    .from('emails')
+    .select('from_address, from_name, thread_subject, is_internal')
+    .eq('last_report_date', today)
+    .not('from_address', 'is', null)
+    .neq('from_address', 'hankinsr@claycorp.com')
+    .limit(200)
+
+  // Merge with activeEmails (which have richer fields) — deduplicate by from_address
+  const allEmailSenders = new Map()
+  for (const e of (activeEmails || [])) {
+    if (e.from_address) allEmailSenders.set(e.from_address.toLowerCase(), e)
+  }
+  for (const e of (allTodayEmails || [])) {
+    if (e.from_address && !allEmailSenders.has(e.from_address.toLowerCase())) {
+      allEmailSenders.set(e.from_address.toLowerCase(), e)
+    }
+  }
+  const emailsForContactSync = Array.from(allEmailSenders.values())
+  console.log(`  → Scanning ${emailsForContactSync.length} unique senders from today's report`)
+
+  for (const email of emailsForContactSync) {
     try {
-      if (!email.from_address || !email.from_name) continue
+      if (!email.from_address) continue
       if (email.from_address === 'hankinsr@claycorp.com') continue
+      // Use email username as fallback name if from_name missing (bucket 3-5 may lack it)
+      if (!email.from_name) email.from_name = email.from_address.split('@')[0]
 
       // Priority 1: exact email match
       const { data: byEmail } = await supabase
@@ -1920,6 +1947,45 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     }
   }
   console.log(`  ✓ Contacts: ${results.contacts_created} created, ${results.contacts_updated} updated`)
+
+  // ── STEP 3.6b: Backfill contacts from historical emails ──────────
+  // Catches senders who emailed before contact creation was expanded.
+  // Runs a lightweight pass: find distinct from_addresses in emails table
+  // that have NO matching contact yet. Limit 50 to stay fast.
+  console.log('Step 3.6b: Backfilling missing contacts from email history...')
+  let backfillCreated = 0
+  try {
+    const { data: orphanedSenders } = await supabase
+      .rpc('get_emails_without_contacts', { row_limit: 50 })
+      .catch(() => ({ data: null })) // RPC may not exist yet — non-fatal
+
+    if (orphanedSenders && orphanedSenders.length > 0) {
+      for (const row of orphanedSenders) {
+        try {
+          if (!row.from_address || row.from_address === 'hankinsr@claycorp.com') continue
+          const domain = row.from_address.split('@')[1] || ''
+          const company = domain && !['gmail', 'yahoo', 'outlook', 'hotmail', 'icloud'].includes(domain.split('.')[0])
+            ? domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1)
+            : null
+          await supabase.from('contacts').insert({
+            name: normalizeDisplayName(row.from_name || row.from_address.split('@')[0]),
+            email: row.from_address,
+            company: company,
+            last_contact_date: today,
+            last_topic: row.thread_subject,
+            relationship_warmth: row.is_internal ? 'warm' : 'cool',
+            notes: `Auto-created (backfill): ${row.thread_subject}`
+          })
+          backfillCreated++
+        } catch (_) { /* non-fatal */ }
+      }
+      console.log(`  ✓ Backfill: ${backfillCreated} missing contacts created`)
+    } else {
+      console.log('  → No orphaned senders found (RPC unavailable or all senders already have contacts)')
+    }
+  } catch (backfillErr) {
+    console.log(`  ⚠️  Backfill skipped: ${backfillErr.message}`)
+  }
 
   // ── STEP 3.7: Enrich contacts from email signatures ─────────────
   // Targets contacts that need enrichment — not just active email senders.
@@ -2209,6 +2275,11 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   const thirtyDaysAgo = new Date()
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
 
+  // Contacts qualify for enrichment if any key profile field is missing OR never enriched.
+  // No time-based cooldown — if a contact emails Ryan today, we want to catch it immediately.
+  // Contacts with no email content are cheap (just a DB query, no AI call).
+  // Priority ordering by last_contact_date ensures recently active contacts (who likely
+  // have email content) get the 250 slots before dormant contacts with no emails.
   const { data: contactsToEnrich } = await supabase
     .from('contacts')
     .select('*')
@@ -2219,7 +2290,6 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       'phone_mobile.is.null,' +
       'company.is.null,' +
       'address.is.null,' +
-      'linkedin.is.null,' +
       `enriched_at.lt.${thirtyDaysAgo.toISOString()}`
     )
     .not('email', 'is', null)
@@ -2245,14 +2315,23 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
 
       for (const e of (sentEmails || [])) {
         if (e.full_thread_content) {
-          // Take last 2500 chars — this is where the signature lives
-          const content = e.full_thread_content
-          contentParts.push(content.slice(-2500))
-          // Also take a middle slice in case of long threads with multiple sigs
-          if (content.length > 5000) contentParts.push(content.slice(Math.floor(content.length / 2) - 1000, Math.floor(content.length / 2) + 1000))
-        } else if (e.sent_body) {
-          contentParts.push(e.sent_body.slice(-2000))
+          // Split by message break — signatures live at the BOTTOM of each message segment.
+          // Taking only the last 2500 chars of the full thread fails for bucket 2 threads
+          // where Ryan replied last: Ryan's signature ends up at the tail, not the contact's.
+          // Instead: take the tail of each individual message segment.
+          const segments = e.full_thread_content.split('---MESSAGE BREAK---')
+          for (const seg of segments.slice(0, 6)) { // cap at 6 segments
+            const trimmed = seg.trim()
+            if (trimmed.length > 80) {
+              // Last 1200 chars of each message — this is where email signatures live
+              contentParts.push(trimmed.slice(-1200))
+            }
+          }
+        } else if (e.body_preview) {
+          // body_preview is a short preview — less useful for signatures but better than nothing
+          contentParts.push(e.body_preview.slice(-1200))
         }
+        // sent_body is Ryan's own sent message — not useful for extracting the contact's sig
       }
 
       // Source 2 REMOVED: participant threads caused cross-contamination — other people's
@@ -2289,10 +2368,10 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
       }
 
       if (contentParts.length === 0) {
-        // Mark enriched=true with no data so we don't keep retrying for missing contacts
-        await supabase.from('contacts').update({
-          enriched: true, enriched_at: new Date().toISOString()
-        }).eq('id', contact.id)
+        // No email content yet — skip silently. Don't write anything.
+        // This contact stays in the queue and will be retried tomorrow.
+        // If they email Ryan tonight, their content will be here tomorrow and enrichment fires.
+        // enriched=true is only set when we actually find and write profile data.
         continue
       }
 
@@ -2422,6 +2501,99 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     }
   }
   console.log(`  ✓ Enriched ${contactsEnriched} contacts from signatures`)
+
+  // ── STEP 3.7c: Content-first signature backstop ──────────────────
+  // Complements Step 3.7. Goes the other direction: scours today's full
+  // thread content for ALL signature blocks, matches each one to a contact
+  // using the email address found IN the signature as the anchor.
+  // Catches: CC participants, newly created contacts needing same-night
+  // enrichment, anyone who's only ever been on threads but never the FROM.
+  // Only writes when signature contains an email address — prevents cross-contamination.
+  console.log('Step 3.7c: Content-first signature backstop...')
+  let backstopEnriched = 0
+  let backstopCreated  = 0
+  const INTERNAL_DOMAINS = new Set([
+    'claycorp.com','clayco.com','ljcdesign.com',
+    'crg.com','concretestrategies.com','ventanaconstruction.com'
+  ])
+
+  try {
+    const { data: threadsWithContent } = await supabase
+      .from('emails')
+      .select('thread_subject, full_thread_content')
+      .eq('last_report_date', today)
+      .not('full_thread_content', 'is', null)
+      .limit(50)
+
+    for (const thread of (threadsWithContent || [])) {
+      try {
+        const signatures = await aiService.extractAllSignaturesFromThread(
+          thread.full_thread_content,
+          thread.thread_subject
+        )
+
+        for (const sig of (signatures || [])) {
+          try {
+            if (!sig.email || !sig.email.includes('@')) continue
+            const sigEmail = sig.email.toLowerCase().trim()
+            if (sigEmail === 'hankinsr@claycorp.com') continue
+
+            const { data: existing } = await supabase
+              .from('contacts')
+              .select('id, title, company, phone_mobile, phone_office, address')
+              .eq('email', sigEmail)
+              .maybeSingle()
+
+            if (existing) {
+              // Enrich missing fields — never overwrite existing data
+              const updates = {}
+              if (sig.title        && !existing.title)        updates.title        = sig.title
+              if (sig.company      && !existing.company)      updates.company      = sig.company
+              if (sig.phone_mobile && !existing.phone_mobile) updates.phone_mobile = sig.phone_mobile
+              if (sig.phone_office && !existing.phone_office) updates.phone_office = sig.phone_office
+              if (sig.address      && !existing.address)      updates.address      = sig.address
+
+              if (Object.keys(updates).length > 0) {
+                updates.enriched    = true
+                updates.enriched_at = new Date().toISOString()
+                await supabase.from('contacts').update(updates).eq('id', existing.id)
+                backstopEnriched++
+              }
+            } else {
+              // New contact — create with profile data already populated
+              const domain = sigEmail.split('@')[1] || ''
+              const isInternal = INTERNAL_DOMAINS.has(domain)
+              const guessedCompany = sig.company || (
+                domain && !['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com'].includes(domain)
+                  ? domain.split('.')[0].charAt(0).toUpperCase() + domain.split('.')[0].slice(1)
+                  : null
+              )
+              await supabase.from('contacts').insert({
+                name:             normalizeDisplayName(sig.name || sigEmail.split('@')[0]),
+                email:            sigEmail,
+                title:            sig.title        || null,
+                company:          guessedCompany,
+                phone_mobile:     sig.phone_mobile || null,
+                phone_office:     sig.phone_office || null,
+                address:          sig.address      || null,
+                last_contact_date: today,
+                last_topic:       thread.thread_subject,
+                relationship_warmth: isInternal ? 'warm' : 'cool',
+                enriched:         true,
+                enriched_at:      new Date().toISOString(),
+                notes:            `Auto-created via signature backstop: ${thread.thread_subject}`
+              })
+              backstopCreated++
+            }
+          } catch (_) { /* non-fatal per-signature */ }
+        }
+      } catch (_) { /* non-fatal per-thread */ }
+    }
+
+    console.log(`  ✓ Backstop: ${backstopEnriched} enriched, ${backstopCreated} new contacts from thread signatures`)
+  } catch (backstopErr) {
+    console.log(`  ⚠️  Backstop error (non-fatal): ${backstopErr.message}`)
+  }
 
   // ── STEP 3.8: Process unprocessed lead file attachments ─────────
   console.log('Step 3.8: Processing lead file attachments with AI...')

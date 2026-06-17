@@ -1123,6 +1123,83 @@ Return ONLY the JSON object.`
   }
 }
 
+// ─── EXTRACT ALL SIGNATURES FROM A THREAD (Haiku — content-first backstop)
+// Goes the opposite direction from extractContactFromSignature.
+// Instead of contact → find their emails → extract their sig,
+// this takes a full thread and extracts EVERY signature block present.
+// Only returns entries with a confirmed email address — that's the
+// high-confidence anchor that prevents cross-contamination.
+async function extractAllSignaturesFromThread(threadContent, threadSubject) {
+  if (!threadContent || threadContent.length < 100) return []
+
+  // Split by message break, take the tail of each segment (where sigs live)
+  const segments = threadContent.split('---MESSAGE BREAK---')
+  const tails = segments
+    .map(s => s.trim())
+    .filter(s => s.length > 80)
+    .map(s => s.slice(-1500))
+    .slice(0, 8)
+
+  if (tails.length === 0) return []
+
+  const content = tails.join('\n---NEXT MESSAGE TAIL---\n')
+
+  const message = await withRetry(() =>
+    client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 1000,
+      messages: [{
+        role: 'user',
+        content: `Extract all professional email signatures from these email message tails.
+
+EMAIL THREAD: "${threadSubject || 'unknown'}"
+
+RULES:
+- Only return signatures where you can find the EMAIL ADDRESS — this is required
+- Do NOT include Ryan Hankins or hankinsr@claycorp.com
+- If the same person appears multiple times, return them once
+- Skip automated senders, noreply addresses, marketing emails
+- A signature typically has: name, title, company, phone, email on consecutive lines
+
+MESSAGE TAILS (one per message — signature is near the bottom of each):
+${content}
+
+Return a JSON array. Omit any entry without a clear email address:
+[
+  {
+    "name": "Full Name or null",
+    "email": "their@email.com",
+    "title": "Job Title or null",
+    "company": "Company Name or null",
+    "phone_mobile": "mobile number or null",
+    "phone_office": "office/direct number or null",
+    "address": "physical address or null"
+  }
+]
+
+Return ONLY the JSON array. Return [] if no signatures with email addresses found.`
+      }]
+    })
+  )
+
+  try {
+    const text = message.content[0].text
+    const clean = text.replace(/```json|```/g, '').trim()
+    const results = JSON.parse(clean)
+    if (!Array.isArray(results)) return []
+    return results.filter(r =>
+      r.email &&
+      r.email.includes('@') &&
+      !r.email.toLowerCase().includes('hankinsr@claycorp.com') &&
+      !r.email.toLowerCase().includes('noreply') &&
+      !r.email.toLowerCase().includes('no-reply') &&
+      !r.email.toLowerCase().includes('donotreply')
+    )
+  } catch {
+    return []
+  }
+}
+
 // ─── PARSE PLAUD SUMMARY (Haiku — fast, cheap)
 // Plaud emails contain a fully structured intelligence report in the email body:
 // decisions with confidence, action items with owners/dates, risks with owners,
@@ -1393,6 +1470,7 @@ module.exports = {
   refreshStaleItem,
   createContactProfile,
   extractContactFromSignature,
+  extractAllSignaturesFromThread,
   extractIntelligenceFromTranscript,
   parsePlaudSummary
 }

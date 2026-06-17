@@ -164,23 +164,33 @@ module.exports = async (req, res) => {
 
           // Update existing thread's rolling fields — never overwrite status/bucket
           // (those are controlled by Ryan via the dashboard or task completion cascade)
+          const updatePayload = {
+            days_waiting:          email.days_waiting        ?? null,
+            urgency:               email.urgency             ?? null,
+            cross_reference_status: email.cross_reference_status ?? 'aging',
+            last_report_date:      email.last_report_date    ?? today,
+            thread_message_count:  email.thread_message_count ?? email.threadMessageCount ?? null,
+            latest_sender:         email.latest_sender       ?? email.latestSender        ?? null,
+            latest_sender_name:    email.latest_sender_name  ?? email.latestSenderName    ?? null,
+            waiting_since:         email.waiting_since       ?? email.waitingSince         ?? null,
+            tags:                  email.tags                ?? null,
+            is_time_sensitive:     email.is_time_sensitive   ?? false,
+            has_contract_language: email.has_contract_language ?? false,
+            is_flagged:            email.is_flagged           ?? email.isFlagged           ?? false
+            // status and bucket intentionally excluded — Ryan controls these
+          }
+          // Refresh full_thread_content when the new report has it (Tier 1/2 extraction)
+          // Critical for signature enrichment — without this, Step 3.7 reads stale/null content
+          if (email.full_thread_content) {
+            updatePayload.full_thread_content = email.full_thread_content
+            updatePayload.extraction_depth    = email.extraction_depth ?? 'full'
+          }
+          if (email.sent_body) {
+            updatePayload.sent_body = email.sent_body
+          }
           const { error } = await supabase
             .from('emails')
-            .update({
-              days_waiting:          email.days_waiting        ?? null,
-              urgency:               email.urgency             ?? null,
-              cross_reference_status: email.cross_reference_status ?? 'aging',
-              last_report_date:      email.last_report_date    ?? today,
-              thread_message_count:  email.thread_message_count ?? email.threadMessageCount ?? null,
-              latest_sender:         email.latest_sender       ?? email.latestSender        ?? null,
-              latest_sender_name:    email.latest_sender_name  ?? email.latestSenderName    ?? null,
-              waiting_since:         email.waiting_since       ?? email.waitingSince         ?? null,
-              tags:                  email.tags                ?? null,
-              is_time_sensitive:     email.is_time_sensitive   ?? false,
-              has_contract_language: email.has_contract_language ?? false,
-              is_flagged:            email.is_flagged           ?? email.isFlagged           ?? false
-              // status and bucket intentionally excluded — Ryan controls these
-            })
+            .update(updatePayload)
             .eq('id', existing.id)
           if (error) throw error
           emailResults.updated++
