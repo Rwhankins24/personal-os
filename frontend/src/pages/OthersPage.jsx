@@ -770,7 +770,9 @@ function OthersContextPanel({ c, allItems }) {
 // ── Link Contact Modal ─────────────────────────────────────────
 function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
   const personName = item.committed_by_name || item.person_name || ''
-  const [query,    setQuery]   = useState(personName)
+  const [query,    setQuery]   = useState(
+    personName && !isSpeaker(personName) ? personName : (item.committed_by_email || '')
+  )
   const [email,    setEmail]   = useState(item.committed_by_email || '')
   const [title,    setTitle]   = useState('')
   const [company,  setCompany] = useState('')
@@ -807,9 +809,17 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
     n.displayName.toLowerCase() !== query.toLowerCase()  // hide exact match (no need to confirm)
   ).slice(0, 5)
 
-  // Contacts filter (Search tab)
+  // Contacts filter (Search tab) — match on name, email, or company
   const filteredContacts = (contacts || [])
-    .filter(c => !query.trim() || c.name?.toLowerCase().includes(query.toLowerCase()))
+    .filter(c => {
+      if (!query.trim()) return true
+      const q = query.toLowerCase()
+      return (
+        c.name?.toLowerCase().includes(q)    ||
+        c.email?.toLowerCase().includes(q)   ||
+        c.company?.toLowerCase().includes(q)
+      )
+    })
     .slice(0, 8)
   const exactContactMatch = (contacts || []).find(c => c.name?.toLowerCase() === query.toLowerCase())
 
