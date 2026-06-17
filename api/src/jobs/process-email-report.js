@@ -253,6 +253,7 @@ module.exports = async (req, res) => {
         .from('pipeline_runs')
         .upsert({
           run_date: today,
+          email_pull_completed_at: new Date().toISOString(),   // set here — skill writes via sandbox which blocks Supabase directly
           processing_completed_at: new Date().toISOString(),
           status: 'processing_complete'
         }, { onConflict: 'run_date' })
