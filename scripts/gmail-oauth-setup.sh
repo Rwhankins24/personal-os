@@ -33,32 +33,49 @@ if [ -z "$CLIENT_ID" ] || [ -z "$CLIENT_SECRET" ]; then
   exit 1
 fi
 
-# Build the auth URL
+# Build the auth URL — uses localhost redirect (OOB deprecated by Google in 2022)
 SCOPE="https://www.googleapis.com/auth/gmail.readonly"
-REDIRECT_URI="urn:ietf:wg:oauth:2.0:oob"
+REDIRECT_URI="http://localhost:8080"
 AUTH_URL="https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}&access_type=offline&prompt=consent"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Step 1: Open this URL in your browser"
+echo "  Step 1: Opening browser for sign-in"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "$AUTH_URL"
-echo ""
-
-# Try to open browser automatically
-open "$AUTH_URL" 2>/dev/null || echo "(Could not auto-open — copy the URL above)"
-
-echo ""
 echo "Sign in as: ryanhankins.personalos@gmail.com"
-echo "Click Allow, then copy the authorization code shown on screen."
+echo "Browser opening... waiting for Google to redirect back."
 echo ""
-read -p "Paste authorization code here: " AUTH_CODE
+
+# Python: open browser + run local server to catch the auth code
+AUTH_CODE=$(python3 << PYEOF
+import http.server, urllib.parse, webbrowser, threading
+
+captured = []
+
+class Handler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        code = params.get('code', [''])[0]
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b'<h2>Auth complete. Return to the terminal.</h2>')
+        captured.append(code)
+        threading.Thread(target=self.server.shutdown, daemon=True).start()
+    def log_message(self, *a, **k): pass
+
+server = http.server.HTTPServer(('localhost', 8080), Handler)
+webbrowser.open('${AUTH_URL}')
+server.serve_forever()
+print(captured[0] if captured else '')
+PYEOF
+)
 
 if [ -z "$AUTH_CODE" ]; then
-  echo "ERROR: Authorization code is required"
+  echo "ERROR: Authorization code not received"
   exit 1
 fi
+echo "Auth code received."
 
 echo ""
 echo "Exchanging code for tokens..."
