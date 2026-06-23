@@ -138,3 +138,15 @@ export const uploadLeadFile = (leadId, formData) =>
   }).then(r => r.data)
 export const deleteLeadFile = (fileId) => api.delete(`/api/leads?action=file&id=${fileId}`).then(r => r.data)
 export const synthesizePod     = (id) => api.post(`/api/topic-pods/${id}/synthesize`).then(r => r.data)
+
+// ── Strategic Decisions ───────────────────────────────────────
+export const getStrategicDecisions = (params = {}) => api.get('/api/strategic-decisions', { params }).then(r => r.data)
+export const createStrategicDecision = (data) => api.post('/api/strategic-decisions', data).then(r => r.data)
+export const updateStrategicDecision = (id, data) => api.patch(`/api/strategic-decisions?id=${id}`, data).then(r => r.data)
+export const deleteStrategicDecision = (id) => api.delete(`/api/strategic-decisions?id=${id}`).then(r => r.data)
+
+// ── Observations ──────────────────────────────────────────────
+export const getObservations   = (params = {}) => api.get('/api/observations', { params }).then(r => r.data)
+export const getHistoricalRecall = () => api.get('/api/observations?recall=true').then(r => r.data)
+export const createObservation = (data) => api.post('/api/observations', data).then(r => r.data)
+export const deleteObservation = (id) => api.delete(`/api/observations?id=${id}`).then(r => r.data)

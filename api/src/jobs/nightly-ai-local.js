@@ -664,16 +664,39 @@ Respond with just the sentence, no quotes, no JSON.`
   }
 
   // ── STEP 2: Get active emails ───────────────────────────────────
+  // Increased cap from 25→50. Orders critical/high urgency first, then by days_waiting.
+  // This ensures the most important threads always get AI processing within the cap.
   console.log('Step 2: Fetching active emails...')
-  const { data: activeEmails } = await supabase
+  const { data: activeEmailsRaw } = await supabase
     .from('emails')
     .select('*')
     .in('bucket', [1, 2])
     .in('status', ['needs_reply', 'waiting_on'])
     .order('days_waiting', { ascending: false })
-    .limit(25)
+    .limit(50)
 
-  console.log(`  ✓ Found ${(activeEmails || []).length} active email threads`)
+  // Sort in JS: critical > high > elevated > normal, then days_waiting DESC within tier
+  const URGENCY_RANK = { critical: 4, high: 3, elevated: 2, normal: 1 }
+  const activeEmails = (activeEmailsRaw || []).sort((a, b) => {
+    const rankDiff = (URGENCY_RANK[b.urgency] || 0) - (URGENCY_RANK[a.urgency] || 0)
+    if (rankDiff !== 0) return rankDiff
+    return (b.days_waiting || 0) - (a.days_waiting || 0)
+  })
+
+  // Detect which intelligence legs are available today
+  const legStatus = {
+    email:  activeEmails.length > 0,
+    plaud:  false, // updated in Step 2.4
+    manual: true   // always available — observations, decisions, knowledge base
+  }
+
+  console.log(`  ✓ Found ${activeEmails.length} active email threads (cap: 50, priority-ordered)`)
+
+  // ── Plaud participant map ─────────────────────────────────────────
+  // Maps lowercase email address → [{title, date, summary}] for all today's Plaud meetings.
+  // Built during Step 2.4 and used in Step 3 to cross-reference email threads with meetings —
+  // the bridge between the email leg and the Plaud leg of the three-legged stool.
+  const plaudParticipantMap = new Map()
 
   // ── STEP 2.4: Load Plaud meetings from storage → meeting_notes ──
   console.log('Step 2.4: Loading Plaud meetings into meeting_notes...')
@@ -757,6 +780,23 @@ Respond with just the sentence, no quotes, no JSON.`
         } else {
           console.log(`  ℹ No calendar match for "${meeting.title}" on ${meeting.date}`)
         }
+
+        // ── Build participant map entry for this meeting ──
+        // Populates plaudParticipantMap so Step 3 email processing can find
+        // meetings that share participants with each email thread.
+        const meetingEntry = {
+          title:   meeting.title || 'Untitled',
+          date:    meeting.date  || today,
+          summary: (meeting.summary || meeting.email_body_raw || '').slice(0, 300)
+        }
+        for (const participant of participantRoster) {
+          if (participant.includes('@')) {
+            const key = participant.toLowerCase()
+            if (!plaudParticipantMap.has(key)) plaudParticipantMap.set(key, [])
+            plaudParticipantMap.get(key).push(meetingEntry)
+          }
+        }
+        legStatus.plaud = true
 
         // Map Plaud fields → meeting_notes schema
         const actionItemsRaw = [
@@ -1220,6 +1260,29 @@ Respond with JSON only:
     console.log(`  ⚠ Meeting context load error: ${err.message}`)
   }
 
+  // ── Pre-compute email-Plaud cross-references for all active emails ──
+  // Built once here so both Step 3 (summarize) and Step 3.5 (intelligence)
+  // can use per-email meeting context without redundant lookups.
+  // Maps email.id → formatted string of related Plaud meetings.
+  const emailMeetingCrossRef = new Map()
+  for (const email of (activeEmails || [])) {
+    const participants = [email.from_address, ...(email.thread_participants || [])]
+      .filter(p => p && p.includes('@'))
+    const related = participants
+      .flatMap(p => plaudParticipantMap.get(p.toLowerCase()) || [])
+      .filter((m, i, arr) => arr.findIndex(x => x.title === m.title) === i)
+      .slice(0, 3)
+    if (related.length > 0) {
+      emailMeetingCrossRef.set(email.id,
+        '\n\nPLAUD MEETINGS INVOLVING THIS EMAIL\'S PARTICIPANTS:\n' +
+        related.map(m => `  [${m.date}] ${m.title}${m.summary ? ': ' + m.summary : ''}`).join('\n')
+      )
+    }
+  }
+  if (emailMeetingCrossRef.size > 0) {
+    console.log(`  ✓ Email-Plaud cross-reference: ${emailMeetingCrossRef.size} email threads linked to Plaud meetings`)
+  }
+
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
   for (const email of (activeEmails || [])) {
@@ -1235,7 +1298,12 @@ Respond with JSON only:
         ? await aiService.buildProjectContext(emailProjectId)
         : ''
 
-      const summary = await aiService.summarizeThread(email, projectContext)
+      // ── Email-Plaud cross-reference (three-legged stool bridge) ──
+      // Look up pre-computed meeting cross-reference for this email.
+      // Computed once above (before Step 3) and shared across Step 3 + Step 3.5.
+      const perEmailMeetingNote = emailMeetingCrossRef.get(email.id) || ''
+
+      const summary = await aiService.summarizeThread(email, projectContext + perEmailMeetingNote)
 
       await supabase
         .from('emails')
@@ -1325,7 +1393,16 @@ Respond with JSON only:
       const intelProjectContext = intelProjectId
         ? await aiService.buildProjectContext(intelProjectId)
         : ''
-      const intel = await aiService.extractIntelligence(email, threadHistory, meetingContext, intelProjectContext)
+
+      // Inject per-email meeting cross-reference into intelligence extraction.
+      // Pulls from the pre-computed emailMeetingCrossRef Map (built before Step 3)
+      // so this loop doesn't need its own participant lookup.
+      const perEmailMeetingNote = emailMeetingCrossRef.get(email.id) || ''
+      const enrichedMeetingContext = perEmailMeetingNote
+        ? meetingContext + perEmailMeetingNote
+        : meetingContext
+
+      const intel = await aiService.extractIntelligence(email, threadHistory, enrichedMeetingContext, intelProjectContext)
 
       let projectId = email.project_id ||
         await findProjectByKeywords(email.thread_subject)
@@ -3363,6 +3440,132 @@ Be direct and specific. No fluff.`
   } catch (err) {
     results.errors.push(`Otter processing: ${err.message}`)
     console.log(`  ✗ Otter error: ${err.message}`)
+  }
+
+  // ── STEP 3.9: Extract daily observations — unified three-leg synthesis ────
+  // Three-legged stool: Email + Plaud + Manual. Synthesizes ALL available legs.
+  // If one leg is missing today (e.g. email pull crashed), uses what the others provide.
+  // Writes atomic factual observations to the observations table.
+  // These feed back into buildRyanContext() as accumulated institutional memory.
+  console.log('Step 3.9: Extracting daily observations (three-leg synthesis)...')
+  console.log(`  Legs available today — Email: ${legStatus.email}, Plaud: ${legStatus.plaud}, Manual: ${legStatus.manual}`)
+  try {
+    // ── Leg 1: Email signals ──
+    const emailObsContext = legStatus.email
+      ? (activeEmails || []).slice(0, 15).map(e => {
+          const summary = e.ai_summary || e.body_preview || ''
+          return `Thread: ${e.thread_subject || e.subject}\nFrom: ${e.from_name || e.from_address}\nBucket: ${e.bucket} | Urgency: ${e.urgency} | Days waiting: ${e.days_waiting || 0}\nSummary: ${summary.slice(0, 300)}`
+        }).join('\n\n---\n\n')
+      : null
+
+    // ── Leg 2: Plaud/meeting signals ──
+    const { data: recentMeetingsObs } = await supabase
+      .from('meeting_notes')
+      .select('title, short_summary, action_items_raw, participants, start_time')
+      .gte('start_time', new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString())
+      .order('start_time', { ascending: false })
+      .limit(6)
+
+    const plaudObsContext = (recentMeetingsObs || []).length > 0
+      ? recentMeetingsObs.map(m => {
+          const date = (m.start_time || '').split('T')[0]
+          const people = (m.participants || []).slice(0, 6).join(', ')
+          const actions = (m.action_items_raw || []).slice(0, 5)
+            .map(a => `  - ${a.assignee_name || 'Unassigned'}: ${a.task_text}`).join('\n')
+          return `Meeting: ${m.title} [${date}]\nAttendees: ${people}\nSummary: ${(m.short_summary || '').slice(0, 300)}${actions ? '\nActions:\n' + actions : ''}`
+        }).join('\n\n---\n\n')
+      : null
+
+    // ── Leg 3: Manual signals — Ryan's own inputs ──
+    const { data: recentManualObs } = await supabase
+      .from('observations')
+      .select('content, source_type, created_at')
+      .eq('source_type', 'manual')
+      .order('created_at', { ascending: false })
+      .limit(10)
+
+    const { data: openStrategicDecs } = await supabase
+      .from('strategic_decisions')
+      .select('decision, why, expected_outcome, category, decided_on')
+      .in('status', ['open', 'monitoring'])
+      .order('decided_on', { ascending: false })
+      .limit(8)
+
+    const manualObsContext = [
+      recentManualObs?.length
+        ? 'RYAN\'S MANUAL OBSERVATIONS (last 10):\n' +
+          recentManualObs.map(o => `- [${(o.created_at || '').split('T')[0]}] ${o.content}`).join('\n')
+        : null,
+      openStrategicDecs?.length
+        ? 'RYAN\'S OPEN STRATEGIC DECISIONS:\n' +
+          openStrategicDecs.map(d => `- ${d.decision}${d.why ? ' — Why: ' + d.why.slice(0, 100) : ''}`).join('\n')
+        : null
+    ].filter(Boolean).join('\n\n')
+
+    const hasAnyContext = emailObsContext || plaudObsContext || manualObsContext
+
+    if (hasAnyContext) {
+      // Build the unified three-leg prompt — note which legs are present
+      const legLabels = [
+        legStatus.email ? 'Email' : null,
+        legStatus.plaud ? 'Plaud meetings' : null,
+        'Manual inputs'
+      ].filter(Boolean).join(' + ')
+
+      const obsPrompt = `You are extracting atomic observations from Ryan Hankins' day. Ryan is a Project Executive at Clayco (commercial construction GC) — design-build, large industrial and commercial projects.
+
+Today's intelligence comes from ${legLabels}. Synthesize across ALL legs — the most valuable observations often connect what was discussed in a meeting to what's pending in email, or validate a past observation with new evidence.
+
+Extract 4-6 specific, factual observations Ryan should retain permanently. These are NOT tasks — they are patterns, insights, and learnings about people, clients, projects, or how this business works.
+
+Good observation examples:
+- "ABB/Sofidel team escalates quickly on schedule items — two emails and a follow-up call within 48h of any delay signal"
+- "Data center developers consistently prioritize speed-to-revenue over first cost — scope expansions get faster approval than cost savings"
+- "Owner decision latency on scope changes is running 12+ days across three active projects — budget approvals are the bottleneck, not technical review"
+- "J. Miller raised scope concerns in email AND the OAC call this week — pattern suggests he's building a paper trail before a formal dispute"
+
+Bad observations (too generic, do not produce these):
+- "Ryan had several emails today"
+- "There are open items on multiple projects"
+- "Meeting was held about project X"
+
+${emailObsContext ? `\n═══ LEG 1: EMAIL ═══\n${emailObsContext}` : '\n[Email leg unavailable today — email pull did not complete]'}
+
+${plaudObsContext ? `\n═══ LEG 2: PLAUD MEETINGS ═══\n${plaudObsContext}` : '\n[Plaud leg unavailable today — no meetings recorded]'}
+
+${manualObsContext ? `\n═══ LEG 3: MANUAL INPUTS ═══\n${manualObsContext}` : ''}
+
+Return a JSON array of observation strings only. No explanation.
+["Observation 1", "Observation 2", "Observation 3", "Observation 4"]`
+
+      const raw = await anthropic.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 700,
+        messages: [{ role: 'user', content: obsPrompt }]
+      })
+
+      const text = raw.content[0]?.text?.trim() || '[]'
+      let observations = []
+      try {
+        const match = text.match(/\[[\s\S]*\]/)
+        if (match) observations = JSON.parse(match[0])
+      } catch { /* skip on parse error */ }
+
+      let obsCount = 0
+      for (const content of observations) {
+        if (!content || typeof content !== 'string' || content.length < 20) continue
+        const { error } = await supabase
+          .from('observations')
+          .insert({ content: content.trim(), source_type: 'ai_nightly' })
+        if (!error) obsCount++
+      }
+      console.log(`  ✓ ${obsCount} observations extracted (${legLabels})`)
+    } else {
+      console.log('  — No context available across any leg for observation extraction')
+    }
+  } catch (err) {
+    results.errors.push(`Observation extraction: ${err.message}`)
+    console.log(`  ✗ Observation extraction error: ${err.message}`)
   }
 
   // ── STEP 4: Extract tasks ───────────────────────────────────────

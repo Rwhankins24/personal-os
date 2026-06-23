@@ -147,12 +147,45 @@ bucket arrays to use as the cross-reference baseline.
 
 Run all sub-steps concurrently where possible. Each is a separate API call.
 
-### 2A — Inbox (split into 4 queries — DO NOT combine)
+### 2A — Inbox (split into 7 queries — DO NOT combine)
 
-**Query 2A-1 — Recent inbox by date (folder + date filter, no keyword):**
-- `folderName: "inbox"`, `afterDateTime: PULL_SINCE`, `limit: 100`
-- Uses the calculated pull window from Step 1 — catches gaps from travel days.
+**WHY 7 QUERIES:** The connector caps results at ~25 per query regardless of the `limit`
+parameter. One date-window query covering 48h returns only 25 of 100+ threads. Fix:
+split the date window into 4 time-sliced chunks so each chunk has fewer emails and the
+25-cap covers more of each slice. Add 3 keyword queries for thematic coverage.
+
+Calculate 6-hour time slices from PULL_SINCE to now. Each slice covers exactly 6 hours,
+keeping each query well under the connector's 25-result cap (~10-14 emails per 6h window
+on a typical day). Number of slices varies with window size:
+- 24h window → 4 slices
+- 48h window → 8 slices
+
+Calculate slices dynamically:
+```
+windowHours = (now - PULL_SINCE) in hours
+numSlices   = ceil(windowHours / 6)
+sliceSize   = windowHours / numSlices  (always ≤ 6h)
+
+For i in 0..numSlices-1:
+  SLICE_START[i] = PULL_SINCE + i * sliceSize
+  SLICE_END[i]   = PULL_SINCE + (i+1) * sliceSize
+```
+Last slice has no `beforeDateTime` (open-ended to now).
+
+**IMPORTANT — BATCHED execution to prevent socket drops:**
+Do NOT fire all slices at once. The M365 connector drops connections when too many
+simultaneous queries run. Run slices in sequential batches of 3:
+- Batch 1: slices 0, 1, 2 (run concurrently) → wait for all 3 to complete
+- Batch 2: slices 3, 4, 5 (run concurrently) → wait for all 3 to complete
+- Batch 3: slices 6, 7 if present (run concurrently) → wait to complete
+- Then run keyword queries 2A-2, 2A-3, 2A-4 concurrently as a final batch
+
+If any individual slice returns a socket error, retry it once before skipping.
+
+**Queries 2A-1a through 2A-1n — One per 6-hour slice (run in batches of 3):**
+- `folderName: "inbox"`, `afterDateTime: SLICE_START[i]`, `beforeDateTime: SLICE_END[i]`, `limit: 100`
 - No `query:` parameter.
+- Last slice omits `beforeDateTime`.
 
 **Query 2A-2 — Urgent/action keywords (keyword only, no folder/date):**
 - `query: "urgent OR deadline OR ASAP OR \"action required\" OR \"please respond\" OR approval"`
@@ -169,7 +202,9 @@ Run all sub-steps concurrently where possible. Each is a separate API call.
 - `limit: 100`
 - No `folderName:` or `afterDateTime:` parameter.
 
-After all 4 queries return: merge results. For each email capture these fields:
+After all 7 queries return: merge results. Deduplicate by `conversationId` before
+any further processing. Log how many unique threads each slice contributed:
+`Slice A: X | Slice B: X | Slice C: X | Slice D: X | Keywords: X | Total unique: X` For each email capture these fields:
 
 **Standard fields:**
 - `from_address`, `from_name`, `subject`, `body_preview` (first 200 chars), `received_at`

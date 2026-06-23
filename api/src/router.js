@@ -24,6 +24,8 @@ const triggerNightly      = require('./routes/trigger-nightly')
 const preMeetingBrief     = require('./routes/pre-meeting-brief')
 const uploadMeeting       = require('./routes/upload-meeting')
 const leads               = require('./routes/leads')
+const strategicDecisions  = require('./routes/strategic-decisions')
+const observations        = require('./routes/observations')
 const health              = require('./health')
 
 const CORS_HEADERS = {
@@ -68,6 +70,8 @@ module.exports = async (req, res) => {
   if (path === '/api/jobs/pre-meeting-brief')         return preMeetingBrief(req, res)
   if (path === '/api/upload-meeting')                 return uploadMeeting(req, res)
   if (matchRoute(path, '/api/leads'))                 return leads(req, res)
+  if (matchRoute(path, '/api/strategic-decisions'))   return strategicDecisions(req, res)
+  if (matchRoute(path, '/api/observations'))          return observations(req, res)
 
   return res.status(404).json({ error: 'Not found', path })
 }

@@ -190,6 +190,79 @@ async function buildRyanContext() {
       ctx += '\n'
     }
 
+    // ── THREE-LEGGED STOOL: accumulated intelligence from all three legs ──
+    // Leg 1 — Email: what's actively pending in Ryan's inbox
+    const { data: activeEmailThreads } = await supabase
+      .from('emails')
+      .select('thread_subject, from_name, from_address, bucket, urgency, days_waiting, tags, ai_summary')
+      .in('bucket', [1, 2])
+      .in('status', ['needs_reply', 'waiting_on'])
+      .order('days_waiting', { ascending: false })
+      .limit(15)
+
+    if (activeEmailThreads?.length) {
+      ctx += '\nACTIVE EMAIL THREADS REQUIRING ATTENTION (email intelligence leg):\n'
+      ctx += activeEmailThreads.map(e => {
+        const urgency = e.urgency ? ` [${e.urgency.toUpperCase()}]` : ''
+        const waiting = e.days_waiting > 0 ? ` — ${e.days_waiting}d waiting` : ''
+        const bucket  = e.bucket === 1 ? 'NEEDS REPLY' : 'WAITING ON THEM'
+        const summary = e.ai_summary ? ` — ${e.ai_summary.slice(0, 100)}` : ''
+        return `- [${bucket}]${urgency} "${e.thread_subject}" from ${e.from_name || e.from_address}${waiting}${summary}`
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
+    // Leg 2 — Plaud/meetings: already captured via recentMeetings above
+
+    // Leg 3 — Manual: Ryan's own observations and strategic decisions
+    const { data: recentObservations } = await supabase
+      .from('observations')
+      .select('content, source_type, created_at')
+      .order('created_at', { ascending: false })
+      .limit(20)
+
+    if (recentObservations?.length) {
+      ctx += 'ACCUMULATED OBSERVATIONS (patterns and learnings — treat as institutional memory):\n'
+      ctx += recentObservations.map(o => {
+        const date = (o.created_at || '').split('T')[0]
+        const source = o.source_type === 'ai_nightly' ? 'AI' : 'Manual'
+        return `- [${date}/${source}] ${o.content}`
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
+    const { data: strategicDecisions } = await supabase
+      .from('strategic_decisions')
+      .select('decision, why, expected_outcome, actual_outcome, lesson, status, decided_on, category')
+      .in('status', ['open', 'monitoring', 'reviewed'])
+      .order('decided_on', { ascending: false })
+      .limit(15)
+
+    if (strategicDecisions?.length) {
+      const openDecisions = strategicDecisions.filter(d => d.status === 'open' || d.status === 'monitoring')
+      const reviewedWithLesson = strategicDecisions.filter(d => d.status === 'reviewed' && d.lesson)
+
+      if (openDecisions.length) {
+        ctx += "RYAN'S OPEN STRATEGIC DECISIONS (his own reasoning — use as decision-making context):\n"
+        ctx += openDecisions.map(d => {
+          const cat = d.category ? ` [${d.category}]` : ''
+          const why = d.why ? ` — Why: ${d.why.slice(0, 100)}` : ''
+          const expected = d.expected_outcome ? ` | Expecting: ${d.expected_outcome.slice(0, 80)}` : ''
+          return `- ${d.decided_on || 'undated'}${cat}: ${d.decision}${why}${expected}`
+        }).join('\n')
+        ctx += '\n\n'
+      }
+
+      if (reviewedWithLesson.length) {
+        ctx += "RYAN'S DECISION RETROSPECTIVES (lessons from past decisions — use to avoid repeating mistakes):\n"
+        ctx += reviewedWithLesson.slice(0, 8).map(d => {
+          const cat = d.category ? ` [${d.category}]` : ''
+          return `- ${d.decided_on || 'undated'}${cat}: ${d.decision}\n  → Lesson: ${d.lesson}`
+        }).join('\n')
+        ctx += '\n\n'
+      }
+    }
+
     _cachedContext = ctx
     _cacheBuiltAt = Date.now()
     return ctx
