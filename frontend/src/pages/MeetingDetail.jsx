@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getMeetingNote, updateMeetingNote, getProjects, createTask } from '../lib/api'
 import MeetingSummary from '../components/MeetingSummary'
+import MeetingCategoryPanel from '../components/MeetingCategoryPanel'
 
 const URGENCY_COLOR = {
   critical: 'bg-red-50 text-red-700 border-red-200',
@@ -154,6 +155,12 @@ export default function MeetingDetail() {
 
       <div className="max-w-2xl mx-auto px-4 py-4 space-y-3">
 
+        {/* ── Meeting Type / Category Panel ───────────────────────── */}
+        <MeetingCategoryPanel
+          meetingId={meeting.id}
+          projectId={meeting.project_id}
+        />
+
         {/* ── Pre-meeting notes from calendar (Ryan's input, top) ── */}
         {event?.pre_meeting_notes && (
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
@@ -226,59 +233,70 @@ export default function MeetingDetail() {
         {/* ── Intelligence sections ───────────────────────────────── */}
         {meeting.intelligence_extracted && (
           <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#1B2A4A] mb-4">Meeting Intelligence</p>
+            <div className="flex items-center gap-2 mb-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#1B2A4A]">Meeting Intelligence</p>
+              {meeting.information_only && (
+                <span className="text-[10px] bg-amber-50 border border-amber-200 text-amber-700 px-2 py-0.5 rounded-full font-medium">
+                  📖 Information Only
+                </span>
+              )}
+            </div>
 
-            {/* Ryan's Tasks */}
-            <Section title="My Action Items" count={meeting._tasks?.length} color="#1B2A4A">
-              <IntelCard items={meeting._tasks || []} renderItem={(t, i) => (
-                <div key={i} className={`text-xs border rounded-lg px-3 py-2 ${URGENCY_COLOR[t.urgency] || URGENCY_COLOR.medium}`}>
-                  <span className="font-medium">{t.title}</span>
-                  {t.due_date && <span className="ml-2 opacity-70">due {t.due_date}</span>}
-                  {t.context && <p className="mt-0.5 opacity-60">{t.context}</p>}
-                </div>
-              )} />
-            </Section>
-
-            {/* Others' Commitments */}
-            <Section
-              title="Others' Action Items"
-              count={meeting._others_commitments?.length}
-              color="#5a3a8a"
-              action={
-                (meeting._others_commitments?.length > 1) && (
-                  <button
-                    onClick={() => promoteAll(meeting._others_commitments)}
-                    className="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded font-medium hover:bg-purple-100 transition-colors whitespace-nowrap"
-                  >
-                    Promote all → My tasks
-                  </button>
-                )
-              }
-            >
-              <IntelCard items={meeting._others_commitments || []} renderItem={(c, i) => {
-                const key = c.id || c.title
-                const done = promoted.has(key)
-                return (
-                  <div key={i} className="text-xs border border-purple-100 bg-purple-50 rounded-lg px-3 py-2 flex items-start gap-2">
-                    <div className="flex-1">
-                      <span className="font-semibold text-purple-800">{c.committed_by_name || c.person_name}: </span>
-                      <span className="text-purple-900">{c.title}</span>
-                      {c.due_date && <span className="ml-2 text-purple-600">due {c.due_date}</span>}
-                    </div>
-                    <button
-                      onClick={() => promoteToMyTask(c, meeting.title)}
-                      className={`flex-shrink-0 text-xs px-2 py-0.5 rounded font-medium transition-colors ${
-                        done
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-white text-purple-700 border border-purple-200 hover:bg-purple-100'
-                      }`}
-                    >
-                      {done ? '✓ Added' : '→ My tasks'}
-                    </button>
+            {/* Ryan's Tasks — hidden for information-only meetings */}
+            {!meeting.information_only && (
+              <Section title="My Action Items" count={meeting._tasks?.length} color="#1B2A4A">
+                <IntelCard items={meeting._tasks || []} renderItem={(t, i) => (
+                  <div key={i} className={`text-xs border rounded-lg px-3 py-2 ${URGENCY_COLOR[t.urgency] || URGENCY_COLOR.medium}`}>
+                    <span className="font-medium">{t.title}</span>
+                    {t.due_date && <span className="ml-2 opacity-70">due {t.due_date}</span>}
+                    {t.context && <p className="mt-0.5 opacity-60">{t.context}</p>}
                   </div>
-                )
-              }} />
-            </Section>
+                )} />
+              </Section>
+            )}
+
+            {/* Others' Commitments — hidden for information-only meetings */}
+            {!meeting.information_only && (
+              <Section
+                title="Others' Action Items"
+                count={meeting._others_commitments?.length}
+                color="#5a3a8a"
+                action={
+                  (meeting._others_commitments?.length > 1) && (
+                    <button
+                      onClick={() => promoteAll(meeting._others_commitments)}
+                      className="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded font-medium hover:bg-purple-100 transition-colors whitespace-nowrap"
+                    >
+                      Promote all → My tasks
+                    </button>
+                  )
+                }
+              >
+                <IntelCard items={meeting._others_commitments || []} renderItem={(c, i) => {
+                  const key = c.id || c.title
+                  const done = promoted.has(key)
+                  return (
+                    <div key={i} className="text-xs border border-purple-100 bg-purple-50 rounded-lg px-3 py-2 flex items-start gap-2">
+                      <div className="flex-1">
+                        <span className="font-semibold text-purple-800">{c.committed_by_name || c.person_name}: </span>
+                        <span className="text-purple-900">{c.title}</span>
+                        {c.due_date && <span className="ml-2 text-purple-600">due {c.due_date}</span>}
+                      </div>
+                      <button
+                        onClick={() => promoteToMyTask(c, meeting.title)}
+                        className={`flex-shrink-0 text-xs px-2 py-0.5 rounded font-medium transition-colors ${
+                          done
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-white text-purple-700 border border-purple-200 hover:bg-purple-100'
+                        }`}
+                      >
+                        {done ? '✓ Added' : '→ My tasks'}
+                      </button>
+                    </div>
+                  )
+                }} />
+              </Section>
+            )}
 
             {/* Decisions Made */}
             <Section title="Decisions Made" count={meeting._decisions_made?.length} color="#1a5c1a">

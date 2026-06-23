@@ -164,6 +164,27 @@ async function logAIQuestion(question, context, questionType, options = []) {
   }
 }
 
+// ─── CATEGORY-SPECIFIC EXTRACTION HINTS ─────────────────────────────────────
+// Tells the AI what to focus on for each meeting type.
+// Injected into extractIntelligenceFromTranscript / parsePlaudSummary prompts.
+function getCategoryExtractionHints(categoryName) {
+  const hints = {
+    'OAC': '- Schedule status, RFI/submittal log updates\n- Open owner issues and commitments\n- Cost impacts discussed\n- Next OAC date and agenda items',
+    'Settlement Discussion': '- Dollar amounts or ranges mentioned\n- Each party\'s position and movement\n- Mediator/attorney involvement\n- Next steps and deadlines\n- What was agreed vs. still open',
+    'Design Review': '- Design changes or revisions required\n- Coordination issues between disciplines\n- Owner/architect decisions needed\n- Impact on cost or schedule\n- Outstanding design deliverables',
+    'Change Order / PCO': '- Scope description and cause\n- Cost and schedule impact amounts\n- Which party is responsible\n- Approval status and next steps\n- Any rejection or pushback',
+    'RFI Review': '- RFI numbers and subjects discussed\n- Responses provided or outstanding\n- Design clarification impacts\n- Who owes responses and by when',
+    'Subcontractor Coord.': '- Sequence and coordination conflicts\n- Material or equipment lead times\n- Crew availability / manpower\n- Safety or quality issues raised\n- Commitments made by sub',
+    'Safety': '- Incidents or near-misses described\n- Corrective actions required\n- Responsible parties and deadlines\n- Regulatory or compliance concerns',
+    'Internal Review': '- Strategic decisions made\n- Resource or staffing issues\n- Financial targets or concerns\n- Action items for team members',
+    'Pursuit / BD': '- Client priorities and hot buttons\n- Competitive landscape mentioned\n- Win themes or differentiators\n- Next pursuit milestones and owners\n- Fee or proposal strategy discussed',
+    'Client Check-in': '- Client satisfaction signals\n- Upcoming decisions or approvals\n- Relationship health indicators\n- Asks or concerns from client',
+    'Close-out': '- Punch list status and count\n- Certificate of substantial completion\n- Retainage or final payment status\n- Outstanding warranty or training items',
+    'Preconstruction': '- Budget or GMP status\n- Design completeness and gaps\n- Long-lead procurement needs\n- Schedule milestones and risks',
+  }
+  return hints[categoryName] || '- Key decisions made\n- Action items and owners\n- Risks or issues raised\n- Financial or schedule impacts'
+}
+
 // ─── DETECT LINK TYPE
 function detectLinks(bodyText) {
   if (!bodyText) return []
@@ -2791,18 +2812,58 @@ Be specific and cite concrete details. Avoid generic statements.`
 
   // ── STEP 2.6: Process meeting transcripts (Otter + Plaud) ───────
   console.log('Step 2.6: Processing meeting intelligence (Otter + Plaud)...')
-  try {
-    const { data: unprocessedMeetings } = await supabase
-      .from('meeting_notes')
-      .select('*')
-      .eq('intelligence_extracted', false)
-      .order('start_time', { ascending: false })
-      .limit(15) // steady state: 15/night is sufficient once backfill is done
 
-    for (const meeting of (unprocessedMeetings || [])) {
+  // Load global + project category map once — used to inject category context per meeting
+  const { data: allMeetingCategories = [] } = await supabase
+    .from('meeting_categories')
+    .select('id, name, description')
+  const categoryMap = new Map((allMeetingCategories || []).map(c => [c.id, c]))
+
+  try {
+    // Load unprocessed meetings + meetings flagged for reprocessing (category changed)
+    const [{ data: unprocessedRaw }, { data: reprocessRaw }] = await Promise.all([
+      supabase
+        .from('meeting_notes')
+        .select('*')
+        .eq('intelligence_extracted', false)
+        .order('start_time', { ascending: false })
+        .limit(15), // steady state: 15/night
+      supabase
+        .from('meeting_notes')
+        .select('*')
+        .eq('needs_ai_reprocess', true)
+        .eq('intelligence_extracted', true) // only re-run already-processed meetings
+        .order('start_time', { ascending: false })
+        .limit(10), // cap reprocessing — category backfill can queue many at once
+    ])
+
+    // Deduplicate (a meeting could appear in both lists if somehow flagged + unprocessed)
+    const seen = new Set()
+    const unprocessedMeetings = [...(unprocessedRaw || []), ...(reprocessRaw || [])].filter(m => {
+      if (seen.has(m.id)) return false
+      seen.add(m.id)
+      return true
+    })
+
+    if ((reprocessRaw || []).length > 0) {
+      console.log(`  ↺ Reprocessing ${reprocessRaw.length} meeting(s) with updated categories`)
+    }
+
+    for (const meeting of unprocessedMeetings) {
       try {
+        // ── Resolve category context for this meeting ─────────────────────────
+        // Injected into AI prompts so extraction is category-aware
+        const primaryCat   = meeting.primary_category_id ? categoryMap.get(meeting.primary_category_id) : null
+        const categoryHint = primaryCat
+          ? `\n\nMEETING TYPE: ${primaryCat.name}${primaryCat.description ? ` — ${primaryCat.description}` : ''}.\nExtract intelligence that is specifically relevant to ${primaryCat.name} meetings. For example:\n${getCategoryExtractionHints(primaryCat.name)}`
+          : ''
+
         // PASS 1: Process metadata action items
-        const actionItems = meeting.action_items_raw || []
+        // SKIP entirely for information-only meetings — they build context, not tasks
+        const actionItems = meeting.information_only ? [] : (meeting.action_items_raw || [])
+        if (meeting.information_only) {
+          console.log(`  ℹ Info-only meeting: "${meeting.title}" — skipping action item extraction`)
+        }
 
         // Project ID comes from manual assignment in frontend — not keyword guessing
         const meetingProjectId  = meeting.project_id || null
@@ -3057,16 +3118,17 @@ Be specific and cite concrete details. Avoid generic statements.`
 
           if (shouldUsePlaudParser) {
             // Parse the structured Plaud email body directly — Haiku, ~$0.005/meeting
-            console.log(`    Using Plaud summary parser (Haiku) for: ${meeting.title}`)
-            intel = await aiService.parsePlaudSummary(meeting)
+            console.log(`    Using Plaud summary parser (Haiku) for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
+            intel = await aiService.parsePlaudSummary(meeting, categoryHint)
             if (!intel && hasTranscript) {
               // Fall back to transcript extraction if parse fails
               console.log(`    Plaud parse failed, falling back to transcript extraction`)
-              intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [])
+              intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [], categoryHint)
             }
           } else {
             // Otter or Plaud without rich summary — extract from raw transcript
-            intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [])
+            if (primaryCat) console.log(`    Category context: [${primaryCat.name}]`)
+            intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [], categoryHint)
           }
 
           if (intel) {
@@ -3408,10 +3470,12 @@ Be direct and specific. No fluff.`
 
         // Mark meeting as processed — save summary, outcome, and cached intel
         const meetingFinalUpdate = {
-          intelligence_extracted: true,
-          commitments_extracted:  true,
-          extraction_date:        today,
-          extracted_intelligence: intel || null,   // cache full extraction for later project assignment
+          intelligence_extracted:  true,
+          commitments_extracted:   true,
+          extraction_date:         today,
+          extracted_intelligence:  intel || null,  // cache full extraction for later project assignment
+          needs_ai_reprocess:      false,          // clear reprocess flag
+          last_ai_processed_at:    new Date().toISOString(),
         }
         // Save narrative summary from meeting_outcome (the comprehensive one)
         if (intel?.meeting_outcome?.summary && !meeting.summary) {

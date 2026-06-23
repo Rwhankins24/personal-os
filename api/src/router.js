@@ -26,6 +26,7 @@ const uploadMeeting       = require('./routes/upload-meeting')
 const leads               = require('./routes/leads')
 const strategicDecisions  = require('./routes/strategic-decisions')
 const observations        = require('./routes/observations')
+const meetingCategories   = require('./routes/meeting-categories')
 const health              = require('./health')
 
 const CORS_HEADERS = {
@@ -72,6 +73,7 @@ module.exports = async (req, res) => {
   if (matchRoute(path, '/api/leads'))                 return leads(req, res)
   if (matchRoute(path, '/api/strategic-decisions'))   return strategicDecisions(req, res)
   if (matchRoute(path, '/api/observations'))          return observations(req, res)
+  if (matchRoute(path, '/api/meeting-categories'))    return meetingCategories(req, res)
 
   return res.status(404).json({ error: 'Not found', path })
 }

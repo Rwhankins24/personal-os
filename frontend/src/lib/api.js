@@ -150,3 +150,40 @@ export const getObservations   = (params = {}) => api.get('/api/observations', {
 export const getHistoricalRecall = () => api.get('/api/observations?recall=true').then(r => r.data)
 export const createObservation = (data) => api.post('/api/observations', data).then(r => r.data)
 export const deleteObservation = (id) => api.delete(`/api/observations?id=${id}`).then(r => r.data)
+
+// ── Meeting Categories ────────────────────────────────────────
+// List all categories (global + optional project-scoped)
+export const getMeetingCategories = (projectId) =>
+  api.get(projectId ? `/api/meeting-categories?project_id=${projectId}` : '/api/meeting-categories').then(r => r.data)
+
+// Get categories assigned to a specific meeting (primary + secondaries + info_only flag)
+export const getMeetingCategoryAssignments = (meetingId) =>
+  api.get(`/api/meeting-categories?meeting_id=${meetingId}`).then(r => r.data)
+
+// Create a new category (projectId = null → global)
+export const createMeetingCategory = (data) =>
+  api.post('/api/meeting-categories', data).then(r => r.data)
+
+// Update category metadata
+export const updateMeetingCategory = (id, data) =>
+  api.patch(`/api/meeting-categories?id=${id}`, data).then(r => r.data)
+
+// Delete category
+export const deleteMeetingCategory = (id) =>
+  api.delete(`/api/meeting-categories?id=${id}`).then(r => r.data)
+
+// Assign primary category to a meeting (sets needs_ai_reprocess)
+export const assignPrimaryCategory = (meetingId, categoryId) =>
+  api.patch(`/api/meeting-categories?assign=primary&meeting_id=${meetingId}&category_id=${categoryId || ''}`).then(r => r.data)
+
+// Add secondary category to a meeting
+export const addSecondaryCategory = (meetingId, categoryId) =>
+  api.post('/api/meeting-categories?assign=secondary', { meeting_id: meetingId, category_id: categoryId }).then(r => r.data)
+
+// Remove secondary category from a meeting
+export const removeSecondaryCategory = (meetingId, categoryId) =>
+  api.delete(`/api/meeting-categories?assign=secondary&meeting_id=${meetingId}&category_id=${categoryId}`).then(r => r.data)
+
+// Toggle information-only flag
+export const setInformationOnly = (meetingId, value) =>
+  api.patch(`/api/meeting-categories?toggle_info_only=1&meeting_id=${meetingId}`, { information_only: value }).then(r => r.data)

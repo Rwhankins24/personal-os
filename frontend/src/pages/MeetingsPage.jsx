@@ -7,6 +7,7 @@ import {
   getMeetingNotes, updateMeetingNote, getProjects, createProject,
   getTasks, updateTask, createTask,
   getOthersCommitments, updateOthersCommitment, createOthersCommitment,
+  getMeetingCategories,
 } from '../lib/api'
 import MeetingSummary from '../components/MeetingSummary'
 
@@ -42,7 +43,8 @@ export default function MeetingsPage() {
   const navigate      = useNavigate()
   const qc            = useQueryClient()
   const [search,      setSearch]      = useState('')
-  const [filter,      setFilter]      = useState('all') // all | unlinked | linked
+  const [filter,      setFilter]      = useState('all') // all | unlinked | linked | info_only
+  const [categoryFilter, setCategoryFilter] = useState('') // category id or ''
   const [editing,     setEditing]     = useState(null)  // meeting id being project-assigned
   const [selected,    setSelected]    = useState(new Set())
   const [bulkProject, setBulkProject] = useState('')
@@ -71,6 +73,10 @@ export default function MeetingsPage() {
   const { data: allOthers = [] } = useQuery({
     queryKey: ['others-commitments-all'],
     queryFn:  () => getOthersCommitments('all'),
+  })
+  const { data: allCategories = [] } = useQuery({
+    queryKey: ['meeting-categories'],
+    queryFn:  () => getMeetingCategories(),
   })
 
   const update = useMutation({
@@ -167,8 +173,12 @@ export default function MeetingsPage() {
   const filtered = useMemo(() => {
     let list = [...meetings]
 
-    if (filter === 'unlinked') list = list.filter(m => !m.project_id)
-    if (filter === 'linked')   list = list.filter(m =>  m.project_id)
+    if (filter === 'unlinked')  list = list.filter(m => !m.project_id)
+    if (filter === 'linked')    list = list.filter(m =>  m.project_id)
+    if (filter === 'info_only') list = list.filter(m =>  m.information_only)
+
+    // Category filter
+    if (categoryFilter) list = list.filter(m => m.primary_category_id === categoryFilter)
 
     if (search.trim()) {
       const q = search.toLowerCase()
@@ -184,9 +194,21 @@ export default function MeetingsPage() {
       const db = b.meeting_date || b.start_time || ''
       return db.localeCompare(da)
     })
-  }, [meetings, filter, search])
+  }, [meetings, filter, categoryFilter, search])
 
-  const unlinkedCount = meetings.filter(m => !m.project_id).length
+  const unlinkedCount  = meetings.filter(m => !m.project_id).length
+  const infoOnlyCount  = meetings.filter(m =>  m.information_only).length
+
+  // Build category counts for filter pills
+  const categoryCounts = useMemo(() => {
+    const counts = {}
+    meetings.forEach(m => {
+      if (m.primary_category_id) {
+        counts[m.primary_category_id] = (counts[m.primary_category_id] || 0) + 1
+      }
+    })
+    return counts
+  }, [meetings])
 
   if (isLoading) return (
     <div className="min-h-screen bg-[#f8f8f6] flex items-center justify-center">
@@ -272,15 +294,16 @@ export default function MeetingsPage() {
           />
 
           {/* Filter tabs */}
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap">
             {[
-              { key: 'all',      label: `All (${meetings.length})` },
-              { key: 'unlinked', label: `No project (${unlinkedCount})`, warn: unlinkedCount > 0 },
-              { key: 'linked',   label: `Linked (${meetings.length - unlinkedCount})` },
-            ].map(t => (
+              { key: 'all',       label: `All (${meetings.length})` },
+              { key: 'unlinked',  label: `No project (${unlinkedCount})`, warn: unlinkedCount > 0 },
+              { key: 'linked',    label: `Linked (${meetings.length - unlinkedCount})` },
+              { key: 'info_only', label: `Info Only (${infoOnlyCount})`, show: infoOnlyCount > 0 },
+            ].filter(t => t.show !== false).map(t => (
               <button
                 key={t.key}
-                onClick={() => setFilter(t.key)}
+                onClick={() => { setFilter(t.key); setCategoryFilter('') }}
                 className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors ${
                   filter === t.key
                     ? 'bg-[#1a1a18] text-white'
@@ -293,6 +316,34 @@ export default function MeetingsPage() {
               </button>
             ))}
           </div>
+
+          {/* Category filter pills — show categories that have at least 1 meeting */}
+          {allCategories.filter(c => categoryCounts[c.id]).length > 0 && (
+            <div className="flex gap-1.5 flex-wrap mt-2">
+              {categoryFilter && (
+                <button
+                  onClick={() => setCategoryFilter('')}
+                  className="text-xs px-2.5 py-1 rounded-full border border-[#e5e5e3] text-[#6b6b67] hover:border-gray-400"
+                >
+                  × clear
+                </button>
+              )}
+              {allCategories.filter(c => categoryCounts[c.id]).map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => { setCategoryFilter(categoryFilter === cat.id ? '' : cat.id); setFilter('all') }}
+                  className="text-xs px-2.5 py-1 rounded-full font-medium transition-all"
+                  style={{
+                    backgroundColor: categoryFilter === cat.id ? cat.color : cat.color + '15',
+                    color:           categoryFilter === cat.id ? '#fff' : cat.color,
+                    border:          `1px solid ${cat.color}40`,
+                  }}
+                >
+                  {cat.name} <span className="opacity-70">({categoryCounts[cat.id]})</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -388,6 +439,21 @@ export default function MeetingsPage() {
                       {hasTranscript && !meeting.intelligence_extracted && (
                         <span className="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 rounded font-medium">transcript</span>
                       )}
+                      {meeting.information_only && (
+                        <span className="text-[10px] bg-amber-50 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded font-medium">📖 info only</span>
+                      )}
+                      {/* Primary category badge */}
+                      {meeting.primary_category_id && (() => {
+                        const cat = allCategories.find(c => c.id === meeting.primary_category_id)
+                        return cat ? (
+                          <span
+                            className="text-[10px] px-1.5 py-0.5 rounded font-medium"
+                            style={{ backgroundColor: cat.color + '18', color: cat.color }}
+                          >
+                            {cat.name}
+                          </span>
+                        ) : null
+                      })()}
                     </div>
                   </div>
 
