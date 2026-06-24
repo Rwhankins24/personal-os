@@ -5,9 +5,10 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import {
   getStrategicDecisions, createStrategicDecision,
   updateStrategicDecision, deleteStrategicDecision,
-  getObservations, createObservation, deleteObservation,
+  getObservations, createObservation, updateObservation, deleteObservation,
 } from '../lib/api'
 import { useToast } from '../contexts/ToastContext'
+import EntityCategoryPicker from '../components/EntityCategoryPicker'
 
 dayjs.extend(relativeTime)
 
@@ -411,6 +412,11 @@ function ObservationsPanel() {
     onSuccess: () => qc.invalidateQueries(['observations']),
   })
 
+  const updateMut = useMutation({
+    mutationFn: ({ id, data }) => updateObservation(id, data),
+    onSuccess: () => qc.invalidateQueries(['observations']),
+  })
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
       <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
@@ -465,6 +471,14 @@ function ObservationsPanel() {
                   }`}>{o.source_type === 'ai_nightly' ? 'AI' : o.source_type}</span>
                   <span className="text-xs text-gray-400">{dayjs(o.created_at).fromNow()}</span>
                   {o.projects?.name && <span className="text-xs text-gray-400">{o.projects.name}</span>}
+                  <span onClick={e => e.stopPropagation()}>
+                    <EntityCategoryPicker
+                      entityId={o.id}
+                      currentCategoryId={o.meeting_category_id || null}
+                      onAssign={(catId) => updateMut.mutate({ id: o.id, data: { meeting_category_id: catId } })}
+                      align="right"
+                    />
+                  </span>
                 </div>
               </div>
               <button

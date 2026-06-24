@@ -85,6 +85,61 @@ module.exports = async (req, res) => {
       return res.status(201).json(data)
     }
 
+    // ── PATCH — update an observation (e.g. assign meeting_category_id) ────────
+    if (req.method === 'PATCH') {
+      const { id } = req.query
+      if (!id) return res.status(400).json({ error: 'id required' })
+
+      const payload = { ...req.body, updated_at: new Date().toISOString() }
+      const { data, error } = await supabase
+        .from('observations')
+        .update(payload)
+        .eq('id', id)
+        .select()
+        .single()
+      if (error) throw error
+
+      // ── Pod routing on category assignment ───────────────────────────────
+      if (payload.meeting_category_id) {
+        try {
+          const { data: pod } = await supabase
+            .from('topic_pods')
+            .select('id, name')
+            .eq('category_id', payload.meeting_category_id)
+            .eq('status', 'active')
+            .maybeSingle()
+
+          if (pod) {
+            const { data: existing } = await supabase
+              .from('topic_pod_content')
+              .select('id')
+              .eq('pod_id', pod.id)
+              .eq('observation_id', id)
+              .maybeSingle()
+
+            if (!existing) {
+              await supabase.from('topic_pod_content').insert({
+                pod_id:         pod.id,
+                content_type:   'observation',
+                title:          `Observation — ${new Date(data.created_at).toLocaleDateString()}`,
+                raw_text:       data.content || '',
+                extracted_points: [{ point: data.content, significance: 'medium', tags: ['observation'] }],
+                source_label:   'Journal observation',
+                observation_id: id,
+              })
+              await supabase.from('topic_pods')
+                .update({ updated_at: new Date().toISOString() })
+                .eq('id', pod.id)
+            }
+          }
+        } catch (podErr) {
+          console.error('Observation pod routing error:', podErr.message)
+        }
+      }
+
+      return res.json(data)
+    }
+
     // ── DELETE ────────────────────────────────────────────────────────────────
     if (req.method === 'DELETE') {
       const { id } = req.query

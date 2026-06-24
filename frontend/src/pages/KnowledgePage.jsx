@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import EntityCategoryPicker from '../components/EntityCategoryPicker'
 import {
   getKnowledge, createKnowledge, updateKnowledge, deleteKnowledge,
   extractKnowledgeDoc, extractKnowledgeText, getProjects,
@@ -576,7 +577,7 @@ function KnowledgeModal({ entry, projects, onClose, onSave }) {
 }
 
 // ── Entry Card ─────────────────────────────────────────────────
-function EntryCard({ entry, projects, onEdit, onDelete }) {
+function EntryCard({ entry, projects, onEdit, onDelete, onAssignCategory }) {
   const [expanded, setExpanded] = useState(false)
 
   const previewLen      = 180
@@ -612,6 +613,14 @@ function EntryCard({ entry, projects, onEdit, onDelete }) {
           className="flex items-center gap-1 flex-shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
           onClick={e => e.stopPropagation()}
         >
+          {onAssignCategory && (
+            <EntityCategoryPicker
+              entityId={entry.id}
+              currentCategoryId={entry.meeting_category_id || null}
+              onAssign={(catId) => onAssignCategory(entry.id, catId)}
+              align="right"
+            />
+          )}
           <button
             onClick={() => onEdit(entry)}
             className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100"
@@ -1018,6 +1027,7 @@ export default function KnowledgePage() {
                 projects={projects}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
+                onAssignCategory={(id, catId) => updateMut.mutate({ id, data: { meeting_category_id: catId } })}
               />
             ))}
           </div>

@@ -149,6 +149,7 @@ export const deleteStrategicDecision = (id) => api.delete(`/api/strategic-decisi
 export const getObservations   = (params = {}) => api.get('/api/observations', { params }).then(r => r.data)
 export const getHistoricalRecall = () => api.get('/api/observations?recall=true').then(r => r.data)
 export const createObservation = (data) => api.post('/api/observations', data).then(r => r.data)
+export const updateObservation = (id, data) => api.patch(`/api/observations?id=${id}`, data).then(r => r.data)
 export const deleteObservation = (id) => api.delete(`/api/observations?id=${id}`).then(r => r.data)
 
 // ── Meeting Categories ────────────────────────────────────────

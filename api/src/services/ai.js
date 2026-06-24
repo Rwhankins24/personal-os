@@ -1566,76 +1566,6 @@ Set ai_suggests_complete true only if there is clear evidence the item was compl
   } catch { return { changed: false } }
 }
 
-// ── extractCategoryFocusFromIntel ─────────────────────────────────────────────
-// Lightweight secondary-category pass. Takes already-extracted primary intel
-// and re-synthesizes it through a specific category lens. Used by the nightly
-// job to route content into linked topic pods.
-// Returns { title, raw_text, bullets: [{point, significance}] } or null.
-async function extractCategoryFocusFromIntel(meeting, intel, categoryName, categoryHint = '') {
-  if (!intel) return null
-
-  // Flatten primary intel into a compact text block for the focused re-synthesis
-  const intelSummary = [
-    intel.meeting_outcome?.summary && `OUTCOME: ${intel.meeting_outcome.summary}`,
-    (intel.decisions_made || []).length  && `DECISIONS:\n${intel.decisions_made.map(d => `- ${d.decision}`).join('\n')}`,
-    (intel.ryan_action_items || []).length && `RYAN ACTIONS:\n${intel.ryan_action_items.map(a => `- ${a.task}`).join('\n')}`,
-    (intel.others_action_items || []).length && `OTHERS' ACTIONS:\n${intel.others_action_items.map(a => `- ${a.person}: ${a.task}`).join('\n')}`,
-    (intel.technical_facts || []).length && `TECHNICAL:\n${intel.technical_facts.map(f => `- ${f.fact || f}`).join('\n')}`,
-    (intel.financial_signals || []).length && `FINANCIAL:\n${intel.financial_signals.map(f => `- ${f.signal || f}`).join('\n')}`,
-    (intel.risk_signals || []).length && `RISKS:\n${intel.risk_signals.map(r => `- ${r.risk || r}`).join('\n')}`,
-    (intel.schedule_signals || []).length && `SCHEDULE:\n${intel.schedule_signals.map(s => `- ${s.signal || s}`).join('\n')}`,
-    (intel.key_facts || []).length && `KEY FACTS:\n${intel.key_facts.map(f => `- ${f.fact || f}`).join('\n')}`,
-  ].filter(Boolean).join('\n\n')
-
-  if (!intelSummary.trim()) return null
-
-  const message = await withRetry(() =>
-    client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 600,
-      messages: [{
-        role: 'user',
-        content: `You are extracting specific intelligence signals from a construction meeting for a focused topic pod.
-
-Meeting: ${meeting.title || 'Untitled'}
-Date: ${(meeting.start_time || '').slice(0, 10)}
-${categoryHint}
-
-PRIMARY INTELLIGENCE ALREADY EXTRACTED:
-${intelSummary}
-
-Task: From the above intelligence, extract ONLY the signals directly relevant to "${categoryName}".
-Be specific and concrete. Ignore anything that doesn't directly relate to this category.
-If there is nothing clearly relevant, return null.
-
-Return JSON only:
-{
-  "relevant": true,
-  "bullets": [
-    {"point": "specific signal or fact", "significance": "high|medium|low"},
-    ...
-  ],
-  "summary": "1-2 sentence summary of what this meeting revealed from a ${categoryName} perspective"
-}
-Or if nothing is relevant: {"relevant": false}`
-      }]
-    })
-  )
-
-  try {
-    const text  = message.content[0].text
-    const clean = text.replace(/```json|```/g, '').trim()
-    const parsed = JSON.parse(clean)
-    if (!parsed.relevant || !parsed.bullets?.length) return null
-
-    return {
-      title:    `[${(meeting.start_time || '').slice(0, 10)}] ${meeting.title || 'Meeting'} — ${categoryName}`,
-      raw_text: parsed.summary || '',
-      bullets:  parsed.bullets,
-    }
-  } catch { return null }
-}
-
 module.exports = {
   buildRyanContext,
   buildProjectContext,
@@ -1658,6 +1588,5 @@ module.exports = {
   extractContactFromSignature,
   extractAllSignaturesFromThread,
   extractIntelligenceFromTranscript,
-  parsePlaudSummary,
-  extractCategoryFocusFromIntel,
+  parsePlaudSummary
 }

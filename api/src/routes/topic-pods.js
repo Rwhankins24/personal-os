@@ -287,7 +287,7 @@ module.exports = async (req, res) => {
       const { status = 'active' } = req.query
       let query = supabase
         .from('topic_pods')
-        .select('id, name, description, synthesis, synthesis_bullets, last_synthesized_at, last_researched_at, content_count, status, category_id, created_at, updated_at')
+        .select('id, name, description, synthesis, synthesis_bullets, last_synthesized_at, last_researched_at, content_count, status, created_at, updated_at')
         .order('updated_at', { ascending: false })
 
       if (status !== 'all') query = query.eq('status', status)

@@ -242,6 +242,52 @@ Return ONLY a valid JSON array. No explanation, no markdown, no wrapper object. 
         .select()
         .single()
       if (error) throw error
+
+      // ── Pod routing: if meeting_category_id was set, route to linked pod ──
+      if (payload.meeting_category_id) {
+        try {
+          const { data: pod } = await supabase
+            .from('topic_pods')
+            .select('id, name')
+            .eq('category_id', payload.meeting_category_id)
+            .eq('status', 'active')
+            .maybeSingle()
+
+          if (pod) {
+            // Only insert if not already routed
+            const { data: existing } = await supabase
+              .from('topic_pod_content')
+              .select('id')
+              .eq('pod_id', pod.id)
+              .eq('knowledge_base_id', id)
+              .maybeSingle()
+
+            if (!existing) {
+              const entry = data
+              await supabase.from('topic_pod_content').insert({
+                pod_id:           pod.id,
+                content_type:     'knowledge_link',
+                title:            entry.title || 'Knowledge Entry',
+                raw_text:         [entry.context, entry.resolution, entry.our_position]
+                  .filter(Boolean).join('\n\n').slice(0, 2000),
+                extracted_points: (entry.key_points || []).map(p => ({
+                  point: typeof p === 'string' ? p : p.point || JSON.stringify(p),
+                  significance: 'medium',
+                  tags: [entry.category || 'knowledge'],
+                })),
+                source_label:     `Knowledge: ${entry.title || 'Untitled'}`,
+                knowledge_base_id: id,
+              })
+              await supabase.from('topic_pods')
+                .update({ updated_at: new Date().toISOString() })
+                .eq('id', pod.id)
+            }
+          }
+        } catch (podErr) {
+          console.error('Knowledge pod routing error:', podErr.message)
+        }
+      }
+
       return res.json(data)
     }
 
