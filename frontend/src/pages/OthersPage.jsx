@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { getOthersCommitments, updateOthersCommitment, getContacts, createContact, createTask, getProjects } from '../lib/api'
 import { useToast } from '../contexts/ToastContext'
+import WorkspaceBar from '../components/WorkspaceBar'
+import { useStore } from '../store/useStore'
 
 function isSpeaker(name) {
   if (!name) return true
@@ -118,10 +120,14 @@ export default function OthersPage() {
 
   const toast = useToast()
 
-  const { data: items, isLoading } = useQuery({
-    queryKey: ['others-commitments'],
-    queryFn: () => getOthersCommitments('open'),
+  const { workspace, workspaces } = useStore()
+  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
+
+  const { data: commitments = [], isLoading } = useQuery({
+    queryKey: ['others', workspaceId],
+    queryFn: () => getOthersCommitments('all', workspaceId),
   })
+  const items = commitments
 
   const { data: contacts } = useQuery({
     queryKey: ['contacts'],
@@ -442,6 +448,7 @@ const handleBulkPromoteToMyTasks = async () => {
             ← Back
           </button>
           <h1 className="text-sm font-semibold text-[#1a1a18]">Waiting on Others</h1>
+          <WorkspaceBar compact />
           <button
             onClick={() => setShowCompleted(v => !v)}
             className={`text-xs px-2.5 py-1 rounded-full border transition-all flex-1 text-left ${

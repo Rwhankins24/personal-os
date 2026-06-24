@@ -14,6 +14,8 @@ import {
   getKnowledge,
   getObservations,
 } from '../lib/api'
+import WorkspaceBar from '../components/WorkspaceBar'
+import { useStore } from '../store/useStore'
 
 dayjs.extend(duration)
 
@@ -217,6 +219,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
     }
   }
 
+  // ── Workspace ─────────────────────────────────────────────────
+  const { workspaces } = useStore()
+
   // ── Shared picker styles ──────────────────────────────────────
   const btnBase  = 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs text-[#1a1a18] hover:bg-[#f5f4f2] rounded-lg transition-colors'
   const labelCls = 'text-[9px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1'
@@ -310,6 +315,30 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
 
   return (
     <div className="w-52 flex-shrink-0 border-l border-[#f0f0ee] px-3 py-3 bg-[#fafaf8] space-y-3">
+
+      {/* ── Workspace ───────────────────────────────────────────── */}
+      <div>
+        <p className={labelCls}>Workspace</p>
+        <div className="flex gap-1 flex-wrap mt-1">
+          {workspaces.map(ws => (
+            <button
+              key={ws.id}
+              onClick={async () => {
+                await updateMeetingNote(meeting.id, { workspace_id: ws.id })
+                onUpdate(meeting.id, { workspace_id: ws.id })
+              }}
+              className={`text-[10px] px-2 py-0.5 rounded-full border transition-colors ${
+                meeting.workspace_id === ws.id
+                  ? 'text-white border-transparent'
+                  : 'text-[#6b6b67] border-[#d5d5d3] hover:border-[#9b9b97]'
+              }`}
+              style={meeting.workspace_id === ws.id ? { backgroundColor: ws.color, borderColor: ws.color } : {}}
+            >
+              {ws.name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* ── Project ─────────────────────────────────────────────── */}
       <div>
@@ -693,8 +722,15 @@ export default function MeetingsPage() {
   const [createForMeeting,  setCreateForMeeting]  = useState(null)
   const [creating,          setCreating]          = useState(false)
 
+  // ── Workspace context ─────────────────────────────────────────
+  const { workspace, workspaces } = useStore()
+  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
+
   // ── Queries ───────────────────────────────────────────────────
-  const { data: meetings      = [], isLoading } = useQuery({ queryKey: ['meeting-notes'],            queryFn: getMeetingNotes })
+  const { data: meetings      = [], isLoading } = useQuery({
+    queryKey: ['meeting-notes', workspaceId],
+    queryFn:  () => getMeetingNotes(workspaceId ? { workspace_id: workspaceId } : {}),
+  })
   const { data: projects      = [] }            = useQuery({ queryKey: ['projects'],                 queryFn: getProjects })
   const { data: allTasks      = [] }            = useQuery({ queryKey: ['tasks'],                    queryFn: getTasks })
   const { data: allOthers     = [] }            = useQuery({ queryKey: ['others-commitments-all'],   queryFn: () => getOthersCommitments('all') })
@@ -707,10 +743,10 @@ export default function MeetingsPage() {
 
   // ── Cache update helper ───────────────────────────────────────
   const handleMeetingUpdate = useCallback((meetingId, updates) => {
-    qc.setQueryData(['meeting-notes'], old =>
+    qc.setQueryData(['meeting-notes', workspaceId], old =>
       (old || []).map(m => m.id === meetingId ? { ...m, ...updates } : m)
     )
-  }, [qc])
+  }, [qc, workspaceId])
 
   // ── Bulk select ───────────────────────────────────────────────
   const toggleSelect = (id) => setSelected(prev => {
@@ -743,7 +779,7 @@ export default function MeetingsPage() {
     setBulkSaving(true)
     try {
       await Promise.all([...selected].map(id => updateMeetingNote(id, { project_id: bulkProject })))
-      qc.setQueryData(['meeting-notes'], old =>
+      qc.setQueryData(['meeting-notes', workspaceId], old =>
         (old || []).map(m => selected.has(m.id) ? { ...m, project_id: bulkProject } : m)
       )
       setSelected(new Set()); setBulkProject('')
@@ -845,6 +881,7 @@ export default function MeetingsPage() {
             <div className="flex items-center gap-3">
               <button onClick={() => navigate('/')} className="text-[#6b6b67] hover:text-[#1a1a18] transition-colors">←</button>
               <h1 className="text-lg font-semibold text-[#1a1a18]">Meetings</h1>
+              <WorkspaceBar compact />
             </div>
             <div className="flex items-center gap-2">
               {selected.size > 0 ? (

@@ -5,6 +5,8 @@ import dayjs from 'dayjs'
 import { getTasks, updateTask, deleteTask, getProjects } from '../lib/api'
 import { useToast } from '../contexts/ToastContext'
 import InlineEdit from '../components/InlineEdit'
+import WorkspaceBar from '../components/WorkspaceBar'
+import { useStore } from '../store/useStore'
 
 // ── Potential Duplicates Section ──────────────────────────────────
 function PotentialDuplicatesSection({ allTasks, update }) {
@@ -373,6 +375,9 @@ function TaskContextPanel({ task, allTasks, projects, update }) {
 }
 
 export default function TasksPage() {
+  const { workspace, workspaces } = useStore()
+  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
+
   const navigate = useNavigate()
   const qc = useQueryClient()
   const toast = useToast()
@@ -459,8 +464,8 @@ export default function TasksPage() {
   }
 
   const { data: tasks, isLoading } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: getTasks,
+    queryKey: ['tasks', workspaceId],
+    queryFn: () => getTasks(workspaceId ? { workspace_id: workspaceId } : {}),
   })
 
   const { data: projects } = useQuery({
@@ -639,6 +644,7 @@ export default function TasksPage() {
           )}
           <span className="text-xs text-[#9b9b97] flex-shrink-0">{sorted.length} items</span>
         </div>
+        <WorkspaceBar compact />
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-4 pb-36 space-y-3">

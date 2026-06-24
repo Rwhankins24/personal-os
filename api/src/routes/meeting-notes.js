@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
   // ── PATCH — update a meeting note (user_notes, project_id, etc.)
   if (req.method === 'PATCH') {
     if (!id) return res.status(400).json({ error: 'id required' })
-    const allowed = ['user_notes', 'project_id', 'title', 'linked_pod_id', 'linked_observation_id', 'linked_knowledge_id']
+    const allowed = ['user_notes', 'project_id', 'title', 'linked_pod_id', 'linked_observation_id', 'linked_knowledge_id', 'workspace_id']
     const updates = {}
     for (const key of allowed) {
       if (key in req.body) updates[key] = req.body[key]
@@ -214,11 +214,14 @@ module.exports = async (req, res) => {
   // ── GET all meetings (list)
   if (req.method === 'GET') {
     try {
-      const { data, error } = await supabase
+      const { workspace_id } = req.query
+      let listQuery = supabase
         .from('meeting_notes')
         .select('*')
         .order('meeting_date', { ascending: false })
         .order('start_time', { ascending: false })
+      if (workspace_id) listQuery = listQuery.eq('workspace_id', workspace_id)
+      const { data, error } = await listQuery
 
       if (error) throw error
       return res.json(data)

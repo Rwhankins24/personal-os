@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
   try {
     if (req.method === 'GET') {
-      const { status } = req.query
+      const { status, workspace_id } = req.query
       const filterStatus = status || 'open'
 
       let query = supabase
@@ -28,6 +28,8 @@ module.exports = async (req, res) => {
       if (filterStatus !== 'all') {
         query = query.eq('status', filterStatus)
       }
+
+      if (workspace_id) query = query.eq('workspace_id', workspace_id)
 
       const { data, error } = await query
 
@@ -61,9 +63,18 @@ module.exports = async (req, res) => {
 
     if (req.method === 'PATCH') {
       const { id } = req.query
+      const allowed = [
+        'title', 'committed_by_name', 'committed_by_email', 'due_date',
+        'urgency', 'status', 'context', 'meeting_note_id', 'source_label',
+        'workspace_id'
+      ]
+      const updates = {}
+      for (const key of allowed) {
+        if (key in req.body) updates[key] = req.body[key]
+      }
       const { data, error } = await supabase
         .from('others_commitments')
-        .update(req.body)
+        .update(updates)
         .eq('id', id)
         .select()
         .single()

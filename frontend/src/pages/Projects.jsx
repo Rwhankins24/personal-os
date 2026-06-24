@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getProjects, createProject, mergeProject } from '../lib/api'
+import WorkspaceBar from '../components/WorkspaceBar'
+import { useStore } from '../store/useStore'
 
 // ── Tag Input ─────────────────────────────────────────────────
 function TagInput({ tags, onChange, placeholder = 'Add keyword…' }) {
@@ -79,6 +81,8 @@ function StatusBadge({ status }) {
 function NewProjectModal({ onClose }) {
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const { workspace, workspaces } = useStore()
+  const defaultWorkspaceId = workspaces.find(w => w.name === workspace && workspace !== 'all')?.id || null
   const [form, setForm] = useState({
     name: '',
     client: '',
@@ -86,6 +90,7 @@ function NewProjectModal({ onClose }) {
     status: 'active',
     keywords: [],
     description: '',
+    workspace_id: defaultWorkspaceId,
   })
   const [error, setError] = useState('')
 
@@ -108,6 +113,7 @@ function NewProjectModal({ onClose }) {
       status: form.status,
       keywords: form.keywords,
       description: form.description.trim() || null,
+      workspace_id: form.workspace_id || null,
     })
   }
 
@@ -192,6 +198,29 @@ function NewProjectModal({ onClose }) {
             />
             <p className="text-xs text-gray-400 mt-1">These drive AI email + meeting matching. Use project name, client name, location, etc.</p>
           </div>
+
+          {workspaces.length > 0 && (
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1.5">Workspace</label>
+              <div className="flex gap-2">
+                {workspaces.map(ws => (
+                  <button
+                    key={ws.id}
+                    type="button"
+                    onClick={() => setForm(f => ({ ...f, workspace_id: ws.id }))}
+                    className="text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors"
+                    style={
+                      form.workspace_id === ws.id
+                        ? { backgroundColor: ws.color, borderColor: ws.color, color: 'white' }
+                        : { borderColor: '#e5e7eb', color: '#6b7280' }
+                    }
+                  >
+                    {ws.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {error && <p className="text-xs text-red-600">{error}</p>}
 
@@ -330,9 +359,12 @@ export default function Projects() {
   const [showModal, setShowModal] = useState(false)
   const [mergeWinner, setMergeWinner] = useState(null) // project to merge INTO
 
+  const { workspace, workspaces } = useStore()
+  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
+
   const { data: projects = [], isLoading } = useQuery({
-    queryKey: ['projects'],
-    queryFn: getProjects,
+    queryKey: ['projects', workspaceId],
+    queryFn: () => getProjects(workspaceId ? { workspace_id: workspaceId } : {}),
     refetchInterval: 300000,
   })
 
@@ -361,12 +393,15 @@ export default function Projects() {
             </Link>
             <span className="font-bold text-[#1a1a18] text-base tracking-tight">Projects</span>
           </div>
-          <button
-            onClick={() => setShowModal(true)}
-            className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-[#2a2a28]"
-          >
-            <span className="text-lg leading-none">+</span> New Project
-          </button>
+          <div className="flex items-center gap-2">
+            <WorkspaceBar compact />
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-[#2a2a28]"
+            >
+              <span className="text-lg leading-none">+</span> New Project
+            </button>
+          </div>
         </div>
       </div>
 

@@ -27,6 +27,7 @@ const leads               = require('./routes/leads')
 const strategicDecisions  = require('./routes/strategic-decisions')
 const observations        = require('./routes/observations')
 const meetingCategories   = require('./routes/meeting-categories')
+const workspaces          = require('./routes/workspaces')
 const health              = require('./health')
 
 const CORS_HEADERS = {
@@ -48,6 +49,7 @@ module.exports = async (req, res) => {
   const path = req.url.split('?')[0]
 
   if (path === '/api/health')                    return health(req, res)
+  if (matchRoute(path, '/api/workspaces'))       return workspaces(req, res)
   if (matchRoute(path, '/api/tasks'))            return tasks(req, res)
   if (matchRoute(path, '/api/events'))           return events(req, res)
   if (matchRoute(path, '/api/emails'))           return emails(req, res)

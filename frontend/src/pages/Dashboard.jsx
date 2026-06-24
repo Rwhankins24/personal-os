@@ -25,6 +25,7 @@ import {
 import SyncButton from '../components/SyncButton'
 import MeetingSummary from '../components/MeetingSummary'
 import MeetingUpload from '../components/MeetingUpload'
+import WorkspaceBar from '../components/WorkspaceBar'
 
 dayjs.extend(relativeTime)
 
@@ -194,27 +195,7 @@ function PillBadge({ label, color = 'gray' }) {
   )
 }
 
-// ── Workspace tab bar ──────────────────────────────────────────
-function WorkspaceBar({ workspace, setWorkspace }) {
-  const tabs = ['all', 'work', 'personal', 'other']
-  return (
-    <div className="flex items-center gap-1">
-      {tabs.map(tab => (
-        <button
-          key={tab}
-          onClick={() => setWorkspace(tab)}
-          className={`px-3 py-1 rounded-lg text-xs font-medium transition-all capitalize ${
-            workspace === tab
-              ? 'bg-[#1a1a18] text-white'
-              : 'text-[#6b6b67] hover:text-[#1a1a18] hover:bg-gray-100'
-          }`}
-        >
-          {tab}
-        </button>
-      ))}
-    </div>
-  )
-}
+// WorkspaceBar is now a shared component in src/components/WorkspaceBar.jsx
 
 // ── Pipeline status banner ─────────────────────────────────────
 function PipelineBanner() {
@@ -1712,7 +1693,6 @@ function AIJobButton() {
 // ── Dashboard ──────────────────────────────────────────────────
 export default function Dashboard() {
   const navigate = useNavigate()
-  const [workspace, setWorkspace] = useState('all')
 
   // ── Lifted expand/collapse state (still used for in-page panels) ──
   const [showAllTasks,     setShowAllTasks]     = useState(false)
@@ -1773,7 +1753,7 @@ export default function Dashboard() {
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-3">
             <span className="font-bold text-[#1a1a18] text-base tracking-tight">Personal OS</span>
-            <WorkspaceBar workspace={workspace} setWorkspace={setWorkspace} />
+            <WorkspaceBar />
             <Link
               to="/projects"
               className="text-xs text-[#6b6b67] hover:text-[#1a1a18] px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"

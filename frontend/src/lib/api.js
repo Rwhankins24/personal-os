@@ -3,6 +3,9 @@ import axios from 'axios'
 const BASE = import.meta.env.VITE_API_URL || 'https://personal-os-five-black.vercel.app'
 const TRIGGER_SECRET = import.meta.env.VITE_TRIGGER_SECRET || ''
 
+export const getWorkspaces = () =>
+  fetch(`${BASE}/api/workspaces`).then(r => r.json())
+
 export const api = axios.create({ baseURL: BASE })
 
 // Auth header for protected routes (pipeline)
@@ -11,7 +14,10 @@ const authHeaders = () => ({
 })
 
 // ── Tasks ─────────────────────────────────────────────────────
-export const getTasks       = () => api.get('/api/tasks').then(r => r.data)
+export const getTasks       = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/tasks${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const getTask        = (id) => api.get(`/api/tasks?id=${id}`).then(r => r.data)
 export const createTask     = (data) => api.post('/api/tasks', data).then(r => r.data)
 export const updateTask     = (id, data) => api.patch(`/api/tasks?id=${id}`, data).then(r => r.data)
@@ -31,14 +37,22 @@ export const createCommitment  = (data) => api.post('/api/commitments', data).th
 export const updateCommitment  = (id, data) => api.patch(`/api/commitments?id=${id}`, data).then(r => r.data)
 
 // ── Others' Commitments ───────────────────────────────────────
-export const getOthersCommitments    = (status = 'open') =>
-  api.get(`/api/others-commitments?status=${status}`).then(r => r.data)
+export const getOthersCommitments    = (status = 'open', workspaceId = null) => {
+  const params = {}
+  if (status && status !== 'all') params.status = status
+  if (workspaceId) params.workspace_id = workspaceId
+  const qs = new URLSearchParams(params).toString()
+  return fetch(`${BASE}/api/others-commitments${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const createOthersCommitment  = (data) => api.post('/api/others-commitments', data).then(r => r.data)
 export const updateOthersCommitment  = (id, data) =>
   api.patch(`/api/others-commitments?id=${id}`, data).then(r => r.data)
 
 // ── Projects ──────────────────────────────────────────────────
-export const getProjects    = () => api.get('/api/projects').then(r => r.data)
+export const getProjects    = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/projects${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const getProject     = (id) => api.get(`/api/projects?id=${id}`).then(r => r.data)
 export const createProject  = (data) => api.post('/api/projects', data).then(r => r.data)
 export const updateProject  = (id, data) => api.patch(`/api/projects?id=${id}`, data).then(r => r.data)
@@ -56,7 +70,10 @@ export const updateContact  = (id, data) => api.patch(`/api/contacts?id=${id}`, 
 export const deleteContact  = (id) => api.delete(`/api/contacts?id=${id}`).then(r => r.data)
 
 // ── Meeting Notes ─────────────────────────────────────────────
-export const getMeetingNotes   = ()         => api.get('/api/meeting-notes').then(r => r.data)
+export const getMeetingNotes   = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/meeting-notes${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const getMeetingNote    = (id)       => api.get(`/api/meeting-notes?id=${id}`).then(r => r.data)
 export const updateMeetingNote = (id, data) => api.patch(`/api/meeting-notes?id=${id}`, data).then(r => r.data)
 export const uploadMeetingFile = (formData) => api.post('/api/upload-meeting', formData, {
@@ -68,8 +85,10 @@ export const getCaptures    = ()     => api.get('/api/captures').then(r => r.dat
 export const createCapture  = (data) => api.post('/api/captures', data).then(r => r.data)
 
 // ── Pending Decisions ─────────────────────────────────────────
-export const getPendingDecisions    = () =>
-  api.get('/api/pending-decisions').then(r => r.data)
+export const getPendingDecisions    = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/pending-decisions${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const createPendingDecision  = (data) => api.post('/api/pending-decisions', data).then(r => r.data)
 export const updatePendingDecision  = (id, data) =>
   api.patch(`/api/pending-decisions?id=${id}`, data).then(r => r.data)
