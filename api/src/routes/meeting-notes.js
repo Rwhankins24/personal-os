@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
   // ── PATCH — update a meeting note (user_notes, project_id, etc.)
   if (req.method === 'PATCH') {
     if (!id) return res.status(400).json({ error: 'id required' })
-    const allowed = ['user_notes', 'project_id', 'title']
+    const allowed = ['user_notes', 'project_id', 'title', 'linked_pod_id', 'linked_observation_id', 'linked_knowledge_id']
     const updates = {}
     for (const key of allowed) {
       if (key in req.body) updates[key] = req.body[key]
