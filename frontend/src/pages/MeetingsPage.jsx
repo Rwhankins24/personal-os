@@ -13,6 +13,7 @@ import {
   getTopicPods, createTopicPod,
   getKnowledge,
   getObservations,
+  getWorkspaces,
 } from '../lib/api'
 import WorkspaceBar from '../components/WorkspaceBar'
 import { useStore } from '../store/useStore'
@@ -220,7 +221,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   }
 
   // ── Workspace ─────────────────────────────────────────────────
-  const { workspaces } = useStore()
+  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
 
   // ── Shared picker styles ──────────────────────────────────────
   const btnBase  = 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs text-[#1a1a18] hover:bg-[#f5f4f2] rounded-lg transition-colors'
@@ -723,7 +724,8 @@ export default function MeetingsPage() {
   const [creating,          setCreating]          = useState(false)
 
   // ── Workspace context ─────────────────────────────────────────
-  const { workspace, workspaces } = useStore()
+  const { workspace } = useStore()
+  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
   const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   // ── Queries ───────────────────────────────────────────────────

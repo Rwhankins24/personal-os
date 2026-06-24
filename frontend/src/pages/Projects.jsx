@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getProjects, createProject, mergeProject } from '../lib/api'
+import { getProjects, createProject, mergeProject, getWorkspaces } from '../lib/api'
 import WorkspaceBar from '../components/WorkspaceBar'
 import { useStore } from '../store/useStore'
 
@@ -81,7 +81,8 @@ function StatusBadge({ status }) {
 function NewProjectModal({ onClose }) {
   const navigate = useNavigate()
   const qc = useQueryClient()
-  const { workspace, workspaces } = useStore()
+  const { workspace } = useStore()
+  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
   const defaultWorkspaceId = workspaces.find(w => w.name === workspace && workspace !== 'all')?.id || null
   const [form, setForm] = useState({
     name: '',
@@ -359,7 +360,8 @@ export default function Projects() {
   const [showModal, setShowModal] = useState(false)
   const [mergeWinner, setMergeWinner] = useState(null) // project to merge INTO
 
-  const { workspace, workspaces } = useStore()
+  const { workspace } = useStore()
+  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
   const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   const { data: projects = [], isLoading } = useQuery({

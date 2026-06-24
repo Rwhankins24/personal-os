@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getOthersCommitments, updateOthersCommitment, getContacts, createContact, createTask, getProjects } from '../lib/api'
+import { getOthersCommitments, updateOthersCommitment, getContacts, createContact, createTask, getProjects, getWorkspaces } from '../lib/api'
 import { useToast } from '../contexts/ToastContext'
 import WorkspaceBar from '../components/WorkspaceBar'
 import { useStore } from '../store/useStore'
@@ -120,7 +120,8 @@ export default function OthersPage() {
 
   const toast = useToast()
 
-  const { workspace, workspaces } = useStore()
+  const { workspace } = useStore()
+  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
   const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   const { data: commitments = [], isLoading } = useQuery({
