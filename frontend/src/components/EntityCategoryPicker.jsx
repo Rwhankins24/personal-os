@@ -103,7 +103,8 @@ export default function EntityCategoryPicker({ entityId, currentCategoryId, onAs
             {currentCategory.name}
             {linkedPodName && <span className="opacity-60">→ {linkedPodName}</span>}
             <span
-              onMouseDown={e => { e.stopPropagation(); onAssign(null) }}
+              onClick={e => { e.stopPropagation(); onAssign(null) }}
+              onMouseDown={e => e.stopPropagation()}
               className="ml-0.5 hover:opacity-60 cursor-pointer"
             >×</span>
           </span>

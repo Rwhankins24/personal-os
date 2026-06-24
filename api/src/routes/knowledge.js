@@ -270,7 +270,7 @@ Return ONLY a valid JSON array. No explanation, no markdown, no wrapper object. 
                 title:            entry.title || 'Knowledge Entry',
                 raw_text:         [entry.context, entry.resolution, entry.our_position]
                   .filter(Boolean).join('\n\n').slice(0, 2000),
-                extracted_points: (entry.key_points || []).map(p => ({
+                extracted_points: (entry.applies_to || []).map(p => ({
                   point: typeof p === 'string' ? p : p.point || JSON.stringify(p),
                   significance: 'medium',
                   tags: [entry.category || 'knowledge'],

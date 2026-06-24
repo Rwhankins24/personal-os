@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
       const { id } = req.query
       if (!id) return res.status(400).json({ error: 'id required' })
 
-      const payload = { ...req.body, updated_at: new Date().toISOString() }
+      const payload = { ...req.body }
       const { data, error } = await supabase
         .from('observations')
         .update(payload)

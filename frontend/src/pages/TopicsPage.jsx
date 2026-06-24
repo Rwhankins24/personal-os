@@ -1,9 +1,10 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   getTopicPods, createTopicPod, updateTopicPod, deleteTopicPod,
   getPodContent, addPodText, addPodFile, deletePodContent, synthesizePod,
+  getMeetingCategories,
 } from '../lib/api'
 
 // ── Relative time helper ───────────────────────────────────────
@@ -222,12 +223,45 @@ function PodDetail({ pod, onBack, onUpdated }) {
   const [view,  setView]    = useState('synthesis') // 'synthesis' | 'feed'
   const [addOpen, setAddOpen] = useState(false)
   const [synthesizing, setSynthesizing] = useState(false)
+  const [categoryPickerOpen, setCategoryPickerOpen] = useState(false)
+  const [categoryQuery, setCategoryQuery] = useState('')
+  const catPickerRef = useRef(null)
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (catPickerRef.current && !catPickerRef.current.contains(e.target)) {
+        setCategoryPickerOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   const { data: contents = [], isLoading: loadingContent, refetch: refetchContent } = useQuery({
     queryKey: ['pod-content', pod.id],
     queryFn:  () => getPodContent(pod.id),
     staleTime: 1000 * 30,
   })
+
+  // All categories for the link picker
+  const { data: allCategories = [] } = useQuery({
+    queryKey: ['meeting-categories', null],
+    queryFn:  () => getMeetingCategories(null),
+  })
+
+  const linkedCategory = allCategories.find(c => c.id === pod.category_id) || null
+
+  const updatePodMut = useMutation({
+    mutationFn: (updates) => updateTopicPod(pod.id, updates),
+    onSuccess:  () => {
+      qc.invalidateQueries({ queryKey: ['topic-pods'] })
+      onUpdated()
+    },
+  })
+
+  const filteredCategories = categoryQuery.trim()
+    ? allCategories.filter(c => c.name.toLowerCase().includes(categoryQuery.toLowerCase()))
+    : allCategories
 
   const deleteMut = useMutation({
     mutationFn: (contentId) => deletePodContent(pod.id, contentId),
@@ -265,6 +299,69 @@ function PodDetail({ pod, onBack, onUpdated }) {
                 {pod.last_researched_at && (
                   <span className="text-xs text-green-400">🔍 Researched {timeAgo(pod.last_researched_at)}</span>
                 )}
+
+                {/* Category link — auto-routing indicator */}
+                <div className="relative" ref={catPickerRef}>
+                  <button
+                    onClick={() => setCategoryPickerOpen(v => !v)}
+                    className="flex items-center gap-1 text-xs transition-colors"
+                    title="Link this pod to a category — meetings with this category will auto-route here"
+                  >
+                    {linkedCategory ? (
+                      <span
+                        className="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                        style={{ backgroundColor: linkedCategory.color + '28', color: linkedCategory.color, border: `1px solid ${linkedCategory.color}50` }}
+                      >
+                        ⟲ {linkedCategory.name}
+                      </span>
+                    ) : (
+                      <span className="text-[#8899aa] hover:text-[#C9A84C] text-[10px]">+ link category</span>
+                    )}
+                  </button>
+
+                  {categoryPickerOpen && (
+                    <div className="absolute left-0 top-full mt-1 z-50 w-52 bg-white border border-[#e5e5e3] rounded-xl shadow-lg py-2">
+                      <div className="px-2 pb-1.5">
+                        <input
+                          autoFocus
+                          value={categoryQuery}
+                          onChange={e => setCategoryQuery(e.target.value)}
+                          placeholder="Search categories…"
+                          className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-[#fafaf8]"
+                        />
+                      </div>
+                      <div className="max-h-48 overflow-y-auto px-1">
+                        {linkedCategory && (
+                          <button
+                            onMouseDown={e => { e.preventDefault(); updatePodMut.mutate({ category_id: null }); setCategoryPickerOpen(false) }}
+                            className="w-full text-left px-3 py-1.5 text-xs text-red-500 hover:bg-red-50 rounded-lg"
+                          >
+                            ✕ Remove link
+                          </button>
+                        )}
+                        {filteredCategories.map(cat => (
+                          <button
+                            key={cat.id}
+                            onMouseDown={e => {
+                              e.preventDefault()
+                              updatePodMut.mutate({ category_id: cat.id })
+                              setCategoryPickerOpen(false)
+                              setCategoryQuery('')
+                            }}
+                            className="w-full flex items-center gap-2.5 px-3 py-1.5 text-left hover:bg-[#f5f4f2] rounded-lg"
+                          >
+                            <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: cat.color }} />
+                            <span className="text-xs text-[#1a1a18]">{cat.name}</span>
+                            {cat.id === pod.category_id && <span className="ml-auto text-[10px] text-blue-500">✓</span>}
+                          </button>
+                        ))}
+                        {filteredCategories.length === 0 && (
+                          <div className="px-3 py-2 text-xs text-[#9b9b97]">No matches</div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <button

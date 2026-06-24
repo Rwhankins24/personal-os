@@ -206,6 +206,60 @@ module.exports = async (req, res) => {
       return res.status(204).end()
     }
 
+    // ── Merge categories ──────────────────────────────────────────────────────
+    // POST /api/meeting-categories?merge=1  body: { source_id, target_id }
+    // Transfers all primary + secondary assignments from source → target, then
+    // deletes the source category. Safe across all entity types that follow the
+    // same junction table pattern.
+    if (req.method === 'POST' && req.query.merge) {
+      const { source_id, target_id } = req.body
+      if (!source_id || !target_id) return res.status(400).json({ error: 'source_id and target_id required' })
+      if (source_id === target_id)  return res.status(400).json({ error: 'source and target must differ' })
+
+      // 1. Reassign primary on meeting_notes
+      const { error: e1 } = await supabase
+        .from('meeting_notes')
+        .update({ primary_category_id: target_id, needs_ai_reprocess: true })
+        .eq('primary_category_id', source_id)
+      if (e1) throw e1
+
+      // 2. Fetch source secondary rows so we can re-insert under target
+      const { data: srcRows, error: e2 } = await supabase
+        .from('meeting_note_categories')
+        .select('meeting_note_id, assigned_by')
+        .eq('category_id', source_id)
+      if (e2) throw e2
+
+      // 3. Upsert each row under target (ignore conflicts — meeting already has target)
+      if (srcRows && srcRows.length > 0) {
+        const inserts = srcRows.map(r => ({
+          meeting_note_id: r.meeting_note_id,
+          category_id:     target_id,
+          assigned_by:     r.assigned_by || 'merge',
+        }))
+        const { error: e3 } = await supabase
+          .from('meeting_note_categories')
+          .upsert(inserts, { onConflict: 'meeting_note_id,category_id', ignoreDuplicates: true })
+        if (e3) throw e3
+      }
+
+      // 4. Delete all source secondary rows
+      const { error: e4 } = await supabase
+        .from('meeting_note_categories')
+        .delete()
+        .eq('category_id', source_id)
+      if (e4) throw e4
+
+      // 5. Delete the source category itself
+      const { error: e5 } = await supabase
+        .from('meeting_categories')
+        .delete()
+        .eq('id', source_id)
+      if (e5) throw e5
+
+      return res.json({ ok: true, transferred: srcRows?.length || 0 })
+    }
+
     return res.status(405).json({ error: 'Method not allowed' })
 
   } catch (err) {
