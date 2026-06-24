@@ -9,12 +9,11 @@ import {
   getOthersCommitments, updateOthersCommitment, createOthersCommitment,
   getMeetingCategories, getMeetingCategoryAssignments,
   assignPrimaryCategory, addSecondaryCategory, removeSecondaryCategory,
-  createMeetingCategory,
+  createMeetingCategory, setInformationOnly,
   getTopicPods, createTopicPod,
   getKnowledge,
   getObservations,
 } from '../lib/api'
-import MeetingSummary from '../components/MeetingSummary'
 
 dayjs.extend(duration)
 
@@ -602,7 +601,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
 
       {/* ── Knowledge ────────────────────────────────────────────── */}
       <div>
-        <p className={labelCls}>Knowledge</p>
+        <p className={labelCls}>Knowledge entry</p>
         <PickerPopover
           open={knowOpen}
           onClose={() => { setKnowOpen(false); setKnowQ('') }}
@@ -650,6 +649,26 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             {filteredKnow.length === 0 && <div className="px-2 py-2 text-[10px] text-[#9b9b97]">No entries</div>}
           </div>
         </PickerPopover>
+      </div>
+
+      {/* ── Info only toggle ─────────────────────────────────── */}
+      <div className="border-t border-[#e5e5e3] pt-3">
+        <div className="flex items-center justify-between">
+          <p className={labelCls}>Info only</p>
+          <button
+            onClick={async () => {
+              const next = !meeting.information_only
+              await setInformationOnly(meeting.id, next)
+              onUpdate(meeting.id, { information_only: next })
+            }}
+            className={`relative w-8 h-4 rounded-full transition-colors ${meeting.information_only ? 'bg-amber-400' : 'bg-[#d0d0cc]'}`}
+          >
+            <span className={`absolute top-0.5 w-3 h-3 bg-white rounded-full shadow transition-transform ${meeting.information_only ? 'translate-x-4' : 'translate-x-0.5'}`} />
+          </button>
+        </div>
+        {meeting.information_only && (
+          <p className="text-[9px] text-amber-600 mt-1">AI skips action &amp; task extraction</p>
+        )}
       </div>
 
     </div>
@@ -1004,35 +1023,37 @@ export default function MeetingsPage() {
                 <div className="border-t border-[#f0f0ee] flex">
 
                   {/* Left: meeting content */}
-                  <div className="flex-1 min-w-0 px-4 pt-4 pb-5 space-y-5">
+                  <div className="flex-1 min-w-0 px-4 pt-4 pb-5 space-y-4">
+
+                    {/* Summary — short_summary preferred, truncated */}
+                    {(meeting.short_summary || meeting.summary) && (
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Summary</p>
+                        <p className="text-sm text-[#1a1a18] leading-relaxed line-clamp-4">
+                          {(meeting.short_summary || meeting.summary || '').replace(/^#+\s*/gm, '').replace(/\*\*/g, '').replace(/\n+/g, ' ').trim()}
+                        </p>
+                      </div>
+                    )}
 
                     {/* Attendees */}
                     {(meeting.participants || []).length > 0 && (
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Attendees</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Attendees</p>
                         <div className="flex flex-wrap gap-1.5">
-                          {meeting.participants.slice(0, 15).map((p, i) => (
+                          {meeting.participants.slice(0, 8).map((p, i) => (
                             <span key={i} className="text-xs bg-[#f0f0ee] text-[#1a1a18] px-2 py-0.5 rounded-full">{p}</span>
                           ))}
-                          {meeting.participants.length > 15 && (
-                            <span className="text-xs text-[#9b9b97]">+{meeting.participants.length - 15} more</span>
+                          {meeting.participants.length > 8 && (
+                            <span className="text-xs text-[#9b9b97] px-1">+{meeting.participants.length - 8} more</span>
                           )}
                         </div>
                       </div>
                     )}
 
-                    {/* Summary */}
-                    {(meeting.summary || meeting.short_summary) && (
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Summary</p>
-                        <MeetingSummary text={meeting.summary || meeting.short_summary} />
-                      </div>
-                    )}
-
-                    {/* My actions */}
+                    {/* My action items — checkable */}
                     {(showDbTasks ? meetingTasks : exTasks).length > 0 && (
                       <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">My Actions</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">My Actions</p>
                         <div className="space-y-1.5">
                           {showDbTasks ? meetingTasks.map(t => (
                             <div key={t.id} className="flex items-start gap-2.5">
@@ -1045,7 +1066,7 @@ export default function MeetingsPage() {
                                 {t.due_date && <span className="text-xs text-[#9b9b97] ml-1.5">due {dayjs(t.due_date).format('MMM D')}</span>}
                               </span>
                             </div>
-                          )) : exTasks.map((t, i) => {
+                          )) : exTasks.slice(0, 4).map((t, i) => {
                             const title = typeof t === 'string' ? t : (t.title || t.description || JSON.stringify(t))
                             return (
                               <div key={i} className="flex items-start gap-2.5">
@@ -1059,81 +1080,47 @@ export default function MeetingsPage() {
                       </div>
                     )}
 
-                    {/* Others' commitments */}
-                    {(showDbOthers ? meetingOthers : exOthers).length > 0 && (
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Others' Commitments</p>
-                        <div className="space-y-1.5">
-                          {showDbOthers ? meetingOthers.map(c => (
-                            <div key={c.id} className="flex items-start gap-2.5">
-                              <button onClick={() => markOtherDone(c.id)} disabled={c.status === 'closed'}
-                                className={`flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${c.status === 'closed' ? 'bg-green-500 border-green-500' : 'border-[#d0d0cc] hover:border-green-500'}`}>
-                                {c.status === 'closed' && <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                              </button>
-                              <span className={`text-sm leading-snug ${c.status === 'closed' ? 'line-through text-[#9b9b97]' : 'text-[#1a1a18]'}`}>
-                                {c.committed_by_name && <span className="font-medium text-[#1B2A4A]">{c.committed_by_name}: </span>}
-                                {c.title}
-                              </span>
-                            </div>
-                          )) : exOthers.map((c, i) => {
-                            const title  = typeof c === 'string' ? c : (c.title || c.description || JSON.stringify(c))
-                            const person = typeof c === 'object' ? (c.person || c.committed_by || c.committed_by_name || '') : ''
-                            return (
-                              <div key={i} className="flex items-start gap-2.5">
-                                <button onClick={() => pushOtherDone(meeting.id, title, person)}
-                                  className="flex-shrink-0 mt-0.5 w-4 h-4 rounded border-2 border-[#d0d0cc] hover:border-green-500 flex items-center justify-center transition-colors" />
-                                <span className="text-sm text-[#1a1a18] leading-snug">
-                                  {person && <span className="font-medium text-[#1B2A4A]">{person}: </span>}
-                                  {title}
+                    {/* Compact key intel — others, decisions, risks combined */}
+                    {(() => {
+                      const items = []
+                      ;(showDbOthers ? meetingOthers : exOthers).slice(0, 3).forEach(c => {
+                        const title  = typeof c === 'string' ? c : (c.title || c.description || '')
+                        const person = typeof c === 'object' ? (c.committed_by_name || c.person || c.committed_by || '') : ''
+                        if (title) items.push({ tag: 'Others', cls: 'bg-green-50 text-green-800', text: person ? `${person}: ${title}` : title, done: c.status === 'closed', id: c.id, isDb: showDbOthers })
+                      })
+                      decisions.slice(0, 3).forEach(d => {
+                        const text = typeof d === 'string' ? d : (d.decision || d.title || d.description || '')
+                        if (text) items.push({ tag: 'Decision', cls: 'bg-purple-50 text-purple-800', text })
+                      })
+                      risks.slice(0, 3).forEach(r => {
+                        const text = typeof r === 'string' ? r : (r.description || r.risk || r.title || '')
+                        if (text) items.push({ tag: 'Risk', cls: 'bg-red-50 text-red-800', text })
+                      })
+                      if (!items.length) return null
+                      return (
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Key Intel</p>
+                          <div className="space-y-1.5">
+                            {items.slice(0, 5).map((item, i) => (
+                              <div key={i} className="flex items-start gap-2 text-xs">
+                                <span className={`flex-shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded mt-0.5 whitespace-nowrap ${item.cls}`}>{item.tag}</span>
+                                <span className={`leading-snug ${item.done ? 'line-through text-[#9b9b97]' : 'text-[#1a1a18]'}`}>
+                                  {item.isDb && !item.done ? (
+                                    <button onClick={() => markOtherDone(item.id)} className="mr-1.5 flex-shrink-0 w-3.5 h-3.5 rounded border border-[#d0d0cc] hover:border-green-500 inline-flex items-center justify-center" />
+                                  ) : null}
+                                  {item.text}
                                 </span>
                               </div>
-                            )
-                          })}
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
-
-                    {/* Key decisions */}
-                    {decisions.length > 0 && (
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Key Decisions</p>
-                        <div className="space-y-1">
-                          {decisions.map((d, i) => {
-                            const text = typeof d === 'string' ? d : (d.decision || d.title || d.description || JSON.stringify(d))
-                            return (
-                              <div key={i} className="flex items-start gap-2">
-                                <span className="text-[#C9A84C] text-xs mt-0.5 flex-shrink-0">▸</span>
-                                <span className="text-sm text-[#1a1a18] leading-snug">{text}</span>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Risk signals */}
-                    {risks.length > 0 && (
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-2">Risk Signals</p>
-                        <div className="space-y-1">
-                          {risks.map((r, i) => {
-                            const text = typeof r === 'string' ? r : (r.description || r.risk || r.title || JSON.stringify(r))
-                            return (
-                              <div key={i} className="flex items-start gap-2">
-                                <span className="text-red-400 text-xs mt-0.5 flex-shrink-0">⚠</span>
-                                <span className="text-sm text-[#1a1a18] leading-snug">{text}</span>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )}
+                      )
+                    })()}
 
                     {/* Footer */}
-                    <div className="flex items-center justify-between pt-1 border-t border-[#f0f0ee]">
+                    <div className="flex items-center justify-between pt-2 border-t border-[#f0f0ee]">
                       <span className="text-xs text-[#9b9b97]">
-                        {meetingTasks.filter(t => t.status === 'done').length}/{meetingTasks.length || exTasks.length} tasks done
-                        {meetingOthers.length > 0 && ` · ${meetingOthers.filter(c => c.status === 'closed').length}/${meetingOthers.length} others closed`}
+                        {meetingTasks.filter(t => t.status === 'done').length}/{meetingTasks.length || exTasks.length} actions done
                       </span>
                       <button onClick={() => navigate(`/meeting/${meeting.id}`)}
                         className="text-xs text-[#1B2A4A] font-medium hover:underline">
