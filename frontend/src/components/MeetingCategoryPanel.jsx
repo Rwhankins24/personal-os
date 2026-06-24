@@ -14,6 +14,7 @@ import {
   updateMeetingCategory,
   deleteMeetingCategory,
   mergeMeetingCategories,
+  getTopicPods,
 } from '../lib/api'
 
 const PRESET_COLORS = [
@@ -365,6 +366,17 @@ export default function MeetingCategoryPanel({ meetingId, projectId }) {
     queryFn:  () => getMeetingCategories(projectId),
   })
 
+  // Pods with a linked category — used to show routing indicator on secondary badges
+  const { data: allPods = [] } = useQuery({
+    queryKey: ['topic-pods', 'active'],
+    queryFn:  () => getTopicPods('active'),
+  })
+
+  // Map: category_id → pod name (for any category that has a linked pod)
+  const categoryPodMap = new Map(
+    allPods.filter(p => p.category_id).map(p => [p.category_id, p.name])
+  )
+
   const { data: assignments, isLoading: loadingAssignments } = useQuery({
     queryKey: ['meeting-category-assignments', meetingId],
     queryFn:  () => getMeetingCategoryAssignments(meetingId),
@@ -494,14 +506,26 @@ export default function MeetingCategoryPanel({ meetingId, projectId }) {
         <div className="mb-3">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-[#9b9b97] mb-1.5">Secondary</p>
           <div className="flex flex-wrap gap-1.5 items-center">
-            {secondaries.map(cat => (
-              <CategoryBadge
-                key={cat.id}
-                category={cat}
-                small
-                onRemove={() => removeSecondary.mutate(cat.id)}
-              />
-            ))}
+            {secondaries.map(cat => {
+              const linkedPodName = categoryPodMap.get(cat.id)
+              return (
+                <span key={cat.id} className="inline-flex items-center gap-0.5">
+                  <CategoryBadge
+                    category={cat}
+                    small
+                    onRemove={() => removeSecondary.mutate(cat.id)}
+                  />
+                  {linkedPodName && (
+                    <span
+                      className="text-[9px] text-[#9b9b97] ml-0.5"
+                      title={`Routes to pod: ${linkedPodName}`}
+                    >
+                      ⟲
+                    </span>
+                  )}
+                </span>
+              )
+            })}
             {availableForSecondary.length > 0 && (
               <div className="relative">
                 <button
