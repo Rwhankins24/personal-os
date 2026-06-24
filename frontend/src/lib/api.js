@@ -187,3 +187,15 @@ export const removeSecondaryCategory = (meetingId, categoryId) =>
 // Toggle information-only flag
 export const setInformationOnly = (meetingId, value) =>
   api.patch(`/api/meeting-categories?toggle_info_only=1&meeting_id=${meetingId}`, { information_only: value }).then(r => r.data)
+
+// Update a category's name / color
+export const updateMeetingCategory = (id, updates) =>
+  api.patch(`/api/meeting-categories?id=${id}`, updates).then(r => r.data)
+
+// Delete a category
+export const deleteMeetingCategory = (id) =>
+  api.delete(`/api/meeting-categories?id=${id}`).then(r => r.data)
+
+// Merge source into target — all assignments transfer, source is deleted
+export const mergeMeetingCategories = (sourceId, targetId) =>
+  api.post(`/api/meeting-categories?merge=1`, { source_id: sourceId, target_id: targetId }).then(r => r.data)
