@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
   try {
     if (req.method === 'GET') {
-      const { status, workspace_id } = req.query
+      const { status, workspace_id, workspace } = req.query
       const filterStatus = status || 'open'
 
       let query = supabase
@@ -29,7 +29,12 @@ module.exports = async (req, res) => {
         query = query.eq('status', filterStatus)
       }
 
-      if (workspace_id) query = query.eq('workspace_id', workspace_id)
+      if (workspace_id) {
+        query = query.eq('workspace_id', workspace_id)
+      } else if (workspace && workspace !== 'all') {
+        const { data: ws } = await supabase.from('workspaces').select('id').eq('name', workspace).maybeSingle()
+        if (ws?.id) query = query.eq('workspace_id', ws.id)
+      }
 
       const { data, error } = await query
 

@@ -361,12 +361,10 @@ export default function Projects() {
   const [mergeWinner, setMergeWinner] = useState(null) // project to merge INTO
 
   const { workspace } = useStore()
-  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
-  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   const { data: projects = [], isLoading } = useQuery({
-    queryKey: ['projects', workspaceId],
-    queryFn: () => getProjects(workspaceId ? { workspace_id: workspaceId } : {}),
+    queryKey: ['projects', workspace],
+    queryFn: () => getProjects(workspace !== 'all' ? { workspace } : {}),
     refetchInterval: 300000,
   })
 

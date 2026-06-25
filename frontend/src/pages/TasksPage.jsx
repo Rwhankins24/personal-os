@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
-import { getTasks, updateTask, deleteTask, getProjects, getWorkspaces } from '../lib/api'
+import { getTasks, updateTask, deleteTask, getProjects } from '../lib/api'
 import { useToast } from '../contexts/ToastContext'
 import InlineEdit from '../components/InlineEdit'
 import WorkspaceBar from '../components/WorkspaceBar'
@@ -376,8 +376,6 @@ function TaskContextPanel({ task, allTasks, projects, update }) {
 
 export default function TasksPage() {
   const { workspace } = useStore()
-  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
-  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   const navigate = useNavigate()
   const qc = useQueryClient()
@@ -465,8 +463,8 @@ export default function TasksPage() {
   }
 
   const { data: tasks, isLoading } = useQuery({
-    queryKey: ['tasks', workspaceId],
-    queryFn: () => getTasks(workspaceId ? { workspace_id: workspaceId } : {}),
+    queryKey: ['tasks', workspace],
+    queryFn: () => getTasks(workspace !== 'all' ? { workspace } : {}),
   })
 
   const { data: projects } = useQuery({

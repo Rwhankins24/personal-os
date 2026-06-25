@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'GET') {
-      const { id, status, type, workspace_id } = req.query
+      const { id, status, type, workspace_id, workspace } = req.query
       if (id) {
         const { data, error } = await supabase
           .from('projects').select('*').eq('id', id).single()
@@ -39,7 +39,12 @@ module.exports = async (req, res) => {
       let query = supabase.from('projects').select('*').order('created_at', { ascending: false })
       if (status)       query = query.eq('status', status)
       if (type)         query = query.eq('type', type)
-      if (workspace_id) query = query.eq('workspace_id', workspace_id)
+      if (workspace_id) {
+        query = query.eq('workspace_id', workspace_id)
+      } else if (workspace && workspace !== 'all') {
+        const { data: ws } = await supabase.from('workspaces').select('id').eq('name', workspace).maybeSingle()
+        if (ws?.id) query = query.eq('workspace_id', ws.id)
+      }
       const { data, error } = await query
       if (error) throw error
       return res.json(data)

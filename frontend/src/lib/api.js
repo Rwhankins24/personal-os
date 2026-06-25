@@ -37,10 +37,11 @@ export const createCommitment  = (data) => api.post('/api/commitments', data).th
 export const updateCommitment  = (id, data) => api.patch(`/api/commitments?id=${id}`, data).then(r => r.data)
 
 // ── Others' Commitments ───────────────────────────────────────
-export const getOthersCommitments    = (status = 'open', workspaceId = null) => {
+export const getOthersCommitments    = (status = 'open', workspaceId = null, workspaceName = null) => {
   const params = {}
   if (status && status !== 'all') params.status = status
   if (workspaceId) params.workspace_id = workspaceId
+  if (workspaceName && workspaceName !== 'all') params.workspace = workspaceName
   const qs = new URLSearchParams(params).toString()
   return fetch(`${BASE}/api/others-commitments${qs ? '?' + qs : ''}`).then(r => r.json())
 }

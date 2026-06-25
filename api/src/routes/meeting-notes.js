@@ -214,13 +214,18 @@ module.exports = async (req, res) => {
   // ── GET all meetings (list)
   if (req.method === 'GET') {
     try {
-      const { workspace_id } = req.query
+      const { workspace_id, workspace } = req.query
       let listQuery = supabase
         .from('meeting_notes')
         .select('*')
         .order('meeting_date', { ascending: false })
         .order('start_time', { ascending: false })
-      if (workspace_id) listQuery = listQuery.eq('workspace_id', workspace_id)
+      if (workspace_id) {
+        listQuery = listQuery.eq('workspace_id', workspace_id)
+      } else if (workspace && workspace !== 'all') {
+        const { data: ws } = await supabase.from('workspaces').select('id').eq('name', workspace).maybeSingle()
+        if (ws?.id) listQuery = listQuery.eq('workspace_id', ws.id)
+      }
       const { data, error } = await listQuery
 
       if (error) throw error

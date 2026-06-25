@@ -725,13 +725,11 @@ export default function MeetingsPage() {
 
   // ── Workspace context ─────────────────────────────────────────
   const { workspace } = useStore()
-  const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
-  const workspaceId = workspaces.find(w => w.name === workspace)?.id || null
 
   // ── Queries ───────────────────────────────────────────────────
   const { data: meetings      = [], isLoading } = useQuery({
-    queryKey: ['meeting-notes', workspaceId],
-    queryFn:  () => getMeetingNotes(workspaceId ? { workspace_id: workspaceId } : {}),
+    queryKey: ['meeting-notes', workspace],
+    queryFn:  () => getMeetingNotes(workspace !== 'all' ? { workspace } : {}),
   })
   const { data: projects      = [] }            = useQuery({ queryKey: ['projects'],                 queryFn: getProjects })
   const { data: allTasks      = [] }            = useQuery({ queryKey: ['tasks'],                    queryFn: getTasks })
@@ -745,10 +743,10 @@ export default function MeetingsPage() {
 
   // ── Cache update helper ───────────────────────────────────────
   const handleMeetingUpdate = useCallback((meetingId, updates) => {
-    qc.setQueryData(['meeting-notes', workspaceId], old =>
+    qc.setQueryData(['meeting-notes', workspace], old =>
       (old || []).map(m => m.id === meetingId ? { ...m, ...updates } : m)
     )
-  }, [qc, workspaceId])
+  }, [qc, workspace])
 
   // ── Bulk select ───────────────────────────────────────────────
   const toggleSelect = (id) => setSelected(prev => {
