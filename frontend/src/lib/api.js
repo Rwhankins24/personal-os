@@ -98,8 +98,10 @@ export const updatePendingDecision  = (id, data) =>
   api.patch(`/api/pending-decisions?id=${id}`, data).then(r => r.data)
 
 // ── Unlinked Intelligence ─────────────────────────────────────
-export const getUnlinkedIntelligence   = () =>
-  api.get('/api/unlinked-intelligence').then(r => r.data)
+export const getUnlinkedIntelligence   = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/unlinked-intelligence${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const updateUnlinkedIntelligence = (id, data) =>
   api.patch(`/api/unlinked-intelligence?id=${id}`, data).then(r => r.data)
 

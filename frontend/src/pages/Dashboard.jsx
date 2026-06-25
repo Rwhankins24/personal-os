@@ -718,10 +718,11 @@ function OthersCommitmentsPanel({ contacts }) {
   const qc = useQueryClient()
   const toast = useToast()
   const [collapsed, setCollapsed] = useState({ blocking_ryan: false, to_ryan: false, general: true })
+  const { workspace } = useStore()
 
   const { data, isLoading } = useQuery({
-    queryKey: ['others-commitments'],
-    queryFn: () => getOthersCommitments('open'),
+    queryKey: ['others-commitments', workspace],
+    queryFn: () => getOthersCommitments('open', null, workspace !== 'all' ? workspace : null),
     refetchInterval: 180000,
   })
 
@@ -1086,9 +1087,10 @@ function EmailQueue({ emails, isLoading, contacts, showAllReply, setShowAllReply
 // ── Pending Decisions panel ────────────────────────────────────
 function PendingDecisionsPanel({ showAll, setShowAll }) {
   const qc = useQueryClient()
+  const { workspace } = useStore()
   const { data, isLoading } = useQuery({
-    queryKey: ['pending-decisions'],
-    queryFn: getPendingDecisions,
+    queryKey: ['pending-decisions', workspace],
+    queryFn: () => getPendingDecisions(workspace !== 'all' ? { workspace } : {}),
     refetchInterval: 300000,
   })
   const [deciding, setDeciding] = useState(null)
@@ -1384,9 +1386,10 @@ function IntelSubItem({ obj }) {
 function UnlinkedIntelPanel({ projects }) {
   const qc = useQueryClient()
   const [showAll, setShowAll] = useState(false)
+  const { workspace } = useStore()
   const { data, isLoading } = useQuery({
-    queryKey: ['unlinked-intel'],
-    queryFn: getUnlinkedIntelligence,
+    queryKey: ['unlinked-intel', workspace],
+    queryFn: () => getUnlinkedIntelligence(workspace !== 'all' ? { workspace } : {}),
     refetchInterval: 300000,
   })
 

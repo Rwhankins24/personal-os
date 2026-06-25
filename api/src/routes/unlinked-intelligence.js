@@ -16,12 +16,20 @@ module.exports = async (req, res) => {
 
   try {
     if (req.method === 'GET') {
-      const { data, error } = await supabase
+      const { workspace_id, workspace } = req.query
+      let query = supabase
         .from('unlinked_intelligence')
         .select('*')
         .eq('status', 'unreviewed')
         .order('created_at', { ascending: false })
         .limit(20)
+      if (workspace_id) {
+        query = query.eq('workspace_id', workspace_id)
+      } else if (workspace && workspace !== 'all') {
+        const { data: ws } = await supabase.from('workspaces').select('id').eq('name', workspace).maybeSingle()
+        if (ws?.id) query = query.eq('workspace_id', ws.id)
+      }
+      const { data, error } = await query
       if (error) throw error
       return res.json(data)
     }
