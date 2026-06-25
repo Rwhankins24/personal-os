@@ -101,6 +101,29 @@ module.exports = async (req, res) => {
       return res.json({ success: true, action: 'inserted', data: recording })
     }
 
+    if (type === 'pipeline_complete') {
+      const { report_date } = req.body || {}
+      const date = report_date || new Date().toISOString().split('T')[0]
+
+      const { data: existing } = await supabase
+        .from('pipeline_runs').select('id').eq('run_date', date).maybeSingle()
+
+      const now = new Date().toISOString()
+      if (existing) {
+        const { error } = await supabase
+          .from('pipeline_runs')
+          .update({ processing_completed_at: now, status: 'in_progress' })
+          .eq('run_date', date)
+        if (error) throw error
+      } else {
+        const { error } = await supabase
+          .from('pipeline_runs')
+          .insert({ run_date: date, processing_completed_at: now, status: 'in_progress', error_count: 0 })
+        if (error) throw error
+      }
+      return res.json({ success: true, action: 'pipeline_complete_marked', date })
+    }
+
     return res.status(400).json({ error: 'Unknown webhook type' })
   } catch (err) {
     return res.status(500).json({ error: err.message })
