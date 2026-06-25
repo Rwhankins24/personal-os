@@ -106,8 +106,10 @@ export const updateUnlinkedIntelligence = (id, data) =>
   api.patch(`/api/unlinked-intelligence?id=${id}`, data).then(r => r.data)
 
 // ── AI Questions ──────────────────────────────────────────────
-export const getAIQuestions   = () =>
-  api.get('/api/ai-questions').then(r => r.data)
+export const getAIQuestions   = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/ai-questions${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const updateAIQuestion = (id, data) =>
   api.patch(`/api/ai-questions?id=${id}`, data).then(r => r.data)
 export const answerAIQuestion = (id, answer) =>

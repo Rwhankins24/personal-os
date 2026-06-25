@@ -1195,9 +1195,10 @@ function PendingDecisionsPanel({ showAll, setShowAll }) {
 // ── AI Questions panel ─────────────────────────────────────────
 function AIQuestionsPanel({ showAll, setShowAll }) {
   const qc = useQueryClient()
+  const { workspace } = useStore()
   const { data, isLoading } = useQuery({
-    queryKey: ['ai-questions'],
-    queryFn: getAIQuestions,
+    queryKey: ['ai-questions', workspace],
+    queryFn: () => getAIQuestions(workspace !== 'all' ? { workspace } : {}),
     refetchInterval: 300000,
   })
   const [answering, setAnswering]   = useState(null)
@@ -1725,7 +1726,7 @@ export default function Dashboard() {
   const { data: projects,    isLoading: loadingProjects} = useQuery({ queryKey: ['projects', workspace],    queryFn: () => getProjects(wsParam),     refetchInterval: 300000 })
   const { data: contacts }   = useQuery({ queryKey: ['contacts'],                                           queryFn: getContacts,                    refetchInterval: 300000 })
   const { data: decisions }  = useQuery({ queryKey: ['pending-decisions', workspace], queryFn: () => getPendingDecisions(wsParam), refetchInterval: 300000 })
-  const { data: questions }  = useQuery({ queryKey: ['ai-questions'],      queryFn: getAIQuestions,     refetchInterval: 300000 })
+  const { data: questions }  = useQuery({ queryKey: ['ai-questions', workspace], queryFn: () => getAIQuestions(workspace !== 'all' ? { workspace } : {}), refetchInterval: 300000 })
   const { data: meetingNotesRaw = [] } = useQuery({
     queryKey: ['meeting-notes', workspace],
     queryFn: () => getMeetingNotes(wsParam),
