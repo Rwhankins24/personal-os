@@ -53,6 +53,15 @@ Apply throughout every step.
 10. **Batched M365 queries — max 3 concurrent.** Never fire all time slices at once.
     Run in groups of 3 to prevent socket drops. See Step 2A for batching rules.
 
+11. **MANDATORY PAGINATION — every query must paginate.**
+    The M365 connector returns a maximum of 25 results per call regardless of `limit`.
+    25 is a page size, not a total cap. After every query, check if the last item in
+    the result array contains a `nextOffset` field. If it does, immediately call the
+    same query again with `offset: [nextOffset value]`. Repeat until a response contains
+    no `nextOffset`. Collect ALL pages before moving to the next slice or query.
+    A query that stops at the first page silently drops all results beyond page 1.
+    Log page counts: `Slice 0: page 1 (25) + page 2 (18) = 43 results`.
+
 ---
 
 ## Step 1 — Setup
@@ -98,55 +107,56 @@ This goes into the output JSON so Task 2 doesn't need to read any other file.
 
 ## Step 2 — Pull all data (M365)
 
-### 2A — Inbox time-sliced queries (batched groups of 3)
+### 2A — Inbox queries
 
-**WHY TIME SLICES:** M365 connector caps at ~25 results per query regardless of `limit`.
-Splitting the pull window into 6-hour slices keeps each slice under the cap.
+**Standard pull (windowHours ≤ 48):** One inbox query covering the full pull window,
+then paginate completely before moving on.
 
-Calculate slices dynamically:
 ```
-windowHours = (now - PULL_SINCE) in hours
-numSlices   = ceil(windowHours / 6)
-sliceSize   = windowHours / numSlices  (always ≤ 6h)
-
-For i in 0..numSlices-1:
-  SLICE_START[i] = PULL_SINCE + i * sliceSize
-  SLICE_END[i]   = PULL_SINCE + (i+1) * sliceSize
+Query 2A-1:
+  folderName: "inbox"
+  afterDateTime: PULL_SINCE
+  limit: 100
+  → paginate with offset until no nextOffset
 ```
-Last slice: no `beforeDateTime` (open-ended to now).
 
-**BATCHING — critical to prevent socket drops:**
-- Batch 1: slices 0, 1, 2 → run concurrently → wait for all 3
-- Batch 2: slices 3, 4, 5 → run concurrently → wait for all 3
-- Batch 3: slices 6, 7 (if present) → run concurrently → wait
-- Final batch: run keyword queries 2A-2, 2A-3, 2A-4 concurrently → wait
+**Recovery pull (windowHours > 48):** Split into daily chunks and run up to 3 concurrently,
+paginating each chunk fully before moving to the next batch.
 
-If any slice returns a socket error, retry once before skipping.
+```
+For each day D in [PULL_SINCE .. now]:
+  folderName: "inbox"
+  afterDateTime: D 00:00 UTC
+  beforeDateTime: D+1 00:00 UTC  (last chunk: omit beforeDateTime)
+  limit: 100
+  → paginate until no nextOffset
+Batch: run 3 chunks concurrently, wait, then next 3.
+```
 
-**Per-slice query params:**
-- `folderName: "inbox"`, `afterDateTime: SLICE_START[i]`, `beforeDateTime: SLICE_END[i]`, `limit: 100`
-- No `query:` parameter
-- Last slice omits `beforeDateTime`
+**PAGINATION IS MANDATORY.** See Resilience Rule 11. Never stop at page 1.
+Log page counts: `Inbox: page 1 (25) + page 2 (25) + page 3 (17) = 67 results`
 
-**Keyword queries (run after all slices complete, as one concurrent batch):**
+If any query returns a socket error, retry once before skipping.
+
+**Keyword queries (run concurrently with inbox, or immediately after):**
 
 Query 2A-2 — Urgent/action:
 - `query: "urgent OR deadline OR ASAP OR \"action required\" OR \"please respond\" OR approval"`
-- `limit: 100`
-- No `folderName:` or `afterDateTime:`
+- `limit: 100`, no `folderName:` or `afterDateTime:`
+- **Paginate until no `nextOffset`**
 
 Query 2A-3 — Contract language:
 - `query: "contract OR agreement OR indemnity OR lien OR \"change order\" OR GMP OR \"sign off\" OR execute"`
-- `limit: 100`
-- No `folderName:` or `afterDateTime:`
+- `limit: 100`, no `folderName:` or `afterDateTime:`
+- **Paginate until no `nextOffset`**
 
 Query 2A-4 — Signatures/documents:
 - `query: "DocuSign OR signature OR exhibit OR submittal OR drawing OR spec"`
-- `limit: 100`
-- No `folderName:` or `afterDateTime:`
+- `limit: 100`, no `folderName:` or `afterDateTime:`
+- **Paginate until no `nextOffset`**
 
 **After all queries return:** merge + deduplicate by `conversationId`.
-Log: `Slice contributions: [per-slice counts] | Keywords: X | Total unique threads: X`
+Log: `Inbox: X | Keywords: X | Total unique threads: X (after dedup)`
 
 **For each email, capture these fields:**
 
@@ -175,10 +185,12 @@ Classification flags (compute now — Task 2 uses these):
 Query 2B-1 — Sent since last pull:
 - `folderName: "sentitems"`, `afterDateTime: PULL_SINCE`, `limit: 100`
 - No `query:`
+- **Paginate until no `nextOffset`** (see Resilience Rule 11)
 
 Query 2B-2 — Sent overlap buffer:
 - `folderName: "sentitems"`, `afterDateTime: 14d ago`, `beforeDateTime: PULL_SINCE`, `limit: 100`
 - No `query:`
+- **Paginate until no `nextOffset`**
 
 Capture all thread fields same as inbox. These are merged with inbox results in Step 2.5
 so `myLastReplyTime` and `waitingSince` can be computed accurately.
