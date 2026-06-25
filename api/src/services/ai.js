@@ -484,21 +484,30 @@ async function buildProjectContext(projectId) {
   }
 }
 
-// ─── Exponential backoff for API rate limits
+// ─── Exponential backoff for API rate limits AND transient network errors
 async function withRetry(fn, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await fn()
     } catch (err) {
       if (attempt === maxRetries) throw err
-      if (
+      const isRateLimit =
         err.status === 429 ||
         err.status === 529 ||
         err.message?.includes('rate limit') ||
         err.message?.includes('overloaded')
-      ) {
+      const isNetworkError =
+        err.message?.includes('Premature close') ||
+        err.message?.includes('fetch failed') ||
+        err.message?.includes('ECONNRESET') ||
+        err.message?.includes('ECONNREFUSED') ||
+        err.message?.includes('operation was canceled') ||
+        err.name === 'AbortError' ||
+        err.code === 'ECONNRESET'
+      if (isRateLimit || isNetworkError) {
         const delay = Math.pow(2, attempt) * 1000
-        console.log(`Rate limited. Waiting ${delay}ms before retry ${attempt + 1}...`)
+        const reason = isRateLimit ? 'Rate limited' : 'Network error'
+        console.log(`${reason} (${err.message?.slice(0, 60)}). Waiting ${delay}ms before retry ${attempt + 1}...`)
         await new Promise(r => setTimeout(r, delay))
       } else {
         throw err

@@ -2055,7 +2055,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   try {
     const { data: orphanedSenders } = await supabase
       .rpc('get_emails_without_contacts', { row_limit: 50 })
-      .catch(() => ({ data: null })) // RPC may not exist yet — non-fatal
+      .then(r => r, () => ({ data: null })) // RPC may not exist yet — non-fatal
 
     if (orphanedSenders && orphanedSenders.length > 0) {
       for (const row of orphanedSenders) {
@@ -3673,7 +3673,8 @@ ${manualObsContext ? `\n═══ LEG 3: MANUAL INPUTS ═══\n${manualObsCon
 Return a JSON array of observation strings only. No explanation.
 ["Observation 1", "Observation 2", "Observation 3", "Observation 4"]`
 
-      const raw = await anthropic.messages.create({
+      const obsClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const raw = await obsClient.messages.create({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 700,
         messages: [{ role: 'user', content: obsPrompt }]
