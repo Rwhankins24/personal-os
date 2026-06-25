@@ -63,20 +63,27 @@ date '+%Y-%m-%d'
 
 Store `TODAY_ISO`.
 
-**Determine PULL_SINCE** — use last successful run so travel gaps are auto-caught:
+**Determine PULL_SINCE** — read from local file first, Supabase as fallback:
 
 ```bash
-curl -s \
-  "https://dvevqwhphrcboyjpvnlz.supabase.co/rest/v1/pipeline_status?select=processing_completed_at&order=created_at.desc&limit=2" \
-  -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+cat ~/personal-os/data/last-email-raw.json 2>/dev/null | python3 -c "
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    ts = d.get('generated_at') or d.get('pull_since') or ''
+    print(ts.strip())
+except:
+    print('')
+"
 ```
 
-From the result, find the most recent `processing_completed_at` from a **previous** run (not today). Set `PULL_SINCE` to whichever gives the larger window (earlier date):
-- If previous run timestamp exists: use that timestamp
-- If no previous run found: default to 48h ago
+- If `generated_at` is found in the local file → use that as `PULL_SINCE` (this is the timestamp of the last successful pull, works even without network)
+- If local file is missing or empty → try Supabase pipeline_status as fallback
+- If both fail → default to 48h ago
 
-Log: `"Pull window: from [PULL_SINCE] to now"`
+**This eliminates the Supabase dependency for PULL_SINCE.** The local file is always written at the end of every successful run, so it's the most reliable source. Travel gaps are handled automatically — if you're gone 5 days, the file still has the last real pull timestamp.
+
+Log: `"Pull window: from [PULL_SINCE] to now (source: local-file | supabase | 48h-default)"`
 
 **Load yesterday's conversationIds for Task 2's cross-reference:**
 

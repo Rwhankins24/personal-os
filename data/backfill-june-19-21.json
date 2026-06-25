@@ -1,0 +1,140 @@
+{
+  "report_date": "2026-06-19",
+  "generated_at": "2026-06-24T00:00:00Z",
+  "backfill": true,
+  "bucket1": [
+    {
+      "thread_subject": "Pac Fusion / Clayco - OCIP Materials",
+      "subject": "RE: Pac Fusion / Clayco - OCIP Materials",
+      "from_address": "schulzn@claycorp.com",
+      "from_name": "Nocona Schulz",
+      "body_preview": "@Ryan Hankins, can you please respond regarding the first 1-2 weeks of onsite activities?",
+      "received_at": "2026-06-20T16:53:09Z",
+      "bucket": 1, "urgency": "high", "is_internal": true,
+      "has_attachment": true, "has_contract_language": false,
+      "is_time_sensitive": true, "is_flagged": false,
+      "thread_participant_count": 13, "days_waiting": 4,
+      "tags": ["pacific-fusion","ocip","action-required"],
+      "followed_up": false, "cross_reference_status": "new"
+    },
+    {
+      "thread_subject": "Solis - Progress RCP & Lighting - Coordination",
+      "subject": "[EXTERNAL] FW: Solis - Progress RCP & Lighting - Coordination",
+      "from_address": "Rebekah.Bellum@stantec.com",
+      "from_name": "Rebekah Bellum (Stantec)",
+      "body_preview": "I wasn't sure how to respond to Nick's question based on the Wednesday meeting. Having our team wait for Clayco's response before providing additional information about the one line.",
+      "received_at": "2026-06-19T22:53:00Z",
+      "bucket": 1, "urgency": "high", "is_internal": false,
+      "has_attachment": true, "has_contract_language": false,
+      "is_time_sensitive": true, "is_flagged": false,
+      "thread_participant_count": 9, "days_waiting": 5,
+      "tags": ["solis","lighting","stantec","waiting-on-ryan"],
+      "followed_up": false, "cross_reference_status": "new"
+    },
+    {
+      "thread_subject": "303 Glendale - Concrete Slab Evaluation / Payment Dispute",
+      "subject": "RE: [EXTERNAL] Re: FW: 303 Glendale - 6235 Cotton Lane - Concrete Slab Evaluation",
+      "from_address": "starr@northstarrconcrete.com",
+      "from_name": "Northstar Concrete",
+      "body_preview": "We received a payment of $8000 shortly after the invoice was sent. Ron claims it was for a thermal project, not the slab evaluation invoice.",
+      "received_at": "2026-06-19T13:34:07Z",
+      "bucket": 1, "urgency": "normal", "is_internal": false,
+      "has_attachment": true, "has_contract_language": true,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 4, "days_waiting": 5,
+      "tags": ["303-glendale","payment","dispute","invoice"],
+      "followed_up": false, "cross_reference_status": "new"
+    }
+  ],
+  "bucket2": [
+    {
+      "thread_subject": "Pacific Fusion VE Backup",
+      "subject": "[EXTERNAL] RE: Pacific Fusion VE Backup",
+      "from_address": "nick.becker@villalighting.com",
+      "from_name": "Nick Becker (Villa Lighting)",
+      "body_preview": "Wanted to follow up and confirm we will see the revised drawings today? To hit that WEDS target we could really use them asap.",
+      "received_at": "2026-06-19T15:54:05Z",
+      "bucket": 2, "urgency": "high", "is_internal": false,
+      "has_attachment": false, "has_contract_language": false,
+      "is_time_sensitive": true, "is_flagged": false,
+      "thread_participant_count": 9, "days_waiting": 5,
+      "tags": ["pacific-fusion","ve","drawings","deadline"],
+      "followed_up": false, "cross_reference_status": "new"
+    }
+  ],
+  "bucket3": [
+    {
+      "thread_subject": "Pac Fusion / OCIP Quote Review",
+      "subject": "[EXTERNAL] Pac Fusion / OCIP Quote Review",
+      "from_address": "Sarah.Shepard@baldwin.com",
+      "from_name": "Sarah Shepard (Baldwin)",
+      "body_preview": "Attached please find the current primary OCIP quote with Great American and specimen policy forms for your review.",
+      "received_at": "2026-06-19T02:24:56Z",
+      "bucket": 3, "urgency": "normal", "is_internal": false,
+      "has_attachment": true, "has_contract_language": true,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 13, "days_waiting": 5,
+      "tags": ["ocip","pacific-fusion","insurance"],
+      "followed_up": false, "cross_reference_status": "new"
+    },
+    {
+      "thread_subject": "Solis - GMP 1 approval for Mobilization and Ground Breaking",
+      "subject": "RE: Solis - GMP 1 approval for Mobilization and Ground Breaking",
+      "from_address": "TinneyC@claycorp.com",
+      "from_name": "Chad Tinney",
+      "body_preview": "To memorialize the sitework direction: PF/Clayco/Stantec/MDS team agreed to a one subcontractor approach to perform all civil on site and off site work.",
+      "received_at": "2026-06-19T18:33:16Z",
+      "bucket": 3, "urgency": "normal", "is_internal": true,
+      "has_attachment": false, "has_contract_language": true,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 7, "days_waiting": 5,
+      "tags": ["solis","gmp","sitework","decision"],
+      "followed_up": false, "cross_reference_status": "new"
+    },
+    {
+      "thread_subject": "Gotion BESS - Construction Support and Record Drawings",
+      "subject": "RE: Gotion BESS - Construction Support and Record Drawings",
+      "from_address": "appelbauml@theljc.com",
+      "from_name": "Appelbaum (LJC)",
+      "body_preview": "A normal starting point for CA is 20%. If we look at the budget I provided vs the Ulteig design fee, we are pretty close to the 20% mark.",
+      "received_at": "2026-06-19T17:51:40Z",
+      "bucket": 3, "urgency": "normal", "is_internal": true,
+      "has_attachment": false, "has_contract_language": false,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 2, "days_waiting": 5,
+      "tags": ["gotion","bess","ljc","ca-fee"],
+      "followed_up": false, "cross_reference_status": "new"
+    },
+    {
+      "thread_subject": "Augercast Piles and Rigid Inclusions - Solis",
+      "subject": "RE: Augercast Piles and Rigid Inclusions",
+      "from_address": "StorckE@claycorp.com",
+      "from_name": "Erica Storck",
+      "body_preview": "Multiple VP preconstruction responses on augercast/rigid inclusion pricing benchmarks for Solis. References from Canton OH, STL Lambert Airport.",
+      "received_at": "2026-06-19T15:48:48Z",
+      "bucket": 3, "urgency": "normal", "is_internal": true,
+      "has_attachment": false, "has_contract_language": false,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 6, "days_waiting": 5,
+      "tags": ["solis","augercast","preconstruction","benchmark"],
+      "followed_up": false, "cross_reference_status": "new"
+    }
+  ],
+  "bucket4": [
+    {
+      "thread_subject": "Project Solis - Augercast and Rigid Inclusion Analysis",
+      "subject": "[EXTERNAL] Re: Project Solis - Augercast and Rigid Inclusion Analysis",
+      "from_address": "craig@westerngroundimprovement.com",
+      "from_name": "Craig (Western Ground Improvement)",
+      "body_preview": "Attached are all the proposals making up the summary I provided yesterday. Summarized on cover letter with settlement/performance specs.",
+      "received_at": "2026-06-19T14:48:19Z",
+      "bucket": 4, "urgency": "normal", "is_internal": false,
+      "has_attachment": true, "has_contract_language": false,
+      "is_time_sensitive": false, "is_flagged": false,
+      "thread_participant_count": 3, "days_waiting": 5,
+      "tags": ["solis","augercast","ground-improvement","proposals"],
+      "followed_up": false, "cross_reference_status": "new"
+    }
+  ],
+  "bucket6_count": 12
+}

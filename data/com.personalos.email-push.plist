@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <key>Label</key>
+    <string>com.personalos.email-push</string>
+
+    <!-- Run the push script -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>/usr/bin/python3 "$HOME/personal-os/data/push_email_report.py" >> "$HOME/personal-os/data/push-email.log" 2>&1</string>
+    </array>
+
+    <!-- Trigger 1: fires immediately when Task 2 writes the report file -->
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/ryanhankins/personal-os/data/last-email-report.json</string>
+    </array>
+
+    <!-- Trigger 2: 5 AM safety net (idempotency check prevents double-push) -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>5</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Logging -->
+    <key>StandardOutPath</key>
+    <string>/Users/ryanhankins/personal-os/data/push-email.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/ryanhankins/personal-os/data/push-email.error.log</string>
+
+    <!-- Only run when user is logged in -->
+    <key>RunAtLoad</key>
+    <false/>
+
+</dict>
+</plist>
