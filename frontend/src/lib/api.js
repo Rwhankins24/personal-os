@@ -32,7 +32,10 @@ export const getEmails      = () => api.get('/api/emails').then(r => r.data)
 export const updateEmail    = (id, data) => api.patch(`/api/emails?id=${id}`, data).then(r => r.data)
 
 // ── My Commitments ────────────────────────────────────────────
-export const getCommitments    = () => api.get('/api/commitments').then(r => r.data)
+export const getCommitments    = (params = {}) => {
+  const qs = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null)).toString()
+  return fetch(`${BASE}/api/commitments${qs ? '?' + qs : ''}`).then(r => r.json())
+}
 export const createCommitment  = (data) => api.post('/api/commitments', data).then(r => r.data)
 export const updateCommitment  = (id, data) => api.patch(`/api/commitments?id=${id}`, data).then(r => r.data)
 

@@ -26,6 +26,7 @@ import SyncButton from '../components/SyncButton'
 import MeetingSummary from '../components/MeetingSummary'
 import MeetingUpload from '../components/MeetingUpload'
 import WorkspaceBar from '../components/WorkspaceBar'
+import { useStore } from '../store/useStore'
 
 dayjs.extend(relativeTime)
 
@@ -1693,6 +1694,7 @@ function AIJobButton() {
 // ── Dashboard ──────────────────────────────────────────────────
 export default function Dashboard() {
   const navigate = useNavigate()
+  const { workspace } = useStore()
 
   // ── Lifted expand/collapse state (still used for in-page panels) ──
   const [showAllTasks,     setShowAllTasks]     = useState(false)
@@ -1712,17 +1714,18 @@ export default function Dashboard() {
   const onDecisions  = useCallback(() => navigate('/decisions'), [navigate])
   const onQuestions  = useCallback(() => navigate('/knowledge'), [navigate])
 
-  const { data: tasks,       isLoading: loadingTasks }   = useQuery({ queryKey: ['tasks'],       queryFn: getTasks,        refetchInterval: 120000 })
-  const { data: events,      isLoading: loadingEvents }  = useQuery({ queryKey: ['events'],      queryFn: getEvents,       refetchInterval: 120000 })
-  const { data: emails,      isLoading: loadingEmails }  = useQuery({ queryKey: ['emails'],      queryFn: getEmails,       refetchInterval: 120000 })
-  const { data: commitments, isLoading: loadingCommit }  = useQuery({ queryKey: ['commitments'], queryFn: getCommitments,  refetchInterval: 120000 })
-  const { data: projects,    isLoading: loadingProjects} = useQuery({ queryKey: ['projects'],    queryFn: getProjects,     refetchInterval: 300000 })
-  const { data: contacts }   = useQuery({ queryKey: ['contacts'],    queryFn: getContacts,     refetchInterval: 300000 })
-  const { data: decisions }  = useQuery({ queryKey: ['pending-decisions'], queryFn: getPendingDecisions, refetchInterval: 300000 })
+  const wsParam = workspace !== 'all' ? { workspace } : {}
+  const { data: tasks,       isLoading: loadingTasks }   = useQuery({ queryKey: ['tasks', workspace],       queryFn: () => getTasks(wsParam),        refetchInterval: 120000 })
+  const { data: events,      isLoading: loadingEvents }  = useQuery({ queryKey: ['events'],                 queryFn: getEvents,                      refetchInterval: 120000 })
+  const { data: emails,      isLoading: loadingEmails }  = useQuery({ queryKey: ['emails'],                 queryFn: getEmails,                      refetchInterval: 120000 })
+  const { data: commitments, isLoading: loadingCommit }  = useQuery({ queryKey: ['commitments', workspace], queryFn: () => getCommitments(wsParam),  refetchInterval: 120000 })
+  const { data: projects,    isLoading: loadingProjects} = useQuery({ queryKey: ['projects', workspace],    queryFn: () => getProjects(wsParam),     refetchInterval: 300000 })
+  const { data: contacts }   = useQuery({ queryKey: ['contacts'],                                           queryFn: getContacts,                    refetchInterval: 300000 })
+  const { data: decisions }  = useQuery({ queryKey: ['pending-decisions', workspace], queryFn: () => getPendingDecisions(wsParam), refetchInterval: 300000 })
   const { data: questions }  = useQuery({ queryKey: ['ai-questions'],      queryFn: getAIQuestions,     refetchInterval: 300000 })
   const { data: meetingNotesRaw = [] } = useQuery({
-    queryKey: ['meeting-notes'],
-    queryFn: () => getMeetingNotes(),
+    queryKey: ['meeting-notes', workspace],
+    queryFn: () => getMeetingNotes(wsParam),
     refetchInterval: 300000
   })
   // Only show meetings from the last 14 days on the dashboard
