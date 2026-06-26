@@ -64,6 +64,26 @@ Apply throughout every step.
 
 ---
 
+## Step 0 — Detect workspace path (REQUIRED before any file operation)
+
+**The Read and Write tools require absolute paths. `~` does not resolve in the Cowork tool context.
+You MUST detect the correct absolute path before any Read, Write, or Bash file operation.**
+
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then
+  WORKSPACE_PATH="$HOME/personal-os"
+fi
+echo "Workspace path: $WORKSPACE_PATH"
+DATA_PATH="${WORKSPACE_PATH}/data"
+echo "Data path: $DATA_PATH"
+```
+
+Store `WORKSPACE_PATH` and `DATA_PATH`. Use them in ALL subsequent file Read/Write/Bash operations.
+Every `~/personal-os/data/...` reference in this skill means `${DATA_PATH}/...` with the actual detected path.
+
+---
+
 ## Step 1 — Setup
 
 ```bash
@@ -75,7 +95,7 @@ Store `TODAY_ISO`.
 **Determine PULL_SINCE** — read from local file first, Supabase as fallback:
 
 ```bash
-cat ~/personal-os/data/last-email-raw.json 2>/dev/null | python3 -c "
+cat "${DATA_PATH}/last-email-raw.json" 2>/dev/null | python3 -c "
 import sys, json
 try:
     d = json.load(sys.stdin)
@@ -97,7 +117,7 @@ Log: `"Pull window: from [PULL_SINCE] to now (source: local-file | supabase | 48
 **Load yesterday's conversationIds for Task 2's cross-reference:**
 
 ```bash
-cat ~/personal-os/data/last-email-report.json 2>/dev/null || echo "{}"
+cat "${DATA_PATH}/last-email-report.json" 2>/dev/null || echo "{}"
 ```
 
 Extract all `conversationId` values from all bucket arrays. Store as `YESTERDAY_CONV_IDS` list.
@@ -305,20 +325,23 @@ This sequence prevents that: the old file stays intact until the new one is full
 
 **Step 3A — Read existing file (precondition)**
 
+Use the Read tool with the ABSOLUTE path detected in Step 0:
 ```
-Read: ~/personal-os/data/last-email-raw.json
+Read: {DATA_PATH}/last-email-raw.json
 ```
+(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-raw.json`)
 
 No other tool call between this Read and the Write in Step 3B.
 
 **Step 3B — Write full payload to TEMP file (not the final path)**
 
-Write the full raw payload to: `~/personal-os/data/last-email-raw.tmp.json`
+Use the Write tool with the ABSOLUTE path: `{DATA_PATH}/last-email-raw.tmp.json`
+(Substitute the actual DATA_PATH value)
 
 **Step 3C — Rename temp → final (atomic swap)**
 
 ```bash
-mv ~/personal-os/data/last-email-raw.tmp.json ~/personal-os/data/last-email-raw.json
+mv "${DATA_PATH}/last-email-raw.tmp.json" "${DATA_PATH}/last-email-raw.json"
 ```
 
 If the session crashes between 3B and 3C, `.tmp.json` exists but the FINAL file is untouched.
@@ -327,7 +350,7 @@ Tomorrow's pull reads the correct previous day file. No corruption, no stale dat
 **Step 3D — Write completion flag so classify knows pull is done**
 
 ```bash
-echo "done" > ~/personal-os/data/pull-complete-[TODAY_ISO].flag
+echo "done" > "${DATA_PATH}/pull-complete-[TODAY_ISO].flag"
 ```
 
 Replace `[TODAY_ISO]` with the actual date string, e.g. `pull-complete-2026-06-26.flag`.

@@ -106,6 +106,24 @@ failure to recall them.
 
 ---
 
+## Step 0 — Detect workspace path (REQUIRED before any file operation)
+
+**The Read and Write tools require absolute paths. `~` does not resolve in the Cowork tool context.**
+
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then
+  WORKSPACE_PATH="$HOME/personal-os"
+fi
+DATA_PATH="${WORKSPACE_PATH}/data"
+echo "Data path: $DATA_PATH"
+```
+
+Store `WORKSPACE_PATH` and `DATA_PATH`. Every `~/personal-os/data/...` reference below means `${DATA_PATH}/...`.
+Use the actual detected absolute path in ALL Read, Write, and Bash file operations.
+
+---
+
 ## Step 1 — Setup
 
 ```bash
@@ -505,12 +523,13 @@ Write the complete report to `~/personal-os/data/last-email-report.json`.
 This step always runs — even if earlier steps had partial failures.
 
 **PRECONDITION — do this first, before the Write:**
-Read `~/personal-os/data/last-email-report.json` using the Read tool RIGHT NOW,
-immediately before the Write call below. No other tool calls in between.
+Read the report file using the ABSOLUTE path detected in Step 0, immediately before the Write call below.
+No other tool calls in between.
 
 ```
-Read: ~/personal-os/data/last-email-report.json
+Read: {DATA_PATH}/last-email-report.json
 ```
+(Substitute the actual DATA_PATH value detected in Step 0)
 
 Then immediately write the full classified JSON payload (structure defined below).
 Do not read any other file or make any API call between this Read and the Write.

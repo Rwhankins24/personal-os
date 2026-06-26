@@ -32,14 +32,30 @@ thread into 6 buckets, apply urgency and tags, and write the final classified re
 
 ---
 
-## Step 0 — Wait for pull completion flag (event-driven trigger)
+## Step 0 — Detect workspace path + wait for pull completion flag
 
-Before reading any data, confirm Task 1 actually finished for today.
+**FIRST: Detect workspace path (required before any file operation)**
+
+The Read and Write tools require absolute paths. `~` does not resolve in the Cowork tool context.
+
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then
+  WORKSPACE_PATH="$HOME/personal-os"
+fi
+DATA_PATH="${WORKSPACE_PATH}/data"
+echo "Data path: $DATA_PATH"
+```
+
+Store `WORKSPACE_PATH` and `DATA_PATH`. Use them in ALL subsequent file Read/Write/Bash operations.
+Every `~/personal-os/data/...` reference in this skill means `${DATA_PATH}/...` with the actual path.
+
+**THEN: Confirm Task 1 finished for today.**
 This replaces the fragile fixed 20-minute timer — classify now waits for pull to signal it's done.
 
 ```bash
 TODAY=$(date '+%Y-%m-%d')
-FLAG_FILE=~/personal-os/data/pull-complete-${TODAY}.flag
+FLAG_FILE="${DATA_PATH}/pull-complete-${TODAY}.flag"
 MAX_WAIT=30  # minutes
 INTERVAL=2   # minutes between checks
 ELAPSED=0
@@ -61,9 +77,10 @@ if [ -f "$FLAG_FILE" ]; then
 else
   # Flag missing: check if raw file is fresh enough to use anyway
   RAW_DATE=$(python3 -c "
-import json, os
+import json, os, sys
+data_path = os.environ.get('DATA_PATH', os.path.expanduser('~/personal-os/data'))
 try:
-    with open(os.path.expanduser('~/personal-os/data/last-email-raw.json')) as f:
+    with open(os.path.join(data_path, 'last-email-raw.json')) as f:
         print(json.load(f).get('report_date',''))
 except: print('')
 " 2>/dev/null)
@@ -81,8 +98,15 @@ fi
 
 ## Step 1 — Read raw input
 
+Use the Read tool with the ABSOLUTE path detected in Step 0:
+```
+Read: {DATA_PATH}/last-email-raw.json
+```
+(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-raw.json`)
+
+Also confirm with bash:
 ```bash
-cat ~/personal-os/data/last-email-raw.json
+cat "${DATA_PATH}/last-email-raw.json"
 ```
 
 Parse the JSON. Verify `report_date` is today. If the file doesn't exist or `report_date`
@@ -326,12 +350,13 @@ fields only if clearly present — B3/B4 threads often have no action items for 
 
 ## Step 6 — Write classified report
 
-**PRECONDITION:** Read `~/personal-os/data/last-email-report.json` immediately before the Write.
+**PRECONDITION:** Read the report file using the ABSOLUTE path detected in Step 0, immediately before the Write.
 No other tool call between the Read and the Write.
 
 ```
-Read: ~/personal-os/data/last-email-report.json
+Read: {DATA_PATH}/last-email-report.json
 ```
+(Substitute the actual DATA_PATH value detected in Step 0, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-report.json`)
 
 **CRITICAL — pass-through rule:** For every thread record in the output, include ALL fields
 from the raw JSON thread object. Do NOT drop any field. The downstream Vercel processing job
