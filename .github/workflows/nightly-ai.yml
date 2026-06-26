@@ -25,7 +25,7 @@ on:
 jobs:
   check-and-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
 
     steps:
       - name: Check pipeline and trigger AI
@@ -59,6 +59,36 @@ jobs:
           AI_DONE=$(echo "$STATUS" | python3 -c \
             "import json,sys; d=json.load(sys.stdin); print(d.get('ai_completed_at') or '')" \
             2>/dev/null)
+
+          JOB_STARTED_AT=$(echo "$STATUS" | python3 -c \
+            "import json,sys; d=json.load(sys.stdin); print(d.get('job_started_at') or '')" \
+            2>/dev/null)
+
+          # Calculate minutes since job last started (for cascade guard)
+          MINUTES_SINCE_JOB_START=9999
+          if [ -n "$JOB_STARTED_AT" ]; then
+            JOB_EPOCH=$(python3 -c "
+          from datetime import datetime, timezone
+          import time
+          dt = datetime.fromisoformat('${JOB_STARTED_AT}'.replace('Z', '+00:00'))
+          print(int(time.time() - dt.timestamp()))" 2>/dev/null || echo "0")
+            MINUTES_SINCE_JOB_START=$((JOB_EPOCH / 60))
+          fi
+
+          echo "Job started at: $JOB_STARTED_AT"
+          echo "Minutes since job start: $MINUTES_SINCE_JOB_START"
+
+          # CASCADE GUARD: if job started < 110 min ago and AI not done, skip — job is
+          # still running or crashed very recently. Re-trigger only after 110+ min with no completion.
+          if [ -n "$JOB_STARTED_AT" ] && [ -z "$AI_DONE" ] && [ "$MINUTES_SINCE_JOB_START" -lt 110 ]; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+            echo "CASCADE GUARD: job started ${MINUTES_SINCE_JOB_START}m ago, AI not done — skipping to prevent cascade."
+            exit 0
+          fi
+
+          if [ -n "$JOB_STARTED_AT" ] && [ -z "$AI_DONE" ] && [ "$MINUTES_SINCE_JOB_START" -ge 110 ]; then
+            echo "Job started ${MINUTES_SINCE_JOB_START}m ago with no completion — probable crash. Allowing re-trigger."
+          fi
 
           # Calculate minutes since email processing completed
           MINUTES_SINCE_EMAIL=0

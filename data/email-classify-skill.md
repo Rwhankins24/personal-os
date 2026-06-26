@@ -29,6 +29,53 @@ thread into 6 buckets, apply urgency and tags, and write the final classified re
 
 ---
 
+## Step 0 — Wait for pull completion flag (event-driven trigger)
+
+Before reading any data, confirm Task 1 actually finished for today.
+This replaces the fragile fixed 20-minute timer — classify now waits for pull to signal it's done.
+
+```bash
+TODAY=$(date '+%Y-%m-%d')
+FLAG_FILE=~/personal-os/data/pull-complete-${TODAY}.flag
+MAX_WAIT=30  # minutes
+INTERVAL=2   # minutes between checks
+ELAPSED=0
+
+echo "Waiting for pull completion flag: $FLAG_FILE"
+
+while [ ! -f "$FLAG_FILE" ]; do
+  if [ "$ELAPSED" -ge "$MAX_WAIT" ]; then
+    echo "⚠ Flag not found after ${MAX_WAIT} min. Checking raw file freshness..."
+    break
+  fi
+  echo "  Flag not found yet. Waiting ${INTERVAL} min... (${ELAPSED}/${MAX_WAIT}m)"
+  sleep $((INTERVAL * 60))
+  ELAPSED=$((ELAPSED + INTERVAL))
+done
+
+if [ -f "$FLAG_FILE" ]; then
+  echo "✓ Pull complete flag found — proceeding."
+else
+  # Flag missing: check if raw file is fresh enough to use anyway
+  RAW_DATE=$(python3 -c "
+import json, os
+try:
+    with open(os.path.expanduser('~/personal-os/data/last-email-raw.json')) as f:
+        print(json.load(f).get('report_date',''))
+except: print('')
+" 2>/dev/null)
+  TODAY_CHECK=$(date '+%Y-%m-%d')
+  if [ "$RAW_DATE" != "$TODAY_CHECK" ]; then
+    echo "✗ Raw file is from $RAW_DATE, not today ($TODAY_CHECK). Task 1 did not complete."
+    echo "  Stopping — do not classify stale data."
+    exit 0
+  fi
+  echo "⚠ Flag missing but raw file is today's — proceeding with caution. Pull may still be running."
+fi
+```
+
+---
+
 ## Step 1 — Read raw input
 
 ```bash

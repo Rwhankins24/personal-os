@@ -133,8 +133,10 @@ def main():
 
     report_date = report.get("report_date", "")
     if report_date != today:
-        log(f"⚠  Report date is {report_date}, today is {today}.")
-        log("   Proceeding anyway — may be a weekend or holiday catch-up.")
+        log(f"✗ Report date is {report_date}, not today ({today}). Aborting — stale data.")
+        log("  To push a backfill report, pass the file path as an argument:")
+        log(f"  python3 push_email_report.py ~/personal-os/data/archive/{report_date}-email-report.json")
+        sys.exit(1)
 
     success = 0
     fail = 0

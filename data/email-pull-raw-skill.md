@@ -295,18 +295,46 @@ Tier 3 (standard): X threads
 
 ---
 
-## Step 3 — Write raw JSON handoff file
+## Step 3 — Write raw JSON handoff file (ATOMIC WRITE)
 
 **THIS IS THE ONLY OUTPUT OF TASK 1. EVERYTHING ELSE IS SETUP.**
 
-**PRECONDITION:** Read `~/personal-os/data/last-email-raw.json` immediately before the Write.
-No other tool call between the Read and Write.
+**ATOMIC WRITE — follow this exact four-step sequence.**
+A session crash mid-write used to corrupt `last-email-raw.json` and break the entire pipeline.
+This sequence prevents that: the old file stays intact until the new one is fully written.
+
+**Step 3A — Read existing file (precondition)**
 
 ```
 Read: ~/personal-os/data/last-email-raw.json
 ```
 
-Then immediately write the full raw payload:
+No other tool call between this Read and the Write in Step 3B.
+
+**Step 3B — Write full payload to TEMP file (not the final path)**
+
+Write the full raw payload to: `~/personal-os/data/last-email-raw.tmp.json`
+
+**Step 3C — Rename temp → final (atomic swap)**
+
+```bash
+mv ~/personal-os/data/last-email-raw.tmp.json ~/personal-os/data/last-email-raw.json
+```
+
+If the session crashes between 3B and 3C, `.tmp.json` exists but the FINAL file is untouched.
+Tomorrow's pull reads the correct previous day file. No corruption, no stale date.
+
+**Step 3D — Write completion flag so classify knows pull is done**
+
+```bash
+echo "done" > ~/personal-os/data/pull-complete-[TODAY_ISO].flag
+```
+
+Replace `[TODAY_ISO]` with the actual date string, e.g. `pull-complete-2026-06-26.flag`.
+Task 2 (classify) polls for this flag instead of firing on a fixed 20-min timer.
+Without this flag, classify may start while pull is still running and read a stale file.
+
+**Full payload template (write to .tmp.json in Step 3B):**
 
 ```json
 {

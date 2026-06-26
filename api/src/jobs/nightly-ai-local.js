@@ -316,6 +316,22 @@ async function main() {
 
   await checkAlreadyRan()
 
+  // ── WRITE job_started_at — cascade guard ──────────────────────────────────
+  // Written immediately after idempotency check passes and BEFORE any API calls.
+  // The GitHub Actions polling logic uses this to detect: job running (< 110 min ago)
+  // vs. job crashed (> 110 min ago with no ai_completed_at). Prevents re-trigger cascade.
+  try {
+    await supabase.from('pipeline_runs').upsert({
+      run_date: today,
+      job_started_at: new Date().toISOString(),
+      status: 'in_progress'
+    }, { onConflict: 'run_date' })
+    console.log('  ✓ job_started_at written — cascade guard active')
+  } catch (startErr) {
+    // Non-fatal — if this fails, cascade guard won't work but job still runs
+    console.log(`  ⚠ job_started_at write failed (non-fatal): ${startErr.message}`)
+  }
+
   // Warm AI context cache once — all subsequent AI calls use the cached version
   console.log('Warming AI context (live project + task + contact data)...')
   try {
@@ -1001,13 +1017,20 @@ Respond with JSON only:
   // where the calendar event wasn't available at insert time.
   console.log('Step 2.44: Re-matching unlinked Plaud meetings to calendar events...')
   try {
+    // Only re-attempt matching for meetings within the last 30 days.
+    // Without this window the query scans all unlinked meetings ever recorded,
+    // making one Haiku call per meeting every single nightly run.
+    const thirtyDaysAgo = new Date()
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+
     const { data: unlinkedMeetings } = await supabase
       .from('meeting_notes')
       .select('id, title, start_time, participants, raw_transcript, full_transcript, summary, short_summary')
       .eq('source', 'plaud')
       .is('event_id', null)
       .not('start_time', 'is', null)
-      .limit(100)
+      .gte('start_time', thirtyDaysAgo.toISOString())
+      .limit(20)
 
     let relinked = 0
     for (const mn of (unlinkedMeetings || [])) {
