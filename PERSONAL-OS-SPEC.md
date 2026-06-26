@@ -565,25 +565,21 @@ Morning review panel showing:
 
 ## 12. Full Task List by Phase
 
-### IMMEDIATE (tonight — Ryan runs from terminal)
+### Phase 1A — Pipeline reliability ✅ COMPLETE (2026-06-26)
 | # | Task | Status |
 |---|---|---|
-| #68 | Cascade fix: `job_started_at` guard + timeout 60→120 | ✅ Code done — **⚠️ Ryan: git push** |
-| #79 | Push pagination fix (already committed, not pushed) | ✅ Committed — **⚠️ Ryan: git push** |
-
-### Phase 1A — Pipeline reliability
-| # | Task | Status |
-|---|---|---|
-| #74 | Fix push_email_report.py stale date abort | ✅ Done 2026-06-26 |
-| #71A | Atomic write + completion flag for email pull | ✅ Done 2026-06-26 |
-| #75 | Event-driven classify trigger (flag file polling) | ✅ Done 2026-06-26 |
-| #86 | Step 2.44 Plaud re-matching: 30-day window + limit 20 | ✅ Done 2026-06-26 |
+| #68 | Cascade fix: `job_started_at` guard + timeout 60→120 | ✅ Pushed 2026-06-26 |
+| #79 | Push pagination fix | ✅ Pushed 2026-06-26 |
+| #74 | Fix push_email_report.py stale date abort | ✅ Pushed 2026-06-26 |
+| #71A | Atomic write + completion flag for email pull | ✅ Pushed 2026-06-26 |
+| #75 | Event-driven classify trigger (flag file polling) | ✅ Pushed 2026-06-26 |
+| #86 | Step 2.44 Plaud re-matching: 30-day window + limit 20 | ✅ Pushed 2026-06-26 |
+| #66 | SQL migrations: job_started_at, source_type, match_attempted | ✅ Run in Supabase 2026-06-26 |
 
 ### Schema & front end
 | # | Task | Status |
 |---|---|---|
-| #66 | source_type migration (all tables) + job_started_at + match_attempted | ⏳ SQL written — **⚠️ Ryan: run in Supabase SQL editor** |
-| #67 | Dismiss button on front end pages | Pending (blocked by #66) |
+| #67 | Dismiss button on front end pages | Pending (Phase 1B ready) |
 | #78 | Dashboard "Extracted last night" panel | Pending |
 
 ### Phase 1B — Extraction layer

@@ -4,13 +4,16 @@ description: >
   Task 2 of 2 in the morning email pipeline. Reads raw thread data from
   ~/personal-os/data/last-email-raw.json (written by Task 1 at 4:05 AM).
   Classifies threads into 6 buckets, applies urgency scoring, cross-references
-  against yesterday's report, builds tags, writes final classified report to
-  ~/personal-os/data/last-email-report.json, and uploads to Supabase storage.
-  NO M365 connector calls. NO data pulling. Classification and output only.
+  against yesterday's report, builds tags, extracts structured intelligence
+  (action items, commitments, risks, decisions, summaries) per thread,
+  writes final classified report to ~/personal-os/data/last-email-report.json,
+  and uploads to Supabase storage.
+  NO M365 connector calls. NO data pulling. Classification + extraction only.
   Runs at 4:25 AM, 20 minutes after Task 1.
+  Phase 1B: extracted fields in output eliminate per-email AI calls in nightly job.
 ---
 
-# Email Classify — Classification & Output (Task 2 of 2)
+# Email Classify — Classification, Extraction & Output (Task 2 of 2)
 
 You are Task 2 of Ryan Hankins' morning email pipeline. Task 1 ran at 4:05 AM and wrote
 `~/personal-os/data/last-email-raw.json`. Your job is to read that file, classify every
@@ -207,6 +210,120 @@ For each thread in Buckets 1–5, populate `tags: []`:
 
 ---
 
+## Step 5.5 — Intelligence extraction (Phase 1B)
+
+**Purpose:** Eliminate per-email AI calls in the nightly job. Every thread gets structured
+extraction here, inline, so the nightly job reads this data instead of calling Haiku 200+ times.
+
+For each thread in Buckets 1–4, read `full_thread_content` (or `body_preview` if full content
+is unavailable) and extract the following. Use your best judgment — do NOT hallucinate.
+Confidence below 0.6 → omit the item. This is extraction, not invention.
+
+Add an `extracted` object to each thread record:
+
+```json
+{
+  "extracted": {
+    "ai_summary": "1-2 sentence plain English summary of what this thread is about and where it stands.",
+    "context_type": "work",
+    "action_items": [
+      {
+        "text": "Ryan needs to review and respond to the GMP proposal",
+        "owner": "ryan",
+        "due_date": "2026-06-28",
+        "confidence": 0.92
+      },
+      {
+        "text": "Send updated schedule to owner by Friday",
+        "owner": "other",
+        "owner_email": "contractor@company.com",
+        "owner_name": "John Smith",
+        "due_date": "2026-06-27",
+        "confidence": 0.85
+      }
+    ],
+    "commitments": [
+      {
+        "text": "Will send revised drawings by Monday",
+        "made_by_email": "arch@studio.com",
+        "made_by_name": "Sarah Lee",
+        "due_date": "2026-06-30",
+        "confidence": 0.88
+      }
+    ],
+    "pending_decisions": [
+      {
+        "question": "Should Clayco accept the $150k credit as settlement of the LWIC scope gap?",
+        "context": "Owner offering credit; contractor says full cost is $280k. Ryan has not responded.",
+        "confidence": 0.9
+      }
+    ],
+    "risk_signals": [
+      {
+        "signal": "Schedule milestone for steel delivery appears to be slipping — 3-week lag mentioned",
+        "severity": "medium",
+        "project_hint": "Gotion",
+        "confidence": 0.78
+      }
+    ],
+    "decisions_made": [
+      {
+        "decision": "Owner approved the alternate roofing system",
+        "decided_by": "owner",
+        "all_parties": ["hankinsr@claycorp.com", "owner@client.com"],
+        "confidence": 0.91
+      }
+    ],
+    "key_facts": [
+      {
+        "fact": "Insulation scope is now confirmed at $2.4M per approved change order",
+        "confidence": 0.95
+      }
+    ]
+  }
+}
+```
+
+**Extraction rules:**
+
+`ai_summary` — Always required. Keep to 1-2 sentences. State the topic and current status.
+Do not editorialize. "Owner sent revised GMP; Ryan has not replied in 3 days."
+
+`context_type` — Classify as:
+- `"work"` — involves a project, client, subcontractor, contract, or Clayco business
+- `"personal"` — flights, family, health, banking, personal appointments
+- `"mixed"` — clearly both
+
+`action_items` — Explicit asks, next steps, or tasks. For Ryan: `owner: "ryan"`. For others:
+`owner: "other"` + `owner_email` and `owner_name` if identifiable. Only include items with
+clear language ("please send", "can you confirm", "by Friday"). Omit vague requests.
+
+`commitments` — Statements where someone promised a future deliverable.
+"I'll send that by EOD", "We will have drawings to you by Monday." Must be specific.
+Only include if due_date or recipient is identifiable.
+
+`pending_decisions` — Open questions where Ryan's input or decision is needed and hasn't
+been given. Include context (what the options are, what's at stake). Omit if the question is
+trivial or already answered within the thread.
+
+`risk_signals` — Schedule, cost, scope, or contractual risk. Must be specific and real —
+not generic. severity: `"low"` | `"medium"` | `"high"`. Include `project_hint` if the email
+is clearly tied to a project (use the subject or company name).
+
+`decisions_made` — Decisions that were actually made in the thread and are now final.
+Not pending — made. "Owner approved X", "Parties agreed to Y."
+
+`key_facts` — Specific, verifiable facts that may be useful later. Numbers, dates, parties,
+specifications. "GMP is $48.2M." "Substantial completion date is Sept 15." Omit opinions.
+
+**Omit any key entirely if no qualifying items exist.** An empty `action_items: []` is fine.
+Do not manufacture items to fill the structure.
+
+**Bucket 3 and 4 threads:** Extract `ai_summary` and `context_type` always. Extract other
+fields only if clearly present — B3/B4 threads often have no action items for Ryan.
+
+---
+
 ## Step 6 — Write classified report
 
 **PRECONDITION:** Read `~/personal-os/data/last-email-report.json` immediately before the Write.
@@ -269,7 +386,37 @@ Then immediately write the full classified payload:
       "latest_sender_name": "J. Miller",
       "my_last_reply_time": "2026-05-10T14:00:00Z",
       "waiting_since": "2026-05-10T16:30:00Z",
-      "thread_subject": "LWIC coordination"
+      "thread_subject": "LWIC coordination",
+      "extracted": {
+        "ai_summary": "J. Miller is waiting on Ryan's response re: Siplast insulation scope; thread has been open 5 days.",
+        "context_type": "work",
+        "action_items": [
+          {
+            "text": "Review Siplast insulation spec attachment and respond to Miller on scope clarification",
+            "owner": "ryan",
+            "due_date": null,
+            "confidence": 0.94
+          }
+        ],
+        "commitments": [],
+        "pending_decisions": [
+          {
+            "question": "Is Siplast or alternate insulation system approved for the LWIC scope?",
+            "context": "Miller attached spec and is waiting for Ryan's direction. No response yet after 5 days.",
+            "confidence": 0.88
+          }
+        ],
+        "risk_signals": [
+          {
+            "signal": "LWIC scope clarification unresolved for 5 days — may impact subcontractor procurement",
+            "severity": "medium",
+            "project_hint": "LWIC coordination",
+            "confidence": 0.82
+          }
+        ],
+        "decisions_made": [],
+        "key_facts": []
+      }
     }
   ],
   "bucket2": [],

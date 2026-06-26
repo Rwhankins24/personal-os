@@ -1327,8 +1327,39 @@ Respond with JSON only:
     console.log(`  ✓ Email-Plaud cross-reference: ${emailMeetingCrossRef.size} email threads linked to Plaud meetings`)
   }
 
+  // ── PHASE 1B: Load pre-extracted classify output ─────────────────
+  // email-classify-skill (Task 2) writes daily-reports/{today}.json with an
+  // `extracted` object per thread (ai_summary, action_items, commitments, etc.).
+  // If available, we skip per-email Haiku calls in Steps 3, 3.2, and 3.5.
+  // Keyed by conversation_id (lowercase). Falls back gracefully if not found.
+  const phase1bIndex = new Map()
+  try {
+    const p1bStorageUrl = `${process.env.SUPABASE_URL}/storage/v1/object/daily-reports/${today}.json`
+    const p1bRes = await fetch(p1bStorageUrl, {
+      headers: { Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}` }
+    })
+    if (p1bRes.ok) {
+      const p1bReport = await p1bRes.json()
+      let p1bThreadCount = 0
+      for (const bucket of ['bucket1', 'bucket2', 'bucket3', 'bucket4']) {
+        for (const thread of (p1bReport[bucket] || [])) {
+          if (thread.conversation_id && thread.extracted) {
+            phase1bIndex.set(thread.conversation_id.toLowerCase(), thread.extracted)
+            p1bThreadCount++
+          }
+        }
+      }
+      console.log(`  ✓ Phase 1B index: ${p1bThreadCount} threads with pre-extracted intelligence`)
+    } else {
+      console.log(`  ⚠ Phase 1B classify output not found (HTTP ${p1bRes.status}) — falling back to per-email AI calls`)
+    }
+  } catch (p1bErr) {
+    console.log(`  ⚠ Phase 1B load error (non-fatal): ${p1bErr.message} — falling back to per-email AI calls`)
+  }
+
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
+  let phase1bSummaryHits = 0
   for (const email of (activeEmails || [])) {
     try {
       // Detect links
@@ -1336,6 +1367,23 @@ Respond with JSON only:
         email.full_thread_content || email.body_preview || ''
       )
 
+      // ── Phase 1B fast path: use pre-extracted summary if available ──
+      const p1bData = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      if (p1bData?.ai_summary) {
+        await supabase
+          .from('emails')
+          .update({
+            ai_summary: p1bData.ai_summary,
+            context_type: p1bData.context_type || 'work',
+            links_detected: links
+          })
+          .eq('id', email.id)
+        results.threads_summarized++
+        phase1bSummaryHits++
+        continue  // skip Haiku call
+      }
+
+      // ── Fallback: per-email Haiku summarize (no Phase 1B data) ──
       // Pre-fetch project context if email is linked to a project
       const emailProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
       const projectContext = emailProjectId
@@ -1377,13 +1425,21 @@ Respond with JSON only:
       console.log(`  ✗ Summarize error: ${err.message}`)
     }
   }
-  console.log(`  ✓ Summarized ${results.threads_summarized} threads`)
+  console.log(`  ✓ Summarized ${results.threads_summarized} threads (${phase1bSummaryHits} from Phase 1B, ${results.threads_summarized - phase1bSummaryHits} via Haiku)`)
 
   // ── STEP 3.2: Classify email context (work vs personal) ──────────
   console.log('Step 3.2: Classifying email context...')
   let classified = 0
   try {
     for (const email of (activeEmails || [])) {
+      // Phase 1B fast path: already classified by classify skill
+      const p1bCtx = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      if (p1bCtx?.context_type && p1bCtx.context_type !== 'work') {
+        await supabase.from('emails').update({ context_type: p1bCtx.context_type }).eq('id', email.id)
+        classified++
+        continue
+      }
+
       // Skip if already classified
       if (email.context_type && email.context_type !== 'work') continue
 
@@ -1430,23 +1486,66 @@ Respond with JSON only:
   // Track topic clusters for unlinked intel
   const unlinkedClusters = {}
 
+  let phase1bIntelHits = 0
   for (const email of (activeEmails || [])) {
     try {
-      const threadHistory = await getThreadHistory(email)
-      const intelProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
-      const intelProjectContext = intelProjectId
-        ? await aiService.buildProjectContext(intelProjectId)
-        : ''
+      // ── Phase 1B fast path: use pre-extracted intelligence if available ──
+      const p1bData = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      let intel
+      if (p1bData && (p1bData.pending_decisions?.length || p1bData.risk_signals?.length ||
+                      p1bData.decisions_made?.length || p1bData.key_facts?.length)) {
+        // Map Phase 1B schema → existing intel object shape for write compatibility
+        intel = {
+          technical_facts: [],
+          financial_signals: [],
+          schedule_signals: [],
+          scope_signals: [],
+          implicit_commitments: [],
+          relationship_signals: [],
+          key_facts: (p1bData.key_facts || []).map(f => ({
+            fact: f.fact || f, source: email.thread_subject
+          })),
+          decisions_made: (p1bData.decisions_made || []).map(d => ({
+            decision: d.decision,
+            decided_by: d.decided_by || 'unknown',
+            all_parties: d.all_parties || [],
+            date: today
+          })),
+          pending_decisions: (p1bData.pending_decisions || []).map(pd => ({
+            decision: pd.question,
+            blocking: false,
+            due_date: null,
+            urgency: 'medium'
+          })),
+          risk_signals: (p1bData.risk_signals || [])
+            .filter(r => r.severity !== 'low')
+            .map(r => ({
+              signal: r.signal,
+              severity: r.severity,
+              involves_key_contact: true,    // bucket1/2 threads are active/important
+              involves_active_project: !!r.project_hint,
+              source: email.thread_subject
+            }))
+        }
+        phase1bIntelHits++
+      } else {
+        // ── Fallback: per-email Haiku intelligence extraction ──
+        const threadHistory = await getThreadHistory(email)
+        const intelProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
+        const intelProjectContext = intelProjectId
+          ? await aiService.buildProjectContext(intelProjectId)
+          : ''
 
-      // Inject per-email meeting cross-reference into intelligence extraction.
-      // Pulls from the pre-computed emailMeetingCrossRef Map (built before Step 3)
-      // so this loop doesn't need its own participant lookup.
-      const perEmailMeetingNote = emailMeetingCrossRef.get(email.id) || ''
-      const enrichedMeetingContext = perEmailMeetingNote
-        ? meetingContext + perEmailMeetingNote
-        : meetingContext
+        // Inject per-email meeting cross-reference into intelligence extraction.
+        // Pulls from the pre-computed emailMeetingCrossRef Map (built before Step 3)
+        // so this loop doesn't need its own participant lookup.
+        const perEmailMeetingNote = emailMeetingCrossRef.get(email.id) || ''
+        const enrichedMeetingContext = perEmailMeetingNote
+          ? meetingContext + perEmailMeetingNote
+          : meetingContext
 
-      const intel = await aiService.extractIntelligence(email, threadHistory, enrichedMeetingContext, intelProjectContext)
+        intel = await aiService.extractIntelligence(email, threadHistory, enrichedMeetingContext, intelProjectContext)
+      }
 
       let projectId = email.project_id ||
         await findProjectByKeywords(email.thread_subject)
@@ -1673,7 +1772,8 @@ Respond with JSON only:
     `  ✓ Intelligence: ${results.intelligence_notes_added} notes, ` +
     `${results.decisions_logged} decisions, ` +
     `${results.pending_decisions_created} pending, ` +
-    `${results.risk_signals_detected} risks`
+    `${results.risk_signals_detected} risks ` +
+    `(${phase1bIntelHits}/${activeEmails.length} from Phase 1B, ${activeEmails.length - phase1bIntelHits} via Haiku)`
   )
 
   // ── STEP 3.55: Email context enrichment ────────────────────────
