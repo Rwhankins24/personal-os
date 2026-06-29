@@ -285,6 +285,67 @@ function PipelineBanner() {
   )
 }
 
+// ── Nightly Digest Panel ────────────────────────────────────────
+// Shows what the previous night's AI run extracted, with links to review
+function NightlyDigestPanel() {
+  const { data: status } = useQuery({
+    queryKey: ['pipeline-status'],
+    queryFn: getPipelineStatus,
+    refetchInterval: 300000,
+    retry: false,
+  })
+
+  if (!status?.ai_completed_at) return null
+
+  // Only show if AI completed within the last 24h
+  const hoursAgo = (Date.now() - new Date(status.ai_completed_at).getTime()) / (1000 * 60 * 60)
+  if (hoursAgo > 24) return null
+
+  const counts = [
+    { label: 'Tasks',          value: status.tasks_created         || 0, to: '/tasks',        color: 'bg-blue-50 text-blue-700 border-blue-200'   },
+    { label: 'Decisions',      value: status.decisions_logged       || 0, to: '/decisions',    color: 'bg-amber-50 text-amber-700 border-amber-200' },
+    { label: 'Pending',        value: status.pending_decisions      || 0, to: '/decisions',    color: 'bg-orange-50 text-orange-700 border-orange-200' },
+    { label: 'Knowledge',      value: status.knowledge_created      || 0, to: '/knowledge',    color: 'bg-green-50 text-green-700 border-green-200' },
+    { label: 'Learnings',      value: status.observations_created   || 0, to: '/observations', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+    { label: "Others' Items",  value: status.others_commitments     || 0, to: '/others',       color: 'bg-slate-50 text-slate-700 border-slate-200' },
+    { label: 'Risks',          value: status.risk_signals           || 0, to: '/decisions',    color: 'bg-red-50 text-red-700 border-red-200'      },
+  ].filter(c => c.value > 0)
+
+  if (counts.length === 0) return null
+
+  const totalItems = counts.reduce((sum, c) => sum + c.value, 0)
+  const meetingsN  = status.meetings_processed || 0
+  const threadsN   = status.threads_processed  || 0
+
+  return (
+    <div className="bg-white rounded-2xl border border-[#e5e5e3] px-4 py-3">
+      <div className="flex items-center justify-between mb-2.5">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-[#1a1a18]">Extracted last night</span>
+          <span className="text-xs text-[#9b9b97]">
+            {totalItems} item{totalItems !== 1 ? 's' : ''}
+            {meetingsN > 0 && ` from ${meetingsN} meeting${meetingsN !== 1 ? 's' : ''}`}
+            {threadsN  > 0 && ` · ${threadsN} thread${threadsN !== 1 ? 's' : ''}`}
+          </span>
+        </div>
+        <span className="text-xs text-[#9b9b97]">{dayjs(status.ai_completed_at).fromNow()}</span>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {counts.map(c => (
+          <Link
+            key={c.label}
+            to={c.to}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border text-xs font-medium transition-opacity hover:opacity-80 ${c.color}`}
+          >
+            <span className="text-[13px] font-bold">{c.value}</span>
+            <span>{c.label}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ── Stat cards ─────────────────────────────────────────────────
 function StatCards({ tasks, emails, events, commitments, decisions, questions,
                      onOpenTasks, onNeedsReply, onDecisions, onQuestions }) {
@@ -1825,6 +1886,9 @@ export default function Dashboard() {
 
         {/* Daily brief — full width */}
         <DailyBrief />
+
+        {/* Extracted last night — what the nightly job pulled */}
+        <NightlyDigestPanel />
 
         {/* Stat cards */}
         <StatCards

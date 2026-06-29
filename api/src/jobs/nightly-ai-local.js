@@ -5721,11 +5721,22 @@ Return only valid JSON.`
   const pendingQCount = results.questions_logged
 
   await supabase.from('pipeline_runs').upsert({
-    run_date: today,
-    ai_completed_at: new Date().toISOString(),
-    status: 'complete',
-    pending_questions: pendingQCount,
-    error_count: results.errors.length
+    run_date:              today,
+    ai_completed_at:       new Date().toISOString(),
+    status:                'complete',
+    pending_questions:     pendingQCount,
+    error_count:           results.errors.length,
+    // Extraction counts — read by Dashboard "Extracted last night" panel
+    tasks_created:         results.tasks_created         || 0,
+    decisions_logged:      results.decisions_logged       || 0,
+    pending_decisions:     results.pending_decisions_created || 0,
+    commitments_extracted: results.my_commitments_extracted  || 0,
+    others_commitments:    results.others_commitments_extracted || 0,
+    knowledge_created:     results.knowledge_created      || 0,
+    observations_created:  results.observations_created   || 0,
+    risk_signals:          results.risk_signals_detected  || 0,
+    threads_processed:     results.threads_summarized     || 0,
+    meetings_processed:    results.plaud_meetings_loaded  || 0,
   }, { onConflict: 'run_date' })
 
   // ── FINAL REPORT ────────────────────────────────────────────────
