@@ -636,14 +636,19 @@ function EntryCard({ entry, projects, onEdit, onDelete, onAssignCategory }) {
         </div>
       </div>
 
-      {/* Source project chip */}
-      {projectName && (
-        <div className="mb-2">
+      {/* Source project chip + source label */}
+      <div className="flex items-center gap-2 flex-wrap mb-2">
+        {projectName && (
           <span className="text-xs border border-[#C9A84C]/50 text-[#C9A84C] bg-amber-50 px-2 py-0.5 rounded-full font-medium">
             📁 {projectName}
           </span>
-        </div>
-      )}
+        )}
+        {entry.source_label && (
+          <span className="text-xs text-[#9b9b97]">
+            {entry.source_type === 'ai_email' ? '📧' : entry.source_type?.includes('plaud') ? '🎙' : '↳'} {entry.source_label}
+          </span>
+        )}
+      </div>
 
       {/* Project refs chips */}
       {(entry.project_refs || []).length > 0 && (

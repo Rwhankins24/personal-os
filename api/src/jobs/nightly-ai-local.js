@@ -1851,15 +1851,16 @@ Respond with JSON only:
 
             if (!existP) {
               await supabase.from('pending_decisions').insert({
-                title: p.decision,
-                context: p.decision,
-                blocking: p.blocking,
-                due_date: p.due_date,
-                urgency: p.urgency || 'medium',
-                project_id: projectId,
-                source_type: 'ai_email',
-                source_id: email.id,
-                status: 'open'
+                title:        p.decision,
+                context:      p.decision,
+                blocking:     p.blocking,
+                due_date:     p.due_date,
+                urgency:      p.urgency || 'medium',
+                project_id:   projectId,
+                source_type:  'ai_email',
+                source_id:    email.id,
+                source_label: email.thread_subject || email.subject || 'Email',
+                status:       'open'
               })
               results.pending_decisions_created++
             }
@@ -3666,15 +3667,16 @@ Be specific and cite concrete details. Avoid generic statements.`
 
               if (!existP) {
                 await supabase.from('pending_decisions').insert({
-                  title:       decisionTitle,
-                  context:     p.context || p.decision || decisionTitle,
-                  blocking:    p.blocking || false,
-                  due_date:    p.due_date || null,
-                  urgency:     p.urgency || 'medium',
-                  project_id:  projectId || null,
-                  source_type: meetingSourceType,
-                  source_id:   meeting.id,
-                  status:      'open'
+                  title:        decisionTitle,
+                  context:      p.context || p.decision || decisionTitle,
+                  blocking:     p.blocking || false,
+                  due_date:     p.due_date || null,
+                  urgency:      p.urgency || 'medium',
+                  project_id:   projectId || null,
+                  source_type:  meetingSourceType,
+                  source_id:    meeting.id,
+                  source_label: meeting.title || 'Meeting',
+                  status:       'open'
                 })
                 results.pending_decisions_created++
               }
@@ -3729,6 +3731,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                     source_context: k.source_context || null,
                     source_type:    meetingSourceType,
                     source_id:      meeting.id,
+                    source_label:   meeting.title || 'Meeting',
                     project_id:     projectId || null,
                   })
                   results.knowledge_created = (results.knowledge_created || 0) + 1
@@ -3754,6 +3757,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                     confidence:   l.confidence   || 'moderate',
                     source_type:  meetingSourceType,
                     source_id:    meeting.id,
+                    source_label: meeting.title || 'Meeting',
                     project_id:   projectId || null,
                   })
                   results.observations_created = (results.observations_created || 0) + 1
@@ -5476,18 +5480,19 @@ Return JSON only:
         if (!parsed?.worth_saving) continue
 
         await supabase.from('knowledge_base').insert({
-          topic:       parsed.topic,
-          category:    'decision',
-          context:     parsed.context,
-          resolution:  parsed.resolution,
-          applies_to:  parsed.applies_to || [],
-          status:      'proposed',
-          proposed_by: 'ai_nightly',
-          source_type: 'pending_decision',
-          source_id:   item.id,
-          project_id:  item.project_id || null,
-          created_at:  new Date().toISOString(),
-          updated_at:  new Date().toISOString(),
+          topic:        parsed.topic,
+          category:     'decision',
+          context:      parsed.context,
+          resolution:   parsed.resolution,
+          applies_to:   parsed.applies_to || [],
+          status:       'proposed',
+          proposed_by:  'ai_nightly',
+          source_type:  'pending_decision',
+          source_id:    item.id,
+          source_label: item.title ? `Decision: ${item.title.slice(0, 80)}` : 'Resolved decision',
+          project_id:   item.project_id || null,
+          created_at:   new Date().toISOString(),
+          updated_at:   new Date().toISOString(),
         })
         knowledgeProposed++
       } catch { /* non-fatal */ }

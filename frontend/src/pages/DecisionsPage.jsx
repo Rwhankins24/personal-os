@@ -159,8 +159,11 @@ export default function DecisionsPage() {
                       {dayjs(d.created_at).format('MMM D, YYYY')}
                     </span>
                   )}
-                  {d.source && (
-                    <span className="text-xs text-[#9b9b97]">{d.source}</span>
+                  {(d.source_label || d.source) && (
+                    <span className="text-xs text-[#9b9b97]">
+                      {d.source_type === 'ai_email' ? '📧 ' : d.source_type?.includes('plaud') ? '🎙 ' : '↳ '}
+                      {d.source_label || d.source}
+                    </span>
                   )}
                 </div>
 
