@@ -1959,11 +1959,11 @@ export default function Dashboard() {
                     {isExpanded && (
                       <div className="px-3 pb-3 space-y-3 border-t border-[#f0f0ee]" onClick={e => e.stopPropagation()}>
 
-                        {/* Summary — full paragraph */}
-                        {cleanSummary && (
+                        {/* Summary — formatted via MeetingSummary (handles bullets, headings, bold) */}
+                        {rawSummary && (
                           <div className="pt-3">
                             <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1.5">Summary</p>
-                            <p className="text-xs text-[#1a1a18] leading-relaxed">{cleanSummary}</p>
+                            <MeetingSummary text={rawSummary} compact={true} />
                           </div>
                         )}
 
