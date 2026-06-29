@@ -531,6 +531,9 @@ async function main() {
     otter_my_commitments: 0,
     otter_others_created: 0,
     cross_refs_created: 0,
+    knowledge_created: 0,
+    observations_created: 0,
+    plaud_meetings_loaded: 0,
     errors: []
   }
 
@@ -1065,7 +1068,13 @@ Respond with just the sentence, no quotes, no JSON.`
           participants:           participantRoster,
           source:                 'plaud',
           intelligence_extracted: false,
-          commitments_extracted:  false
+          commitments_extracted:  false,
+          // Structured block data — populated when Plaud email parser extracts them.
+          // hasPlaudBlocks reads these columns; without them hasPlaudBlocks is always false
+          // and mapPlaudBlocksToIntel never triggers (integration audit fix, session 26b).
+          people_and_actions:     meeting.people_and_actions  || null,
+          decisions_and_risks:    meeting.decisions_and_risks || null,
+          meeting_metadata:       meeting.meeting_metadata    || null,
         }).select('id').single()
         plaudMeetingsLoaded++
 
@@ -5723,6 +5732,9 @@ Return only valid JSON.`
 
   // ── STEP 10: Mark complete ──────────────────────────────────────
   console.log('Step 10: Marking complete...')
+  // Flush local counter → results so pipeline_runs gets the real meeting count
+  // (plaudMeetingsLoaded is incremented in Step 2.4 but was never assigned to results — fix session 26b)
+  results.plaud_meetings_loaded = plaudMeetingsLoaded
   const pendingQCount = results.questions_logged
 
   await supabase.from('pipeline_runs').upsert({
