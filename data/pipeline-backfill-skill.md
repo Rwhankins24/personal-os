@@ -87,9 +87,27 @@ Log: `Backfill range: [START_DATE] → [END_DATE] — [N] dates`
 
 ---
 
-## Step 2 — Storage audit
+## Step 2 — Data audit (local archive first, then storage)
 
-For each date in `TARGET_DATES`, check what's already in Supabase storage:
+For each date in `TARGET_DATES`, check local archive before hitting storage.
+Local archive is faster, avoids sandbox network issues, and is the ground truth
+for data generated on this Mac.
+
+**Check local archive files first:**
+
+```bash
+for DATE in ${TARGET_DATES[@]}; do
+  EMAIL_LOCAL="${DATA_PATH}/archive/${DATE}-email-report.json"
+  PLAUD_LOCAL="${DATA_PATH}/archive/${DATE}-plaud-report.json"
+  echo "Email local ${DATE}: $([ -f "$EMAIL_LOCAL" ] && echo 'EXISTS' || echo 'missing')"
+  echo "Plaud local ${DATE}: $([ -f "$PLAUD_LOCAL" ] && echo 'EXISTS' || echo 'missing')"
+done
+```
+
+For any date where the local archive file EXISTS and is non-empty: mark as
+`email_ok` / `plaud_ok` without making a storage request.
+
+For dates where local archive is MISSING: check Supabase storage:
 
 **Email report check** (the classified output — `{DATE}.json`):
 ```bash

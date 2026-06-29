@@ -560,6 +560,25 @@ wc -c ~/personal-os/data/last-plaud-report.json
 
 Log the size in your summary. If size is 0 or file missing, log as a critical warning.
 
+**Save date-based archive copy** (mirrors the email pipeline archive pattern):
+
+```bash
+TODAY_ISO=$(date '+%Y-%m-%d')
+ARCHIVE_DIR="${DATA_PATH}/archive"
+mkdir -p "$ARCHIVE_DIR"
+ARCHIVE_DEST="${ARCHIVE_DIR}/${TODAY_ISO}-plaud-report.json"
+if [ ! -f "$ARCHIVE_DEST" ]; then
+  cp "${DATA_PATH}/last-plaud-report.json" "$ARCHIVE_DEST"
+  echo "Archived → $ARCHIVE_DEST"
+else
+  echo "Archive already exists: $ARCHIVE_DEST"
+fi
+```
+
+This local archive (`archive/{DATE}-plaud-report.json`) serves as the recovery file
+if Supabase storage is unavailable. The pipeline-backfill skill reads these archive
+files before falling back to storage fetches.
+
 ---
 
 ## Step 7 — Upload to Supabase Storage

@@ -19,6 +19,13 @@ REPORT_FILE = os.path.expanduser("~/personal-os/data/last-email-report.json")
 ARCHIVE_DIR = os.path.expanduser("~/personal-os/data/archive")
 LOG_FILE = os.path.expanduser("~/personal-os/data/push-email.log")
 
+SUPABASE_URL = "https://dvevqwhphrcboyjpvnlz.supabase.co"
+SUPABASE_KEY = (
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIs"
+    "ImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+)
+
 def archive_report(today):
     """Copy last-email-report.json to archive/YYYY-MM-DD-email-report.json."""
     os.makedirs(ARCHIVE_DIR, exist_ok=True)
@@ -28,6 +35,42 @@ def archive_report(today):
         shutil.copy2(REPORT_FILE, dest)
         return dest
     return dest  # already archived
+
+def archive_plaud_report(today):
+    """Fetch plaud-{today}.json from Supabase storage and save to archive.
+
+    The Plaud pull runs via GitHub Actions (plaud-pull.yml) at 2 AM and uploads
+    directly to storage — it never writes a local file. This function pulls that
+    storage file down so the local archive stays consistent with the email archive.
+    Non-fatal if no Plaud meetings ran today (returns a status string, not raises).
+    """
+    os.makedirs(ARCHIVE_DIR, exist_ok=True)
+    dest = os.path.join(ARCHIVE_DIR, f"{today}-plaud-report.json")
+    if os.path.exists(dest):
+        return dest, "already_exists"
+
+    url = f"{SUPABASE_URL}/storage/v1/object/daily-reports/plaud-{today}.json"
+    req = urllib.request.Request(
+        url,
+        headers={"Authorization": f"Bearer {SUPABASE_KEY}"}
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = r.read()
+        with open(dest, "wb") as f:
+            f.write(data)
+        meeting_count = 0
+        try:
+            meeting_count = len(json.loads(data).get("meetings", []))
+        except Exception:
+            pass
+        return dest, f"downloaded ({meeting_count} meetings)"
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return dest, "not_found (no Plaud meetings today — normal)"
+        return dest, f"HTTP {e.code}"
+    except Exception as e:
+        return dest, f"failed: {e}"
 
 def log(msg):
     print(msg)
@@ -126,10 +169,15 @@ def main():
         log("  Task 2 (classify) may not have run yet. Exiting.")
         sys.exit(1)
 
-    # Archive today's report before pushing
+    # Archive today's email report before pushing
     if report_path == REPORT_FILE:
         archived = archive_report(today)
-        log(f"  Archived → {archived}")
+        log(f"  Email archived  → {archived}")
+
+    # Archive today's Plaud report (fetched from Supabase storage).
+    # Runs every day — non-fatal if no Plaud meetings today.
+    plaud_dest, plaud_status = archive_plaud_report(today)
+    log(f"  Plaud archived  → {plaud_dest}  [{plaud_status}]")
 
     with open(report_path) as f:
         report = json.load(f)

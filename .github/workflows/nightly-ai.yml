@@ -183,7 +183,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "from": "personalos@resend.dev",
-              "to": "hankinsr@claycorp.com",
+              "to": "ryanhankins.personalos@gmail.com",
               "subject": "Personal OS — AI job FAILED (hard crash)",
               "text": "The nightly AI job crashed. Check GitHub Actions logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }' || echo "Notification failed too"
@@ -207,7 +207,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{
                 \"from\": \"personalos@resend.dev\",
-                \"to\": \"hankinsr@claycorp.com\",
+                \"to\": \"ryanhankins.personalos@gmail.com\",
                 \"subject\": \"Personal OS — AI job partial failures (${ERROR_COUNT} errors)\",
                 \"text\": \"The nightly AI job completed but had ${ERROR_COUNT} step-level errors. Some intelligence may be missing. Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
               }" || echo "Partial-failure notification failed"
