@@ -275,6 +275,58 @@ def parse_action_items(body_text):
 
     return ryan_items, others_items, unattributed
 
+def clean_block_json(raw):
+    """
+    Strip markdown and formatting artifacts from LLM-generated JSON blocks.
+    Real Plaud output has three known issues:
+      1. The first block sometimes starts inside a markdown table (| content |)
+         because the LLM continues the action-items table format.
+      2. JSON field values may be wrapped in inline code backticks: `"value"`
+      3. Code fence markers (``` or ```json) may surround parts of the block.
+    HTML entities (&quot;) are included defensively in case of email encoding.
+    """
+    # Remove code fence markers
+    text = re.sub(r'```\w*\s*\n?', '\n', raw)
+    # Remove inline backtick wrappers: `value` -> value
+    text = re.sub(r'`([^`\n]*)`', r'\1', text)
+    # Decode HTML entities (defensive — may not appear in plain-text attachments)
+    text = text.replace('&quot;', '"').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+    # Strip markdown table pipe formatting: "| content | | |" -> "content"
+    # This is needed when the LLM embeds the JSON block at the tail of a table.
+    cleaned_lines = []
+    for line in text.split('\n'):
+        stripped = line.strip()
+        if stripped.startswith('|') and stripped.count('|') >= 2:
+            parts = [p.strip() for p in stripped.strip('|').split('|') if p.strip()]
+            cleaned_lines.append(parts[0] if parts else '')
+        else:
+            cleaned_lines.append(line)
+    return '\n'.join(cleaned_lines).strip()
+
+def extract_block(text, label):
+    """
+    Extract and JSON-parse a structured block from the new Plaud AI prompt format.
+    Delimiter pattern: =LABEL= ... =END_LABEL= (1+ equals signs on each side).
+    The prompt template shows =====LABEL===== but real LLM output uses single =.
+    Uses ={1,} to handle both. Falls back to cleaned parse for formatting artifacts.
+    Returns parsed dict, or None if block absent or unparseable (old-format emails).
+    """
+    pattern = r'={1,}\s*' + re.escape(label) + r'\s*={1,}(.*?)={1,}\s*END_' + re.escape(label) + r'\s*={1,}'
+    match = re.search(pattern, text, re.DOTALL)
+    if not match:
+        return None
+    raw = match.group(1).strip()
+    # Try direct parse first (clean output)
+    try:
+        return json.loads(raw)
+    except (json.JSONDecodeError, ValueError):
+        pass
+    # Strip markdown/formatting artifacts and retry
+    try:
+        return json.loads(clean_block_json(raw))
+    except (json.JSONDecodeError, ValueError):
+        return None
+
 def parse_summary(body_text):
     """Extract the summary section from Plaud summary.txt."""
     # Strip markdown images (Plaud banner at top): ![PLAUD NOTE](url)
@@ -359,6 +411,13 @@ for msg_id in MESSAGE_IDS:
     summary = parse_summary(summary_text) if summary_text else ""
     ryan_items, others_items, unattributed = parse_action_items(summary_text) if summary_text else ([], [], [])
 
+    # Extract structured JSON blocks from new Plaud AI prompt format.
+    # Returns None for old-format emails (no delimiters present) — nightly job falls
+    # back to legacy Haiku path gracefully when these are null.
+    people_and_actions  = extract_block(summary_text, 'PEOPLE_AND_ACTIONS')  if summary_text else None
+    decisions_and_risks = extract_block(summary_text, 'DECISIONS_AND_RISKS') if summary_text else None
+    meeting_metadata    = extract_block(summary_text, 'MEETING_METADATA')    if summary_text else None
+
     # Store raw summary text for debugging
     email_body_raw = summary_text
 
@@ -400,7 +459,13 @@ for msg_id in MESSAGE_IDS:
         "unattributed_action_items": unattributed,
         "has_transcript": has_transcript,
         "transcript_text": transcript_text,
-        "transcript_word_count": len(transcript_text.split()) if transcript_text else 0
+        "transcript_word_count": len(transcript_text.split()) if transcript_text else 0,
+        # Structured blocks — populated when new Plaud AI prompt format is active.
+        # Null for old-format emails. Nightly job reads these into meeting_notes columns
+        # and routes through mapPlaudBlocksToIntel (zero Haiku cost) when present.
+        "people_and_actions":  people_and_actions,
+        "decisions_and_risks": decisions_and_risks,
+        "meeting_metadata":    meeting_metadata,
     })
 
 report = {
