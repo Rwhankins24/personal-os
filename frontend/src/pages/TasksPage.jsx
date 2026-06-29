@@ -201,7 +201,7 @@ function PillToggle({ options, value, onChange }) {
 }
 
 // ── Task expanded context panel ───────────────────────────────
-function TaskContextPanel({ task, allTasks, projects, update }) {
+function TaskContextPanel({ task, allTasks, projects, update, onDelete }) {
   const [tab, setTab] = useState('context')
   const [editUrgency, setEditUrgency] = useState(task.urgency || 'medium')
   const [editDue, setEditDue] = useState(task.due_date || '')
@@ -344,6 +344,15 @@ function TaskContextPanel({ task, allTasks, projects, update }) {
             >
               {saving ? '…' : 'Save'}
             </button>
+            {onDelete && (
+              <button
+                onClick={onDelete}
+                className="ml-auto text-xs text-[#9b9b97] hover:text-red-500 hover:bg-red-50 px-2 py-1 rounded-lg transition-colors"
+                title="Delete task"
+              >
+                Delete
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -817,6 +826,15 @@ export default function TasksPage() {
                       allTasks={tasks}
                       projects={projects}
                       update={update}
+                      onDelete={() => {
+                        deleteTask(task.id)
+                          .then(() => {
+                            qc.setQueryData(['tasks'], old => (old || []).filter(t => t.id !== task.id))
+                            setExpandedId(null)
+                            toast('Task deleted', { icon: '🗑', type: 'info' })
+                          })
+                          .catch(() => toast('Delete failed', { type: 'error' }))
+                      }}
                     />
                   )}
 
