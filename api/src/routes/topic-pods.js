@@ -305,6 +305,118 @@ module.exports = async (req, res) => {
         .select()
         .single()
       if (error) throw error
+
+      // ── #77: Retroactive historical population ─────────────────
+      // Fire-and-forget: search knowledge_base + observations for
+      // content matching this new pod's keywords and route matches.
+      // Does NOT block the API response.
+      setImmediate(async () => {
+        try {
+          const podId   = data.id
+          const podName = data.name || ''
+          const podDesc = data.description || ''
+          const podDir  = data.research_directive || ''
+
+          // Build keyword set from pod metadata (words > 4 chars to skip stop words)
+          const keywords = `${podName} ${podDesc} ${podDir}`
+            .toLowerCase()
+            .split(/\W+/)
+            .filter(w => w.length > 4)
+          if (!keywords.length) return
+
+          // Deduplicate keywords and take top 5 for queries
+          const uniqueKw = [...new Set(keywords)].slice(0, 5)
+          let routed = 0
+          const CAP = 30
+
+          // Search knowledge_base for each keyword
+          for (const kw of uniqueKw) {
+            if (routed >= CAP) break
+            const { data: kbMatches } = await supabase
+              .from('knowledge_base')
+              .select('id, topic, context, source_label')
+              .or(`topic.ilike.%${kw}%,context.ilike.%${kw}%`)
+              .limit(20)
+
+            for (const entry of (kbMatches || [])) {
+              if (routed >= CAP) break
+              // Require 2+ keyword overlap to reduce false positives
+              const entryText = `${entry.topic || ''} ${entry.context || ''}`.toLowerCase()
+              const overlap   = keywords.filter(w => entryText.includes(w)).length
+              if (overlap < 2) continue
+
+              const { data: dup } = await supabase
+                .from('topic_pod_content')
+                .select('id')
+                .eq('pod_id', podId)
+                .eq('source_id', entry.id)
+                .eq('content_type', 'knowledge')
+                .maybeSingle()
+              if (dup) continue
+
+              await supabase.from('topic_pod_content').insert({
+                pod_id:           podId,
+                content_type:     'knowledge',
+                source_id:        entry.id,
+                title:            entry.topic || 'Knowledge entry',
+                source_label:     entry.source_label || 'Historical match',
+                raw_text:         (entry.context || '').slice(0, 50000),
+                extracted_points: [],
+                created_at:       new Date().toISOString(),
+              })
+              routed++
+            }
+          }
+
+          // Search observations for each keyword
+          for (const kw of uniqueKw) {
+            if (routed >= CAP) break
+            const { data: obsMatches } = await supabase
+              .from('observations')
+              .select('id, title, summary, source_label')
+              .or(`title.ilike.%${kw}%,summary.ilike.%${kw}%`)
+              .limit(20)
+
+            for (const obs of (obsMatches || [])) {
+              if (routed >= CAP) break
+              const obsText = `${obs.title || ''} ${obs.summary || ''}`.toLowerCase()
+              const overlap = keywords.filter(w => obsText.includes(w)).length
+              if (overlap < 2) continue
+
+              const { data: dup } = await supabase
+                .from('topic_pod_content')
+                .select('id')
+                .eq('pod_id', podId)
+                .eq('source_id', obs.id)
+                .eq('content_type', 'observation')
+                .maybeSingle()
+              if (dup) continue
+
+              await supabase.from('topic_pod_content').insert({
+                pod_id:           podId,
+                content_type:     'observation',
+                source_id:        obs.id,
+                title:            obs.title || 'Observation',
+                source_label:     obs.source_label || 'Historical match',
+                raw_text:         (obs.summary || '').slice(0, 50000),
+                extracted_points: [],
+                created_at:       new Date().toISOString(),
+              })
+              routed++
+            }
+          }
+
+          // Update content_count if anything was routed
+          if (routed > 0) {
+            const { data: cp } = await supabase.from('topic_pods').select('content_count').eq('id', podId).single()
+            await supabase.from('topic_pods').update({ content_count: (cp?.content_count || 0) + routed }).eq('id', podId)
+            console.log(`[topic-pods] Retroactive population: ${routed} items routed to pod ${podId}`)
+          }
+        } catch (err) {
+          console.error('[topic-pods] Retroactive population error:', err.message)
+        }
+      })
+
       return res.status(201).json(data)
     }
 

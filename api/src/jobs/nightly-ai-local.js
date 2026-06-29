@@ -5638,6 +5638,76 @@ Return JSON only:
     results.errors.push(`Knowledge: ${err.message}`)
   }
 
+  // ── STEP 9.8: Auto-route today's knowledge/observations to topic pods ──
+  // Keyword-based routing — no Haiku cost. Each active pod builds a keyword
+  // set from its name + description + research_directive. New knowledge_base
+  // entries and observations from today are routed when they share 2+ keywords.
+  console.log('Step 9.8: Auto-routing new content to topic pods...')
+  let podRoutedCount = 0
+  try {
+    const { data: routingPods } = await supabase
+      .from('topic_pods')
+      .select('id, name, description, research_directive')
+      .eq('status', 'active')
+
+    if (routingPods && routingPods.length > 0) {
+      // Build keyword sets per pod
+      const podKeywordSets = routingPods.map(pod => {
+        const raw = `${pod.name} ${pod.description || ''} ${pod.research_directive || ''}`
+        const words = new Set(raw.toLowerCase().split(/\W+/).filter(w => w.length > 4))
+        return { pod, words }
+      })
+
+      // Today's new knowledge_base entries
+      const { data: newKnowledge } = await supabase
+        .from('knowledge_base')
+        .select('id, topic, context, source_label')
+        .gte('created_at', `${today}T00:00:00Z`)
+
+      for (const entry of (newKnowledge || [])) {
+        const entryWords = `${entry.topic || ''} ${entry.context || ''}`.toLowerCase().split(/\W+/).filter(w => w.length > 4)
+        for (const { pod, words: podWords } of podKeywordSets) {
+          const overlap = entryWords.filter(w => podWords.has(w)).length
+          if (overlap < 2) continue
+          const { data: dup } = await supabase.from('topic_pod_content').select('id').eq('pod_id', pod.id).eq('source_id', entry.id).eq('content_type', 'knowledge').maybeSingle()
+          if (dup) continue
+          await supabase.from('topic_pod_content').insert({
+            pod_id: pod.id, content_type: 'knowledge', source_id: entry.id,
+            title: entry.topic || 'Knowledge entry', source_label: entry.source_label || 'Nightly extraction',
+            raw_text: entry.context || '', extracted_points: [], created_at: new Date().toISOString()
+          })
+          podRoutedCount++
+        }
+      }
+
+      // Today's new observations
+      const { data: newObservations } = await supabase
+        .from('observations')
+        .select('id, title, summary, source_label')
+        .gte('created_at', `${today}T00:00:00Z`)
+
+      for (const obs of (newObservations || [])) {
+        const obsWords = `${obs.title || ''} ${obs.summary || ''}`.toLowerCase().split(/\W+/).filter(w => w.length > 4)
+        for (const { pod, words: podWords } of podKeywordSets) {
+          const overlap = obsWords.filter(w => podWords.has(w)).length
+          if (overlap < 2) continue
+          const { data: dup } = await supabase.from('topic_pod_content').select('id').eq('pod_id', pod.id).eq('source_id', obs.id).eq('content_type', 'observation').maybeSingle()
+          if (dup) continue
+          await supabase.from('topic_pod_content').insert({
+            pod_id: pod.id, content_type: 'observation', source_id: obs.id,
+            title: obs.title || 'Observation', source_label: obs.source_label || 'Nightly extraction',
+            raw_text: obs.summary || '', extracted_points: [], created_at: new Date().toISOString()
+          })
+          podRoutedCount++
+        }
+      }
+    }
+    console.log(`  ✓ Pod routing: ${podRoutedCount} new items auto-routed`)
+  } catch (err) {
+    console.log(`  ⚠ Pod routing error: ${err.message}`)
+    results.errors.push(`PodRouting: ${err.message}`)
+  }
+
   // ── STEP 9.5: Topic Pod nightly research ───────────────────────
   console.log('Step 9.5: Running topic pod research directives...')
   try {
