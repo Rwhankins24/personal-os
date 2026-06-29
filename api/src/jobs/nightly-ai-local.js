@@ -4159,8 +4159,23 @@ Return a JSON array of observation strings only. No explanation.
 
   for (const email of bucket1) {
     try {
-      const threadHistory = await getThreadHistory(email)
-      const tasks = await aiService.extractTasks(email, threadHistory, existingTasksContext)
+      // Phase 1B fast path: if classify pre-extracted Ryan's action items for this thread,
+      // skip the Haiku extractTasks call entirely. Falls back to Haiku when no p1b data.
+      const p1bData = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      let tasks
+      if (p1bData?.action_items?.some(a => a.owner === 'ryan')) {
+        tasks = p1bData.action_items
+          .filter(a => a.owner === 'ryan')
+          .map(a => ({
+            title:                  a.text,
+            urgency:                'medium',
+            due_date:               a.due_date || null,
+            attribution_confidence: a.confidence || 0.85,
+          }))
+      } else {
+        const threadHistory = await getThreadHistory(email)
+        tasks = await aiService.extractTasks(email, threadHistory, existingTasksContext)
+      }
 
       for (const task of tasks) {
         // Level 1: exact title match
@@ -4403,10 +4418,52 @@ Return a JSON array of observation strings only. No explanation.
   console.log('Step 5: Extracting commitments...')
   for (const email of (activeEmails || [])) {
     try {
-      const threadHistory = await getThreadHistory(email)
+      // Phase 1B fast path: classify pre-extracts others' commitments from two fields:
+      //   action_items[owner="other"] — explicit asks directed at non-Ryan people
+      //   commitments[]              — explicit promises made by others ("I'll send X by Y")
+      // Fetch threadHistory lazily: only when Haiku path needed OR bucket2 myC needed.
+      const p1bData = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      const hasOthersP1b = !!(p1bData && (
+        p1bData.action_items?.some(a => a.owner === 'other') ||
+        p1bData.commitments?.length
+      ))
+
+      // Fetch thread history once, only when needed
+      let threadHistory = null
+      if (!hasOthersP1b || email.bucket === 2) {
+        threadHistory = await getThreadHistory(email)
+      }
 
       // Others' commitments
-      const othersC = await aiService.extractOthersCommitments(email, threadHistory, existingOthersContext)
+      let othersC
+      if (hasOthersP1b) {
+        const fromActions = (p1bData.action_items || [])
+          .filter(a => a.owner === 'other')
+          .map(a => ({
+            title:                a.text,
+            committed_by_name:    a.owner_name  || null,
+            committed_by_email:   a.owner_email || null,
+            due_date:             a.due_date    || null,
+            urgency:              'medium',
+            context:              null,
+            ai_suggests_complete: false,
+            delivery_type:        'general',
+          }))
+        const fromCommitments = (p1bData.commitments || [])
+          .map(c => ({
+            title:                c.text,
+            committed_by_name:    c.made_by_name  || null,
+            committed_by_email:   c.made_by_email || null,
+            due_date:             c.due_date      || null,
+            urgency:              'medium',
+            context:              null,
+            ai_suggests_complete: false,
+            delivery_type:        'general',
+          }))
+        othersC = [...fromActions, ...fromCommitments]
+      } else {
+        othersC = await aiService.extractOthersCommitments(email, threadHistory, existingOthersContext)
+      }
 
       for (const c of othersC) {
         // Level 1: exact match (title + email)
@@ -4539,7 +4596,8 @@ Return a JSON array of observation strings only. No explanation.
         }
       }
 
-      // My commitments (from Bucket 2 sent body)
+      // My commitments (from Bucket 2 sent body) — no Phase 1B fast path yet
+      // threadHistory is guaranteed loaded above for bucket === 2 regardless of hasOthersP1b
       if (email.bucket === 2) {
         const myC = await aiService.extractMyCommitments(email, threadHistory, existingMineContext)
 
