@@ -185,6 +185,16 @@ if (isBackfill) {
 }
 
 // ─── IDEMPOTENCY CHECK
+// ── Hard process timeout — 120 minutes ───────────────────────────────────────
+// If the job is still alive after 120 min something hung (Sonnet call, network stall, etc.)
+// Kill it cleanly so launchd doesn't hold an orphaned node process overnight.
+const MAX_RUNTIME_MS = 120 * 60 * 1000  // 120 minutes
+const jobKillTimer = setTimeout(() => {
+  console.error(`\n⏱ HARD TIMEOUT: nightly job exceeded ${MAX_RUNTIME_MS / 60000} minutes — forcing exit`)
+  process.exit(1)
+}, MAX_RUNTIME_MS)
+jobKillTimer.unref()  // don't keep process alive just for the timer
+
 // If AI already ran for this date — exit (unless FORCE_RERUN is set)
 async function checkAlreadyRan() {
   if (process.env.FORCE_RERUN === 'true') {
@@ -193,13 +203,28 @@ async function checkAlreadyRan() {
   }
   const { data } = await supabase
     .from('pipeline_runs')
-    .select('ai_completed_at')
+    .select('ai_completed_at, job_started_at, status')
     .eq('run_date', today)
     .maybeSingle()
 
+  // Already completed — exit clean
   if (data?.ai_completed_at) {
     console.log(`AI job already completed for ${today}. Exiting.`)
     process.exit(0)
+  }
+
+  // Already running — started less than 110 min ago, no completion → another instance is live
+  // Use 110 min threshold (slightly under our 120 min hard kill) to avoid a crashed job
+  // blocking the next day's run if cleanup didn't write ai_completed_at
+  if (data?.job_started_at && data?.status === 'in_progress') {
+    const startedMs = new Date(data.job_started_at).getTime()
+    const ageMin = (Date.now() - startedMs) / 60000
+    if (ageMin < 110) {
+      console.log(`AI job already in progress for ${today} (started ${Math.round(ageMin)}min ago). Exiting to prevent cascade.`)
+      process.exit(0)
+    } else {
+      console.log(`AI job was in progress but appears stale (${Math.round(ageMin)}min ago) — proceeding with restart`)
+    }
   }
 }
 

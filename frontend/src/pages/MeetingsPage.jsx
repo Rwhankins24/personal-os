@@ -16,6 +16,7 @@ import {
   getWorkspaces,
 } from '../lib/api'
 import WorkspaceBar from '../components/WorkspaceBar'
+import MeetingSummary from '../components/MeetingSummary'
 import { useStore } from '../store/useStore'
 
 dayjs.extend(duration)
@@ -1062,30 +1063,29 @@ export default function MeetingsPage() {
                   {/* Left: meeting content */}
                   <div className="flex-1 min-w-0 px-4 pt-4 pb-5 space-y-4">
 
-                    {/* Summary — short_summary preferred, truncated */}
+                    {/* Summary — formatted (handles bullets, headings, bold) */}
                     {(meeting.short_summary || meeting.summary) && (
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Summary</p>
-                        <p className="text-sm text-[#1a1a18] leading-relaxed line-clamp-4">
-                          {(meeting.short_summary || meeting.summary || '').replace(/^#+\s*/gm, '').replace(/\*\*/g, '').replace(/\n+/g, ' ').trim()}
-                        </p>
+                        <MeetingSummary text={meeting.short_summary || meeting.summary} compact={true} />
                       </div>
                     )}
 
-                    {/* Attendees */}
-                    {(meeting.participants || []).length > 0 && (
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Attendees</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {meeting.participants.slice(0, 8).map((p, i) => (
-                            <span key={i} className="text-xs bg-[#f0f0ee] text-[#1a1a18] px-2 py-0.5 rounded-full">{p}</span>
-                          ))}
-                          {meeting.participants.length > 8 && (
-                            <span className="text-xs text-[#9b9b97] px-1">+{meeting.participants.length - 8} more</span>
-                          )}
+                    {/* Attendees — readable sentence */}
+                    {(meeting.participants || []).length > 0 && (() => {
+                      const att = meeting.participants
+                      const sentence = att.length === 1
+                        ? att[0]
+                        : att.length === 2
+                          ? `${att[0]} and ${att[1]}`
+                          : `${att.slice(0, -1).join(', ')}, and ${att[att.length - 1]}`
+                      return (
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#6b6b67] mb-1.5">Attendees</p>
+                          <p className="text-xs text-[#4a4a48] leading-relaxed">{sentence}</p>
                         </div>
-                      </div>
-                    )}
+                      )
+                    })()}
 
                     {/* My action items — checkable */}
                     {(showDbTasks ? meetingTasks : exTasks).length > 0 && (
