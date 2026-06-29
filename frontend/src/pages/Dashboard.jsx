@@ -1901,88 +1901,111 @@ export default function Dashboard() {
               {meetingNotes.map(m => {
                 const isExpanded = expandedMeeting === m.otter_id
                 const dateStr = m.start_time ? m.start_time.split('T')[0] : 'unknown'
-                const participantCount = (m.participants || []).length
-                const ryanItems = (m.action_items_raw || []).filter(a => a.is_ryan_item || a.assignee_email === 'hankinsr@claycorp.com')
-                const othersItems = (m.action_items_raw || []).filter(a => !a.is_ryan_item && a.assignee_email !== 'hankinsr@claycorp.com')
-                // Clean 2-3 line summary: strip markdown markers, collapse to sentences
+
+                // Clean summary — strip markdown
                 const rawSummary = m.summary || m.short_summary || ''
                 const cleanSummary = rawSummary
                   .replace(/^#+\s*/gm, '')
                   .replace(/\*\*/g, '')
                   .replace(/\n+/g, ' ')
                   .trim()
-                  .slice(0, 200) + (rawSummary.length > 200 ? '…' : '')
 
-                // Ryan's action items — from extracted tasks (preferred) or action_items_raw fallback
-                const myTasks = (m.action_items_raw || [])
+                // Collapsed snippet — short preview only
+                const snippetSummary = cleanSummary.slice(0, 180) + (cleanSummary.length > 180 ? '…' : '')
+
+                // Attendees as readable sentence: "A, B, and C"
+                const attendees = m.participants || []
+                const attendeeSentence = attendees.length === 0
+                  ? ''
+                  : attendees.length === 1
+                    ? attendees[0]
+                    : attendees.length === 2
+                      ? `${attendees[0]} and ${attendees[1]}`
+                      : `${attendees.slice(0, -1).join(', ')}, and ${attendees[attendees.length - 1]}`
+
+                // Action items — Ryan's (gold) and others' (gray)
+                const ryanActions = (m.action_items_raw || [])
                   .filter(a => a.is_ryan_item || (a.assignee_email || '').includes('hankinsr'))
-                  .slice(0, 5)
+                const othersActions = (m.action_items_raw || [])
+                  .filter(a => !a.is_ryan_item && !(a.assignee_email || '').includes('hankinsr') && a.assignee_name)
+                const hasActions = ryanActions.length > 0 || othersActions.length > 0
 
                 return (
                   <div
                     key={m.otter_id}
-                    className="border border-[#e5e5e3] rounded-xl p-3 cursor-pointer hover:bg-[#f8f8f6] transition-colors"
-                    onClick={() => setExpandedMeeting(isExpanded ? null : m.otter_id)}
+                    className="border border-[#e5e5e3] rounded-xl overflow-hidden"
                   >
-                    {/* Title + date */}
-                    <div className="flex items-center justify-between">
+                    {/* Header row — always visible, click to expand */}
+                    <div
+                      className="flex items-center justify-between px-3 py-2.5 cursor-pointer hover:bg-[#f8f8f6] transition-colors"
+                      onClick={() => setExpandedMeeting(isExpanded ? null : m.otter_id)}
+                    >
                       <span className="text-xs font-medium text-[#1a1a18] truncate flex-1 mr-2">{m.title || 'Untitled meeting'}</span>
-                      <span className="text-xs text-[#9b9b97] shrink-0">{dateStr}</span>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-xs text-[#9b9b97]">{dateStr}</span>
+                        <span className="text-[10px] text-[#9b9b97]">{isExpanded ? '▲' : '▼'}</span>
+                      </div>
                     </div>
 
-                    {/* Collapsed: clean summary snippet */}
-                    {!isExpanded && cleanSummary && (
-                      <p className="text-xs text-[#6b6b67] mt-1 leading-relaxed">{cleanSummary}</p>
+                    {/* Collapsed: one-line snippet */}
+                    {!isExpanded && snippetSummary && (
+                      <p
+                        className="text-xs text-[#6b6b67] px-3 pb-2.5 leading-relaxed cursor-pointer"
+                        onClick={() => setExpandedMeeting(m.otter_id)}
+                      >{snippetSummary}</p>
                     )}
 
                     {/* Expanded */}
                     {isExpanded && (
-                      <div className="mt-3 space-y-3" onClick={e => e.stopPropagation()}>
+                      <div className="px-3 pb-3 space-y-3 border-t border-[#f0f0ee]" onClick={e => e.stopPropagation()}>
 
-                        {/* Attendees — max 10 */}
-                        {(m.participants || []).length > 0 && (
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">Attendees</p>
-                            <div className="flex flex-wrap gap-1">
-                              {(m.participants || []).slice(0, 10).map((p, i) => (
-                                <span key={i} className="text-[10px] bg-gray-100 text-[#4a4a48] px-2 py-0.5 rounded-full">{p}</span>
-                              ))}
-                              {(m.participants || []).length > 10 && (
-                                <span className="text-[10px] text-[#9b9b97]">+{(m.participants || []).length - 10} more</span>
-                              )}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Summary — 2-3 lines */}
+                        {/* Summary — full paragraph */}
                         {cleanSummary && (
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">Summary</p>
+                          <div className="pt-3">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1.5">Summary</p>
                             <p className="text-xs text-[#1a1a18] leading-relaxed">{cleanSummary}</p>
                           </div>
                         )}
 
-                        {/* My action items */}
-                        {myTasks.length > 0 && (
+                        {/* Attendees — readable sentence */}
+                        {attendeeSentence && (
                           <div>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1">My Action Items</p>
-                            <ul className="space-y-1">
-                              {myTasks.map((item, i) => (
-                                <li key={i} className="flex items-start gap-1.5 text-xs text-[#1a1a18]">
-                                  <span className="text-[#C9A84C] shrink-0 mt-0.5">▸</span>
-                                  <span>{item.task_text}</span>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1.5">Attendees</p>
+                            <p className="text-xs text-[#4a4a48] leading-relaxed">{attendeeSentence}</p>
+                          </div>
+                        )}
+
+                        {/* Actions — Ryan's (gold bullets) then others' (gray bullets) */}
+                        {hasActions && (
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1.5">Actions</p>
+                            <ul className="space-y-1.5">
+                              {ryanActions.map((item, i) => (
+                                <li key={`r-${i}`} className="flex items-start gap-2 text-xs">
+                                  <span className="text-[#C9A84C] shrink-0 mt-0.5 font-bold">▸</span>
+                                  <span className="text-[#1a1a18]">
+                                    <span className="font-semibold">Ryan — </span>{item.task_text}
+                                  </span>
+                                </li>
+                              ))}
+                              {othersActions.map((item, i) => (
+                                <li key={`o-${i}`} className="flex items-start gap-2 text-xs">
+                                  <span className="text-[#9b9b97] shrink-0 mt-0.5">▸</span>
+                                  <span className="text-[#4a4a48]">
+                                    <span className="font-medium">{item.assignee_name} — </span>{item.task_text}
+                                  </span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                         )}
 
-                        {/* View full */}
+                        {/* View full detail */}
                         <button
                           onClick={() => navigate(`/meeting/${m.id}`)}
-                          className="text-xs text-blue-600 hover:underline font-medium pt-1 border-t border-[#f0f0ee] w-full text-left"
+                          className="text-xs text-blue-600 hover:underline font-medium pt-2 border-t border-[#f0f0ee] w-full text-left"
                         >
-                          View full detail →
+                          Decisions, risks, full intelligence →
                         </button>
                       </div>
                     )}

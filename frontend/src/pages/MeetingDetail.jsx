@@ -46,9 +46,10 @@ export default function MeetingDetail() {
   const { id }    = useParams()
   const navigate  = useNavigate()
   const qc        = useQueryClient()
-  const [editingNotes, setEditingNotes] = useState(false)
-  const [notesDraft,   setNotesDraft]   = useState('')
-  const [promoted,     setPromoted]     = useState(new Set()) // ids promoted to my tasks
+  const [editingNotes,       setEditingNotes]       = useState(false)
+  const [notesDraft,         setNotesDraft]         = useState('')
+  const [promoted,           setPromoted]           = useState(new Set()) // ids promoted to my tasks
+  const [transcriptExpanded, setTranscriptExpanded] = useState(false)
 
   const { data: meeting, isLoading } = useQuery({
     queryKey: ['meeting', id],
@@ -401,19 +402,46 @@ export default function MeetingDetail() {
           </div>
         )}
 
-        {/* ── Raw transcript (collapsed) ──────────────────────────── */}
-        {(meeting.full_transcript || meeting.raw_transcript) && (
-          <details className="bg-white border border-[#e5e5e3] rounded-2xl">
-            <summary className="px-4 py-3 text-xs font-bold uppercase tracking-widest text-[#6b6b67] cursor-pointer">
-              Full Transcript
-            </summary>
-            <div className="px-4 pb-4">
-              <p className="text-xs text-[#6b6b67] leading-relaxed whitespace-pre-wrap font-mono">
-                {meeting.full_transcript || meeting.raw_transcript}
-              </p>
+        {/* ── Transcript ──────────────────────────────────────────── */}
+        {(meeting.full_transcript || meeting.raw_transcript) && (() => {
+          const fullText = meeting.full_transcript || meeting.raw_transcript || ''
+          const PREVIEW_CHARS = 1200
+          const isLong = fullText.length > PREVIEW_CHARS
+          const displayText = transcriptExpanded || !isLong
+            ? fullText
+            : fullText.slice(0, PREVIEW_CHARS) + '…'
+
+          return (
+            <div className="bg-white border border-[#e5e5e3] rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-[#f0f0ee]">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#6b6b67]">Transcript</p>
+                <div className="flex items-center gap-3">
+                  {isLong && (
+                    <button
+                      onClick={() => setTranscriptExpanded(e => !e)}
+                      className="text-xs text-blue-600 hover:underline"
+                    >
+                      {transcriptExpanded ? 'Show less' : `Show full (${Math.round(fullText.length / 1000)}k chars)`}
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="px-4 py-3">
+                <p className="text-xs text-[#6b6b67] leading-relaxed whitespace-pre-wrap font-mono">
+                  {displayText}
+                </p>
+                {isLong && !transcriptExpanded && (
+                  <button
+                    onClick={() => setTranscriptExpanded(true)}
+                    className="mt-2 text-xs text-blue-600 hover:underline"
+                  >
+                    Show full transcript →
+                  </button>
+                )}
+              </div>
             </div>
-          </details>
-        )}
+          )
+        })()}
       </div>
     </div>
   )
