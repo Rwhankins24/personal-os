@@ -263,6 +263,33 @@ async function buildRyanContext() {
       }
     }
 
+    // ── Knowledge base: domain expertise accumulated by Ryan and AI ──────────
+    // These are structured learnings — contract terms, project patterns, owner
+    // positions, risk findings — that should inform task/commitment extraction.
+    // Kept token-light: topic + category + short context + position + risk.
+    const { data: knowledgeItems } = await supabase
+      .from('knowledge_base')
+      .select('topic, category, context, our_position, client_asks, risk_level, applies_to, project_refs')
+      .eq('status', 'active')
+      .order('updated_at', { ascending: false })
+      .limit(30)
+
+    if (knowledgeItems?.length) {
+      ctx += 'DOMAIN KNOWLEDGE BASE (accumulated learnings — use to correctly interpret actions, risk, and context):\n'
+      ctx += knowledgeItems.map(k => {
+        const cat      = k.category   ? ` [${k.category}]`                  : ''
+        const risk     = k.risk_level ? ` [${k.risk_level.toUpperCase()} RISK]` : ''
+        const applies  = [...(k.applies_to || []), ...(k.project_refs || [])].filter(Boolean)
+        const scope    = applies.length ? ` (${applies.slice(0, 3).join(', ')})` : ''
+        let line = `- ${k.topic}${cat}${risk}${scope}`
+        if (k.context)      line += `\n  Context: ${k.context.slice(0, 200)}`
+        if (k.our_position) line += `\n  Our position: ${k.our_position.slice(0, 150)}`
+        if (k.client_asks)  line += `\n  Client asks: ${k.client_asks.slice(0, 120)}`
+        return line
+      }).join('\n')
+      ctx += '\n\n'
+    }
+
     _cachedContext = ctx
     _cacheBuiltAt = Date.now()
     return ctx
