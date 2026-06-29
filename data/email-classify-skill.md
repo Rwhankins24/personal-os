@@ -485,7 +485,16 @@ After a successful write, log: `Classified JSON saved: ~/personal-os/data/last-e
 
 ## Step 7 — Upload to Supabase storage
 
+**Purpose:** Deliver the Phase 1B intelligence package (extracted fields, ai_summary, action_items,
+commitments, risk_signals, etc.) to Supabase storage so the nightly AI job can load it at 6 AM.
+This is a BONUS step — if it fails, the system degrades gracefully via the launchd fallback path.
+
+**Classify DOES NOT push individual threads to the webhook.** That is launchd's job
+(`push_email_report.py` at 5:00 AM). Two things push to the same webhook = duplicate email records.
+Classify only writes: (1) local file, (2) storage JSON. Nothing else.
+
 **Note:** This may fail in sandbox. Expected and non-blocking. Log failure in `warnings[]` and continue.
+The local file (Step 6) is the critical dependency — it's already saved regardless of Step 7 outcome.
 
 Primary path — PUT (upsert):
 ```bash
@@ -497,20 +506,17 @@ curl -X PUT \
   -d "[FULL_JSON_PAYLOAD]"
 ```
 
-On success, post pipeline completion marker:
-```bash
-curl -s -X POST \
-  "https://personal-os-five-black.vercel.app/api/pipeline/complete-step" \
-  -H "Content-Type: application/json" \
-  -H "x-trigger-secret: 0557601ac4f4c8f0d42923bba2fb083b" \
-  -d '{"step":"upload","run_date":"[TODAY_ISO]"}'
-```
+On success, log: `Storage upload: daily-reports/[TODAY_ISO].json ✓`
 
-On failure, retry once after 5 seconds. If still failing, fall back to direct webhook push:
-For each thread in Buckets 1–5, POST to `https://personal-os-five-black.vercel.app/api/webhooks?type=email`
+On failure, retry once after 5 seconds. If still failing:
+- Log: `Storage upload failed — sandbox_blocked. launchd will push threads via webhook at 5:00 AM.`
+- Add to `warnings[]` and **stop**. Do NOT attempt per-thread webhook fallback.
+- The local file is already saved. launchd will push threads. The Phase 1B enrichment will be
+  unavailable in tonight's nightly job (it will use the emails TABLE fallback path instead).
 
-Use the same payload structure as each thread record (see Step 6 schema). If fallback
-webhook push fails for a thread, log the subject and continue.
+**Do NOT call** `pipeline/complete-step`. That endpoint is owned by launchd (`push_email_report.py`)
+and is called once after all threads are pushed. If classify also calls it, the timestamp gets set
+before launchd runs, and the nightly job may start before all email records are in the database.
 
 ---
 
