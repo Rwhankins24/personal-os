@@ -50,6 +50,13 @@ echo "Data path: $DATA_PATH"
 Store `WORKSPACE_PATH` and `DATA_PATH`. Use them in ALL subsequent file Read/Write/Bash operations.
 Every `~/personal-os/data/...` reference in this skill means `${DATA_PATH}/...` with the actual path.
 
+Also clean up any stale checkpoints from previous days (they must never be loaded for the wrong date):
+
+```bash
+find "${DATA_PATH}" -name "classify-checkpoint-*.json" ! -name "classify-checkpoint-${TODAY_ISO}.json" -delete 2>/dev/null
+echo "Stale checkpoint cleanup done."
+```
+
 **THEN: Confirm Task 1 finished for today.**
 This replaces the fragile fixed 20-minute timer — classify now waits for pull to signal it's done.
 
@@ -123,6 +130,41 @@ From the raw JSON, store:
 
 ---
 
+## Step 1.5 — Load checkpoint (crash recovery)
+
+**Purpose:** If this session crashed mid-run today, resume from where it left off instead
+of restarting from thread 1. Without this, a crash at thread 50 of 70 wastes 25 minutes
+of work every time.
+
+```bash
+CHECKPOINT_FILE="${DATA_PATH}/classify-checkpoint-${TODAY_ISO}.json"
+echo "Checkpoint file: $CHECKPOINT_FILE"
+
+if [ -f "$CHECKPOINT_FILE" ]; then
+  echo "⚡ Checkpoint found — resuming from previous run."
+  cat "$CHECKPOINT_FILE"
+else
+  echo "No checkpoint — starting fresh."
+fi
+```
+
+If the checkpoint file exists:
+1. Read it using the Read tool: `Read: {DATA_PATH}/classify-checkpoint-{TODAY_ISO}.json`
+2. Load `checkpoint.processed_conv_ids[]` — set of conversationIds already done
+3. Load `checkpoint.partial_classified[]` — threads already classified (with all fields)
+4. Load `checkpoint.processed_count` — number of threads done so far
+5. Set `RESUMING = true`
+
+Log: `⚡ Resuming classify from thread ${processed_count}/${threads.length} (${processed_conv_ids.length} already done)`
+
+If no checkpoint: set `RESUMING = false`, `processed_conv_ids = []`, `partial_classified = []`.
+
+**When resuming:** In Step 2 and Step 5.5, skip any thread whose `conversationId` is in
+`processed_conv_ids`. The `partial_classified[]` records are already done — merge them
+with newly processed threads at Step 6.
+
+---
+
 ## Step 2 — Classify threads into 6 buckets
 
 Process each thread through this decision tree in order. Assign the FIRST bucket that matches.
@@ -187,6 +229,47 @@ All `pending_invites[]` from Task 1 (already filtered to `my_response_status = "
 Automated senders: `@noreply`, `@notifications`, `@marketing`, newsletters, LinkedIn,
 vendor promotions. These are already counted in `bucket6_count` from Task 1.
 Do NOT include in output buckets. Use the `bucket6_count` directly.
+
+### Checkpoint writes during classification
+
+**Every 10 threads classified**, write the current checkpoint to disk:
+
+```bash
+# Write checkpoint (substitute actual DATA_PATH)
+python3 -c "
+import json, os, sys
+
+data_path = '${DATA_PATH}'
+today = '${TODAY_ISO}'
+checkpoint_path = os.path.join(data_path, f'classify-checkpoint-{today}.json')
+
+# Build from current state passed as arg
+checkpoint = json.loads(sys.argv[1])
+with open(checkpoint_path, 'w') as f:
+    json.dump(checkpoint, f)
+print(f'Checkpoint saved: {checkpoint_path}')
+" '[CHECKPOINT_JSON]'
+```
+
+Checkpoint JSON structure:
+```json
+{
+  "checkpoint_date": "[TODAY_ISO]",
+  "processed_count": 30,
+  "processed_conv_ids": ["AAQkAA...", "AAMkAB...", "..."],
+  "partial_classified": [
+    { /* full thread record with bucket, urgency, tags, extracted, all fields */ },
+    { /* ... */ }
+  ]
+}
+```
+
+**Rules:**
+- Write after every 10th thread, AND after the final thread
+- `processed_conv_ids` is the complete set of conversationIds processed so far
+- `partial_classified` contains the full classified thread records (everything that would go in the final output for those threads)
+- If resuming, append newly processed threads to `partial_classified` from the loaded checkpoint
+- Do NOT write checkpoint for Bucket 5 (invites) or Bucket 6 (filtered) — these are quick and handled separately
 
 ---
 
@@ -349,6 +432,15 @@ fields only if clearly present — B3/B4 threads often have no action items for 
 ---
 
 ## Step 6 — Write classified report
+
+**If RESUMING:** Merge `partial_classified[]` from the checkpoint with all newly classified
+threads before building the final output. The combined set is the complete thread list.
+Then delete the checkpoint file — a successful write means recovery succeeded:
+
+```bash
+rm -f "${DATA_PATH}/classify-checkpoint-${TODAY_ISO}.json"
+echo "Checkpoint cleared — run complete."
+```
 
 **PRECONDITION:** Read the report file using the ABSOLUTE path detected in Step 0, immediately before the Write.
 No other tool call between the Read and the Write.
