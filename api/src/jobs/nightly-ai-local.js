@@ -379,9 +379,11 @@ function detectLinks(bodyText) {
 }
 
 // ─── SEMANTIC DEDUPLICATION (source-priority-aware)
-// Priority: manual=4 (never deleted), ai_otter=3, ai_email=2, system=1
+// Priority: manual=4 (never deleted), ai_otter=3, ai_plaud=3, ai_upload=2, ai_email=2, system=1
+// ai_plaud == ai_otter (both are meeting recordings — high signal quality)
+// ai_upload == ai_email (structured but not manual)
 async function deduplicateTable(tableName, emailField) {
-  const SOURCE_PRIORITY = { manual: 4, ai_otter: 3, ai_email: 2, system: 1 }
+  const SOURCE_PRIORITY = { manual: 4, ai_otter: 3, ai_plaud: 3, ai_upload: 2, ai_email: 2, system: 1 }
 
   let selectFields = 'id, title, source_type, created_at'
   if (emailField) selectFields += `, ${emailField}`
@@ -588,7 +590,7 @@ async function main() {
         ', duplicate_reviewed, known_not_duplicate_with'
       let query = supabase
         .from(tableName)
-        .select('id, title, project_id' + extraFields)
+        .select('id, title, status, project_id' + extraFields)
         .eq('status', 'open')
         .or('duplicate_reviewed.is.null,duplicate_reviewed.eq.false')
 
@@ -601,7 +603,7 @@ async function main() {
         const { data: projectRecs } = await query.eq('project_id', projectId).limit(50)
         const { data: unlinkedRecs } = await supabase
           .from(tableName)
-          .select('id, title' + (tableName === 'others_commitments' ? ', committed_by_email' : '') + ', project_id')
+          .select('id, title, status' + (tableName === 'others_commitments' ? ', committed_by_email' : '') + ', project_id')
           .eq('status', 'open')
           .is('project_id', null)
           .limit(25)
@@ -610,6 +612,23 @@ async function main() {
         const { data: recs } = await query.limit(50)
         var candidates = recs || []
       }
+
+      // Also check recently-dismissed records (last 30 days) — prevents re-creating items
+      // Ryan already chose to dismiss. No Haiku call needed for dismissed matches; just suppress.
+      const thirtyDaysAgo = new Date()
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+      let dismissedQuery = supabase
+        .from(tableName)
+        .select('id, title, status, project_id')
+        .eq('status', 'dismissed')
+        .gte('updated_at', thirtyDaysAgo.toISOString())
+        .limit(50)
+      if (candidatePersonEmail && tableName === 'others_commitments') {
+        dismissedQuery = dismissedQuery.eq('committed_by_email', candidatePersonEmail)
+      }
+      const { data: dismissedRecs } = await dismissedQuery
+      const dismissedIds = new Set((dismissedRecs || []).map(r => r.id))
+      candidates = [...candidates, ...(dismissedRecs || [])]
 
       // Find best Jaccard match — skip pairs already reviewed as "keep separate"
       let bestMatch = null
@@ -626,6 +645,11 @@ async function main() {
       }
 
       if (!bestMatch) return { match: null, confidence: 0, bestTitle: null }
+
+      // Dismissed match — suppress without Haiku call. Ryan already decided.
+      if (dismissedIds.has(bestMatch.id)) {
+        return { match: bestMatch, confidence: 90, bestTitle: bestMatch.title, isDismissed: true }
+      }
 
       // Call Haiku for semantic confirmation with confidence score
       const haikuSMC = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
@@ -3234,7 +3258,10 @@ Be specific and cite concrete details. Avoid generic statements.`
                 meetingProjectId
               )
 
-              if (smcResult.match && smcResult.confidence >= 75) {
+              if (smcResult.isDismissed) {
+                // Matched a dismissed item — Ryan already decided. Suppress re-creation silently.
+                console.log(`  Suppressed (dismissed match): "${item.task_text}" → dismissed "${smcResult.match.title}"`)
+              } else if (smcResult.match && smcResult.confidence >= 75) {
                 // High confidence match — add source row to existing task, skip insert
                 try {
                   await supabase.from('work_item_sources').insert({
@@ -3341,7 +3368,10 @@ Be specific and cite concrete details. Avoid generic statements.`
                 meetingProjectId
               )
 
-              if (smcResult.match && smcResult.confidence >= 75) {
+              if (smcResult.isDismissed) {
+                // Matched a dismissed commitment — suppress re-creation.
+                console.log(`  Suppressed (dismissed match): commitment "${item.task_text}" → dismissed "${smcResult.match.title}"`)
+              } else if (smcResult.match && smcResult.confidence >= 75) {
                 // High confidence — add source row to existing commitment
                 try {
                   await supabase.from('work_item_sources').insert({
