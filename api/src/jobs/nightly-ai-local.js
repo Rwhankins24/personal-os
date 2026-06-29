@@ -1587,6 +1587,24 @@ Respond with JSON only:
     console.log(`  ⚠ Phase 1B load error (non-fatal): ${p1bErr.message} — falling back to per-email AI calls`)
   }
 
+  // ── Phase 1B DB supplement: fill index gaps from emails.extracted column ──
+  // process-email-report.js writes emails.extracted when the classify output is
+  // processed via launchd. This path is always reliable — no sandbox network needed.
+  // Storage JSON takes priority (already loaded above); DB fills the rest.
+  {
+    let dbHits = 0
+    for (const email of (activeEmails || [])) {
+      const key = (email.conversation_id || '').toLowerCase()
+      if (key && !phase1bIndex.has(key) && email.extracted && typeof email.extracted === 'object') {
+        phase1bIndex.set(key, email.extracted)
+        dbHits++
+      }
+    }
+    if (dbHits > 0) {
+      console.log(`  ✓ Phase 1B DB supplement: ${dbHits} additional threads from emails.extracted`)
+    }
+  }
+
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
   let phase1bSummaryHits = 0

@@ -188,6 +188,13 @@ module.exports = async (req, res) => {
           if (email.sent_body) {
             updatePayload.sent_body = email.sent_body
           }
+          // Phase 1B: store extracted intelligence in emails table.
+          // Nightly AI job reads this as a reliable fallback when Supabase storage
+          // is unavailable (sandbox network block). Storage JSON takes priority;
+          // emails.extracted is the DB-based backup for phase1bIndex.
+          if (email.extracted && typeof email.extracted === 'object') {
+            updatePayload.extracted = email.extracted
+          }
           const { error } = await supabase
             .from('emails')
             .update(updatePayload)
@@ -233,7 +240,10 @@ module.exports = async (req, res) => {
               full_thread_content:    email.full_thread_content  ?? null,
               extraction_depth:       email.extraction_depth     ?? 'standard',
               links_detected:         email.links_detected       ?? [],
-              sent_body:              email.sent_body            ?? null
+              sent_body:              email.sent_body            ?? null,
+              // Phase 1B: store extracted intelligence for nightly job DB fallback
+              extracted:              (email.extracted && typeof email.extracted === 'object')
+                                        ? email.extracted : null
             })
           if (error) throw error
           emailResults.pushed++
