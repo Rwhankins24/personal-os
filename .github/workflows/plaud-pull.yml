@@ -97,6 +97,20 @@ jobs:
 
           LOOKBACK_DAYS = get_lookback_days()
 
+          # Backfill fix: if date_override is a historical date, extend lookback
+          # so the Gmail newer_than:{N}d search covers that date.
+          # Example: date_override=2026-06-21 with today=2026-06-29 → need lookback ≥ 9d
+          DATE_OVERRIDE_STR = os.environ.get('DATE_OVERRIDE', '').strip()
+          if DATE_OVERRIDE_STR:
+              try:
+                  override_dt = datetime.strptime(DATE_OVERRIDE_STR, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+                  days_back = (datetime.now(timezone.utc) - override_dt).days + 2  # +2 for partial-day safety
+                  if days_back > LOOKBACK_DAYS:
+                      log(f"date_override={DATE_OVERRIDE_STR} → extending lookback from {LOOKBACK_DAYS}d to {days_back}d")
+                      LOOKBACK_DAYS = days_back
+              except Exception as e:
+                  log(f"date_override parse failed ({e}) — using computed lookback {LOOKBACK_DAYS}d")
+
           log("Refreshing Gmail access token...")
           ACCESS_TOKEN = refresh_token(1)
           if not ACCESS_TOKEN:

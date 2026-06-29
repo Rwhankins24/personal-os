@@ -123,7 +123,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "from": "personalos@resend.dev",
-              "to": "ryanhankins.personalos@gmail.com",
+              "to": "hankinsr@claycorp.com",
               "subject": "Personal OS — Backfill job failed",
               "text": "The data backfill job failed. Check GitHub Actions logs."
             }' || true
