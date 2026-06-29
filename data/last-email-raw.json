@@ -1,716 +1,976 @@
 {
-  "report_date": "2026-06-25",
-  "pull_since": "2026-06-25T04:20:00Z",
-  "pull_window_hours": "6.79",
-  "generated_at": "2026-06-25T11:10:00Z",
-  "yesterday_conv_ids": ["thread-pf-contract-comments-0624","thread-gotion-bess-ca-0624","thread-gotion-ulteig-deadline-0624","thread-solis-foundation-selection-0624","thread-solis-earthwork-prebid-0624","thread-gotion-bess-construction-0624","thread-pf-ocip-materials-0624","thread-pf-long-lead-0624","thread-solis-lighting-package-0624","thread-gotion-comed-transformer-0624","thread-solis-earthwork-sow-0624","thread-solis-service-equip-yard-0624","thread-ground-breaking-0624","thread-solis-sow-ready-0624","thread-pf-ocip-quote-0624","thread-solis-schedule-logistics-0624","thread-kate-catchup-0624","thread-friday-ops-mtg-cancel-0624","thread-mds-pf-sync-0624","thread-gotion-bess-site-lighting-0624","thread-solis-lighting-discussion-0624","thread-amfab-solis-0624","thread-asml-electrical-gear-0624","thread-project-sun-0624","thread-safety-training-0625","thread-dataserv-approval-0624","thread-gotion-ulteig-solar-0624","thread-solis-geopier-0624"],
-  "bucket6_count": 25,
-  "calendar": [
-    {
-      "title": "Kate | Ryan - Catch-Up",
-      "start_time": "2026-06-24T23:30:00Z",
-      "end_time": "2026-06-25T01:00:00Z",
-      "location": "The Global Ambassador (4360 E Camelback Rd, Phoenix, AZ 85018)",
-      "join_link": null,
-      "organizer": "Kate.Kaminski@howardhughes.com",
-      "attendees": ["Kate.Kaminski@howardhughes.com", "hankinsr@claycorp.com"]
-    },
-    {
-      "title": "Catch Up (Martin Marietta / Phoenician Golf)",
-      "start_time": "2026-06-25T13:00:00Z",
-      "end_time": "2026-06-25T17:30:00Z",
-      "location": "Phoenician Golf Club (6000 E Camelback Rd, Scottsdale, AZ 85251)",
-      "join_link": null,
-      "organizer": "Jason.Parnell@martinmarietta.com",
-      "attendees": ["Jason.Parnell@martinmarietta.com", "HankinsR@claycorp.com", "abtl@concretestrategies.com", "Robb.Vanderschaaff@martinmarietta.com"]
-    },
-    {
-      "title": "BIM Meeting",
-      "start_time": "2026-06-25T16:30:00Z",
-      "end_time": "2026-06-25T17:00:00Z",
-      "location": "https://meet.google.com/stm-owoy-cud",
-      "join_link": "https://meet.google.com/stm-owoy-cud",
-      "organizer": "courtney@pacificfusion.com",
-      "attendees": ["courtney@pacificfusion.com", "dwood@pagethink.com", "ffang@thorntontomasetti.com", "jeremy.dixon@pacificfusion.com", "mkoenigs@thorntontomasetti.com"]
-    },
-    {
-      "title": "Bridge Crane Weekly",
-      "start_time": "2026-06-25T18:00:00Z",
-      "end_time": "2026-06-25T18:30:00Z",
-      "location": "https://meet.google.com/aqk-pznc-qsk",
-      "join_link": "https://meet.google.com/aqk-pznc-qsk",
-      "organizer": "courtney@pacificfusion.com",
-      "attendees": ["courtney@pacificfusion.com", "echo@pacificfusion.com", "hankinsr@claycorp.com", "nick.rivera@pacificfusion.com", "tinneyc@claycorp.com"]
-    },
-    {
-      "title": "Project Solis Earthwork Prebid Meeting",
-      "start_time": "2026-06-25T20:00:00Z",
-      "end_time": "2026-06-25T21:00:00Z",
-      "location": "https://clayco.webex.com/clayco/j.php?MTID=m22abaf946650e4cd423eba3fb65f3d96",
-      "join_link": "https://clayco.webex.com/clayco/j.php?MTID=m22abaf946650e4cd423eba3fb65f3d96",
-      "organizer": "SnyderC@claycorp.com",
-      "attendees": ["SnyderC@claycorp.com", "HankinsR@claycorp.com", "TinneyC@claycorp.com", "StorckE@claycorp.com", "HenleyL@claycorp.com"]
-    }
-  ],
-  "pending_invites": [],
+  "report_date": "2026-06-29",
+  "generated_at": "2026-06-29T11:10:00Z",
+  "pull_since": "2026-06-26T16:30:00Z",
+  "pull_window_hours": 63.5,
+  "source": "email-pull-raw-skill v2 (cowork-direct)",
+  "inbox_total_scanned": 62,
+  "sent_total_scanned": 3,
+  "calendar_events_today": 7,
   "threads": [
     {
-      "conversationId": "thread-pf-contract-comments-0625",
-      "threadSubject": "PF/Clayco - Preliminary Contract Comments",
-      "from_address": "courtney@pacificfusion.com",
-      "from_name": "Courtney Richardson",
-      "subject": "Re: PF/Clayco - Preliminary Contract Comments",
-      "body_preview": "Thanks Nick, Team, contract execution will enable several workstreams which need to happen over the next few months. As of now, these workstreams are on hold until the contracts are signed.",
-      "received_at": "2026-06-24T19:42:14Z",
-      "latestSender": "courtney@pacificfusion.com",
-      "latestSenderName": "Courtney Richardson",
-      "latestMessageTime": "2026-06-24T19:42:14Z",
-      "threadMessageCount": 8,
-      "threadParticipants": ["nick.rivera@pacificfusion.com","courtney@pacificfusion.com","hankinsr@claycorp.com","swanc@claycorp.com","TigheC@claycorp.com","TinneyC@claycorp.com","eric.hieber@gtlaw.com","jensend@gtlaw.com","jeff.mitchell@pacificfusion.com"],
-      "myLastReplyTime": "2026-06-24T18:52:25Z",
-      "waitingSince": "2026-06-24T19:42:14Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 9,
-      "full_thread_content": "Courtney (2026-06-24T19:42): Thanks Nick, Team, contract execution will enable several workstreams which need to happen over the next few months. As of now, these workstreams are on hold until the contracts are signed. ---MESSAGE BREAK--- Courtney (2026-06-24T19:41): contract execution will enable several workstreams which need to happen over the next few months ---MESSAGE BREAK--- Ryan (2026-06-24T18:52): + @Conor Tighe @Catherine Swan [added legal team to thread] ---MESSAGE BREAK--- Ryan (2026-06-24T18:51): Nick – Given that its Wednesday (2PM Central) – we need some time to review wholesitically and meet internally before we meet externally. We are looking to do a quick turn – but need some time to evaluate. Let me get with Conor and Catherine and we can discuss. ---MESSAGE BREAK--- Nick Rivera (2026-06-24T18:31): urgency of completing the contract. To help keep things moving, we would like to arrange a meeting between our respective legal teams this Friday to discuss any remaining open items. ---MESSAGE BREAK--- Ryan FW to internal (2026-06-24T17:35): Heres the contract; let me know what comments we have - and if we can meet Friday - or if that is too early. ---MESSAGE BREAK--- Nick Rivera (2026-06-24T17:30): Ryan, Please see the attached redlines. Let me know if your team would be available sometime Friday to discuss.",
-      "sent_body": "Nick – Given that its Wednesday (2PM Central) – we need some time to review wholistically and meet internally before we meet externally. We are looking to do a quick turn – but need some time to evaluate. Let me get with Conor and Catherine and we can discuss.",
-      "extraction_depth": "full"
+      "conversation_id": "pf-contract-comments-2026-06",
+      "subject": "PF/Clayco - Contract Review & Execution Track",
+      "bucket_hint": 1,
+      "priority": "critical",
+      "last_message_at": "2026-06-28T19:05:00Z",
+      "participants": [
+        "courtney@pacificfusion.com",
+        "hankinsr@claycorp.com",
+        "tinneyc@claycorp.com",
+        "tighec@claycorp.com",
+        "swanc@claycorp.com",
+        "eric.hieber@gtlaw.com",
+        "jensend@gtlaw.com",
+        "jeff.mitchell@pacificfusion.com",
+        "nick.rivera@pacificfusion.com",
+        "justin.grodman@pacificfusion.com",
+        "abbottr@claycorp.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "tighec@claycorp.com",
+      "summary": "Contract execution track continues with two meetings TODAY: PF Internal Contract Review #2 (8AM MST, Ryan+Swan+Tighe) and PF|Clayco formal Contract Review and Discussion (12PM MST, includes PF legal: Rivera, GT lawyers Hieber and Jensen). Tighe shared 'Draft Share' SharePoint folder for contract edit collaboration — Swan, Abbott, and Ryan have access. Hard 7/14 deadline for A133/A102/GMP1 execution remains active.",
+      "key_facts": [
+        "Today 8AM: PF Internal Contract Review #2 (Swan, Hankins, Tighe — Swan is organizer)",
+        "Today 12PM: PF|Clayco Contract Review and Discussion (Google Meet — Rivera, GT lawyers, Swan, Tighe, Tinney, Ryan)",
+        "Tighe shared 'Draft Share' SharePoint folder: 'for collaboration of the contract edits' — Swan, Abbott, Ryan on access",
+        "Ryan sent FW: PF- Request for BIM and CAD files (Swan, Tighe) with EDTA agreement attached — June 26 20:18",
+        "Ryan sent FW: CSI Solis Approach (Tighe) — June 26 20:59",
+        "GMP1 / A133 / A102 execution deadline: July 14, 2026 (15 days from today)",
+        "OCIP binding question newly surfaced (Schulz) — separate but linked thread"
+      ],
+      "action_items": [
+        {
+          "text": "Attend PF Internal Contract Review #2 at 8AM MST today — be prepared on A133, EDTA, OCIP (Schulz questions re: Exhibit B), and CSI Solis approach",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.99
+        },
+        {
+          "text": "Attend PF|Clayco Contract Review and Discussion at 12PM MST today — formal session with PF legal (Rivera, Hieber, Jensen) + Clayco team. Resolve open commercial/legal items before 7/14",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.99
+        },
+        {
+          "text": "Access Tighe's 'Draft Share' SharePoint folder and review contract edit draft before 8AM meeting",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.90
+        }
+      ],
+      "commitments": [
+        {
+          "text": "A133 contract review track — active, 7/14 execution deadline",
+          "made_to": "Pacific Fusion (Rivera, Courtney) + Clayco legal team",
+          "made_at": "2026-06-25",
+          "status": "in progress — two meetings today"
+        }
+      ],
+      "risk_signals": [
+        "7/14 deadline for A133/A102/GMP1 execution — 15 days remaining",
+        "OCIP binding decision (Schulz) is adjacent — must align insurance before contract execution",
+        "BIM/CAD file EDTA agreement forwarded — confirm execution status before today's meetings"
+      ]
     },
     {
-      "conversationId": "thread-solis-foundation-selection-0625",
-      "threadSubject": "Project Solis - Foundation selection",
-      "from_address": "craig@westerngroundimprovement.com",
-      "from_name": "Craig Streit",
-      "subject": "[EXTERNAL] Re: Project Solis - Foundation selection",
-      "body_preview": "We'll get updated moduli asap. Bill/Rebekah - Since our contract is technically with you for now, is this direction to proceed with the RI solution? Thanks, -Craig",
-      "received_at": "2026-06-25T03:04:37Z",
-      "latestSender": "craig@westerngroundimprovement.com",
-      "latestSenderName": "Craig Streit",
-      "latestMessageTime": "2026-06-25T03:04:37Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["MKoenigs@ThorntonTomasetti.com","craig@westerngroundimprovement.com","hankinsr@claycorp.com","Rebekah.Bellum@stantec.com","courtney@pacificfusion.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-25T03:04:37Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": true,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 5,
-      "full_thread_content": "Craig Streit (2026-06-25T03:04): We'll get updated moduli asap. Bill/Rebekah - Since our contract is technically with you for now, is this direction to proceed with the RI solution? Thanks, -Craig Craig P. Streit LEED AP Western Ground Improvement ---MESSAGE BREAK--- Mark Koenigs TT (2026-06-25T00:44): on whomever holds your contract for design, please make sure to get that. As we re-start the design, can you confirm whether the ground improvement design parameters have changed from the original RI design?",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "pf-ocip-quote-review-2026-06",
+      "subject": "RE: Pac Fusion / OCIP Quote Review",
+      "bucket_hint": 1,
+      "priority": "critical",
+      "last_message_at": "2026-06-28T21:20:00Z",
+      "participants": [
+        "schulzn@claycorp.com",
+        "hankinsr@claycorp.com",
+        "tmscottii@baldwinrisk.com",
+        "info@cacgroup.com",
+        "courtney@pacificfusion.com",
+        "nick.rivera@pacificfusion.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "schulzn@claycorp.com",
+      "summary": "Neil Schulz (SVP Corporate Insurance) reviewing Great American OCIP quote + Exhibit B of the GC Agreement before binding. He has specific questions about named insured status, wrap structure, and contractual alignment. Binding is expected next week. This directly follows Zurich pulling out — Great American is the replacement carrier. Schulz needs Ryan's input on contract terms before he can sign off.",
+      "key_facts": [
+        "Great American = replacement carrier after Zurich pulled out of PF OCIP",
+        "Schulz reviewing: Great American OCIP quote + Exhibit B of GC Agreement",
+        "Schulz has specific questions before binding — asking Ryan to review",
+        "Binding timeline: next week (week of June 30)",
+        "Parties copied: Baldwin Risk Partners (broker), CAC Group, PF (Courtney + Rivera)",
+        "has_attachment: true (OCIP quote, Exhibit B)",
+        "has_contract_language: true (Exhibit B of GC Agreement)"
+      ],
+      "action_items": [
+        {
+          "text": "Review Schulz's OCIP questions re: Great American quote and Exhibit B — respond before binding (target: today or tomorrow before EOD Mon)",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.95
+        },
+        {
+          "text": "Raise OCIP binding status in 8AM PF Internal Contract Review — align with Swan and Tighe on insurance requirements before today's 12PM session with PF legal",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.92
+        }
+      ],
+      "risk_signals": [
+        "OCIP must bind before or contemporaneous with contract execution — 7/14 deadline creates pressure",
+        "Exhibit B of GC Agreement: if OCIP terms conflict with contract language, creates execution risk",
+        "Zurich already out — Great American is the only live quote; no backup if this falls through"
+      ]
     },
     {
-      "conversationId": "thread-solis-earthwork-prebid-0625",
-      "threadSubject": "Project Solis Earthwork Prebid Meeting",
-      "from_address": "SnyderC@claycorp.com",
-      "from_name": "Chris Snyder",
-      "subject": "Project Solis Earthwork Prebid Meeting",
-      "body_preview": "Team, I'm editing this meeting invite to be our full Earthwork prebid meeting with all of our team members and subcontractors. Meeting agenda: Contract and Approach, Scope of Work, Schedule and Sequencing, Logistics Plan, Long Lead items, Break Ground.",
-      "received_at": "2026-06-24T20:55:08Z",
-      "latestSender": "SnyderC@claycorp.com",
-      "latestSenderName": "Chris Snyder",
-      "latestMessageTime": "2026-06-24T20:55:08Z",
-      "threadMessageCount": 1,
-      "threadParticipants": ["SnyderC@claycorp.com","HankinsR@claycorp.com","TinneyC@claycorp.com","StorckE@claycorp.com","HenleyL@claycorp.com","SpielerD@claycorp.com","brian.hanlin@feinm.com","gus.harbaugh@feinm.com","tyler@guzmancs.com","rudy@guzmancs.com","shane@compassnm.com","wlucero74@comcast.net"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T20:55:08Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 12,
-      "full_thread_content": "Chris Snyder (2026-06-24T20:55): Team, I'm editing this meeting invite to be our full Earthwork prebid meeting with all of our team members and subcontractors. Apologies for any confusion. Meeting agenda includes: Contract and Approach, Scope of Work, Schedule and Sequencing, Logistics Plan and Workflow, Long Lead items, Break Ground. Exhibit C - Subcontractor's Scope of Work - Combined Scope of Work Template - Overall Scope Requirements - Civil Scope.",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "pf-a133-working-file-2026-06",
+      "subject": "Pacific Fusion A133 Working File for SharePoint",
+      "bucket_hint": 1,
+      "priority": "high",
+      "last_message_at": "2026-06-26T21:27:33Z",
+      "participants": [
+        "cswanatty@gmail.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "cswanatty@gmail.com",
+      "summary": "Swan sent A133 working document to Ryan from her personal Gmail account (cswanatty@gmail.com), attaching the current A133 draft with tracked deletions and additions. Sent directly (not through Clayco systems) — implies this is the live working version. Likely the same file now in the 'Draft Share' SharePoint folder Tighe set up. Contains active contract redlines.",
+      "key_facts": [
+        "Swan sent from personal Gmail (cswanatty@gmail.com) — working draft A133 with redlines",
+        "has_attachment: true (A133 working document)",
+        "has_contract_language: true",
+        "Sent directly to Ryan only — likely the document Swan reviewed over the weekend",
+        "Tighe separately shared 'Draft Share' SharePoint folder for collaboration on contract edits"
+      ],
+      "action_items": [
+        {
+          "text": "Locate and review Swan's A133 working file attachment before 8AM contract review — this is the live redlined draft",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.95
+        }
+      ],
+      "risk_signals": [
+        "Working redline sent via personal Gmail — not in Clayco document management system; ensure it gets to SharePoint",
+        "Contract changes may not be visible to others until uploaded to Tighe's Draft Share folder"
+      ]
     },
     {
-      "conversationId": "thread-solis-earthwork-sow-0625",
-      "threadSubject": "Solis Earthwork Scope of Work",
-      "from_address": "TinneyC@claycorp.com",
-      "from_name": "Chris Tinney",
-      "subject": "Solis Earthwork Scope of Work",
-      "body_preview": "Attached is the SOW document that will be included in the Earthwork Contract. This should also be issued to the bidders before our meeting tomorrow in case they have any questions.",
-      "received_at": "2026-06-24T20:25:40Z",
-      "latestSender": "TinneyC@claycorp.com",
-      "latestSenderName": "Chris Tinney",
-      "latestMessageTime": "2026-06-24T20:25:40Z",
-      "threadMessageCount": 1,
-      "threadParticipants": ["TinneyC@claycorp.com","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T20:25:40Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "extended"
+      "conversation_id": "solis-billing-estopinal-2026-06",
+      "subject": "Solis Clayco Billing",
+      "bucket_hint": 1,
+      "priority": "high",
+      "last_message_at": "2026-06-26T22:15:00Z",
+      "participants": [
+        "james.estopinal@pacificfusion.com",
+        "tinneyc@claycorp.com",
+        "hankinsr@claycorp.com",
+        "nick.rivera@pacificfusion.com"
+      ],
+      "message_count": 4,
+      "latest_sender": "james.estopinal@pacificfusion.com",
+      "summary": "Active billing dispute. Ryan's June 26 email questioned Estopinal's invoice schedule, asking why three invoices had been submitted (down payment + April + May) and flagging need to discuss extended precon billing beyond July. Estopinal counter-responded attaching signed agreement and claiming the agreement explicitly shows 4 equal monthly payments — not prepayments. This is a contract interpretation dispute between Ryan/Clayco and Pacific Fusion on billing structure. Tinney said 'Thank you sir! Have a great weekend' (appears to support Estopinal's position). Dispute is unresolved.",
+      "key_facts": [
+        "Ryan's position (June 26 16:58): Questioned 3-invoice structure (down payment + April + May) and raised extended precon billing beyond July",
+        "Estopinal's counter (June 26): Signed agreement = 4 equal monthly payments (not prepayments), attached signed copy",
+        "Tinney response: 'Thank you sir! Have a great weekend' (ambiguous — may be supporting Estopinal)",
+        "has_attachment: true (signed agreement on billing structure)",
+        "Ryan also cc'd Nick Rivera (PF) on his initial response",
+        "has_contract_language: true",
+        "Solis Project Schedule Development meeting is today at 12:30PM MST (Tinney + Ryan + Whitmer)"
+      ],
+      "action_items": [
+        {
+          "text": "Review signed agreement Estopinal attached — confirm actual billing terms before Solis Schedule meeting at 12:30PM today. Determine Ryan's position on extended precon billing beyond July",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.92
+        },
+        {
+          "text": "Align with Tinney on billing dispute before Solis Schedule meeting — understand his position (appears he sided with Estopinal)",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.88
+        }
+      ],
+      "commitments": [
+        {
+          "text": "Raised extended precon billing beyond July — needs resolution discussion",
+          "made_to": "Estopinal, Rivera, Tinney",
+          "made_at": "2026-06-26",
+          "status": "open — dispute active"
+        }
+      ],
+      "risk_signals": [
+        "Contract interpretation dispute on billing structure — Ryan's 3-invoice view vs. Estopinal's 4-equal-payment view",
+        "Estopinal has signed agreement as evidence — if Ryan's interpretation is wrong, billing dispute escalates",
+        "Extended precon billing beyond July unresolved — financial exposure for Clayco",
+        "Solis Schedule meeting today — likely to surface this billing issue again"
+      ]
     },
     {
-      "conversationId": "thread-gotion-bess-ca-0625",
-      "threadSubject": "Gotion BESS - Phase 1 - Construction Administration",
-      "from_address": "appelbauml@theljc.com",
-      "from_name": "Luke Appelbaum",
-      "subject": "Gotion BESS - Phase 1 - Construction Administration",
-      "body_preview": "Support may include review and response to Phase 1 RFIs, submittals, shop drawings, and related construction documentation for general conformance with the project design intent. Participate in Phase 1 construction meetings.",
-      "received_at": "2026-06-24T16:49:41Z",
-      "latestSender": "appelbauml@theljc.com",
-      "latestSenderName": "Luke Appelbaum",
-      "latestMessageTime": "2026-06-24T16:49:41Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["appelbauml@theljc.com","mitchellj@theljc.com","howea@theljc.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": "2026-06-23T20:34:38Z",
-      "waitingSince": "2026-06-24T16:49:41Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": "Luke Appelbaum (2026-06-24T16:49): Support may include review and response to Phase 1 RFIs, submittals, shop drawings, and related construction documentation for general conformance with the project design intent. Participate in Phase 1 construction meetings as is reasonably required. [Attached: Gotion Solar Phase 1 CA Proposal with scope and fee for LJC CA services]",
-      "sent_body": "See attached [Gotion Solar Phase 1 CA Proposal - Ryan's version sent 2026-06-23T20:34]",
-      "extraction_depth": "full"
+      "conversation_id": "pf-long-lead-early-trade-2026-06",
+      "subject": "Pacific Fusion || Long Lead / Early Trade Purchases",
+      "bucket_hint": 2,
+      "priority": "high",
+      "last_message_at": "2026-06-28T16:45:00Z",
+      "participants": [
+        "Rebekah.Bellum@stantec.com",
+        "craig@westerngroundimprovement.com",
+        "hankinsr@claycorp.com",
+        "tinneyc@claycorp.com",
+        "courtney@pacificfusion.com",
+        "bill.huie@stantec.com",
+        "mkoenigs@thorntontomasetti.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "craig@westerngroundimprovement.com",
+      "summary": "Two updates on PF long lead / early trade coordination. Stantec (Bellum) distributed updated deliverables spreadsheet with a minor schedule change noted (June 27, 20+ recipients including all design consultants). WGI (Craig Streit) confirmed June 28 they are OK with 8/20 as the target date for final Geopier/Rigid Inclusion design, but require the final foundation plan 2-3 weeks prior (≈ August 6). This sets a hard dependency: foundation plan must be finalized by ~August 6 for WGI to hit August 20.",
+      "key_facts": [
+        "WGI (Craig): OK with 8/20 final Geopier/Rigid Inclusion design date — confirmed June 28",
+        "WGI dependency: needs final foundation plan 2-3 weeks prior to 8/20 = approximately August 6",
+        "Stantec (Bellum): updated deliverables spreadsheet distributed June 27 — minor change noted",
+        "Foundation plan finalization is on the critical path for GI design",
+        "has_attachment: true (Stantec deliverables spreadsheet, Bellum June 27)"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm with TT / PF that foundation plan will be finalized by August 6 to support WGI's 8/20 GI design completion",
+          "owner": "ryan",
+          "due_date": "2026-07-02",
+          "confidence": 0.88
+        },
+        {
+          "text": "Review updated Stantec deliverables spreadsheet — identify the 'minor change' and confirm no downstream impact",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.80
+        }
+      ],
+      "risk_signals": [
+        "Foundation plan must be finalized by ~Aug 6 — if TT/PF are late, WGI 8/20 GI date slips",
+        "Solis foundation selection not yet complete (rigid inclusion answer: no rebar confirmed) — selection timing feeds this plan",
+        "Stantec deliverables change: minor but confirm no scope/schedule impact"
+      ]
     },
     {
-      "conversationId": "thread-gotion-bess-construction-0625",
-      "threadSubject": "Gotion BESS - Construction Support and Record Drawings",
-      "from_address": "appelbauml@theljc.com",
-      "from_name": "Luke Appelbaum",
-      "subject": "RE: Gotion BESS - Construction Support and Record Drawings",
-      "body_preview": "Love it. Let's submit! Ryan, John and I aligned on the workbook provided, $380,670 fee, as well as the language. We added specification that this is Phase 1 only and noted the schedule covers a maximum of a 6 month construction schedule.",
-      "received_at": "2026-06-23T20:22:28Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-23T20:34:38Z",
-      "threadMessageCount": 6,
-      "threadParticipants": ["appelbauml@theljc.com","mitchellj@theljc.com","howea@theljc.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": "2026-06-23T20:34:38Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": null,
-      "sent_body": "See attached [Gotion proposal document sent to LJC]",
-      "extraction_depth": "standard"
+      "conversation_id": "solis-foundation-selection-2026-06",
+      "subject": "Project Solis - Foundation Selection / Building Reduction",
+      "bucket_hint": 2,
+      "priority": "high",
+      "last_message_at": "2026-06-26T19:45:00Z",
+      "participants": [
+        "craig@westerngroundimprovement.com",
+        "ken@westerngroundimprovement.com",
+        "hankinsr@claycorp.com",
+        "mkoenigs@thorntontomasetti.com",
+        "ffang@thorntontomasetti.com",
+        "JLeung@ThorntonTomasetti.com",
+        "courtney@pacificfusion.com",
+        "bill.huie@stantec.com",
+        "Rebekah.Bellum@stantec.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "Rebekah.Bellum@stantec.com",
+      "summary": "WGI (Ken) answered Bellum's structural question: rigid inclusions do NOT have reinforcing. Low strength grout element (~750 psi, ~5ft edge-to-edge). This means the mat foundation does NOT need to span between point supports — the previous structural risk (from the June 26 last-raw) is resolved. Bellum acknowledged with 'Thank you.' Engineering coordination continues but the main structural uncertainty is cleared.",
+      "key_facts": [
+        "Ken (WGI): No reinforcing in rigid inclusions — low strength grout element",
+        "WGI specs confirmed: ~750 psi, ~5ft edge-to-edge",
+        "Bellum (Stantec): acknowledged — 'Thank you. RB'",
+        "RESOLVED: Mat foundation does NOT need to span rigid inclusions as point supports",
+        "Structural cost risk from June 26 (TT mat design complexity) is mitigated"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm TT (Koenigs/Fang/Leung) received WGI's answer and updated their mat design assumptions — ensure no cost change required",
+          "owner": "ryan",
+          "due_date": "2026-07-01",
+          "confidence": 0.82
+        }
+      ],
+      "risk_signals": [
+        "TT still needs to confirm their mat design reflects WGI's answer (no rebar, low-strength grout = no point support spanning needed)",
+        "Building reduction (grid 10-12) scope change still needs to be tracked for contract impact"
+      ]
     },
     {
-      "conversationId": "thread-gotion-ulteig-solar-0625",
-      "threadSubject": "24.04110 - ClayCo / Ulteig - Gotion Solar",
-      "from_address": "justin.smaaladen@ulteig.com",
-      "from_name": "Justin Smaaladen",
-      "subject": "[EXTERNAL] RE: 24.04110 - ClayCo / Ulteig - Gotion Solar",
-      "body_preview": "LNTP with their general contractor. Thanks, Luke Appelbaum Project Engineer III LJC. [Gotion commented on Ulteig proposal - responses due by next Monday]",
-      "received_at": "2026-06-24T14:31:32Z",
-      "latestSender": "justin.smaaladen@ulteig.com",
-      "latestSenderName": "Justin Smaaladen",
-      "latestMessageTime": "2026-06-24T14:31:32Z",
-      "threadMessageCount": 4,
-      "threadParticipants": ["appelbauml@theljc.com","justin.smaaladen@ulteig.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": "2026-06-23T13:43:11Z",
-      "waitingSince": "2026-06-24T14:31:32Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": "Justin Smaaladen Ulteig (2026-06-24T14:31): LNTP with their general contractor. ---MESSAGE BREAK--- Luke Appelbaum LJC (2026-06-24T14:30): LNTP with their general contractor. Gotion received our comments. Please work to have responses in the spreadsheet by next Monday. ---MESSAGE BREAK--- Luke Appelbaum LJC (2026-06-23T19:50): All, We received Gotion's comments today. Please see attached. @Justin Smaaladen Can you please work to have responses in the spreadsheet by next Monday? I would like to get it to Gotion by Wednesday. ---MESSAGE BREAK--- Ryan (2026-06-23T13:43): We were supporting them with permitting — not paying the plan review fees. What does our clarifications say?",
-      "sent_body": "We were supporting them with permitting — not paying the plan review fees. What does our clarifications say?",
-      "extraction_depth": "full"
+      "conversation_id": "sahuarita-powered-land-2026-06",
+      "subject": "Fwd: Sahuarita Powered Land Site",
+      "bucket_hint": 2,
+      "priority": "high",
+      "last_message_at": "2026-06-28T14:30:00Z",
+      "participants": [
+        "jblackbourn@everestholdings.com",
+        "hankinsr@claycorp.com",
+        "bnichols@stackinfra.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "jblackbourn@everestholdings.com",
+      "summary": "Joe Blackbourn (Everest Holdings) forwarded a powered land site opportunity in Sahuarita to Ryan and Brandon Nichols (Stack Infrastructure). Original source: Jeremy Sharpe (developer). Has attachment — likely site details, power specs, or land package. Sahuarita is south of Tucson in Southern Arizona. The dual-recipient setup (Clayco + Stack Infrastructure) suggests this is a data center or industrial land play where both GC and data center operator/developer are being simultaneously approached.",
+      "key_facts": [
+        "Location: Sahuarita, AZ (south of Tucson)",
+        "Source chain: Jeremy Sharpe (developer) → Joe Blackbourn (Everest Holdings) → Ryan + Brandon Nichols (Stack Infrastructure)",
+        "has_attachment: true (site details TBD)",
+        "Dual outreach to Clayco + Stack Infrastructure = likely data center or industrial opportunity",
+        "New BD thread — no prior relationship with Blackbourn/Everest Holdings in recent records"
+      ],
+      "action_items": [
+        {
+          "text": "Review Sahuarita powered land site attachment — evaluate opportunity for Clayco. Determine if Stack Infrastructure (Nichols) is a potential client or co-developer",
+          "owner": "ryan",
+          "due_date": "2026-07-01",
+          "confidence": 0.85
+        },
+        {
+          "text": "Respond to Blackbourn if site is worth pursuing — coordinate with Watkins/BD team if it qualifies as an industrial/data center lead",
+          "owner": "ryan",
+          "due_date": "2026-07-01",
+          "confidence": 0.82
+        }
+      ],
+      "risk_signals": [
+        "Stack Infrastructure copied — if they're the potential owner/developer, Clayco must move to establish direct relationship quickly",
+        "No context on power capacity, acreage, or zoning — evaluate before committing time"
+      ]
     },
     {
-      "conversationId": "thread-pf-ocip-materials-0625",
-      "threadSubject": "Pac Fusion / Clayco - OCIP Materials",
-      "from_address": "Sarah.Shepard@baldwin.com",
-      "from_name": "Sarah Shepard",
-      "subject": "[EXTERNAL] RE: Pac Fusion / Clayco - OCIP Materials",
-      "body_preview": "Oh, ok this is even more helpful. We were under the impression that this was in July. Therefore, from our standpoint, while the OCIP will be in place for your July 1 start – it won't be in place for the first 1-2 weeks on site.",
-      "received_at": "2026-06-22T14:09:08Z",
-      "latestSender": "Sarah.Shepard@baldwin.com",
-      "latestSenderName": "Sarah Shepard",
-      "latestMessageTime": "2026-06-22T14:09:08Z",
-      "threadMessageCount": 5,
-      "threadParticipants": ["Sarah.Shepard@baldwin.com","schulzn@claycorp.com","TigheC@claycorp.com","hankinsr@claycorp.com","carter.swan@cacgroup.com","Joe.Charczenko@baldwin.com","Rick.Eisenstat@cacgroup.com","mindy@pacificfusion.com","nick.rivera@pacificfusion.com","courtney@pacificfusion.com"],
-      "myLastReplyTime": "2026-06-22T14:06:06Z",
-      "waitingSince": "2026-06-22T14:09:08Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 10,
-      "full_thread_content": "Sarah Shepard Baldwin (2026-06-22T14:09): Oh, ok this is even more helpful. We were under the impression that this was in July. Therefore, while the OCIP will be in place for your July 1 start – it won't be in place for the first 1-2 weeks on site. ---MESSAGE BREAK--- Ryan (2026-06-22T14:06): We don't know who the subcontractors are yet; we don't anticipate being onsite until mid August with earthwork. Currently doing buyout at the moment. Earthwork — maybe $3mm or so; Ground improvement is being evaluated. ---MESSAGE BREAK--- Ryan (2026-06-22T13:47): First 1-2 weeks is primarily Earthwork for the most part. Maybe geopiers / ground improvements. That should be all for first few weeks.",
-      "sent_body": "We don't know who the subcontractors are yet; we don't anticipate being onsite until mid August with earthwork. Currently doing buyout at the moment and there are multiple subcontractors still in the mix.",
-      "extraction_depth": "full"
+      "conversation_id": "gotion-solar-60-design-2026-06",
+      "subject": "10109160 - Gotion Solar / 24.04110 - ClayCo/Ulteig — 60% Design Deliverables",
+      "bucket_hint": 2,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T18:40:00Z",
+      "participants": [
+        "appelbauml@theljc.com",
+        "taozhihan@gotion.com.cn",
+        "justin.smaaladen@ulteig.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "appelbauml@theljc.com",
+      "summary": "Two coordinated threads on Gotion Solar 60% design deliverables. Appelbaum (LJC) sent comment responses to Gotion (Tao) with attachment. Separately, Ulteig (Justin Smaaladen) sent comment response Excel file (24.04110 coordination). Both are responses to Gotion's 60% design package review. Today at 1PM MST is the Gotion Solar/Ulteig weekly coordination meeting.",
+      "key_facts": [
+        "Appelbaum: sent 60% design comment responses to Tao (Gotion) — has_attachment",
+        "Ulteig (Smaaladen): sent comment response Excel for 24.04110 — has_attachment",
+        "Today 1PM MST: ClayCo/Ulteig Gotion Solar weekly meeting (Ulteig organizer)",
+        "LJC and Ulteig both actively responding to 60% design deliverables"
+      ],
+      "action_items": [
+        {
+          "text": "Attend/confirm Gotion Solar weekly meeting today at 1PM MST — review 60% design comment responses from LJC and Ulteig in advance",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.85
+        }
+      ],
+      "risk_signals": [
+        "60% design = active design milestone; unresolved comments may affect schedule"
+      ]
     },
     {
-      "conversationId": "thread-pf-ocip-quote-0625",
-      "threadSubject": "Pac Fusion / OCIP Quote Review",
-      "from_address": "Sarah.Shepard@baldwin.com",
-      "from_name": "Sarah Shepard",
-      "subject": "[EXTERNAL] RE: Pac Fusion / OCIP Quote Review",
-      "body_preview": "Noted, that is stressful. We plan to push back binding to July 1, and understand that you will not be on site that week. Be in touch when you can and note that I will be out the week of the 4th.",
-      "received_at": "2026-06-24T20:07:10Z",
-      "latestSender": "Sarah.Shepard@baldwin.com",
-      "latestSenderName": "Sarah Shepard",
-      "latestMessageTime": "2026-06-24T20:07:10Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["Sarah.Shepard@baldwin.com","schulzn@claycorp.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T20:07:10Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "extended"
+      "conversation_id": "gotion-bess-swppp-2026-06",
+      "subject": "RE: Epstein SWPPP / ILR10 Permit — Gotion Solar",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T17:50:00Z",
+      "participants": [
+        "xiepingping@gotion.com.cn",
+        "appelbauml@theljc.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "appelbauml@theljc.com",
+      "summary": "Gotion (Xie Pingping) thanked Luke (Epstein) for SWPPP/ILR10 permit coordination. Appelbaum (LJC) clarified context: Clayco is no longer bidding the BESS scope (Epstein Global taking over as GC). Question remaining: whether a new contractor can sign the existing SWPPP/ILR10 permit or must transfer/re-permit. Appelbauml asking on Clayco's behalf to clarify permitting responsibility boundary.",
+      "key_facts": [
+        "Clayco: confirmed out of BESS scope — Epstein Global is new GC",
+        "Remaining question: can Epstein sign existing SWPPP/ILR10, or does permit need to transfer?",
+        "Gotion appears to believe Clayco (Luke) is still coordinating — miscommunication risk",
+        "Solar scope (ClayCo/LJC/Ulteig) continues unaffected"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm Epstein Global is fully transitioned on BESS permitting — ensure Clayco has no residual SWPPP/ILR10 obligation",
+          "owner": "ryan",
+          "due_date": "2026-07-01",
+          "confidence": 0.78
+        }
+      ],
+      "risk_signals": [
+        "Permitting responsibility boundary unclear — if Clayco is still named on SWPPP, liability persists after Epstein takeover"
+      ]
     },
     {
-      "conversationId": "thread-pf-long-lead-0625",
-      "threadSubject": "Pacific Fusion || Long Lead / Early Trade Purchases",
-      "from_address": "Rebekah.Bellum@stantec.com",
-      "from_name": "Rebekah Bellum",
-      "subject": "[EXTERNAL] RE: Pacific Fusion || Long Lead / Early Trade Purchases",
-      "body_preview": "Hello Team +@Ryan Hankins, @Craig Streit, @Matthew Cramer, Attached is the latest version of the Design Schedule. Critical items: 7/16/2026: 100% DD submittals; 8/4/2026: Early Procurement Packages (MEP Equipment; Prelim Mill Order).",
-      "received_at": "2026-06-24T18:01:05Z",
-      "latestSender": "Rebekah.Bellum@stantec.com",
-      "latestSenderName": "Rebekah Bellum",
-      "latestMessageTime": "2026-06-24T18:01:05Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["Rebekah.Bellum@stantec.com","hankinsr@claycorp.com","craig.companion@pacificfusion.com","matthew.adams@konecranes.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T18:01:05Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": "Rebekah Bellum Stantec (2026-06-24T18:01): Hello Team +@Ryan Hankins, @Craig Streit, @Matthew Cramer, Attached is the latest version of the Design Schedule that we have provided to Courtney. Critical path items: 7/16/2026: 100% DD submittals (1B, 1C, DFT Minor Amendment); 8/4/2026: Early Procurement Packages (MEP Equipment; Prelim Mill Order), Preliminary Early Foundation + UG Utilities. Please let me know ASAP if you see any issues!",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "pf-contract-tighe-share-2026-06",
+      "subject": "Conor Tighe shared 'Draft Share' folder",
+      "bucket_hint": 2,
+      "priority": "high",
+      "last_message_at": "2026-06-26T20:45:00Z",
+      "participants": [
+        "tighec@claycorp.com",
+        "swanc@claycorp.com",
+        "abbottr@claycorp.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "tighec@claycorp.com",
+      "summary": "Tighe shared a 'Draft Share' SharePoint folder specifically for Pacific Fusion contract edit collaboration. Comment: 'for collaboration of the contract edits.' Ryan, Swan, and Abbott have access. This is the working repository for A133 redlines and related contract documents.",
+      "key_facts": [
+        "Tighe created 'Draft Share' SharePoint folder for PF contract edit collaboration",
+        "Shared to: Swan, Abbott, Ryan",
+        "This is the live working repository for A133/contract redlines"
+      ],
+      "action_items": [
+        {
+          "text": "Access 'Draft Share' SharePoint folder before 8AM — upload or confirm Swan's A133 working file is in there",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.88
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-amfab-solis-0625",
-      "threadSubject": "Solis",
-      "from_address": "rob.vanderhei@amfabinc.com",
-      "from_name": "Rob Vanderhei",
-      "subject": "[EXTERNAL] Solis",
-      "body_preview": "Checking your availability to discuss drawings and schedule for Solis. Let me know... Rob Vanderhei Vice President of Sales amfabsteel, inc. 100 Calle Industrial Bernalillo, NM 87004.",
-      "received_at": "2026-06-25T00:25:10Z",
-      "latestSender": "rob.vanderhei@amfabinc.com",
-      "latestSenderName": "Rob Vanderhei",
-      "latestMessageTime": "2026-06-25T00:25:10Z",
-      "threadMessageCount": 1,
-      "threadParticipants": ["rob.vanderhei@amfabinc.com","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-25T00:25:10Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": "Rob Vanderhei amfabsteel (2026-06-25T00:25): Checking your availability to discuss drawings and schedule for Solis. Let me know… Rob Vanderhei Vice President of Sales amfabsteel, inc. 100 Calle Industrial Bernalillo, NM 87004",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "financial-review-schedule-2026",
+      "subject": "Revised Financial Review Schedule for 2026",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T17:30:00Z",
+      "participants": [
+        "carsonr@claycorp.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "carsonr@claycorp.com",
+      "summary": "Ryan Carson sent a revised 2026 financial review schedule. Key change for July: financial reports now due July 20 (previously different date), with reviews scheduled July 22-29. Has attachment (calendar/schedule document).",
+      "key_facts": [
+        "July financials due: July 20, 2026",
+        "July financial reviews scheduled: July 22-29, 2026",
+        "has_attachment: true (revised schedule document)"
+      ],
+      "action_items": [
+        {
+          "text": "Calendar July 20 as financial report submission deadline",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.88
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-solis-lighting-discussion-0625",
-      "threadSubject": "Project Solis Lighting Discussion",
-      "from_address": "Dominic.Wood@stantec.com",
-      "from_name": "Dominic Wood",
-      "subject": "[EXTERNAL] RE: Project Solis Lighting Discussion",
-      "body_preview": "@Nick Becker and @Tyler Woldridge, See attached markup with the equipment height. Assume 30' for your lighting calculations.",
-      "received_at": "2026-06-24T21:34:18Z",
-      "latestSender": "Dominic.Wood@stantec.com",
-      "latestSenderName": "Dominic Wood",
-      "latestMessageTime": "2026-06-24T21:34:18Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["Dominic.Wood@stantec.com","nick.becker@villalighting.com","tyler.woldridge@laiweb.net","hankinsr@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T21:34:18Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "extended"
+      "conversation_id": "safety-training-overdue-202606",
+      "subject": "202606 Monthly Safety Training is overdue by 5 Days",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-28T12:00:00Z",
+      "participants": [
+        "AXIS@claycorp.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "AXIS@claycorp.com",
+      "summary": "Automated AXIS compliance reminder: June 2026 monthly safety training is 5 days overdue as of June 28. Training must be completed to maintain compliance.",
+      "key_facts": [
+        "Training ID: 202606 Monthly Safety Training",
+        "Overdue by: 5 days (as of June 28)",
+        "Source: AXIS compliance system"
+      ],
+      "action_items": [
+        {
+          "text": "Complete 202606 Monthly Safety Training — overdue by 5+ days",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.97
+        }
+      ],
+      "risk_signals": [
+        "Compliance risk if training not completed — AXIS escalates past-due training"
+      ]
     },
     {
-      "conversationId": "thread-gotion-bess-site-lighting-0625",
-      "threadSubject": "Gotion BESS Site Lighting",
-      "from_address": "appelbauml@theljc.com",
-      "from_name": "Luke Appelbaum",
-      "subject": "RE: Gotion BESS Site Lighting",
-      "body_preview": "Lighting layout requires adjustment to eliminate shadowed zones. Open 6/23/26 6/24/26: This must be discussed with Morris and Mohamad Z. Lights require uniformity as required on drawing.",
-      "received_at": "2026-06-24T13:28:26Z",
-      "latestSender": "appelbauml@theljc.com",
-      "latestSenderName": "Luke Appelbaum",
-      "latestMessageTime": "2026-06-24T13:28:26Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["appelbauml@theljc.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T13:28:26Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": "Luke Appelbaum LJC (2026-06-24T13:28): Lighting layout requires adjustment to eliminate shadowed zones. Open 6/23/26 - 6/24/26: This must be discussed with Morris and Mohamad Z. Lights require uniformity as required on drawing.",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "dataserv-approvals-2026-06",
+      "subject": "DataServ Documents Pending Approval",
+      "bucket_hint": 5,
+      "priority": "low",
+      "last_message_at": "2026-06-29T09:00:00Z",
+      "participants": [
+        "support@dataserv.us",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 3,
+      "latest_sender": "support@dataserv.us",
+      "summary": "Three consecutive DataServ pending approval notifications received: June 27, June 28, June 29. Documents queuing up without action — likely 3+ separate documents or batches now pending Ryan's approval.",
+      "key_facts": [
+        "DataServ approvals pending: June 27, June 28, June 29 notifications",
+        "3 consecutive days of unactioned approval requests",
+        "Company policy: invoices >7 days need escalation review"
+      ],
+      "action_items": [
+        {
+          "text": "Log into DataServ and approve all pending documents — 3 consecutive notification days",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.92
+        }
+      ],
+      "risk_signals": [
+        "3 days of unactioned approvals — vendor payment delays if not cleared"
+      ]
     },
     {
-      "conversationId": "thread-gotion-comed-transformer-0625",
-      "threadSubject": "RE: Gotion - Comed Main Power Transformer",
-      "from_address": "appelbauml@theljc.com",
-      "from_name": "Luke Appelbaum",
-      "subject": "RE: [EXTERNAL]Re: Gotion - Comed Main Power Transformer",
-      "body_preview": "@Gurevich, Boris:(ComEd)@Rasinski, Emilia:(ComEd) Can you confirm if the existing temporary substation and the new substation will be 138 kv or 132kv? Our understanding was different.",
-      "received_at": "2026-06-22T14:40:43Z",
-      "latestSender": "appelbauml@theljc.com",
-      "latestSenderName": "Luke Appelbaum",
-      "latestMessageTime": "2026-06-22T14:40:43Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["appelbauml@theljc.com","hankinsr@claycorp.com","Boris.Gurevich@comed.com","Emilia.Rasinski@comed.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-22T14:40:43Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": "Luke Appelbaum LJC (2026-06-22T14:40): @Gurevich, Boris:(ComEd)@Rasinski, Emilia:(ComEd) Can you confirm if the existing temporary substation and the new substation will be 138 kv or 132kv? Our understanding was different from what was discussed.",
-      "sent_body": null,
-      "extraction_depth": "full"
+      "conversation_id": "sw-industrial-bd-guest-review-2026",
+      "subject": "Guest Review Required - Industrial - SW Industrial BD",
+      "bucket_hint": 5,
+      "priority": "low",
+      "last_message_at": "2026-06-28T10:00:00Z",
+      "participants": [
+        "SharePointOnline@claycorp.onmicrosoft.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "SharePointOnline@claycorp.onmicrosoft.com",
+      "summary": "Automated SharePoint access review request for guest user access on SW Industrial BD project. Ryan needs to confirm or revoke guest access.",
+      "key_facts": [
+        "Project: SW Industrial BD",
+        "Review type: SharePoint guest access review",
+        "Action required: confirm or revoke guest"
+      ],
+      "action_items": [
+        {
+          "text": "Complete SharePoint guest access review for SW Industrial BD project",
+          "owner": "ryan",
+          "due_date": "2026-07-05",
+          "confidence": 0.82
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-solis-lighting-package-0625",
-      "threadSubject": "Solis - Lighting Package",
-      "from_address": "KumarK@claycorp.com",
-      "from_name": "Karan Kumar",
-      "subject": "Solis - Lighting Package",
-      "body_preview": "TOTAL FIXTURE COUNTS: 100% Docs: 1350 fixtures / $757k; Revised Plan: 870 fixtures / $520k; Change: -480 fixtures / -$237k. Fixtures not shown on the drawings noted.",
-      "received_at": "2026-06-23T21:45:51Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-24T05:45:16Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["KumarK@claycorp.com","hankinsr@claycorp.com","StraughanM@claycorp.com"],
-      "myLastReplyTime": "2026-06-24T05:45:16Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": true,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": null,
-      "sent_body": "I think we have achieved the savings goal alone with the office exercise; we should be good. Thanks guys!!",
-      "extraction_depth": "standard"
+      "conversation_id": "project-bravo-deck-2026-06",
+      "subject": "Project Bravo deck updates and content needs",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T12:43:43Z",
+      "participants": [
+        "watkinss@claycorp.com",
+        "hankinsr@claycorp.com",
+        "fassnachtm@claycorp.com",
+        "koppja@claycorp.com",
+        "tighec@claycorp.com",
+        "dziekanl@claycorp.com",
+        "randolphk@claycorp.com",
+        "baldockb@claycorp.com",
+        "LechterE@theljc.com",
+        "crossjo@theljc.com",
+        "personm@claycorp.com",
+        "youngs@claycorp.com",
+        "schnurs@realcrg.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "watkinss@claycorp.com",
+      "summary": "No new messages in this window. Watkins had asked Ryan to create a confidential Pacific Fusion project profile for the Bravo pursuit deck. Ryan committed to working on it June 26 after reviewing NDA. Status unknown — no response visible in sent items this window. Follow-up needed.",
+      "key_facts": [
+        "No new messages June 26–29",
+        "Ryan's commitment: 'will work on it today [June 26], need to review NDA first'",
+        "Status: no sent reply visible — unknown if completed"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm/complete NDA review and Bravo deck Pacific Fusion profile — commitment made June 25, no visible follow-through in window",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.85
+        }
+      ],
+      "commitments": [
+        {
+          "text": "Will work on Bravo deck today, need to review NDA first",
+          "made_to": "Scott Watkins + Bravo team",
+          "made_at": "2026-06-25",
+          "status": "unknown — no visible follow-through"
+        }
+      ],
+      "risk_signals": [
+        "Ryan's Bravo commitment from June 25 has no visible follow-through in this pull window — may be overdue"
+      ]
     },
     {
-      "conversationId": "thread-sow-ready-0625",
-      "threadSubject": "SOW ready to issue",
-      "from_address": "TinneyC@claycorp.com",
-      "from_name": "Chris Tinney",
-      "subject": "SOW ready to issue",
-      "body_preview": "This is what I would like to send out today. [Attached SOW - Exhibit C Subcontractor Scope of Work - Distribution 31 specifications - civil/earthwork scope]",
-      "received_at": "2026-06-24T18:18:39Z",
-      "latestSender": "TinneyC@claycorp.com",
-      "latestSenderName": "Chris Tinney",
-      "latestMessageTime": "2026-06-24T18:18:39Z",
-      "threadMessageCount": 1,
-      "threadParticipants": ["TinneyC@claycorp.com","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T18:18:39Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "extended"
+      "conversation_id": "quarterly-project-slides-2026-06",
+      "subject": "Active Projects Slides for Next Quarterly",
+      "bucket_hint": 5,
+      "priority": "low",
+      "last_message_at": "2026-06-26T02:14:20Z",
+      "participants": [
+        "pedersonj@claycorp.com",
+        "hankinsr@claycorp.com",
+        "abbottr@claycorp.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "pedersonj@claycorp.com",
+      "summary": "No new messages. Pederson requested slide updates for the Quarterly (~July 17). Ryan needs to confirm attendance and update project slides. Action item carries from June 26.",
+      "key_facts": [
+        "Quarterly date: approx. July 17, 2026",
+        "Due date for action (review + update slides): ~June 30"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm quarterly attendance and update active project slides — respond to Pederson",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.85
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-pf-contract-internal-0625",
-      "threadSubject": "Pacific Fusion/Clayco - Preliminary Contract Comments (internal)",
-      "from_address": "swanc@claycorp.com",
-      "from_name": "Catherine Swan",
-      "subject": "Re: [EXTERNAL] Fwd: Pacific Fusion/Clayco - Preliminary Contract Comments",
-      "body_preview": "Pacific Fusion/Clayco - Preliminary Contract Comments - Heres the contract; let me know what comments we have - and if we can meet Friday - or if that is too early.",
-      "received_at": "2026-06-24T18:19:11Z",
-      "latestSender": "swanc@claycorp.com",
-      "latestSenderName": "Catherine Swan",
-      "latestMessageTime": "2026-06-24T18:19:11Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["swanc@claycorp.com","hankinsr@claycorp.com","TigheC@claycorp.com"],
-      "myLastReplyTime": "2026-06-24T17:35:32Z",
-      "waitingSince": "2026-06-24T18:19:11Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": true,
-      "has_contract_language": true,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": null,
-      "sent_body": "Heres the contract; let me know what comments we have - and if we can meet Friday - or if that is too early.",
-      "extraction_depth": "extended"
+      "conversation_id": "crm-spil-bella-2026-06-26",
+      "subject": "CRM Assignment: SPIL Bella Advanced Packaging",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T15:02:05Z",
+      "participants": [
+        "svc_ClaycoSystem@claycorp.onmicrosoft.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "svc_ClaycoSystem@claycorp.onmicrosoft.com",
+      "summary": "CRM assignment: Ryan = Responsible Party for SPIL 'Bella' Advanced Packaging pursuit. Action item due June 28 is now past-due. No visible follow-through in this window.",
+      "key_facts": [
+        "New pursuit: SPIL 'Bella' Advanced Packaging — Ryan = Responsible Party",
+        "Action item due June 28 — past due"
+      ],
+      "action_items": [
+        {
+          "text": "Review SPIL 'Bella' Advanced Packaging in Dynamics — overdue from June 28",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.80
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-solis-service-equip-yard-0625",
-      "threadSubject": "Project Solis - Service Equip Yard Pricing",
-      "from_address": "Dominic.Wood@stantec.com",
-      "from_name": "Dominic Wood",
-      "subject": "FW: Project Solis - Service Equip Yard Pricing",
-      "body_preview": "Clayco team, In addition to the new systems, please also consider: New retaining wall - 200' @ average 3' H; ~500 additional cubic yards earthwork; [Attached: updated drawings]",
-      "received_at": "2026-06-24T21:28:50Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-24T21:28:50Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["Dominic.Wood@stantec.com","hankinsr@claycorp.com","SpielerD@claycorp.com","StorckE@claycorp.com"],
-      "myLastReplyTime": "2026-06-24T21:28:50Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": false,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "standard"
+      "conversation_id": "crm-seg-solar-2026-06-26",
+      "subject": "CRM Assignment: SEG Solar Cell and Module",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-26T15:02:05Z",
+      "participants": [
+        "svc_ClaycoSystem@claycorp.onmicrosoft.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "svc_ClaycoSystem@claycorp.onmicrosoft.com",
+      "summary": "CRM assignment: Ryan = Responsible Party for SEG Solar Cell and Module pursuit. Action item due June 28 — past due. No visible follow-through in this window.",
+      "key_facts": [
+        "New pursuit: SEG Solar Cell and Module — Ryan = Responsible Party",
+        "Action item due June 28 — past due"
+      ],
+      "action_items": [
+        {
+          "text": "Review SEG Solar Cell and Module in Dynamics — overdue from June 28",
+          "owner": "ryan",
+          "due_date": "2026-06-30",
+          "confidence": 0.80
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-friday-ops-mtg-cancel-0625",
-      "threadSubject": "Friday Operations Mtg (Weekly) - Q3 2026 - CANCELED",
-      "from_address": "JezikT@claycorp.com",
-      "from_name": "Tammy Jezik",
-      "subject": "Canceled: Friday Operations Mtg (Weekly) - Q3 2026",
-      "body_preview": "Hi all, I've been informed that there is an issue with this meeting invitation. As a result, I am going to cancel it, allow the system to reset overnight, and send out a new invitation. Apologies for all the notifications.",
-      "received_at": "2026-06-24T21:37:56Z",
-      "latestSender": "JezikT@claycorp.com",
-      "latestSenderName": "Tammy Jezik",
-      "latestMessageTime": "2026-06-24T21:37:56Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["JezikT@claycorp.com","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-24T21:37:56Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "standard"
+      "conversation_id": "sofidel-status-2026-06",
+      "subject": "Sofidel bid submission — waiting on owner response",
+      "bucket_hint": 3,
+      "priority": "medium",
+      "last_message_at": "2026-06-25T00:00:00Z",
+      "participants": [
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "hankinsr@claycorp.com",
+      "summary": "No new messages from Sofidel/Vance in this window. Ryan's June 25 follow-up position was: 'submitted, haven't heard back — give it another week.' Now 4 days since Ryan's note. If no response by end of week, follow up.",
+      "key_facts": [
+        "No Sofidel messages in June 26–29 window",
+        "Ryan's last note: 'give it another week' (June 25)",
+        "Days since last message: 4"
+      ],
+      "action_items": [
+        {
+          "text": "Follow up with Vance (Sofidel) if no response by July 2 — 1 week since Ryan's last sent",
+          "owner": "ryan",
+          "due_date": "2026-07-02",
+          "confidence": 0.82
+        }
+      ],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-kate-catchup-0625",
-      "threadSubject": "Kate | Ryan - Catch-Up",
-      "from_address": "Kate.Kaminski@howardhughes.com",
-      "from_name": "Kate Kaminski",
-      "subject": "Kate | Ryan - Catch-Up",
-      "body_preview": "Kate — I'm sitting in the lounge at a low table. No rush!",
-      "received_at": "2026-06-24T23:31:51Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-24T23:31:51Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["Kate.Kaminski@howardhughes.com","hankinsr@claycorp.com"],
-      "myLastReplyTime": "2026-06-24T23:31:51Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": "Kate — I'm sitting in the lounge at a low table. No rush!",
-      "extraction_depth": "standard"
+      "conversation_id": "gotion-solar-bess-weekly-2026-06",
+      "subject": "Gotion Solar/BESS Weekly Meeting",
+      "bucket_hint": 4,
+      "priority": "low",
+      "last_message_at": "2026-06-26T13:36:44Z",
+      "participants": [
+        "appelbauml@theljc.com",
+        "taozhihan@gotion.com.cn",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 0,
+      "latest_sender": "appelbauml@theljc.com",
+      "summary": "No new weekly meeting thread messages. BESS: Clayco out, Epstein Global in. Solar coordination meeting continues — weekly with Gotion Solar at 1PM today per Otter upcoming meetings.",
+      "key_facts": [
+        "BESS confirmed: Clayco out, Epstein Global GC",
+        "Solar weekly coordination meeting: today 1PM MST (Ulteig organizer, 24.04110)"
+      ],
+      "action_items": [],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-safety-training-0625",
-      "threadSubject": "202606 Monthly Safety Training Overdue",
-      "from_address": "AXIS@claycorp.com",
-      "from_name": "Clayco AXIS",
-      "subject": "202606 Monthly Safety Training is overdue by 2 Days",
-      "body_preview": "Ryan Hankins, Completion of 202606 Monthly Safety Training is overdue. Please complete this assignment soon. https://clayco.sabacloud.com/Saba/W...",
-      "received_at": "2026-06-25T10:01:06Z",
-      "latestSender": "AXIS@claycorp.com",
-      "latestSenderName": "Clayco AXIS",
-      "latestMessageTime": "2026-06-25T10:01:06Z",
-      "threadMessageCount": 1,
-      "threadParticipants": ["AXIS@claycorp.com","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-25T10:01:06Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "standard"
+      "conversation_id": "operations-meeting-minutes-2026-06-26",
+      "subject": "Operations Meeting Minutes 6.26.2026",
+      "bucket_hint": 4,
+      "priority": "low",
+      "last_message_at": "2026-06-26T19:00:00Z",
+      "participants": [
+        "ShehataE@claycorp.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 1,
+      "latest_sender": "ShehataE@claycorp.com",
+      "summary": "Shehata distributed Friday Operations Meeting minutes for June 26, 2026. Wide distribution. Has attachment.",
+      "key_facts": [
+        "Ops meeting minutes from June 26 distributed",
+        "has_attachment: true",
+        "Review if needed for any action items from ops meeting"
+      ],
+      "action_items": [],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-dataserv-approval-0625",
-      "threadSubject": "Documents Pending Approval",
-      "from_address": "support@dataserv.us",
-      "from_name": "DataServ",
-      "subject": "[EXTERNAL] Documents Pending Approval",
-      "body_preview": "You have 1 document(s) to approve. To review the document(s), please click the link below to sign into DataServ. Approve My Documents.",
-      "received_at": "2026-06-25T09:36:24Z",
-      "latestSender": "support@dataserv.us",
-      "latestSenderName": "DataServ",
-      "latestMessageTime": "2026-06-25T09:36:24Z",
-      "threadMessageCount": 4,
-      "threadParticipants": ["support@dataserv.us","HankinsR@claycorp.com"],
-      "myLastReplyTime": null,
-      "waitingSince": "2026-06-25T09:36:24Z",
-      "ryanSentLast": false,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 2,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "standard"
+      "conversation_id": "wimbledon-pickem-2026",
+      "subject": "2026 Wimbledon Pickem Contest",
+      "bucket_hint": 4,
+      "priority": "low",
+      "last_message_at": "2026-06-28T14:20:00Z",
+      "participants": [
+        "todd.s.lamb@gmail.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 2,
+      "latest_sender": "todd.s.lamb@gmail.com",
+      "summary": "Todd Lamb running a Wimbledon bracket pool. Draw is out. Picks were due Sunday June 28 at 10pm AZ time. $50 entry. DEADLINE HAS PASSED — Ryan would have needed to submit June 28 by 10pm.",
+      "key_facts": [
+        "Pool organizer: Todd Lamb (todd.s.lamb@gmail.com)",
+        "Picks deadline: June 28 at 10pm AZ time — PAST DUE",
+        "$50 entry",
+        "Personal / non-work item"
+      ],
+      "action_items": [],
+      "risk_signals": []
     },
     {
-      "conversationId": "thread-mds-pf-sync-0625",
-      "threadSubject": "MDS | PF Sync",
-      "from_address": "hankinsr@claycorp.com",
-      "from_name": "Ryan Hankins",
-      "subject": "RE: [EXTERNAL] MDS | PF Sync",
-      "body_preview": "or 6/26 DRC Submittal by - 6/25 To include shift from Early Civil Site OS3. Early bid process can utilize existing docs: Early Civil Site Package. Existing DRC package - is out of date.",
-      "received_at": "2026-06-23T18:30:42Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-23T18:30:42Z",
-      "threadMessageCount": 3,
-      "threadParticipants": ["hankinsr@claycorp.com","courtney@pacificfusion.com","nick.rivera@pacificfusion.com"],
-      "myLastReplyTime": "2026-06-23T18:30:42Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": true,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": null,
-      "sent_body": "DRC Submittal by 6/25 or 6/26. To include shift from Early Civil Site OS3. Early bid process can utilize existing docs.",
-      "extraction_depth": "standard"
-    },
-    {
-      "conversationId": "thread-ground-breaking-0625",
-      "threadSubject": "Ground Breaking",
-      "from_address": "TinneyC@claycorp.com",
-      "from_name": "Chris Tinney",
-      "subject": "RE: Ground Breaking",
-      "body_preview": "Here are initial thoughts of things we need to be thinking about. [Ryan's thoughts on groundbreaking planning]",
-      "received_at": "2026-06-23T17:21:45Z",
-      "latestSender": "hankinsr@claycorp.com",
-      "latestSenderName": "Ryan Hankins",
-      "latestMessageTime": "2026-06-23T17:21:45Z",
-      "threadMessageCount": 2,
-      "threadParticipants": ["TinneyC@claycorp.com","hankinsr@claycorp.com","nick.rivera@pacificfusion.com","courtney@pacificfusion.com"],
-      "myLastReplyTime": "2026-06-23T17:21:45Z",
-      "waitingSince": null,
-      "ryanSentLast": true,
-      "is_internal": false,
-      "has_attachment": false,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 4,
-      "full_thread_content": null,
-      "sent_body": "Here are initial thoughts of things we need to be thinking about.",
-      "extraction_depth": "standard"
-    },
-    {
-      "conversationId": "thread-project-sun-sofidel-0625",
-      "threadSubject": "Clayco's GC & Fee Proposal for Project Sun",
-      "from_address": "BruckalS@claycorp.com",
-      "from_name": "Steve Bruckal",
-      "subject": "FW: Clayco's GC & Fee Proposal for Project Sun",
-      "body_preview": "Dario, Peter, and Antonio, We thoroughly enjoyed the opportunity to meet with the Sofidel and BHM teams and were encouraged by the strong alignment we observed in our shared values.",
-      "received_at": "2026-06-16T14:10:04Z",
-      "latestSender": "BruckalS@claycorp.com",
-      "latestSenderName": "Steve Bruckal",
-      "latestMessageTime": "2026-06-16T14:10:04Z",
-      "threadMessageCount": 4,
-      "threadParticipants": ["BruckalS@claycorp.com","hankinsr@claycorp.com","watkinss@Claycorp.com"],
-      "myLastReplyTime": "2026-06-15T13:08:16Z",
-      "waitingSince": "2026-06-16T14:10:04Z",
-      "ryanSentLast": false,
-      "is_internal": true,
-      "has_attachment": true,
-      "has_contract_language": false,
-      "is_time_sensitive": false,
-      "is_flagged": false,
-      "thread_participant_count": 3,
-      "full_thread_content": null,
-      "sent_body": null,
-      "extraction_depth": "standard"
+      "conversation_id": "trimble-security-2026",
+      "subject": "Security Alerts: Trimble ID Changes (hankinsr@claycorp.com)",
+      "bucket_hint": 4,
+      "priority": "low",
+      "last_message_at": "2026-06-27T15:30:00Z",
+      "participants": [
+        "no-reply@account.trimble.com",
+        "hankinsr@claycorp.com"
+      ],
+      "message_count": 3,
+      "latest_sender": "no-reply@account.trimble.com",
+      "summary": "Three Trimble security alert emails received June 27: identity verification code sent, new recovery codes generated, and a passkey added to Ryan's Trimble ID (hankinsr@claycorp.com). Appears someone (likely Ryan himself) accessed Trimble to set up passkey authentication. If not Ryan, requires investigation.",
+      "key_facts": [
+        "Passkey added to Trimble ID for hankinsr@claycorp.com — June 27",
+        "New recovery codes generated June 27",
+        "3 sequential security emails = active account change session"
+      ],
+      "action_items": [
+        {
+          "text": "Confirm you initiated Trimble passkey setup on June 27 — if not, secure account immediately",
+          "owner": "ryan",
+          "due_date": "2026-06-29",
+          "confidence": 0.85
+        }
+      ],
+      "risk_signals": [
+        "If passkey addition was not user-initiated, account compromise — investigate immediately"
+      ]
     }
   ],
-  "warnings": [
-    "Sent items 2B-1 (after PULL_SINCE) returned no results — zero new sent items since 04:20 AM. Normal if no emails sent during overnight.",
-    "Step 2.5B full Tier 1 body extraction limited to threads where preview was already sufficient. Additional read_resource fetches skipped to preserve API budget for automated run.",
-    "Pending invites section empty — all calendar events show as 'tentative' (already responded). No 'none' status invites identified.",
-    "Keyword queries (2A-2, 2A-3, 2A-4) and sent (2B-2) each returned 25/25 max with moreResults=true. First-page results captured; older long-tail items may be missed but highest-priority threads captured via time-slice queries.",
-    "thread-pf-contract-internal-0625 and thread-pf-contract-comments-0625 are related threads (internal Ryan-to-legal FW vs external PF thread)."
-  ],
-  "slice_summary": "Slice 0 (04:20-07:44): 1 | Slice 1 (07:44-now): 2 | KW Urgent/Approval: 25+ | KW Contract: 25+ | KW Drawings/Spec: 25+ | Sent 2B-1: 0 | Sent 2B-2: 25+ | Total unique threads: 26"
+  "calendar": {
+    "date": "2026-06-29",
+    "events": [
+      {
+        "title": "SEI Bi-Weekly Touch Point with Industrial Group",
+        "start_utc": "2026-06-29T14:30:00Z",
+        "end_utc": "2026-06-29T15:00:00Z",
+        "local_time": "7:30 AM - 8:00 AM MST",
+        "status": "tentative",
+        "platform": "Teams",
+        "organizer": "juradoJ@claycorp.com",
+        "prep_needed": false
+      },
+      {
+        "title": "Pacific Fusion Internal Contract Review #2",
+        "start_utc": "2026-06-29T15:00:00Z",
+        "end_utc": "2026-06-29T16:00:00Z",
+        "local_time": "8:00 AM - 9:00 AM MST",
+        "status": "tentative",
+        "platform": "Teams",
+        "organizer": "swanc@claycorp.com",
+        "attendees": ["swanc@claycorp.com", "hankinsr@claycorp.com", "tighec@claycorp.com"],
+        "prep_needed": true,
+        "prep_context": "Review Swan's A133 working file redlines (from cswanatty@gmail.com) and Tighe's Draft Share folder before this meeting. Key agenda: OCIP binding (Schulz/Great American/Exhibit B), CSI Solis approach (Ryan forwarded to Tighe June 26), BIM/CAD EDTA status, and open A133 commercial terms before 7/14 execution deadline."
+      },
+      {
+        "title": "Industrial Sales Meeting",
+        "start_utc": "2026-06-29T16:00:00Z",
+        "end_utc": "2026-06-29T17:00:00Z",
+        "local_time": "9:00 AM - 10:00 AM MST",
+        "status": "tentative",
+        "platform": "Webex",
+        "organizer": "watkinss@claycorp.com",
+        "prep_needed": false
+      },
+      {
+        "title": "PF | Clayco - Contract Review and Discussion",
+        "start_utc": "2026-06-29T19:00:00Z",
+        "end_utc": "2026-06-29T21:00:00Z",
+        "local_time": "12:00 PM - 2:00 PM MST",
+        "status": "tentative",
+        "platform": "Google Meet",
+        "organizer": "nick.rivera@pacificfusion.com",
+        "attendees": [
+          "nick.rivera@pacificfusion.com",
+          "swanc@claycorp.com",
+          "tighec@claycorp.com",
+          "tinneyc@claycorp.com",
+          "hankinsr@claycorp.com",
+          "eric.hieber@gtlaw.com",
+          "jensend@gtlaw.com"
+        ],
+        "prep_needed": true,
+        "prep_context": "CRITICAL: Formal contract review with PF legal (Rivera + GT lawyers Hieber/Jensen). Must come in prepared on: (1) all open A133/A102 commercial and legal issues, (2) OCIP binding alignment (Schulz/Great American), (3) billing dispute with Estopinal — do NOT let this surface for the first time here, (4) BIM/CAD EDTA agreement status. Ryan should align with Swan + Tighe in the 8AM internal review first."
+      },
+      {
+        "title": "Weekly Safety Incident Call",
+        "start_utc": "2026-06-29T19:00:00Z",
+        "end_utc": "2026-06-29T19:30:00Z",
+        "local_time": "12:00 PM - 12:30 PM MST",
+        "status": "confirmed",
+        "platform": "Webex",
+        "prep_needed": false,
+        "note": "Conflicts with PF Contract Review — mandatory call, may need to step away briefly"
+      },
+      {
+        "title": "Solis Project Schedule Development",
+        "start_utc": "2026-06-29T19:30:00Z",
+        "end_utc": "2026-06-29T21:00:00Z",
+        "local_time": "12:30 PM - 2:00 PM MST",
+        "status": "tentative",
+        "platform": "Teams",
+        "organizer": "WhitmerR@claycorp.com",
+        "attendees": ["tinneyc@claycorp.com", "hankinsr@claycorp.com", "WhitmerR@claycorp.com"],
+        "prep_needed": true,
+        "prep_context": "Billing dispute with Estopinal may surface here (Tinney is also on this call and appeared to side with Estopinal). Come in with a clear position on the billing structure. Also: WGI foundation confirmation (no rebar), foundation plan critical path (Aug 6 needed for WGI 8/20 GI design)."
+      },
+      {
+        "title": "24.04110 ClayCo/Ulteig Gotion Solar Weekly",
+        "start_utc": "2026-06-29T20:00:00Z",
+        "end_utc": "2026-06-29T21:00:00Z",
+        "local_time": "1:00 PM - 2:00 PM MST",
+        "status": "tentative",
+        "platform": "Teams",
+        "organizer": "justin.smaaladen@ulteig.com",
+        "prep_needed": false,
+        "note": "60% design comment responses from LJC and Ulteig were just submitted — review before meeting"
+      }
+    ],
+    "cancelled_today": [
+      "303 Punch Review",
+      "Valley Partnership Legislative Meeting (x2)",
+      "NTT Weekly Team Huddle"
+    ]
+  },
+  "sent_summary": {
+    "commitments_made": [
+      {
+        "to": "Conor Tighe",
+        "commitment": "Forwarded CSI Solis Approach for review",
+        "sent_at": "2026-06-26",
+        "status": "sent — awaiting Tighe's input"
+      },
+      {
+        "to": "Swan, Tighe",
+        "commitment": "Forwarded PF BIM/CAD files request with EDTA agreement attached",
+        "sent_at": "2026-06-26",
+        "status": "sent — EDTA execution status unknown"
+      },
+      {
+        "to": "Estopinal, Tinney, Rivera",
+        "commitment": "Raised extended precon billing question beyond July — needs resolution discussion",
+        "sent_at": "2026-06-26",
+        "status": "open — Estopinal disputed, billing structure contested"
+      },
+      {
+        "to": "Scott Watkins + Bravo team",
+        "commitment": "Will work on Bravo deck NDA review and PF profile today (June 26)",
+        "sent_at": "2026-06-25",
+        "status": "unknown — no visible follow-through in this window"
+      },
+      {
+        "to": "Vance (Sofidel)",
+        "commitment": "Submitted; haven't heard back — give it another week",
+        "sent_at": "2026-06-25",
+        "status": "open — 4 days, no response"
+      },
+      {
+        "to": "Bill Huie (Stantec)",
+        "commitment": "Foundation selection: not yet, likely middle of July",
+        "sent_at": "2026-06-25",
+        "status": "open — WGI confirmed no rebar (June 26); selection timing still July"
+      }
+    ],
+    "awaiting_response": [
+      {
+        "to": "James Estopinal (Pacific Fusion)",
+        "subject": "Solis Clayco Billing — invoice structure dispute",
+        "sent_at": "2026-06-26",
+        "days_waiting": 3,
+        "type": "external",
+        "note": "Estopinal replied disputing Ryan's billing interpretation; dispute is unresolved — Ryan needs to review signed agreement and respond"
+      },
+      {
+        "to": "Vance (Sofidel)",
+        "subject": "Sofidel bid follow-up",
+        "sent_at": "2026-06-25",
+        "days_waiting": 4,
+        "type": "external"
+      },
+      {
+        "to": "Neil Schulz",
+        "subject": "PF OCIP / Great American quote + Exhibit B questions",
+        "sent_at": "2026-06-28",
+        "days_waiting": 1,
+        "type": "internal",
+        "note": "Schulz asked questions and needs Ryan's input before binding (target: this week)"
+      }
+    ]
+  },
+  "noise_filtered": [
+    "End User Digest x5 (Proofpoint)",
+    "Google Terms of Service update",
+    "BizJournals newsletters x2 (TSMC bidding wars, Intel Fab 52)",
+    "AZBEX/Phoenix BizJournals residential broker newsletter",
+    "AZ Diamondbacks StubHub spam",
+    "Camelback Village July newsletter",
+    "Morning Brew home renovation edition",
+    "NAIOP Source events newsletter",
+    "Valley Partnership Legislative Tracking (bill tracking list — FYI only)",
+    "LNS electric haulers industry newsletter",
+    "Bob Clark Rivian R2 WSJ article (S-Team share — FYI)",
+    "HFTH Independence Day safety announcements x2",
+    "James Beard restaurant newsletter",
+    "Gotion Solar BESS Security BOM from 4 Media Group (Appelbaum — informational)",
+    "Otter.ai upcoming meetings digest",
+    "DS3 Structural Sync calendar sync noise (multiple)",
+    "Lunch menus (WhiteME x2)"
+  ]
 }

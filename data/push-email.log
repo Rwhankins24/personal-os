@@ -242,3 +242,55 @@
   Archive: /Users/ryanhankins/personal-os/data/archive/2026-06-26-email-report.json
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+[2026-06-26] Already pushed today — skipping.
+[2026-06-26] Already pushed today — skipping.
+[2026-06-26] Already pushed today — skipping.
+[2026-06-26] Already pushed today — skipping.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-27
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-27-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-27). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-27
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-27-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-27). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-28
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-28-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-28). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-28
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-28-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-28). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-29
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-29-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-29). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-29
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Archived → /Users/ryanhankins/personal-os/data/archive/2026-06-29-email-report.json
+✗ Report date is 2026-06-26, not today (2026-06-29). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
