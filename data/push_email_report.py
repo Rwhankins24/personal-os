@@ -81,6 +81,9 @@ def thread_to_payload(t, today):
         "is_flagged":             t.get("is_flagged", False),
         "thread_participant_count": t.get("thread_participant_count", 1),
         "last_report_date":       today,
+        # Phase 1B: conversation_id enables fast-path index in nightly AI job.
+        # Pull from classify output first, fall back to raw Outlook conversationId.
+        "conversation_id":        t.get("conversation_id") or t.get("conversationId") or None,
     }
 
 STATE_FILE = os.path.expanduser("~/personal-os/data/push-state.json")
