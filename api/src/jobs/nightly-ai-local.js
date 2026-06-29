@@ -27,6 +27,148 @@ const { createClient } = require('@supabase/supabase-js')
 const Anthropic = require('@anthropic-ai/sdk')
 const aiService = require('../services/ai')
 
+// ─────────────────────────────────────────────────────────────────────────────
+// mapPlaudBlocksToIntel — bridges new Plaud block schema → existing intel schema
+//
+// The nightly job's DB routing logic expects intel fields like ryan_action_items,
+// verbal_commitments_ryan, decisions_made, etc. This function translates the
+// pre-parsed PEOPLE_AND_ACTIONS and DECISIONS_AND_RISKS blocks into that schema,
+// so all downstream routing code runs unchanged.
+// ─────────────────────────────────────────────────────────────────────────────
+function mapPlaudBlocksToIntel(peopleAndActions, decisionsAndRisks) {
+  const actions      = (peopleAndActions?.actions           || [])
+  const commitments  = (peopleAndActions?.commitments       || [])
+  const relSignals   = (peopleAndActions?.relationship_signals || [])
+  const decisions    = (decisionsAndRisks?.decisions        || [])
+  const pending      = (decisionsAndRisks?.pending          || [])
+  const risks        = (decisionsAndRisks?.risks            || [])
+  const facts        = (decisionsAndRisks?.facts            || [])
+  const costFlags    = (decisionsAndRisks?.cost_flags       || [])
+  const scheduleFlags= (decisionsAndRisks?.schedule_flags   || [])
+  const leadSignals  = (decisionsAndRisks?.lead_signals     || [])
+
+  const ryanNames = ['ryan', 'ryan hankins']
+  const isRyan = (name) => ryanNames.includes((name || '').toLowerCase().trim())
+
+  return {
+    ryan_action_items: actions
+      .filter(a => a.ryan_owns === true)
+      .map(a => ({
+        title:                  a.task,
+        urgency:                a.urgency || 'medium',
+        due_date:               a.due    || null,
+        attribution_confidence: 'high',
+        attribution_basis:      'Plaud PEOPLE_AND_ACTIONS block'
+      })),
+
+    others_action_items: actions
+      .filter(a => !a.ryan_owns)
+      .map(a => ({
+        task_text:              a.task,
+        assigned_to_name:       a.owner || null,
+        assigned_to_email:      null,
+        urgency:                a.urgency || 'medium',
+        due_date:               a.due    || null,
+        attribution_confidence: 'high',
+        attribution_basis:      'Plaud PEOPLE_AND_ACTIONS block'
+      })),
+
+    verbal_commitments_ryan: commitments
+      .filter(c => isRyan(c.made_by))
+      .map(c => ({
+        title:           c.deliverable || c.commitment,
+        made_to:         c.made_to    || null,
+        urgency:         'medium',
+        due_date:        c.due        || null,
+        commitment_type: 'hard',
+        attribution_confidence: 'high'
+      })),
+
+    verbal_commitments_others: commitments
+      .filter(c => !isRyan(c.made_by))
+      .map(c => ({
+        title:               c.deliverable || c.commitment,
+        committed_by_name:   c.made_by     || 'Unknown',
+        committed_by_email:  null,
+        urgency:             'medium',
+        due_date:            c.due         || null,
+        attribution_confidence: 'high'
+      })),
+
+    decisions_made: decisions.map(d => ({
+      decision:   d.decision,
+      all_parties: d.parties_agreed || [],
+      implications: d.implication   || null,
+      attribution_confidence: 'high'
+    })),
+
+    pending_decisions: pending.map(p => ({
+      decision: p.question  || p.pending,
+      blocking: !!(p.blocker),
+      due_date: p.trigger_date || null,
+      urgency:  'high',
+      context:  [p.impact_if_unresolved, p.blocker].filter(Boolean).join(' | ') || null,
+      decision_maker: p.decision_maker || null
+    })),
+
+    risk_signals: risks.map(r => ({
+      signal:   r.risk,
+      severity: r.severity === 'critical' ? 'high' : (r.severity || 'medium'),
+      type:     'scope',
+      evidence: r.why_it_exists || null,
+      involves_key_contact:   false,
+      involves_active_project: true
+    })),
+
+    technical_facts: facts.map(f => ({
+      fact:                   f.fact,
+      stated_by:              f.source_person || null,
+      attribution_confidence: f.confidence === 'confirmed' ? 'high' : 'medium',
+      attribution_basis:      'Plaud DECISIONS_AND_RISKS block'
+    })),
+
+    financial_signals: costFlags.map(c => ({
+      amount:  c.amount    || null,
+      context: c.flag      || c.cost_flag,
+      stated_by: 'Meeting',
+      attribution_confidence: 'medium'
+    })),
+
+    schedule_signals: scheduleFlags.map(s => ({
+      date_or_deadline: s.date || null,
+      context:          (s.flag || s.schedule_flag) + (s.impact ? ` — ${s.impact}` : ''),
+      stated_by:        'Meeting',
+      hard_deadline:    true,
+      attribution_confidence: 'medium'
+    })),
+
+    key_facts: facts.map(f => ({
+      fact:     f.fact,
+      category: 'technical',
+      stated_by: f.source_person || null
+    })),
+
+    scope_signals: [],        // not produced by Plaud blocks — keep empty for compat
+    lead_signals:  leadSignals,
+    relationship_signals: relSignals,
+
+    meeting_outcome: {
+      summary:          '',   // populated from meeting.summary by caller
+      resolved_items:   decisions.map(d => d.decision),
+      unresolved_items: pending.map(p => p.question || p.pending),
+      next_steps:       actions.filter(a => a.ryan_owns).map(a => a.task),
+      overall_sentiment: 'productive'
+    },
+
+    speaker_attributions: (peopleAndActions?.participants || []).map(p => ({
+      speaker_label: p.name,
+      likely_person: p.name,
+      confidence:    'high',
+      basis:         'Plaud PEOPLE_AND_ACTIONS block'
+    }))
+  }
+}
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
@@ -854,8 +996,38 @@ Respond with just the sentence, no quotes, no JSON.`
           }))
         ]
 
-        // Use real start_time from calendar if matched, otherwise default to noon
-        const startTime = calendarMatch?.start_time || `${meeting.date}T12:00:00Z`
+        // Start time resolution priority:
+        // 1. Plaud MEETING_METADATA block recording_start_time (most accurate)
+        // 2. Calendar match (if content-verified)
+        // 3. Estimated from email_received_datetime − duration − 8 min buffer
+        // 4. Default noon Phoenix (19:00 UTC)
+        let startTime
+        if (meeting.recording_start_time && meeting.recording_date) {
+          // Plaud provides HH:MM local time. Convert to UTC ISO using Phoenix offset.
+          // Phoenix is MST (UTC-7) year-round (no DST)
+          const [rHH, rMM] = (meeting.recording_start_time + ':00').split(':').map(Number)
+          const rDate = meeting.recording_date
+          const phoenixHour = rHH + 7  // add 7 to convert MST→UTC
+          const utcHour = phoenixHour % 24
+          const dayCarry = phoenixHour >= 24 ? 1 : 0
+          // Rebuild date with carry (simple — handles month boundaries imperfectly but
+          // the calendar match step will correct any ±1 day edge cases)
+          startTime = `${rDate}T${String(utcHour).padStart(2,'0')}:${String(rMM).padStart(2,'0')}:00Z`
+          if (dayCarry) {
+            const d = new Date(startTime)
+            d.setUTCDate(d.getUTCDate() + dayCarry)
+            startTime = d.toISOString().replace('.000Z', 'Z').slice(0, 20) + 'Z'
+          }
+        } else if (calendarMatch?.start_time) {
+          startTime = calendarMatch.start_time
+        } else if (meeting.email_received_datetime && meeting.duration_minutes) {
+          // Estimate: email was sent ~8 min after recording ended
+          const receivedMs = new Date(meeting.email_received_datetime).getTime()
+          const startMs = receivedMs - (meeting.duration_minutes + 8) * 60 * 1000
+          startTime = new Date(startMs).toISOString().slice(0, 20) + 'Z'
+        } else {
+          startTime = `${meeting.date}T19:00:00Z`  // noon Phoenix = 19:00 UTC
+        }
 
         const { data: insertedMeeting } = await supabase.from('meeting_notes').insert({
           otter_id:               `plaud_${meeting.gmail_message_id}`,
@@ -3216,15 +3388,20 @@ Be specific and cite concrete details. Avoid generic statements.`
         const hasRichSummary = (meeting.short_summary || meeting.summary || '').trim().length > 500
         const isPlaud = meeting.source === 'plaud'
 
-        // Plaud meetings: parse pre-structured email summary (Haiku — fast, cheap)
-        // Otter / no-summary: extract from transcript (Sonnet — full depth)
-        // Backfill always uses extractIntelligenceFromTranscript — no summary available
+        // Plaud meetings: read pre-parsed structured blocks from pull step (zero AI cost for factual extraction)
+        //   PEOPLE_AND_ACTIONS + DECISIONS_AND_RISKS parsed by Plaud's own AI → mapped to intel schema
+        //   Three Haiku calls run separately for knowledge / learnings / project context
+        //   NO fallback to extractIntelligenceFromTranscript — that caused the 90-min hang
+        //
+        // Otter / no-block meetings: extract from raw transcript (extractIntelligenceFromTranscript)
+        // Backfill always uses extractIntelligenceFromTranscript — no structured blocks available
         const hasTranscript = !!(meeting.full_transcript || meeting.raw_transcript)
-        const shouldUsePlaudParser = isPlaud && hasRichSummary
+        const hasPlaudBlocks = isPlaud && !!(meeting.people_and_actions || meeting.decisions_and_risks)
+        const shouldUsePlaudParser = isPlaud && hasRichSummary  // legacy: true for old-format meetings
 
         let intel = null  // declared here so speaker attributions + meetingFinalUpdate can access it
 
-        if ((hasTranscript || shouldUsePlaudParser) && !isAllHands) {
+        if ((hasTranscript || hasPlaudBlocks || shouldUsePlaudParser) && !isAllHands) {
           const attendeeRoster = meeting.participants || []
 
           const keywords = ((meeting.title || '') + ' ' + (meeting.short_summary || ''))
@@ -3239,17 +3416,24 @@ Be specific and cite concrete details. Avoid generic statements.`
             .or(keywords.length ? keywords.map(k => `thread_subject.ilike.%${k}%`).join(',') : 'id.is.null')
             .limit(5)
 
-          if (shouldUsePlaudParser) {
-            // Parse the structured Plaud email body directly — Haiku, ~$0.005/meeting
-            console.log(`    Using Plaud summary parser (Haiku) for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
+          if (hasPlaudBlocks) {
+            // ── New path: structured blocks parsed by Plaud AI in pull step ──
+            // Direct mapping → intel schema. Zero Haiku cost here. Fast. No timeout risk.
+            console.log(`    Using Plaud structured blocks for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
+            intel = mapPlaudBlocksToIntel(meeting.people_and_actions, meeting.decisions_and_risks)
+            if (intel?.meeting_outcome) intel.meeting_outcome.summary = meeting.summary || meeting.short_summary || ''
+            console.log(`    Block mapping: ${intel?.ryan_action_items?.length || 0} Ryan tasks, ${intel?.decisions_made?.length || 0} decisions, ${intel?.risk_signals?.length || 0} risks`)
+          } else if (shouldUsePlaudParser) {
+            // ── Legacy path: old Plaud format (pre-block prompt) — use parsePlaudSummary ──
+            // This branch will naturally phase out as older meetings age off
+            console.log(`    Using legacy Plaud summary parser (Haiku) for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
             intel = await aiService.parsePlaudSummary(meeting, categoryHint)
-            if (!intel && hasTranscript) {
-              // Fall back to transcript extraction if parse fails
-              console.log(`    Plaud parse failed, falling back to transcript extraction`)
-              intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [], categoryHint)
+            // NO fallback to extractIntelligenceFromTranscript — if this fails, log and skip
+            if (!intel) {
+              console.log(`    Legacy Plaud parse returned null for: ${meeting.title} — skipping intelligence extraction`)
             }
           } else {
-            // Otter or Plaud without rich summary — extract from raw transcript
+            // ── Otter or non-Plaud meeting — extract from raw transcript ──
             if (primaryCat) console.log(`    Category context: [${primaryCat.name}]`)
             intel = await aiService.extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmails || [], categoryHint)
           }
@@ -3473,6 +3657,110 @@ Be specific and cite concrete details. Avoid generic statements.`
           }
         } else if (isAllHands) {
           console.log(`  Skipping full extraction for all-hands: ${meeting.title}`)
+        }
+
+        // ── Haiku reasoning layer: Knowledge, Learnings, Project Context ──
+        // Runs for all Plaud meetings that have a transcript (full or email body).
+        // Three concurrent Haiku calls — max_tokens: 8192 each — full transcript input.
+        // Outputs route to: knowledge_base, observations, and projects tables.
+        // Independent from block parsing above. If this fails, factual extraction still committed.
+        if (isPlaud && !isAllHands && (hasTranscript || meeting.email_body_raw)) {
+          try {
+            const projectId = meetingProjectId
+
+            // Load existing knowledge and observations for context injection
+            const [{ data: existingKnowledge }, { data: priorObservations }] = await Promise.all([
+              projectId
+                ? supabase.from('knowledge_base').select('content, title').eq('project_id', projectId).order('created_at', { ascending: false }).limit(10)
+                : { data: [] },
+              projectId
+                ? supabase.from('observations').select('content, title').eq('project_id', projectId).order('created_at', { ascending: false }).limit(10)
+                : { data: [] }
+            ])
+
+            const meetingIntel = await aiService.extractMeetingIntelligence(
+              meeting,
+              existingKnowledge || [],
+              priorObservations || []
+            )
+
+            if (meetingIntel) {
+              // ── Write knowledge items → knowledge_base ──────────────────
+              for (const k of (meetingIntel.knowledge || [])) {
+                if (!k.what) continue
+                const { data: existK } = await supabase
+                  .from('knowledge_base')
+                  .select('id')
+                  .ilike('content', k.what.slice(0, 80))
+                  .maybeSingle()
+
+                if (!existK) {
+                  await supabase.from('knowledge_base').insert({
+                    content:        k.what,
+                    title:          k.what.slice(0, 120),
+                    context:        [k.why_it_matters, k.decision_trigger].filter(Boolean).join(' | '),
+                    transferability: k.transferability || 'this-project',
+                    confidence:     k.confidence || 'inferred',
+                    source_context: k.source_context || null,
+                    source_type:    meetingSourceType,
+                    source_id:      meeting.id,
+                    project_id:     projectId || null,
+                  })
+                  results.knowledge_created = (results.knowledge_created || 0) + 1
+                }
+              }
+
+              // ── Write learnings → observations ──────────────────────────
+              for (const l of (meetingIntel.learnings || [])) {
+                if (!l.pattern) continue
+                const { data: existL } = await supabase
+                  .from('observations')
+                  .select('id')
+                  .ilike('content', l.pattern.slice(0, 80))
+                  .maybeSingle()
+
+                if (!existL) {
+                  await supabase.from('observations').insert({
+                    content:      l.pattern,
+                    title:        l.pattern.slice(0, 120),
+                    evidence:     l.evidence     || null,
+                    implication:  l.implication  || null,
+                    applicable_to: l.applicable_to || null,
+                    confidence:   l.confidence   || 'moderate',
+                    source_type:  meetingSourceType,
+                    source_id:    meeting.id,
+                    project_id:   projectId || null,
+                  })
+                  results.observations_created = (results.observations_created || 0) + 1
+                }
+              }
+
+              // ── Write project context → projects table ──────────────────
+              if (meetingIntel.project_context && projectId) {
+                const pc = meetingIntel.project_context
+                // These columns are added via the session24 migration script.
+                // If columns don't exist yet the update is a no-op (Postgres ignores unknown columns
+                // via the JS client — will surface as a warning, not a crash).
+                await supabase
+                  .from('projects')
+                  .update({
+                    project_phase:           pc.project_phase     || null,
+                    key_constraints:         pc.key_constraints   || [],
+                    core_problem:            pc.core_problem      || null,
+                    next_milestone:          pc.next_milestone    || null,
+                    open_dependencies:       pc.open_dependencies || [],
+                    workstream_owners:       pc.workstream_owners || [],
+                    project_context_updated_at: new Date().toISOString()
+                  })
+                  .eq('id', projectId)
+              }
+
+              console.log(`    Haiku reasoning: ${meetingIntel.knowledge?.length || 0} knowledge, ${meetingIntel.learnings?.length || 0} learnings, context: ${!!meetingIntel.project_context}`)
+            }
+          } catch (err) {
+            console.error(`  extractMeetingIntelligence failed for "${meeting.title}": ${err.message}`)
+            // Non-fatal — factual extraction already committed above
+          }
         }
 
         // ── Recurring Series Continuity ────────────────────────────────

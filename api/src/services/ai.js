@@ -1645,6 +1645,186 @@ Or if nothing is relevant: {"relevant": false}`
   } catch { return null }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// extractMeetingIntelligence — Three targeted Haiku calls for Plaud meetings
+// Reads the full transcript (27k+ chars). No truncation. max_tokens: 8192.
+//
+// Call A — Knowledge: reusable insights worth keeping in knowledge_base
+// Call B — Learnings: patterns and dynamics for observations table
+// Call C — Project Context: current project state snapshot for future injection
+//
+// All three calls run concurrently. Any call that fails returns its zero value.
+// Never falls through to Sonnet — if calls fail, we log and return what we have.
+// ─────────────────────────────────────────────────────────────────────────────
+async function extractMeetingIntelligence(meeting, existingKnowledge = [], priorObservations = []) {
+  // Prefer full transcript → email body → short summary. Never truncate.
+  const transcript = meeting.full_transcript || meeting.raw_transcript ||
+                     meeting.email_body_raw   || meeting.short_summary || ''
+
+  if (!transcript || transcript.trim().length < 200) {
+    console.log(`  extractMeetingIntelligence: insufficient input for "${meeting.title}" — skipping`)
+    return null
+  }
+
+  const inputType   = meeting.full_transcript  ? 'transcript'  :
+                      meeting.email_body_raw   ? 'email_body'  : 'summary'
+  const meetingTitle = meeting.title || 'Untitled Meeting'
+  const meetingDate  = meeting.recording_date || meeting.date || 'unknown'
+
+  const knowledgeContext = existingKnowledge.length > 0
+    ? `\nExisting knowledge for this project (do not duplicate):\n${
+        existingKnowledge.slice(0, 10).map(k => `- ${k.content || k.title || ''}`).join('\n')
+      }`
+    : ''
+
+  const observationsContext = priorObservations.length > 0
+    ? `\nPrior observations on record (look for reinforcing or contradicting patterns):\n${
+        priorObservations.slice(0, 10).map(o => `- ${o.content || o.title || ''}`).join('\n')
+      }`
+    : ''
+
+  const MODEL = 'claude-haiku-4-5-20251001'
+  const MAX   = 8192
+
+  // Run all three calls concurrently — independent inputs, independent outputs
+  const [knowledgeResult, learningsResult, contextResult] = await Promise.allSettled([
+
+    // ── Call A: Knowledge ────────────────────────────────────────────────────
+    (async () => {
+      const msg = await withRetry(() => client.messages.create({
+        model: MODEL,
+        max_tokens: MAX,
+        messages: [{
+          role: 'user',
+          content: `You are extracting reusable knowledge from a meeting transcript for Ryan Hankins, Project Executive at Clayco (construction and real estate).
+
+Meeting: ${meetingTitle} (${meetingDate})
+Input type: ${inputType}
+${knowledgeContext}
+
+TRANSCRIPT:
+${transcript}
+
+Extract knowledge worth storing permanently in a knowledge base. Test each item:
+- Is it reusable beyond this specific meeting instance?
+- Does it inform future decisions on similar projects or pursuits?
+- Is it genuinely new vs. already obvious to an experienced construction executive?
+
+Be selective — quality over quantity. Omit meeting logistics, status updates, and anything that won't matter in 6 months.
+
+Return a JSON array only (no markdown fences, no commentary):
+[
+  {
+    "what": "the concept, fact, or insight — stated fully and clearly",
+    "why_it_matters": "specific implication for Ryan's work on this type of project",
+    "decision_trigger": "what future decision or situation would benefit from knowing this",
+    "transferability": "this-project | cross-project | industry-wide",
+    "confidence": "confirmed | inferred",
+    "source_context": "brief note on where in the meeting this came from"
+  }
+]
+
+Return [] if nothing genuinely reusable is present.`
+        }]
+      }))
+      const raw = msg.content[0].text.replace(/```json|```/g, '').trim()
+      return JSON.parse(raw)
+    })(),
+
+    // ── Call B: Learnings / Patterns ─────────────────────────────────────────
+    (async () => {
+      const msg = await withRetry(() => client.messages.create({
+        model: MODEL,
+        max_tokens: MAX,
+        messages: [{
+          role: 'user',
+          content: `You are identifying behavioral patterns and learnings from a meeting transcript for Ryan Hankins, Project Executive at Clayco.
+
+Meeting: ${meetingTitle} (${meetingDate})
+Input type: ${inputType}
+${observationsContext}
+
+TRANSCRIPT:
+${transcript}
+
+Identify patterns this meeting evidences. Not just what happened — what recurring dynamic, risk type, owner behavior, or structural problem does it represent?
+
+Test each item:
+- Is this a genuine pattern, or a one-off incident?
+- Does it apply beyond this project?
+- What should change or be watched as a result?
+
+Return a JSON array only (no markdown fences, no commentary):
+[
+  {
+    "pattern": "the observable pattern or dynamic — not a description of the event",
+    "evidence": "specific evidence from this meeting that demonstrates the pattern",
+    "implication": "what should change, be monitored, or be protected against as a result",
+    "applicable_to": "which projects, roles, or situations this pattern typically appears in",
+    "confidence": "strong | moderate | weak"
+  }
+]
+
+Return [] if no genuine patterns are evidenced.`
+        }]
+      }))
+      const raw = msg.content[0].text.replace(/```json|```/g, '').trim()
+      return JSON.parse(raw)
+    })(),
+
+    // ── Call C: Project Context Snapshot ─────────────────────────────────────
+    (async () => {
+      const msg = await withRetry(() => client.messages.create({
+        model: MODEL,
+        max_tokens: MAX,
+        messages: [{
+          role: 'user',
+          content: `You are capturing the current state of a project based on a meeting transcript, for Ryan Hankins, Project Executive at Clayco.
+
+Meeting: ${meetingTitle} (${meetingDate})
+Input type: ${inputType}
+
+TRANSCRIPT:
+${transcript}
+
+Describe the current project state as evidenced by this meeting. This snapshot will be injected as context into future AI processing of meetings on this same project — so prioritize what another AI would need to understand "where things stand" without having read this transcript.
+
+Return a JSON object only (no markdown fences, no commentary):
+{
+  "project_phase": "description of where the project is right now (e.g. design development, GMP negotiation, procurement, construction)",
+  "key_constraints": ["constraints actively driving decisions in this meeting"],
+  "workstream_owners": [{ "workstream": "what area", "owner": "person's name" }],
+  "core_problem": "the central problem or challenge the team is trying to solve right now",
+  "next_milestone": "the next significant milestone, gate, or deliverable",
+  "open_dependencies": ["things that must happen or be resolved before the project can move forward"]
+}`
+        }]
+      }))
+      const raw = msg.content[0].text.replace(/```json|```/g, '').trim()
+      return JSON.parse(raw)
+    })()
+
+  ])
+
+  const knowledge = knowledgeResult.status === 'fulfilled' ? (knowledgeResult.value || []) : []
+  const learnings = learningsResult.status === 'fulfilled' ? (learningsResult.value || []) : []
+  const project_context = contextResult.status === 'fulfilled' ? (contextResult.value || null) : null
+
+  if (knowledgeResult.status === 'rejected') {
+    console.error(`  extractMeetingIntelligence Call A (knowledge) failed: ${knowledgeResult.reason?.message}`)
+  }
+  if (learningsResult.status === 'rejected') {
+    console.error(`  extractMeetingIntelligence Call B (learnings) failed: ${learningsResult.reason?.message}`)
+  }
+  if (contextResult.status === 'rejected') {
+    console.error(`  extractMeetingIntelligence Call C (project context) failed: ${contextResult.reason?.message}`)
+  }
+
+  console.log(`  extractMeetingIntelligence: ${knowledge.length} knowledge, ${learnings.length} learnings, context: ${!!project_context}`)
+
+  return { knowledge, learnings, project_context, input_type: inputType }
+}
+
 module.exports = {
   buildRyanContext,
   buildProjectContext,
@@ -1669,4 +1849,5 @@ module.exports = {
   extractIntelligenceFromTranscript,
   parsePlaudSummary,
   extractCategoryFocusFromIntel,
+  extractMeetingIntelligence,
 }

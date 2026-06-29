@@ -233,13 +233,14 @@ MSG_RESPONSE=$(curl -s \
   -H "Authorization: Bearer ${ACCESS_TOKEN}")
 ```
 
-### 4B — Extract Subject and Date
+### 4B — Extract Subject, Date, and Email Received Datetime
 
 Parse from the `payload.headers` array:
 
 ```python
-import json, sys, base64
+import json, sys, base64, re
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 
 data = json.load(sys.stdin)
 headers = {h['name']: h['value'] for h in data.get('payload', {}).get('headers', [])}
@@ -252,8 +253,16 @@ gmail_id = data.get('id', '')
 # Extract meeting title from subject: strip "[Plaud-AutoFlow] MM-DD " prefix
 title = subject.replace('[Plaud-AutoFlow]', '').strip()
 # Remove leading "MM-DD " date prefix if present
-import re
 title = re.sub(r'^\d{2}-\d{2}\s+', '', title).strip()
+
+# Capture the exact email received datetime (used for start time estimation)
+# Store as UTC ISO string — e.g. "2026-06-03T15:15:00+00:00"
+email_received_datetime = None
+if date_str:
+    try:
+        email_received_datetime = parsedate_to_datetime(date_str).isoformat()
+    except Exception:
+        email_received_datetime = None
 ```
 
 ### 4C — Extract Email Body (Summary + Action Items)
@@ -337,6 +346,93 @@ If attachment download fails or no attachment found:
 - Log in `warnings[]`: `"No transcript attachment for: {title}"`
 - Continue — body summary is sufficient
 
+### 4F — Parse Transcript Duration
+
+From the downloaded transcript text, extract the last timestamp to determine recording duration:
+
+```python
+def parse_transcript_duration(transcript_text):
+    """Parse HH:MM:SS timestamps from transcript, return duration in minutes."""
+    if not transcript_text:
+        return None
+    # Plaud transcripts use relative HH:MM:SS timestamps: "Speaker Name 00:39:48"
+    timestamps = re.findall(r'\b(\d{1,2}:\d{2}:\d{2})\b', transcript_text)
+    if not timestamps:
+        return None
+    last_ts = timestamps[-1]
+    parts = last_ts.split(':')
+    total_minutes = int(parts[0]) * 60 + int(parts[1]) + int(parts[2]) / 60
+    return round(total_minutes)
+
+duration_from_transcript = parse_transcript_duration(transcript_text)
+```
+
+### 4G — Parse Plaud Structured Blocks from Email Body
+
+Plaud's AI summary email contains structured call-word blocks delimited with `=LABEL=` markers.
+Parse all three blocks from `email_body_raw`:
+
+```python
+def extract_block(text, label):
+    """Extract JSON from =LABEL= ... =END_LABEL= block (flexible = count)."""
+    if not text:
+        return None
+    pattern = r'={1,}' + label + r'={1,}\n(.*?)\n={1,}END_' + label + r'={1,}'
+    match = re.search(pattern, text, re.DOTALL)
+    if not match:
+        return None
+    try:
+        return json.loads(match.group(1).strip())
+    except (json.JSONDecodeError, Exception) as e:
+        print(f'  Warning: Could not parse {label} block: {e}')
+        return None
+
+# Parse all three structured blocks from the email body
+meeting_metadata    = extract_block(email_body_raw, 'MEETING_METADATA')
+people_and_actions  = extract_block(email_body_raw, 'PEOPLE_AND_ACTIONS')
+decisions_and_risks = extract_block(email_body_raw, 'DECISIONS_AND_RISKS')
+
+# Resolve recording start time and date from metadata
+recording_start_time = meeting_metadata.get('recording_start_time') if meeting_metadata else None
+recording_date       = meeting_metadata.get('recording_date')       if meeting_metadata else None
+duration_minutes     = meeting_metadata.get('duration_minutes')     if meeting_metadata else duration_from_transcript
+timezone             = meeting_metadata.get('timezone', 'America/Phoenix') if meeting_metadata else 'America/Phoenix'
+
+# Determine time_source
+if recording_start_time and recording_date:
+    time_source = 'plaud_ai'
+elif duration_from_transcript and email_received_datetime:
+    # Estimate: email was sent ~8 min after recording ended
+    time_source = 'estimated'
+    # Estimate start: email_received - duration - 8 min buffer
+    # The nightly job can use this to compute start_time
+else:
+    time_source = 'unknown'
+
+# Participants from structured block (fallback to legacy parsing if empty)
+block_participants = []
+if people_and_actions and people_and_actions.get('participants'):
+    block_participants = [p.get('name') for p in people_and_actions['participants'] if p.get('name')]
+
+if meeting_metadata:
+    print(f'  Plaud metadata: {recording_date} {recording_start_time} ({duration_minutes} min) [{timezone}]')
+else:
+    print(f'  Warning: MEETING_METADATA block not found in email body for: {title}')
+
+if people_and_actions:
+    action_count = len(people_and_actions.get('actions', []))
+    print(f'  PEOPLE_AND_ACTIONS: {action_count} action(s), {len(block_participants)} participant(s)')
+else:
+    print(f'  Warning: PEOPLE_AND_ACTIONS block not found for: {title}')
+
+if decisions_and_risks:
+    decision_count = len(decisions_and_risks.get('decisions', []))
+    risk_count = len(decisions_and_risks.get('risks', []))
+    print(f'  DECISIONS_AND_RISKS: {decision_count} decision(s), {risk_count} risk(s)')
+else:
+    print(f'  Warning: DECISIONS_AND_RISKS block not found for: {title}')
+```
+
 ---
 
 ## Step 5 — Build Meeting Objects
@@ -353,6 +449,46 @@ For each processed message, build:
   "gmail_message_id": "1abc2def3ghi",
   "summary": "The team discussed...",
   "email_body_raw": "...",
+
+  "meeting_metadata": {
+    "recording_date": "2026-06-03",
+    "recording_start_time": "12:00",
+    "recording_end_time": "13:40",
+    "duration_minutes": 100,
+    "timezone": "America/Phoenix",
+    "meeting_type": "project_coordination"
+  },
+  "people_and_actions": {
+    "participants": [{ "name": "Ryan Hankins", "role": "Project Executive" }],
+    "projects_referenced": ["Pacific Fusion Albuquerque"],
+    "actions": [
+      {
+        "task": "Send updated schedule to owner by Friday",
+        "owner": "Ryan Hankins",
+        "ryan_owns": true,
+        "due": "2026-06-06",
+        "urgency": "high"
+      }
+    ],
+    "commitments": [],
+    "relationship_signals": []
+  },
+  "decisions_and_risks": {
+    "decisions": [],
+    "pending": [],
+    "risks": [],
+    "facts": [],
+    "cost_flags": [],
+    "schedule_flags": [],
+    "lead_signals": []
+  },
+
+  "recording_date": "2026-06-03",
+  "recording_start_time": "12:00",
+  "duration_minutes": 100,
+  "time_source": "plaud_ai",
+  "email_received_datetime": "2026-06-03T19:15:00+00:00",
+
   "participants": ["Ryan Hankins", "John Smith"],
   "ryan_action_items": [
     {
@@ -383,6 +519,8 @@ For each processed message, build:
   "transcript_word_count": 4821
 }
 ```
+
+Note on `participants`: Populate from `people_and_actions.participants[].name` when block parse succeeds. Fall back to legacy parsing from email body if block is null.
 
 Count totals across all meetings:
 - `ryan_action_items_total` — sum of all `ryan_action_items` arrays
