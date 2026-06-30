@@ -1,9 +1,21 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getProjects, createProject, mergeProject, getWorkspaces } from '../lib/api'
+import {
+  getProjects, createProject, mergeProject, getWorkspaces,
+  getMeetingCategories, createMeetingCategory, updateMeetingCategory,
+  deleteMeetingCategory, mergeMeetingCategories,
+  getTopicPods, createTopicPod, updateTopicPod, deleteTopicPod,
+  getKnowledge, createKnowledge,
+} from '../lib/api'
 import WorkspaceBar from '../components/WorkspaceBar'
 import { useStore } from '../store/useStore'
+
+const CAT_COLORS = [
+  '#7F77DD','#1D9E75','#D85A30','#378ADD',
+  '#BA7517','#D4537E','#639922','#E24B4A',
+  '#5F5E5A','#C9A84C',
+]
 
 // ── Tag Input ─────────────────────────────────────────────────
 function TagInput({ tags, onChange, placeholder = 'Add keyword…' }) {
@@ -297,7 +309,6 @@ function MergeProjectModal({ winner, allProjects, onClose }) {
           </div>
         ) : (
           <div className="p-5 space-y-5">
-            {/* Winner */}
             <div>
               <p className="text-xs text-gray-500 mb-1 font-medium uppercase tracking-wider">Keep (winner)</p>
               <div className="text-sm font-semibold text-[#1a1a18] bg-green-50 border border-green-200 rounded-lg px-3 py-2">
@@ -305,7 +316,6 @@ function MergeProjectModal({ winner, allProjects, onClose }) {
               </div>
             </div>
 
-            {/* Loser picker */}
             <div>
               <p className="text-xs text-gray-500 mb-1 font-medium uppercase tracking-wider">Merge into it (will be archived)</p>
               <select
@@ -350,15 +360,417 @@ function MergeProjectModal({ winner, allProjects, onClose }) {
   )
 }
 
+// ── shared label style ────────────────────────────────────────
+const tabLabelCls = 'text-[9px] font-bold uppercase tracking-widest text-[#9b9b97]'
+
+// ── Categories Tab ────────────────────────────────────────────
+function CategoriesTab() {
+  const qc = useQueryClient()
+  const { data: categories = [], isLoading } = useQuery({
+    queryKey: ['meeting-categories'],
+    queryFn: () => getMeetingCategories(),
+  })
+  const [editingId,   setEditingId]   = useState(null)
+  const [editName,    setEditName]    = useState('')
+  const [editColor,   setEditColor]   = useState('#7F77DD')
+  const [editSaving,  setEditSaving]  = useState(false)
+  const [editError,   setEditError]   = useState(null)
+  const [mergeId,     setMergeId]     = useState(null)
+  const [mergeTarget, setMergeTarget] = useState('')
+  const [mergeSaving, setMergeSaving] = useState(false)
+  const [mergeError,  setMergeError]  = useState(null)
+  const [newMode,    setNewMode]    = useState(false)
+  const [newName,    setNewName]    = useState('')
+  const [newColor,   setNewColor]   = useState('#7F77DD')
+  const [newSaving,  setNewSaving]  = useState(false)
+  const [newError,   setNewError]   = useState(null)
+
+  const startEdit = (cat) => { setEditingId(cat.id); setEditName(cat.name); setEditColor(cat.color || '#7F77DD'); setEditError(null) }
+
+  const saveEdit = async (id) => {
+    if (!editName.trim() || editSaving) return
+    setEditSaving(true); setEditError(null)
+    try {
+      await updateMeetingCategory(id, { name: editName.trim(), color: editColor })
+      qc.invalidateQueries({ queryKey: ['meeting-categories'] })
+      setEditingId(null)
+    } catch (err) {
+      setEditError(err?.response?.data?.error || err?.message || 'Failed to save')
+    } finally { setEditSaving(false) }
+  }
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this category? All meeting assignments will be removed.')) return
+    try {
+      await deleteMeetingCategory(id)
+      qc.invalidateQueries({ queryKey: ['meeting-categories'] })
+    } catch (err) { alert(err?.response?.data?.error || err?.message || 'Failed to delete') }
+  }
+
+  const handleMerge = async () => {
+    if (!mergeTarget || mergeSaving) return
+    setMergeSaving(true); setMergeError(null)
+    try {
+      await mergeMeetingCategories(mergeId, mergeTarget)
+      qc.invalidateQueries({ queryKey: ['meeting-categories'] })
+      setMergeId(null); setMergeTarget('')
+    } catch (err) {
+      setMergeError(err?.response?.data?.error || err?.message || 'Failed to merge')
+    } finally { setMergeSaving(false) }
+  }
+
+  const handleCreate = async () => {
+    if (!newName.trim() || newSaving) return
+    setNewSaving(true); setNewError(null)
+    try {
+      await createMeetingCategory({ name: newName.trim(), color: newColor })
+      qc.invalidateQueries({ queryKey: ['meeting-categories'] })
+      setNewMode(false); setNewName(''); setNewColor('#7F77DD')
+    } catch (err) {
+      setNewError(err?.response?.data?.error || err?.message || 'Failed to create')
+    } finally { setNewSaving(false) }
+  }
+
+  if (isLoading) return <p className="text-xs text-[#9b9b97] py-4 text-center">Loading…</p>
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className={tabLabelCls}>{categories.length} categories</p>
+        <button onClick={() => { setNewMode(true); setNewError(null) }}
+          className="text-xs px-2.5 py-1 rounded-lg bg-[#1a1a18] text-white hover:bg-gray-800 transition-colors">
+          + New Category
+        </button>
+      </div>
+
+      {/* New category form */}
+      {newMode && (
+        <div className="bg-[#f8f8f6] border border-[#e5e5e3] rounded-xl p-3 mb-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New category</p>
+          <input autoFocus value={newName} onChange={e => setNewName(e.target.value)} placeholder="Category name…"
+            className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-white" />
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {CAT_COLORS.map(c => (
+              <button key={c} onClick={() => setNewColor(c)}
+                className="w-5 h-5 rounded-full border-2 transition-all"
+                style={{ backgroundColor: c, borderColor: newColor === c ? '#1a1a18' : 'transparent' }} />
+            ))}
+          </div>
+          {newError && <p className="text-[10px] text-red-600 mb-1">{newError}</p>}
+          <div className="flex gap-2">
+            <button onClick={() => { setNewMode(false); setNewName(''); setNewError(null) }}
+              className="flex-1 text-xs py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={handleCreate} disabled={!newName.trim() || newSaving}
+              className="flex-1 text-xs py-1.5 rounded-lg bg-[#C9A84C] text-white disabled:opacity-40 hover:bg-[#b8943d] transition-colors">
+              {newSaving ? '…' : 'Create'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Merge panel */}
+      {mergeId && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-amber-700 mb-2">
+            Merge "{categories.find(c => c.id === mergeId)?.name}" into…
+          </p>
+          <select value={mergeTarget} onChange={e => setMergeTarget(e.target.value)}
+            className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 bg-white focus:outline-none">
+            <option value="">Pick target category…</option>
+            {categories.filter(c => c.id !== mergeId).map(c => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+          {mergeError && <p className="text-[10px] text-red-600 mb-1">{mergeError}</p>}
+          <div className="flex gap-2">
+            <button onClick={() => { setMergeId(null); setMergeTarget(''); setMergeError(null) }}
+              className="flex-1 text-xs py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={handleMerge} disabled={!mergeTarget || mergeSaving}
+              className="flex-1 text-xs py-1.5 rounded-lg bg-amber-600 text-white disabled:opacity-40 hover:bg-amber-700 transition-colors">
+              {mergeSaving ? '…' : 'Merge & delete source'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Category chips */}
+      <div className="flex flex-wrap gap-2">
+        {categories.map(cat => (
+          <div key={cat.id} className="group bg-white border border-[#e5e5e3] rounded-xl px-3 py-2 flex items-center gap-2 min-w-0">
+            {editingId === cat.id ? (
+              <div className="flex flex-col gap-1.5 min-w-[180px]">
+                <input autoFocus value={editName} onChange={e => setEditName(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter') saveEdit(cat.id); if (e.key === 'Escape') setEditingId(null) }}
+                  className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-300" />
+                <div className="flex flex-wrap gap-1">
+                  {CAT_COLORS.map(c => (
+                    <button key={c} onClick={() => setEditColor(c)}
+                      className="w-4 h-4 rounded-full border-2 transition-all"
+                      style={{ backgroundColor: c, borderColor: editColor === c ? '#1a1a18' : 'transparent' }} />
+                  ))}
+                </div>
+                {editError && <p className="text-[10px] text-red-600">{editError}</p>}
+                <div className="flex gap-1">
+                  <button onClick={() => setEditingId(null)}
+                    className="flex-1 text-[10px] py-0.5 rounded border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+                  <button onClick={() => saveEdit(cat.id)} disabled={editSaving}
+                    className="flex-1 text-[10px] py-0.5 rounded bg-[#1a1a18] text-white disabled:opacity-40">
+                    {editSaving ? '…' : 'Save'}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color || '#64748b' }} />
+                <span className="text-xs text-[#1a1a18] font-medium truncate max-w-[140px]">{cat.name}</span>
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                  <button onClick={() => startEdit(cat)} title="Edit name"
+                    className="text-[10px] text-[#6b6b67] hover:text-[#1a1a18] px-1">✎</button>
+                  <button onClick={() => { setMergeId(cat.id); setMergeTarget(''); setMergeError(null) }} title="Merge into another"
+                    className="text-[10px] text-[#6b6b67] hover:text-[#C9A84C] px-1">⇢</button>
+                  <button onClick={() => handleDelete(cat.id)} title="Delete"
+                    className="text-[10px] text-[#6b6b67] hover:text-red-500 px-1">×</button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+      {categories.length === 0 && <p className="text-xs text-[#9b9b97] py-6 text-center">No categories yet</p>}
+    </div>
+  )
+}
+
+// ── Topic Pods Tab ────────────────────────────────────────────
+function PodRow({ pod, editingId, editName, editError, editSaving, onStartEdit, onEditName, onSaveEdit, onCancelEdit, onDelete }) {
+  const isEditing = editingId === pod.id
+  return (
+    <div className="bg-white border border-[#e5e5e3] rounded-xl px-3 py-2.5">
+      {isEditing ? (
+        <div className="flex flex-col gap-1.5">
+          <input autoFocus value={editName} onChange={e => onEditName(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') onSaveEdit(pod.id); if (e.key === 'Escape') onCancelEdit() }}
+            className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-300" />
+          {editError && <p className="text-[10px] text-red-600">{editError}</p>}
+          <div className="flex gap-1">
+            <button onClick={onCancelEdit}
+              className="flex-1 text-[10px] py-0.5 rounded border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={() => onSaveEdit(pod.id)} disabled={editSaving}
+              className="flex-1 text-[10px] py-0.5 rounded bg-[#1a1a18] text-white disabled:opacity-40">
+              {editSaving ? '…' : 'Save'}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-sm font-medium text-[#1a1a18] truncate">{pod.name}</span>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-medium ${
+                pod.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-[#6b6b67]'
+              }`}>{pod.status || 'active'}</span>
+            </div>
+            {pod.description && <p className="text-[11px] text-[#6b6b67] leading-relaxed">{pod.description}</p>}
+          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <button onClick={() => onStartEdit(pod)}
+              className="text-[10px] text-[#6b6b67] hover:text-[#1a1a18] px-1.5 py-1 rounded hover:bg-[#f5f4f2]">✎</button>
+            <button onClick={() => onDelete(pod.id)}
+              className="text-[10px] text-[#6b6b67] hover:text-red-500 px-1.5 py-1 rounded hover:bg-red-50">×</button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function TopicPodsTab() {
+  const qc = useQueryClient()
+  const { data: pods = [], isLoading } = useQuery({
+    queryKey: ['topic-pods', 'all'],
+    queryFn: () => getTopicPods('all'),
+  })
+  const [editingId,  setEditingId]  = useState(null)
+  const [editName,   setEditName]   = useState('')
+  const [editSaving, setEditSaving] = useState(false)
+  const [editError,  setEditError]  = useState(null)
+  const [newMode,    setNewMode]    = useState(false)
+  const [newName,    setNewName]    = useState('')
+  const [newDesc,    setNewDesc]    = useState('')
+  const [newSaving,  setNewSaving]  = useState(false)
+  const [newError,   setNewError]   = useState(null)
+
+  const saveEdit = async (id) => {
+    if (!editName.trim() || editSaving) return
+    setEditSaving(true); setEditError(null)
+    try {
+      await updateTopicPod(id, { name: editName.trim() })
+      qc.invalidateQueries({ queryKey: ['topic-pods'] })
+      setEditingId(null)
+    } catch (err) {
+      setEditError(err?.response?.data?.error || err?.message || 'Failed to save')
+    } finally { setEditSaving(false) }
+  }
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this pod? This cannot be undone.')) return
+    try {
+      await deleteTopicPod(id)
+      qc.invalidateQueries({ queryKey: ['topic-pods'] })
+    } catch (err) { alert(err?.response?.data?.error || err?.message || 'Failed to delete') }
+  }
+
+  const handleCreate = async () => {
+    if (!newName.trim() || newSaving) return
+    setNewSaving(true); setNewError(null)
+    try {
+      await createTopicPod({ name: newName.trim(), description: newDesc.trim() || null, status: 'active' })
+      qc.invalidateQueries({ queryKey: ['topic-pods'] })
+      setNewMode(false); setNewName(''); setNewDesc('')
+    } catch (err) {
+      setNewError(err?.response?.data?.error || err?.message || 'Failed to create')
+    } finally { setNewSaving(false) }
+  }
+
+  if (isLoading) return <p className="text-xs text-[#9b9b97] py-4 text-center">Loading…</p>
+
+  const activePods   = pods.filter(p => p.status !== 'archived')
+  const archivedPods = pods.filter(p => p.status === 'archived')
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className={tabLabelCls}>{pods.length} pods</p>
+        <button onClick={() => { setNewMode(true); setNewError(null) }}
+          className="text-xs px-2.5 py-1 rounded-lg bg-[#1a1a18] text-white hover:bg-gray-800 transition-colors">
+          + New Pod
+        </button>
+      </div>
+
+      {newMode && (
+        <div className="bg-[#f8f8f6] border border-[#e5e5e3] rounded-xl p-3 mb-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New pod</p>
+          <input autoFocus value={newName} onChange={e => setNewName(e.target.value)} placeholder="Pod name…"
+            className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-white" />
+          <input value={newDesc} onChange={e => setNewDesc(e.target.value)} placeholder="Description (optional)…"
+            className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-white" />
+          {newError && <p className="text-[10px] text-red-600 mb-1">{newError}</p>}
+          <div className="flex gap-2">
+            <button onClick={() => { setNewMode(false); setNewName(''); setNewDesc(''); setNewError(null) }}
+              className="flex-1 text-xs py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={handleCreate} disabled={!newName.trim() || newSaving}
+              className="flex-1 text-xs py-1.5 rounded-lg bg-[#C9A84C] text-white disabled:opacity-40 hover:bg-[#b8943d] transition-colors">
+              {newSaving ? '…' : 'Create'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        {activePods.map(pod => (
+          <PodRow key={pod.id} pod={pod} editingId={editingId} editName={editName} editError={editError}
+            editSaving={editSaving}
+            onStartEdit={p => { setEditingId(p.id); setEditName(p.name); setEditError(null) }}
+            onEditName={setEditName} onSaveEdit={saveEdit} onCancelEdit={() => setEditingId(null)} onDelete={handleDelete} />
+        ))}
+        {archivedPods.length > 0 && (
+          <>
+            <p className={`${tabLabelCls} mt-4 mb-2`}>Archived</p>
+            {archivedPods.map(pod => (
+              <PodRow key={pod.id} pod={pod} editingId={editingId} editName={editName} editError={editError}
+                editSaving={editSaving}
+                onStartEdit={p => { setEditingId(p.id); setEditName(p.name); setEditError(null) }}
+                onEditName={setEditName} onSaveEdit={saveEdit} onCancelEdit={() => setEditingId(null)} onDelete={handleDelete} />
+            ))}
+          </>
+        )}
+      </div>
+      {pods.length === 0 && <p className="text-xs text-[#9b9b97] py-6 text-center">No pods yet</p>}
+    </div>
+  )
+}
+
+// ── Knowledge Tab ─────────────────────────────────────────────
+function KnowledgeTab() {
+  const qc = useQueryClient()
+  const { data: entries = [], isLoading } = useQuery({
+    queryKey: ['knowledge', 'active'],
+    queryFn: () => getKnowledge('active'),
+  })
+  const [newMode,   setNewMode]   = useState(false)
+  const [newTopic,  setNewTopic]  = useState('')
+  const [newSaving, setNewSaving] = useState(false)
+  const [newError,  setNewError]  = useState(null)
+
+  const handleCreate = async () => {
+    if (!newTopic.trim() || newSaving) return
+    setNewSaving(true); setNewError(null)
+    try {
+      await createKnowledge({ topic: newTopic.trim(), status: 'active' })
+      qc.invalidateQueries({ queryKey: ['knowledge'] })
+      setNewMode(false); setNewTopic('')
+    } catch (err) {
+      setNewError(err?.response?.data?.error || err?.message || 'Failed to create')
+    } finally { setNewSaving(false) }
+  }
+
+  if (isLoading) return <p className="text-xs text-[#9b9b97] py-4 text-center">Loading…</p>
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <p className={tabLabelCls}>{entries.length} entries</p>
+        <button onClick={() => { setNewMode(true); setNewError(null) }}
+          className="text-xs px-2.5 py-1 rounded-lg bg-[#1a1a18] text-white hover:bg-gray-800 transition-colors">
+          + New Entry
+        </button>
+      </div>
+
+      {newMode && (
+        <div className="bg-[#f8f8f6] border border-[#e5e5e3] rounded-xl p-3 mb-3">
+          <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New knowledge entry</p>
+          <input autoFocus value={newTopic} onChange={e => setNewTopic(e.target.value)} placeholder="Topic / title…"
+            className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-white" />
+          {newError && <p className="text-[10px] text-red-600 mb-1">{newError}</p>}
+          <div className="flex gap-2">
+            <button onClick={() => { setNewMode(false); setNewTopic(''); setNewError(null) }}
+              className="flex-1 text-xs py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={handleCreate} disabled={!newTopic.trim() || newSaving}
+              className="flex-1 text-xs py-1.5 rounded-lg bg-[#C9A84C] text-white disabled:opacity-40 hover:bg-[#b8943d] transition-colors">
+              {newSaving ? '…' : 'Create'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-2">
+        {entries.map(entry => (
+          <div key={entry.id} className="bg-white border border-[#e5e5e3] rounded-xl px-3 py-2.5">
+            <p className="text-sm font-medium text-[#1a1a18]">{entry.topic || entry.title || 'Untitled'}</p>
+            {entry.content && (
+              <p className="text-[11px] text-[#6b6b67] mt-0.5 leading-relaxed">
+                {entry.content.slice(0, 80)}{entry.content.length > 80 ? '…' : ''}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+      {entries.length === 0 && <p className="text-xs text-[#9b9b97] py-6 text-center">No knowledge entries yet</p>}
+    </div>
+  )
+}
+
 // ── Projects page ─────────────────────────────────────────────
 const STATUS_FILTERS = ['all', 'active', 'pursuit', 'on_hold', 'completed']
+const PAGE_TABS = ['Projects', 'Categories', 'Topic Pods', 'Knowledge']
 
 export default function Projects() {
   const navigate = useNavigate()
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [showModal, setShowModal] = useState(false)
-  const [mergeWinner, setMergeWinner] = useState(null) // project to merge INTO
+  const [mergeWinner, setMergeWinner] = useState(null)
+  const [activeTab, setActiveTab] = useState('Projects')
 
   const { workspace } = useStore()
 
@@ -395,151 +807,197 @@ export default function Projects() {
           </div>
           <div className="flex items-center gap-2">
             <WorkspaceBar compact />
-            <button
-              onClick={() => setShowModal(true)}
-              className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-[#2a2a28]"
-            >
-              <span className="text-lg leading-none">+</span> New Project
-            </button>
+            {activeTab === 'Projects' && (
+              <button
+                onClick={() => setShowModal(true)}
+                className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-[#1a1a18] text-white rounded-lg hover:bg-[#2a2a28]"
+              >
+                <span className="text-lg leading-none">+</span> New Project
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-5 space-y-4">
-        {/* Search + filter */}
-        <div className="flex flex-col sm:flex-row gap-3">
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search projects, clients, keywords…"
-            className="flex-1 text-sm px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
-          />
-          <div className="flex gap-1.5 flex-wrap">
-            {STATUS_FILTERS.map(s => (
-              <button
-                key={s}
-                onClick={() => setFilter(s)}
-                className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
-                  filter === s
-                    ? 'bg-[#1a1a18] text-white border-[#1a1a18]'
-                    : 'bg-white text-[#6b6b67] border-gray-200 hover:border-gray-400'
-                }`}
-              >
-                {s === 'on_hold' ? 'On Hold' : s.charAt(0).toUpperCase() + s.slice(1)}
-              </button>
-            ))}
-          </div>
+
+        {/* Top-level tabs */}
+        <div className="flex gap-1 bg-white border border-[#e5e5e3] rounded-xl p-1">
+          {PAGE_TABS.map(tab => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 text-xs py-1.5 rounded-lg font-medium transition-colors ${
+                activeTab === tab
+                  ? 'bg-[#1a1a18] text-white'
+                  : 'text-[#6b6b67] hover:text-[#1a1a18] hover:bg-[#f5f4f2]'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
 
-        {/* Project list */}
-        {isLoading ? (
-          <div className="flex justify-center py-12">
-            <div className="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-sm">
-              {search || filter !== 'all' ? 'No projects match your filter.' : 'No projects yet.'}
-            </p>
-            {!search && filter === 'all' && (
-              <button
-                onClick={() => setShowModal(true)}
-                className="mt-3 text-sm text-blue-600 hover:underline"
-              >
-                Create your first project →
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="bg-white border border-[#e5e5e3] rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-100 bg-gray-50">
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5">Project</th>
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden sm:table-cell">Type</th>
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5">Status</th>
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden md:table-cell">Keywords</th>
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Risks</th>
-                  <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Decisions</th>
-                  <th className="px-4 py-2.5" />
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((p, i) => {
-                  const risks     = (p.risk_signals || []).filter(r => !r.checked_off)
-                  const decisions = (p.decisions_made || [])
-                  const keywords  = (p.keywords || [])
-                  return (
-                    <tr
-                      key={p.id}
-                      onClick={() => navigate(`/projects/${p.id}`)}
-                      className={`cursor-pointer hover:bg-blue-50 transition-colors ${i < filtered.length - 1 ? 'border-b border-gray-100' : ''}`}
-                    >
-                      <td className="px-4 py-3">
-                        <p className="font-medium text-[#1a1a18] leading-snug">{p.name}</p>
-                        {p.client && <p className="text-xs text-gray-500 mt-0.5">{p.client}</p>}
-                      </td>
-                      <td className="px-4 py-3 hidden sm:table-cell">
-                        {p.type ? (
-                          <span className="text-xs text-gray-500 capitalize">{p.type.replace('_', ' ')}</span>
-                        ) : (
-                          <span className="text-xs text-gray-300">—</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3">
-                        <StatusBadge status={p.status} />
-                      </td>
-                      <td className="px-4 py-3 hidden md:table-cell">
-                        <div className="flex flex-wrap gap-1 max-w-[200px]">
-                          {keywords.slice(0, 3).map(k => (
-                            <span key={k} className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded">
-                              {k}
-                            </span>
-                          ))}
-                          {keywords.length > 3 && (
-                            <span className="text-xs text-gray-400">+{keywords.length - 3}</span>
-                          )}
-                          {keywords.length === 0 && <span className="text-xs text-gray-300">—</span>}
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 hidden lg:table-cell">
-                        {risks.length > 0 ? (
-                          <span className="text-xs px-2 py-0.5 bg-red-50 text-red-600 rounded-full">{risks.length}</span>
-                        ) : (
-                          <span className="text-xs text-gray-300">—</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 hidden lg:table-cell">
-                        {decisions.length > 0 ? (
-                          <span className="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded-full">{decisions.length}</span>
-                        ) : (
-                          <span className="text-xs text-gray-300">—</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        <button
-                          onClick={e => { e.stopPropagation(); setMergeWinner(p) }}
-                          className="text-[10px] text-gray-400 hover:text-amber-600 hover:bg-amber-50 px-2 py-0.5 rounded transition-colors whitespace-nowrap"
-                          title="Merge another project into this one"
-                        >
-                          Merge ↗
-                        </button>
-                      </td>
+        {/* ── Projects tab ─────────────────────────────────── */}
+        {activeTab === 'Projects' && (
+          <>
+            {/* Search + filter */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search projects, clients, keywords…"
+                className="flex-1 text-sm px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
+              />
+              <div className="flex gap-1.5 flex-wrap">
+                {STATUS_FILTERS.map(s => (
+                  <button
+                    key={s}
+                    onClick={() => setFilter(s)}
+                    className={`text-xs px-3 py-1.5 rounded-lg border transition-colors ${
+                      filter === s
+                        ? 'bg-[#1a1a18] text-white border-[#1a1a18]'
+                        : 'bg-white text-[#6b6b67] border-gray-200 hover:border-gray-400'
+                    }`}
+                  >
+                    {s === 'on_hold' ? 'On Hold' : s.charAt(0).toUpperCase() + s.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Project list */}
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <div className="w-6 h-6 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />
+              </div>
+            ) : filtered.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-400 text-sm">
+                  {search || filter !== 'all' ? 'No projects match your filter.' : 'No projects yet.'}
+                </p>
+                {!search && filter === 'all' && (
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="mt-3 text-sm text-blue-600 hover:underline"
+                  >
+                    Create your first project →
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="bg-white border border-[#e5e5e3] rounded-xl overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-100 bg-gray-50">
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5">Project</th>
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden sm:table-cell">Type</th>
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5">Status</th>
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden md:table-cell">Keywords</th>
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Risks</th>
+                      <th className="text-left text-xs font-medium text-gray-500 px-4 py-2.5 hidden lg:table-cell">Decisions</th>
+                      <th className="px-4 py-2.5" />
                     </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    {filtered.map((p, i) => {
+                      const risks     = (p.risk_signals || []).filter(r => !r.checked_off)
+                      const decisions = (p.decisions_made || [])
+                      const keywords  = (p.keywords || [])
+                      return (
+                        <tr
+                          key={p.id}
+                          onClick={() => navigate(`/projects/${p.id}`)}
+                          className={`cursor-pointer hover:bg-blue-50 transition-colors ${i < filtered.length - 1 ? 'border-b border-gray-100' : ''}`}
+                        >
+                          <td className="px-4 py-3">
+                            <p className="font-medium text-[#1a1a18] leading-snug">{p.name}</p>
+                            {p.client && <p className="text-xs text-gray-500 mt-0.5">{p.client}</p>}
+                          </td>
+                          <td className="px-4 py-3 hidden sm:table-cell">
+                            {p.type ? (
+                              <span className="text-xs text-gray-500 capitalize">{p.type.replace('_', ' ')}</span>
+                            ) : (
+                              <span className="text-xs text-gray-300">—</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
+                            <StatusBadge status={p.status} />
+                          </td>
+                          <td className="px-4 py-3 hidden md:table-cell">
+                            <div className="flex flex-wrap gap-1 max-w-[200px]">
+                              {keywords.slice(0, 3).map(k => (
+                                <span key={k} className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded">
+                                  {k}
+                                </span>
+                              ))}
+                              {keywords.length > 3 && (
+                                <span className="text-xs text-gray-400">+{keywords.length - 3}</span>
+                              )}
+                              {keywords.length === 0 && <span className="text-xs text-gray-300">—</span>}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3 hidden lg:table-cell">
+                            {risks.length > 0 ? (
+                              <span className="text-xs px-2 py-0.5 bg-red-50 text-red-600 rounded-full">{risks.length}</span>
+                            ) : (
+                              <span className="text-xs text-gray-300">—</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3 hidden lg:table-cell">
+                            {decisions.length > 0 ? (
+                              <span className="text-xs px-2 py-0.5 bg-green-50 text-green-700 rounded-full">{decisions.length}</span>
+                            ) : (
+                              <span className="text-xs text-gray-300">—</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <button
+                              onClick={e => { e.stopPropagation(); setMergeWinner(p) }}
+                              className="text-[10px] text-gray-400 hover:text-amber-600 hover:bg-amber-50 px-2 py-0.5 rounded transition-colors whitespace-nowrap"
+                              title="Merge another project into this one"
+                            >
+                              Merge ↗
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {filtered.length > 0 && (
+              <p className="text-xs text-gray-400 text-right">
+                {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+                {filter !== 'all' || search ? ` (filtered from ${projects.length})` : ''}
+              </p>
+            )}
+          </>
+        )}
+
+        {/* ── Categories tab ───────────────────────────────── */}
+        {activeTab === 'Categories' && (
+          <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+            <CategoriesTab />
           </div>
         )}
 
-        {/* Summary */}
-        {filtered.length > 0 && (
-          <p className="text-xs text-gray-400 text-right">
-            {filtered.length} project{filtered.length !== 1 ? 's' : ''}
-            {filter !== 'all' || search ? ` (filtered from ${projects.length})` : ''}
-          </p>
+        {/* ── Topic Pods tab ───────────────────────────────── */}
+        {activeTab === 'Topic Pods' && (
+          <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+            <TopicPodsTab />
+          </div>
         )}
+
+        {/* ── Knowledge tab ────────────────────────────────── */}
+        {activeTab === 'Knowledge' && (
+          <div className="bg-white border border-[#e5e5e3] rounded-2xl p-4">
+            <KnowledgeTab />
+          </div>
+        )}
+
       </div>
 
       {showModal && <NewProjectModal onClose={() => setShowModal(false)} />}

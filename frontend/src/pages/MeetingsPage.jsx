@@ -85,6 +85,7 @@ function NewCatForm({
   newCatScope, setNewCatScope,
   newCatSaving,
   onCancel, onSave,
+  error,
 }) {
   return (
     <div className="px-2 py-2 border-t border-[#f0f0ee]">
@@ -123,6 +124,7 @@ function NewCatForm({
           </button>
         ))}
       </div>
+      {error && <p className="text-[10px] text-red-600 mb-1">{error}</p>}
       <div className="flex gap-1">
         <button
           onMouseDown={e => { e.preventDefault(); onCancel() }}
@@ -144,6 +146,7 @@ function NewPodForm({
   newPodDesc, setNewPodDesc,
   newPodSaving,
   onCancel, onSave,
+  error,
 }) {
   return (
     <div className="px-2 py-2 border-t border-[#f0f0ee]">
@@ -161,6 +164,7 @@ function NewPodForm({
         placeholder="Description (optional)…"
         className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300"
       />
+      {error && <p className="text-[10px] text-red-600 mb-1">{error}</p>}
       <div className="flex gap-1">
         <button
           onMouseDown={e => { e.preventDefault(); onCancel() }}
@@ -177,7 +181,7 @@ function NewPodForm({
 }
 
 // ── New knowledge inline form (module-level) ───────────────────────────────────
-function NewKnowForm({ newKnowTopic, setNewKnowTopic, newKnowSaving, onCancel, onSave }) {
+function NewKnowForm({ newKnowTopic, setNewKnowTopic, newKnowSaving, onCancel, onSave, error }) {
   return (
     <div className="px-2 py-2 border-t border-[#f0f0ee]">
       <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New knowledge entry</p>
@@ -188,6 +192,7 @@ function NewKnowForm({ newKnowTopic, setNewKnowTopic, newKnowSaving, onCancel, o
         placeholder="Topic / title…"
         className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
       />
+      {error && <p className="text-[10px] text-red-600 mb-1">{error}</p>}
       <div className="flex gap-1">
         <button
           onMouseDown={e => { e.preventDefault(); onCancel() }}
@@ -204,7 +209,7 @@ function NewKnowForm({ newKnowTopic, setNewKnowTopic, newKnowSaving, onCancel, o
 }
 
 // ── New observation/journal inline form (module-level) ─────────────────────────
-function NewObsForm({ newObsContent, setNewObsContent, newObsSaving, onCancel, onSave }) {
+function NewObsForm({ newObsContent, setNewObsContent, newObsSaving, onCancel, onSave, error }) {
   return (
     <div className="px-2 py-2 border-t border-[#f0f0ee]">
       <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New journal entry</p>
@@ -216,6 +221,7 @@ function NewObsForm({ newObsContent, setNewObsContent, newObsSaving, onCancel, o
         rows={3}
         className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 resize-none"
       />
+      {error && <p className="text-[10px] text-red-600 mb-1">{error}</p>}
       <div className="flex gap-1">
         <button
           onMouseDown={e => { e.preventDefault(); onCancel() }}
@@ -258,22 +264,26 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   const [newCatScope,  setNewCatScope]  = useState('global')
   const [newCatHint,   setNewCatHint]   = useState('')
   const [newCatSaving, setNewCatSaving] = useState(false)
+  const [newCatError,  setNewCatError]  = useState(null)
 
   // ── New pod inline form ───────────────────────────────────────
   const [newPodMode,   setNewPodMode]   = useState(false)
   const [newPodName,   setNewPodName]   = useState('')
   const [newPodDesc,   setNewPodDesc]   = useState('')
   const [newPodSaving, setNewPodSaving] = useState(false)
+  const [newPodError,  setNewPodError]  = useState(null)
 
   // ── New knowledge inline form ─────────────────────────────────
   const [newKnowMode,   setNewKnowMode]   = useState(false)
   const [newKnowTopic,  setNewKnowTopic]  = useState('')
   const [newKnowSaving, setNewKnowSaving] = useState(false)
+  const [newKnowError,  setNewKnowError]  = useState(null)
 
   // ── New observation inline form ───────────────────────────────
   const [newObsMode,    setNewObsMode]    = useState(false)
   const [newObsContent, setNewObsContent] = useState('')
   const [newObsSaving,  setNewObsSaving]  = useState(false)
+  const [newObsError,   setNewObsError]   = useState(null)
 
   // ── Secondary categories for this meeting ─────────────────────
   const { data: catAssignments, refetch: refetchCats } = useQuery({
@@ -347,7 +357,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   // ── Create new category ───────────────────────────────────────
   const handleCreateCategory = async () => {
     if (!newCatName.trim() || newCatSaving) return
-    setNewCatSaving(true)
+    setNewCatSaving(true); setNewCatError(null)
     try {
       const cat = await createMeetingCategory({
         name:             newCatName.trim(),
@@ -366,6 +376,8 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
         setSecondaryOpen(false)
       }
       setNewCatFor(null); setNewCatName(''); setNewCatHint(''); setNewCatColor('#7F77DD'); setNewCatScope('global')
+    } catch (err) {
+      setNewCatError(err?.response?.data?.error || err?.message || 'Failed to create category')
     } finally {
       setNewCatSaving(false)
     }
@@ -374,12 +386,14 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   // ── Create new pod ────────────────────────────────────────────
   const handleCreatePod = async () => {
     if (!newPodName.trim() || newPodSaving) return
-    setNewPodSaving(true)
+    setNewPodSaving(true); setNewPodError(null)
     try {
       const pod = await createTopicPod({ name: newPodName.trim(), description: newPodDesc.trim(), status: 'active' })
       qc.invalidateQueries({ queryKey: ['topic-pods'] })
       await saveMut({ linked_pod_id: pod.id })
       setPodOpen(false); setNewPodMode(false); setNewPodName(''); setNewPodDesc('')
+    } catch (err) {
+      setNewPodError(err?.response?.data?.error || err?.message || 'Failed to create pod')
     } finally {
       setNewPodSaving(false)
     }
@@ -388,12 +402,14 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   // ── Create new knowledge entry ────────────────────────────────
   const handleCreateKnowledge = async () => {
     if (!newKnowTopic.trim() || newKnowSaving) return
-    setNewKnowSaving(true)
+    setNewKnowSaving(true); setNewKnowError(null)
     try {
       const entry = await createKnowledge({ topic: newKnowTopic.trim(), status: 'active' })
       qc.invalidateQueries({ queryKey: ['knowledge', 'active'] })
       await saveMut({ linked_knowledge_id: entry.id })
       setKnowOpen(false); setNewKnowMode(false); setNewKnowTopic('')
+    } catch (err) {
+      setNewKnowError(err?.response?.data?.error || err?.message || 'Failed to create knowledge entry')
     } finally {
       setNewKnowSaving(false)
     }
@@ -402,12 +418,14 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   // ── Create new observation/journal entry ──────────────────────
   const handleCreateObservation = async () => {
     if (!newObsContent.trim() || newObsSaving) return
-    setNewObsSaving(true)
+    setNewObsSaving(true); setNewObsError(null)
     try {
       const obs = await createObservation({ content: newObsContent.trim() })
       qc.invalidateQueries({ queryKey: ['observations'] })
       await saveMut({ linked_observation_id: obs.id })
       setObsOpen(false); setNewObsMode(false); setNewObsContent('')
+    } catch (err) {
+      setNewObsError(err?.response?.data?.error || err?.message || 'Failed to create journal entry')
     } finally {
       setNewObsSaving(false)
     }
@@ -532,8 +550,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
               newCatColor={newCatColor} setNewCatColor={setNewCatColor}
               newCatScope={newCatScope} setNewCatScope={setNewCatScope}
               newCatSaving={newCatSaving}
-              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint('') }}
+              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint(''); setNewCatError(null) }}
               onSave={handleCreateCategory}
+              error={newCatError}
             />
           ) : (
             <>
@@ -606,8 +625,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
               newCatColor={newCatColor} setNewCatColor={setNewCatColor}
               newCatScope={newCatScope} setNewCatScope={setNewCatScope}
               newCatSaving={newCatSaving}
-              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint('') }}
+              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint(''); setNewCatError(null) }}
               onSave={handleCreateCategory}
+              error={newCatError}
             />
           ) : (
             <>
@@ -672,8 +692,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
               newPodName={newPodName} setNewPodName={setNewPodName}
               newPodDesc={newPodDesc} setNewPodDesc={setNewPodDesc}
               newPodSaving={newPodSaving}
-              onCancel={() => { setNewPodMode(false); setNewPodName(''); setNewPodDesc('') }}
+              onCancel={() => { setNewPodMode(false); setNewPodName(''); setNewPodDesc(''); setNewPodError(null) }}
               onSave={handleCreatePod}
+              error={newPodError}
             />
           ) : (
             <>
@@ -742,8 +763,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             <NewObsForm
               newObsContent={newObsContent} setNewObsContent={setNewObsContent}
               newObsSaving={newObsSaving}
-              onCancel={() => { setNewObsMode(false); setNewObsContent('') }}
+              onCancel={() => { setNewObsMode(false); setNewObsContent(''); setNewObsError(null) }}
               onSave={handleCreateObservation}
+              error={newObsError}
             />
           ) : (
             <>
@@ -811,8 +833,9 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             <NewKnowForm
               newKnowTopic={newKnowTopic} setNewKnowTopic={setNewKnowTopic}
               newKnowSaving={newKnowSaving}
-              onCancel={() => { setNewKnowMode(false); setNewKnowTopic('') }}
+              onCancel={() => { setNewKnowMode(false); setNewKnowTopic(''); setNewKnowError(null) }}
               onSave={handleCreateKnowledge}
+              error={newKnowError}
             />
           ) : (
             <>

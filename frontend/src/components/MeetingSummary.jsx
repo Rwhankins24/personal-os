@@ -173,17 +173,17 @@ export default function MeetingSummary({ text, compact = false }) {
       const sections = parseInlineSections(displayLine)
       if (sections) {
         elements.push(
-          <div key={i} className={`space-y-1 ${elements.length > 0 ? 'mt-1' : ''}`}>
+          <div key={i} className={`space-y-0 ${elements.length > 0 ? 'mt-1' : ''}`}>
             {sections.map((sec, j) => (
-              <div key={j} className="flex items-start gap-1.5">
+              <div key={j} className={`${j > 0 ? 'mt-2' : ''}`}>
                 {sec.label && (
-                  <span className={`${compact ? 'text-[10px]' : 'text-xs'} font-bold text-[#1B2A4A] shrink-0 mt-0.5`}>
+                  <p className={`${compact ? 'text-[10px]' : 'text-xs'} font-bold text-[#1B2A4A] mb-0.5`}>
                     {sec.label}:
-                  </span>
+                  </p>
                 )}
-                <span className={`${compact ? 'text-xs' : 'text-sm'} text-[#1a1a18] leading-relaxed`}>
+                <p className={`${compact ? 'text-xs' : 'text-sm'} text-[#1a1a18] leading-relaxed ${sec.label ? 'pl-2 border-l-2 border-[#e5e5e3]' : ''}`}>
                   {renderInline(sec.content)}
-                </span>
+                </p>
               </div>
             ))}
           </div>

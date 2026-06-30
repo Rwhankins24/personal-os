@@ -165,12 +165,12 @@ module.exports = async (req, res) => {
 
     // ── Create category ───────────────────────────────────────────────────────
     if (req.method === 'POST') {
-      const { name, description, color = '#64748b', project_id: pId, sort_order = 0 } = req.body
+      const { name, description, color = '#64748b', project_id: pId, sort_order = 0, extraction_hint } = req.body
       if (!name) return res.status(400).json({ error: 'name required' })
 
       const { data, error } = await supabase
         .from('meeting_categories')
-        .insert({ name, description, color, project_id: pId || null, sort_order })
+        .insert({ name, description: description || extraction_hint || null, color, project_id: pId || null, sort_order })
         .select()
         .single()
       if (error) throw error
