@@ -366,10 +366,25 @@ const tabLabelCls = 'text-[9px] font-bold uppercase tracking-widest text-[#9b9b9
 // ── Categories Tab ────────────────────────────────────────────
 function CategoriesTab() {
   const qc = useQueryClient()
-  const { data: categories = [], isLoading } = useQuery({
+  const { data: globalCats = [], isLoading } = useQuery({
     queryKey: ['meeting-categories'],
     queryFn: () => getMeetingCategories(),
   })
+  const { data: projects = [] } = useQuery({ queryKey: ['projects'], queryFn: getProjects })
+
+  // ── Project selector ──────────────────────────────────────────
+  const [selectedProjectId, setSelectedProjectId] = useState('')
+  const selectedProject = projects.find(p => p.id === selectedProjectId) || null
+
+  const { data: projectCats = [], isLoading: projectCatsLoading } = useQuery({
+    queryKey: ['meeting-categories', selectedProjectId],
+    queryFn:  () => getMeetingCategories(selectedProjectId),
+    enabled:  !!selectedProjectId,
+  })
+
+  // All categories visible in merge dropdown = global + currently-shown project cats
+  const allCatsForMerge = [...globalCats, ...projectCats.filter(pc => !globalCats.find(c => c.id === pc.id))]
+
   const [editingId,   setEditingId]   = useState(null)
   const [editName,    setEditName]    = useState('')
   const [editColor,   setEditColor]   = useState('#7F77DD')
@@ -382,6 +397,7 @@ function CategoriesTab() {
   const [newMode,    setNewMode]    = useState(false)
   const [newName,    setNewName]    = useState('')
   const [newColor,   setNewColor]   = useState('#7F77DD')
+  const [newScope,   setNewScope]   = useState('global') // 'global' | 'project'
   const [newSaving,  setNewSaving]  = useState(false)
   const [newError,   setNewError]   = useState(null)
 
@@ -421,26 +437,87 @@ function CategoriesTab() {
 
   const handleCreate = async () => {
     if (!newName.trim() || newSaving) return
+    if (newScope === 'project' && !selectedProjectId) {
+      setNewError('Select a project above first'); return
+    }
     setNewSaving(true); setNewError(null)
     try {
-      await createMeetingCategory({ name: newName.trim(), color: newColor })
+      await createMeetingCategory({
+        name:       newName.trim(),
+        color:      newColor,
+        project_id: newScope === 'project' ? selectedProjectId : null,
+      })
       qc.invalidateQueries({ queryKey: ['meeting-categories'] })
-      setNewMode(false); setNewName(''); setNewColor('#7F77DD')
+      setNewMode(false); setNewName(''); setNewColor('#7F77DD'); setNewScope('global')
     } catch (err) {
       setNewError(err?.response?.data?.error || err?.message || 'Failed to create')
     } finally { setNewSaving(false) }
   }
 
+  // Shared category chip renderer
+  const renderCatChip = (cat) => (
+    <div key={cat.id} className="group bg-white border border-[#e5e5e3] rounded-xl px-3 py-2 flex items-center gap-2 min-w-0">
+      {editingId === cat.id ? (
+        <div className="flex flex-col gap-1.5 min-w-[180px]">
+          <input autoFocus value={editName} onChange={e => setEditName(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') saveEdit(cat.id); if (e.key === 'Escape') setEditingId(null) }}
+            className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-300" />
+          <div className="flex flex-wrap gap-1">
+            {CAT_COLORS.map(c => (
+              <button key={c} onClick={() => setEditColor(c)}
+                className="w-4 h-4 rounded-full border-2 transition-all"
+                style={{ backgroundColor: c, borderColor: editColor === c ? '#1a1a18' : 'transparent' }} />
+            ))}
+          </div>
+          {editError && <p className="text-[10px] text-red-600">{editError}</p>}
+          <div className="flex gap-1">
+            <button onClick={() => setEditingId(null)}
+              className="flex-1 text-[10px] py-0.5 rounded border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
+            <button onClick={() => saveEdit(cat.id)} disabled={editSaving}
+              className="flex-1 text-[10px] py-0.5 rounded bg-[#1a1a18] text-white disabled:opacity-40">
+              {editSaving ? '…' : 'Save'}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color || '#64748b' }} />
+          <span className="text-xs text-[#1a1a18] font-medium truncate max-w-[140px]">{cat.name}</span>
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+            <button onClick={() => startEdit(cat)} title="Edit name"
+              className="text-[10px] text-[#6b6b67] hover:text-[#1a1a18] px-1">✎</button>
+            <button onClick={() => { setMergeId(cat.id); setMergeTarget(''); setMergeError(null) }} title="Merge into another"
+              className="text-[10px] text-[#6b6b67] hover:text-[#C9A84C] px-1">⇢</button>
+            <button onClick={() => handleDelete(cat.id)} title="Delete"
+              className="text-[10px] text-[#6b6b67] hover:text-red-500 px-1">×</button>
+          </div>
+        </>
+      )}
+    </div>
+  )
+
   if (isLoading) return <p className="text-xs text-[#9b9b97] py-4 text-center">Loading…</p>
 
   return (
     <div>
+      {/* Header row */}
       <div className="flex items-center justify-between mb-3">
-        <p className={tabLabelCls}>{categories.length} categories</p>
+        <p className={tabLabelCls}>{globalCats.length} global{selectedProjectId && projectCats.length ? ` · ${projectCats.length} project-scoped` : ''}</p>
         <button onClick={() => { setNewMode(true); setNewError(null) }}
           className="text-xs px-2.5 py-1 rounded-lg bg-[#1a1a18] text-white hover:bg-gray-800 transition-colors">
           + New Category
         </button>
+      </div>
+
+      {/* Project selector */}
+      <div className="mb-3">
+        <select value={selectedProjectId} onChange={e => setSelectedProjectId(e.target.value)}
+          className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-300 w-full max-w-xs">
+          <option value="">Show project-scoped categories…</option>
+          {projects.filter(p => p.status === 'active' || !p.status).map(p => (
+            <option key={p.id} value={p.id}>{p.name}</option>
+          ))}
+        </select>
       </div>
 
       {/* New category form */}
@@ -456,9 +533,21 @@ function CategoriesTab() {
                 style={{ backgroundColor: c, borderColor: newColor === c ? '#1a1a18' : 'transparent' }} />
             ))}
           </div>
+          {/* Scope buttons — project only available when project is selected */}
+          <div className="flex gap-1.5 mb-2">
+            <button onClick={() => setNewScope('global')}
+              className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${newScope === 'global' ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'}`}>
+              Global
+            </button>
+            <button onClick={() => setNewScope('project')} disabled={!selectedProjectId}
+              title={!selectedProjectId ? 'Select a project above first' : undefined}
+              className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${newScope === 'project' ? 'bg-[#1B2A4A] text-white border-[#1B2A4A]' : 'border-[#e5e5e3] text-[#6b6b67]'} ${!selectedProjectId ? 'opacity-40 cursor-not-allowed' : ''}`}>
+              {selectedProject ? selectedProject.name : 'This project'}
+            </button>
+          </div>
           {newError && <p className="text-[10px] text-red-600 mb-1">{newError}</p>}
           <div className="flex gap-2">
-            <button onClick={() => { setNewMode(false); setNewName(''); setNewError(null) }}
+            <button onClick={() => { setNewMode(false); setNewName(''); setNewError(null); setNewScope('global') }}
               className="flex-1 text-xs py-1.5 rounded-lg border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
             <button onClick={handleCreate} disabled={!newName.trim() || newSaving}
               className="flex-1 text-xs py-1.5 rounded-lg bg-[#C9A84C] text-white disabled:opacity-40 hover:bg-[#b8943d] transition-colors">
@@ -472,13 +561,13 @@ function CategoriesTab() {
       {mergeId && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-3">
           <p className="text-[9px] font-bold uppercase tracking-widest text-amber-700 mb-2">
-            Merge "{categories.find(c => c.id === mergeId)?.name}" into…
+            Merge "{allCatsForMerge.find(c => c.id === mergeId)?.name}" into…
           </p>
           <select value={mergeTarget} onChange={e => setMergeTarget(e.target.value)}
             className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 mb-2 bg-white focus:outline-none">
             <option value="">Pick target category…</option>
-            {categories.filter(c => c.id !== mergeId).map(c => (
-              <option key={c.id} value={c.id}>{c.name}</option>
+            {allCatsForMerge.filter(c => c.id !== mergeId).map(c => (
+              <option key={c.id} value={c.id}>{c.name}{c.project_id ? ' (project)' : ''}</option>
             ))}
           </select>
           {mergeError && <p className="text-[10px] text-red-600 mb-1">{mergeError}</p>}
@@ -493,50 +582,34 @@ function CategoriesTab() {
         </div>
       )}
 
-      {/* Category chips */}
-      <div className="flex flex-wrap gap-2">
-        {categories.map(cat => (
-          <div key={cat.id} className="group bg-white border border-[#e5e5e3] rounded-xl px-3 py-2 flex items-center gap-2 min-w-0">
-            {editingId === cat.id ? (
-              <div className="flex flex-col gap-1.5 min-w-[180px]">
-                <input autoFocus value={editName} onChange={e => setEditName(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter') saveEdit(cat.id); if (e.key === 'Escape') setEditingId(null) }}
-                  className="text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-300" />
-                <div className="flex flex-wrap gap-1">
-                  {CAT_COLORS.map(c => (
-                    <button key={c} onClick={() => setEditColor(c)}
-                      className="w-4 h-4 rounded-full border-2 transition-all"
-                      style={{ backgroundColor: c, borderColor: editColor === c ? '#1a1a18' : 'transparent' }} />
-                  ))}
-                </div>
-                {editError && <p className="text-[10px] text-red-600">{editError}</p>}
-                <div className="flex gap-1">
-                  <button onClick={() => setEditingId(null)}
-                    className="flex-1 text-[10px] py-0.5 rounded border border-[#e5e5e3] text-[#6b6b67]">Cancel</button>
-                  <button onClick={() => saveEdit(cat.id)} disabled={editSaving}
-                    className="flex-1 text-[10px] py-0.5 rounded bg-[#1a1a18] text-white disabled:opacity-40">
-                    {editSaving ? '…' : 'Save'}
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color || '#64748b' }} />
-                <span className="text-xs text-[#1a1a18] font-medium truncate max-w-[140px]">{cat.name}</span>
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                  <button onClick={() => startEdit(cat)} title="Edit name"
-                    className="text-[10px] text-[#6b6b67] hover:text-[#1a1a18] px-1">✎</button>
-                  <button onClick={() => { setMergeId(cat.id); setMergeTarget(''); setMergeError(null) }} title="Merge into another"
-                    className="text-[10px] text-[#6b6b67] hover:text-[#C9A84C] px-1">⇢</button>
-                  <button onClick={() => handleDelete(cat.id)} title="Delete"
-                    className="text-[10px] text-[#6b6b67] hover:text-red-500 px-1">×</button>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+      {/* Global categories section */}
+      <div className="mb-4">
+        <p className="text-[9px] font-bold uppercase tracking-widest text-[#9b9b97] mb-2">Global</p>
+        <div className="flex flex-wrap gap-2">
+          {globalCats.map(cat => renderCatChip(cat))}
+        </div>
+        {globalCats.length === 0 && <p className="text-xs text-[#9b9b97] py-3 text-center">No global categories yet</p>}
       </div>
-      {categories.length === 0 && <p className="text-xs text-[#9b9b97] py-6 text-center">No categories yet</p>}
+
+      {/* Project-scoped categories section */}
+      {selectedProjectId && (
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-widest text-[#9b9b97] mb-2">
+            {selectedProject?.name || 'Project'} — scoped
+          </p>
+          {projectCatsLoading
+            ? <p className="text-xs text-[#9b9b97] py-2">Loading…</p>
+            : (
+              <div className="flex flex-wrap gap-2">
+                {projectCats.map(cat => renderCatChip(cat))}
+                {projectCats.length === 0 && (
+                  <p className="text-xs text-[#9b9b97] py-3">No project-scoped categories for this project yet — create one above with "This project" scope.</p>
+                )}
+              </div>
+            )
+          }
+        </div>
+      )}
     </div>
   )
 }

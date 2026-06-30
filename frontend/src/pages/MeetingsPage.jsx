@@ -87,6 +87,7 @@ function NewCatForm({
   newCatSaving,
   onCancel, onSave,
   error,
+  hasProject,
 }) {
   return (
     <div className="px-2 py-2 border-t border-[#f0f0ee]">
@@ -114,17 +115,19 @@ function NewCatForm({
           />
         ))}
       </div>
-      <div className="flex gap-1 mb-2">
-        {['global','project'].map(s => (
-          <button
-            key={s}
-            onMouseDown={e => { e.preventDefault(); setNewCatScope(s) }}
-            className={`flex-1 text-[10px] py-1 rounded-md border transition-colors ${newCatScope === s ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'}`}
-          >
-            {s === 'global' ? 'Global' : 'This project'}
-          </button>
-        ))}
+      <div className="flex gap-1 mb-1">
+        <button
+          onMouseDown={e => { e.preventDefault(); setNewCatScope('global') }}
+          className={`flex-1 text-[10px] py-1 rounded-md border transition-colors ${newCatScope === 'global' ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'}`}
+        >Global</button>
+        <button
+          onMouseDown={e => { e.preventDefault(); if (hasProject) setNewCatScope('project') }}
+          disabled={!hasProject}
+          title={!hasProject ? 'Link this meeting to a project first' : undefined}
+          className={`flex-1 text-[10px] py-1 rounded-md border transition-colors ${newCatScope === 'project' ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'} ${!hasProject ? 'opacity-40 cursor-not-allowed' : ''}`}
+        >This project</button>
       </div>
+      {!hasProject && <p className="text-[9px] text-[#9b9b97] mb-1.5">Link meeting to a project to create project-scoped categories</p>}
       {error && <p className="text-[10px] text-red-600 mb-1">{error}</p>}
       <div className="flex gap-1">
         <button
@@ -293,17 +296,29 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   })
   const secondaryCats = catAssignments?.secondaries || []
 
+  // ── Project-scoped categories for this meeting's project ──────
+  const { data: projectScopedCats = [] } = useQuery({
+    queryKey: ['meeting-categories', meeting.project_id],
+    queryFn:  () => getMeetingCategories(meeting.project_id),
+    enabled:  !!meeting.project_id,
+  })
+  // Merge global + project-scoped, deduped by id
+  const allCatsMerged = [
+    ...allCategories,
+    ...projectScopedCats.filter(pc => !allCategories.find(c => c.id === pc.id)),
+  ]
+
   // ── Derived linked entities ───────────────────────────────────
   const currentProject   = projects.find(p => p.id === meeting.project_id) || null
-  const currentPrimary   = allCategories.find(c => c.id === meeting.primary_category_id) || null
+  const currentPrimary   = allCatsMerged.find(c => c.id === meeting.primary_category_id) || catAssignments?.primary || null
   const currentPod       = allPods.find(p => p.id === meeting.linked_pod_id) || null
   const currentObs       = allObservations.find(o => o.id === meeting.linked_observation_id) || null
   const currentKnowledge = allKnowledge.find(k => k.id === meeting.linked_knowledge_id) || null
 
   // ── Filtered lists ────────────────────────────────────────────
   const filteredProjects  = projects.filter(p => !projectQ || p.name.toLowerCase().includes(projectQ.toLowerCase()))
-  const filteredPrimary   = allCategories.filter(c => !primaryQ   || c.name.toLowerCase().includes(primaryQ.toLowerCase()))
-  const filteredSecondary = allCategories.filter(c =>
+  const filteredPrimary   = allCatsMerged.filter(c => !primaryQ   || c.name.toLowerCase().includes(primaryQ.toLowerCase()))
+  const filteredSecondary = allCatsMerged.filter(c =>
     (!secondaryQ || c.name.toLowerCase().includes(secondaryQ.toLowerCase())) &&
     !secondaryCats.find(s => s.id === c.id) &&
     c.id !== meeting.primary_category_id
@@ -358,6 +373,10 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   // ── Create new category ───────────────────────────────────────
   const handleCreateCategory = async () => {
     if (!newCatName.trim() || newCatSaving) return
+    if (newCatScope === 'project' && !meeting.project_id) {
+      setNewCatError('Link this meeting to a project first')
+      return
+    }
     setNewCatSaving(true); setNewCatError(null)
     try {
       const cat = await createMeetingCategory({
@@ -370,6 +389,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
       if (newCatFor === 'primary') {
         await assignPrimaryCategory(meeting.id, cat.id)
         onUpdate(meeting.id, { primary_category_id: cat.id })
+        refetchCats()
         setPrimaryOpen(false)
       } else {
         await addSecondaryCategory(meeting.id, cat.id)
@@ -554,6 +574,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
               onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint(''); setNewCatError(null) }}
               onSave={handleCreateCategory}
               error={newCatError}
+              hasProject={!!meeting.project_id}
             />
           ) : (
             <>
@@ -629,6 +650,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
               onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint(''); setNewCatError(null) }}
               onSave={handleCreateCategory}
               error={newCatError}
+              hasProject={!!meeting.project_id}
             />
           ) : (
             <>
