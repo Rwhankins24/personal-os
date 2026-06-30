@@ -1628,10 +1628,10 @@ Respond with JSON only:
   // Steps 1-2.45 above always run (fast DB reads, set variables needed by Steps 5+).
   // Steps 3-4.5 below are the expensive AI-call block. If RESUME_FROM_STEP >= 3,
   // those steps were already completed in a prior run — skip straight to Step 5.
-  stepsThreeToFour: {
+  stepsThreeToEmail: {
     if (RESUME_FROM_STEP >= 3) {
-      console.log(`⏭  RESUME_FROM_STEP=${RESUME_FROM_STEP}: Skipping Steps 3–4.5 (already completed in prior run)`)
-      break stepsThreeToFour
+      console.log(`⏭  RESUME_FROM_STEP=${RESUME_FROM_STEP}: Skipping Steps 3–3.8 email AI (already completed in prior run)`)
+      break stepsThreeToEmail
     }
 
   // ── STEP 3: Summarize threads ───────────────────────────────────
@@ -3211,7 +3211,12 @@ Be specific and cite concrete details. Avoid generic statements.`
     console.log(`  ✗ Lead file processing error: ${err.message}`)
   }
 
-  // ── STEP 2.6: Process meeting transcripts (Otter + Plaud) ───────
+  } // end stepsThreeToEmail — email AI block (Steps 3–3.8)
+  // Step 2.6 runs ALWAYS regardless of RESUME_FROM_STEP.
+  // Plaud meeting intelligence is independent of email summarization — it reads
+  // directly from meeting_notes in the DB and must not be skipped on resume runs.
+
+  // ── STEP 2.6: Process Plaud meeting transcripts ──────────────────
   console.log('Step 2.6: Processing Plaud meeting intelligence...')
 
   // Load global + project category map once — used to inject category context per meeting
@@ -4106,6 +4111,16 @@ Be direct and specific. No fluff.`
     console.log(`  ✗ Plaud error: ${err.message}`)
   }
 
+  // Step 2.6 complete — legStatus.plaud is now set for Step 3.9 below.
+  // ── RESUME GUARD 2: skip Steps 3.9–4.5 when resuming ──────────────────────
+  // Step 2.6 above always runs. Steps 3.9–4.5 were already completed
+  // in the prior run and don't need to repeat on a resume.
+  stepsObsToFour: {
+    if (RESUME_FROM_STEP >= 3) {
+      console.log(`⏭  RESUME_FROM_STEP=${RESUME_FROM_STEP}: Skipping Steps 3.9–4.5 observations/tasks (already completed)`)
+      break stepsObsToFour
+    }
+
   // ── STEP 3.9: Extract daily observations — unified three-leg synthesis ────
   // Three-legged stool: Email + Plaud + Manual. Synthesizes ALL available legs.
   // If one leg is missing today (e.g. email pull crashed), uses what the others provide.
@@ -4494,7 +4509,7 @@ Return a JSON array of observation strings only. No explanation.
   results.tasks_enriched += refreshed
   console.log(`  ✓ Refreshed: ${refreshed} stale items updated, ${reopened} re-opened threads flagged`)
 
-  } // end stepsThreeToFour — labeled block for RESUME_FROM_STEP guard
+  } // end stepsObsToFour — Steps 3.9–4.5 resume guard
 
   // ── STEP 5: Extract commitments ─────────────────────────────────
   console.log('Step 5: Extracting commitments...')
