@@ -1,3 +1,6 @@
+# Claude Code agent worktrees — ephemeral session artifacts, never commit
+.claude/
+
 data/last-email-report.json
 data/last-otter-report.json
 data/last-plaud-report.json
