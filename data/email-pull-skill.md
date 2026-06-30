@@ -2,11 +2,12 @@
 name: email-pull
 description: >
   Morning email classification pipeline for Ryan Hankins. Pulls inbox and sent items
-  from Outlook (last 48h), classifies into 6 buckets by thread, cross-references against
-  yesterday's report, tags each thread with metadata, pushes to personal-os webhook,
-  and saves a structured handoff JSON for the 4:15am pipeline. This skill runs at 4:15am
-  daily via Cowork scheduled task. Trigger on: "pull my emails", "classify inbox",
-  "run email pull", "morning email prep", or on schedule at 4:15am.
+  from Outlook for the previous day (midnight-to-midnight Phoenix time, UTC-7), classifies
+  into 6 buckets by thread, cross-references against yesterday's report, tags each thread
+  with metadata, pushes to personal-os webhook, and saves a structured handoff JSON for
+  the 4:15am pipeline. This skill runs at 4:15am daily via Cowork scheduled task.
+  Trigger on: "pull my emails", "classify inbox", "run email pull", "morning email prep",
+  or on schedule at 4:15am.
 ---
 
 # Email Pull & Classification Pipeline
@@ -130,25 +131,20 @@ Use the actual detected absolute path in ALL Read, Write, and Bash file operatio
 date '+%Y-%m-%d'
 ```
 
-Store `TODAY_ISO`. Then determine the pull window — use last successful run date
-so gaps from travel are automatically caught:
+Store `TODAY_ISO`. Then determine the **strict 24-hour pull window** for yesterday:
 
-```bash
-curl -s \
-  "https://dvevqwhphrcboyjpvnlz.supabase.co/rest/v1/pipeline_status?select=processing_completed_at&order=created_at.desc&limit=2" \
-  -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+```
+YESTERDAY_ISO = TODAY_ISO minus 1 day  (e.g. if today is 2026-06-24 → yesterday = 2026-06-23)
+
+PULL_START = {YESTERDAY_ISO}T07:00:00Z   ← midnight Phoenix time (UTC-7, no DST)
+PULL_END   = {TODAY_ISO}T07:00:00Z       ← midnight Phoenix time (next day)
 ```
 
-From the result, find the most recent `processing_completed_at` from a **previous**
-run (not today). Calculate `PULL_SINCE`:
+**Always use exactly this 24-hour window.** Do NOT query Supabase for a prior run
+timestamp. Do NOT use a 48h fallback. If a date was missed, perform a manual
+backfill using the backfill workflow — do not stretch the pull window.
 
-- If a previous run timestamp exists: use that timestamp as `PULL_SINCE`
-  (this catches all emails since last successful pull, including travel gaps)
-- If no previous run found: default to `48h ago`
-- Always use whichever gives the **larger** window (earlier date)
-
-Store as `PULL_SINCE`. Log: `"Pull window: from [PULL_SINCE] to now"`
+Log: `"Pull window: from [PULL_START] to [PULL_END] (YESTERDAY_ISO, Phoenix midnight-to-midnight)"`
 
 Then load yesterday's report if it exists:
 
@@ -172,23 +168,18 @@ parameter. One date-window query covering 48h returns only 25 of 100+ threads. F
 split the date window into 4 time-sliced chunks so each chunk has fewer emails and the
 25-cap covers more of each slice. Add 3 keyword queries for thematic coverage.
 
-Calculate 6-hour time slices from PULL_SINCE to now. Each slice covers exactly 6 hours,
-keeping each query well under the connector's 25-result cap (~10-14 emails per 6h window
-on a typical day). Number of slices varies with window size:
-- 24h window → 4 slices
-- 48h window → 8 slices
+Split the 24-hour window into exactly 4 fixed 6-hour slices. Each slice covers
+exactly 6 hours, keeping each query well under the connector's 25-result cap
+(~10-14 emails per 6h window on a typical day):
 
-Calculate slices dynamically:
 ```
-windowHours = (now - PULL_SINCE) in hours
-numSlices   = ceil(windowHours / 6)
-sliceSize   = windowHours / numSlices  (always ≤ 6h)
+Slice 1: PULL_START + 0h  → PULL_START + 6h   (e.g. 07:00Z–13:00Z)
+Slice 2: PULL_START + 6h  → PULL_START + 12h  (e.g. 13:00Z–19:00Z)
+Slice 3: PULL_START + 12h → PULL_START + 18h  (e.g. 19:00Z–01:00Z next day)
+Slice 4: PULL_START + 18h → PULL_END          (e.g. 01:00Z–07:00Z next day)
+```
 
-For i in 0..numSlices-1:
-  SLICE_START[i] = PULL_SINCE + i * sliceSize
-  SLICE_END[i]   = PULL_SINCE + (i+1) * sliceSize
-```
-Last slice has no `beforeDateTime` (open-ended to now).
+Always exactly 4 slices. No dynamic calculation needed.
 
 **IMPORTANT — BATCHED execution to prevent socket drops:**
 Do NOT fire all slices at once. The M365 connector drops connections when too many

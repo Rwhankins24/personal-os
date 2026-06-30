@@ -1416,7 +1416,12 @@ Return ONLY valid JSON:
   try {
     const text = message.content[0].text
     const clean = text.replace(/```json|```/g, '').trim()
-    const parsed = JSON.parse(clean)
+    // Haiku sometimes appends explanatory text after the closing brace — extract
+    // just the outermost JSON object to avoid "Unexpected non-whitespace" parse errors
+    const firstBrace = clean.indexOf('{')
+    const lastBrace = clean.lastIndexOf('}')
+    if (firstBrace === -1 || lastBrace === -1) throw new Error('No JSON object found in response')
+    const parsed = JSON.parse(clean.slice(firstBrace, lastBrace + 1))
     // Always preserve the full Plaud report as summary — don't let Haiku summarize it
     if (parsed.meeting_outcome) {
       parsed.meeting_outcome.summary = summaryText
