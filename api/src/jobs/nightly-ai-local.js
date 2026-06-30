@@ -542,10 +542,10 @@ async function main() {
     tasks_enriched: 0,
     questions_logged: 0,
     daily_brief: null,
-    otter_meetings_processed: 0,
-    otter_tasks_created: 0,
-    otter_my_commitments: 0,
-    otter_others_created: 0,
+    plaud_meetings_processed: 0,
+    plaud_tasks_created: 0,
+    plaud_my_commitments: 0,
+    plaud_others_created: 0,
     cross_refs_created: 0,
     knowledge_created: 0,
     observations_created: 0,
@@ -912,6 +912,12 @@ Respond with just the sentence, no quotes, no JSON.`
   // Increased cap from 25→50. Orders critical/high urgency first, then by days_waiting.
   // This ensures the most important threads always get AI processing within the cap.
   const THREAD_CAP = parseInt(process.env.THREAD_CAP || '50', 10)
+  // RESUME_FROM_STEP: skip expensive AI steps when resuming after a timeout.
+  // Usage: RESUME_FROM_STEP=5 node api/src/jobs/nightly-ai-local.js
+  // Steps 1-2.45 always run (fast DB reads that set required variables).
+  // Steps 3-4.5 are skipped when RESUME_FROM_STEP >= 3 (already completed).
+  // Step 5+ always runs.
+  const RESUME_FROM_STEP = parseFloat(process.env.RESUME_FROM_STEP || '0')
   console.log('Step 2: Fetching active emails...')
   const { data: activeEmailsRaw } = await supabase
     .from('emails')
@@ -1262,20 +1268,18 @@ Respond with JSON only:
   // where the calendar event wasn't available at insert time.
   console.log('Step 2.44: Re-matching unlinked Plaud meetings to calendar events...')
   try {
-    // Only re-attempt matching for meetings within the last 30 days.
-    // Without this window the query scans all unlinked meetings ever recorded,
-    // making one Haiku call per meeting every single nightly run.
-    const thirtyDaysAgo = new Date()
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-
+    // Match ALL unprocessed Plaud meetings that lack a calendar link.
+    // Scoped to intelligence_extracted=false so each meeting is only attempted BEFORE
+    // its intelligence extraction runs — once extracted, event_id is expected to be set
+    // already; re-matching after extraction provides no benefit and wastes Haiku calls.
+    // No date window or cap: backfill + new imports must ALL be matched before Step 2.6.
     const { data: unlinkedMeetings } = await supabase
       .from('meeting_notes')
       .select('id, title, start_time, participants, raw_transcript, full_transcript, summary, short_summary')
       .eq('source', 'plaud')
+      .eq('intelligence_extracted', false)
       .is('event_id', null)
       .not('start_time', 'is', null)
-      .gte('start_time', thirtyDaysAgo.toISOString())
-      .limit(20)
 
     let relinked = 0
     for (const mn of (unlinkedMeetings || [])) {
@@ -1619,6 +1623,16 @@ Respond with JSON only:
       console.log(`  ✓ Phase 1B DB supplement: ${dbHits} additional threads from emails.extracted`)
     }
   }
+
+  // ── RESUME GUARD: skip Steps 3–4.5 when resuming after a timeout ──────────
+  // Steps 1-2.45 above always run (fast DB reads, set variables needed by Steps 5+).
+  // Steps 3-4.5 below are the expensive AI-call block. If RESUME_FROM_STEP >= 3,
+  // those steps were already completed in a prior run — skip straight to Step 5.
+  stepsThreeToFour: {
+    if (RESUME_FROM_STEP >= 3) {
+      console.log(`⏭  RESUME_FROM_STEP=${RESUME_FROM_STEP}: Skipping Steps 3–4.5 (already completed in prior run)`)
+      break stepsThreeToFour
+    }
 
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
@@ -3198,7 +3212,7 @@ Be specific and cite concrete details. Avoid generic statements.`
   }
 
   // ── STEP 2.6: Process meeting transcripts (Otter + Plaud) ───────
-  console.log('Step 2.6: Processing meeting intelligence (Otter + Plaud)...')
+  console.log('Step 2.6: Processing Plaud meeting intelligence...')
 
   // Load global + project category map once — used to inject category context per meeting
   const { data: allMeetingCategories = [] } = await supabase
@@ -3336,7 +3350,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                   .select('id')
                   .maybeSingle()
 
-                results.otter_tasks_created++
+                results.plaud_tasks_created++
 
                 if (smcResult.match && smcResult.confidence >= 65) {
                   await logAIQuestion(
@@ -3447,7 +3461,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                   .select('id')
                   .maybeSingle()
 
-                results.otter_others_created++
+                results.plaud_others_created++
 
                 if (smcResult.match && smcResult.confidence >= 65) {
                   await logAIQuestion(
@@ -3673,7 +3687,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                   made_on:         today,
                   project_id:      projectId || null,
                 })
-                results.otter_my_commitments++
+                results.plaud_my_commitments++
               }
             }
 
@@ -3722,7 +3736,7 @@ Be specific and cite concrete details. Avoid generic statements.`
                   meeting_note_id: meeting.id,
                   status:          'open',
                 })
-                results.otter_others_created++
+                results.plaud_others_created++
               }
             }
 
@@ -4072,21 +4086,24 @@ Be direct and specific. No fluff.`
           }
         }
 
-        results.otter_meetings_processed++
+        results.plaud_meetings_processed++
       } catch (err) {
-        results.errors.push(`Otter ${meeting.otter_id}: ${err.message}`)
+        results.errors.push(`Plaud ${meeting.id}: ${err.message}`)
       }
     }
 
     console.log(
-      `  ✓ Otter: ${results.otter_meetings_processed} meetings, ` +
-      `${results.otter_tasks_created} tasks, ` +
-      `${results.otter_my_commitments} my commitments, ` +
-      `${results.otter_others_created} others`
+      `  ✓ Plaud: ${results.plaud_meetings_processed} meetings, ` +
+      `${results.plaud_tasks_created} tasks, ` +
+      `${results.plaud_my_commitments} my commitments, ` +
+      `${results.plaud_others_created} others`
     )
+    // If Step 2.6 processed meetings, mark Plaud leg as active for three-leg synthesis
+    // (Step 2.4 only sets this when loading NEW meetings; meetings already in DB also count)
+    if (results.plaud_meetings_processed > 0) legStatus.plaud = true
   } catch (err) {
-    results.errors.push(`Otter processing: ${err.message}`)
-    console.log(`  ✗ Otter error: ${err.message}`)
+    results.errors.push(`Plaud processing: ${err.message}`)
+    console.log(`  ✗ Plaud error: ${err.message}`)
   }
 
   // ── STEP 3.9: Extract daily observations — unified three-leg synthesis ────
@@ -4477,6 +4494,8 @@ Return a JSON array of observation strings only. No explanation.
   results.tasks_enriched += refreshed
   console.log(`  ✓ Refreshed: ${refreshed} stale items updated, ${reopened} re-opened threads flagged`)
 
+  } // end stepsThreeToFour — labeled block for RESUME_FROM_STEP guard
+
   // ── STEP 5: Extract commitments ─────────────────────────────────
   console.log('Step 5: Extracting commitments...')
   for (const email of (activeEmails || [])) {
@@ -4855,14 +4874,14 @@ Respond ONLY with valid JSON:
   // ── STEP 5.5: Cross-reference synthesis ────────────────────────
   console.log('Step 5.5: Cross-referencing sources...')
   try {
-    const { data: otterItems } = await supabase
+    const { data: plaudItems } = await supabase
       .from('tasks')
       .select('*')
       .in('source_type', ['ai_otter', 'ai_plaud'])
       .eq('source_date', today)
       .limit(20)
 
-    const { data: otterCommitments } = await supabase
+    const { data: plaudCommitments } = await supabase
       .from('commitments')
       .select('*')
       .in('source_type', ['ai_otter', 'ai_plaud'])
@@ -4875,12 +4894,12 @@ Respond ONLY with valid JSON:
       .in('bucket', [1, 2])
       .limit(20)
 
-    const allOtterItems = [
-      ...(otterItems || []),
-      ...(otterCommitments || [])
+    const allPlaudItems = [
+      ...(plaudItems || []),
+      ...(plaudCommitments || [])
     ]
 
-    for (const item of allOtterItems) {
+    for (const item of allPlaudItems) {
       const titleWords = (item.title || '')
         .toLowerCase()
         .split(' ')
