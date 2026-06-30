@@ -911,6 +911,7 @@ Respond with just the sentence, no quotes, no JSON.`
   // ── STEP 2: Get active emails ───────────────────────────────────
   // Increased cap from 25→50. Orders critical/high urgency first, then by days_waiting.
   // This ensures the most important threads always get AI processing within the cap.
+  const THREAD_CAP = parseInt(process.env.THREAD_CAP || '50', 10)
   console.log('Step 2: Fetching active emails...')
   const { data: activeEmailsRaw } = await supabase
     .from('emails')
@@ -918,7 +919,7 @@ Respond with just the sentence, no quotes, no JSON.`
     .in('bucket', [1, 2])
     .in('status', ['needs_reply', 'waiting_on'])
     .order('days_waiting', { ascending: false })
-    .limit(50)
+    .limit(THREAD_CAP)
 
   // Sort in JS: critical > high > elevated > normal, then days_waiting DESC within tier
   const URGENCY_RANK = { critical: 4, high: 3, elevated: 2, normal: 1 }
