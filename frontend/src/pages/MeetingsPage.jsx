@@ -11,8 +11,8 @@ import {
   assignPrimaryCategory, addSecondaryCategory, removeSecondaryCategory,
   createMeetingCategory, setInformationOnly,
   getTopicPods, createTopicPod,
-  getKnowledge,
-  getObservations,
+  getKnowledge, createKnowledge,
+  getObservations, createObservation,
   getWorkspaces,
 } from '../lib/api'
 import WorkspaceBar from '../components/WorkspaceBar'
@@ -77,6 +77,160 @@ function PickerPopover({ open, onClose, trigger, children, align = 'right', widt
   )
 }
 
+// ── New category inline form (module-level to prevent remount) ────────────────
+function NewCatForm({
+  newCatName, setNewCatName,
+  newCatHint, setNewCatHint,
+  newCatColor, setNewCatColor,
+  newCatScope, setNewCatScope,
+  newCatSaving,
+  onCancel, onSave,
+}) {
+  return (
+    <div className="px-2 py-2 border-t border-[#f0f0ee]">
+      <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New category</p>
+      <input
+        autoFocus
+        value={newCatName}
+        onChange={e => setNewCatName(e.target.value)}
+        placeholder="Category name…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
+      />
+      <input
+        value={newCatHint}
+        onChange={e => setNewCatHint(e.target.value)}
+        placeholder="AI focus hint (optional)…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
+      />
+      <div className="flex flex-wrap gap-1 mb-1.5">
+        {CAT_COLORS.map(c => (
+          <button
+            key={c}
+            onMouseDown={e => { e.preventDefault(); setNewCatColor(c) }}
+            className="w-4 h-4 rounded-full border-2 transition-all"
+            style={{ backgroundColor: c, borderColor: newCatColor === c ? '#1a1a18' : 'transparent' }}
+          />
+        ))}
+      </div>
+      <div className="flex gap-1 mb-2">
+        {['global','project'].map(s => (
+          <button
+            key={s}
+            onMouseDown={e => { e.preventDefault(); setNewCatScope(s) }}
+            className={`flex-1 text-[10px] py-1 rounded-md border transition-colors ${newCatScope === s ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'}`}
+          >
+            {s === 'global' ? 'Global' : 'This project'}
+          </button>
+        ))}
+      </div>
+      <div className="flex gap-1">
+        <button
+          onMouseDown={e => { e.preventDefault(); onCancel() }}
+          className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
+        >Cancel</button>
+        <button
+          onMouseDown={e => { e.preventDefault(); onSave() }}
+          disabled={!newCatName.trim() || newCatSaving}
+          className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
+        >{newCatSaving ? '…' : 'Create'}</button>
+      </div>
+    </div>
+  )
+}
+
+// ── New pod inline form (module-level to prevent remount) ─────────────────────
+function NewPodForm({
+  newPodName, setNewPodName,
+  newPodDesc, setNewPodDesc,
+  newPodSaving,
+  onCancel, onSave,
+}) {
+  return (
+    <div className="px-2 py-2 border-t border-[#f0f0ee]">
+      <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New pod</p>
+      <input
+        autoFocus
+        value={newPodName}
+        onChange={e => setNewPodName(e.target.value)}
+        placeholder="Pod name…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
+      />
+      <input
+        value={newPodDesc}
+        onChange={e => setNewPodDesc(e.target.value)}
+        placeholder="Description (optional)…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300"
+      />
+      <div className="flex gap-1">
+        <button
+          onMouseDown={e => { e.preventDefault(); onCancel() }}
+          className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
+        >Cancel</button>
+        <button
+          onMouseDown={e => { e.preventDefault(); onSave() }}
+          disabled={!newPodName.trim() || newPodSaving}
+          className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
+        >{newPodSaving ? '…' : 'Create'}</button>
+      </div>
+    </div>
+  )
+}
+
+// ── New knowledge inline form (module-level) ───────────────────────────────────
+function NewKnowForm({ newKnowTopic, setNewKnowTopic, newKnowSaving, onCancel, onSave }) {
+  return (
+    <div className="px-2 py-2 border-t border-[#f0f0ee]">
+      <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New knowledge entry</p>
+      <input
+        autoFocus
+        value={newKnowTopic}
+        onChange={e => setNewKnowTopic(e.target.value)}
+        placeholder="Topic / title…"
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
+      />
+      <div className="flex gap-1">
+        <button
+          onMouseDown={e => { e.preventDefault(); onCancel() }}
+          className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
+        >Cancel</button>
+        <button
+          onMouseDown={e => { e.preventDefault(); onSave() }}
+          disabled={!newKnowTopic.trim() || newKnowSaving}
+          className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
+        >{newKnowSaving ? '…' : 'Create'}</button>
+      </div>
+    </div>
+  )
+}
+
+// ── New observation/journal inline form (module-level) ─────────────────────────
+function NewObsForm({ newObsContent, setNewObsContent, newObsSaving, onCancel, onSave }) {
+  return (
+    <div className="px-2 py-2 border-t border-[#f0f0ee]">
+      <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New journal entry</p>
+      <textarea
+        autoFocus
+        value={newObsContent}
+        onChange={e => setNewObsContent(e.target.value)}
+        placeholder="Journal note…"
+        rows={3}
+        className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 resize-none"
+      />
+      <div className="flex gap-1">
+        <button
+          onMouseDown={e => { e.preventDefault(); onCancel() }}
+          className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
+        >Cancel</button>
+        <button
+          onMouseDown={e => { e.preventDefault(); onSave() }}
+          disabled={!newObsContent.trim() || newObsSaving}
+          className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
+        >{newObsSaving ? '…' : 'Create'}</button>
+      </div>
+    </div>
+  )
+}
+
 // ── Metadata panel (right column of expanded row) ─────────────────────────────
 function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allObservations, allKnowledge, onUpdate, onOpenCreateProject }) {
   const qc = useQueryClient()
@@ -111,12 +265,22 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
   const [newPodDesc,   setNewPodDesc]   = useState('')
   const [newPodSaving, setNewPodSaving] = useState(false)
 
+  // ── New knowledge inline form ─────────────────────────────────
+  const [newKnowMode,   setNewKnowMode]   = useState(false)
+  const [newKnowTopic,  setNewKnowTopic]  = useState('')
+  const [newKnowSaving, setNewKnowSaving] = useState(false)
+
+  // ── New observation inline form ───────────────────────────────
+  const [newObsMode,    setNewObsMode]    = useState(false)
+  const [newObsContent, setNewObsContent] = useState('')
+  const [newObsSaving,  setNewObsSaving]  = useState(false)
+
   // ── Secondary categories for this meeting ─────────────────────
   const { data: catAssignments, refetch: refetchCats } = useQuery({
     queryKey: ['meeting-cat-assignments', meeting.id],
     queryFn:  () => getMeetingCategoryAssignments(meeting.id),
   })
-  const secondaryCats = catAssignments?.secondary_categories || []
+  const secondaryCats = catAssignments?.secondaries || []
 
   // ── Derived linked entities ───────────────────────────────────
   const currentProject   = projects.find(p => p.id === meeting.project_id) || null
@@ -221,99 +385,40 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
     }
   }
 
+  // ── Create new knowledge entry ────────────────────────────────
+  const handleCreateKnowledge = async () => {
+    if (!newKnowTopic.trim() || newKnowSaving) return
+    setNewKnowSaving(true)
+    try {
+      const entry = await createKnowledge({ topic: newKnowTopic.trim(), status: 'active' })
+      qc.invalidateQueries({ queryKey: ['knowledge', 'active'] })
+      await saveMut({ linked_knowledge_id: entry.id })
+      setKnowOpen(false); setNewKnowMode(false); setNewKnowTopic('')
+    } finally {
+      setNewKnowSaving(false)
+    }
+  }
+
+  // ── Create new observation/journal entry ──────────────────────
+  const handleCreateObservation = async () => {
+    if (!newObsContent.trim() || newObsSaving) return
+    setNewObsSaving(true)
+    try {
+      const obs = await createObservation({ content: newObsContent.trim() })
+      qc.invalidateQueries({ queryKey: ['observations'] })
+      await saveMut({ linked_observation_id: obs.id })
+      setObsOpen(false); setNewObsMode(false); setNewObsContent('')
+    } finally {
+      setNewObsSaving(false)
+    }
+  }
+
   // ── Workspace ─────────────────────────────────────────────────
   const { data: workspaces = [] } = useQuery({ queryKey: ['workspaces'], queryFn: getWorkspaces, staleTime: Infinity })
 
   // ── Shared picker styles ──────────────────────────────────────
   const btnBase  = 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs text-[#1a1a18] hover:bg-[#f5f4f2] rounded-lg transition-colors'
   const labelCls = 'text-[9px] font-bold uppercase tracking-widest text-[#9b9b97] mb-1'
-
-  // ── New category form ─────────────────────────────────────────
-  function NewCatForm() {
-    return (
-      <div className="px-2 py-2 border-t border-[#f0f0ee]">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New category</p>
-        <input
-          autoFocus
-          value={newCatName}
-          onChange={e => setNewCatName(e.target.value)}
-          placeholder="Category name…"
-          className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
-        />
-        <input
-          value={newCatHint}
-          onChange={e => setNewCatHint(e.target.value)}
-          placeholder="AI focus hint (optional)…"
-          className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
-        />
-        <div className="flex flex-wrap gap-1 mb-1.5">
-          {CAT_COLORS.map(c => (
-            <button
-              key={c}
-              onMouseDown={e => { e.preventDefault(); setNewCatColor(c) }}
-              className="w-4 h-4 rounded-full border-2 transition-all"
-              style={{ backgroundColor: c, borderColor: newCatColor === c ? '#1a1a18' : 'transparent' }}
-            />
-          ))}
-        </div>
-        <div className="flex gap-1 mb-2">
-          {['global','project'].map(s => (
-            <button
-              key={s}
-              onMouseDown={e => { e.preventDefault(); setNewCatScope(s) }}
-              className={`flex-1 text-[10px] py-1 rounded-md border transition-colors ${newCatScope === s ? 'bg-[#1a1a18] text-white border-[#1a1a18]' : 'border-[#e5e5e3] text-[#6b6b67]'}`}
-            >
-              {s === 'global' ? 'Global' : 'This project'}
-            </button>
-          ))}
-        </div>
-        <div className="flex gap-1">
-          <button
-            onMouseDown={e => { e.preventDefault(); setNewCatFor(null); setNewCatName(''); setNewCatHint('') }}
-            className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
-          >Cancel</button>
-          <button
-            onMouseDown={e => { e.preventDefault(); handleCreateCategory() }}
-            disabled={!newCatName.trim() || newCatSaving}
-            className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
-          >{newCatSaving ? '…' : 'Create'}</button>
-        </div>
-      </div>
-    )
-  }
-
-  // ── New pod form ──────────────────────────────────────────────
-  function NewPodForm() {
-    return (
-      <div className="px-2 py-2 border-t border-[#f0f0ee]">
-        <p className="text-[9px] font-bold uppercase tracking-widest text-[#C9A84C] mb-2">New pod</p>
-        <input
-          autoFocus
-          value={newPodName}
-          onChange={e => setNewPodName(e.target.value)}
-          placeholder="Pod name…"
-          className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
-        />
-        <input
-          value={newPodDesc}
-          onChange={e => setNewPodDesc(e.target.value)}
-          placeholder="Description (optional)…"
-          className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-300"
-        />
-        <div className="flex gap-1">
-          <button
-            onMouseDown={e => { e.preventDefault(); setNewPodMode(false); setNewPodName(''); setNewPodDesc('') }}
-            className="flex-1 text-[10px] py-1 rounded-md border border-[#e5e5e3] text-[#6b6b67]"
-          >Cancel</button>
-          <button
-            onMouseDown={e => { e.preventDefault(); handleCreatePod() }}
-            disabled={!newPodName.trim() || newPodSaving}
-            className="flex-1 text-[10px] py-1 rounded-md bg-[#1a1a18] text-white disabled:opacity-40"
-          >{newPodSaving ? '…' : 'Create'}</button>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="w-52 flex-shrink-0 border-l border-[#f0f0ee] px-3 py-3 bg-[#fafaf8] space-y-3">
@@ -420,7 +525,17 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             </button>
           }
         >
-          {newCatFor === 'primary' ? <NewCatForm /> : (
+          {newCatFor === 'primary' ? (
+            <NewCatForm
+              newCatName={newCatName} setNewCatName={setNewCatName}
+              newCatHint={newCatHint} setNewCatHint={setNewCatHint}
+              newCatColor={newCatColor} setNewCatColor={setNewCatColor}
+              newCatScope={newCatScope} setNewCatScope={setNewCatScope}
+              newCatSaving={newCatSaving}
+              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint('') }}
+              onSave={handleCreateCategory}
+            />
+          ) : (
             <>
               <div className="px-2 pt-2 pb-1">
                 <input autoFocus value={primaryQ} onChange={e => setPrimaryQ(e.target.value)}
@@ -484,7 +599,17 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             </button>
           }
         >
-          {newCatFor === 'secondary' ? <NewCatForm /> : (
+          {newCatFor === 'secondary' ? (
+            <NewCatForm
+              newCatName={newCatName} setNewCatName={setNewCatName}
+              newCatHint={newCatHint} setNewCatHint={setNewCatHint}
+              newCatColor={newCatColor} setNewCatColor={setNewCatColor}
+              newCatScope={newCatScope} setNewCatScope={setNewCatScope}
+              newCatSaving={newCatSaving}
+              onCancel={() => { setNewCatFor(null); setNewCatName(''); setNewCatHint('') }}
+              onSave={handleCreateCategory}
+            />
+          ) : (
             <>
               <div className="px-2 pt-2 pb-1">
                 <input autoFocus value={secondaryQ} onChange={e => setSecondaryQ(e.target.value)}
@@ -542,7 +667,15 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             </button>
           }
         >
-          {newPodMode ? <NewPodForm /> : (
+          {newPodMode ? (
+            <NewPodForm
+              newPodName={newPodName} setNewPodName={setNewPodName}
+              newPodDesc={newPodDesc} setNewPodDesc={setNewPodDesc}
+              newPodSaving={newPodSaving}
+              onCancel={() => { setNewPodMode(false); setNewPodName(''); setNewPodDesc('') }}
+              onSave={handleCreatePod}
+            />
+          ) : (
             <>
               <div className="px-2 pt-2 pb-1">
                 <input autoFocus value={podQ} onChange={e => setPodQ(e.target.value)}
@@ -583,7 +716,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
         <p className={labelCls}>Journal</p>
         <PickerPopover
           open={obsOpen}
-          onClose={() => { setObsOpen(false); setObsQ('') }}
+          onClose={() => { setObsOpen(false); setObsQ(''); setNewObsMode(false); setNewObsContent('') }}
           align="right"
           trigger={
             <button
@@ -605,28 +738,45 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             </button>
           }
         >
-          <div className="px-2 pt-2 pb-1">
-            <input autoFocus value={obsQ} onChange={e => setObsQ(e.target.value)}
-              placeholder="Search observations…"
-              className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-[#fafaf8]"
+          {newObsMode ? (
+            <NewObsForm
+              newObsContent={newObsContent} setNewObsContent={setNewObsContent}
+              newObsSaving={newObsSaving}
+              onCancel={() => { setNewObsMode(false); setNewObsContent('') }}
+              onSave={handleCreateObservation}
             />
-          </div>
-          <div className="overflow-y-auto px-1 pb-2" style={{ maxHeight: 160 }}>
-            {currentObs && (
-              <button onMouseDown={e => { e.preventDefault(); handleLinkObs(null) }}
-                className="w-full text-left px-2 py-1.5 text-[10px] text-red-500 hover:bg-red-50 rounded-lg mb-1"
-              >✕ Remove link</button>
-            )}
-            {filteredObs.map(o => (
-              <button key={o.id} onMouseDown={e => { e.preventDefault(); handleLinkObs(o.id) }}
-                className={btnBase}
-              >
-                <span className="flex-1 truncate text-left">{(o.content || '').slice(0, 55)}</span>
-                {o.id === meeting.linked_observation_id && <span className="text-[10px] text-purple-500">✓</span>}
-              </button>
-            ))}
-            {filteredObs.length === 0 && <div className="px-2 py-2 text-[10px] text-[#9b9b97]">No observations</div>}
-          </div>
+          ) : (
+            <>
+              <div className="px-2 pt-2 pb-1">
+                <input autoFocus value={obsQ} onChange={e => setObsQ(e.target.value)}
+                  placeholder="Search observations…"
+                  className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-[#fafaf8]"
+                />
+              </div>
+              <div className="overflow-y-auto px-1 pb-1" style={{ maxHeight: 140 }}>
+                {currentObs && (
+                  <button onMouseDown={e => { e.preventDefault(); handleLinkObs(null) }}
+                    className="w-full text-left px-2 py-1.5 text-[10px] text-red-500 hover:bg-red-50 rounded-lg mb-1"
+                  >✕ Remove link</button>
+                )}
+                {filteredObs.map(o => (
+                  <button key={o.id} onMouseDown={e => { e.preventDefault(); handleLinkObs(o.id) }}
+                    className={btnBase}
+                  >
+                    <span className="flex-1 truncate text-left">{(o.content || '').slice(0, 55)}</span>
+                    {o.id === meeting.linked_observation_id && <span className="text-[10px] text-purple-500">✓</span>}
+                  </button>
+                ))}
+                {filteredObs.length === 0 && <div className="px-2 py-2 text-[10px] text-[#9b9b97]">No observations</div>}
+              </div>
+              <div className="px-2 py-1.5 border-t border-[#f0f0ee]">
+                <button
+                  onMouseDown={e => { e.preventDefault(); setNewObsMode(true) }}
+                  className="w-full text-left text-[10px] text-[#C9A84C] hover:underline py-0.5"
+                >+ create new journal entry</button>
+              </div>
+            </>
+          )}
         </PickerPopover>
       </div>
 
@@ -635,7 +785,7 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
         <p className={labelCls}>Knowledge entry</p>
         <PickerPopover
           open={knowOpen}
-          onClose={() => { setKnowOpen(false); setKnowQ('') }}
+          onClose={() => { setKnowOpen(false); setKnowQ(''); setNewKnowMode(false); setNewKnowTopic('') }}
           align="right"
           trigger={
             <button
@@ -657,28 +807,45 @@ function MeetingMetadataPanel({ meeting, projects, allCategories, allPods, allOb
             </button>
           }
         >
-          <div className="px-2 pt-2 pb-1">
-            <input autoFocus value={knowQ} onChange={e => setKnowQ(e.target.value)}
-              placeholder="Search knowledge…"
-              className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-[#fafaf8]"
+          {newKnowMode ? (
+            <NewKnowForm
+              newKnowTopic={newKnowTopic} setNewKnowTopic={setNewKnowTopic}
+              newKnowSaving={newKnowSaving}
+              onCancel={() => { setNewKnowMode(false); setNewKnowTopic('') }}
+              onSave={handleCreateKnowledge}
             />
-          </div>
-          <div className="overflow-y-auto px-1 pb-2" style={{ maxHeight: 160 }}>
-            {currentKnowledge && (
-              <button onMouseDown={e => { e.preventDefault(); handleLinkKnow(null) }}
-                className="w-full text-left px-2 py-1.5 text-[10px] text-red-500 hover:bg-red-50 rounded-lg mb-1"
-              >✕ Remove link</button>
-            )}
-            {filteredKnow.map(k => (
-              <button key={k.id} onMouseDown={e => { e.preventDefault(); handleLinkKnow(k.id) }}
-                className={btnBase}
-              >
-                <span className="flex-1 truncate text-left">{k.topic}</span>
-                {k.id === meeting.linked_knowledge_id && <span className="text-[10px] text-green-500">✓</span>}
-              </button>
-            ))}
-            {filteredKnow.length === 0 && <div className="px-2 py-2 text-[10px] text-[#9b9b97]">No entries</div>}
-          </div>
+          ) : (
+            <>
+              <div className="px-2 pt-2 pb-1">
+                <input autoFocus value={knowQ} onChange={e => setKnowQ(e.target.value)}
+                  placeholder="Search knowledge…"
+                  className="w-full text-xs border border-[#e5e5e3] rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300 bg-[#fafaf8]"
+                />
+              </div>
+              <div className="overflow-y-auto px-1 pb-1" style={{ maxHeight: 140 }}>
+                {currentKnowledge && (
+                  <button onMouseDown={e => { e.preventDefault(); handleLinkKnow(null) }}
+                    className="w-full text-left px-2 py-1.5 text-[10px] text-red-500 hover:bg-red-50 rounded-lg mb-1"
+                  >✕ Remove link</button>
+                )}
+                {filteredKnow.map(k => (
+                  <button key={k.id} onMouseDown={e => { e.preventDefault(); handleLinkKnow(k.id) }}
+                    className={btnBase}
+                  >
+                    <span className="flex-1 truncate text-left">{k.topic}</span>
+                    {k.id === meeting.linked_knowledge_id && <span className="text-[10px] text-green-500">✓</span>}
+                  </button>
+                ))}
+                {filteredKnow.length === 0 && <div className="px-2 py-2 text-[10px] text-[#9b9b97]">No entries</div>}
+              </div>
+              <div className="px-2 py-1.5 border-t border-[#f0f0ee]">
+                <button
+                  onMouseDown={e => { e.preventDefault(); setNewKnowMode(true) }}
+                  className="w-full text-left text-[10px] text-[#C9A84C] hover:underline py-0.5"
+                >+ create new knowledge entry</button>
+              </div>
+            </>
+          )}
         </PickerPopover>
       </div>
 
