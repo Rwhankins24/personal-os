@@ -294,3 +294,39 @@
 ✗ Report date is 2026-06-26, not today (2026-06-29). Aborting — stale data.
   To push a backfill report, pass the file path as an argument:
   python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-30
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Email archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-email-report.json
+  Plaud archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-plaud-report.json  [downloaded (4 meetings)]
+✗ Report date is 2026-06-26, not today (2026-06-30). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-30
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Email archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-email-report.json
+  Plaud archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-plaud-report.json  [downloaded (4 meetings)]
+✗ Report date is 2026-06-26, not today (2026-06-30). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-26-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-30
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Email archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-email-report.json
+  Plaud archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-plaud-report.json  [already_exists]
+✗ Report date is 2026-06-29, not today (2026-06-30). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-29-email-report.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EMAIL PUSH — 2026-06-30
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Email archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-email-report.json
+  Plaud archived  → /Users/ryanhankins/personal-os/data/archive/2026-06-30-plaud-report.json  [already_exists]
+✗ Report date is 2026-06-29, not today (2026-06-30). Aborting — stale data.
+  To push a backfill report, pass the file path as an argument:
+  python3 push_email_report.py ~/personal-os/data/archive/2026-06-29-email-report.json
