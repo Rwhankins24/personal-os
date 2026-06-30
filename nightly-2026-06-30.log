@@ -30,3 +30,68 @@ Step 3: Summarizing threads...
 Step 3.2: Classifying email context...
   ✓ Classified: 10 non-work emails
 Step 3.5: Extracting intelligence...
+Rate limited (529 {"type":"error","error":{"type":"overloaded_error","mess). Waiting 2000ms before retry 2...
+Rate limited (529 {"type":"error","error":{"type":"overloaded_error","mess). Waiting 4000ms before retry 3...
+  ✓ Intelligence: 64 notes, 3 decisions, 21 pending, 40 risks (9/150 from Phase 1B, 141 via Haiku)
+Step 3.55: Email context enrichment...
+  ✓ Enriched 40/40 emails with context
+Step 3.6b: Learning project keywords...
+Step 3.6: Updating contacts...
+  → Scanning 52 unique senders from today's report
+  ✓ Contacts: 0 created, 52 updated
+Step 3.6b: Backfilling missing contacts from email history...
+  ✓ Backfill: 27 missing contacts created
+Step 3.7a: Generating context questions...
+  ✓ Context questions logged: 8
+Step 3.65: Auto-creating contacts from email participants...
+  ✓ Auto-created 3 contacts from email senders + participants
+Step 3.66: Auto-setting contact relationship_tier from email frequency...
+  ✓ Relationship tiers updated: 4 tier-1 candidates, 12 tier-2 candidates → 0 updates applied
+Step 3.7: Enriching contacts from signatures...
+  ✓ Enriched 0 contacts from signatures
+Step 3.7c: Content-first signature backstop...
+  ✓ Backstop: 0 enriched, 0 new contacts from thread signatures
+Step 3.8: Processing lead file attachments with AI...
+  ✓ Lead files processed: 0
+Step 2.6: Processing meeting intelligence (Otter + Plaud)...
+    Using legacy Plaud summary parser (Haiku) for: Meeting: Redline Review of Owner-Provided Contract (AIA A133/A201)
+  extractMeetingIntelligence Call A (knowledge) failed: Unterminated string in JSON at position 33428 (line 352 column 40)
+  extractMeetingIntelligence: 0 knowledge, 10 learnings, context: true
+    Haiku reasoning: 0 knowledge, 10 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Interview: Brian Nichols Recruiting Ryan Hankins for Senior Development Role in Data Center Market
+  extractMeetingIntelligence: 9 knowledge, 8 learnings, context: true
+    Haiku reasoning: 9 knowledge, 8 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Executive Meeting: Pacific Fusion Rolling GMP, Contract Redlines, IRB Compliance, and Overlap Safety Controls
+  extractMeetingIntelligence: 24 knowledge, 14 learnings, context: true
+    Haiku reasoning: 24 knowledge, 14 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Strategy Discussion: PCL Role Fit, Executive Growth Path, and Travel Constraints
+  extractMeetingIntelligence: 7 knowledge, 8 learnings, context: true
+    Haiku reasoning: 7 knowledge, 8 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Weekly Meeting: Ground Improvement, HVAC Location, and CMOS Room Coordination
+  extractMeetingIntelligence: 11 knowledge, 11 learnings, context: true
+    Haiku reasoning: 11 knowledge, 11 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Project Meeting: DFT Minor Amendment Strategy, GMP Basis, and Early Procurement Scope
+parsePlaudSummary JSON parse error: Expected ',' or '}' after property value in JSON at position 5464 (line 98 column 78)
+    Legacy Plaud parse returned null for: Project Meeting: DFT Minor Amendment Strategy, GMP Basis, and Early Procurement Scope — skipping intelligence extraction
+  extractMeetingIntelligence: 7 knowledge, 8 learnings, context: true
+    Haiku reasoning: 7 knowledge, 8 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Executive Meeting: IMGS Pier Connection Strategy and Budget Control
+  extractMeetingIntelligence: 7 knowledge, 5 learnings, context: true
+    Haiku reasoning: 7 knowledge, 5 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Coordination Meeting: Design, Budget Reconciliation, and Value Engineering Impacts
+  extractMeetingIntelligence: 11 knowledge, 9 learnings, context: true
+    Haiku reasoning: 11 knowledge, 9 learnings, context: true
+    Using legacy Plaud summary parser (Haiku) for: Meeting: Lighting Package Cost Reduction & Design Optimization
+  extractMeetingIntelligence: 11 knowledge, 9 learnings, context: true
+    Haiku reasoning: 11 knowledge, 9 learnings, context: true
+  ✓ Otter: 9 meetings, 0 tasks, 2 my commitments, 601 others
+Step 3.9: Extracting daily observations (three-leg synthesis)...
+  Legs available today — Email: true, Plaud: false, Manual: true
+  ✓ 6 observations extracted (Email + Manual inputs)
+Step 4: Extracting tasks...
+  ✓ Tasks: 82 created
+Step 4.5: Refreshing stale open items...
+  ✓ Refreshed: 29 stale items updated, 0 re-opened threads flagged
+Step 5: Extracting commitments...
+
+⏱ HARD TIMEOUT: nightly job exceeded 120 minutes — forcing exit
