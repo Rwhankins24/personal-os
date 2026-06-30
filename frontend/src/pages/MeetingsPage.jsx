@@ -69,6 +69,7 @@ function PickerPopover({ open, onClose, trigger, children, align = 'right', widt
         <div
           className={`absolute top-full mt-1 z-50 ${width} bg-white border border-[#e5e5e3] rounded-xl shadow-lg ${align === 'right' ? 'right-0' : 'left-0'}`}
           style={{ maxHeight: 300, display: 'flex', flexDirection: 'column' }}
+          onMouseDown={e => e.stopPropagation()}
         >
           {children}
         </div>
