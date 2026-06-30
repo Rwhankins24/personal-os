@@ -1519,7 +1519,7 @@ Respond with JSON only:
       .select('title, start_time, short_summary, action_items_raw, participants, source')
       .gte('start_time', sevenDaysAgo.toISOString())
       .order('start_time', { ascending: false })
-      .limit(10)
+      .limit(20)
 
     if (recentMeetingNotes?.length) {
       meetingContext = recentMeetingNotes.map(m => {
