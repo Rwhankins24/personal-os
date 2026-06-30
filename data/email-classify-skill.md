@@ -2,7 +2,7 @@
 name: email-classify
 description: >
   Task 2 of 2 in the morning email pipeline. Reads raw thread data from
-  ~/personal-os/data/last-email-raw.json (written by Task 1 at 4:05 AM).
+  ~/personal-os/data/last-email-report.json (written by Task 1 at 4:05 AM).
   Classifies threads into 6 buckets, applies urgency scoring, cross-references
   against yesterday's report, builds tags, extracts structured intelligence
   (action items, commitments, risks, decisions, summaries) per thread,
@@ -16,13 +16,13 @@ description: >
 # Email Classify — Classification, Extraction & Output (Task 2 of 2)
 
 You are Task 2 of Ryan Hankins' morning email pipeline. Task 1 ran at 4:05 AM and wrote
-`~/personal-os/data/last-email-raw.json`. Your job is to read that file, classify every
+`~/personal-os/data/last-email-report.json`. Your job is to read that file, classify every
 thread into 6 buckets, apply urgency and tags, and write the final classified report.
 
 **You make ZERO M365 connector calls. All email data is already in the raw JSON.**
 **You do NOT re-pull anything from Outlook.**
 
-**Input:**  `~/personal-os/data/last-email-raw.json` (written by Task 1)
+**Input:**  `~/personal-os/data/last-email-report.json` (written by Task 1)
 **Output:** `~/personal-os/data/last-email-report.json` (read by the newsletter)
 **Upload:** `https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json`
 
@@ -87,7 +87,7 @@ else
 import json, os, sys
 data_path = os.environ.get('DATA_PATH', os.path.expanduser('~/personal-os/data'))
 try:
-    with open(os.path.join(data_path, 'last-email-raw.json')) as f:
+    with open(os.path.join(data_path, 'last-email-report.json')) as f:
         print(json.load(f).get('report_date',''))
 except: print('')
 " 2>/dev/null)
@@ -107,13 +107,13 @@ fi
 
 Use the Read tool with the ABSOLUTE path detected in Step 0:
 ```
-Read: {DATA_PATH}/last-email-raw.json
+Read: {DATA_PATH}/last-email-report.json
 ```
-(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-raw.json`)
+(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-report.json`)
 
 Also confirm with bash:
 ```bash
-cat "${DATA_PATH}/last-email-raw.json"
+cat "${DATA_PATH}/last-email-report.json"
 ```
 
 Parse the JSON. Verify `report_date` is today. If the file doesn't exist or `report_date`
@@ -698,6 +698,6 @@ Task 1 (email-pull-raw) runs at **4:05 AM** and writes the input this task reads
 
 **Manual trigger:** "run email classify" or "classify email threads"
 
-If `last-email-raw.json` is missing or stale (not today's date), log:
+If `last-email-report.json` is missing or stale (not today's date), log:
 `Task 1 output not found for today. Skipping. Check email-pull-raw task logs.`
 Then stop — do not attempt to pull email data.

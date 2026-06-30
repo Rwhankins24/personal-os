@@ -531,6 +531,15 @@ Do not read any other file or make any API call between this Read and the Write.
 
 After a successful write, log: `JSON saved: ~/personal-os/data/last-email-report.json`
 
+**Immediately after the write, create the pull-complete flag so the classify skill
+(4:25 AM) can start without waiting the full 30-minute timeout:**
+
+```bash
+touch "{DATA_PATH}/pull-complete-{TODAY_ISO}.flag"
+```
+
+Log: `Pull-complete flag written: pull-complete-{TODAY_ISO}.flag`
+
 ---
 
 ## Step 7 — Upload JSON to Supabase storage

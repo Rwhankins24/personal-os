@@ -202,7 +202,7 @@ if (isBackfill) {
 // ── Hard process timeout — 120 minutes ───────────────────────────────────────
 // If the job is still alive after 120 min something hung (Sonnet call, network stall, etc.)
 // Kill it cleanly so launchd doesn't hold an orphaned node process overnight.
-const MAX_RUNTIME_MS = 120 * 60 * 1000  // 120 minutes
+const MAX_RUNTIME_MS = 110 * 60 * 1000  // 110 minutes — 10-min buffer before GitHub Actions hard-kills at 120
 const jobKillTimer = setTimeout(() => {
   console.error(`\n⏱ HARD TIMEOUT: nightly job exceeded ${MAX_RUNTIME_MS / 60000} minutes — forcing exit`)
   process.exit(1)
@@ -2793,7 +2793,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
     )
     .not('email', 'is', null)
     .order('last_contact_date', { ascending: false, nullsFirst: false })
-    .limit(250)
+    .limit(50)  // reduced from 250 — each contact is one Haiku call; 50 = ~2-3 min, 250 = 15-20 min
 
   for (const contact of (contactsToEnrich || [])) {
     try {
