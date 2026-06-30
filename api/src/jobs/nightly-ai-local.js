@@ -23,9 +23,23 @@ require('dotenv').config({
   path: path.join(__dirname, '../../.env')
 })
 
+const https = require('https')
 const { createClient } = require('@supabase/supabase-js')
 const Anthropic = require('@anthropic-ai/sdk')
 const aiService = require('../services/ai')
+
+// ── Shared Anthropic client factory ──────────────────────────────────────────
+// Uses a keepAlive HTTPS agent to prevent GitHub Actions NAT from closing
+// long-lived connections mid-response ("Premature close" error).
+const _keepAliveAgent = new https.Agent({ keepAlive: true, keepAliveMsecs: 30000, maxSockets: 10 })
+function makeAnthropic() {
+  return new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+    httpAgent: _keepAliveAgent,
+    timeout: 120000,   // 2 min per request
+    maxRetries: 3
+  })
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // mapPlaudBlocksToIntel — bridges new Plaud block schema → existing intel schema
@@ -652,7 +666,7 @@ async function main() {
       }
 
       // Call Haiku for semantic confirmation with confidence score
-      const haikuSMC = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const haikuSMC = makeAnthropic()
       const smcPrompt = `Two ${tableName === 'tasks' ? 'tasks' : 'commitments'} from Ryan's personal OS:
 
 Item A (candidate, not yet saved): "${candidateTitle}"
@@ -851,7 +865,7 @@ The "confidence" field must be an integer 0-100 representing how certain you are
     if (!needsContext.length) {
       console.log('  No tasks need context enrichment')
     } else {
-      const haikuEnrich = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const haikuEnrich = makeAnthropic()
       let enrichedTasks = 0
 
       for (const task of needsContext) {
@@ -2060,7 +2074,7 @@ Respond with JSON only:
       .order('days_waiting', { ascending: false })
       .limit(40)
 
-    const haikuClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const haikuClient = makeAnthropic()
     let enriched = 0
 
     for (const email of (enrichQueue || [])) {
@@ -3068,7 +3082,7 @@ Set can_auto_archive to true ONLY if this is clearly a no-action-needed FYI with
   // ── STEP 3.8: Process unprocessed lead file attachments ─────────
   console.log('Step 3.8: Processing lead file attachments with AI...')
   try {
-    const haikuLeads = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const haikuLeads = makeAnthropic()
     const { data: unprocessedFiles } = await supabase
       .from('lead_files')
       .select('id, lead_id, filename, storage_path, mime_type')
@@ -4170,7 +4184,7 @@ ${manualObsContext ? `\n═══ LEG 3: MANUAL INPUTS ═══\n${manualObsCon
 Return a JSON array of observation strings only. No explanation.
 ["Observation 1", "Observation 2", "Observation 3", "Observation 4"]`
 
-      const obsClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+      const obsClient = makeAnthropic()
       const raw = await obsClient.messages.create({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 700,
@@ -4704,7 +4718,7 @@ Return a JSON array of observation strings only. No explanation.
       .order('days_waiting', { ascending: false })
       .limit(60)
 
-    const haikuLink = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const haikuLink = makeAnthropic()
     let linked = 0
 
     for (const email of (waitingEmails || [])) {
@@ -5538,7 +5552,7 @@ Be specific, direct, and actionable. Today is ${today}.`
   // ── STEP 9.7: Propose knowledge base entries ──────────────────────
   console.log('Step 9.7: Extracting knowledge base proposals...')
   let knowledgeProposed = 0
-  const haiku = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+  const haiku = makeAnthropic()
 
   async function proposeWithHaiku(prompt) {
     const msg = await haiku.messages.create({
