@@ -15,7 +15,8 @@ const {
   generateDailyDigest,
   updateRollingContext,
   enrichTask,
-  createContactProfile
+  createContactProfile,
+  extractIntelligenceFromTranscript,
 } = require('../services/ai')
 require('dotenv').config()
 
@@ -30,6 +31,25 @@ const supabase = createClient(
 //   2. Date proximity window ±48 hours
 //   3. Participant / attendee overlap (bonus score)
 // Returns the best-match event ID or null if confidence < threshold.
+
+// ── Category-specific extraction hints ───────────────────────────────────────
+function getCategoryExtractionHints(categoryName) {
+  const hints = {
+    'OAC':                   '- Schedule status, RFI/submittal log updates\n- Open owner issues and commitments\n- Cost impacts discussed\n- Next OAC date and agenda items',
+    'Settlement Discussion':  '- Dollar amounts or ranges mentioned\n- Each party\'s position and movement\n- Mediator/attorney involvement\n- Next steps and deadlines\n- What was agreed vs. still open',
+    'Design Review':          '- Design changes or revisions required\n- Coordination issues between disciplines\n- Owner/architect decisions needed\n- Impact on cost or schedule\n- Outstanding design deliverables',
+    'Change Order / PCO':     '- Scope description and cause\n- Cost and schedule impact amounts\n- Which party is responsible\n- Approval status and next steps\n- Any rejection or pushback',
+    'RFI Review':             '- RFI numbers and subjects discussed\n- Responses provided or outstanding\n- Design clarification impacts\n- Who owes responses and by when',
+    'Subcontractor Coord.':   '- Sequence and coordination conflicts\n- Material or equipment lead times\n- Crew availability / manpower\n- Safety or quality issues raised\n- Commitments made by sub',
+    'Safety':                 '- Incidents or near-misses described\n- Corrective actions required\n- Responsible parties and deadlines\n- Regulatory or compliance concerns',
+    'Internal Review':        '- Strategic decisions made\n- Resource or staffing issues\n- Financial targets or concerns\n- Action items for team members',
+    'Pursuit / BD':           '- Client priorities and hot buttons\n- Competitive landscape mentioned\n- Win themes or differentiators\n- Next pursuit milestones and owners\n- Fee or proposal strategy discussed',
+    'Client Check-in':        '- Client satisfaction signals\n- Upcoming decisions or approvals\n- Relationship health indicators\n- Asks or concerns from client',
+    'Close-out':              '- Punch list status and count\n- Certificate of substantial completion\n- Retainage or final payment status\n- Outstanding warranty or training items',
+    'Preconstruction':        '- Budget or GMP status\n- Design completeness and gaps\n- Long-lead procurement needs\n- Schedule milestones and risks',
+  }
+  return hints[categoryName] || '- Key decisions made\n- Action items and owners\n- Risks or issues raised\n- Financial or schedule impacts'
+}
 
 const STOP_WORDS = new Set(['the','a','an','and','or','of','in','at','for','with','to','on','is','this','call','meeting','sync','standup','check-in','checkin','weekly','monthly'])
 
@@ -165,6 +185,90 @@ module.exports = async (req, res) => {
       } catch (err) {
         // non-fatal
       }
+    }
+
+    // ── STEP 2.6: Reprocess meetings tagged with a new/changed category ──────
+    // When a user assigns or changes a category, needs_ai_reprocess = true.
+    // This step re-extracts intelligence with category context overnight.
+    results.meetings_reprocessed = 0
+    try {
+      const { data: allMeetingCategories } = await supabase
+        .from('meeting_categories')
+        .select('id, name, description')
+      const categoryMap = new Map((allMeetingCategories || []).map(c => [c.id, c]))
+
+      const { data: reprocessQueue } = await supabase
+        .from('meeting_notes')
+        .select('id, title, meeting_date, start_time, participants, raw_transcript, full_transcript, short_summary, action_items_raw, duration_raw, primary_category_id, information_only')
+        .eq('needs_ai_reprocess', true)
+        .limit(5)
+
+      for (const meeting of (reprocessQueue || [])) {
+        try {
+          const primaryCat = meeting.primary_category_id ? categoryMap.get(meeting.primary_category_id) : null
+          const nowISO = new Date().toISOString()
+          const meetingDate = meeting.meeting_date || meeting.start_time?.split('T')[0] || today
+          const catLabel = primaryCat ? ` [${primaryCat.name}]` : ''
+
+          // information_only: clear flag, skip extraction
+          if (meeting.information_only) {
+            await supabase.from('meeting_notes').update({ needs_ai_reprocess: false, last_ai_processed_at: nowISO }).eq('id', meeting.id)
+            results.meetings_reprocessed++
+            continue
+          }
+
+          // No transcript — clear flag, nothing to extract
+          if (!(meeting.raw_transcript || meeting.full_transcript)) {
+            await supabase.from('meeting_notes').update({ needs_ai_reprocess: false, last_ai_processed_at: nowISO }).eq('id', meeting.id)
+            continue
+          }
+
+          const categoryHint = primaryCat
+            ? `\n\nMEETING TYPE: ${primaryCat.name}${primaryCat.description ? ` — ${primaryCat.description}` : ''}.\nExtract intelligence specifically relevant to ${primaryCat.name} meetings:\n${getCategoryExtractionHints(primaryCat.name)}`
+            : ''
+
+          const intel = await extractIntelligenceFromTranscript(meeting, meeting.participants || [], [], categoryHint)
+
+          if (intel) {
+            for (const item of (intel.ryan_action_items || [])) {
+              const title = item.title || item.task_text || item.task
+              if (!title) continue
+              const { data: existing } = await supabase.from('tasks').select('id').eq('title', title).eq('status', 'open').maybeSingle()
+              if (!existing) {
+                await supabase.from('tasks').insert({ title, context: `From meeting: ${meeting.title}${catLabel}`, urgency: item.urgency || 'medium', due_date: item.due_date || null, status: 'open', source: 'meeting', source_type: 'ai_plaud', source_label: meeting.title, source_date: meetingDate, ai_enriched: true, source_confidence: 0.85 })
+                results.tasks_created++
+              }
+            }
+            for (const c of (intel.verbal_commitments_ryan || [])) {
+              if (!c.title) continue
+              const { data: existing } = await supabase.from('commitments').select('id').eq('title', c.title).eq('status', 'open').maybeSingle()
+              if (!existing) {
+                await supabase.from('commitments').insert({ title: c.title, made_to: c.made_to || null, due_date: c.due_date || null, status: 'open', commitment_type: c.commitment_type || 'verbal', source_type: 'ai_plaud', made_on: meetingDate, ai_context: `From meeting: ${meeting.title}${catLabel}` })
+                results.my_commitments_extracted++
+              }
+            }
+            for (const c of [...(intel.verbal_commitments_others || []), ...(intel.others_action_items || [])]) {
+              const title = c.title || c.commitment_text || c.task_text
+              if (!title) continue
+              const { data: existing } = await supabase.from('others_commitments').select('id').eq('title', title).eq('status', 'open').maybeSingle()
+              if (!existing) {
+                await supabase.from('others_commitments').insert({ title, committed_by_name: c.committed_by_name || c.assigned_to_name || 'Unknown', committed_by_email: c.committed_by_email || c.assigned_to_email || null, due_date: c.due_date || null, urgency: c.urgency || 'medium', status: 'open', source_type: 'ai_plaud', source_id: meeting.id, source_label: meeting.title, ai_context: `From meeting: ${meeting.title}${catLabel}` })
+                results.others_commitments_extracted++
+              }
+            }
+            if (intel.meeting_outcome?.summary) {
+              await supabase.from('meeting_notes').update({ summary: intel.meeting_outcome.summary }).eq('id', meeting.id)
+            }
+          }
+
+          await supabase.from('meeting_notes').update({ needs_ai_reprocess: false, last_ai_processed_at: nowISO }).eq('id', meeting.id)
+          results.meetings_reprocessed++
+        } catch (meetErr) {
+          results.errors.push(`Meeting reprocess failed "${meeting.title}": ${meetErr.message}`)
+        }
+      }
+    } catch (step26Err) {
+      results.errors.push(`Step 2.6 (meeting reprocess) failed: ${step26Err.message}`)
     }
 
     // ── STEP 2: Get active emails needing processing ──────────────────

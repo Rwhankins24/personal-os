@@ -45,6 +45,7 @@ module.exports = async (req, res) => {
       tasks,
       intelligenceNotes,
       events,
+      allCategories,
     ] = await Promise.all([
 
       // Knowledge base — always include relevant entries
@@ -74,7 +75,8 @@ module.exports = async (req, res) => {
           'id, title, meeting_date, start_time, source, participants, ' +
           'summary, short_summary, raw_transcript, full_transcript, transcript_word_count, ' +
           'action_items, action_items_raw, has_transcript, ' +
-          'continuity_context, event_title, recurring_series_key'
+          'continuity_context, event_title, recurring_series_key, ' +
+          'primary_category_id, information_only'
         )
         .or(`meeting_date.gte.${since.split('T')[0]},start_time.gte.${since}`)
         .order('meeting_date', { ascending: false, nullsFirst: false })
@@ -148,7 +150,45 @@ module.exports = async (req, res) => {
         .order('start_time', { ascending: false })
         .limit(10)
         .then(r => r.data || []),
+
+      // Meeting categories — for category-aware filtering
+      supabase
+        .from('meeting_categories')
+        .select('id, name, description')
+        .then(r => r.data || []),
     ])
+
+    // ── Category-aware meeting filtering ─────────────────────────────────────
+    const categoryById = new Map((allCategories || []).map(c => [c.id, c]))
+
+    let detectedCategory = null
+    const qLowerForCat = question.toLowerCase()
+    for (const cat of (allCategories || [])) {
+      const catLower = cat.name.toLowerCase()
+      if (
+        qLowerForCat.includes(catLower) ||
+        (cat.name === 'OAC' && (qLowerForCat.includes('oac') || qLowerForCat.includes('owner architect'))) ||
+        (cat.name === 'Change Order / PCO' && (qLowerForCat.includes('change order') || qLowerForCat.includes('pco'))) ||
+        (cat.name === 'Subcontractor Coord.' && qLowerForCat.includes('subcontractor')) ||
+        (cat.name === 'Pursuit / BD' && (qLowerForCat.includes('pursuit') || qLowerForCat.includes(' bd ')))
+      ) {
+        detectedCategory = cat
+        break
+      }
+    }
+
+    let categoryFilteredMeetings = []
+    if (detectedCategory) {
+      try {
+        const { data: catMeetings } = await supabase
+          .from('meeting_notes')
+          .select('id, title, meeting_date, start_time, source, participants, summary, short_summary, action_items, action_items_raw, has_transcript, primary_category_id, information_only')
+          .eq('primary_category_id', detectedCategory.id)
+          .order('meeting_date', { ascending: false, nullsFirst: false })
+          .limit(8)
+        categoryFilteredMeetings = catMeetings || []
+      } catch (_) { /* non-fatal */ }
+    }
 
     // ── Project context: load pre-computed intelligence if question matches a project ──
     let projectIntelSection = null
@@ -199,6 +239,12 @@ module.exports = async (req, res) => {
 
     const relMeetings = filterRelevant(meetingNotes,
       n => `${n.title} ${n.summary} ${n.short_summary} ${(n.participants || []).join(' ')} ${(n.raw_transcript || n.full_transcript || '').slice(0, 500)}`, 0)
+
+    // Prepend category-filtered meetings (deduplicated)
+    if (categoryFilteredMeetings.length > 0) {
+      const seenIds = new Set(relMeetings.map(m => m.id))
+      relMeetings.unshift(...categoryFilteredMeetings.filter(m => !seenIds.has(m.id)))
+    }
 
     const relEmails = filterRelevant(emails,
       e => `${e.thread_subject} ${e.ai_summary} ${e.from_name}`)
@@ -268,7 +314,7 @@ module.exports = async (req, res) => {
     }
 
     if (relMeetings.length) {
-      sections.push('=== MEETING NOTES ===')
+      sections.push(detectedCategory ? `=== MEETING NOTES [Filtered: ${detectedCategory.name}] ===` : '=== MEETING NOTES ===')
       relMeetings.forEach((n, idx) => {
         const date = n.meeting_date || n.start_time?.split('T')[0] || 'unknown date'
 
@@ -296,8 +342,9 @@ module.exports = async (req, res) => {
           ? `\nTranscript excerpt:\n${transcript.slice(0, transcriptChars)}${transcript.length > transcriptChars ? '\n[...truncated]' : ''}`
           : ''
 
+        const catName = n.primary_category_id ? categoryById.get(n.primary_category_id)?.name : null
         sections.push(
-`[${date}] ${n.title}${n.event_title && n.event_title !== n.title ? ` (calendar: ${n.event_title})` : ''} (${n.source || 'recording'})${n.has_transcript ? ' ✓ transcript' : ''}
+`[${date}] ${n.title}${catName ? ` [${catName}]` : ''}${n.event_title && n.event_title !== n.title ? ` (calendar: ${n.event_title})` : ''} (${n.source || 'recording'})${n.has_transcript ? ' ✓ transcript' : ''}
 Participants: ${(n.participants || []).slice(0, 8).join(', ') || 'unknown'}
 Summary: ${fullSummary.slice(0, 800)}
 ${allItems.length ? `Action items:\n${allItems.join('\n')}` : ''}${transcriptSnippet}${n.continuity_context ? `\nRecurring context: ${n.continuity_context.slice(0, 400)}` : ''}`)
