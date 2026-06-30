@@ -1185,7 +1185,7 @@ Respond with JSON only:
   "inferred_title": "If the recording is clearly an OAC or specific meeting type based on content, provide a better title here. Otherwise null."
 }`
 
-              const haikuMatch = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+              const haikuMatch = makeAnthropic()
               const matchMsg = await haikuMatch.messages.create({
                 model:      'claude-haiku-4-5-20251001',
                 max_tokens: 200,
@@ -1338,7 +1338,7 @@ Respond with JSON only:
   "reason": "one sentence"
 }`
 
-        const haikuClient = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+        const haikuClient = makeAnthropic()
         const matchMsg = await haikuClient.messages.create({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 150,
@@ -3912,7 +3912,7 @@ Be specific and cite concrete details. Avoid generic statements.`
               const currentSummary = meeting.short_summary || 'No summary available'
               const currentItems = (meeting.action_items_raw || []).map(a => `  - ${a.task_text || a.task || a}`).join('\n')
 
-              const continuityHaiku = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+              const continuityHaiku = makeAnthropic()
               const continuityMsg = await continuityHaiku.messages.create({
                 model: 'claude-haiku-4-5-20251001',
                 max_tokens: 500,
@@ -5321,7 +5321,7 @@ Respond ONLY with valid JSON:
       .eq('status', 'active')
       .limit(10)
 
-    const projectIntelHaiku = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const projectIntelHaiku = makeAnthropic()
     let projectIntelCount = 0
 
     for (const project of (activeProjects || [])) {
@@ -5786,7 +5786,7 @@ Return JSON only:
       for (const pod of activePods) {
         try {
           console.log(`  Researching: ${pod.name}`)
-          const haikuResearch = new (require('@anthropic-ai/sdk'))({ apiKey: process.env.ANTHROPIC_API_KEY })
+          const haikuResearch = makeAnthropic()
 
           // Generate a web search query from the directive
           const queryMsg = await haikuResearch.messages.create({
