@@ -1467,8 +1467,13 @@ Return ONLY valid JSON:
 // categoryHint: optional string injected to focus extraction on meeting type specifics
 async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext, categoryHint = '') {
   const RYAN_CONTEXT = await buildRyanContext()
-  const transcript = meeting.full_transcript || meeting.raw_transcript
-  if (!transcript || transcript.trim().length < 100) return null
+  const rawTranscript = meeting.full_transcript || meeting.raw_transcript
+  if (!rawTranscript || rawTranscript.trim().length < 100) return null
+  // Cap transcript at 40K chars (~10K tokens) to prevent model hangs on huge recordings.
+  // This covers ~60-90 minutes of dense meeting content — sufficient for intelligence extraction.
+  const transcript = rawTranscript.length > 40000
+    ? rawTranscript.slice(0, 40000) + '\n\n[Transcript truncated at 40,000 chars for processing]'
+    : rawTranscript
 
   // Attendee roster can be {name, email} objects or strings (from Plaud participants array)
   // Augment with names derived from action item assignees if roster is thin
@@ -1505,8 +1510,8 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 32000,
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 6000,
       messages: [{
         role: 'user',
         content: `${RYAN_CONTEXT}
