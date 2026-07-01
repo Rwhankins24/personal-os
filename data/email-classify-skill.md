@@ -22,13 +22,18 @@ thread into 6 buckets, apply urgency and tags, and write the final classified re
 **You make ZERO M365 connector calls. All email data is already in the raw JSON.**
 **You do NOT re-pull anything from Outlook.**
 
-**Input:**  `~/personal-os/data/last-email-report.json` (written by Task 1)
+**Input:**  `~/personal-os/data/last-email-raw.json` (written by Task 1 — the pull)
 **Output:** `~/personal-os/data/last-email-report.json` (read by the newsletter)
 **Upload:** `https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json`
 
 **Runtime credentials (for Step 6 upload):**
-- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
-- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
+Read from `${WORKSPACE_PATH}/api/.env` — do NOT hardcode credentials in this file.
+```bash
+SUPABASE_URL=$(grep '^SUPABASE_URL=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+SUPABASE_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_KEY=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+echo "Supabase URL loaded: ${SUPABASE_URL:0:40}…"
+echo "Service key loaded: ${SUPABASE_SERVICE_KEY:0:20}… (truncated)"
+```
 
 ---
 
@@ -82,18 +87,19 @@ done
 if [ -f "$FLAG_FILE" ]; then
   echo "✓ Pull complete flag found — proceeding."
 else
-  # Flag missing: check if raw file is fresh enough to use anyway
+  # Flag missing: check if the raw pull file (last-email-raw.json) is fresh enough to use anyway
+  # NOTE: do NOT check last-email-report.json — that is yesterday's classified output, not today's pull
   RAW_DATE=$(python3 -c "
 import json, os, sys
 data_path = os.environ.get('DATA_PATH', os.path.expanduser('~/personal-os/data'))
 try:
-    with open(os.path.join(data_path, 'last-email-report.json')) as f:
+    with open(os.path.join(data_path, 'last-email-raw.json')) as f:
         print(json.load(f).get('report_date',''))
 except: print('')
 " 2>/dev/null)
   TODAY_CHECK=$(date '+%Y-%m-%d')
   if [ "$RAW_DATE" != "$TODAY_CHECK" ]; then
-    echo "✗ Raw file is from $RAW_DATE, not today ($TODAY_CHECK). Task 1 did not complete."
+    echo "✗ Raw pull file (last-email-raw.json) is from $RAW_DATE, not today ($TODAY_CHECK). Task 1 did not complete."
     echo "  Stopping — do not classify stale data."
     exit 0
   fi
@@ -107,18 +113,21 @@ fi
 
 Use the Read tool with the ABSOLUTE path detected in Step 0:
 ```
-Read: {DATA_PATH}/last-email-report.json
+Read: {DATA_PATH}/last-email-raw.json
 ```
-(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-report.json`)
+(Substitute the actual DATA_PATH value, e.g. `/sessions/abc-xyz/mnt/personal-os/data/last-email-raw.json`)
 
 Also confirm with bash:
 ```bash
-cat "${DATA_PATH}/last-email-report.json"
+cat "${DATA_PATH}/last-email-raw.json"
 ```
 
 Parse the JSON. Verify `report_date` is today. If the file doesn't exist or `report_date`
 is not today, log a warning and stop — Task 1 did not complete. Do not attempt to pull
 email data yourself.
+
+NOTE: `last-email-report.json` is yesterday's classified OUTPUT — do not read that as input.
+The input for classify is always `last-email-raw.json` (the pull output from Task 1).
 
 From the raw JSON, store:
 - `threads[]` — all thread records from Task 1

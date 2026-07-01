@@ -2,6 +2,14 @@
 .claude/
 
 data/last-email-report.json
+data/last-email-raw.json
+data/*-skill.md
+data/*-backfill.md
+data/pull-complete-*.flag
+data/classify-checkpoint-*.json
+data/push-state.json
+data/push-email.log
+data/push-email.error.log
 data/last-otter-report.json
 data/last-plaud-report.json
 data/gmail-credentials.json
