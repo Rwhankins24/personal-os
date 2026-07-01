@@ -645,7 +645,7 @@ Return only the summary. No preamble.`
 
 // ─── EXTRACT INTELLIGENCE
 // Extracts all 10 categories of intelligence
-async function extractIntelligence(email, threadHistory = [], meetingContext = '', projectContext = '') {
+async function extractIntelligence(email, threadHistory = [], meetingContext = '', projectContext = '', model = 'claude-haiku-4-5-20251001') {
   const RYAN_CONTEXT = await buildRyanContext()
   const content =
     email.full_thread_content ||
@@ -659,7 +659,7 @@ async function extractIntelligence(email, threadHistory = [], meetingContext = '
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-haiku-4-5-20251001',  // high-volume per-email loop — Haiku is fast + sufficient for structured extraction
+      model,  // B1: Sonnet (caller-specified); B2+: Haiku default
       max_tokens: 1500,
       messages: [{
         role: 'user',

@@ -2196,7 +2196,10 @@ Respond with JSON only:
           ? meetingContext + perEmailMeetingNote
           : meetingContext
 
-        intel = await aiService.extractIntelligence(email, threadHistory, enrichedMeetingContext, intelProjectContext)
+        // B1 (needs_reply) uses Sonnet — these are active asks where extraction quality matters.
+        // B2 and below use Haiku — lower stakes, high volume.
+        const intelModel = email.bucket === 1 ? 'claude-sonnet-4-6' : 'claude-haiku-4-5-20251001'
+        intel = await aiService.extractIntelligence(email, threadHistory, enrichedMeetingContext, intelProjectContext, intelModel)
       }
 
       let projectId = email.project_id ||
