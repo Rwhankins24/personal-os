@@ -127,6 +127,10 @@ def thread_to_payload(t, today):
         # Phase 1B: conversation_id enables fast-path index in nightly AI job.
         # Pull from classify output first, fall back to raw Outlook conversationId.
         "conversation_id":        t.get("conversation_id") or t.get("conversationId") or None,
+        # Phase 1B: store classify-extracted intelligence directly on the emails row.
+        # The nightly job's DB supplement reads email.extracted and skips Haiku calls.
+        # This is more reliable than subject-key matching across report JSON vs DB.
+        "extracted":              t.get("extracted") or None,
     }
 
 STATE_FILE = os.path.expanduser("~/personal-os/data/push-state.json")

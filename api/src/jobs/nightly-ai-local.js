@@ -1044,7 +1044,7 @@ The "confidence" field must be an integer 0-100 representing how certain you are
 
       const { data: allActiveEmails } = await supabase
         .from('emails')
-        .select('id, from_address, thread_subject, subject, bucket, status, days_waiting, created_at, ai_summary, action_needed')
+        .select('id, from_address, thread_subject, subject, bucket, status, days_waiting, created_at, ai_summary, action_needed, extracted')
         .not('status', 'eq', 'archived')
 
       const emailGroups = new Map()
@@ -1073,13 +1073,25 @@ The "confidence" field must be an integer 0-100 representing how certain you are
         const winner  = group[0]
         const losers  = group.slice(1)
 
-        // Merge any richer data from losers into winner before deleting
+        // Merge any richer data from losers into winner before deleting.
+        // ai_summary: take from loser if winner has none.
+        // extracted: Phase 1B intelligence from classify — critical for skipping Haiku calls.
+        //   Newest row normally wins (sort above), so winner usually has extracted already.
+        //   Fallback: propagate from any loser that has it, in case winner is older.
         const mergedSummary = winner.ai_summary || winner.action_needed
           ? null
           : losers.map(l => l.ai_summary || l.action_needed).find(Boolean)
 
-        if (mergedSummary) {
-          await supabase.from('emails').update({ ai_summary: mergedSummary }).eq('id', winner.id)
+        const mergedExtracted = (!winner.extracted || typeof winner.extracted !== 'object')
+          ? losers.map(l => l.extracted).find(e => e && typeof e === 'object')
+          : null
+
+        const mergeUpdates = {}
+        if (mergedSummary) mergeUpdates.ai_summary = mergedSummary
+        if (mergedExtracted) mergeUpdates.extracted = mergedExtracted
+
+        if (Object.keys(mergeUpdates).length > 0) {
+          await supabase.from('emails').update(mergeUpdates).eq('id', winner.id)
         }
 
         // Delete the losers
@@ -1875,26 +1887,29 @@ Respond with JSON only:
   }
 
   // ── Phase 1B DB supplement: fill index gaps from emails.extracted column ──
-  // process-email-report.js writes emails.extracted when the classify output is
-  // processed via launchd. This path is always reliable — no sandbox network needed.
-  // Storage JSON takes priority (already loaded above); DB fills the rest.
+  // push_email_report.py now writes emails.extracted for each thread (from classify output).
+  // Storage JSON keys may mismatch (invented vs real subjects) but DB supplement is
+  // self-consistent — same email row used for both building index and lookup → always matches.
   {
-    let dbHits = 0
+    let dbConvHits = 0
+    let dbSubjHits = 0
     for (const email of (activeEmails || [])) {
+      if (!email.extracted || typeof email.extracted !== 'object') continue
       const convKey = (email.conversation_id || '').toLowerCase()
       // Primary: conversation_id
-      if (convKey && !phase1bIndex.has(convKey) && email.extracted && typeof email.extracted === 'object') {
+      if (convKey && !phase1bIndex.has(convKey)) {
         phase1bIndex.set(convKey, email.extracted)
-        dbHits++
+        dbConvHits++
       }
-      // Secondary: from_address:subject
+      // Secondary: from_address:subject (self-consistent — same row for build + lookup)
       const subjKey = p1bSubjectKey(email)
-      if (subjKey && !phase1bIndex.has(subjKey) && email.extracted && typeof email.extracted === 'object') {
+      if (subjKey && !phase1bIndex.has(subjKey)) {
         phase1bIndex.set(subjKey, email.extracted)
+        dbSubjHits++
       }
     }
-    if (dbHits > 0) {
-      console.log(`  ✓ Phase 1B DB supplement: ${dbHits} additional threads from emails.extracted`)
+    if (dbConvHits + dbSubjHits > 0) {
+      console.log(`  ✓ Phase 1B DB supplement: ${dbConvHits} by conv_id + ${dbSubjHits} by subject key (from emails.extracted)`)
     }
   }
 
