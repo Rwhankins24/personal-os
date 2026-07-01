@@ -294,6 +294,33 @@ const handleBulkPromoteToMyTasks = async () => {
     } catch (_) {}
   }
 
+  // ── Auto-link by name match ───────────────────────────────────
+  // When contacts load, any item whose committed_by_name matches a contact
+  // name (case-insensitive) gets its contact_id auto-set — no manual Assign needed
+  useEffect(() => {
+    if (!contacts?.length || !items?.length) return
+    const contactByName = new Map(
+      contacts.map(c => [(c.name || '').toLowerCase().trim(), c])
+    )
+    const toLink = items.filter(item => {
+      if (item.contact_id) return false // already linked
+      const name = (item.committed_by_name || item.person_name || '').toLowerCase().trim()
+      return name && contactByName.has(name)
+    })
+    if (toLink.length === 0) return
+    // Fire updates in background — failures are non-fatal
+    toLink.forEach(item => {
+      const contact = contactByName.get((item.committed_by_name || item.person_name || '').toLowerCase().trim())
+      updateOthersCommitment(item.id, { contact_id: contact.id })
+        .then(() => {
+          qc.setQueryData(['others', workspace], old =>
+            (old || []).map(c => c.id === item.id ? { ...c, contact_id: contact.id } : c)
+          )
+        })
+        .catch(() => {}) // silent — next load will retry
+    })
+  }, [contacts, items]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const today = dayjs()
 
   // Build key contact lookup by email + name — must come before keyCount

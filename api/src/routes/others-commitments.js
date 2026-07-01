@@ -71,7 +71,8 @@ module.exports = async (req, res) => {
       const allowed = [
         'title', 'committed_by_name', 'committed_by_email', 'due_date',
         'urgency', 'status', 'context', 'meeting_note_id', 'source_label',
-        'workspace_id'
+        'workspace_id', 'contact_id', 'delivery_type', 'parent_id',
+        'source_type', 'source_date', 'person_name',
       ]
       const updates = {}
       for (const key of allowed) {
