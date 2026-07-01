@@ -141,15 +141,15 @@ export default function OthersPage() {
   const update = useMutation({
     mutationFn: ({ id, updates }) => updateOthersCommitment(id, updates),
     onMutate: async ({ id, updates }) => {
-      await qc.cancelQueries({ queryKey: ['others-commitments'] })
-      const prev = qc.getQueryData(['others-commitments'])
-      qc.setQueryData(['others-commitments'], old =>
+      await qc.cancelQueries({ queryKey: ['others', workspace] })
+      const prev = qc.getQueryData(['others', workspace])
+      qc.setQueryData(['others', workspace], old =>
         (old || []).map(c => c.id === id ? { ...c, ...updates } : c)
       )
       return { prev }
     },
-    onError: (_, __, ctx) => qc.setQueryData(['others-commitments'], ctx.prev),
-    onSettled: () => qc.invalidateQueries({ queryKey: ['others-commitments'] }),
+    onError: (_, __, ctx) => qc.setQueryData(['others', workspace], ctx.prev),
+    onSettled: () => qc.invalidateQueries({ queryKey: ['others', workspace] }),
   })
 
   // markDone: close item + show 5-sec undo window before hiding
@@ -199,7 +199,7 @@ export default function OthersPage() {
     const ids = [...selectedIds]
     try {
       await Promise.all(ids.map(id => updateOthersCommitment(id, { status: 'closed' })))
-      qc.setQueryData(['others-commitments'], old =>
+      qc.setQueryData(['others', workspace], old =>
         (old || []).map(c => ids.includes(c.id) ? { ...c, status: 'closed' } : c)
       )
       // Add each to the 5-sec undo window
@@ -225,7 +225,7 @@ export default function OthersPage() {
     setBulkSaving(true)
     try {
       await Promise.all(losers.map(id => updateOthersCommitment(id, { parent_id: keeperId })))
-      qc.setQueryData(['others-commitments'], old =>
+      qc.setQueryData(['others', workspace], old =>
         (old || []).map(c => losers.includes(c.id) ? { ...c, parent_id: keeperId } : c)
       )
       toast(`Merged ${selectedIds.size} items into 1`, { icon: '⛓' })
@@ -261,7 +261,7 @@ const handleBulkPromoteToMyTasks = async () => {
     }
     if (promoted.length > 0) {
       setPromotedIds(prev => new Set([...prev, ...promoted]))
-      qc.setQueryData(['others-commitments'], old =>
+      qc.setQueryData(['others', workspace], old =>
         (old || []).map(c => promoted.includes(c.id) ? { ...c, status: 'archived' } : c)
       )
     }
@@ -287,7 +287,7 @@ const handleBulkPromoteToMyTasks = async () => {
       })
       await updateOthersCommitment(c.id, { status: 'archived' })
       setPromotedIds(prev => new Set([...prev, c.id]))
-      qc.setQueryData(['others-commitments'], old =>
+      qc.setQueryData(['others', workspace], old =>
         (old || []).map(item => item.id === c.id ? { ...item, status: 'archived' } : item)
       )
       toast('Added to My Tasks', { icon: '→' })
