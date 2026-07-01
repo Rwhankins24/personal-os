@@ -23,18 +23,27 @@ require('dotenv').config({
   path: path.join(__dirname, '../../.env')
 })
 
+const https = require('https')
 const { createClient } = require('@supabase/supabase-js')
 const Anthropic = require('@anthropic-ai/sdk')
 const aiService = require('../services/ai')
 
 // ── Shared Anthropic client factory ──────────────────────────────────────────
-// Do NOT pass a custom httpAgent — the SDK ships with agentkeepalive in
-// _shims/node-runtime.js (timeout: 5min, keepAlive: true). Overriding it
-// with a plain https.Agent causes "Premature close" on GitHub Actions because
-// https.Agent lacks the connection-pool sophistication of agentkeepalive.
+// The SDK ships with agentkeepalive (keepAlive: true, timeout: 5 min) in
+// _shims/node-runtime.js. On GitHub Actions, the NAT gateway closes idle TCP
+// sockets after ~60–90 seconds — well before agentkeepalive's 5-min pool
+// timeout. When the SDK tries to reuse a NAT-closed socket, node-fetch gets
+// "Premature close" as the server-side RST arrives mid-response.
+//
+// Fix: override with keepAlive: false so every Anthropic call opens a fresh
+// TCP connection. Slightly slower (TLS handshake per call) but eliminates all
+// stale-socket NAT issues. This is the standard fix for Lambda/Actions/GCP.
+const _freshConnectionAgent = new https.Agent({ keepAlive: false })
+
 function makeAnthropic() {
   return new Anthropic({
     apiKey: process.env.ANTHROPIC_API_KEY,
+    httpAgent: _freshConnectionAgent,
     timeout: 120000,   // 2 min per request
     maxRetries: 3
   })

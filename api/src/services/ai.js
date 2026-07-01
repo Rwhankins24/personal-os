@@ -2,16 +2,22 @@
 // personal-os — AI service layer
 // All Claude API calls centralized here
 
+const https = require('https')
 const Anthropic = require('@anthropic-ai/sdk')
 require('dotenv').config()
 
 const { createClient } = require('@supabase/supabase-js')
 
-// Note: do NOT pass a custom httpAgent — the SDK ships with agentkeepalive
-// (see _shims/node-runtime.js) which is more robust than a plain https.Agent.
-// Overriding it with https.Agent causes "Premature close" on GitHub Actions.
+// The SDK's built-in agentkeepalive (_shims/node-runtime.js) pools sockets
+// for 5 min. GitHub Actions NAT closes idle sockets after ~60–90s. When
+// node-fetch tries to reuse a NAT-closed socket it gets "Premature close."
+// Fix: keepAlive: false — fresh TCP+TLS per call, no stale-socket risk.
+// Standard pattern for ephemeral compute (Lambda, Actions, GCP Cloud Run).
+const _freshConnectionAgent = new https.Agent({ keepAlive: false })
+
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
+  httpAgent: _freshConnectionAgent,
   timeout: 120000,  // 2 min — matches nightly-ai-local.js
   maxRetries: 2     // SDK retries; withRetry() adds another layer on top
 })
