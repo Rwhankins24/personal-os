@@ -23,19 +23,18 @@ require('dotenv').config({
   path: path.join(__dirname, '../../.env')
 })
 
-const https = require('https')
 const { createClient } = require('@supabase/supabase-js')
 const Anthropic = require('@anthropic-ai/sdk')
 const aiService = require('../services/ai')
 
 // ── Shared Anthropic client factory ──────────────────────────────────────────
-// Uses a keepAlive HTTPS agent to prevent GitHub Actions NAT from closing
-// long-lived connections mid-response ("Premature close" error).
-const _keepAliveAgent = new https.Agent({ keepAlive: true, keepAliveMsecs: 30000, maxSockets: 10 })
+// Do NOT pass a custom httpAgent — the SDK ships with agentkeepalive in
+// _shims/node-runtime.js (timeout: 5min, keepAlive: true). Overriding it
+// with a plain https.Agent causes "Premature close" on GitHub Actions because
+// https.Agent lacks the connection-pool sophistication of agentkeepalive.
 function makeAnthropic() {
   return new Anthropic({
     apiKey: process.env.ANTHROPIC_API_KEY,
-    httpAgent: _keepAliveAgent,
     timeout: 120000,   // 2 min per request
     maxRetries: 3
   })

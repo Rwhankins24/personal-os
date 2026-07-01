@@ -3,22 +3,15 @@
 // All Claude API calls centralized here
 
 const Anthropic = require('@anthropic-ai/sdk')
-const https = require('https')
 require('dotenv').config()
 
 const { createClient } = require('@supabase/supabase-js')
 
-// keepAlive agent prevents Mac NAT/TCP from closing long-lived connections
-// mid-response — fixes "Invalid response body" errors on sequential API calls
-const _keepAliveAgent = new https.Agent({
-  keepAlive: true,
-  keepAliveMsecs: 30000,
-  maxSockets: 10
-})
-
+// Note: do NOT pass a custom httpAgent — the SDK ships with agentkeepalive
+// (see _shims/node-runtime.js) which is more robust than a plain https.Agent.
+// Overriding it with https.Agent causes "Premature close" on GitHub Actions.
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
-  httpAgent: _keepAliveAgent,
   timeout: 120000,  // 2 min — matches nightly-ai-local.js
   maxRetries: 2     // SDK retries; withRetry() adds another layer on top
 })
