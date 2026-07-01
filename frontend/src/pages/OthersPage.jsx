@@ -54,7 +54,7 @@ function getInitials(name) {
 }
 
 // ── Bulk action bar ────────────────────────────────────────────
-function BulkActionBar({ selectedIds, onPromoteToMyTasks, onMarkDone, onMerge, onCancel, promoting, saving }) {
+function BulkActionBar({ selectedIds, onPromoteToMyTasks, onMarkDone, onMerge, onReassign, onCancel, promoting, saving }) {
   if (selectedIds.size === 0) return null
 
   return (
@@ -69,6 +69,14 @@ function BulkActionBar({ selectedIds, onPromoteToMyTasks, onMarkDone, onMerge, o
             className="text-sm bg-green-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-green-400 transition-colors disabled:opacity-50 whitespace-nowrap"
           >
             {saving ? 'Saving…' : '✓ Done'}
+          </button>
+          {/* Reassign */}
+          <button
+            onClick={onReassign}
+            disabled={saving}
+            className="text-sm bg-purple-500 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-purple-400 transition-colors disabled:opacity-50 whitespace-nowrap"
+          >
+            ↩ Reassign
           </button>
           {/* Merge — only when 2+ selected */}
           {selectedIds.size >= 2 && (
@@ -176,8 +184,9 @@ export default function OthersPage() {
   }, [update])
 
 
-  const [bulkSaving, setBulkSaving] = useState(false)
-  const [mergeModal, setMergeModal] = useState(false)
+  const [bulkSaving,     setBulkSaving]     = useState(false)
+  const [mergeModal,     setMergeModal]     = useState(false)
+  const [reassignModal,  setReassignModal]  = useState(false)
 
   const toggleSelectMode = () => {
     setSelectMode(v => !v)
@@ -230,6 +239,25 @@ export default function OthersPage() {
       )
       toast(`Merged ${selectedIds.size} items into 1`, { icon: '⛓' })
       setMergeModal(false)
+      setSelectedIds(new Set())
+      setSelectMode(false)
+    } finally {
+      setBulkSaving(false)
+    }
+  }
+
+  const handleBulkReassign = async ({ name, contact_id }) => {
+    if (!name?.trim() || bulkSaving) return
+    setBulkSaving(true)
+    const ids = [...selectedIds]
+    try {
+      const updates = { committed_by_name: name.trim(), ...(contact_id ? { contact_id } : {}) }
+      await Promise.all(ids.map(id => updateOthersCommitment(id, updates)))
+      qc.setQueryData(['others', workspace], old =>
+        (old || []).map(c => ids.includes(c.id) ? { ...c, ...updates } : c)
+      )
+      toast(`${ids.length} item${ids.length !== 1 ? 's' : ''} reassigned to ${name.trim()}`, { icon: '↩' })
+      setReassignModal(false)
       setSelectedIds(new Set())
       setSelectMode(false)
     } finally {
@@ -660,6 +688,7 @@ const handleBulkPromoteToMyTasks = async () => {
         selectedIds={selectedIds}
         onMarkDone={handleBulkMarkDone}
         onMerge={() => setMergeModal(true)}
+        onReassign={() => setReassignModal(true)}
         onPromoteToMyTasks={handleBulkPromoteToMyTasks}
         onCancel={() => { setSelectMode(false); setSelectedIds(new Set()) }}
         promoting={promoting}
@@ -702,6 +731,18 @@ const handleBulkPromoteToMyTasks = async () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Reassign modal */}
+      {reassignModal && (
+        <BulkReassignModal
+          selectedIds={selectedIds}
+          items={items}
+          contacts={contacts}
+          saving={bulkSaving}
+          onReassign={handleBulkReassign}
+          onClose={() => setReassignModal(false)}
+        />
       )}
 
       {/* Link contact modal */}
@@ -1034,6 +1075,84 @@ function LinkContactModal({ item, contacts, allItems, onLink, onClose }) {
               )}
             </>
           )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Bulk Reassign Modal ────────────────────────────────────────
+function BulkReassignModal({ selectedIds, items, contacts, saving, onReassign, onClose }) {
+  const [query,     setQuery]     = useState('')
+  const [selected,  setSelected]  = useState(null) // { name, contact_id }
+  const inputRef = useRef(null)
+  useEffect(() => { setTimeout(() => inputRef.current?.focus(), 80) }, [])
+
+  const filtered = (contacts || [])
+    .filter(c => !query.trim() || c.name?.toLowerCase().includes(query.toLowerCase()))
+    .slice(0, 8)
+
+  const handlePick = (contact) => {
+    setSelected({ name: contact.name, contact_id: contact.id })
+    setQuery(contact.name)
+  }
+
+  const handleConfirm = () => {
+    const name = selected?.name || query.trim()
+    const contact_id = selected?.contact_id || null
+    if (!name) return
+    onReassign({ name, contact_id })
+  }
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-4" onClick={onClose}>
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-[#e5e5e3]">
+          <div>
+            <h2 className="text-sm font-semibold text-[#1a1a18]">Reassign {selectedIds.size} item{selectedIds.size !== 1 ? 's' : ''}</h2>
+            <p className="text-xs text-[#6b6b67] mt-0.5">Move selected items to a different person</p>
+          </div>
+          <button onClick={onClose} className="text-[#6b6b67] hover:text-[#1a1a18] text-xl leading-none">×</button>
+        </div>
+        <div className="px-4 py-3">
+          <input
+            ref={inputRef}
+            value={query}
+            onChange={e => { setQuery(e.target.value); setSelected(null) }}
+            placeholder="Search contacts or type a name…"
+            className="w-full text-sm border border-[#e5e5e3] rounded-lg px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+          {/* Contact list */}
+          <div className="space-y-1 max-h-52 overflow-y-auto mb-3">
+            {filtered.map(c => (
+              <button
+                key={c.id}
+                onClick={() => handlePick(c)}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors text-left ${
+                  selected?.contact_id === c.id ? 'bg-purple-50 border border-purple-300' : 'hover:bg-gray-50'
+                }`}
+              >
+                <span className="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  {c.name?.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-[#1a1a18]">{c.name}</p>
+                  {c.email && <p className="text-xs text-[#9b9b97] truncate">{c.email}</p>}
+                </div>
+                {c.is_key_contact && <span className="text-amber-500 text-xs flex-shrink-0">⭐</span>}
+              </button>
+            ))}
+            {filtered.length === 0 && query.trim().length > 0 && (
+              <p className="text-xs text-[#9b9b97] px-3 py-2">No contact found — will reassign to "{query}" as a new name</p>
+            )}
+          </div>
+          <button
+            onClick={handleConfirm}
+            disabled={saving || !query.trim()}
+            className="w-full py-2.5 bg-purple-600 text-white text-sm font-medium rounded-xl disabled:opacity-40 hover:bg-purple-700 transition-colors"
+          >
+            {saving ? 'Saving…' : `Reassign to ${selected?.name || query.trim() || '…'}`}
+          </button>
         </div>
       </div>
     </div>
