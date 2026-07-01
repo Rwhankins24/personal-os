@@ -131,6 +131,23 @@ def thread_to_payload(t, today):
         # The nightly job's DB supplement reads email.extracted and skips Haiku calls.
         # This is more reliable than subject-key matching across report JSON vs DB.
         "extracted":              t.get("extracted") or None,
+        # ── New classify signal fields (Step 2.5 additions) ──
+        # These are filterable/indexable columns added to the emails table.
+        # Passed through here so the DB row reflects the classify output.
+        # Old classify output won't have these fields — .get() defaults keep this backward-compat.
+        "sender_type":            t.get("sender_type") or None,
+        "decision_status":        t.get("decision_status") or None,
+        "thread_type":            t.get("thread_type") or None,
+        "thread_momentum":        t.get("thread_momentum") or None,
+        "tone_signal":            t.get("tone_signal") or None,
+        "communication_register": t.get("communication_register") or None,
+        "first_contact":          t.get("first_contact", False),
+        "attachment_types":       t.get("attachment_types", []),
+        "participant_tier":       t.get("participant_tier") or None,
+        "action_deadline":        t.get("action_deadline") or None,
+        "contract_event":         t.get("contract_event") or None,
+        "competitor_mentioned":   t.get("competitor_mentioned", False),
+        "expected_reply_by":      t.get("expected_reply_by") or None,
     }
 
 STATE_FILE = os.path.expanduser("~/personal-os/data/push-state.json")

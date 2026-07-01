@@ -505,13 +505,24 @@ async function checkAlreadyRan() {
 // ─── THREAD HISTORY QUERY
 // Reads accumulated history from database
 // Does NOT call Outlook
+// Memoized per email.id — called multiple times for the same email across Steps 3.5, 4, 4.5, 5.
+// A single nightly run can fetch the same thread history 3-4x without this cache.
+const _threadHistoryCache = new Map()
 async function getThreadHistory(email) {
+  const cacheKey = email.id || email.thread_subject || ''
+  if (_threadHistoryCache.has(cacheKey)) {
+    return _threadHistoryCache.get(cacheKey)
+  }
+
   const subject = (email.thread_subject || email.subject || '')
     .replace(/^(re:|fwd?:|fw:)\s*/gi, '')
     .trim()
     .substring(0, 60)
 
-  if (!subject) return []
+  if (!subject) {
+    _threadHistoryCache.set(cacheKey, [])
+    return []
+  }
 
   const { data } = await supabase
     .from('emails')
@@ -523,7 +534,9 @@ async function getThreadHistory(email) {
     .order('created_at', { ascending: true })  // received_at is often null; created_at is always set
     .limit(20)
 
-  return data || []
+  const result = data || []
+  _threadHistoryCache.set(cacheKey, result)
+  return result
 }
 
 // ─── PROJECT KEYWORD MATCHING
@@ -1862,6 +1875,11 @@ Respond with JSON only:
     return from && subj ? `subj:${from}:${subj}` : null
   }
 
+  // Phase 1B B3 oversight intelligence — populated from storage JSON, fed into daily brief.
+  // B3 threads with full extraction (risk/financial/scope signals) are valuable project intel
+  // that the brief generator needs but that never flows through activeEmails (B1/B2 only).
+  let p1bOversightThreads = []
+
   try {
     const p1bStorageUrl = `${process.env.SUPABASE_URL}/storage/v1/object/daily-reports/${today}.json`
     const p1bRes = await fetch(p1bStorageUrl, {
@@ -1888,6 +1906,41 @@ Respond with JSON only:
         }
       }
       console.log(`  ✓ Phase 1B index: ${p1bThreadCount} by conv_id + ${p1bSubjCount} by subject key`)
+
+      // ── Extract B3 oversight intelligence for daily brief ──
+      // B3 threads that classify ran full extraction on (they have signal data beyond ai_summary).
+      // These represent project intel that Ryan is CC'd on — not action items, but critical context.
+      // Filter to threads with at least one meaningful signal; cap at 10 for brief context budget.
+      const bucket3All = p1bReport.bucket3 || []
+      p1bOversightThreads = bucket3All
+        .filter(t => {
+          if (!t.extracted) return false
+          const ex = t.extracted
+          return (
+            (ex.risk_signals && ex.risk_signals.length > 0) ||
+            (ex.financial_items && ex.financial_items.length > 0) ||
+            (ex.scope_changes && ex.scope_changes.length > 0) ||
+            (ex.pending_decisions && ex.pending_decisions.length > 0) ||
+            t.competitor_mentioned === true ||
+            (t.contract_event && t.contract_event !== 'none')
+          )
+        })
+        .map(t => ({
+          subject: t.thread_subject || t.subject || '',
+          from_name: t.from_name || '',
+          sender_type: t.sender_type || 'unknown',
+          ai_summary: t.extracted.ai_summary || '',
+          risk_signals: (t.extracted.risk_signals || []).map(r => r.signal || r),
+          financial_items: (t.extracted.financial_items || []).map(f => `${f.amount} — ${f.context}`),
+          scope_changes: (t.extracted.scope_changes || []).map(s => s.description),
+          pending_decisions: (t.extracted.pending_decisions || []).map(d => d.question),
+          competitor_mentioned: t.competitor_mentioned || false,
+          contract_event: t.contract_event || 'none'
+        }))
+        .slice(0, 10)
+      if (p1bOversightThreads.length > 0) {
+        console.log(`  ✓ Phase 1B oversight intel: ${p1bOversightThreads.length} B3 threads with signals (for brief)`)
+      }
     } else {
       console.log(`  ⚠ Phase 1B classify output not found (HTTP ${p1bRes.status}) — falling back to per-email AI calls`)
     }
@@ -5605,7 +5658,10 @@ Respond ONLY with valid JSON:
       pending_decisions: pendingDecisions || [],
       risk_signals: riskSignalsList,
       rolling_summary: rollingCtx?.content || null,
-      recent_meetings: recentMeetings || []
+      recent_meetings: recentMeetings || [],
+      // Phase 1B: B3 oversight threads with extracted signals — project intel from CC-only emails.
+      // These threads never appear in activeEmails (B1/B2 only) so must be fed explicitly.
+      oversight_intel: p1bOversightThreads
     }
 
     const brief = await aiService.generateDailyBrief(briefContext)

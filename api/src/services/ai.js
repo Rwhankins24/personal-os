@@ -659,7 +659,7 @@ async function extractIntelligence(email, threadHistory = [], meetingContext = '
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',  // high-volume per-email loop — Haiku is fast + sufficient for structured extraction
       max_tokens: 1500,
       messages: [{
         role: 'user',
@@ -783,7 +783,7 @@ async function extractTasks(email, threadHistory = [], existingItemsContext = ''
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',  // high-volume per-email loop — Haiku handles structured task extraction well
       max_tokens: 1000,
       messages: [{
         role: 'user',
@@ -833,7 +833,7 @@ async function extractOthersCommitments(email, threadHistory = [], existingItems
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',  // high-volume per-email loop — Haiku handles structured commitment extraction well
       max_tokens: 2000,
       messages: [{
         role: 'user',
@@ -906,7 +906,7 @@ async function extractMyCommitments(email, threadHistory = [], existingItemsCont
 
   const message = await withRetry(() =>
     client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',  // high-volume per-email loop — Haiku handles structured commitment extraction well
       max_tokens: 2000,
       messages: [{
         role: 'user',
@@ -1126,7 +1126,20 @@ ${(context.recent_meetings || []).map(m =>
   `[${m.start_time?.split('T')[0] || 'unknown'}] ${m.title}: ${m.short_summary || 'no summary'}`
 ).join('\n') || 'No meeting data'}
 
-Cross-source intelligence: When an item has evidence from BOTH email AND meeting transcripts — explicitly note this connection. Example: "Verbally committed in [meeting] AND no email follow-through yet." Flag when verbal commitments from meetings have no corresponding email follow-up — these are highest risk for falling through cracks. Flag when email threads reference a meeting discussion that is still unresolved.
+Oversight intelligence (B3 CC-only threads with extracted signals — project context Ryan is watching but not driving):
+${(context.oversight_intel || []).length > 0
+  ? (context.oversight_intel || []).map(t => {
+      const lines = [`[${t.sender_type}] ${t.subject}: ${t.ai_summary}`]
+      if (t.risk_signals.length)      lines.push(`  Risks: ${t.risk_signals.join('; ')}`)
+      if (t.financial_items.length)   lines.push(`  Financial: ${t.financial_items.join('; ')}`)
+      if (t.scope_changes.length)     lines.push(`  Scope: ${t.scope_changes.join('; ')}`)
+      if (t.competitor_mentioned)     lines.push(`  ⚠ Competitor mentioned`)
+      if (t.contract_event !== 'none') lines.push(`  Contract event: ${t.contract_event}`)
+      return lines.join('\n')
+    }).join('\n\n')
+  : 'None'}
+
+Cross-source intelligence: When an item has evidence from BOTH email AND meeting transcripts — explicitly note this connection. Example: "Verbally committed in [meeting] AND no email follow-through yet." Flag when verbal commitments from meetings have no corresponding email follow-up — these are highest risk for falling through cracks. Flag when email threads reference a meeting discussion that is still unresolved. Surface any oversight threads with risk signals or financial items that may be escalating — Ryan may need to shift from passive observer to active participant.
 
 Return only the brief with three labeled sections. No preamble.`
       }]

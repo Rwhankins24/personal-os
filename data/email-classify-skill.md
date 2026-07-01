@@ -309,6 +309,99 @@ Checkpoint JSON structure:
 
 ---
 
+## Step 2.5 — Per-thread signal fields
+
+For each classified thread (Buckets 1–5), set the following fields alongside `bucket`, `urgency`, and
+`status`. These are derived from thread content during Step 2 classification — not LLM calls.
+Use heuristics, sender domain patterns, and subject/body text signals.
+
+**`sender_type`** — Who is the primary sender? Classify `from_address` / `from_name`:
+- `"owner"` — client, developer, owner's rep (direct client contacts, CBRE/JLL acting as owner)
+- `"subcontractor"` — sub/specialty contractor, supplier, materials vendor for a project
+- `"design_team"` — architect, engineer, consultant (look for AIA, PE, "arch", "engineering" firm domains)
+- `"internal_clayco"` — `@claycorp.com`, `@concretestrategies.com`, `@crgrea.com`, `@ljcdesign.com`, `@ventana-construction.com`
+- `"broker"` — commercial real estate broker or tenant rep (CBRE/JLL/Cushman acting as broker)
+- `"vendor"` — software, equipment, or services vendor (not project-specific materials)
+- `"legal"` — law firm, attorney (look for "Esq.", "LLP", counsel domains like wilkiefarr.com etc.)
+- `"financial"` — lender, investor, bank, insurance, surety, bonding company
+- `"personal"` — personal contacts, family, health, non-work
+- `"unknown"` — cannot determine from available signals
+
+**`decision_status`** — Is a decision pending or has it been made?
+- `"pending_ryan"` — open question or approval awaiting Ryan's input specifically
+- `"pending_other"` — waiting on someone else's decision (Ryan is just informed or watching)
+- `"decided"` — a decision was clearly made in the thread and is now final
+- `"no_decision"` — informational/FYI, no decision involved
+
+**`thread_type`** — What kind of communication is this?
+- `"thread"` — back-and-forth exchange with 2+ messages
+- `"single_message"` — only one message in the thread (no replies)
+- `"mass_email"` — sent to 8+ recipients or a distribution list
+- `"automated"` — system notification, calendar notification (shouldn't reach B1–B4 but catch stragglers)
+
+**`thread_momentum`** — How is the conversation progressing?
+- `"active"` — most recent reply within 24h, ongoing exchange
+- `"stalled"` — no movement in 3+ days despite open action items
+- `"escalating"` — increasing urgency, CC escalation, or multiple follow-ups without resolution
+- `"closing"` — explicit resolution language present ("thanks, we're all set", "closing this out")
+
+**`tone_signal`** — Tone of the most recent message in the thread:
+- `"neutral"` — standard professional communication
+- `"urgent"` — deadline language, "ASAP", "time-sensitive", "critical"
+- `"frustrated"` — impatience or dissatisfaction signals
+- `"collaborative"` — joint problem-solving, partnership language
+- `"formal"` — legal, contract, or notice language (structured, citation-heavy)
+- `"adversarial"` — dispute, claim, or hostile language
+
+**`communication_register`** — What type of communication is this?
+- `"executive"` — senior leadership, owner principal, cross-company decisions
+- `"operational"` — day-to-day project coordination and execution
+- `"contractual"` — contract execution, changes, formal notices, claims
+- `"administrative"` — scheduling, logistics, process coordination
+- `"social"` — relationship maintenance, congratulations, introductions
+
+**`first_contact`** — `true` if this sender's `from_address` has NOT appeared in any prior thread
+in the report AND was not in `yesterday_conv_ids` participants. Signals a new relationship.
+Default `false` if unsure — only mark `true` when clearly a new sender.
+
+**`attachment_types`** — Array of attachment type tags when `has_attachment: true`. Infer from
+subject line and body text (e.g., "attached revised drawings" → `["drawing"]`). Use:
+`"contract"` | `"drawing"` | `"schedule"` | `"budget"` | `"photo"` | `"spec"` | `"report"` | `"other"`
+Empty array `[]` if no attachments or attachment type cannot be determined.
+
+**`participant_tier`** — Highest-seniority tier among non-Ryan participants (scan names/titles in thread):
+- `"c_suite"` — CEO, COO, CFO, President, Principal, Owner/Partner
+- `"executive"` — VP, SVP, EVP, Director, Project Executive, PE
+- `"manager"` — Project Manager, PM, Superintendent, Senior Manager
+- `"field"` — Estimator, Coordinator, Foreman, field personnel
+- `"admin"` — Administrative assistant, clerical, support staff
+- `"external_unknown"` — external party with undetectable seniority
+
+**`action_deadline`** — Earliest hard deadline for Ryan to take action, ISO date string (`"YYYY-MM-DD"`) or `null`.
+Look for: "by Friday", "before COB", "deadline of [date]", "respond by [date]", "due [date]".
+Convert relative dates to absolute using `TODAY_ISO` as anchor. Ignore soft asks.
+
+**`contract_event`** — Specific contract lifecycle event detected in the thread:
+- `"none"` — no contract event (default)
+- `"execution"` — contract signing or execution underway
+- `"amendment"` — contract amendment or modification
+- `"change_order"` — change order discussion, request, or execution
+- `"dispute"` — claim, dispute, or formal disagreement
+- `"notice"` — formal notice (NTP, NOD, NOC, cure notice, stop-work, etc.)
+- `"closeout"` — substantial completion, final payment, punch list, lien release
+
+**`competitor_mentioned`** — `true` if any known competitor is named in the subject or body.
+Tracked competitors: Turner, Skanska, Mortenson, McCarthy, Whiting-Turner, Hensel Phelps,
+Alberici, Pepper Construction, Power Construction, DPR, Gilbane, AECOM, Balfour Beatty,
+Linbeck, Ryan Companies, Tarlton, Walbridge, Barton Malow, Brasfield & Gorrie, Hoar.
+Default `false`.
+
+**`expected_reply_by`** — Date the sender appears to expect a reply, ISO string or `null`.
+Distinct from `action_deadline` — this is their stated or implied expectation, not a hard contractual date.
+Look for: "let me know by", "hoping to hear back by", "need your response before".
+
+---
+
 ## Step 3 — Cross-reference against yesterday's report
 
 For each thread in Buckets 1–4, check if its `conversationId` appears in `yesterday_conv_ids`:
@@ -335,9 +428,15 @@ regardless of `days_waiting`.
 
 ---
 
-## Step 5 — Build tags array
+## Step 5 — Build tags array (4-tier system)
 
-For each thread in Buckets 1–5, populate `tags: []`:
+For each thread in Buckets 1–5, populate `tags: []`. Tags are built in 4 tiers, ordered from
+zero-LLM to single-call LLM. Apply ALL tiers. ~70–80% of tags come from Tiers 1–3 with no LLM call.
+
+Note: Tier 3 tags depend on the `extracted` block — they must be applied AFTER Step 5.5 runs.
+Apply Tier 1 and Tier 2 before Step 5.5, then apply Tier 3 and Tier 4 after Step 5.5.
+
+### Tier 1 — Deterministic from boolean fields (zero LLM)
 
 | Tag                | Condition                                          |
 |--------------------|----------------------------------------------------|
@@ -350,6 +449,67 @@ For each thread in Buckets 1–5, populate `tags: []`:
 | `LARGE_THREAD`     | `thread_participant_count >= 6`                    |
 | `FLAGGED`          | `is_flagged: true`                                 |
 | `FOLLOWED_UP`      | `followed_up: true` (Bucket 2 only)                |
+
+### Tier 2 — Derived from sender_type (zero LLM)
+
+Apply from `sender_type` set in Step 2.5:
+
+| Tag                  | Condition                             |
+|----------------------|---------------------------------------|
+| `SENDER_OWNER`       | `sender_type == "owner"`              |
+| `SENDER_SUB`         | `sender_type == "subcontractor"`      |
+| `SENDER_DESIGN`      | `sender_type == "design_team"`        |
+| `SENDER_LEGAL`       | `sender_type == "legal"`              |
+| `SENDER_FINANCIAL`   | `sender_type == "financial"`          |
+| `SENDER_INTERNAL`    | `sender_type == "internal_clayco"`    |
+
+### Tier 3 — Derived from extracted block (post-Step 5.5, zero LLM)
+
+Apply AFTER Step 5.5 extraction runs. Derive mechanically from the `extracted` object:
+
+| Tag                    | Condition                                                              |
+|------------------------|------------------------------------------------------------------------|
+| `HAS_ACTION_ITEM`      | `extracted.action_items` has any item with `owner: "ryan"`             |
+| `HAS_COMMITMENT`       | `extracted.commitments` is non-empty                                   |
+| `HAS_PENDING_DECISION` | `extracted.pending_decisions` is non-empty                             |
+| `HAS_RISK`             | `extracted.risk_signals` is non-empty                                  |
+| `HAS_DECISION_MADE`    | `extracted.decisions_made` is non-empty                                |
+| `FINANCIAL_ITEM`       | `extracted.financial_items` is non-empty                               |
+| `SCOPE_CHANGE`         | `extracted.scope_changes` is non-empty                                 |
+| `HAS_DEADLINE`         | `extracted.deadlines` is non-empty OR `action_deadline` is non-null    |
+| `COMPETITOR_MENTION`   | `competitor_mentioned: true`                                           |
+| `CONTRACT_EVENT`       | `contract_event` is not `"none"` and not null                          |
+| `FIRST_CONTACT`        | `first_contact: true`                                                  |
+| `STALLED`              | `thread_momentum == "stalled"`                                         |
+| `ESCALATING`           | `thread_momentum == "escalating"`                                      |
+| `ADVERSARIAL_TONE`     | `tone_signal == "adversarial"`                                         |
+| `NEW_RELATIONSHIP`     | `first_contact: true` AND `sender_type != "internal_clayco"`           |
+
+### Tier 4 — Single focused LLM topic classification (Haiku, one call per thread)
+
+Run for: all B1/B2 threads, and B3 threads that passed the expanded extraction filter (see Step 5.5).
+Skip for: B4 threads (assign `TOPIC_LEGAL_CONTRACT` directly), B5 threads (assign `TOPIC_GENERAL` directly),
+and B3 threads that did NOT pass the extraction filter (assign `TOPIC_GENERAL` directly).
+
+For qualifying threads: make one Haiku call with the subject line + first 300 chars of body preview.
+Prompt: "Classify this email into exactly ONE topic category. Reply with only the tag name, nothing else."
+Return the **single best-fit tag** from this fixed enum:
+
+| Tag                    | When thread is primarily about...                              |
+|------------------------|----------------------------------------------------------------|
+| `TOPIC_FINANCIAL`      | Money: invoices, pay apps, GMP, budgets, cost, fees, bonds     |
+| `TOPIC_SCHEDULE`       | Timeline: milestones, delays, CPM, float, delivery dates       |
+| `TOPIC_SCOPE`          | Scope: clarifications, additions, reductions, exclusions       |
+| `TOPIC_DESIGN`         | Design: submittals, RFIs, drawings, specifications, approvals  |
+| `TOPIC_PROCUREMENT`    | Purchasing: sub awards, materials, long-lead, buyout           |
+| `TOPIC_OWNER_RELATIONS`| Owner: approvals, reporting, relationship management           |
+| `TOPIC_PURSUIT`        | Business development: proposals, interviews, new pursuit       |
+| `TOPIC_LEGAL_CONTRACT` | Legal/contracts: terms, disputes, claims, formal notices       |
+| `TOPIC_PERSONNEL`      | Staffing: roles, assignments, HR matters, recruiting           |
+| `TOPIC_SAFETY`         | Safety: incidents, regulations, OSHA, site conditions          |
+| `TOPIC_GENERAL`        | Doesn't clearly fit any category above                         |
+
+Append the returned tag to `tags[]`. If the Haiku call fails or times out, default to `TOPIC_GENERAL`.
 
 ---
 
@@ -422,6 +582,39 @@ Add an `extracted` object to each thread record:
         "fact": "Insulation scope is now confirmed at $2.4M per approved change order",
         "confidence": 0.95
       }
+    ],
+    "financial_items": [
+      {
+        "amount": "$280,000",
+        "amount_numeric": 280000,
+        "context": "Contractor says full cost of LWIC scope gap is $280k per their cost breakdown",
+        "type": "scope_cost",
+        "confidence": 0.91
+      }
+    ],
+    "relationship_signals": [
+      {
+        "signal": "Owner expressing frustration with 5-day response delay on insulation scope",
+        "type": "tension",
+        "party": "owner@client.com",
+        "confidence": 0.82
+      }
+    ],
+    "scope_changes": [
+      {
+        "description": "Owner requested addition of covered parking to Lot C",
+        "direction": "add",
+        "estimated_impact": "$150k–$200k",
+        "confidence": 0.87
+      }
+    ],
+    "deadlines": [
+      {
+        "description": "GMP submission due to owner",
+        "date": "2026-07-15",
+        "is_hard": true,
+        "confidence": 0.93
+      }
     ]
   }
 }
@@ -459,11 +652,57 @@ Not pending — made. "Owner approved X", "Parties agreed to Y."
 `key_facts` — Specific, verifiable facts that may be useful later. Numbers, dates, parties,
 specifications. "GMP is $48.2M." "Substantial completion date is Sept 15." Omit opinions.
 
+`financial_items` — Financial amounts detected WITH construction-financial context. A dollar sign
+alone is NOT sufficient — marketing emails, signatures, and pricing sheets all contain dollar signs.
+Require BOTH: (1) a dollar amount AND (2) at least one of these construction-financial keywords
+nearby (within same sentence or immediately adjacent sentence): invoice, pay application, pay app,
+GMP, NTE, not-to-exceed, change order, retainage, retention, budget, cost breakdown, cost estimate,
+lump sum fee, contract value, bid amount, award amount, bond amount, surety, lien, claim amount.
+For each qualifying item:
+- `amount`: dollar amount as a string (e.g., `"$280,000"`)
+- `amount_numeric`: parsed number (e.g., `280000`)
+- `context`: 1-sentence description of what the amount refers to
+- `type`: `"invoice"` | `"pay_app"` | `"change_order"` | `"gmp"` | `"nte"` | `"retainage"` | `"budget"` | `"fee"` | `"scope_cost"` | `"other_financial"`
+- `confidence`: 0–1
+
+`relationship_signals` — Notable relationship dynamics worth Ryan's awareness:
+- `signal`: 1-sentence description of the dynamic
+- `type`: `"positive"` | `"tension"` | `"escalation"` | `"new_contact"` | `"long_silence"`
+- `party`: email address of the party showing the signal (if identifiable)
+- `confidence`: 0–1
+Only include if clearly present — don't manufacture signals from neutral exchanges.
+
+`scope_changes` — Explicit scope additions, reductions, or modifications mentioned:
+- `description`: what changed
+- `direction`: `"add"` | `"reduce"` | `"change"` | `"unclear"`
+- `estimated_impact`: cost/time impact if stated (e.g., `"$150k–$200k"`, `"~3 weeks"`), else `null`
+- `confidence`: 0–1
+
+`deadlines` — Explicit dates or deadlines mentioned in the thread:
+- `description`: what the deadline is for
+- `date`: ISO date string `"YYYY-MM-DD"` (convert relative dates using TODAY_ISO as anchor), or `null` if only a day of week is mentioned without a specific date
+- `is_hard`: `true` if described as a hard deadline, contractual milestone, or owner-imposed; `false` if soft/preferred
+- `confidence`: 0–1
+
 **Omit any key entirely if no qualifying items exist.** An empty `action_items: []` is fine.
 Do not manufacture items to fill the structure.
 
-**Bucket 3 and 4 threads:** Extract `ai_summary` and `context_type` always. Extract other
-fields only if clearly present — B3/B4 threads often have no action items for Ryan.
+**Bucket 4 threads:** Extract `ai_summary` and `context_type` always. Extract other fields
+only if clearly present — B4 threads often have no action items beyond the review request itself.
+
+**Bucket 3 threads — expanded extraction filter:**
+Run FULL extraction (all keys including financial_items, relationship_signals, scope_changes, deadlines)
+on B3 threads matching ANY of these criteria:
+- `is_time_sensitive: true`
+- `has_contract_language: true`
+- `has_attachment: true` AND `attachment_types` includes `"contract"`, `"drawing"`, `"schedule"`, or `"budget"`
+- `thread_message_count >= 4` (active multi-message thread)
+- Subject contains project name signals: ALL-CAPS acronyms, project codes, known client/project names from recent threads
+- `competitor_mentioned: true`
+- `contract_event` is not `"none"`
+
+For B3 threads NOT matching any filter: extract `ai_summary` and `context_type` only.
+Log count of B3 threads with full extraction for the Step 8 summary (`total_b3_extracted`).
 
 ---
 
@@ -530,6 +769,19 @@ Then immediately write the full classified payload:
       "thread_participant_count": 3,
       "last_report_date": "[TODAY_ISO]",
       "conversation_id": "AAQkADFhYWFhYWFh",
+      "sender_type": "subcontractor",
+      "decision_status": "pending_ryan",
+      "thread_type": "thread",
+      "thread_momentum": "stalled",
+      "tone_signal": "urgent",
+      "communication_register": "operational",
+      "first_contact": false,
+      "attachment_types": ["spec"],
+      "participant_tier": "manager",
+      "action_deadline": null,
+      "contract_event": "none",
+      "competitor_mentioned": false,
+      "expected_reply_by": null,
       "full_thread_content": "Full message body... ---MESSAGE BREAK--- Previous message...",
       "sent_body": "Ryan's last sent message in this thread...",
       "extraction_depth": "full",
@@ -568,7 +820,11 @@ Then immediately write the full classified payload:
           }
         ],
         "decisions_made": [],
-        "key_facts": []
+        "key_facts": [],
+        "financial_items": [],
+        "relationship_signals": [],
+        "scope_changes": [],
+        "deadlines": []
       }
     }
   ],
@@ -602,7 +858,22 @@ Then immediately write the full classified payload:
     "urgency_normal_count": 4,
     "large_thread_count": 2,
     "flagged_count": 1,
-    "followed_up_count": 0
+    "followed_up_count": 0,
+    "total_with_action_items": 4,
+    "total_with_risk_signals": 3,
+    "total_with_financial_items": 2,
+    "total_with_pending_decisions": 3,
+    "total_b3_extracted": 7,
+    "topic_financial_count": 3,
+    "topic_schedule_count": 2,
+    "topic_scope_count": 2,
+    "topic_design_count": 1,
+    "topic_pursuit_count": 1,
+    "competitor_mention_count": 1,
+    "first_contact_count": 2,
+    "contract_event_count": 1,
+    "stalled_thread_count": 4,
+    "escalating_thread_count": 2
   }
 }
 ```
@@ -682,6 +953,21 @@ Output this exact bordered summary:
   Large thread (≥6):     X
   Internal:              X
   External:              X
+  Stalled:               X
+  Escalating:            X
+
+  INTELLIGENCE EXTRACTED
+  ────────────────────────────────────────────────────
+  With action items:     X
+  With risk signals:     X
+  With financial items:  X
+  With pending decisions:X
+  B3 threads extracted:  X
+  Competitor mentions:   X
+  First contacts:        X
+  Contract events:       X
+  Topic — Financial:     X  Schedule: X  Scope: X  Design: X
+  Topic — Pursuit:       X  Legal: X  Personnel: X  Safety: X
 
   DELTA
   ────────────────────────────────────────────────────
