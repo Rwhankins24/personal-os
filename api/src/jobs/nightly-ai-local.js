@@ -1935,6 +1935,8 @@ Respond with JSON only:
   // ── STEP 3: Summarize threads ───────────────────────────────────
   console.log('Step 3: Summarizing threads...')
   let phase1bSummaryHits = 0
+  let existingSummarySkips = 0
+  let haikuSummaryCalls = 0
   for (const email of (activeEmails || [])) {
     try {
       // Detect links
@@ -1961,7 +1963,21 @@ Respond with JSON only:
         continue  // skip Haiku call
       }
 
-      // ── Fallback: per-email Haiku summarize (no Phase 1B data) ──
+      // ── Already summarized + no classify update today → skip Haiku ──
+      // Old active threads (needs_reply / waiting_on for days) won't appear
+      // in today's classify output. Any thread that got a NEW email today will
+      // be in classify and caught by Phase 1B above. Everything else with an
+      // existing summary is unchanged — re-calling Haiku burns tokens for zero gain.
+      if (email.ai_summary) {
+        if (links.length > 0) {
+          await supabase.from('emails').update({ links_detected: links }).eq('id', email.id)
+        }
+        results.threads_summarized++
+        existingSummarySkips++
+        continue
+      }
+
+      // ── No summary yet → Haiku (genuinely new thread without classify data) ──
       // Pre-fetch project context if email is linked to a project
       const emailProjectId = email.project_id || await findProjectByKeywords(email.thread_subject)
       const projectContext = emailProjectId
@@ -1988,6 +2004,7 @@ Respond with JSON only:
         .eq('id', email.id)
 
       results.threads_summarized++
+      haikuSummaryCalls++
 
       // Log response pattern
       await supabase.from('pattern_log').insert({
@@ -2007,7 +2024,7 @@ Respond with JSON only:
       console.log(`  ✗ Summarize error: ${err.message}`)
     }
   }
-  console.log(`  ✓ Summarized ${results.threads_summarized} threads (${phase1bSummaryHits} from Phase 1B, ${results.threads_summarized - phase1bSummaryHits} via Haiku)`)
+  console.log(`  ✓ Summarized ${results.threads_summarized} threads (${phase1bSummaryHits} Phase 1B, ${existingSummarySkips} kept existing, ${haikuSummaryCalls} via Haiku)`)
 
   // ── STEP 3.2: Classify email context (work vs personal) ──────────
   console.log('Step 3.2: Classifying email context...')
