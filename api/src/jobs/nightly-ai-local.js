@@ -1582,6 +1582,14 @@ Respond with JSON only:
   // If available, we skip per-email Haiku calls in Steps 3, 3.2, and 3.5.
   // Keyed by conversation_id (lowercase). Falls back gracefully if not found.
   const phase1bIndex = new Map()
+  // Secondary key: when conversation_id is null (M365 connector limitation),
+  // fall back to matching by normalized from_address:thread_subject
+  function p1bSubjectKey(thread) {
+    const from = (thread.from_address || '').toLowerCase().trim()
+    const subj = (thread.thread_subject || thread.threadSubject || thread.subject || '').toLowerCase().trim()
+    return from && subj ? `subj:${from}:${subj}` : null
+  }
+
   try {
     const p1bStorageUrl = `${process.env.SUPABASE_URL}/storage/v1/object/daily-reports/${today}.json`
     const p1bRes = await fetch(p1bStorageUrl, {
@@ -1590,15 +1598,24 @@ Respond with JSON only:
     if (p1bRes.ok) {
       const p1bReport = await p1bRes.json()
       let p1bThreadCount = 0
+      let p1bSubjCount = 0
       for (const bucket of ['bucket1', 'bucket2', 'bucket3', 'bucket4']) {
         for (const thread of (p1bReport[bucket] || [])) {
-          if (thread.conversation_id && thread.extracted) {
+          if (!thread.extracted) continue
+          // Primary key: conversation_id (when available)
+          if (thread.conversation_id) {
             phase1bIndex.set(thread.conversation_id.toLowerCase(), thread.extracted)
             p1bThreadCount++
           }
+          // Secondary key: from_address:subject (fallback for M365 connector limitation)
+          const subjKey = p1bSubjectKey(thread)
+          if (subjKey && !phase1bIndex.has(subjKey)) {
+            phase1bIndex.set(subjKey, thread.extracted)
+            p1bSubjCount++
+          }
         }
       }
-      console.log(`  ✓ Phase 1B index: ${p1bThreadCount} threads with pre-extracted intelligence`)
+      console.log(`  ✓ Phase 1B index: ${p1bThreadCount} by conv_id + ${p1bSubjCount} by subject key`)
     } else {
       console.log(`  ⚠ Phase 1B classify output not found (HTTP ${p1bRes.status}) — falling back to per-email AI calls`)
     }
@@ -1613,10 +1630,16 @@ Respond with JSON only:
   {
     let dbHits = 0
     for (const email of (activeEmails || [])) {
-      const key = (email.conversation_id || '').toLowerCase()
-      if (key && !phase1bIndex.has(key) && email.extracted && typeof email.extracted === 'object') {
-        phase1bIndex.set(key, email.extracted)
+      const convKey = (email.conversation_id || '').toLowerCase()
+      // Primary: conversation_id
+      if (convKey && !phase1bIndex.has(convKey) && email.extracted && typeof email.extracted === 'object') {
+        phase1bIndex.set(convKey, email.extracted)
         dbHits++
+      }
+      // Secondary: from_address:subject
+      const subjKey = p1bSubjectKey(email)
+      if (subjKey && !phase1bIndex.has(subjKey) && email.extracted && typeof email.extracted === 'object') {
+        phase1bIndex.set(subjKey, email.extracted)
       }
     }
     if (dbHits > 0) {
@@ -1645,7 +1668,10 @@ Respond with JSON only:
       )
 
       // ── Phase 1B fast path: use pre-extracted summary if available ──
-      const p1bData = phase1bIndex.get((email.conversation_id || '').toLowerCase())
+      // Try conversation_id first, then fall back to from_address:subject key
+      const convKey = (email.conversation_id || '').toLowerCase()
+      const subjKey = p1bSubjectKey(email)
+      const p1bData = (convKey && phase1bIndex.get(convKey)) || (subjKey && phase1bIndex.get(subjKey)) || null
       if (p1bData?.ai_summary) {
         await supabase
           .from('emails')

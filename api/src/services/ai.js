@@ -576,12 +576,31 @@ function formatThreadHistoryForAI(history) {
 // Forces specificity — this summary becomes
 // the permanent memory of this thread
 async function summarizeThread(email, projectContext = '') {
-  const RYAN_CONTEXT = await buildRyanContext()
-  const content =
+  const subject = email.thread_subject || email.subject || ''
+  const rawContent =
     email.full_thread_content ||
     email.sent_body ||
     email.body_preview ||
-    'No content available'
+    ''
+
+  // ── Skip Haiku when body content is degenerate ───────────────────────────
+  // The M365 connector often returns only the subject line as full_thread_content.
+  // Calling Haiku on "No content available" or a 50-char subject wastes API calls,
+  // adds latency on GitHub Actions, and produces useless summaries.
+  const isDegenerate = !rawContent
+    || rawContent.trim().length < 60
+    || rawContent.trim().toLowerCase() === subject.trim().toLowerCase()
+
+  if (isDegenerate) {
+    const fromPart = email.from_name || email.from_address || 'Unknown sender'
+    const daysPart = email.days_waiting > 0 ? ` (${email.days_waiting}d waiting)` : ''
+    const tagPart  = (email.tags || []).length ? ` [${email.tags.join(', ')}]` : ''
+    return `Email from ${fromPart} re: "${subject}"${daysPart}. Body content unavailable — summary based on metadata only.${tagPart}`
+  }
+
+  const content = rawContent
+
+  const RYAN_CONTEXT = await buildRyanContext()
 
   const message = await withRetry(() =>
     client.messages.create({
