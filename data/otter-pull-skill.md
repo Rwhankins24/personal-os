@@ -23,9 +23,14 @@ Automated run — complete without confirmation. Do not ask clarifying questions
 **Storage upload:** `https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/otter-[TODAY_ISO].json`
 **Pipeline webhook:** `https://personal-os-five-black.vercel.app/api/pipeline/complete-step`
 
-**Runtime credentials (for Step 8 upload):**
-- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
-- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
+**Runtime credentials — read from `.env`, do NOT hardcode:**
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then WORKSPACE_PATH="$HOME/personal-os"; fi
+SUPABASE_URL=$(grep '^SUPABASE_URL=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+SUPABASE_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_KEY=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+echo "Credentials loaded."
+```
 - `TRIGGER_SECRET` = `0557601ac4f4c8f0d42923bba2fb083b`
 
 ---
@@ -394,7 +399,7 @@ non-blocking. Log status in `warnings[]` as `"sandbox_blocked"` and continue reg
 ```bash
 curl -s -X POST \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/otter-[TODAY_ISO].json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   --data-binary "@/Users/ryanhankins/personal-os/data/last-otter-report.json"
 ```
@@ -404,7 +409,7 @@ If the file already exists for today (HTTP 409), use PUT with upsert:
 ```bash
 curl -s -X PUT \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/otter-[TODAY_ISO].json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   -H "x-upsert: true" \
   --data-binary "@/Users/ryanhankins/personal-os/data/last-otter-report.json"

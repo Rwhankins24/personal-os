@@ -23,9 +23,14 @@ database, and save the handoff JSON. You do NOT write the newsletter — that's 
 **Storage fallback (webhook):** `https://personal-os-five-black.vercel.app/api/webhooks?type=email`
 **Delivery:** hankinsr@claycorp.com
 
-**Runtime credentials (for Step 6):**
-- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
-- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
+**Runtime credentials — read from `.env`, do NOT hardcode:**
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then WORKSPACE_PATH="$HOME/personal-os"; fi
+SUPABASE_URL=$(grep '^SUPABASE_URL=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+SUPABASE_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_KEY=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+echo "Credentials loaded."
+```
 
 ---
 
@@ -557,7 +562,7 @@ non-blocking. Log status in warnings[] and continue to Step 8 regardless.
 ```bash
 curl -X POST \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   -d "[FULL_JSON_PAYLOAD]"
 ```
@@ -571,7 +576,7 @@ If the file already exists for today (HTTP 409), use `PUT` (upsert/overwrite):
 ```bash
 curl -X PUT \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   -H "x-upsert: true" \
   -d "[FULL_JSON_PAYLOAD]"

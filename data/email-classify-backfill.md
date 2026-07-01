@@ -30,9 +30,14 @@ so it processes all three legs together.
 
 **Output:** `~/personal-os/data/last-email-report.json` + Supabase storage `[TARGET_DATE].json`
 
-**Runtime credentials:**
-- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
-- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
+**Runtime credentials — read from `.env`, do NOT hardcode:**
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then WORKSPACE_PATH="$HOME/personal-os"; fi
+SUPABASE_URL=$(grep '^SUPABASE_URL=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+SUPABASE_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_KEY=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+echo "Credentials loaded."
+```
 
 ---
 
@@ -103,7 +108,7 @@ If Source A fails or date doesn't match:
 ```bash
 curl -s \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/${TARGET_DATE}.json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}"
 ```
 
 Parse the response JSON. If empty or HTTP error, fail with:
@@ -125,7 +130,7 @@ Fetch PRIOR_DATE's report from storage to get yesterday's conversation IDs:
 ```bash
 curl -s \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/${PRIOR_DATE}.json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4"
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}"
 ```
 
 If found: extract all `conversationId` values → `PRIOR_CONV_IDS[]`
@@ -166,7 +171,7 @@ Write the complete classified report with `"report_date": "[TARGET_DATE]"`.
 ```bash
 curl -X PUT \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/${TARGET_DATE}.json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   -H "x-upsert: true" \
   -d "[FULL_JSON_PAYLOAD]"

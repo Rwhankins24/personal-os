@@ -26,8 +26,14 @@ Automated run — complete without confirmation. Do not ask clarifying questions
 **Pipeline webhook:** `https://personal-os-five-black.vercel.app/api/pipeline/complete-step`
 
 **Runtime credentials (for Step 7 upload):**
-- `SUPABASE_URL` = `https://dvevqwhphrcboyjpvnlz.supabase.co`
-- `SUPABASE_SERVICE_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4`
+Read from `.env` — do NOT hardcode credentials in this file.
+```bash
+WORKSPACE_PATH=$(find /sessions -maxdepth 5 -name "personal-os" -type d 2>/dev/null | head -1)
+if [ -z "$WORKSPACE_PATH" ]; then WORKSPACE_PATH="$HOME/personal-os"; fi
+SUPABASE_URL=$(grep '^SUPABASE_URL=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+SUPABASE_SERVICE_KEY=$(grep '^SUPABASE_SERVICE_KEY=' "${WORKSPACE_PATH}/api/.env" | cut -d= -f2-)
+echo "Credentials loaded."
+```
 - `TRIGGER_SECRET` = `0557601ac4f4c8f0d42923bba2fb083b`
 - `GMAIL_CREDENTIALS_FILE` = `~/personal-os/data/gmail-credentials.json`
 
@@ -590,7 +596,7 @@ TODAY_ISO=$(date '+%Y-%m-%d')
 
 RESPONSE=$(curl -s -X POST \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/plaud-${TODAY_ISO}.json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   --data-binary @"$HOME/personal-os/data/last-plaud-report.json" \
   -w "\nHTTP_STATUS:%{http_code}")
