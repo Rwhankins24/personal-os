@@ -3,6 +3,7 @@
 
 data/last-email-report.json
 data/last-email-raw.json
+data/archive/
 data/*-skill.md
 data/*-backfill.md
 data/pull-complete-*.flag
