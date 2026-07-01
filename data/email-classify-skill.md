@@ -235,9 +235,36 @@ All `pending_invites[]` from Task 1 (already filtered to `my_response_status = "
 
 ### Bucket 6 — Filtered
 
-Automated senders: `@noreply`, `@notifications`, `@marketing`, newsletters, LinkedIn,
-vendor promotions. These are already counted in `bucket6_count` from Task 1.
-Do NOT include in output buckets. Use the `bucket6_count` directly.
+Apply this check BEFORE the Bucket 1–5 decision tree. Any thread matching the criteria
+below goes directly to Bucket 6 — do NOT evaluate it further.
+
+**Automated sender address patterns (match against `from_address`):**
+- Address domain: `noreply`, `no-reply`, `notifications`, `marketing`, `alerts`, `digest`,
+  `donotreply`, `do-not-reply`, `mailer`, `bounce`, `automailer`, `replies`
+- Known newsletter/marketing domains: `bizjournals.com`, `ccsend.com`, `constantcontact.com`,
+  `mailchimp.com`, `klaviyo.com`, `sendgrid.net`, `mandrillapp.com`, `mailgun.org`,
+  `exacttarget.com`, `salesforce.com` (marketing subdomains), `hubspot.com` (email)
+- Industry newsletters: `naiop.org` (daily/weekly digest emails), `uli.org` (email blasts)
+- Events/entertainment: `seatgeek.com`, `ticketmaster.com`, `eventbrite.com`
+- Travel/airlines: `southwest.com`, `united.com`, `delta.com`, `aa.com` (promotional; NOT transactional booking confirmations — those are Bucket 3)
+- SharePoint / Microsoft system notifications: `from_address` contains `svc_` prefix,
+  OR `from_name` contains "SharePoint" AND `from_address` does NOT contain a person's name,
+  OR domain is `sharepointonline.com`, `sharepoint.com` (automated notifications only)
+
+**Automated sender name patterns (match against `from_name`):**
+- Contains: "Newsletter", "Digest", "Alerts", "Notifications", "No Reply", "Noreply",
+  "Do Not Reply", "Marketing", "Updates", "Promotions"
+
+**Subject-line automation signals (match against `threadSubject`):**
+- Contains "unsubscribe", "[digest]", "[newsletter]", "Weekly Roundup", "Daily Briefing"
+  (unless from a known human contact at a real organization)
+
+**Sender count boundary:** If a thread has 8+ recipients in `threadParticipants` AND
+the sender matches any automated pattern above → Bucket 6.
+
+These are already counted in `bucket6_count` from Task 1.
+Do NOT include Bucket 6 threads in output bucket arrays. Use the `bucket6_count` directly.
+Increment `bucket6_count` for any additional threads caught here that weren't in Task 1's count.
 
 ### Checkpoint writes during classification
 
@@ -601,7 +628,7 @@ Primary path — PUT (upsert):
 ```bash
 curl -X PUT \
   "https://dvevqwhphrcboyjpvnlz.supabase.co/storage/v1/object/daily-reports/[TODAY_ISO].json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZXZxd2hwaHJjYm95anB2bmx6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODc4NjMwNiwiZXhwIjoyMDk0MzYyMzA2fQ.HSstuAETV0tUHDF2PQm0gsC4jLqX3DtLqik8k8R0pQ4" \
+  -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
   -H "Content-Type: application/json" \
   -H "x-upsert: true" \
   -d "[FULL_JSON_PAYLOAD]"

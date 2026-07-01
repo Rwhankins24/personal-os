@@ -280,9 +280,25 @@ For every thread where ANY is true:
 - `is_flagged = true`
 - Days since `waitingSince` >= 2
 
-Fetch complete body for the most recent 5 messages using `outlook_email_search` with the thread subject. Store as:
-- `full_thread_content`: concatenated message bodies separated by `"---MESSAGE BREAK---"`
+Fetch the most recent 5 messages in the thread using `outlook_email_search` with the thread subject.
+
+**CRITICAL — what to extract from each returned message:**
+- Use the `body_preview` field (the text content of the email body — NOT `subject`)
+- If `body_preview` is empty, null, or identical to `subject`, skip that message (do not use `subject` as a body fallback)
+- Concatenate all non-empty `body_preview` values with `"---MESSAGE BREAK---"` as separator
+
+Store as:
+- `full_thread_content`: concatenated `body_preview` values (see above)
 - `extraction_depth: "full"`
+
+**Degeneracy check (run after building `full_thread_content`):**
+If `full_thread_content` is null, empty, < 50 chars, or exactly equals `threadSubject`:
+- Set `full_thread_content = null`
+- Set `extraction_depth = "body_unavailable"`
+- Log: `⚠ body_unavailable: [threadSubject] — body_preview was empty or degenerate`
+
+Log total degenerate count at end of Tier 1:
+`Tier 1 degenerate (body_unavailable): X of Y threads — classify will use subject+context for these`
 
 Also fetch Ryan's most recent sent message for every Tier 1 thread:
 ```

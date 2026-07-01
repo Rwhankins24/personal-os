@@ -3702,10 +3702,10 @@ Be specific and cite concrete details. Avoid generic statements.`
               ...(intel.others_action_items       || []),
             ]
             for (const c of allOthersItems) {
-              const personName  = c.committed_by_name || c.assigned_to_name
+              const personName  = c.committed_by_name || c.assigned_to_name || 'Unassigned'
               const personEmail = c.committed_by_email || c.assigned_to_email || null
               const title       = c.title || c.task_text
-              if (!title || !personName) continue
+              if (!title) continue
               if (personName === 'Ryan' || personName === 'Ryan Hankins') continue
               if ((c.attribution_confidence || 'medium') === 'low') continue
 
