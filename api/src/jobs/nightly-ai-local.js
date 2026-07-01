@@ -1205,7 +1205,7 @@ Respond with just the sentence, no quotes, no JSON.`
     manual: true   // always available — observations, decisions, knowledge base
   }
 
-  console.log(`  ✓ Found ${activeEmails.length} active email threads (cap: 50, priority-ordered)`)
+  console.log(`  ✓ Found ${activeEmails.length} active email threads (cap: ${THREAD_CAP}, priority-ordered)`)
 
   // ── Plaud participant map ─────────────────────────────────────────
   // Maps lowercase email address → [{title, date, summary}] for all today's Plaud meetings.
