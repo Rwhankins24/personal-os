@@ -149,6 +149,25 @@ jobs:
               walk(payload)
               return attachments
 
+          def extract_email_body_text(payload):
+              """Extract the text/plain body from the email MIME structure.
+              This is the formatted version of the Plaud summary — same content as
+              summary.txt but with **bold** headers, |markdown tables|, and section
+              numbering intact. Preferred over the plain-text attachment for parsing."""
+              def find_plain(p):
+                  mime = p.get('mimeType', '')
+                  # Inline text/plain part (no filename = not an attachment)
+                  if mime == 'text/plain' and not p.get('filename'):
+                      data = p.get('body', {}).get('data', '')
+                      if data:
+                          return decode_b64(data)
+                  for part in p.get('parts', []):
+                      result = find_plain(part)
+                      if result:
+                          return result
+                  return ''
+              return find_plain(payload)
+
           def parse_action_items(body_text):
               ryan_items, others_items, unattributed = [], [], []
               lines = body_text.split('\n')
@@ -282,6 +301,11 @@ jobs:
 
                   attachments = find_attachments(msg.get('payload', {}))
 
+                  # Extract the email BODY text (formatted: **bold** headers, |markdown tables|)
+                  # This is the same content as summary.txt but WITH markdown formatting.
+                  # Used by parseOldPlaudSections for zero-AI table extraction.
+                  email_body_text = extract_email_body_text(msg.get('payload', {}))
+
                   summary_text = ""
                   summary_att_id = attachments.get("summary.txt")
                   if summary_att_id:
@@ -319,7 +343,9 @@ jobs:
                       "id": msg_id, "gmail_message_id": msg_id,
                       "title": title, "date": meeting_date, "source": "plaud",
                       "email_subject": subject, "summary": summary,
-                      "email_body_raw": summary_text, "participants": [],
+                      # email_body_raw: formatted email body with **bold** headers and |tables|
+                      # email_body_text takes precedence; summary_text is plain-text fallback
+                      "email_body_raw": email_body_text or summary_text, "participants": [],
                       "ryan_action_items": ryan_items,
                       "others_action_items": others_items,
                       "unattributed_action_items": unattributed,
@@ -376,6 +402,9 @@ jobs:
                           "meeting_date": m.get("date"),
                           "source":       "plaud",
                           "summary":      m.get("summary") or m.get("email_body_raw", ""),
+                          # email_body_raw: formatted email body (bold headers + markdown tables)
+                          # Used by zero-AI parseOldPlaudSections for structured extraction
+                          "email_body_raw": m.get("email_body_raw", ""),
                           "action_items": (
                               m.get("ryan_action_items", []) +
                               m.get("others_action_items", []) +

@@ -182,6 +182,258 @@ function mapPlaudBlocksToIntel(peopleAndActions, decisionsAndRisks) {
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// parseOldPlaudSections — zero-AI parser for old-format Plaud reports
+//
+// Old Plaud reports are pre-structured with numbered section headers and
+// markdown tables. Instead of re-running AI on content that is already
+// organized, we parse section headers as callwords and extract table rows
+// directly into the intel schema.
+//
+// Section detection: flexible regex handles "3. Action Items",
+//   "**3. Action Items**", "### 3. Action Items", emoji-prefixed headers, etc.
+// Table parsing: standard markdown table format (|col|col| with --- separator)
+// Returns null if extraction yields no useful data → caller falls back to Haiku
+// ─────────────────────────────────────────────────────────────────────────────
+function parseOldPlaudSections(meeting) {
+  // Source priority:
+  // 1. email_body_raw — the formatted Plaud email body with **bold** headers and |table| rows
+  // 2. short_summary / summary — plain-text attachments (no tables; limited extraction)
+  // email_body_raw is preferred because it has the structured markdown tables; the txt
+  // attachments have the same content but stripped of all formatting.
+  const summaryText = (
+    (meeting.email_body_raw || '').trim().length > 200
+      ? meeting.email_body_raw
+      : (meeting.short_summary || meeting.summary || '')
+  ).trim()
+
+  if (!summaryText || summaryText.length < 200) return null
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+
+  // Split text into named sections using numbered headers.
+  // Supports: "3. Action Items", "**3. Action Items**", "### 3. Action Items",
+  //           "3️⃣ Action Items", emoji variants, etc.
+  function extractSections(text) {
+    const sections = {}
+    // Match: optional #/*/emoji + digit(s) + dot + section name + newline
+    const headerRe = /(?:^|\n)(?:[*#\s📋📝🔑⚠️🗓️🎤🔗📧ℹ️🤝🚧✅❓🧠💰⏰🔄📊]*)?(\d+)[.)]\s+([^\n]{3,60}?)(?:\*{0,2})?\s*(?=\n)/g
+    const matches = []
+    let m
+    while ((m = headerRe.exec(text)) !== null) {
+      matches.push({ name: m[2].trim().toLowerCase(), pos: m.index + m[0].length })
+    }
+    for (let i = 0; i < matches.length; i++) {
+      const start = matches[i].pos
+      const end = i + 1 < matches.length ? matches[i + 1].pos - 1 : text.length
+      sections[matches[i].name] = text.slice(start, end).trim()
+    }
+    return sections
+  }
+
+  // Find section content by keyword (partial match, case-insensitive)
+  function findSection(sections, ...keywords) {
+    for (const kw of keywords) {
+      for (const [name, content] of Object.entries(sections)) {
+        if (name.includes(kw.toLowerCase())) return content
+      }
+    }
+    return ''
+  }
+
+  // Parse a standard markdown table into array of {header: value} objects
+  function parseTable(text) {
+    if (!text) return []
+    const lines = text.split('\n').map(l => l.trim()).filter(l => l.startsWith('|'))
+    if (lines.length < 2) return []
+
+    const headers = lines[0].split('|').map(h => h.trim().toLowerCase()).filter(h => h)
+    const dataLines = lines.slice(1).filter(l => !/^\|[\s\-|]+\|$/.test(l))  // skip separator
+
+    return dataLines.map(line => {
+      const cells = line.replace(/^\||\|$/g, '').split('|').map(c => c.trim())
+      const obj = {}
+      headers.forEach((h, i) => { obj[h] = cells[i] || '' })
+      return obj
+    }).filter(row => Object.values(row).some(v => v && v !== '-' && v.toLowerCase() !== 'n/a' && v !== ''))
+  }
+
+  // Parse bullet list items into strings (fallback when no table)
+  function parseBullets(text) {
+    if (!text) return []
+    return text.split('\n')
+      .map(l => l.replace(/^[-*•]\s*/, '').trim())
+      .filter(l => l.length > 5 && !l.startsWith('|') && !l.startsWith('#'))
+  }
+
+  // Resolve "high/medium/low" from various column names
+  function cellPriority(row, ...colNames) {
+    for (const col of colNames) {
+      const v = (row[col] || '').toLowerCase()
+      if (!v) continue
+      if (v.includes('critical') || v.includes('urgent')) return 'critical'
+      if (v.includes('high')) return 'high'
+      if (v.includes('low')) return 'low'
+      return 'medium'
+    }
+    return 'medium'
+  }
+
+  // Resolve severity from a cell value
+  function cellSeverity(val) {
+    const v = (val || '').toLowerCase()
+    if (v.includes('critical') || v.includes('high') || v.includes('major')) return 'high'
+    if (v.includes('low') || v.includes('minor')) return 'low'
+    return 'medium'
+  }
+
+  // Attempt to parse a plain date string; return YYYY-MM-DD or null
+  function parseDate(str) {
+    if (!str || str === '-' || str.toLowerCase() === 'n/a' || str.toLowerCase() === 'tbd') return null
+    const d = new Date(str)
+    if (!isNaN(d.getTime())) return d.toISOString().split('T')[0]
+    return null
+  }
+
+  // ── Extract sections ──────────────────────────────────────────────────────
+  const sections = extractSections(summaryText)
+
+  const actionText    = findSection(sections, 'action item', 'action & follow', 'task')
+  const decisionText  = findSection(sections, 'decision')
+  const riskText      = findSection(sections, 'risk/exposure', 'risk', 'exposure', 'concern')
+  const summaryText2  = findSection(sections, 'high-perform', 'executive summary', 'summary', 'overview')
+  const openQText     = findSection(sections, 'open question', 'pending question', 'question')
+  const deadlineText  = findSection(sections, 'deadline', 'time-sensitive')
+
+  // ── Parse tables ──────────────────────────────────────────────────────────
+  const actionRows   = parseTable(actionText)
+  const decisionRows = parseTable(decisionText)
+  const riskRows     = parseTable(riskText)
+  const openQRows    = parseTable(openQText)
+
+  // ── Ryan identification ───────────────────────────────────────────────────
+  const ryanTokens = ['ryan hankins', 'ryan', 'r. hankins', 'rhankins']
+  const isRyan = (name) => ryanTokens.some(t => (name || '').toLowerCase().includes(t))
+
+  // ── Map action items ──────────────────────────────────────────────────────
+  const ryan_action_items = []
+  const others_action_items = []
+
+  for (const row of actionRows) {
+    const person = row['person'] || row['owner'] || row['assignee'] || row['name'] || row['responsible'] || row['driver'] || ''
+    const task   = row['task'] || row['action item'] || row['action'] || row['description'] || row['deliverable'] || ''
+    if (!task || task.length < 3) continue
+
+    const item = {
+      title:                  task,
+      due_date:               parseDate(row['deadline'] || row['due date'] || row['due'] || row['target date']),
+      urgency:                cellPriority(row, 'priority', 'urgency', 'impact'),
+      attribution_confidence: 'high',
+      attribution_basis:      'Plaud old-format action items section'
+    }
+
+    if (isRyan(person)) {
+      ryan_action_items.push(item)
+    } else {
+      others_action_items.push({ ...item, assigned_to_name: person || null, assigned_to_email: null })
+    }
+  }
+
+  // If no table, try bullet fallback
+  if (ryan_action_items.length === 0 && others_action_items.length === 0 && actionText) {
+    for (const bullet of parseBullets(actionText)) {
+      // Heuristic: if bullet starts with a name pattern "Person: task", split it
+      const colonIdx = bullet.indexOf(':')
+      const person = colonIdx > 0 && colonIdx < 30 ? bullet.slice(0, colonIdx).trim() : ''
+      const task   = colonIdx > 0 && colonIdx < 30 ? bullet.slice(colonIdx + 1).trim() : bullet
+      if (task.length < 5) continue
+      const item = { title: task, due_date: null, urgency: 'medium', attribution_confidence: 'medium', attribution_basis: 'Plaud old-format bullet list' }
+      if (isRyan(person)) ryan_action_items.push(item)
+      else others_action_items.push({ ...item, assigned_to_name: person || null, assigned_to_email: null })
+    }
+  }
+
+  // ── Map decisions ─────────────────────────────────────────────────────────
+  const decisions_made = decisionRows.map(row => ({
+    decision:   row['decision'] || row['summary'] || row['outcome'] || row['description'] || '',
+    decided_by: row['owner'] || row['lead'] || row['decision owner'] || row['driver'] || row['made by'] || 'Meeting',
+    all_parties: [],
+    implications: row['impact'] || row['implication'] || row['notes'] || row['rationale'] || '',
+    attribution_confidence: 'high'
+  })).filter(d => d.decision && d.decision.length > 3)
+
+  // Bullet fallback for decisions
+  if (decisions_made.length === 0 && decisionText) {
+    for (const bullet of parseBullets(decisionText)) {
+      if (bullet.length > 5) decisions_made.push({ decision: bullet, decided_by: 'Meeting', all_parties: [], implications: '', attribution_confidence: 'medium' })
+    }
+  }
+
+  // ── Map risks ─────────────────────────────────────────────────────────────
+  const risk_signals = riskRows.map(row => ({
+    signal:   row['risk'] || row['exposure'] || row['concern'] || row['description'] || row['issue'] || '',
+    type:     'scope',
+    severity: cellSeverity(row['impact'] || row['severity'] || row['priority'] || row['level']),
+    involves_key_contact:    false,
+    involves_active_project: true,
+    evidence: row['mitigation'] || row['notes'] || row['owner'] || ''
+  })).filter(r => r.signal && r.signal.length > 3)
+
+  if (risk_signals.length === 0 && riskText) {
+    for (const bullet of parseBullets(riskText)) {
+      if (bullet.length > 5) risk_signals.push({ signal: bullet, type: 'scope', severity: 'medium', involves_key_contact: false, involves_active_project: true, evidence: '' })
+    }
+  }
+
+  // ── Map pending decisions / open questions ────────────────────────────────
+  const pending_decisions = openQRows.map(row => ({
+    decision: row['question'] || row['open question'] || row['topic'] || row['issue'] || '',
+    blocking: false,
+    due_date: parseDate(row['deadline'] || row['target'] || null),
+    urgency:  'medium',
+    decision_maker: row['owner'] || row['responsible'] || null
+  })).filter(d => d.decision && d.decision.length > 3)
+
+  if (pending_decisions.length === 0 && openQText) {
+    for (const bullet of parseBullets(openQText)) {
+      if (bullet.length > 5) pending_decisions.push({ decision: bullet, blocking: false, due_date: null, urgency: 'medium', decision_maker: null })
+    }
+  }
+
+  // ── Quality gate: return null if nothing extracted ─────────────────────────
+  // Caller will fall back to parsePlaudSummary (Haiku) for edge cases
+  const totalItems = ryan_action_items.length + others_action_items.length + decisions_made.length + risk_signals.length
+  if (totalItems === 0) {
+    console.log(`    parseOldPlaudSections: no structured data found — will fall back to Haiku`)
+    return null
+  }
+
+  console.log(`    parseOldPlaudSections (zero-AI): ${ryan_action_items.length} Ryan tasks, ${others_action_items.length} team tasks, ${decisions_made.length} decisions, ${risk_signals.length} risks`)
+
+  return {
+    ryan_action_items,
+    others_action_items,
+    decisions_made,
+    risk_signals,
+    pending_decisions,
+    verbal_commitments_ryan:   [],
+    verbal_commitments_others: [],
+    technical_facts:           [],
+    financial_signals:         [],
+    schedule_signals:          [],
+    scope_signals:             [],
+    key_facts:                 [],
+    meeting_outcome: {
+      summary:          summaryText2 || summaryText.slice(0, 800),
+      resolved_items:   decisions_made.map(d => d.decision).slice(0, 5),
+      unresolved_items: pending_decisions.map(d => d.decision).slice(0, 5),
+      next_steps:       ryan_action_items.map(a => a.title).slice(0, 5),
+      overall_sentiment: 'productive'
+    },
+    speaker_attributions: []
+  }
+}
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
@@ -3531,7 +3783,13 @@ Be specific and cite concrete details. Avoid generic statements.`
             (meeting.title || '').toLowerCase().includes(phrase)
           )
 
-        const hasRichSummary = (meeting.short_summary || meeting.summary || '').trim().length > 500
+        // hasRichSummary: true when ANY rich text source has enough content to parse.
+        // email_body_raw is the Plaud-formatted email body (bold headers + markdown tables).
+        // short_summary/summary are plain-text attachments. All three count.
+        const hasRichSummary = (
+          (meeting.email_body_raw || '').trim().length > 500 ||
+          (meeting.short_summary || meeting.summary || '').trim().length > 500
+        )
         const isPlaud = meeting.source === 'plaud'
 
         // Plaud meetings: read pre-parsed structured blocks from pull step (zero AI cost for factual extraction)
@@ -3570,13 +3828,23 @@ Be specific and cite concrete details. Avoid generic statements.`
             if (intel?.meeting_outcome) intel.meeting_outcome.summary = meeting.summary || meeting.short_summary || ''
             console.log(`    Block mapping: ${intel?.ryan_action_items?.length || 0} Ryan tasks, ${intel?.decisions_made?.length || 0} decisions, ${intel?.risk_signals?.length || 0} risks`)
           } else if (shouldUsePlaudParser) {
-            // ── Legacy path: old Plaud format (pre-block prompt) — use parsePlaudSummary ──
-            // This branch will naturally phase out as older meetings age off
-            console.log(`    Using legacy Plaud summary parser (Haiku) for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
-            intel = await aiService.parsePlaudSummary(meeting, categoryHint)
-            // NO fallback to extractIntelligenceFromTranscript — if this fails, log and skip
-            if (!intel) {
-              console.log(`    Legacy Plaud parse returned null for: ${meeting.title} — skipping intelligence extraction`)
+            // ── Legacy path: old Plaud format (numbered sections + markdown tables) ──
+            // Step 1: zero-AI callword parser — extracts directly from section headers + tables
+            //   Primary source: email_body_raw (has **bold** headers and |table| formatting)
+            //   Fallback source: short_summary/summary (plain text, no tables — limited extraction)
+            // Step 2: Haiku fallback if parser returns null (edge case: non-standard formatting)
+            console.log(`    Old Plaud format: trying zero-AI section parser for: ${meeting.title}${primaryCat ? ` [${primaryCat.name}]` : ''}`)
+            intel = parseOldPlaudSections(meeting)
+            if (intel) {
+              // Preserve full summary text for frontend display
+              if (intel.meeting_outcome) intel.meeting_outcome.summary = summaryForParse
+            } else {
+              // Edge case: non-standard section formatting — fall back to Haiku
+              console.log(`    Zero-AI parser returned null → falling back to parsePlaudSummary (Haiku)`)
+              intel = await aiService.parsePlaudSummary(meeting, categoryHint)
+              if (!intel) {
+                console.log(`    Both parsers returned null for: ${meeting.title} — skipping intelligence extraction`)
+              }
             }
           } else {
             // ── Otter or non-Plaud meeting — extract from raw transcript ──

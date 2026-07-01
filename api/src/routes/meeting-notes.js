@@ -27,6 +27,7 @@ module.exports = async (req, res) => {
     try {
       const {
         title, meeting_date, source = 'plaud', summary,
+        email_body_raw,
         action_items = [], participants = [],
         raw_transcript, external_id, has_transcript, transcript_word_count,
       } = req.body
@@ -64,6 +65,7 @@ module.exports = async (req, res) => {
           meeting_date:           meeting_date || null,
           start_time:             startTime,
           short_summary:          summary || '',
+          email_body_raw:         email_body_raw || null,
           full_transcript:        raw_transcript || null,
           raw_transcript:         raw_transcript || null,
           action_items_raw:       actionItemsRaw,

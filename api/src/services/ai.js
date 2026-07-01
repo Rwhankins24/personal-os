@@ -1390,8 +1390,14 @@ Return ONLY the JSON array. Return [] if no signatures with email addresses foun
 // Backfill (transcript-only) always uses extractIntelligenceFromTranscript.
 async function parsePlaudSummary(meeting, categoryHint = '') {
   const RYAN_CONTEXT = await buildRyanContext()
-  const summaryText = meeting.short_summary || meeting.summary || ''
-  if (!summaryText || summaryText.trim().length < 200) return null
+  // Prefer email_body_raw: it has **bold** headers and |table| formatting that
+  // Haiku can parse more reliably than the plain-text summary attachments.
+  const summaryText = (
+    (meeting.email_body_raw || '').trim().length > 200
+      ? meeting.email_body_raw
+      : (meeting.short_summary || meeting.summary || '')
+  ).trim()
+  if (!summaryText || summaryText.length < 200) return null
 
   const message = await withRetry(() =>
     client.messages.create({
@@ -1467,13 +1473,24 @@ Return ONLY valid JSON:
 // categoryHint: optional string injected to focus extraction on meeting type specifics
 async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relatedEmailContext, categoryHint = '') {
   const RYAN_CONTEXT = await buildRyanContext()
+
+  // Prefer the Otter pre-processed summary over the raw transcript.
+  // (Note: Plaud meetings use parseOldPlaudSections / parsePlaudSummary — not this function.)
+  // The summary is already distilled — sending the full transcript just adds tokens
+  // and causes model hangs on long recordings. Fall back to transcript only when
+  // no usable summary exists. If transcript is all we have, cap at 20K chars
+  // (covers ~30-40min of dense content) to bound the call to seconds not minutes.
+  const shortSummary = (meeting.short_summary || '').trim()
+  const hasSummary = shortSummary.length >= 200
   const rawTranscript = meeting.full_transcript || meeting.raw_transcript
-  if (!rawTranscript || rawTranscript.trim().length < 100) return null
-  // Cap transcript at 40K chars (~10K tokens) to prevent model hangs on huge recordings.
-  // This covers ~60-90 minutes of dense meeting content — sufficient for intelligence extraction.
-  const transcript = rawTranscript.length > 40000
-    ? rawTranscript.slice(0, 40000) + '\n\n[Transcript truncated at 40,000 chars for processing]'
+  const transcript = hasSummary
+    ? shortSummary
     : rawTranscript
+      ? rawTranscript.length > 20000
+        ? rawTranscript.slice(0, 20000) + '\n\n[Transcript truncated — summary unavailable]'
+        : rawTranscript
+      : null
+  if (!transcript || transcript.trim().length < 100) return null
 
   // Attendee roster can be {name, email} objects or strings (from Plaud participants array)
   // Augment with names derived from action item assignees if roster is thin
@@ -1508,6 +1525,22 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
     )
     .join('\n\n')
 
+  // This function now handles Otter and non-Plaud meetings only.
+  // Old Plaud format is routed to parseOldPlaudSections (zero-AI) first, then parsePlaudSummary.
+  // When we have a pre-processed summary (e.g. Otter AI summary), use a neutral
+  // "meeting summary" prompt — NOT the "labeled sections" prompt (that's Plaud-specific).
+  // When we only have raw transcript, use the speaker-attribution transcript prompt.
+  const inputLabel = hasSummary ? 'MEETING SUMMARY (AI-generated, narrative format):' : 'Full transcript:'
+  const preamble = hasSummary
+    ? `Extract ALL valuable intelligence from this AI-generated meeting summary. The summary is a narrative distillation of the meeting — speaker names may be partially resolved. Focus on extracting action items, decisions, risks, and commitments from the summary text.`
+    : `Extract ALL valuable intelligence from this meeting transcript. Audio recording — speakers may be labeled "Speaker 1" etc. or by name if the recording tool identified them.
+
+Speaker attribution signals:
+1. Action items show who was assigned what
+2. Names mentioned directly in conversation
+3. First person language near topics owned by specific attendees
+4. Context clues from discussion topics`
+
   const message = await withRetry(() =>
     client.messages.create({
       model: 'claude-haiku-4-5-20251001',
@@ -1516,13 +1549,7 @@ async function extractIntelligenceFromTranscript(meeting, attendeeRoster, relate
         role: 'user',
         content: `${RYAN_CONTEXT}
 ${CONSTRUCTION_DOMAIN_CONTEXT}${categoryHint}
-Extract ALL valuable intelligence from this meeting transcript. Audio recording — speakers may be labeled "Speaker 1" etc. or by name if the recording tool identified them.
-
-Speaker attribution signals:
-1. Action items show who was assigned what
-2. Names mentioned directly in conversation
-3. First person language near topics owned by specific attendees
-4. Context clues from discussion topics
+${preamble}
 
 Meeting: ${meeting.title || 'Untitled'}
 Date: ${meeting.start_time}
@@ -1530,7 +1557,7 @@ Duration: ${meeting.duration_raw}
 
 Confirmed attendees:
 ${attendeeList || 'Unknown'}
-${structuredSummary}
+${hasSummary ? '' : structuredSummary}
 Related active email threads:
 ${emailContext || 'None'}
 
@@ -1539,7 +1566,7 @@ ${(meeting.action_items_raw || [])
   .map(a => `- ${a.assignee_name}: ${a.task_text}`)
   .join('\n') || 'None'}
 
-Full transcript:
+${inputLabel}
 ${transcript}
 
 Return ONLY valid JSON. Empty arrays fine.
