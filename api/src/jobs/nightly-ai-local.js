@@ -1674,6 +1674,10 @@ Respond with JSON only:
 
       const summary = await aiService.summarizeThread(email, projectContext + perEmailMeetingNote)
 
+      // Small throttle between sequential Haiku calls — prevents connection
+      // pool exhaustion on the Mac that causes "Invalid response body" errors
+      await new Promise(r => setTimeout(r, 150))
+
       await supabase
         .from('emails')
         .update({

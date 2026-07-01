@@ -3,12 +3,24 @@
 // All Claude API calls centralized here
 
 const Anthropic = require('@anthropic-ai/sdk')
+const https = require('https')
 require('dotenv').config()
 
 const { createClient } = require('@supabase/supabase-js')
 
+// keepAlive agent prevents Mac NAT/TCP from closing long-lived connections
+// mid-response — fixes "Invalid response body" errors on sequential API calls
+const _keepAliveAgent = new https.Agent({
+  keepAlive: true,
+  keepAliveMsecs: 30000,
+  maxSockets: 10
+})
+
 const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
+  apiKey: process.env.ANTHROPIC_API_KEY,
+  httpAgent: _keepAliveAgent,
+  timeout: 120000,  // 2 min — matches nightly-ai-local.js
+  maxRetries: 2     // SDK retries; withRetry() adds another layer on top
 })
 
 // ─── Supabase client for live context injection
@@ -526,11 +538,14 @@ async function withRetry(fn, maxRetries = 3) {
       const isNetworkError =
         err.message?.includes('Premature close') ||
         err.message?.includes('fetch failed') ||
+        err.message?.includes('Invalid response body') ||
         err.message?.includes('ECONNRESET') ||
         err.message?.includes('ECONNREFUSED') ||
+        err.message?.includes('ETIMEDOUT') ||
         err.message?.includes('operation was canceled') ||
         err.name === 'AbortError' ||
-        err.code === 'ECONNRESET'
+        err.code === 'ECONNRESET' ||
+        err.code === 'ETIMEDOUT'
       if (isRateLimit || isNetworkError) {
         const delay = Math.pow(2, attempt) * 1000
         const reason = isRateLimit ? 'Rate limited' : 'Network error'
