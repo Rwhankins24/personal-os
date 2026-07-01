@@ -139,7 +139,7 @@ jobs:
         if: steps.check.outputs.should_run == 'true'
         uses: actions/setup-node@v5
         with:
-          node-version: '22'
+          node-version: '20'
           cache: 'npm'
           cache-dependency-path: api/package-lock.json
 
@@ -158,6 +158,7 @@ jobs:
           TRIGGER_SECRET: ${{ secrets.TRIGGER_SECRET }}
           DATE_OVERRIDE: ${{ github.event.inputs.date_override }}
           FORCE_RERUN: ${{ github.event.inputs.force_rerun }}
+          THREAD_CAP: ${{ vars.THREAD_CAP }}
         run: |
           cd api
           node src/jobs/nightly-ai-local.js
