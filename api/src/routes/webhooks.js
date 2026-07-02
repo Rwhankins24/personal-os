@@ -71,10 +71,29 @@ module.exports = async (req, res) => {
     }
 
     if (type === 'email') {
-      const { data, error } = await supabase
-        .from('emails').insert(req.body).select().single()
+      // Upsert on conversation_id when present — prevents duplicate rows when the same
+      // thread appears in multiple daily reports. NULL conversation_ids still INSERT
+      // (Postgres unique constraints ignore NULLs), which is acceptable since those
+      // threads can't be reliably deduped anyway.
+      const emailPayload = req.body
+      let data, error, action
+
+      if (emailPayload.conversation_id) {
+        // Known thread — upsert: update all fields if conversation_id already exists
+        ;({ data, error } = await supabase
+          .from('emails')
+          .upsert(emailPayload, { onConflict: 'conversation_id' })
+          .select().single())
+        action = 'upserted'
+      } else {
+        // No conversation_id — plain insert (dedup not possible without a stable key)
+        ;({ data, error } = await supabase
+          .from('emails').insert(emailPayload).select().single())
+        action = 'inserted'
+      }
+
       if (error) throw error
-      return res.json({ success: true, action: 'inserted', data })
+      return res.json({ success: true, action, data })
     }
 
     if (type === 'transcript') {
